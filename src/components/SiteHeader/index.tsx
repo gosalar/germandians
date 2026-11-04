@@ -1,19 +1,12 @@
+import { Button } from '@mantine/core';
 import BrandLink from '@/components/Brand';
+import HomeSectionLink from '@/components/HomeSectionLink';
 import { usePageChrome, usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
-import { SECTIONS, hashLink } from '@/utils/constants';
+import { NAV_CTA, NAV_LINKS, SECTIONS, hashLink } from '@/utils/constants';
 
 import styles from './styles.module.scss';
 
-const NAV_LINKS = [
-  { id: SECTIONS.journey, label: 'Journey' },
-  { id: SECTIONS.universities, label: 'Universities' },
-  { id: SECTIONS.community, label: 'Why us' },
-  { id: SECTIONS.contact, label: 'Contact' },
-];
-
-const CTA_LABEL = 'Get my profile reviewed';
-
-export default function Navbar() {
+export default function SiteHeader() {
   const { menuOpen } = usePageChrome();
   const { toggleMenu, closeMenu } = usePageChromeActions();
 
@@ -25,14 +18,14 @@ export default function Navbar() {
         <div className={styles.full}>
           <div className={styles.links}>
             {NAV_LINKS.map((link) => (
-              <a key={link.id} href={hashLink(link.id)} className={styles.link}>
+              <HomeSectionLink key={link.id} href={hashLink(link.id)} className={styles.link}>
                 {link.label}
-              </a>
+              </HomeSectionLink>
             ))}
           </div>
-          <a href={hashLink(SECTIONS.contactForm)} className={styles.cta}>
-            {CTA_LABEL}
-          </a>
+          <Button component={HomeSectionLink} href={hashLink(NAV_CTA.id)} variant="navy" size="nav">
+            {NAV_CTA.label}
+          </Button>
         </div>
 
         <button
@@ -53,13 +46,14 @@ export default function Navbar() {
       {menuOpen ? (
         <div id="mobile-menu" className={styles.menu}>
           {NAV_LINKS.map((link) => (
-            <a key={link.id} href={hashLink(link.id)} onClick={closeMenu} className={styles.menuLink}>
+            <HomeSectionLink key={link.id} href={hashLink(link.id)} onClick={closeMenu} className={styles.menuLink}>
               {link.label}
-            </a>
+            </HomeSectionLink>
           ))}
-          <a href={hashLink(SECTIONS.contactForm)} onClick={closeMenu} className={styles.menuCta}>
-            {CTA_LABEL}
-          </a>
+          <Button component={HomeSectionLink} href={hashLink(NAV_CTA.id)} onClick={closeMenu}
+            variant="menu" size="menu" className={styles.menuCta}>
+            {NAV_CTA.label}
+          </Button>
         </div>
       ) : null}
     </nav>

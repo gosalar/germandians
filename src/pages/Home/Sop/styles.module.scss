@@ -186,7 +186,7 @@
     --card-ring: none;
     --stamp-color: #{t.$red};
     --stamp-rotate: -12deg;
-    --stamp-delay: 0.25s;
+    --stamp-delay: var(--motion-duration, 0.25s);
   }
 
   &[data-tone='admitted'] {
@@ -196,7 +196,7 @@
     --card-ring: inset 0 0 0 3px #{t.$yellow};
     --stamp-color: #{t.$green};
     --stamp-rotate: -7deg;
-    --stamp-delay: 0.85s;
+    --stamp-delay: var(--motion-duration, 0.85s);
   }
 }
 
@@ -263,8 +263,8 @@
   transform: rotate(var(--stamp-rotate)) scale(1.9);
   opacity: 0;
   transition:
-    transform 0.32s cubic-bezier(0.2, 1.6, 0.4, 1) var(--stamp-delay),
-    opacity 0.2s var(--stamp-delay);
+    transform var(--motion-duration, 0.32s) cubic-bezier(0.2, 1.6, 0.4, 1) var(--stamp-delay),
+    opacity var(--motion-duration, 0.2s) var(--stamp-delay);
 
   &[data-stamped='true'] {
     transform: rotate(var(--stamp-rotate)) scale(1);
@@ -274,6 +274,4 @@
 
 .cta {
   margin-top: 56px;
-  display: inline-flex;
-  @include m.cta(t.$yellow, t.$navy, t.$white, t.$navy);
 }

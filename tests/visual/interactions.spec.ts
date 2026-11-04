@@ -1,4 +1,4 @@
-import { test, type Page } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 import { expectSameScreenshot, openPage, PAGES, settle } from './compare';
 
@@ -49,6 +49,34 @@ const SCENARIOS: Scenario[] = [
   },
 
   // Month explorer
+  {
+    name: 'nav CTA hover', width: 1440, quick: true,
+    act: (p) => p.locator('nav').getByRole('link', { name: 'Get my profile reviewed' }).hover(), shot: 'nav',
+  },
+  {
+    name: 'fees CTA hover', width: 1440,
+    act: (p) => p.locator('#fees a[href="#contact-form"]').hover(), shot: '#fees',
+  },
+  {
+    name: 'play button hover', width: 1440,
+    act: (p) => button(p, 'Play all 7 months').hover(), shot: '#journey',
+  },
+  {
+    name: 'next month hover', width: 1440,
+    act: (p) => button(p, 'Next month').hover(), shot: '#journey',
+  },
+  {
+    name: 'previous month disabled at month one', width: 1440,
+    act: async (p) => { await expect(button(p, 'Previous month')).toBeDisabled(); }, shot: '#journey',
+  },
+  {
+    name: 'form submit hover', width: 1440,
+    act: (p) => button(p, 'Request my profile review').hover(), shot: '#contact',
+  },
+  {
+    name: 'form input focus', width: 1440, quick: true,
+    act: (p) => p.locator('#f-name').focus(), shot: '#contact',
+  },
   { name: 'month 5 selected', width: 1440, act: (p) => button(p, 'Month 5').click(), shot: '#journey', quick: true },
   {
     name: 'next month, then month 7 (1024px)',

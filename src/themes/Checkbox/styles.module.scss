@@ -1,0 +1,10 @@
+@use '@/utils/styles/tokens' as t;
+
+.root {
+  --checkbox-size: 22px;
+  --checkbox-radius: 4px;
+}
+.input:checked {
+  background: t.$navy;
+  border-color: t.$navy;
+}

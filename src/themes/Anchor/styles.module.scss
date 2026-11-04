@@ -1,0 +1,10 @@
+@use '@/utils/styles/tokens' as t;
+
+.root {
+  color: t.$navy;
+  text-decoration: underline 2px t.$yellow;
+  text-underline-offset: 3px;
+}
+.root:hover {
+  color: t.$red;
+}

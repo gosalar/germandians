@@ -49,24 +49,6 @@
   }
 }
 
-.cta {
-  background: t.$navy;
-  color: t.$yellow;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 11px 18px;
-  border-radius: 10px;
-  transition:
-    background 0.2s,
-    color 0.2s;
-
-  &:hover {
-    background: t.$yellow;
-    color: t.$navy;
-  }
-}
-
 // Menu button below 940px.
 .menuButton {
   flex: none;
@@ -98,7 +80,7 @@
     height: 2px;
     background: t.$yellow;
     border-radius: 1px;
-    transition: transform 0.25s;
+    transition: transform var(--motion-duration, 0.25s);
   }
 
   &[data-open='true'] {
@@ -141,15 +123,4 @@
 
 .menuCta {
   margin-top: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 54px;
-  background: t.$yellow;
-  color: t.$navy;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 17px;
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2px t.$navy;
 }

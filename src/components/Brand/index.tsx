@@ -1,5 +1,7 @@
 import { Link } from 'react-router';
 
+import HomeSectionLink from '@/components/HomeSectionLink';
+
 import styles from './styles.module.scss';
 
 interface BrandLinkProps {
@@ -22,9 +24,9 @@ export default function BrandLink({ to, size = 'fluid', onClick }: BrandLinkProp
   );
 
   return to.startsWith('#') ? (
-    <a href={to} onClick={onClick} className={styles.link} data-size={size}>
+    <HomeSectionLink href={to} onClick={onClick} className={styles.link} data-size={size}>
       {children}
-    </a>
+    </HomeSectionLink>
   ) : (
     <Link to={to} onClick={onClick} className={styles.link} data-size={size}>
       {children}

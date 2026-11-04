@@ -1,3 +1,4 @@
+import { Badge, Button } from '@mantine/core';
 import flagPainting from '@/assets/images/flag-painting.jpg';
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
 import { CONTACT, SECTIONS, hashLink, type IntakeStatus } from '@/utils/constants';
@@ -18,10 +19,9 @@ function IntakeStatusBadge() {
   if (!colors) return null;
   const [background, ink] = colors;
   return (
-    <span className={styles.status} style={{ background, color: ink }}>
-      <span className={styles.statusDot} style={{ background: ink }} />
-      <span>{siteConfig.intakeStatus}</span>
-    </span>
+    <Badge component="span" variant="intake" style={{ background, color: ink }}>
+      {siteConfig.intakeStatus}
+    </Badge>
   );
 }
 
@@ -76,12 +76,12 @@ export default function Hero() {
           </a>
           <p className={styles.summary}>We guide you from profile evaluation to your first week in Germany.</p>
           <div ref={heroCtaRef} className={styles.ctas}>
-            <a href={hashLink(SECTIONS.contactForm)} className={styles.primaryCta}>
+            <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow" size="lg">
               Get my profile reviewed
-            </a>
-            <a href={CONTACT.instagramUrl} target="_blank" rel="noopener" className={styles.secondaryCta}>
+            </Button>
+            <Button component="a" href={CONTACT.instagramUrl} target="_blank" rel="noopener" variant="ring" size="lg">
               DM us on Instagram
-            </a>
+            </Button>
           </div>
           <div className={styles.meta}>
             <div className={styles.intake}>

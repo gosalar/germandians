@@ -1,12 +1,13 @@
 import { Link } from 'react-router';
 
+import HomeSectionLink from '@/components/HomeSectionLink';
 import { CONTACT, INTAKE_SEATS, ROUTES, SECTIONS, hashLink } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 import FitWordmark from './FitWordmark';
 import styles from './styles.module.scss';
 
-export default function Footer() {
+export default function SiteFooter() {
   return (
     <>
       <div aria-hidden="true" className={styles.flagBand} />
@@ -26,9 +27,9 @@ export default function Footer() {
               <Link to={ROUTES.privacy} className={styles.link}>
                 Privacy
               </Link>
-              <a href={hashLink(SECTIONS.top)} className={styles.link}>
+              <HomeSectionLink href={hashLink(SECTIONS.top)} className={styles.link}>
                 Back to top
-              </a>
+              </HomeSectionLink>
             </div>
           </div>
           <FitWordmark />

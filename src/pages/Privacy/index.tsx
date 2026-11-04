@@ -20,7 +20,6 @@ const emailLink = (
 export default function Privacy() {
   return (
     <>
-      <title>Privacy note | Germandians</title>
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <BrandLink to={ROUTES.home} size="fixed" />

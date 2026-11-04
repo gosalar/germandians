@@ -1,4 +1,4 @@
-import { TextInput } from '@mantine/core';
+import { Button, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router';
@@ -31,13 +31,6 @@ const VALIDATE = {
   consent: (value: boolean) => (value ? null : 'Please tick the box so we can contact you.'),
 };
 
-const FIELD_CLASSES = {
-  root: styles.field,
-  label: styles.fieldLabel,
-  input: styles.input,
-  error: styles.fieldError,
-};
-
 function FieldLabel({ number, children }: { number: number; children: ReactNode }) {
   return (
     <>
@@ -51,6 +44,7 @@ function FieldLabel({ number, children }: { number: number; children: ReactNode 
 export default function ProfileReviewForm() {
   const { formRef } = usePageChromeActions();
   const [status, setStatus] = useState<Status>('idle');
+  const [receivedDate, setReceivedDate] = useState('');
 
   const form = useForm<FormValues>({
     mode: 'controlled',
@@ -64,11 +58,14 @@ export default function ProfileReviewForm() {
     if (status === 'sending') return;
     const request = { name: values.name.trim(), email: values.email.trim(), whatsapp: values.wa.trim() };
     if (siteConfig.formEndpoint) setStatus('sending');
-    setStatus(await submitProfileReview(request));
+    const result = await submitProfileReview(request);
+    if (result === 'sent') setReceivedDate(new Date().toLocaleDateString('de-DE'));
+    setStatus(result);
   };
 
   const reset = () => {
     form.reset();
+    setReceivedDate('');
     setStatus('idle');
   };
 
@@ -104,7 +101,6 @@ export default function ProfileReviewForm() {
         placeholder="e.g. Priya Sharma"
         disabled={locked}
         label={<FieldLabel number={1}>Name</FieldLabel>}
-        classNames={FIELD_CLASSES}
         {...form.getInputProps('name')}
       />
       <TextInput
@@ -114,7 +110,6 @@ export default function ProfileReviewForm() {
         placeholder="you@example.com"
         disabled={locked}
         label={<FieldLabel number={2}>Email</FieldLabel>}
-        classNames={FIELD_CLASSES}
         {...form.getInputProps('email')}
       />
       <TextInput
@@ -124,7 +119,7 @@ export default function ProfileReviewForm() {
         placeholder="+91 98765 43210"
         disabled={locked}
         label={<FieldLabel number={3}>WhatsApp number</FieldLabel>}
-        classNames={{ ...FIELD_CLASSES, input: `${styles.input} ${styles.phoneInput}` }}
+        classNames={{ input: styles.phoneInput }}
         {...form.getInputProps('wa')}
       />
 
@@ -157,14 +152,14 @@ export default function ProfileReviewForm() {
       </div>
 
       {canSubmit ? (
-        <button type="submit" className={styles.submit}>
+        <Button type="submit" variant="navy" size="submit" className={styles.submit}>
           Request my profile review
-        </button>
+        </Button>
       ) : null}
       {status === 'sending' ? (
-        <button type="button" disabled className={styles.sending}>
+        <Button type="button" disabled variant="navy" size="submit" className={styles.submit}>
           Sending…
-        </button>
+        </Button>
       ) : null}
       {status === 'error' ? (
         <div role="alert" className={styles.errorMessage}>
@@ -187,7 +182,7 @@ export default function ProfileReviewForm() {
 
       <div aria-hidden="true" className={styles.stamp} data-visible={status === 'sent'}>
         <div className={styles.stampTitle}>EINGEGANGEN</div>
-        <div className={styles.stampDate}>Received, {new Date().toLocaleDateString('de-DE')}</div>
+        <div className={styles.stampDate}>Received, {receivedDate}</div>
       </div>
     </form>
   );

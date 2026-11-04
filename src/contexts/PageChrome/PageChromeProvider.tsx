@@ -1,5 +1,8 @@
 import { useIntersection, useWindowEvent } from '@mantine/hooks';
 import { useState, type ReactNode } from 'react';
+import { useLocation } from 'react-router';
+
+import { ROUTES } from '@/utils/constants';
 
 import { PageChromeActionsContext, PageChromeStateContext, type PageChromeActions, type PageChromeState } from './context';
 
@@ -13,6 +16,7 @@ const VISIBILITY = { threshold: 0.05 };
  */
 export default function PageChromeProvider({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { pathname } = useLocation();
   const heroCta = useIntersection<HTMLElement>(VISIBILITY);
   const form = useIntersection<HTMLElement>(VISIBILITY);
 
@@ -22,8 +26,10 @@ export default function PageChromeProvider({ children }: { children: ReactNode }
 
   const state: PageChromeState = {
     menuOpen,
-    heroCtaInView: heroCta.entry ? heroCta.entry.isIntersecting : true,
-    formInView: form.entry ? form.entry.isIntersecting : false,
+    // Only home prerenders an above-the-fold hero. Unobserved sections on
+    // other pages are off screen, so their mobile action bar is available.
+    heroCtaInView: heroCta.entry?.isIntersecting ?? (pathname === ROUTES.home),
+    formInView: form.entry?.isIntersecting ?? false,
   };
 
   const actions: PageChromeActions = {

@@ -1,3 +1,4 @@
+import { useReducedMotion } from '@mantine/hooks';
 import { useEffect, useRef, useState } from 'react';
 
 import { useReplayOnFirstView } from '@/hooks/useReplayOnFirstView';
@@ -13,7 +14,7 @@ export default function Receipt({ feeShort }: { feeShort: string }) {
   const clipRef = useRef<HTMLDivElement>(null);
   const restart = useRef<ReturnType<typeof setTimeout>>(undefined);
   const [printed, setPrinted] = useState(true);
-  const [reducedMotion] = useState(prefersReducedMotion);
+  const reducedMotion = useReducedMotion();
 
   const print = () => {
     if (prefersReducedMotion()) {

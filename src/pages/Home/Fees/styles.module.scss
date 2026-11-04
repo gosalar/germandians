@@ -103,7 +103,7 @@
   }
 
   &[data-animate='true'] {
-    transition: transform 2.6s steps(22, end);
+    transition: transform var(--motion-duration, 2.6s) steps(22, end);
   }
 }
 
@@ -279,5 +279,4 @@
 
 .cta {
   align-self: flex-start;
-  @include m.cta(t.$yellow, t.$navy, t.$white, t.$navy);
 }

@@ -1,3 +1,4 @@
+import { Button } from '@mantine/core';
 import { useRef, type KeyboardEvent, type PointerEvent } from 'react';
 
 import { MONTHS, PHASES, TOTAL_MONTHS } from './data';
@@ -60,9 +61,9 @@ export default function MonthExplorer() {
             The same four stages, split into seven months. Pick a month to see what we work on with you.
           </p>
         </div>
-        <button type="button" onClick={togglePlay} aria-pressed={playing} className={styles.playButton}>
+        <Button type="button" onClick={togglePlay} aria-pressed={playing} variant="navy" size="md">
           {playLabel}
-        </button>
+        </Button>
       </div>
 
       <div className={styles.explorer}>
@@ -159,24 +160,24 @@ export default function MonthExplorer() {
         </div>
 
         <div className={styles.stepper}>
-          <button
+          <Button
             type="button"
             onClick={() => select(month - 1)}
             disabled={month <= 1}
-            className={styles.prev}
+            variant="outline" size="step"
           >
             <span className={styles.longLabel}>Previous month</span>
             <span className={styles.shortLabel}>Previous</span>
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             onClick={() => select(month + 1)}
             disabled={month >= TOTAL_MONTHS}
-            className={styles.next}
+            variant="navy-step" size="step"
           >
             <span className={styles.longLabel}>Next month</span>
             <span className={styles.shortLabel}>Next</span>
-          </button>
+          </Button>
         </div>
       </div>
     </>

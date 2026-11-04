@@ -1,3 +1,4 @@
+import { Button } from '@mantine/core';
 import { SECTIONS, hashLink } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
@@ -39,9 +40,9 @@ export default function Fees() {
               ))}
             </ul>
           </div>
-          <a href={hashLink(SECTIONS.contactForm)} className={styles.cta}>
+          <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow-dark" size="lg" className={styles.cta}>
             Get my profile reviewed
-          </a>
+          </Button>
         </div>
       </div>
     </section>

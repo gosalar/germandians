@@ -125,26 +125,6 @@
   text-wrap: pretty;
 }
 
-.playButton {
-  background: t.$navy;
-  color: t.$yellow;
-  border: 0;
-  border-radius: 12px;
-  padding: 0 22px;
-  min-height: 50px;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  transition:
-    background 0.2s,
-    color 0.2s;
-
-  &:hover {
-    background: t.$yellow;
-    color: t.$navy;
-  }
-}
-
 .explorer {
   margin-top: 28px;
   background: t.$white;
@@ -177,7 +157,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: left 0.4s cubic-bezier(0.3, 1.45, 0.5, 1);
+  transition: left var(--motion-duration, 0.4s) cubic-bezier(0.3, 1.45, 0.5, 1);
   pointer-events: none;
 }
 
@@ -256,7 +236,7 @@
   font-size: 16px;
   color: t.$slate;
   font-weight: 500;
-  transition: background 0.3s;
+  transition: background var(--motion-duration, 0.3s);
 
   &[aria-current] {
     color: t.$navy;
@@ -310,7 +290,7 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: clamp(12px, 4vw, 48px);
   align-items: start;
-  transition: background 0.3s;
+  transition: background var(--motion-duration, 0.3s);
 }
 
 .detailMonth {
@@ -333,7 +313,7 @@
   line-height: 1;
   margin-top: 8px;
   letter-spacing: -0.05em;
-  transition: color 0.3s;
+  transition: color var(--motion-duration, 0.3s);
 }
 
 .detailMonthTotal {
@@ -355,7 +335,7 @@
   font-weight: 800;
   font-size: clamp(24px, 2.4vw, 34px);
   line-height: 1.1;
-  transition: color 0.3s;
+  transition: color var(--motion-duration, 0.3s);
 }
 
 .detailDesc {
@@ -408,40 +388,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-}
-
-%step-button {
-  min-height: 56px;
-  border-radius: 12px;
-  border: 2px solid t.$navy;
-  font-weight: 700;
-  font-size: 17px;
-  cursor: pointer;
-  transition: background 0.2s;
-
-  &:disabled {
-    opacity: 0.4;
-  }
-}
-
-.prev {
-  @extend %step-button;
-  background: t.$white;
-  color: t.$navy;
-
-  &:hover {
-    background: t.$note;
-  }
-}
-
-.next {
-  @extend %step-button;
-  background: t.$navy;
-  color: t.$yellow;
-
-  &:hover {
-    background: t.$navy-raised;
-  }
 }
 
 .shortLabel {

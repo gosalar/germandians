@@ -28,7 +28,7 @@ export default defineConfig({
     },
     {
       // Always a fresh production build with the design's default settings.
-      command: `npm run build:visual && npx vite preview --mode visual --outDir .visual-build --port ${APP_PORT} --strictPort`,
+      command: `npm run build:visual && node scripts/serve.mjs .visual-build/client ${APP_PORT}`,
       port: APP_PORT,
       reuseExistingServer: false,
       timeout: 180_000,

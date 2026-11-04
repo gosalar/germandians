@@ -1,8 +1,10 @@
 import { fileURLToPath } from 'node:url';
 
 import babel from '@rolldown/plugin-babel';
-import react, { reactCompilerPreset } from '@vitejs/plugin-react';
+import { reactRouter } from '@react-router/dev/vite';
+import { reactCompilerPreset } from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import { siteBase } from './scripts/site-base.ts';
 
 export default defineConfig(({ command, mode }) => {
   // A machine-wide NODE_ENV (e.g. "localhost") would otherwise make Vite ship
@@ -10,12 +12,13 @@ export default defineConfig(({ command, mode }) => {
   if (command === 'build') process.env.NODE_ENV = 'production';
 
   return {
+    base: siteBase,
     // The visual-test build ignores config/.env* so it always has the design's default settings.
     envDir: mode === 'visual' ? false : 'config',
     // Same alias as tsconfig "paths"; declared here too so Sass @use resolves it.
     resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
-    plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
-    build: {
+    plugins: [reactRouter(), babel({ presets: [reactCompilerPreset()] })],
+    environments: { client: { build: {
       rolldownOptions: {
         output: {
           // Vendor code changes rarely; separate chunks stay cached across site updates.
@@ -28,6 +31,6 @@ export default defineConfig(({ command, mode }) => {
           },
         },
       },
-    },
+    } } },
   };
 });

@@ -17,6 +17,14 @@ export const SECTIONS = {
 
 export const hashLink = (id: string) => `#${id}`;
 
+export const NAV_LINKS = [
+  { id: SECTIONS.journey, label: 'Journey' },
+  { id: SECTIONS.universities, label: 'Universities' },
+  { id: SECTIONS.community, label: 'Why us' },
+  { id: SECTIONS.contact, label: 'Contact' },
+] as const;
+export const NAV_CTA = { id: SECTIONS.contactForm, label: 'Get my profile reviewed' } as const;
+
 export const CONTACT = {
   email: 'thegermandians@gmail.com',
   instagramHandle: '@germandians',

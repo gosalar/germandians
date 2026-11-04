@@ -1,0 +1,26 @@
+@use '@/utils/styles/tokens' as t;
+
+.root {
+  display: inline-flex;
+  height: auto;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.section {
+  margin: 0;
+}
+
+.root[data-variant='intake']::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}

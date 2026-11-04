@@ -1,0 +1,6 @@
+@use '@/utils/styles/tokens' as t;
+
+.focus:focus-visible {
+  outline: 3px solid t.$yellow;
+  outline-offset: 6px;
+}

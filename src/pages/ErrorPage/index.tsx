@@ -12,7 +12,6 @@ export default function ErrorPage() {
 
   return (
     <>
-      <title>{notFound ? 'Page not found | Germandians' : 'Something went wrong | Germandians'}</title>
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <BrandLink to={ROUTES.home} size="fixed" />

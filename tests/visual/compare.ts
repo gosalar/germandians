@@ -108,8 +108,14 @@ export async function openPage(browser: Browser, url: string, options: OpenOptio
   await serveCdnFromCache(context);
   const page = await context.newPage();
   await page.goto(url, { waitUntil: 'load' });
-  // The prototype renders itself after compiling in the browser; wait for real content.
-  await page.locator('nav').first().waitFor();
+  if (url.startsWith(`http://localhost:${APP_PORT}/`)) {
+    // The site is prerendered: its HTML is on screen before React hydrates and
+    // runs the effects that finish the layout (e.g. the footer wordmark fit).
+    await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+  } else {
+    // The prototype renders itself after compiling in the browser; wait for real content.
+    await page.locator('nav').first().waitFor();
+  }
   // Lazy images would otherwise only load when scrolled to.
   await page.evaluate(() => document.querySelectorAll('img').forEach((img) => (img.loading = 'eager')));
   if (options.unstickNav) await page.addStyleTag({ content: UNSTICK_NAV });

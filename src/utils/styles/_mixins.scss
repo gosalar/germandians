@@ -60,25 +60,6 @@
   font-size: $size;
 }
 
-// Solid call-to-action link used across sections.
-@mixin cta($bg, $fg, $hover-bg, $hover-fg) {
-  background: $bg;
-  color: $fg;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 17px;
-  padding: 16px 24px;
-  border-radius: 12px;
-  transition:
-    background 0.2s,
-    color 0.2s;
-
-  &:hover {
-    background: $hover-bg;
-    color: $hover-fg;
-  }
-}
-
 @mixin square-bullet($size, $radius, $top: 0) {
   flex: none;
   width: $size;

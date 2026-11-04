@@ -1,3 +1,4 @@
+import HomeSectionLink from '@/components/HomeSectionLink';
 import { usePageChrome } from '@/contexts/PageChrome/usePageChrome';
 import { CONTACT } from '@/utils/constants';
 import { whatsapp } from '@/utils/siteConfig';
@@ -16,9 +17,9 @@ export default function MobileActionBar() {
     <>
       <div aria-hidden="true" className={styles.spacer} />
       <div className={styles.bar} data-visible={visible}>
-        <a href={whatsapp.href} target={whatsapp.target} rel="noopener" className={styles.whatsapp}>
+        <HomeSectionLink href={whatsapp.href} target={whatsapp.target} rel="noopener" className={styles.whatsapp}>
           WhatsApp us
-        </a>
+        </HomeSectionLink>
         <a href={CONTACT.instagramUrl} target="_blank" rel="noopener" className={styles.instagram}>
           Instagram
         </a>

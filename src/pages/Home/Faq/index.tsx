@@ -35,16 +35,6 @@ const QUESTIONS = [
   },
 ];
 
-const ACCORDION_CLASSES = {
-  root: styles.list,
-  item: styles.item,
-  control: styles.control,
-  chevron: styles.chevron,
-  icon: styles.icon,
-};
-
-const plusIcon = <span aria-hidden="true">+</span>;
-
 export default function Faq() {
   return (
     <section id={SECTIONS.faq} data-screen-label="FAQ" className={styles.section}>
@@ -61,10 +51,10 @@ export default function Faq() {
         </div>
 
         {/* Each answer opens independently; the first starts open. */}
-        <Accordion multiple defaultValue={['0']} transitionDuration={0} classNames={ACCORDION_CLASSES}>
+        <Accordion multiple defaultValue={['0']}>
           {QUESTIONS.map((item, i) => (
             <Accordion.Item key={item.q} value={String(i)}>
-              <Accordion.Control icon={plusIcon}>{item.q}</Accordion.Control>
+              <Accordion.Control>{item.q}</Accordion.Control>
               <Accordion.Panel>
                 <p className={styles.answer}>{item.a}</p>
               </Accordion.Panel>

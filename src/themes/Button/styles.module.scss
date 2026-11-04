@@ -1,0 +1,108 @@
+@use '@/utils/styles/tokens' as t;
+
+.root {
+  height: auto;
+  line-height: normal;
+  overflow: visible;
+  border: 0;
+  border-radius: 12px;
+  font-weight: 700;
+  color: var(--brand-button-fg);
+  background: var(--brand-button-bg);
+  text-decoration: none;
+  transition: background var(--motion-duration, 0.2s), color var(--motion-duration, 0.2s);
+  // Only the loading overlay needs a positioned containing block.
+  &:not([data-loading]) {
+    position: static;
+  }
+  &:hover {
+    background: var(--brand-button-hover-bg, var(--brand-button-bg));
+    color: var(--brand-button-hover-fg, var(--brand-button-fg));
+  }
+  &[data-disabled] {
+    opacity: 0.4;
+  }
+  &[data-size='nav'] {
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+  &[data-size='md'] {
+    min-height: 50px;
+    padding: 0 22px;
+    font-size: 16px;
+  }
+  &[data-size='lg'] {
+    padding: 16px 24px;
+    font-size: 17px;
+  }
+  &[data-size='step'] {
+    min-height: 56px;
+    padding: 1px 6px;
+    font-size: 17px;
+  }
+  &[data-size='submit'] {
+    min-height: 56px;
+    padding: 0 26px;
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 8px;
+  }
+  &[data-size='menu'] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 54px;
+    padding: 0;
+    font-size: 17px;
+  }
+  &[data-variant='navy'], &[data-variant='navy-step'] {
+    --brand-button-bg: #{t.$navy};
+    --brand-button-fg: #{t.$yellow};
+    --brand-button-hover-bg: #{t.$yellow};
+    --brand-button-hover-fg: #{t.$navy};
+  }
+  &[data-variant='yellow'], &[data-variant='yellow-dark'], &[data-variant='menu'] {
+    --brand-button-bg: #{t.$yellow};
+    --brand-button-fg: #{t.$navy};
+  }
+  &[data-variant='yellow'] {
+    --brand-button-hover-bg: #{t.$navy};
+    --brand-button-hover-fg: #{t.$yellow};
+  }
+  &[data-variant='yellow-dark'] {
+    --brand-button-hover-bg: #{t.$white};
+  }
+  &[data-variant='ring'] {
+    --brand-button-bg: transparent;
+    --brand-button-fg: #{t.$navy};
+    --brand-button-hover-bg: #{t.$khaki};
+  }
+  &[data-variant='yellow'], &[data-variant='menu'], &[data-variant='ring'] {
+    box-shadow: inset 0 0 0 2px t.$navy;
+  }
+  &[data-variant='outline'] {
+    --brand-button-bg: #{t.$white};
+    --brand-button-fg: #{t.$navy};
+    --brand-button-hover-bg: #{t.$note};
+  }
+  &[data-variant='navy-step'] {
+    --brand-button-hover-bg: #{t.$navy-raised};
+    --brand-button-hover-fg: #{t.$yellow};
+  }
+  &[data-variant='outline'], &[data-variant='navy-step'] {
+    border: 2px solid t.$navy;
+  }
+  &[data-disabled][data-size='submit'] {
+    background: t.$slate;
+    color: t.$white;
+    opacity: 1;
+  }
+}
+.inner, .label {
+  height: auto;
+  line-height: inherit;
+  overflow: visible;
+  white-space: normal;
+}

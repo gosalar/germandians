@@ -6,7 +6,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
-  globalIgnores(['dist', 'claude-design-handoff', 'references']),
+  globalIgnores(['dist', 'build', '.react-router', '.visual-build', 'claude-design-handoff', 'references']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -16,5 +16,14 @@ export default defineConfig([
       reactRefresh.configs.vite,
     ],
     languageOptions: { ecmaVersion: 2023, globals: globals.browser },
+  },
+  {
+    files: ['src/root.tsx', 'src/routes/**/*.tsx'],
+    rules: {
+      'react-refresh/only-export-components': ['warn', {
+        allowExportNames: ['meta', 'links', 'headers', 'loader', 'clientLoader', 'action', 'clientAction',
+          'ErrorBoundary', 'HydrateFallback', 'handle', 'shouldRevalidate'],
+      }],
+    },
   },
 ]);

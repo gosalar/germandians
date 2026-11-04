@@ -1,0 +1,19 @@
+@use '@/utils/styles/tokens' as t;
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1.5px t.$navy;
+  border-radius: 18px;
+  font-size: 17px;
+  line-height: 1.45;
+}
+.th, .td {
+  padding: 18px 22px;
+  border-bottom: 1px solid t.$hairline;
+}
+.th {
+  background: t.$sand;
+  font: 700 18px t.$font-label;
+}
