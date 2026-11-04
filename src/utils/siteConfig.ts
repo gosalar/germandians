@@ -1,0 +1,37 @@
+import { CONTACT, INTAKE_SEATS, INTAKE_STATUSES, SECTIONS, hashLink, type IntakeStatus } from '@/utils/constants';
+
+/**
+ * Editable site settings. These were the design's "props" panel; here they
+ * come from `config/.env*` (see `config/.env.example`). Defaults match the design.
+ */
+const env = import.meta.env;
+
+const text = (value: string | undefined) => String(value ?? '').trim();
+
+const toIntakeStatus = (value: string): IntakeStatus =>
+  (INTAKE_STATUSES as readonly string[]).includes(value) ? (value as IntakeStatus) : 'Not confirmed';
+
+const toSeats = (value: string) => {
+  const n = Number(value);
+  return value !== '' && Number.isFinite(n) ? Math.max(0, Math.min(INTAKE_SEATS, Math.round(n))) : INTAKE_SEATS;
+};
+
+const whatsappDigits = text(env.VITE_WHATSAPP_NUMBER).replace(/\D/g, '');
+
+export const siteConfig = {
+  formEndpoint: text(env.VITE_FORM_ENDPOINT),
+  feeAfterAdmission: text(env.VITE_FEE_AFTER_ADMISSION),
+  intakeStatus: toIntakeStatus(text(env.VITE_INTAKE_STATUS)),
+  showSeatCount: text(env.VITE_SHOW_SEAT_COUNT) === 'true',
+  seatsLeft: toSeats(text(env.VITE_SEATS_LEFT)),
+  allowRepaint: text(env.VITE_ALLOW_REPAINT) !== 'false',
+} as const;
+
+/** WhatsApp link, or a jump to the form when no number is configured. */
+export const whatsapp = whatsappDigits
+  ? {
+      href: `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(CONTACT.whatsappGreeting)}`,
+      target: '_blank',
+      label: `+${whatsappDigits}`,
+    }
+  : { href: hashLink(SECTIONS.contactForm), target: '_self', label: 'Use the form' };

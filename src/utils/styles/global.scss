@@ -1,0 +1,56 @@
+@use 'tokens' as t;
+
+// Element defaults from the design. They sit inside :where() so any component
+// class wins over them, the same way the design's inline styles did.
+:where(html) {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+  overflow-x: clip;
+}
+
+:where(body) {
+  margin: 0;
+  background: t.$paper;
+  color: t.$navy;
+  font-family: t.$font-body;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+:where(a) {
+  color: t.$navy;
+  text-decoration-color: t.$yellow;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+:where(a:hover) {
+  color: t.$red;
+}
+
+::selection {
+  background: t.$yellow;
+  color: t.$navy;
+}
+
+:where(input)::placeholder {
+  color: t.$placeholder;
+}
+
+:where(button) {
+  font: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition-duration: 0s !important;
+  }
+}

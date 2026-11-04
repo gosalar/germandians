@@ -1,0 +1,61 @@
+// Design tokens, taken verbatim from the Claude Design handoff (Germandians v4).
+
+// Brand
+$navy: #10182e;
+$navy-raised: #1c2643;
+$navy-raised-hover: #26315a;
+$navy-line: #2a3557;
+$navy-line-soft: #26304f;
+$navy-deep: #050913;
+$navy-footer: #0b1122;
+$yellow: #f5c400;
+$yellow-bright: #ffd83d;
+$red: #c4261b;
+$red-bright: #d42b1f;
+$green: #1d7a3d;
+$orange: #ef8a21;
+$orange-ink: #b85d06;
+$black: #121212;
+$white: #ffffff;
+
+// Paper and surfaces
+$paper: #f7f5ef;
+$sand: #efebe2;
+$khaki: #ebe6d8;
+$cream: #fffdf4;
+$receipt: #fffef8;
+$form: #fbfaf5;
+$note: #f1eee4;
+$cream-hover: #fff6cc;
+$highlight: #fde98a;
+
+// Lines
+$line: #e2ddd0;
+$hairline: #d9d4c6;
+$underline-muted: #b9b29f;
+
+// Text on light
+$ink-strong: #1f2742;
+$ink: #2b3350;
+$ink-soft: #333c56;
+$ink-muted: #3b4460;
+$slate: #4a5372;
+$placeholder: #7a8094;
+
+// Text on navy
+$mist: #c6ccda;
+$mist-soft: #d3d8e4;
+$mist-light: #e3e6ee;
+
+// Type
+$font-display: 'Archivo Variable', 'Archivo', sans-serif;
+$font-body: 'Hanken Grotesk Variable', 'Hanken Grotesk', sans-serif;
+$font-label: 'Barlow Semi Condensed', sans-serif;
+
+// Widths at which the design switches layout (window.innerWidth thresholds).
+$bp-mobile: 760px; // below: stacked hero/fees, card versions of both tables, sticky action bar
+$bp-nav: 940px; // below: menu button instead of inline links
+$bp-stages-4: 1100px; // from: four journey stages per row
+$bp-stages-2: 600px; // from: two journey stages per row
+$bp-segment-labels: 640px; // from: labels inside the month track, below: a legend
+$bp-short-labels: 420px; // below: "Previous" / "Next"

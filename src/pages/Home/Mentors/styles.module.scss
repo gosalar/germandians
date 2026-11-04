@@ -1,0 +1,404 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+$table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
+
+.section {
+  @include m.section-padding;
+}
+
+.container {
+  @include m.container;
+}
+
+// Intro + photo
+.intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(36px, 6vw, 88px);
+  align-items: center;
+}
+
+.introCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  @include m.display-heading;
+}
+
+.body {
+  @include m.body-copy;
+  color: t.$ink-soft;
+}
+
+.points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  > li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    font-size: clamp(17px, 1.35vw, 19px);
+    line-height: 1.5;
+    color: t.$ink-strong;
+  }
+}
+
+.pointBullet {
+  @include m.square-bullet(14px, 3px, 6px);
+}
+
+.photo {
+  border-radius: 18px;
+  overflow: hidden;
+  transform: rotate(1.2deg);
+  box-shadow: 0 24px 48px -24px rgba(16, 24, 46, 0.45);
+  aspect-ratio: 1090 / 788;
+
+  > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// Stats
+.stats {
+  margin-top: clamp(64px, 8vw, 104px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 28px 32px;
+}
+
+.stat {
+  border-top: 3px solid t.$navy;
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  --stat-color: #{t.$navy};
+
+  &[data-highlight='true'] {
+    border-top-color: t.$red;
+    --stat-color: #{t.$red};
+  }
+}
+
+.statValue {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 80%;
+  font-size: clamp(56px, 6vw, 88px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--stat-color);
+}
+
+.statLabel {
+  font-size: 18px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: t.$ink-strong;
+}
+
+.seats {
+  @include m.label-font(600, 17px);
+  color: t.$ink-muted;
+}
+
+// Ratio headline and diagrams
+.ratio {
+  margin: clamp(80px, 9vw, 120px) 0 32px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 76%;
+  line-height: 0.92;
+  letter-spacing: -0.022em;
+  word-spacing: 0.14em;
+  text-wrap: balance;
+}
+
+.ratioOurs {
+  display: block;
+  font-size: clamp(42px, 6.2vw, 100px);
+  color: t.$navy;
+}
+
+.ratioTheirs {
+  display: block;
+  margin-top: 14px;
+  font-size: clamp(26px, 3.2vw, 48px);
+  color: t.$red;
+}
+
+.diagrams {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 24px;
+}
+
+.diagram {
+  border-radius: 22px;
+  padding: clamp(20px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+
+  &[data-tone='ours'] {
+    background: t.$navy;
+    color: t.$white;
+    border: 2px dashed t.$yellow;
+    --diagram-accent: #{t.$yellow};
+    --diagram-arrow: #{t.$mist};
+    --diagram-note: #{t.$mist-soft};
+  }
+
+  &[data-tone='theirs'] {
+    border: 2px dashed t.$red-bright;
+    --diagram-accent: #{t.$red-bright};
+    --diagram-arrow: #{t.$slate};
+    --diagram-note: #{t.$ink-muted};
+
+    .diagramTitle {
+      color: t.$red;
+    }
+  }
+}
+
+.diagramHead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.diagramTitle {
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-size: 26px;
+  color: t.$yellow;
+}
+
+.diagramSource {
+  font-size: 15px;
+  color: t.$ink-muted;
+}
+
+.diagramBox {
+  width: 100%;
+  border: 2px solid var(--diagram-accent);
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.diagramCrowd {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-weight: normal;
+  font-size: inherit;
+
+  [data-tone='ours'] & {
+    align-items: center;
+  }
+}
+
+.diagramOutcome {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: normal;
+  font-size: inherit;
+}
+
+.diagramStrong {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.diagramNote {
+  font-size: 16px;
+  color: var(--diagram-note);
+}
+
+.arrow {
+  font-size: 22px;
+  color: var(--diagram-arrow);
+}
+
+.studentDots {
+  display: flex;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.studentDot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: t.$yellow;
+}
+
+.agencyDots {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 4px;
+}
+
+.agencyDot {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1.5px solid t.$red-bright;
+}
+
+.ratioNote {
+  margin: 24px 0 0;
+  max-width: 68ch;
+  font-size: clamp(17px, 1.35vw, 19px);
+  line-height: 1.6;
+  text-wrap: pretty;
+  color: t.$ink-soft;
+}
+
+// Comparison
+.compareTitle {
+  margin: clamp(72px, 8vw, 104px) 0 20px;
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1.1;
+  color: t.$navy;
+  text-wrap: balance;
+}
+
+.table {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1.5px t.$navy;
+  font-size: 17px;
+  line-height: 1.45;
+
+  @include m.below(t.$bp-mobile) {
+    display: none;
+  }
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: $table-columns;
+}
+
+.tableBodyRow {
+  border-top: 1px solid t.$hairline;
+}
+
+.tableHeader {
+  padding: 18px 22px;
+  background: t.$sand;
+  @include m.label-font(700, 18px);
+}
+
+.tableHeaderOurs {
+  background: t.$navy;
+  color: t.$yellow;
+}
+
+.tableTopic {
+  padding: 18px 22px;
+  font-weight: 700;
+}
+
+.tableThem {
+  padding: 18px 22px;
+  color: t.$ink-muted;
+}
+
+.tableUs {
+  padding: 18px 22px;
+  background: t.$navy;
+  color: t.$white;
+  font-weight: 600;
+  border-top: 1px solid t.$navy-line-soft;
+}
+
+.compareCards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  @include m.from(t.$bp-mobile) {
+    display: none;
+  }
+}
+
+.compareCard {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1.5px t.$navy;
+}
+
+.compareCardTopic {
+  padding: 14px 18px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.compareCardThem {
+  padding: 0 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .compareCardLabel {
+    color: t.$ink-muted;
+  }
+}
+
+.compareCardUs {
+  padding: 14px 18px;
+  background: t.$navy;
+  color: t.$white;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .compareCardLabel {
+    color: t.$yellow;
+  }
+}
+
+.compareCardLabel {
+  @include m.label-font(700, 15px);
+}
+
+.compareCardThemText {
+  font-size: 17px;
+  color: t.$ink-muted;
+}
+
+.compareCardUsText {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.footnote {
+  margin: 16px 0 0;
+  max-width: 72ch;
+  font-size: 16px;
+  line-height: 1.55;
+  color: t.$ink-muted;
+  text-wrap: pretty;
+}

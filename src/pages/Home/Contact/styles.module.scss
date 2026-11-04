@@ -1,0 +1,374 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.section {
+  background: t.$navy;
+  color: t.$white;
+  @include m.section-padding;
+}
+
+.grid {
+  @include m.container;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(40px, 6vw, 88px);
+  align-items: start;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(56px, 8vw, 132px);
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  word-spacing: 0.14em;
+  font-stretch: 74%;
+  color: t.$yellow;
+  text-wrap: balance;
+}
+
+.body {
+  margin: 0;
+  font-size: clamp(19px, 1.6vw, 23px);
+  line-height: 1.5;
+  color: t.$mist-light;
+  max-width: 32ch;
+  text-wrap: pretty;
+}
+
+.channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+%channel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  text-decoration: none;
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: background 0.2s;
+}
+
+.instagram {
+  @extend %channel;
+  background: t.$yellow;
+  color: t.$navy;
+
+  &:hover {
+    background: t.$yellow-bright;
+    color: t.$navy;
+  }
+}
+
+.channel {
+  @extend %channel;
+  background: t.$navy-raised;
+  color: t.$white;
+
+  &:hover {
+    background: t.$navy-raised-hover;
+    color: t.$white;
+  }
+
+  .channelValue {
+    color: t.$mist-light;
+  }
+}
+
+.channelName {
+  font-weight: 800;
+  font-size: 19px;
+}
+
+.channelValue {
+  @include m.label-font(600, 19px);
+}
+
+.channelEmail {
+  overflow-wrap: anywhere;
+}
+
+// The form
+.form {
+  position: relative;
+  background: t.$form;
+  color: t.$navy;
+  border-radius: 6px;
+  padding: clamp(20px, 3.4vw, 40px);
+  box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  scroll-margin-top: 84px;
+}
+
+.formHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.formTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.formTitle {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.formSubtitle {
+  font-size: 16px;
+  color: t.$ink-muted;
+}
+
+.formRef {
+  border: 1.5px solid t.$navy;
+  padding: 6px 10px;
+  font-family: t.$font-label;
+  font-size: 14px;
+  line-height: 1.3;
+  text-align: right;
+}
+
+.formRefStrong {
+  font-weight: 700;
+}
+
+.formRule {
+  height: 3px;
+  background: t.$navy;
+}
+
+.formIntro {
+  font-size: 17px;
+  line-height: 1.45;
+  color: t.$ink-strong;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.fieldNumber {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: t.$navy;
+  color: t.$form;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.input {
+  height: 54px;
+  border: 1.5px solid t.$navy;
+  border-radius: 4px;
+  background: t.$white;
+  padding: 0 14px;
+  font-family: t.$font-label;
+  font-weight: 600;
+  font-size: 20px;
+  color: t.$navy;
+  outline: none;
+  width: 100%;
+
+  &[data-error] {
+    border-color: t.$red;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px t.$yellow;
+  }
+}
+
+.phoneInput {
+  letter-spacing: 0.04em;
+}
+
+.fieldError {
+  margin: 0;
+  font-size: 15px;
+  color: t.$red;
+  font-weight: 600;
+}
+
+.hint {
+  background: t.$note;
+  border-radius: 4px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink-strong;
+}
+
+.hintTitle {
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+}
+
+.consent {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink-strong;
+  cursor: pointer;
+}
+
+.checkbox {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
+  accent-color: t.$navy;
+  cursor: pointer;
+}
+
+.privacyLink {
+  font-weight: 700;
+}
+
+%submit-button {
+  align-self: flex-start;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 26px;
+  min-height: 56px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.submit {
+  @extend %submit-button;
+  background: t.$navy;
+  color: t.$yellow;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+
+  &:hover {
+    background: t.$yellow;
+    color: t.$navy;
+  }
+}
+
+.sending {
+  @extend %submit-button;
+  background: t.$slate;
+  color: t.$white;
+}
+
+.errorMessage {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: t.$red;
+}
+
+.statusMessage {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: t.$ink-strong;
+}
+
+.sent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sentMessage {
+  font-size: 17px;
+  font-weight: 700;
+  color: t.$green;
+}
+
+.sendAnother {
+  background: none;
+  border: 0;
+  padding: 6px 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: t.$navy;
+  text-decoration: underline;
+  text-decoration-color: t.$yellow;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+.stamp {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  pointer-events: none;
+  border: 5px solid t.$green;
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: t.$green;
+  background: rgba(251, 250, 245, 0.9);
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-11deg) scale(2);
+  transition:
+    transform 0.34s cubic-bezier(0.2, 1.6, 0.4, 1),
+    opacity 0.2s;
+
+  &[data-visible='true'] {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) rotate(-11deg) scale(1);
+  }
+}
+
+.stampTitle {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(28px, 4vw, 46px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.stampDate {
+  @include m.label-font(700, 17px);
+  margin-top: 4px;
+}

@@ -1,0 +1,211 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+$cell-pad: clamp(24px, 3.4vw, 44px);
+
+.section {
+  background: t.$yellow;
+  color: t.$navy;
+  @include m.section-padding;
+}
+
+.container {
+  @include m.container;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 820px;
+}
+
+.title {
+  @include m.display-heading;
+}
+
+.lede {
+  @include m.body-copy;
+  color: t.$ink-strong;
+}
+
+// Desktop table
+.table {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 20px;
+
+  @include m.below(t.$bp-mobile) {
+    display: none;
+  }
+}
+
+.row {
+  display: contents;
+}
+
+%column-header {
+  border-radius: 24px 24px 0 0;
+  padding: clamp(28px, 3.4vw, 44px) $cell-pad 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+}
+
+%column-title {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1;
+}
+
+%column-german {
+  @include m.label-font(600, 17px);
+}
+
+.publicHeader {
+  @extend %column-header;
+  background: t.$navy;
+}
+
+.privateHeader {
+  @extend %column-header;
+  background: t.$paper;
+}
+
+.publicTitle {
+  @extend %column-title;
+  color: t.$yellow;
+}
+
+.privateTitle {
+  @extend %column-title;
+  color: t.$red;
+}
+
+.publicGerman {
+  @extend %column-german;
+  color: t.$mist;
+}
+
+.privateGerman {
+  @extend %column-german;
+  color: t.$ink-muted;
+}
+
+%cell {
+  padding: 0 $cell-pad;
+
+  .row:last-child > & {
+    padding-bottom: $cell-pad;
+    border-radius: 0 0 24px 24px;
+  }
+}
+
+.publicCell {
+  @extend %cell;
+  background: t.$navy;
+  --cell-line: #{t.$navy-line};
+  --cell-topic: #{t.$yellow};
+  --cell-text: #{t.$mist-light};
+}
+
+.privateCell {
+  @extend %cell;
+  background: t.$paper;
+  --cell-line: #{t.$hairline};
+  --cell-topic: #{t.$red};
+  --cell-text: #{t.$ink};
+}
+
+.cellInner {
+  height: 100%;
+  padding: 16px 0;
+  border-top: 1px solid var(--cell-line);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cellTopic {
+  @include m.label-font(700, 16px);
+  color: var(--cell-topic);
+}
+
+.cellText {
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--cell-text);
+}
+
+// Mobile cards
+.cards {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include m.from(t.$bp-mobile) {
+    display: none;
+  }
+}
+
+.cardGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardTopic {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1.1;
+  color: t.$navy;
+}
+
+%card {
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardLabel {
+  @include m.label-font(700, 15px);
+}
+
+.cardText {
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.publicCard {
+  @extend %card;
+  background: t.$navy;
+  color: t.$white;
+
+  .cardLabel {
+    color: t.$yellow;
+  }
+}
+
+.privateCard {
+  @extend %card;
+  background: t.$paper;
+  color: t.$navy;
+
+  .cardLabel {
+    color: t.$red;
+  }
+
+  .cardText {
+    color: t.$ink;
+  }
+}

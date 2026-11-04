@@ -1,0 +1,457 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.section {
+  @include m.section-padding;
+}
+
+.container {
+  @include m.container;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 860px;
+}
+
+.title {
+  @include m.display-heading;
+}
+
+.lede {
+  @include m.body-copy;
+  color: t.$ink-soft;
+}
+
+// Four stage cards
+.stages {
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(36px, 4vw, 48px) clamp(20px, 3vw, 32px);
+
+  @include m.from(t.$bp-stages-2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include m.from(t.$bp-stages-4) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.stageBar {
+  height: 10px;
+  border-radius: 5px;
+}
+
+.stageMeta {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  font-family: t.$font-label;
+  font-size: 16px;
+}
+
+.stageWhen {
+  font-weight: 600;
+  color: t.$ink-muted;
+}
+
+.stageGerman {
+  font-weight: 700;
+}
+
+.stageTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(30px, 2.6vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: t.$navy;
+}
+
+.stageBody {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  color: t.$ink-soft;
+  text-wrap: pretty;
+}
+
+// Month explorer
+.explorerHead {
+  margin-top: clamp(80px, 9vw, 120px);
+  padding-top: clamp(32px, 4vw, 48px);
+  border-top: 2px solid t.$navy;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px 24px;
+}
+
+.explorerIntro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 640px;
+}
+
+.explorerTitle {
+  @include m.sub-heading;
+  color: t.$navy;
+}
+
+.explorerBody {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: t.$ink-muted;
+  text-wrap: pretty;
+}
+
+.playButton {
+  background: t.$navy;
+  color: t.$yellow;
+  border: 0;
+  border-radius: 12px;
+  padding: 0 22px;
+  min-height: 50px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+
+  &:hover {
+    background: t.$yellow;
+    color: t.$navy;
+  }
+}
+
+.explorer {
+  margin-top: 28px;
+  background: t.$white;
+  border-radius: 24px;
+  padding: clamp(16px, 4vw, 52px);
+  box-shadow:
+    0 1px 0 t.$line,
+    0 24px 60px -36px rgba(16, 24, 46, 0.35);
+}
+
+.track {
+  position: relative;
+  height: 104px;
+  cursor: grab;
+  touch-action: pan-y;
+  outline: none;
+  user-select: none;
+
+  &:focus {
+    outline: 3px solid t.$yellow;
+    outline-offset: 6px;
+    border-radius: 12px;
+  }
+}
+
+.handle {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: left 0.4s cubic-bezier(0.3, 1.45, 0.5, 1);
+  pointer-events: none;
+}
+
+.handleBadge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: t.$navy;
+  display: grid;
+  place-items: center;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 21px;
+  color: t.$yellow;
+  box-shadow: 0 8px 18px -6px rgba(16, 24, 46, 0.5);
+}
+
+.handlePoint {
+  width: 12px;
+  height: 12px;
+  background: t.$navy;
+  transform: rotate(45deg);
+  margin-top: -7px;
+}
+
+.segments {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 60px;
+  height: 44px;
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 1fr;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.segment {
+  display: grid;
+  place-items: center;
+  font-family: t.$font-label;
+  font-weight: 700;
+  font-size: 16px;
+  white-space: nowrap;
+  outline: 3px solid transparent;
+  outline-offset: 3px;
+  min-width: 0;
+  overflow: hidden;
+
+  &[data-active='true'] {
+    outline-color: t.$navy;
+  }
+}
+
+.segmentLabel {
+  @include m.below(t.$bp-segment-labels) {
+    display: none;
+  }
+}
+
+.ticks {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+  margin-top: 10px;
+}
+
+.tick {
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 0;
+  min-height: 44px;
+  cursor: pointer;
+  font-family: t.$font-label;
+  font-size: 16px;
+  color: t.$slate;
+  font-weight: 500;
+  transition: background 0.3s;
+
+  &[aria-current] {
+    color: t.$navy;
+    font-weight: 800;
+  }
+}
+
+.legend {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+
+  @include m.from(t.$bp-segment-labels) {
+    display: none;
+  }
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid t.$hairline;
+  background: t.$white;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  color: t.$navy;
+  text-align: left;
+
+  &[data-active='true'] {
+    border-color: t.$navy;
+  }
+}
+
+.legendSwatch {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+.detail {
+  margin-top: 20px;
+  border-radius: 18px;
+  padding: clamp(18px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(12px, 4vw, 48px);
+  align-items: start;
+  transition: background 0.3s;
+}
+
+.detailMonth {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detailMonthLabel {
+  font-family: t.$font-label;
+  font-weight: 700;
+  font-size: 18px;
+  color: t.$ink-strong;
+}
+
+.detailMonthNumber {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(88px, 13vw, 180px);
+  line-height: 1;
+  margin-top: 8px;
+  letter-spacing: -0.05em;
+  transition: color 0.3s;
+}
+
+.detailMonthTotal {
+  font-size: 0.26em;
+  letter-spacing: 0;
+  color: t.$ink-muted;
+  font-weight: 700;
+}
+
+.detailBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detailTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-size: clamp(24px, 2.4vw, 34px);
+  line-height: 1.1;
+  transition: color 0.3s;
+}
+
+.detailDesc {
+  margin: 0;
+  font-size: clamp(17px, 1.35vw, 19px);
+  line-height: 1.6;
+  color: t.$ink;
+}
+
+.tasksLabel {
+  margin-top: 6px;
+  font-family: t.$font-label;
+  font-weight: 700;
+  font-size: 16px;
+  color: t.$ink-strong;
+}
+
+.tasks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  > li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: t.$navy;
+  }
+}
+
+.check {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  color: t.$white;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.stepper {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+%step-button {
+  min-height: 56px;
+  border-radius: 12px;
+  border: 2px solid t.$navy;
+  font-weight: 700;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+.prev {
+  @extend %step-button;
+  background: t.$white;
+  color: t.$navy;
+
+  &:hover {
+    background: t.$note;
+  }
+}
+
+.next {
+  @extend %step-button;
+  background: t.$navy;
+  color: t.$yellow;
+
+  &:hover {
+    background: t.$navy-raised;
+  }
+}
+
+.shortLabel {
+  @include m.from(t.$bp-short-labels) {
+    display: none;
+  }
+}
+
+.longLabel {
+  @include m.below(t.$bp-short-labels) {
+    display: none;
+  }
+}

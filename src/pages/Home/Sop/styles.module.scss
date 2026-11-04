@@ -1,0 +1,279 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.section {
+  background: t.$navy;
+  color: t.$white;
+  overflow-x: clip;
+  @include m.section-padding;
+}
+
+.container {
+  @include m.container;
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(24px, 5vw, 88px);
+  align-items: end;
+}
+
+.title {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(48px, 6.6vw, 108px);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  word-spacing: 0.14em;
+  font-stretch: 74%;
+  color: t.$yellow;
+  text-wrap: balance;
+}
+
+.introCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.body {
+  @include m.body-copy;
+  color: t.$mist-soft;
+}
+
+.subTitle {
+  @include m.sub-heading;
+  color: t.$white;
+  text-wrap: balance;
+}
+
+// Rewrite example
+.rewriteHead {
+  margin-top: clamp(56px, 7vw, 88px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+}
+
+.disclaimer {
+  margin: 0;
+  @include m.label-font(600, 17px);
+  color: t.$mist;
+}
+
+.drafts {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 24px;
+}
+
+%draft {
+  border-radius: 6px;
+  padding: clamp(20px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.genericDraft {
+  @extend %draft;
+  background: t.$khaki;
+  color: t.$ink;
+
+  .draftLabel {
+    color: t.$navy;
+  }
+}
+
+.rewrittenDraft {
+  @extend %draft;
+  background: t.$cream;
+  color: t.$navy;
+  box-shadow: inset 0 0 0 3px t.$yellow;
+}
+
+.draftLabel {
+  @include m.label-font(700, 16px);
+}
+
+.draftText {
+  margin: 0;
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.65;
+}
+
+.highlight {
+  background: t.$highlight;
+  color: t.$navy;
+  padding: 1px 2px;
+  border-radius: 3px;
+}
+
+.noteRef {
+  font-weight: 800;
+  color: t.$red;
+  padding-left: 2px;
+}
+
+.notes {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 16px 24px;
+
+  > li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 17px;
+    line-height: 1.55;
+    color: t.$mist-light;
+  }
+}
+
+.noteNumber {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: t.$red;
+  color: t.$white;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+// Two applicants
+.compare {
+  margin-top: clamp(72px, 9vw, 120px);
+  padding-top: clamp(40px, 5vw, 64px);
+  border-top: 1px solid t.$navy-line;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  gap: clamp(40px, 6vw, 88px);
+  align-items: center;
+}
+
+.compareCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stampCards {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  cursor: pointer;
+}
+
+.applicant {
+  display: flex;
+  flex-direction: column;
+
+  &[data-tone='rejected'] {
+    transform: rotate(-1.2deg);
+    --tab-bg: #{t.$khaki};
+    --card-bg: #{t.$khaki};
+    --card-ring: none;
+    --stamp-color: #{t.$red};
+    --stamp-rotate: -12deg;
+    --stamp-delay: 0.25s;
+  }
+
+  &[data-tone='admitted'] {
+    transform: rotate(0.8deg);
+    --tab-bg: #{t.$yellow};
+    --card-bg: #{t.$cream};
+    --card-ring: inset 0 0 0 3px #{t.$yellow};
+    --stamp-color: #{t.$green};
+    --stamp-rotate: -7deg;
+    --stamp-delay: 0.85s;
+  }
+}
+
+.applicantTab {
+  align-self: flex-start;
+  max-width: 100%;
+  background: var(--tab-bg);
+  border-radius: 10px 10px 0 0;
+  padding: 6px 16px 4px;
+  @include m.label-font(700, 15px);
+  line-height: 1.3;
+  color: t.$navy;
+}
+
+.applicantCard {
+  background: var(--card-bg);
+  color: t.$navy;
+  border-radius: 0 14px 14px 14px;
+  padding: 24px clamp(18px, 3vw, 28px);
+  box-shadow: var(--card-ring);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px 20px;
+}
+
+.applicantStats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.applicantCgpa {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(38px, 4vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.applicantBacklogs {
+  @include m.label-font(600, 19px);
+}
+
+.applicantCycle {
+  font-family: t.$font-label;
+  font-size: 16px;
+  color: t.$ink-muted;
+}
+
+.stamp {
+  flex: none;
+  margin: 6px 4px;
+  border: 4px solid var(--stamp-color);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(22px, 3vw, 34px);
+  letter-spacing: 0.04em;
+  color: var(--stamp-color);
+  transform: rotate(var(--stamp-rotate)) scale(1.9);
+  opacity: 0;
+  transition:
+    transform 0.32s cubic-bezier(0.2, 1.6, 0.4, 1) var(--stamp-delay),
+    opacity 0.2s var(--stamp-delay);
+
+  &[data-stamped='true'] {
+    transform: rotate(var(--stamp-rotate)) scale(1);
+    opacity: 0.95;
+  }
+}
+
+.cta {
+  margin-top: 56px;
+  display: inline-flex;
+  @include m.cta(t.$yellow, t.$navy, t.$white, t.$navy);
+}

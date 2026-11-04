@@ -1,0 +1,139 @@
+import type { ReactNode } from 'react';
+import { Link } from 'react-router';
+
+import BrandLink from '@/components/Brand';
+import { CONTACT, ROUTES, SECTIONS } from '@/utils/constants';
+
+import styles from './styles.module.scss';
+
+/** Details the team still has to fill in before launch. */
+function Placeholder({ children }: { children: ReactNode }) {
+  return <mark className={styles.placeholder}>{children}</mark>;
+}
+
+const emailLink = (
+  <a href={`mailto:${CONTACT.email}`} className={styles.email}>
+    {CONTACT.email}
+  </a>
+);
+
+export default function Privacy() {
+  return (
+    <>
+      <title>Privacy note | Germandians</title>
+      <nav className={styles.nav}>
+        <div className={styles.navInner}>
+          <BrandLink to={ROUTES.home} size="fixed" />
+          <Link to={ROUTES.home} className={styles.back}>
+            Back to the site
+          </Link>
+        </div>
+      </nav>
+
+      <main className={styles.main}>
+        <article className={styles.article}>
+          <header className={styles.header}>
+            <h1 className={styles.title}>Privacy note</h1>
+            <p className={styles.text}>
+              This page explains what happens to the details you send us through this website or contact us with.
+            </p>
+            <p className={styles.updated}>Last updated 3 November 2026</p>
+          </header>
+
+          <section className={styles.section}>
+            <h2 className={styles.heading}>Who is responsible</h2>
+            <p className={styles.text}>
+              Germandians is run by <Placeholder>[full names of the people responsible]</Placeholder>,{' '}
+              <Placeholder>[postal address in Germany]</Placeholder>.
+            </p>
+            <p className={styles.plain}>Email: {emailLink}</p>
+          </section>
+
+          <section className={styles.section}>
+            <h2 className={styles.heading}>What we collect</h2>
+            <p className={styles.text}>
+              When you send the profile review form, we receive your name, email address and WhatsApp number, the time
+              you sent it and that you agreed to be contacted.
+            </p>
+            <p className={styles.text}>
+              If you message us on WhatsApp, Instagram or by email, we receive whatever you send there, such as your
+              transcripts or test scores.
+            </p>
+          </section>
+
+          <section className={styles.section}>
+            <h2 className={styles.heading}>What we use it for</h2>
+            <p className={styles.text}>
+              We use your details only to reply to you and to carry out your profile review. We don't sell them, use
+              them for advertising or add you to a mailing list.
+            </p>
+            <p className={styles.text}>
+              The legal basis is your consent, which you give with the checkbox on the form (Art. 6(1)(a) GDPR), and
+              the steps you ask us to take before we might work together (Art. 6(1)(b) GDPR).
+            </p>
+            <p className={styles.text}>We don't use tracking or advertising cookies on this site.</p>
+          </section>
+
+          <section className={styles.section}>
+            <h2 className={styles.heading}>Who else handles it</h2>
+            <ul className={styles.list}>
+              <li>
+                <span className={styles.bullet} data-color="green" />
+                <span>
+                  <Placeholder>[form service]</Placeholder> receives the form on our behalf.
+                </span>
+              </li>
+              <li>
+                <span className={styles.bullet} data-color="orange" />
+                <span>
+                  <Placeholder>[hosting provider]</Placeholder> hosts this site and keeps short technical logs, such as
+                  IP addresses and access times, to keep it running.
+                </span>
+              </li>
+              <li>
+                <span className={styles.bullet} data-color="red" />
+                <span>
+                  Google provides our email (Gmail). Meta runs WhatsApp and Instagram, which we use when you message us
+                  there.
+                </span>
+              </li>
+            </ul>
+            <p className={styles.text}>Some of these services may process data outside the EU, including in the USA.</p>
+          </section>
+
+          <section className={styles.section}>
+            <h2 className={styles.heading}>How long we keep it</h2>
+            <p className={styles.text}>
+              If we don't end up working together, we delete your details within <Placeholder>[6 months]</Placeholder>{' '}
+              of your last message. If we do, we keep them for as long as we're helping you, plus any period the law
+              requires.
+            </p>
+          </section>
+
+          <section className={styles.section}>
+            <h2 className={styles.heading}>Your rights</h2>
+            <p className={styles.text}>
+              You can ask us to show you, correct or delete the details we hold about you, to limit how we use them, or
+              to send them to you in a portable format. You can also object to how we use them.
+            </p>
+            <p className={styles.text}>
+              You can withdraw your consent at any time by emailing us. This doesn't affect anything we did with your
+              details before you withdrew it.
+            </p>
+            <p className={styles.text}>
+              You can also complain to a data protection authority, for example{' '}
+              <Placeholder>[the authority for the German state where you live]</Placeholder>.
+            </p>
+          </section>
+
+          <div className={styles.footer}>
+            <span>Questions about this note: {emailLink}</span>
+            <Link to={{ pathname: ROUTES.home, hash: SECTIONS.contactForm }} className={styles.backToForm}>
+              Back to the form
+            </Link>
+          </div>
+        </article>
+      </main>
+    </>
+  );
+}

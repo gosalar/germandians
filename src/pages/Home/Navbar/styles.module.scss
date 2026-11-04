@@ -1,0 +1,155 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: t.$paper;
+  border-bottom: 1px solid t.$line;
+}
+
+.bar {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 10px clamp(16px, 5vw, 72px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  min-height: 62px;
+}
+
+// Inline links + CTA from 940px up.
+.full {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  @include m.below(t.$bp-nav) {
+    display: none;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 26px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.link {
+  text-decoration: none;
+  padding: 6px 0;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: t.$yellow;
+    text-decoration-thickness: 3px;
+  }
+}
+
+.cta {
+  background: t.$navy;
+  color: t.$yellow;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 11px 18px;
+  border-radius: 10px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+
+  &:hover {
+    background: t.$yellow;
+    color: t.$navy;
+  }
+}
+
+// Menu button below 940px.
+.menuButton {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: t.$navy;
+  color: t.$paper;
+  border: 0;
+  border-radius: 10px;
+  padding: 0 clamp(10px, 3.4vw, 16px);
+  height: 46px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+
+  @include m.from(t.$bp-nav) {
+    display: none;
+  }
+}
+
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 18px;
+
+  > span {
+    height: 2px;
+    background: t.$yellow;
+    border-radius: 1px;
+    transition: transform 0.25s;
+  }
+
+  &[data-open='true'] {
+    > span:first-child {
+      transform: translateY(3.5px) rotate(45deg);
+    }
+
+    > span:last-child {
+      transform: translateY(-3.5px) rotate(-45deg);
+    }
+  }
+}
+
+.menu {
+  border-top: 1px solid t.$line;
+  background: t.$paper;
+  padding: 8px clamp(16px, 5vw, 72px) 20px;
+  display: flex;
+  flex-direction: column;
+
+  @include m.from(t.$bp-nav) {
+    display: none;
+  }
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  border-bottom: 1px solid t.$line;
+  text-decoration: none;
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-size: 24px;
+
+  &:nth-last-child(2) {
+    border-bottom: 0;
+  }
+}
+
+.menuCta {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 54px;
+  background: t.$yellow;
+  color: t.$navy;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 17px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 2px t.$navy;
+}

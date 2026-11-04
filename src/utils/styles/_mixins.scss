@@ -1,0 +1,88 @@
+@use 'tokens' as t;
+
+@mixin below($width) {
+  @media (max-width: ($width - 0.02px)) {
+    @content;
+  }
+}
+
+@mixin from($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+// Outer padding shared by most full-width sections.
+@mixin section-padding {
+  padding: clamp(72px, 10vw, 136px) clamp(20px, 5vw, 72px);
+}
+
+@mixin container($max: 1240px) {
+  max-width: $max;
+  margin: 0 auto;
+}
+
+// Large condensed section heading (Journey, Universities, Mentors).
+@mixin display-heading {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(46px, 7vw, 116px);
+  line-height: 0.9;
+  letter-spacing: -0.022em;
+  word-spacing: 0.14em;
+  font-stretch: 78%;
+  color: t.$navy;
+  text-wrap: balance;
+}
+
+// Medium condensed sub-heading ("Month by month", "What a rewrite looks like").
+@mixin sub-heading {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(32px, 3.6vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+@mixin body-copy {
+  margin: 0;
+  font-size: clamp(17px, 1.35vw, 19px);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+@mixin label-font($weight: 700, $size: 16px) {
+  font-family: t.$font-label;
+  font-weight: $weight;
+  font-size: $size;
+}
+
+// Solid call-to-action link used across sections.
+@mixin cta($bg, $fg, $hover-bg, $hover-fg) {
+  background: $bg;
+  color: $fg;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 17px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+
+  &:hover {
+    background: $hover-bg;
+    color: $hover-fg;
+  }
+}
+
+@mixin square-bullet($size, $radius, $top: 0) {
+  flex: none;
+  width: $size;
+  height: $size;
+  margin-top: $top;
+  border-radius: $radius;
+}

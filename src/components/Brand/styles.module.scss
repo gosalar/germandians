@@ -1,0 +1,42 @@
+@use '@/utils/styles/tokens' as t;
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 2.5vw, 10px);
+  text-decoration: none;
+  color: t.$navy;
+  min-width: 0;
+
+  &[data-size='fixed'] {
+    gap: 10px;
+    min-width: auto;
+  }
+}
+
+.badge {
+  width: clamp(30px, 9vw, 38px);
+  height: clamp(30px, 9vw, 38px);
+  border-radius: 50%;
+  flex: none;
+  background: url('../../assets/images/flag-painting.jpg') 52% 48% / 240% auto;
+  box-shadow: inset 0 0 0 1.5px t.$navy;
+
+  &[data-size='fixed'] {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+.wordmark {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(18px, 5.4vw, 22px);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+
+  &[data-size='fixed'] {
+    font-size: 22px;
+    white-space: normal;
+  }
+}

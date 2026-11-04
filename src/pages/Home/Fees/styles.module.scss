@@ -1,0 +1,283 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.section {
+  background: t.$navy;
+  color: t.$white;
+  @include m.section-padding;
+}
+
+.grid {
+  @include m.container;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-areas:
+    'a b'
+    'c b';
+  gap: clamp(36px, 5vw, 72px) clamp(40px, 6vw, 96px);
+  align-items: start;
+
+  @include m.below(t.$bp-mobile) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'a' 'b' 'c';
+  }
+}
+
+// Intro (area a)
+.intro {
+  grid-area: a;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  color: t.$yellow;
+  line-height: 0.84;
+}
+
+.titleBig {
+  display: block;
+  font-stretch: 70%;
+  font-size: clamp(76px, 9.4vw, 152px);
+  letter-spacing: -0.025em;
+  word-spacing: 0.12em;
+}
+
+.titleSmall {
+  display: block;
+  margin-top: 16px;
+  font-stretch: 100%;
+  font-size: clamp(28px, 3vw, 44px);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: t.$white;
+  text-wrap: balance;
+}
+
+.introBody {
+  @include m.body-copy;
+  max-width: 44ch;
+  color: t.$mist-soft;
+}
+
+// Receipt (area b)
+.printer {
+  grid-area: b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.printerBody {
+  width: min(100%, 390px);
+}
+
+.slot {
+  height: 18px;
+  background: t.$navy-deep;
+  border-radius: 9px;
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.7),
+    0 1px 0 t.$navy-line;
+}
+
+.clip {
+  overflow: hidden;
+  margin: -9px 14px 0;
+  padding-bottom: 12px;
+}
+
+.paperRoll {
+  transform: translateY(-101%);
+  transition: none;
+
+  &[data-printed='true'] {
+    transform: translateY(0);
+  }
+
+  &[data-animate='true'] {
+    transition: transform 2.6s steps(22, end);
+  }
+}
+
+.paper {
+  background: t.$receipt;
+  color: t.$navy;
+  padding: 34px 24px 20px;
+  font-family: t.$font-label;
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.receiptTitle {
+  text-align: center;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: -0.01em;
+}
+
+.receiptSubtitle {
+  text-align: center;
+  font-size: 15px;
+  color: t.$ink-muted;
+  margin-top: -6px;
+}
+
+.rule {
+  border-top: 2px dashed t.$navy;
+  margin: 6px 0;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.lineValue {
+  font-weight: 700;
+  text-align: right;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.totalLabel {
+  font-weight: 700;
+  font-size: 19px;
+  padding-bottom: 10px;
+}
+
+.totalAmount {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.promise {
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.barcode {
+  height: 46px;
+  margin: 8px 18px 0;
+  background: repeating-linear-gradient(
+    90deg,
+    t.$navy 0 2px,
+    transparent 2px 4px,
+    t.$navy 4px 7px,
+    transparent 7px 9px,
+    t.$navy 9px 10px,
+    transparent 10px 13px,
+    t.$navy 13px 16px,
+    transparent 16px 17px
+  );
+}
+
+.thanks {
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 0.2em;
+}
+
+.tearEdge {
+  height: 12px;
+  background:
+    linear-gradient(135deg, t.$receipt 50%, transparent 0) 0 0 / 24px 24px repeat-x,
+    linear-gradient(225deg, t.$receipt 50%, transparent 0) 0 0 / 24px 24px repeat-x;
+}
+
+.replay {
+  background: none;
+  border: 0;
+  color: t.$mist;
+  font-family: t.$font-label;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: t.$slate;
+  text-underline-offset: 4px;
+  padding: 8px;
+}
+
+// Details (area c)
+.details {
+  grid-area: c;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+.afterAdmission {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.paidSeparately {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detailTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-size: clamp(24px, 2.2vw, 30px);
+  color: t.$white;
+}
+
+.detailBody {
+  @include m.body-copy;
+  max-width: 46ch;
+  color: t.$mist-soft;
+}
+
+.costList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 10px 24px;
+  font-size: 17px;
+  line-height: 1.45;
+  color: t.$mist-light;
+
+  > li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
+.bullet {
+  @include m.square-bullet(10px, 2px, 8px);
+  background: t.$yellow;
+}
+
+.cta {
+  align-self: flex-start;
+  @include m.cta(t.$yellow, t.$navy, t.$white, t.$navy);
+}

@@ -1,0 +1,82 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.flagBand {
+  height: clamp(70px, 10vw, 140px);
+  background: url('../../../assets/images/flag-painting.jpg') center 52% / cover;
+}
+
+.footer {
+  background: t.$navy-footer;
+  color: t.$mist;
+  padding: 56px clamp(20px, 5vw, 72px) 28px;
+}
+
+.inner {
+  @include m.container;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.tagline {
+  margin: 0;
+  max-width: 44ch;
+  color: t.$mist-soft;
+}
+
+.links {
+  display: flex;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+}
+
+.link {
+  color: t.$white;
+  text-decoration: none;
+
+  &:hover {
+    color: t.$yellow;
+  }
+}
+
+.email {
+  overflow-wrap: anywhere;
+}
+
+.wordmarkBox {
+  overflow: hidden;
+  width: 100%;
+}
+
+.wordmark {
+  display: inline-block;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 88%;
+  font-size: clamp(48px, 14vw, 220px);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+  color: t.$yellow;
+  white-space: nowrap;
+  padding-bottom: 0.04em;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: t.$font-label;
+  font-size: 16px;
+  color: t.$mist-soft;
+}

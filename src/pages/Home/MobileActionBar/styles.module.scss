@@ -1,0 +1,69 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+// Keeps the footer clear of the fixed bar.
+.spacer {
+  height: 84px;
+  background: t.$navy-footer;
+}
+
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  background: t.$paper;
+  border-top: 1px solid t.$hairline;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  transform: translateY(110%);
+  visibility: hidden;
+  transition: transform 0.3s ease;
+
+  &[data-visible='true'] {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+// Phones only. Kept after the base rules so it wins.
+.spacer,
+.bar {
+  @include m.from(t.$bp-mobile) {
+    display: none;
+  }
+}
+
+%action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.whatsapp {
+  @extend %action;
+  background: t.$green;
+  color: t.$white;
+
+  &:hover {
+    color: t.$white;
+  }
+}
+
+.instagram {
+  @extend %action;
+  background: t.$navy;
+  color: t.$yellow;
+
+  &:hover {
+    color: t.$yellow;
+  }
+}
