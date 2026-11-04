@@ -6,3 +6,8 @@ dist
 *.log
 .claude/
 initial-implementation-plans
+# Visual tests
+.visual-build
+test-results
+playwright-report
+.visual-cache

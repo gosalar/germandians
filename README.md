@@ -16,7 +16,32 @@ npm run preview    # serve dist/
 npm run lint
 ```
 
-`dist/` is a static site. Any static host works (Vercel, Netlify, Cloudflare Pages, GitHub Pages) as long as unknown paths fall back to `index.html`, so `/privacy` loads.
+`dist/` is a static site. On other static hosts, configure a fallback to `index.html` for client-side routes.
+
+## Visual tests
+
+The site has to match the Claude Design prototype pixel for pixel. The visual tests render the prototype (`tests/visual/reference/`) and a fresh production build side by side in Chrome, and fail if any screenshot differs by more than 64 pixels.
+
+```bash
+npm run test:visual          # full suite: 30 checks, about 1 minute
+npm run test:visual:quick    # 13 checks, about 30 seconds
+npm run test:visual:report   # open the last report (reference, app and diff images for failures)
+```
+
+- **Full suite:** home page at 10 widths, privacy page at 5, and 15 interactive states (menu, month explorer, FAQ, form errors, hovers, mobile action bar, receipt and stamp animations).
+- **Quick subset:** one desktop, one tablet and one phone layout, plus the key interactions. Good for checking a change while you work; the full suite is the gate before merging.
+- **Requirements:**
+  - Locally, the tests use your installed Chrome. CI uses Playwright's Chromium.
+  - The prototype loads React, Babel and fonts from public CDNs, so the first run needs internet. Later runs serve them from `.visual-cache/`; delete that folder to refresh it.
+- **Settings:** the test build ignores `config/.env*`, so it always uses the design's default settings.
+- **Failures:** the reference, app and diff images are saved under `test-results/visual/<test>/`.
+- **Changing the design:** if a test fails because the design itself changed, replace the files in `tests/visual/reference/` with the new export instead of loosening the test.
+
+## GitHub Pages
+
+In the repository's **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. To override the public site settings listed below, add repository variables under **Settings → Secrets and variables → Actions → Variables** before building.
+
+Pull requests targeting `main` run lint, TypeScript checks, a production build and Playwright tests. A successful push to `main` publishes the checked build at [gosalar.github.io/germandians](https://gosalar.github.io/germandians/). To redeploy after changing a variable, run **Site CI and Pages deployment** manually on `main` from the Actions tab. The workflow provides a static entry point for direct visits to `/germandians/privacy/`.
 
 ## Settings
 
