@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -34,6 +34,12 @@ const COLOR_THRESHOLD = 0.1;
 const CACHE_DIR = path.resolve('.visual-cache');
 const CDN = /^https:\/\/(unpkg\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)\//;
 
+async function writeAtomically(file: string, body: Buffer | string) {
+  const tmp = `${file}.${process.pid}.${randomUUID()}.tmp`;
+  await writeFile(tmp, body);
+  await rename(tmp, file);
+}
+
 async function serveCdnFromCache(context: BrowserContext) {
   await context.route(CDN, async (route) => {
     const key = path.join(CACHE_DIR, createHash('sha1').update(route.request().url()).digest('hex'));
@@ -51,10 +57,9 @@ async function serveCdnFromCache(context: BrowserContext) {
       delete headers['content-length'];
       await mkdir(CACHE_DIR, { recursive: true });
       // Write-then-rename so parallel workers never read a half-written file.
-      const tmp = `${key}.${process.pid}.tmp`;
-      await writeFile(tmp, body);
-      await rename(tmp, key);
-      await writeFile(`${key}.json`, JSON.stringify(headers));
+      // Temp names are unique per write: one page can request the same URL twice at once.
+      await writeAtomically(key, body);
+      await writeAtomically(`${key}.json`, JSON.stringify(headers));
     }
     return route.fulfill({ response, body });
   });
@@ -100,6 +105,19 @@ export interface OpenOptions {
  */
 const UNSTICK_NAV = 'nav { position: static !important; }';
 
+/**
+ * Sticky boxes inside the page (the FAQ and contact intros) sit at fractional
+ * offsets. Whether Chrome composites them, and so snaps them to a whole pixel,
+ * changes from run to run and between the two documents, which shifts their
+ * text by 1px on one side only. Both sides render them static instead. The
+ * nav keeps sticking: it sits at a whole-pixel offset, so it isn't affected.
+ */
+function unstickContent() {
+  for (const el of document.querySelectorAll<HTMLElement>('body *:not(nav)')) {
+    if (getComputedStyle(el).position === 'sticky') el.style.setProperty('position', 'static', 'important');
+  }
+}
+
 export async function openPage(browser: Browser, url: string, options: OpenOptions) {
   const context = await browser.newContext({
     viewport: { width: options.width, height: options.height ?? 900 },
@@ -118,6 +136,7 @@ export async function openPage(browser: Browser, url: string, options: OpenOptio
   }
   // Lazy images would otherwise only load when scrolled to.
   await page.evaluate(() => document.querySelectorAll('img').forEach((img) => (img.loading = 'eager')));
+  await page.evaluate(unstickContent);
   if (options.unstickNav) await page.addStyleTag({ content: UNSTICK_NAV });
   await settle(page);
   return page;

@@ -23,6 +23,74 @@ input::placeholder{color:#7a8094}
 button{font:inherit}
 *{box-sizing:border-box}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition-duration:0s !important}}
+.rc-line{display:flex;justify-content:space-between;gap:12px}
+.rc-line>:first-child{min-width:0}
+.rc-line>:last-child{flex:none;white-space:nowrap}
+.rc-clip{overflow:hidden;margin:-9px 14px 0;padding-bottom:12px}
+.rc-paper{background:#fffef8;color:#10182e;padding:34px clamp(12px,3vw,24px) 20px;font-family:'Barlow Semi Condensed',sans-serif;font-size:17px;display:flex;flex-direction:column;gap:9px}
+@media (max-width:419.98px){
+.rc-clip{margin-right:8px;margin-left:8px}
+.rc-paper{padding-right:10px;padding-left:10px;font-size:14px}
+.rc-line{gap:8px}
+.rc-line.rc-pay{flex-direction:column;gap:2px}
+.rc-line.rc-pay>:last-child{text-align:left !important}
+}
+.seg-num{display:none}
+@media (max-width:639.98px){.seg-name{display:none}.seg-num{display:inline}}
+@media (min-width:1024px){.stick-intro{position:sticky;top:88px}}
+.ft-link{display:inline-flex;align-items:center;min-height:44px}
+.m-sdots{display:flex;justify-content:center;gap:12px;padding:6px 0}
+.m-sdot{width:72px;height:72px;border-radius:50%;background:#f5c400}
+@media (min-width:760px){
+.m-sdots{display:grid;width:100%;min-width:0;align-self:stretch;grid-template-columns:repeat(5,minmax(0,72px))}
+.m-sdot{width:100%;height:auto;min-width:0;aspect-ratio:1}
+}
+@media (max-width:759.98px){
+.m-sec{padding-top:64px !important;padding-bottom:64px !important}
+.m-copy{gap:16px !important}
+.m-body{font-size:16px !important;line-height:1.45 !important}
+.m-points{gap:10px !important}
+.m-point{font-size:16px !important;line-height:1.45 !important}
+.m-photo{height:112px;aspect-ratio:auto !important}
+.m-photo-img{object-position:center 55%}
+.m-stats{grid-template-columns:1fr !important;gap:8px !important;margin-top:24px !important}
+.m-stat{display:grid !important;grid-template-columns:100px 1fr;align-items:center;gap:8px !important;padding-top:10px !important}
+.m-stat-label{font-size:15px !important;line-height:1.3 !important}
+.m-seats{grid-column:2;font-size:15px !important}
+.m-ratio{margin:20px 0 8px !important;line-height:1.05 !important;word-spacing:normal !important}
+.m-ratio-ours{font-size:22px !important}
+.m-ratio-theirs{margin-top:4px !important;font-size:16px !important}
+.m-diagrams{gap:10px !important;margin-top:16px !important;align-items:start !important}
+.m-diagram{border-radius:12px !important;gap:4px !important;padding:8px !important}
+.m-dtitle{font-size:18px !important}
+.m-dsource{font-size:12px !important;line-height:1.3}
+.m-dbox{padding:4px 6px !important;font-size:13px !important;border-radius:8px !important}
+.m-crowd{flex:none !important;gap:4px !important;padding:6px 4px !important}
+.m-dstrong{font-size:14px !important}
+.m-dnote{font-size:12px !important;line-height:1.3}
+.m-arrow{display:none}
+.m-sdots{gap:4px;padding:2px 0}
+.m-sdot{width:12px;height:12px}
+.m-adots{width:auto !important;margin-inline:auto;grid-template-columns:repeat(10,6px) !important;gap:2px !important}
+.m-adot{border-width:1px !important}
+.m-rnote{margin-top:12px !important;font-size:15px !important;line-height:1.45 !important}
+.m-ctitle{margin-top:24px !important}
+.m-cards{gap:8px !important}
+.m-card{border-radius:10px !important}
+.m-ctopic{padding:8px 12px !important;font-size:16px !important}
+.m-cside{display:block !important;padding:6px 12px !important}
+.m-clabel{margin-right:6px;font-size:13px !important}
+.m-clabel::after{content:':'}
+.m-ctext{font-size:15px !important;line-height:1.35}
+.m-foot{font-size:14px !important;line-height:1.45 !important}
+}
+@media (max-width:759.98px){
+.hero-head{padding-top:56px !important}
+.hero-fee{flex-wrap:nowrap !important}
+.hero-fee>:first-child{flex:none}
+.hero-ctas{flex-direction:column}
+.hero-ctas>a{width:100%;text-align:center}
+}
 </style>
 </helmet>
 
@@ -33,12 +101,14 @@ button{font:inherit}
       <span style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(18px,5.4vw,22px);letter-spacing:-0.02em;white-space:nowrap">Germandians</span>
     </a>
     <sc-if value="{{ navFull }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;align-items:center;gap:30px">
-        <div style="display:flex;gap:26px;font-weight:600;font-size:16px">
-          <a href="#journey" style="text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Journey</a>
-          <a href="#universities" style="text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Universities</a>
-          <a href="#community" style="text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Why us</a>
-          <a href="#contact" style="text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Contact</a>
+      <div style="display:flex;align-items:center;gap:22px">
+        <div style="display:flex;gap:18px;font-weight:600;font-size:16px">
+          <a href="#community" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Why us</a>
+          <a href="#fees" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Fees</a>
+          <a href="#journey" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Journey</a>
+          <a href="#universities" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Public vs private</a>
+          <a href="#faq" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">FAQ</a>
+          <a href="#contact" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Contact</a>
         </div>
         <a href="#contact-form" style="background:#10182e;color:#f5c400;text-decoration:none;font-weight:700;font-size:15px;padding:11px 18px;border-radius:10px;transition:background .2s,color .2s" style-hover="background:#f5c400;color:#10182e">Get my profile reviewed</a>
       </div>
@@ -51,27 +121,29 @@ button{font:inherit}
     </sc-if>
   </div>
   <sc-if value="{{ menuVisible }}" hint-placeholder-val="{{ false }}">
-    <div id="mobile-menu" style="border-top:1px solid #e2ddd0;background:#f7f5ef;padding:8px clamp(16px,5vw,72px) 20px;display:flex;flex-direction:column">
-      <a href="#journey" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Journey</a>
-      <a href="#universities" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Universities</a>
+    <div id="mobile-menu" style="max-height:calc(100dvh - 66px);overflow-y:auto;overscroll-behavior:contain;border-top:1px solid #e2ddd0;background:#f7f5ef;padding:8px clamp(16px,5vw,72px) 20px;display:flex;flex-direction:column">
       <a href="#community" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Why us</a>
+      <a href="#fees" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Fees</a>
+      <a href="#journey" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Journey</a>
+      <a href="#universities" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Public vs private</a>
+      <a href="#faq" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">FAQ</a>
       <a href="#contact" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Contact</a>
       <a href="#contact-form" onClick="{{ closeMenu }}" style="margin-top:12px;display:flex;justify-content:center;align-items:center;min-height:54px;background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e">Get my profile reviewed</a>
     </div>
   </sc-if>
 </nav>
 
-<header id="top" data-screen-label="Hero" style="padding:clamp(32px,5vw,72px) clamp(20px,5vw,72px) clamp(56px,8vw,104px)">
+<header id="top" data-screen-label="Hero" class="hero-head" style="padding:clamp(32px,5vw,72px) clamp(20px,5vw,72px) clamp(56px,8vw,104px)">
   <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:{{ heroCols }};gap:clamp(32px,4vw,64px);align-items:center">
     <div style="display:flex;flex-direction:column;gap:26px;min-width:0">
       <h1 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(46px,6.2vw,100px);line-height:.92;letter-spacing:-0.022em;word-spacing:.12em;color:#10182e;text-wrap:balance">Study in Germany with the people already there.</h1>
       <p style="margin:0;max-width:30ch;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(22px,2.1vw,30px);line-height:1.18;letter-spacing:-0.01em;color:#10182e;text-wrap:balance">Six student mentors in Germany. Up to five students per mentor.</p>
-      <a href="#fees" style="align-self:flex-start;display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#ffffff;border:2px dashed #10182e;border-radius:12px;padding:12px 18px;text-decoration:none;color:#10182e;transition:background .2s" style-hover="background:#fff6cc;color:#10182e">
+      <a href="#fees" class="hero-fee" style="align-self:flex-start;display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#ffffff;border:2px dashed #10182e;border-radius:12px;padding:12px 18px;text-decoration:none;color:#10182e;transition:background .2s" style-hover="background:#fff6cc;color:#10182e">
         <span style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(30px,2.8vw,40px);line-height:1;letter-spacing:-0.02em">€0</span>
         <span style="font-weight:700;font-size:clamp(17px,1.4vw,20px);line-height:1.3">service fee until you're admitted</span>
       </a>
       <p style="margin:0;max-width:38ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;font-weight:500;color:#2b3350;text-wrap:pretty">We guide you from profile evaluation to your first week in Germany.</p>
-      <div ref="{{ heroCtaRef }}" style="display:flex;flex-wrap:wrap;gap:12px">
+      <div ref="{{ heroCtaRef }}" class="hero-ctas" style="display:flex;flex-wrap:wrap;gap:12px">
         <a href="#contact-form" style="background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e;transition:background .2s,color .2s" style-hover="background:#10182e;color:#f5c400">Get my profile reviewed</a>
         <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e;transition:background .2s" style-hover="background:#ebe6d8;color:#10182e">DM us on Instagram</a>
       </div>
@@ -84,9 +156,9 @@ button{font:inherit}
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
-      <div ref="{{ heroWrap }}" onPointerMove="{{ onHeroMove }}" onPointerDown="{{ onHeroMove }}" onPointerLeave="{{ onHeroLeave }}" style="position:relative;width:100%;aspect-ratio:1217/1168;touch-action:pan-y;cursor:{{ heroCursor }}">
+      <div ref="{{ heroWrap }}" onPointerMove="{{ onHeroMove }}" onPointerDown="{{ onHeroDown }}" onPointerUp="{{ onHeroLeave }}" onPointerCancel="{{ onHeroLeave }}" onPointerLeave="{{ onHeroLeave }}" style="position:relative;width:100%;aspect-ratio:1217/1168;touch-action:{{ heroTouch }};cursor:{{ heroCursor }}">
         <img src="assets/flag-painting.jpg" alt="Palette-knife painting of the German flag sweeping into the Indian tricolour" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;user-select:none;pointer-events:none">
-        <canvas ref="{{ heroCanvas }}" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none"></canvas>
+        <canvas ref="{{ heroCanvas }}" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:{{ canvasOpacity }};transition:{{ canvasTransition }}"></canvas>
       </div>
       <sc-if value="{{ repaintOn }}" hint-placeholder-val="{{ true }}">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px;color:#3b4460">
@@ -134,33 +206,32 @@ button{font:inherit}
     <div style="grid-area:b;display:flex;flex-direction:column;align-items:center;gap:16px;min-width:0">
       <div style="width:min(100%,390px)">
         <div style="height:18px;background:#050913;border-radius:9px;box-shadow:inset 0 3px 6px rgba(0,0,0,.7),0 1px 0 #2a3557"></div>
-        <div ref="{{ receiptRef }}" style="overflow:hidden;margin:-9px 14px 0;padding-bottom:12px">
+        <div ref="{{ receiptRef }}" class="rc-clip">
           <div style="transform:{{ receiptTransform }};transition:{{ receiptTransition }}">
-            <div style="background:#fffef8;color:#10182e;padding:34px 24px 20px;font-family:'Barlow Semi Condensed',sans-serif;font-size:17px;display:flex;flex-direction:column;gap:9px">
+            <div class="rc-paper">
               <div style="text-align:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;letter-spacing:-0.01em">GERMANDIANS</div>
-              <div style="text-align:center;font-size:15px;color:#3b4460;margin-top:-6px">Studienberatung, Winter 2026 intake</div>
+              <div style="text-align:center;font-size:15px;color:#3b4460;margin-top:-6px">Student guidance, Winter 2026 intake</div>
               <div style="border-top:2px dashed #10182e;margin:6px 0"></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>Profile evaluation</span><span>inkl.</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>APS application</span><span>inkl.</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>IELTS guidance</span><span>inkl.</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>University shortlist</span><span>inkl.</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>SOP, written with you</span><span>inkl.</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>Portal applications</span><span>inkl.</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>Loan and blocked account help</span><span>inkl.</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>Visa preparation</span><span>inkl.</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>Dorm, Anmeldung, bank account</span><span>inkl.</span></div>
+              <div class="rc-line"><span>Profile evaluation</span><span>Included</span></div>
+              <div class="rc-line"><span>APS application</span><span>Included</span></div>
+              <div class="rc-line"><span>IELTS guidance</span><span>Included</span></div>
+              <div class="rc-line"><span>University shortlist</span><span>Included</span></div>
+              <div class="rc-line"><span>SOP, written with you</span><span>Included</span></div>
+              <div class="rc-line"><span>Portal applications</span><span>Included</span></div>
+              <div class="rc-line"><span>Loan and blocked account help</span><span>Included</span></div>
+              <div class="rc-line"><span>Visa preparation</span><span>Included</span></div>
+              <div class="rc-line"><span>Dorm, Anmeldung, bank account</span><span>Included</span></div>
               <div style="border-top:2px dashed #10182e;margin:6px 0"></div>
               <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
-                <span style="font-weight:700;font-size:19px;padding-bottom:10px">Due now</span>
-                <span style="font-family:'Archivo',sans-serif;font-weight:900;font-size:60px;line-height:1;letter-spacing:-0.03em">0,00 €</span>
+                <span style="white-space:nowrap;font-weight:700;font-size:19px;padding-bottom:10px">Due now</span>
+                <span style="white-space:nowrap;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,11vw,60px);line-height:1;letter-spacing:-0.03em">0,00 €</span>
               </div>
               <div style="border-top:2px dashed #10182e;margin:6px 0"></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>Due after admission</span><span style="font-weight:700;text-align:right">{{ feeShort }}</span></div>
-              <div style="display:flex;justify-content:space-between;gap:12px"><span>Triggered by</span><span style="font-weight:700;text-align:right">Your admission letter</span></div>
+              <div class="rc-line rc-pay"><span>Due after admission</span><span style="font-weight:700;text-align:right">{{ feeShort }}</span></div>
+              <div class="rc-line rc-pay"><span>Triggered by</span><span style="font-weight:700;text-align:right">Your admission letter</span></div>
               <div style="border-top:2px dashed #10182e;margin:6px 0"></div>
               <div style="text-align:center;font-weight:700;font-size:18px">No admission, no service fee.</div>
               <div style="height:46px;margin:8px 18px 0;background:repeating-linear-gradient(90deg,#10182e 0 2px,transparent 2px 4px,#10182e 4px 7px,transparent 7px 9px,#10182e 9px 10px,transparent 10px 13px,#10182e 13px 16px,transparent 16px 17px)"></div>
-              <div style="text-align:center;font-size:15px;letter-spacing:.2em">DANKE</div>
             </div>
             <div style="height:12px;background:linear-gradient(135deg,#fffef8 50%,transparent 0) 0 0/24px 24px repeat-x,linear-gradient(225deg,#fffef8 50%,transparent 0) 0 0/24px 24px repeat-x"></div>
           </div>
@@ -184,6 +255,7 @@ button{font:inherit}
           <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>Blocked account deposit (your own living money)</span></li>
           <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>Health insurance and flights</span></li>
         </ul>
+        <p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">These fees go directly to those organisations, so we can't refund them.</p>
       </div>
       <a href="#contact-form" style="align-self:flex-start;background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;transition:background .2s,color .2s" style-hover="background:#ffffff;color:#10182e">Get my profile reviewed</a>
     </div>
@@ -211,7 +283,6 @@ button{font:inherit}
         <div aria-hidden="true" style="height:10px;border-radius:5px;background:#ef8a21"></div>
         <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px">
           <span style="font-weight:600;color:#3b4460">Phase 2, months 3–4</span>
-          <span lang="de" style="font-weight:700;color:#b85d06">Bewerbung</span>
         </div>
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,2.6vw,42px);line-height:1;letter-spacing:-0.015em;color:#10182e">Applications</h3>
         <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We shortlist universities with you, write your SOP with you and submit every application on the university portals.</p>
@@ -220,7 +291,7 @@ button{font:inherit}
         <div aria-hidden="true" style="height:10px;border-radius:5px;background:#d42b1f"></div>
         <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px">
           <span style="font-weight:600;color:#3b4460">Phase 3, months 5–6</span>
-          <span lang="de" style="font-weight:700;color:#c4261b">Visum</span>
+          <span lang="en" style="font-weight:700;color:#c4261b">Visa</span>
         </div>
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,2.6vw,42px);line-height:1;letter-spacing:-0.015em;color:#10182e">Pre-departure</h3>
         <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">As admission decisions arrive, we help with your education loan, help you open your blocked account and prepare your visa documents.</p>
@@ -236,6 +307,7 @@ button{font:inherit}
       </li>
     </ol>
 
+    <div ref="{{ explorerRef }}">
     <div style="margin-top:clamp(80px,9vw,120px);padding-top:clamp(32px,4vw,48px);border-top:2px solid #10182e;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 24px">
       <div style="display:flex;flex-direction:column;gap:8px;max-width:640px">
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.6vw,52px);line-height:1;letter-spacing:-0.015em;color:#10182e">Month by month</h3>
@@ -251,10 +323,10 @@ button{font:inherit}
           <div style="width:12px;height:12px;background:#10182e;transform:rotate(45deg);margin-top:-7px"></div>
         </div>
         <div style="position:absolute;left:0;right:0;top:60px;height:44px;display:grid;grid-template-columns:2fr 2fr 2fr 1fr;gap:4px;pointer-events:none">
-          <div style="background:#1d7a3d;color:#ffffff;border-radius:10px 4px 4px 10px;display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;outline:3px solid {{ seg.c1 }};outline-offset:3px;min-width:0;overflow:hidden"><sc-if value="{{ segLabels }}" hint-placeholder-val="{{ true }}">Foundation</sc-if></div>
-          <div style="background:#ef8a21;color:#10182e;border-radius:4px;display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;outline:3px solid {{ seg.c2 }};outline-offset:3px;min-width:0;overflow:hidden"><sc-if value="{{ segLabels }}" hint-placeholder-val="{{ true }}">Applications</sc-if></div>
-          <div style="background:#d42b1f;color:#ffffff;border-radius:4px;display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;outline:3px solid {{ seg.c3 }};outline-offset:3px;min-width:0;overflow:hidden"><sc-if value="{{ segLabels }}" hint-placeholder-val="{{ true }}">Pre-departure</sc-if></div>
-          <div style="background:#121212;color:#ffffff;border-radius:4px 10px 10px 4px;display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;outline:3px solid {{ seg.c4 }};outline-offset:3px;min-width:0;overflow:hidden"><sc-if value="{{ segLabels }}" hint-placeholder-val="{{ true }}">Arrival</sc-if></div>
+          <div style="background:#1d7a3d;color:#ffffff;border-radius:10px 4px 4px 10px;display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;outline:3px solid {{ seg.c1 }};outline-offset:3px;min-width:0;overflow:hidden"><span class="seg-name">Foundation</span><span class="seg-num" aria-hidden="true">1</span></div>
+          <div style="background:#ef8a21;color:#10182e;border-radius:4px;display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;outline:3px solid {{ seg.c2 }};outline-offset:3px;min-width:0;overflow:hidden"><span class="seg-name">Applications</span><span class="seg-num" aria-hidden="true">2</span></div>
+          <div style="background:#d42b1f;color:#ffffff;border-radius:4px;display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;outline:3px solid {{ seg.c3 }};outline-offset:3px;min-width:0;overflow:hidden"><span class="seg-name">Pre-departure</span><span class="seg-num" aria-hidden="true">3</span></div>
+          <div style="background:#121212;color:#ffffff;border-radius:4px 10px 10px 4px;display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;white-space:nowrap;outline:3px solid {{ seg.c4 }};outline-offset:3px;min-width:0;overflow:hidden"><span class="seg-name">Arrival</span><span class="seg-num" aria-hidden="true">4</span></div>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;margin-top:10px">
@@ -263,11 +335,11 @@ button{font:inherit}
         </sc-for>
       </div>
       <sc-if value="{{ segLegend }}" hint-placeholder-val="{{ false }}">
-        <div style="margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px">
-          <button type="button" onClick="{{ seg.g1 }}" style="display:flex;align-items:center;gap:10px;min-height:46px;padding:8px 12px;border-radius:10px;border:2px solid {{ seg.b1 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:16px;color:#10182e;text-align:left"><span aria-hidden="true" style="flex:none;width:14px;height:14px;border-radius:3px;background:#1d7a3d"></span><span>Foundation</span></button>
-          <button type="button" onClick="{{ seg.g2 }}" style="display:flex;align-items:center;gap:10px;min-height:46px;padding:8px 12px;border-radius:10px;border:2px solid {{ seg.b2 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:16px;color:#10182e;text-align:left"><span aria-hidden="true" style="flex:none;width:14px;height:14px;border-radius:3px;background:#ef8a21"></span><span>Applications</span></button>
-          <button type="button" onClick="{{ seg.g3 }}" style="display:flex;align-items:center;gap:10px;min-height:46px;padding:8px 12px;border-radius:10px;border:2px solid {{ seg.b3 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:16px;color:#10182e;text-align:left"><span aria-hidden="true" style="flex:none;width:14px;height:14px;border-radius:3px;background:#d42b1f"></span><span>Pre-departure</span></button>
-          <button type="button" onClick="{{ seg.g4 }}" style="display:flex;align-items:center;gap:10px;min-height:46px;padding:8px 12px;border-radius:10px;border:2px solid {{ seg.b4 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:16px;color:#10182e;text-align:left"><span aria-hidden="true" style="flex:none;width:14px;height:14px;border-radius:3px;background:#121212"></span><span>Arrival</span></button>
+        <div style="margin-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:8px">
+          <button type="button" onClick="{{ seg.g1 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b1 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#1d7a3d;color:#ffffff">1</span><span>Foundation</span></button>
+          <button type="button" onClick="{{ seg.g2 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b2 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#ef8a21;color:#10182e">2</span><span>Applications</span></button>
+          <button type="button" onClick="{{ seg.g3 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b3 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#d42b1f;color:#ffffff">3</span><span>Pre-departure</span></button>
+          <button type="button" onClick="{{ seg.g4 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b4 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#121212;color:#ffffff">4</span><span>Arrival</span></button>
         </div>
       </sc-if>
 
@@ -292,6 +364,7 @@ button{font:inherit}
         <button type="button" onClick="{{ nextMonth }}" disabled="{{ nextDisabled }}" style="min-height:56px;border-radius:12px;border:2px solid #10182e;background:#10182e;color:#f5c400;font-weight:700;font-size:17px;cursor:pointer;opacity:{{ nextOpacity }};transition:background .2s" style-hover="background:#1c2643">{{ nextLabel }}</button>
       </div>
     </div>
+    </div>
   </div>
 </section>
 
@@ -304,8 +377,8 @@ button{font:inherit}
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
       <div role="table" aria-label="Public and private universities compared" style="margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:20px">
         <div role="row" style="display:contents">
-          <div role="columnheader" style="background:#10182e;border-radius:24px 24px 0 0;padding:clamp(28px,3.4vw,44px) clamp(24px,3.4vw,44px) 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap"><h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(28px,3vw,42px);line-height:1;color:#f5c400">Public universities</h3><span lang="de" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#c6ccda">Öffentlich</span></div>
-          <div role="columnheader" style="background:#f7f5ef;border-radius:24px 24px 0 0;padding:clamp(28px,3.4vw,44px) clamp(24px,3.4vw,44px) 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap"><h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(28px,3vw,42px);line-height:1;color:#c4261b">Private universities</h3><span lang="de" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#3b4460">Privat</span></div>
+          <div role="columnheader" style="background:#10182e;border-radius:24px 24px 0 0;padding:clamp(28px,3.4vw,44px) clamp(24px,3.4vw,44px) 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap"><h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(28px,3vw,42px);line-height:1;color:#f5c400">Public universities</h3></div>
+          <div role="columnheader" style="background:#f7f5ef;border-radius:24px 24px 0 0;padding:clamp(28px,3.4vw,44px) clamp(24px,3.4vw,44px) 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap"><h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(28px,3vw,42px);line-height:1;color:#c4261b">Private universities</h3></div>
         </div>
         <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Tuition</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">No tuition fees in most German states. You still pay a semester contribution each term.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Tuition</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Tuition fees apply, and they vary widely between universities.</div></div></div></div>
         <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Admissions</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">Strict. Your earlier credits have to match the course requirements, and incomplete documents get rejected.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Admissions</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Usually more flexible. Quality varies a lot, and some schools are predatory.</div></div></div></div>
@@ -346,7 +419,7 @@ button{font:inherit}
       <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(48px,6.6vw,108px);line-height:.9;letter-spacing:-0.025em;word-spacing:.14em;font-stretch:74%;color:#f5c400;text-wrap:balance">How we write your SOP with you</h2>
       <div style="display:flex;flex-direction:column;gap:16px">
         <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Your Statement of Purpose is the one place in the application where you explain your record in your own words, including the semesters that went badly.</p>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Many consultancies generate SOPs with AI or reuse templates. We write yours by hand with you, over several weeks.</p>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Many consultancies generate SOPs with AI or reuse templates. We write yours by hand with you, over several weeks. Nothing is submitted until you've approved the final version.</p>
       </div>
     </div>
 
@@ -374,6 +447,7 @@ button{font:inherit}
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.6vw,52px);line-height:1;letter-spacing:-0.015em;color:#ffffff;text-wrap:balance">Two applicants, one university</h3>
         <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Both applied to the same German technical university in the Winter 2025 cycle.</p>
         <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Each decision weighed the whole application: grades, course fit, documents and the SOP. The SOP is the part we write with you.</p>
+        <a href="#contact-form" style="margin-top:8px;align-self:flex-start;display:inline-flex;background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;transition:background .2s,color .2s" style-hover="background:#ffffff;color:#10182e">Get my profile reviewed</a>
       </div>
       <div ref="{{ sopRef }}" onClick="{{ restamp }}" style="display:flex;flex-direction:column;gap:28px;cursor:pointer">
         <div style="display:flex;flex-direction:column;transform:rotate(-1.2deg)">
@@ -400,88 +474,87 @@ button{font:inherit}
         </div>
       </div>
     </div>
-    <a href="#contact-form" style="margin-top:56px;display:inline-flex;background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;transition:background .2s,color .2s" style-hover="background:#ffffff;color:#10182e">Get my profile reviewed</a>
   </div>
 </section>
 
-<section id="why" data-screen-label="How we work" style="padding:clamp(72px,10vw,136px) clamp(20px,5vw,72px)">
+<section id="why" data-screen-label="How we work" class="m-sec" style="padding:clamp(72px,10vw,136px) clamp(20px,5vw,72px)">
   <div style="max-width:1240px;margin:0 auto">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(36px,6vw,88px);align-items:center">
-      <div style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,56px);align-items:center">
+      <div class="m-copy" style="display:flex;flex-direction:column;gap:24px">
         <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(46px,7vw,116px);line-height:.9;letter-spacing:-0.022em;word-spacing:.14em;font-stretch:78%;color:#10182e;text-wrap:balance">How our mentors work</h2>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">Each of our six mentors works with up to five students at a time. That limit is what lets us write every SOP by hand and check every document before it goes out.</p>
-        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px">
-          <li style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#1d7a3d"></span><span>Before anything is submitted, a mentor checks it against the university's requirements: ECTS prerequisites, APS and the full document list.</span></li>
-          <li style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#ef8a21"></span><span>Your SOP is written by hand with you, over several weeks.</span></li>
-          <li style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#d42b1f"></span><span>Because the group is small, we can introduce you to seniors at the universities you're applying to.</span></li>
+        <p class="m-body" style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">Each of our six mentors works with up to five students at a time. That limit is what lets us write every SOP by hand and check every document before it goes out.</p>
+        <ul class="m-points" style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px">
+          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#1d7a3d"></span><span>A mentor checks every submission against the university's ECTS prerequisites, APS and full document list.</span></li>
+          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#ef8a21"></span><span>Your SOP is written by hand with you, over several weeks.</span></li>
+          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#d42b1f"></span><span>Because the group is small, we can introduce you to seniors at the universities you're applying to.</span></li>
         </ul>
       </div>
-      <div style="border-radius:18px;overflow:hidden;transform:rotate(1.2deg);box-shadow:0 24px 48px -24px rgba(16,24,46,.45);aspect-ratio:1090/788">
-        <img src="assets/reichstag.jpg" alt="A student with a backpack looking at the Reichstag building in Berlin" style="display:block;width:100%;height:100%;object-fit:cover">
+      <div class="m-photo" style="border-radius:18px;overflow:hidden;transform:rotate(1.2deg);box-shadow:0 24px 48px -24px rgba(16,24,46,.45);aspect-ratio:1090/788">
+        <img class="m-photo-img" src="assets/reichstag.jpg" alt="A student with a backpack looking at the Reichstag building in Berlin" style="display:block;width:100%;height:100%;object-fit:cover">
       </div>
     </div>
 
-    <div style="margin-top:clamp(64px,8vw,104px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:28px 32px">
-      <div style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(56px,6vw,88px);line-height:1;letter-spacing:-0.03em;color:#10182e">22,000+</div>
-        <div style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members in the Germandians student community</div>
+    <div class="m-stats" style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px 24px">
+      <div class="m-stat" style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#10182e">22,000+</div>
+        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members in the Germandians student community</div>
       </div>
-      <div style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(56px,6vw,88px);line-height:1;letter-spacing:-0.03em;color:#10182e">2,000+</div>
-        <div style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members who say they're aiming for Winter 2026</div>
+      <div class="m-stat" style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#10182e">2,000+</div>
+        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members who say they're aiming for Winter 2026</div>
       </div>
-      <div style="border-top:3px solid #c4261b;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(56px,6vw,88px);line-height:1;letter-spacing:-0.03em;color:#c4261b">30</div>
-        <div style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students we'll personally support for Winter 2026</div>
-        <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#3b4460">{{ seatsLeft }} places still open</div></sc-if>
+      <div class="m-stat" style="border-top:3px solid #c4261b;padding-top:18px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#c4261b">30</div>
+        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students we'll personally support for Winter 2026</div>
+        <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><div class="m-seats" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#3b4460">{{ seatsLeft }} places still open</div></sc-if>
       </div>
     </div>
 
-    <h3 style="margin:clamp(80px,9vw,120px) 0 32px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:76%;line-height:.92;letter-spacing:-0.022em;word-spacing:.14em;text-wrap:balance"><span style="display:block;font-size:clamp(42px,6.2vw,100px);color:#10182e">One mentor, up to five students.</span><span style="display:block;margin-top:14px;font-size:clamp(26px,3.2vw,48px);color:#c4261b">Many agencies: one agent, 100 or more.</span></h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px">
-      <div style="background:#10182e;color:#ffffff;border:2px dashed #f5c400;border-radius:22px;padding:clamp(20px,3vw,36px);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
-        <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#f5c400">Germandians</div>
-        <div style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:14px;font-weight:700;font-size:18px">1 mentor</div>
-        <div aria-hidden="true" style="font-size:22px;color:#c6ccda">↓</div>
-        <div style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px">
-          <div aria-hidden="true" style="display:flex;gap:12px;padding:6px 0">
+    <h3 class="m-ratio" style="margin:clamp(48px,6vw,80px) 0 24px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:76%;line-height:.92;letter-spacing:-0.022em;word-spacing:.14em;text-wrap:balance"><span class="m-ratio-ours" style="display:block;font-size:clamp(42px,6.2vw,100px);color:#10182e">One mentor, up to five students.</span><span class="m-ratio-theirs" style="display:block;margin-top:14px;font-size:clamp(26px,3.2vw,48px);color:#c4261b">Many agencies: one agent, 100 or more.</span></h3>
+    <div class="m-diagrams" style="margin-top:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:stretch">
+      <div class="m-diagram" style="background:#10182e;color:#ffffff;border:2px dashed #f5c400;border-radius:22px;padding:clamp(12px,2vw,24px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+        <div class="m-dtitle" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#f5c400">Germandians</div>
+        <div class="m-dbox" style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:14px;font-weight:700;font-size:18px">1 mentor</div>
+        <div aria-hidden="true" class="m-arrow" style="font-size:22px;color:#c6ccda">↓</div>
+        <div class="m-dbox m-crowd" style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:center;flex:1;align-items:center;gap:12px">
+          <div aria-hidden="true" class="m-sdots">
             <sc-for list="{{ dots5 }}" as="item" hint-placeholder-count="5">
-              <span style="width:30px;height:30px;border-radius:50%;background:#f5c400"></span>
+              <span class="m-sdot"></span>
             </sc-for>
           </div>
-          <div style="font-weight:700;font-size:18px">Up to 5 students</div>
+          <div class="m-dstrong" style="font-weight:700;font-size:18px">Up to 5 students</div>
         </div>
-        <div aria-hidden="true" style="font-size:22px;color:#c6ccda">↓</div>
-        <div style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px">
-          <div style="font-weight:700;font-size:18px">A shortlist for each student</div>
-          <div style="font-size:16px;color:#d3d8e4">Every application written for that one student</div>
+        <div aria-hidden="true" class="m-arrow" style="font-size:22px;color:#c6ccda">↓</div>
+        <div class="m-dbox" style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px">
+          <div class="m-dstrong" style="font-weight:700;font-size:18px">A shortlist for each student</div>
+          <div class="m-dnote" style="font-size:16px;color:#d3d8e4">Every application written for that one student</div>
         </div>
       </div>
-      <div style="border:2px dashed #d42b1f;border-radius:22px;padding:clamp(20px,3vw,36px);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+      <div class="m-diagram" style="border:2px dashed #d42b1f;border-radius:22px;padding:clamp(12px,2vw,24px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
         <div style="display:flex;flex-direction:column;gap:2px">
-          <div style="font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#c4261b">Many agencies</div>
-          <div style="font-size:15px;color:#3b4460">As students in our community describe them</div>
+          <div class="m-dtitle" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#c4261b">Many agencies</div>
+          <div class="m-dsource" style="font-size:15px;color:#3b4460">As students in our community describe them</div>
         </div>
-        <div style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:14px;font-weight:700;font-size:18px">1 agent</div>
-        <div aria-hidden="true" style="font-size:22px;color:#4a5372">↓</div>
-        <div style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px">
-          <div aria-hidden="true" style="display:grid;grid-template-columns:repeat(20,1fr);gap:4px">
+        <div class="m-dbox" style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:14px;font-weight:700;font-size:18px">1 agent</div>
+        <div aria-hidden="true" class="m-arrow" style="font-size:22px;color:#4a5372">↓</div>
+        <div class="m-dbox m-crowd" style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:center;flex:1;gap:12px">
+          <div aria-hidden="true" class="m-adots" style="display:grid;width:100%;grid-template-columns:repeat(20,1fr);gap:4px">
             <sc-for list="{{ dots100 }}" as="item" hint-placeholder-count="100">
-              <span style="aspect-ratio:1;border-radius:50%;border:1.5px solid #d42b1f"></span>
+              <span class="m-adot" style="aspect-ratio:1;border-radius:50%;border:1.5px solid #d42b1f"></span>
             </sc-for>
           </div>
-          <div style="font-weight:700;font-size:18px">100+ students</div>
+          <div class="m-dstrong" style="font-weight:700;font-size:18px">100+ students</div>
         </div>
-        <div aria-hidden="true" style="font-size:22px;color:#4a5372">↓</div>
-        <div style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px">
-          <div style="font-weight:700;font-size:18px">1,000+ applications</div>
-          <div style="font-size:16px;color:#3b4460">About 10 each, so SOPs often get templated or reused</div>
+        <div aria-hidden="true" class="m-arrow" style="font-size:22px;color:#4a5372">↓</div>
+        <div class="m-dbox" style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px">
+          <div class="m-dstrong" style="font-weight:700;font-size:18px">1,000+ applications</div>
+          <div class="m-dnote" style="font-size:16px;color:#3b4460">About 10 each, so SOPs often get templated or reused</div>
         </div>
       </div>
     </div>
-    <p style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">A strong application takes about six months of work. With six mentors, capping Winter 2026 at 30 students keeps it to five per mentor.</p>
+    <p class="m-rnote" style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">A strong application takes about six months of work. With six mentors, capping Winter 2026 at 30 students keeps it to five per mentor.</p>
 
-    <h3 style="margin:clamp(72px,8vw,104px) 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,36px);line-height:1.1;color:#10182e;text-wrap:balance">Germandians vs. many consultancies</h3>
+    <h3 class="m-ctitle" style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,36px);line-height:1.1;color:#10182e;text-wrap:balance">Germandians vs. many consultancies</h3>
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
       <div role="table" style="border-radius:18px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e;font-size:17px;line-height:1.45">
         <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr)">
@@ -498,22 +571,22 @@ button{font:inherit}
       </div>
     </sc-if>
     <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-      <div style="display:flex;flex-direction:column;gap:14px">
-        <div style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div style="padding:14px 18px;font-weight:800;font-size:18px">Who advises you</div><div style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span style="font-size:17px;color:#3b4460">Agents, often with outdated information</span></div><div style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span style="font-size:17px;font-weight:600">Students living in Germany right now</span></div></div>
-        <div style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div style="padding:14px 18px;font-weight:800;font-size:18px">Who reviews your documents</div><div style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span style="font-size:17px;color:#3b4460">An agent who may handle 100+ students</span></div><div style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span style="font-size:17px;font-weight:600">A mentor, before anything is submitted</span></div></div>
-        <div style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div style="padding:14px 18px;font-weight:800;font-size:18px">Your SOP</div><div style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span style="font-size:17px;color:#3b4460">Often AI-generated or a reused template</span></div><div style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span style="font-size:17px;font-weight:600">Written by hand with you</span></div></div>
-        <div style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div style="padding:14px 18px;font-weight:800;font-size:18px">Filing applications</div><div style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span style="font-size:17px;color:#3b4460">Often left to you</span></div><div style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span style="font-size:17px;font-weight:600">We submit every application on the portal</span></div></div>
-        <div style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div style="padding:14px 18px;font-weight:800;font-size:18px">When payment is due</div><div style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span style="font-size:17px;color:#3b4460">Often upfront, admitted or not</span></div><div style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span style="font-size:17px;font-weight:600">Only after you're admitted</span></div></div>
-        <div style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div style="padding:14px 18px;font-weight:800;font-size:18px">Help after admission</div><div style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span style="font-size:17px;color:#3b4460">Varies by agency</span></div><div style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span style="font-size:17px;font-weight:600">Help with your loan, blocked account, visa, dorm applications, Anmeldung and bank account, plus introductions to seniors</span></div></div>
+      <div class="m-cards" style="display:flex;flex-direction:column;gap:14px">
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Who advises you</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Agents, often with outdated information</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Students living in Germany right now</span></div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Who reviews your documents</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">An agent who may handle 100+ students</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">A mentor, before anything is submitted</span></div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Your SOP</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often AI-generated or a reused template</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Written by hand with you</span></div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Filing applications</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often left to you</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">We submit every application on the portal</span></div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">When payment is due</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often upfront, admitted or not</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Only after you're admitted</span></div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Help after admission</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Varies by agency</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Help with your loan, blocked account, visa, dorm applications, Anmeldung and bank account, plus introductions to seniors</span></div></div>
       </div>
     </sc-if>
-    <p style="margin:16px 0 0;max-width:72ch;font-size:16px;line-height:1.55;color:#3b4460;text-wrap:pretty">The consultancy figures and descriptions reflect what students in our community commonly report. Individual agencies vary.</p>
+    <p class="m-foot" style="margin:16px 0 0;max-width:72ch;font-size:16px;line-height:1.55;color:#3b4460;text-wrap:pretty">The consultancy figures and descriptions reflect what students in our community commonly report. Individual agencies vary.</p>
   </div>
 </section>
 
 <section id="faq" data-screen-label="FAQ" style="background:#efebe2;padding:clamp(72px,10vw,136px) clamp(20px,5vw,72px)">
   <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(36px,6vw,88px);align-items:start">
-    <div style="display:flex;flex-direction:column;gap:20px">
+    <div class="stick-intro" style="display:flex;flex-direction:column;gap:20px">
       <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(46px,6vw,96px);line-height:.9;letter-spacing:-0.022em;word-spacing:.14em;font-stretch:78%;color:#10182e;text-wrap:balance">Before you send your details</h2>
       <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#333c56;text-wrap:pretty">Answers to what students ask us first. Anything else, <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="font-weight:700">DM us on Instagram</a>.</p>
     </div>
@@ -523,16 +596,8 @@ button{font:inherit}
         <sc-if value="{{ faq.o1 }}" hint-placeholder-val="{{ true }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">No. Universities make every admission decision themselves. What we can promise is the payment model: if no university admits you, you owe us no service fee.</p></sc-if>
       </div>
       <div style="border-top:2px solid #10182e">
-        <button type="button" onClick="{{ faq.t2 }}" aria-expanded="{{ faq.o2 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>What do I owe if I don't get an offer?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r2 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o2 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">Nothing to Germandians. Fees you pay to other organisations along the way, such as university or uni-assist application fees, the APS fee and the IELTS test fee, go to them directly, so we can't refund those.</p></sc-if>
-      </div>
-      <div style="border-top:2px solid #10182e">
         <button type="button" onClick="{{ faq.t3 }}" aria-expanded="{{ faq.o3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Can I apply only to public universities?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r3 }};transition:transform .25s">+</span></button>
         <sc-if value="{{ faq.o3 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">Yes. Tell us in your profile review. We'll check how your ECTS credits match the public courses you want and tell you plainly how your chances look.</p></sc-if>
-      </div>
-      <div style="border-top:2px solid #10182e">
-        <button type="button" onClick="{{ faq.t4 }}" aria-expanded="{{ faq.o4 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Who writes and reviews my SOP?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r4 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o4 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">A mentor writes it with you by hand over several weeks, from your own story and documents. Nothing is submitted until you've approved the final version.</p></sc-if>
       </div>
       <div style="border-top:2px solid #10182e">
         <button type="button" onClick="{{ faq.t5 }}" aria-expanded="{{ faq.o5 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>What support continues after I land?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r5 }};transition:transform .25s">+</span></button>
@@ -552,7 +617,7 @@ button{font:inherit}
 
 <section id="contact" data-screen-label="Contact" style="background:#10182e;color:#ffffff;padding:clamp(72px,10vw,136px) clamp(20px,5vw,72px)">
   <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,6vw,88px);align-items:start">
-    <div style="display:flex;flex-direction:column;gap:24px">
+    <div class="stick-intro" style="display:flex;flex-direction:column;gap:24px">
       <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(56px,8vw,132px);line-height:.88;letter-spacing:-0.025em;word-spacing:.14em;font-stretch:74%;color:#f5c400;text-wrap:balance">Get your profile reviewed</h2>
       <p style="margin:0;font-size:clamp(19px,1.6vw,23px);line-height:1.5;color:#e3e6ee;max-width:32ch;text-wrap:pretty">Fill in the form and an admin will message you on WhatsApp. Or reach us directly:</p>
       <div style="display:flex;flex-direction:column;gap:12px">
@@ -568,7 +633,6 @@ button{font:inherit}
           <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(24px,2.4vw,30px);line-height:1.05;letter-spacing:-0.01em">Antrag auf Erstberatung</div>
           <div style="font-size:16px;color:#3b4460">Application for a first consultation</div>
         </div>
-        <div style="border:1.5px solid #10182e;padding:6px 10px;font-family:'Barlow Semi Condensed',sans-serif;font-size:14px;line-height:1.3;text-align:right"><div style="font-weight:700">Formular GD-26</div><div>Seite 1 von 1</div></div>
       </div>
       <div style="height:3px;background:#10182e"></div>
       <div style="font-size:17px;line-height:1.45;color:#1f2742">Relax, this is the shortest German form you will ever fill in.</div>
@@ -590,17 +654,17 @@ button{font:inherit}
       </div>
 
       <div style="background:#f1eee4;border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:1.5;color:#1f2742">
-        <div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#10182e">Hinweis: what happens next</div>
+        <div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#10182e">What happens next</div>
         <div>One of our six admins replies on WhatsApp, at the number above.</div>
         <div>The review covers your degree, CGPA and backlogs, your APS and IELTS status, and which universities fit.</div>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:8px">
         <label for="f-consent" style="display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.5;color:#1f2742;cursor:pointer">
-          <input id="f-consent" type="checkbox" checked="{{ form.consent }}" onChange="{{ onConsent }}" disabled="{{ locked }}" style="flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:#10182e;cursor:pointer">
+          <input id="f-consent" type="checkbox" checked="{{ form.consent }}" onChange="{{ onConsent }}" disabled="{{ locked }}" aria-describedby="{{ consentDescribedBy }}" style="flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:#10182e;cursor:pointer">
           <span>I agree that Germandians can use my name, email and WhatsApp number to contact me about my profile review. Details are in the <a href="Germandians%20Privacy.dc.html" target="_blank" rel="noopener" style="font-weight:700">privacy note</a>.</span>
         </label>
-        <sc-if value="{{ errors.consent }}" hint-placeholder-val="{{ false }}"><div style="font-size:15px;color:#c4261b;font-weight:600">{{ errors.consent }}</div></sc-if>
+        <sc-if value="{{ errors.consent }}" hint-placeholder-val="{{ false }}"><div id="f-consent-error" style="font-size:15px;color:#c4261b;font-weight:600">{{ errors.consent }}</div></sc-if>
       </div>
 
       <sc-if value="{{ canSubmit }}" hint-placeholder-val="{{ true }}">
@@ -629,29 +693,25 @@ button{font:inherit}
   </div>
 </section>
 
-<div aria-hidden="true" style="height:clamp(70px,10vw,140px);background:url(assets/flag-painting.jpg) center 52%/cover"></div>
-<footer style="background:#0b1122;color:#c6ccda;padding:56px clamp(20px,5vw,72px) 28px">
+<div aria-hidden="true" style="height:clamp(70px,10vw,140px);background:url(assets/flag-painting.jpg) center 12%/cover"></div>
+<footer ref="{{ footerRef }}" style="background:#0b1122;color:#c6ccda;padding:56px clamp(20px,5vw,72px) 28px">
   <div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
     <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;font-size:17px;line-height:1.5">
       <p style="margin:0;max-width:44ch;color:#d3d8e4">Guidance for Indian students heading to Germany, from students who are already there.</p>
       <div style="display:flex;gap:12px 24px;flex-wrap:wrap">
-        <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Instagram</a>
-        <a href="mailto:thegermandians@gmail.com" style="color:#ffffff;text-decoration:none;overflow-wrap:anywhere" style-hover="color:#f5c400">thegermandians@gmail.com</a>
-        <a href="Germandians%20Privacy.dc.html" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Privacy</a>
-        <a href="#top" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Back to top</a>
+        <a href="https://instagram.com/germandians" target="_blank" rel="noopener" class="ft-link" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Instagram</a>
+        <a href="mailto:thegermandians@gmail.com" class="ft-link" style="color:#ffffff;text-decoration:none;overflow-wrap:anywhere" style-hover="color:#f5c400">thegermandians@gmail.com</a>
+        <a href="Germandians%20Privacy.dc.html" class="ft-link" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Privacy</a>
+        <a href="#top" class="ft-link" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Back to top</a>
       </div>
     </div>
-    <div style="overflow:hidden;width:100%">
-      <div ref="{{ markRef }}" aria-hidden="true" style="display:inline-block;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:88%;font-size:clamp(48px,14vw,220px);line-height:.8;letter-spacing:-0.04em;color:#f5c400;white-space:nowrap;padding-bottom:.04em">Germandians</div>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px;color:#d3d8e4">
+    <div style="border-top:1px solid #2a3557;padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px;color:#d3d8e4">
       <span>© 2026 Germandians</span>
       <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><span>Winter 2026: {{ seatsLeft }} of 30 places open</span></sc-if>
     </div>
   </div>
 </footer>
 <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
-  <div aria-hidden="true" style="height:84px;background:#0b1122"></div>
   <div style="position:fixed;left:0;right:0;bottom:0;z-index:60;background:#f7f5ef;border-top:1px solid #d9d4c6;padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:10px;transform:{{ barTransform }};transition:transform .3s ease;visibility:{{ barVisibility }}">
     <a href="{{ waHref }}" target="{{ waTarget }}" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:12px;background:#1d7a3d;color:#ffffff;text-decoration:none;font-weight:700;font-size:17px">WhatsApp us</a>
     <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:12px;background:#10182e;color:#f5c400;text-decoration:none;font-weight:700;font-size:17px">Instagram</a>
@@ -660,8 +720,8 @@ button{font:inherit}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;intakeStatus&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Not confirmed&quot;,&quot;Enquiries open&quot;,&quot;Waitlist only&quot;,&quot;Enquiries closed&quot;],&quot;default&quot;:&quot;Not confirmed&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Intake&quot;},&quot;whatsappNumber&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;formEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact&quot;},&quot;feeAfterAdmission&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fees&quot;},&quot;showSeatCount&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Intake&quot;},&quot;seatsLeft&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:0,&quot;max&quot;:30,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Intake&quot;},&quot;allowRepaint&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
 class Component extends DCLogic {
-  state = { vw: typeof window !== 'undefined' ? window.innerWidth : 1280, menuOpen: false, wiped: false, month: 1, playing: false, printed: true, stampsIn: true, formInView: false, heroCtaInView: true, faq: { 1: true }, form: { name: '', email: '', wa: '', consent: false }, errors: {}, status: 'idle' };
-  heroCtaRef = React.createRef(); heroWrap = React.createRef(); heroCanvas = React.createRef(); trackRef = React.createRef(); receiptRef = React.createRef(); sopRef = React.createRef(); formRef = React.createRef(); markRef = React.createRef();
+  state = { vw: typeof window !== 'undefined' ? window.innerWidth : 1280, menuOpen: false, wiped: false, restoring: false, month: 1, playing: false, paused: false, footerInView: false, printed: true, stampsIn: true, formInView: false, heroCtaInView: true, faq: { 1: true }, form: { name: '', email: '', wa: '', consent: false }, errors: {}, status: 'idle' };
+  heroCtaRef = React.createRef(); heroWrap = React.createRef(); heroCanvas = React.createRef(); trackRef = React.createRef(); receiptRef = React.createRef(); sopRef = React.createRef(); formRef = React.createRef(); footerRef = React.createRef(); explorerRef = React.createRef();
   reduced = typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   PHASES = [
     { n: 1, name: 'Foundation', start: 1, color: '#1d7a3d', ink: '#1d7a3d', tint: '#e4f0e6', desc: 'We evaluate your profile and eligibility, help you apply for APS and plan your IELTS preparation.' },
@@ -684,26 +744,33 @@ class Component extends DCLogic {
   componentDidMount() {
     this.onResize = () => {
       cancelAnimationFrame(this.rz);
-      this.rz = requestAnimationFrame(() => { const w = window.innerWidth; if (w !== this.state.vw) this.setState({ vw: w }); this.fitMark(); });
+      this.rz = requestAnimationFrame(() => { const w = window.innerWidth; if (w !== this.state.vw) this.setState({ vw: w }); });
     };
     window.addEventListener('resize', this.onResize);
     this.onResize();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this.fitMark());
     this.initHero();
     this.initObservers();
     this.onKey = e => { if (e.key === 'Escape' && this.state.menuOpen) this.setState({ menuOpen: false }); };
     window.addEventListener('keydown', this.onKey);
+    this.onVisibility = () => { if (document.hidden) this.pausePlay(); };
+    document.addEventListener('visibilitychange', this.onVisibility);
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onKey);
-    this.ro && this.ro.disconnect(); this.io && this.io.disconnect(); this.fio && this.fio.disconnect();
+    window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onKey); document.removeEventListener('visibilitychange', this.onVisibility);
+    this.ro && this.ro.disconnect(); this.io && this.io.disconnect(); this.fio && this.fio.disconnect(); this.eio && this.eio.disconnect(); this.ftio && this.ftio.disconnect();
+    this.cancelRestore();
     cancelAnimationFrame(this.raf); cancelAnimationFrame(this.initRaf); cancelAnimationFrame(this.obsRaf); cancelAnimationFrame(this.rz);
     clearInterval(this.timer); clearTimeout(this.pt); clearTimeout(this.st);
   }
-  fitMark() {
-    const el = this.markRef.current; if (!el || !el.parentElement) return;
-    const pw = el.parentElement.clientWidth; el.style.fontSize = '100px';
-    const w = el.scrollWidth; if (w && pw) el.style.fontSize = (100 * pw / w * 0.985).toFixed(2) + 'px';
+  cancelRestore() { clearTimeout(this.idleT); clearTimeout(this.fadeT); }
+  scheduleRestore() {
+    clearTimeout(this.idleT);
+    this.idleT = setTimeout(() => {
+      cancelAnimationFrame(this.raf);
+      const finish = () => { this.ctx && this.ctx.clearRect(0, 0, this.cw, this.ch); this.lastPt = null; this.setState({ wiped: false, restoring: false }); };
+      if (this.reduced) finish();
+      else { this.setState({ restoring: true }); this.fadeT = setTimeout(finish, 700); }
+    }, 4500);
   }
 
   initHero(tries = 0) {
@@ -722,16 +789,19 @@ class Component extends DCLogic {
     cv.width = w * dpr; cv.height = h * dpr;
     this.ctx = cv.getContext('2d'); this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cancelAnimationFrame(this.raf);
-    if (this.state.wiped) this.setState({ wiped: false });
+    this.cancelRestore(); this.lastPt = null;
+    if (this.state.wiped || this.state.restoring) this.setState({ wiped: false, restoring: false });
     return true;
   }
   wipe = () => {
     if (!this.sizeCanvas()) return;
     cancelAnimationFrame(this.raf);
+    this.cancelRestore(); this.lastPt = null;
     const ctx = this.ctx;
     ctx.globalCompositeOperation = 'source-over'; ctx.globalAlpha = 1; ctx.fillStyle = '#f7f5ef'; ctx.fillRect(0, 0, this.cw, this.ch);
-    this.setState({ wiped: true });
+    this.setState({ wiped: true, restoring: false });
     if (!this.reduced) this.autoSweep();
+    this.scheduleRestore();
   };
   dab(x, y, a, s) {
     const ctx = this.ctx; ctx.save(); ctx.translate(x, y); ctx.rotate(a);
@@ -770,20 +840,30 @@ class Component extends DCLogic {
     this.raf = requestAnimationFrame(step);
   }
   onHeroMove = e => {
-    if (!this.state.wiped || !this.ctx || !this.heroWrap.current) return;
+    if (!this.state.wiped || this.state.restoring || !this.ctx || !this.heroWrap.current) return;
     const r = this.heroWrap.current.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
     const s = Math.min(this.cw, this.ch) * 0.12;
     const lp = this.lastPt || [x - 2, y + 1];
     this.strokeTo(lp[0], lp[1], x, y, s);
     this.lastPt = [x, y];
+    this.scheduleRestore();
   };
   onHeroLeave = () => { this.lastPt = null; };
+  onHeroDown = e => {
+    if (!this.state.wiped) return;
+    this.lastPt = null;
+    if (e.pointerType !== 'mouse') { try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {} }
+    this.onHeroMove(e);
+  };
 
   initObservers(tries = 0) {
-    const rc = this.receiptRef.current, sp = this.sopRef.current, fm = this.formRef.current, hc = this.heroCtaRef.current;
-    if (!rc || !sp || !fm || !hc || !this.markRef.current) { if (tries < 300) this.obsRaf = requestAnimationFrame(() => this.initObservers(tries + 1)); return; }
-    this.fitMark();
+    const rc = this.receiptRef.current, sp = this.sopRef.current, fm = this.formRef.current, hc = this.heroCtaRef.current, ex = this.explorerRef.current, ft = this.footerRef.current;
+    if (!rc || !sp || !fm || !hc || !ex || !ft) { if (tries < 300) this.obsRaf = requestAnimationFrame(() => this.initObservers(tries + 1)); return; }
     if (!window.IntersectionObserver) return;
+    this.eio = new IntersectionObserver(([e]) => { if (!e.isIntersecting) this.pausePlay(); });
+    this.eio.observe(ex);
+    this.ftio = new IntersectionObserver(([e]) => { if (e.isIntersecting !== this.state.footerInView) this.setState({ footerInView: e.isIntersecting }); }, { rootMargin: '0px 0px 84px 0px' });
+    this.ftio.observe(ft);
     if (!this.reduced) {
       const below = el => el.getBoundingClientRect().top > window.innerHeight * 0.9;
       const pre = {}, watch = [];
@@ -820,7 +900,7 @@ class Component extends DCLogic {
   toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
   closeMenu = () => { if (this.state.menuOpen) this.setState({ menuOpen: false }); };
 
-  setMonth = m => { this.stopPlay(); this.setState({ month: Math.min(7, Math.max(1, m)) }); };
+  setMonth = m => { this.stopPlay(); this.setState({ month: Math.min(7, Math.max(1, m)), paused: false }); };
   prevMonth = () => this.setMonth(this.state.month - 1);
   nextMonth = () => this.setMonth(this.state.month + 1);
   monthFromX(x) {
@@ -839,15 +919,16 @@ class Component extends DCLogic {
     e.preventDefault(); this.setMonth(m);
   };
   togglePlay = () => {
-    if (this.state.playing) return this.stopPlay();
+    if (this.state.playing) return this.pausePlay();
     clearInterval(this.timer);
-    this.setState(s => ({ playing: true, month: s.month >= 7 ? 1 : s.month }));
+    this.setState(s => ({ playing: true, paused: false, month: s.paused ? s.month : 1 }));
     this.timer = setInterval(() => this.setState(s => {
-      if (s.month >= 7) { clearInterval(this.timer); return { playing: false }; }
+      if (s.month >= 7) { clearInterval(this.timer); return { playing: false, paused: false }; }
       return { month: s.month + 1 };
     }), 1600);
   };
   stopPlay() { clearInterval(this.timer); if (this.state.playing) this.setState({ playing: false }); }
+  pausePlay() { if (!this.state.playing) return; clearInterval(this.timer); this.setState({ playing: false, paused: true }); }
 
   toggleFaq = i => this.setState(s => ({ faq: { ...s.faq, [i]: !s.faq[i] } }));
 
@@ -864,7 +945,16 @@ class Component extends DCLogic {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) errors.email = 'Please enter a valid email address.';
     if (f.wa.replace(/\D/g, '').length < 10) errors.wa = 'Please enter your WhatsApp number with at least 10 digits.';
     if (!f.consent) errors.consent = 'Please tick the box so we can contact you.';
-    if (Object.keys(errors).length) return this.setState({ errors });
+    if (Object.keys(errors).length) {
+      this.setState({ errors });
+      const first = ['name', 'email', 'wa', 'consent'].find(k => errors[k]);
+      // Wait for the error messages to render before moving focus.
+      requestAnimationFrame(() => {
+        const input = document.getElementById('f-' + first);
+        if (input) { input.focus({ preventScroll: true }); input.scrollIntoView({ block: 'center', behavior: 'instant' }); }
+      });
+      return;
+    }
     const ep = String(this.props.formEndpoint || '').trim();
     if (ep) {
       this.setState({ status: 'sending', errors: {} });
@@ -881,7 +971,7 @@ class Component extends DCLogic {
 
   renderVals() {
     const s = this.state, p = this.props, mo = this.MONTHS[s.month - 1], ph = this.PHASES[mo.phase];
-    const isMobile = s.vw < 760, compactNav = s.vw < 940;
+    const isMobile = s.vw < 760, compactNav = s.vw < 1100, stackedFees = s.vw < 1100;
     const STATUS = { 'Enquiries open': ['#e1f0e4', '#17692f'], 'Waitlist only': ['#fdeedb', '#8f4700'], 'Enquiries closed': ['#fbe4e1', '#a8221a'] };
     const stat = STATUS[p.intakeStatus];
     const wa = String(p.whatsappNumber || '').replace(/\D/g, '');
@@ -892,7 +982,7 @@ class Component extends DCLogic {
     const faq = {};
     for (let i = 1; i <= 7; i++) { faq['o' + i] = !!s.faq[i]; faq['t' + i] = () => this.toggleFaq(i); faq['r' + i] = s.faq[i] ? 'rotate(45deg)' : 'rotate(0deg)'; }
     const seg = {}; for (let i = 1; i <= 4; i++) { const on = mo.phase === i - 1; seg['c' + i] = on ? '#10182e' : 'transparent'; seg['b' + i] = on ? '#10182e' : '#d9d4c6'; seg['g' + i] = () => this.setMonth(this.PHASES[i - 1].start); }
-    const barOn = isMobile && !s.formInView && !s.heroCtaInView && !s.menuOpen;
+    const barOn = isMobile && !s.formInView && !s.heroCtaInView && !s.menuOpen && !s.footerInView;
     return {
       navFull: !compactNav, navCompact: compactNav, menuOpen: s.menuOpen, menuVisible: compactNav && s.menuOpen,
       menuLabel: s.menuOpen ? 'Close' : 'Menu', toggleMenu: this.toggleMenu, closeMenu: this.closeMenu,
@@ -904,14 +994,17 @@ class Component extends DCLogic {
       hasStatus: !!stat, statusLabel: stat ? p.intakeStatus : '', statusBg: stat ? stat[0] : 'transparent', statusInk: stat ? stat[1] : '#10182e',
       heroCtaRef: this.heroCtaRef,
       heroCols: isMobile ? 'minmax(0,1fr)' : 'minmax(0,1.35fr) minmax(0,1fr)',
-      feeCols: isMobile ? 'minmax(0,1fr)' : 'minmax(0,1.15fr) minmax(0,1fr)',
-      feeAreas: isMobile ? "'a' 'b' 'c'" : "'a b' 'c b'",
+      feeCols: stackedFees ? 'minmax(0,1fr)' : 'minmax(0,1.15fr) minmax(0,1fr)',
+      feeAreas: stackedFees ? "'a' 'b' 'c'" : "'a b' 'c b'",
       uniCols: isMobile ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1fr)',
 
-      heroWrap: this.heroWrap, heroCanvas: this.heroCanvas, onHeroMove: this.onHeroMove, onHeroLeave: this.onHeroLeave, wipe: this.wipe,
+      heroWrap: this.heroWrap, heroCanvas: this.heroCanvas, onHeroMove: this.onHeroMove, onHeroDown: this.onHeroDown, onHeroLeave: this.onHeroLeave, wipe: this.wipe,
       repaintOn: p.allowRepaint !== false,
-      paintHint: s.wiped ? 'Move across the canvas to paint it back.' : 'Wipe the canvas and paint the flag back in.',
+      paintHint: s.wiped ? 'Move your pointer or finger to paint. It restores when you stop.' : 'Wipe the canvas and paint the flag back in.',
       heroCursor: s.wiped ? 'crosshair' : 'default',
+      heroTouch: s.wiped ? 'none' : 'pan-y',
+      canvasOpacity: s.restoring ? 0 : 1,
+      canvasTransition: s.restoring && !this.reduced ? 'opacity .7s ease' : 'none',
 
       receiptRef: this.receiptRef, print: this.print,
       receiptTransform: s.printed ? 'translateY(0)' : 'translateY(-101%)',
@@ -927,7 +1020,8 @@ class Component extends DCLogic {
       handleLeft: ((s.month - 0.5) / 7 * 100).toFixed(3) + '%',
       trackRef: this.trackRef, onTrackDown: this.onTrackDown, onTrackMove: this.onTrackMove, onTrackUp: this.onTrackUp, onTrackKey: this.onTrackKey,
       togglePlay: this.togglePlay,
-      playLabel: s.playing ? 'Pause' : (s.month >= 7 ? 'Replay' : 'Play all 7 months'),
+      playLabel: s.playing ? 'Pause' : s.paused ? 'Resume' : (s.month >= 7 ? 'Replay' : 'Play all 7 months'),
+      explorerRef: this.explorerRef,
       monthTicks: this.MONTHS.map(m => ({ m: m.m, go: () => this.setMonth(m.m), color: m.m === s.month ? '#10182e' : '#4a5372', weight: m.m === s.month ? 800 : 500, bg: m.m === s.month ? ph.tint : 'transparent', current: m.m === s.month ? 'step' : undefined })),
       prevMonth: this.prevMonth, nextMonth: this.nextMonth,
       prevDisabled: s.month <= 1, nextDisabled: s.month >= 7,
@@ -947,7 +1041,8 @@ class Component extends DCLogic {
       waLabel: wa ? '+' + wa : 'Use the form',
       barTransform: barOn ? 'translateY(0)' : 'translateY(110%)', barVisibility: barOn ? 'visible' : 'hidden',
 
-      formRef: this.formRef, markRef: this.markRef,
+      formRef: this.formRef, footerRef: this.footerRef,
+      consentDescribedBy: err.consent ? 'f-consent-error' : undefined,
       form: s.form, errors: err, onName: this.onName, onEmail: this.onEmail, onWa: this.onWa, onConsent: this.onConsent, onSubmit: this.onSubmit, onReset: this.onReset,
       nameBorder: err.name ? '#c4261b' : '#10182e', emailBorder: err.email ? '#c4261b' : '#10182e', waBorder: err.wa ? '#c4261b' : '#10182e',
       locked: st === 'sending' || st === 'sent',

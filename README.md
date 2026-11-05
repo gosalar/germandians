@@ -39,7 +39,7 @@ npm run test:ux              # playback, touch repainting and form focus regress
   - The prototype loads React, Babel and fonts from public CDNs, so the first run needs internet. Later runs serve them from `.visual-cache/`; delete that folder to refresh it.
 - **Settings:** the test build ignores `config/.env*`, so it always uses the design's default settings.
 - **Failures:** the reference, app and diff images are saved under `test-results/visual/<test>/`.
-- **Changing the design:** if a test fails because the design itself changed, replace the files in `tests/visual/reference/` with the new export instead of loosening the test.
+- **Changing the design:** if a test fails because the design itself changed, update `tests/visual/reference/` (a new export, or a hand edit that mirrors the change) instead of loosening the test.
 
 ## GitHub Pages
 
