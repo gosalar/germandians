@@ -19,6 +19,8 @@ export function Layout({ children }: { children: ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* Tints the browser toolbar on Android phones and tablets to the nav's paper colour. */}
+        <meta name="theme-color" content="#f7f5ef" />
         <link rel="icon" href="data:," />
         <Meta />
         <Links />

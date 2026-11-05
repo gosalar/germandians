@@ -1,4 +1,5 @@
 @use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
 
 .nav {
   border-bottom: 1px solid t.$line;
@@ -18,6 +19,7 @@
 .back {
   font-weight: 700;
   font-size: 16px;
+  @include m.touch-area;
 }
 
 .main {
@@ -143,4 +145,5 @@
 
 .backToForm {
   font-weight: 700;
+  @include m.touch-area;
 }

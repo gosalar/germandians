@@ -12,6 +12,25 @@
   }
 }
 
+// Touch screens: makes the tap area at least $min tall without moving anything,
+// for text-sized links and buttons. Width doesn't tell touch from mouse: the
+// tablet in landscape gets the desktop layout. Uses ::after.
+@mixin touch-area($min: 44px) {
+  @media (pointer: coarse) {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: max(100%, $min);
+      transform: translateY(-50%);
+    }
+  }
+}
+
 // Outer padding shared by most full-width sections.
 @mixin section-padding {
   padding: clamp(72px, 10vw, 136px) clamp(20px, 5vw, 72px);

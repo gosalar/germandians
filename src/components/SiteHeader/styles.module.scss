@@ -42,6 +42,7 @@
   white-space: nowrap;
   text-decoration: none;
   padding: 6px 0;
+  @include m.touch-area;
 
   &:hover {
     text-decoration: underline;

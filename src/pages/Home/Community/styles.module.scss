@@ -80,6 +80,7 @@
   font-weight: 700;
   font-size: 17px;
   padding: 6px 0;
+  @include m.touch-area;
 }
 
 .principles {

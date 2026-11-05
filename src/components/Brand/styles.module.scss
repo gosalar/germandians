@@ -1,4 +1,5 @@
 @use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
 
 .link {
   display: flex;
@@ -7,6 +8,7 @@
   text-decoration: none;
   color: t.$navy;
   min-width: 0;
+  @include m.touch-area;
 
   &[data-size='fixed'] {
     gap: 10px;

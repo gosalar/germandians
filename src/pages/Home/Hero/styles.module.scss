@@ -215,4 +215,5 @@
   text-decoration-thickness: 1.5px;
   text-underline-offset: 4px;
   cursor: pointer;
+  @include m.touch-area;
 }

@@ -236,6 +236,7 @@
   text-decoration-color: t.$slate;
   text-underline-offset: 4px;
   padding: 8px;
+  @include m.touch-area;
 }
 
 // Details (area c)
