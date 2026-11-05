@@ -95,25 +95,30 @@ export const STAGES = [
   {
     phase: PHASES[0],
     when: 'Phase 1, months 1–2',
-    german: 'APS',
+    tag: 'APS',
+    lang: 'de',
     body: 'We evaluate your profile and eligibility, help you apply for APS and plan your IELTS preparation.',
   },
   {
     phase: PHASES[1],
     when: 'Phase 2, months 3–4',
-    german: 'Bewerbung',
+    // The stage title is already "Applications", so a tag here would only repeat it.
+    tag: null,
+    lang: null,
     body: 'We shortlist universities with you, write your SOP with you and submit every application on the university portals.',
   },
   {
     phase: PHASES[2],
     when: 'Phase 3, months 5–6',
-    german: 'Visum',
+    tag: 'Visa',
+    lang: 'en',
     body: 'As admission decisions arrive, we help with your education loan, help you open your blocked account and prepare your visa documents.',
   },
   {
     phase: PHASES[3],
     when: 'Phase 4, month 7',
-    german: 'Anmeldung',
+    tag: 'Anmeldung',
+    lang: 'de',
     body: 'We help with your student dorm applications, take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors.',
   },
-];
+] as const;

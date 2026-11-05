@@ -1,12 +1,6 @@
 @use '@/utils/styles/tokens' as t;
 @use '@/utils/styles/mixins' as m;
 
-// Keeps the footer clear of the fixed bar.
-.spacer {
-  height: 84px;
-  background: t.$navy-footer;
-}
-
 .bar {
   position: fixed;
   left: 0;
@@ -30,7 +24,6 @@
 }
 
 // Phones only. Kept after the base rules so it wins.
-.spacer,
 .bar {
   @include m.from(t.$bp-mobile) {
     display: none;

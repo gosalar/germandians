@@ -77,7 +77,15 @@ export default function ProfileReviewForm() {
     <form
       id={SECTIONS.contactForm}
       ref={formRef}
-      onSubmit={form.onSubmit(handleSubmit)}
+      onSubmit={form.onSubmit(handleSubmit, (errors) => {
+        const first = (['name', 'email', 'wa', 'consent'] as const).find((key) => errors[key]);
+        // Wait for the error descriptions to render before moving screen-reader focus.
+        requestAnimationFrame(() => {
+          const input = document.getElementById(`f-${first}`);
+          input?.focus({ preventScroll: true });
+          input?.scrollIntoView({ block: 'center', behavior: 'instant' });
+        });
+      })}
       noValidate
       className={styles.form}
     >
@@ -85,10 +93,6 @@ export default function ProfileReviewForm() {
         <div className={styles.formTitles}>
           <div className={styles.formTitle}>Antrag auf Erstberatung</div>
           <div className={styles.formSubtitle}>Application for a first consultation</div>
-        </div>
-        <div className={styles.formRef}>
-          <div className={styles.formRefStrong}>Formular GD-26</div>
-          <div>Seite 1 von 1</div>
         </div>
       </div>
       <div className={styles.formRule} />
@@ -124,7 +128,7 @@ export default function ProfileReviewForm() {
       />
 
       <div className={styles.hint}>
-        <div className={styles.hintTitle}>Hinweis: what happens next</div>
+        <div className={styles.hintTitle}>What happens next</div>
         <div>One of our six admins replies on WhatsApp, at the number above.</div>
         <div>The review covers your degree, CGPA and backlogs, your APS and IELTS status, and which universities fit.</div>
       </div>
@@ -136,6 +140,7 @@ export default function ProfileReviewForm() {
             type="checkbox"
             disabled={locked}
             aria-invalid={!!consentError}
+            aria-describedby={consentError ? 'f-consent-error' : undefined}
             className={styles.checkbox}
             {...consentProps}
           />
@@ -148,7 +153,7 @@ export default function ProfileReviewForm() {
             .
           </span>
         </label>
-        {consentError ? <div className={styles.fieldError}>{consentError}</div> : null}
+        {consentError ? <div id="f-consent-error" className={styles.fieldError}>{consentError}</div> : null}
       </div>
 
       {canSubmit ? (

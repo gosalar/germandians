@@ -3,7 +3,7 @@
 
 .flagBand {
   height: clamp(70px, 10vw, 140px);
-  background: url('../../assets/images/flag-painting.jpg') center 52% / cover;
+  background: url('../../assets/images/flag-painting.jpg') center 12% / cover;
 }
 
 .footer {
@@ -41,6 +41,9 @@
 }
 
 .link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: t.$white;
   text-decoration: none;
 
@@ -53,25 +56,9 @@
   overflow-wrap: anywhere;
 }
 
-.wordmarkBox {
-  overflow: hidden;
-  width: 100%;
-}
-
-.wordmark {
-  display: inline-block;
-  font-family: t.$font-display;
-  font-weight: 900;
-  font-stretch: 88%;
-  font-size: clamp(48px, 14vw, 220px);
-  line-height: 0.8;
-  letter-spacing: -0.04em;
-  color: t.$yellow;
-  white-space: nowrap;
-  padding-bottom: 0.04em;
-}
-
 .bottom {
+  border-top: 1px solid t.$navy-line;
+  padding-top: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

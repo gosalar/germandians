@@ -32,15 +32,9 @@ function ComparisonTable() {
       <div role="row" className={styles.row}>
         <div role="columnheader" className={styles.publicHeader}>
           <h3 className={styles.publicTitle}>Public universities</h3>
-          <span lang="de" className={styles.publicGerman}>
-            Öffentlich
-          </span>
         </div>
         <div role="columnheader" className={styles.privateHeader}>
           <h3 className={styles.privateTitle}>Private universities</h3>
-          <span lang="de" className={styles.privateGerman}>
-            Privat
-          </span>
         </div>
       </div>
       {ROWS.map((row) => (

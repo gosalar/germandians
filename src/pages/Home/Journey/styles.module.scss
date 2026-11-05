@@ -70,7 +70,7 @@
   color: t.$ink-muted;
 }
 
-.stageGerman {
+.stageTag {
   font-weight: 700;
 }
 
@@ -218,6 +218,10 @@
   }
 }
 
+.segmentNumber {
+  @include m.from(t.$bp-segment-labels) { display: none; }
+}
+
 .ticks {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -247,7 +251,8 @@
 .legend {
   margin-top: 12px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: 8px;
 
   @include m.from(t.$bp-segment-labels) {
@@ -258,15 +263,15 @@
 .legendItem {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   min-height: 46px;
-  padding: 8px 12px;
+  padding: 8px;
   border-radius: 10px;
   border: 2px solid t.$hairline;
   background: t.$white;
   cursor: pointer;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   color: t.$navy;
   text-align: left;
 
@@ -276,9 +281,12 @@
 }
 
 .legendSwatch {
+  display: grid;
+  place-items: center;
+  font-family: t.$font-label;
   flex: none;
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 24px;
   border-radius: 3px;
 }
 

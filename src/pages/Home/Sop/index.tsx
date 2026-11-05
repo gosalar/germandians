@@ -22,7 +22,7 @@ export default function Sop() {
             </p>
             <p className={styles.body}>
               Many consultancies generate SOPs with AI or reuse templates. We write yours by hand with you, over several
-              weeks.
+              weeks. Nothing is submitted until you've approved the final version.
             </p>
           </div>
         </div>
@@ -73,12 +73,12 @@ export default function Sop() {
               Each decision weighed the whole application: grades, course fit, documents and the SOP. The SOP is the
               part we write with you.
             </p>
+            <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow-dark" size="lg" className={styles.cta}>
+              Get my profile reviewed
+            </Button>
           </div>
           <StampedCards />
         </div>
-        <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow-dark" size="lg" className={styles.cta}>
-          Get my profile reviewed
-        </Button>
       </div>
     </section>
   );

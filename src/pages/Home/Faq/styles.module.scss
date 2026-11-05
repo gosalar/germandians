@@ -18,6 +18,10 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @include m.from(t.$bp-content-columns) {
+    position: sticky;
+    top: 88px;
+  }
 }
 
 .title {

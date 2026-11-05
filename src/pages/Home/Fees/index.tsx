@@ -39,6 +39,7 @@ export default function Fees() {
                 </li>
               ))}
             </ul>
+            <p className={styles.detailBody}>These fees go directly to those organisations, so we can't refund them.</p>
           </div>
           <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow-dark" size="lg" className={styles.cta}>
             Get my profile reviewed

@@ -10,16 +10,8 @@ const QUESTIONS = [
     a: 'No. Universities make every admission decision themselves. What we can promise is the payment model: if no university admits you, you owe us no service fee.',
   },
   {
-    q: "What do I owe if I don't get an offer?",
-    a: "Nothing to Germandians. Fees you pay to other organisations along the way, such as university or uni-assist application fees, the APS fee and the IELTS test fee, go to them directly, so we can't refund those.",
-  },
-  {
     q: 'Can I apply only to public universities?',
     a: "Yes. Tell us in your profile review. We'll check how your ECTS credits match the public courses you want and tell you plainly how your chances look.",
-  },
-  {
-    q: 'Who writes and reviews my SOP?',
-    a: "A mentor writes it with you by hand over several weeks, from your own story and documents. Nothing is submitted until you've approved the final version.",
   },
   {
     q: 'What support continues after I land?',

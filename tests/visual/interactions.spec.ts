@@ -38,7 +38,7 @@ const SCENARIOS: Scenario[] = [
   {
     name: 'nav link hover',
     width: 1440,
-    act: (p) => p.getByRole('link', { name: 'Universities', exact: true }).hover(),
+    act: (p) => p.getByRole('link', { name: /^(Universities|Public vs private)$/ }).hover(),
     shot: 'nav',
   },
   {
@@ -104,7 +104,7 @@ const SCENARIOS: Scenario[] = [
     width: 1440,
     act: async (p) => {
       await button(p, 'Can you guarantee admission?').click();
-      await button(p, "What do I owe if I don't get an offer?").click();
+      await button(p, 'Can I apply only to public universities?').click();
       await button(p, 'When do I get the terms in writing?').click();
     },
     shot: '#faq',

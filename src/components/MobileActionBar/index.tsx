@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import HomeSectionLink from '@/components/HomeSectionLink';
 import { usePageChrome } from '@/contexts/PageChrome/usePageChrome';
 import { CONTACT } from '@/utils/constants';
@@ -11,11 +13,20 @@ import styles from './styles.module.scss';
  */
 export default function MobileActionBar() {
   const { heroCtaInView, formInView, menuOpen } = usePageChrome();
-  const visible = !heroCtaInView && !formInView && !menuOpen;
+  const [footerInView, setFooterInView] = useState(false);
+  useEffect(() => {
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+    const observer = new IntersectionObserver(([entry]) => setFooterInView(entry.isIntersecting), {
+      rootMargin: '0px 0px 84px 0px',
+    });
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+  const visible = !heroCtaInView && !formInView && !menuOpen && !footerInView;
 
   return (
     <>
-      <div aria-hidden="true" className={styles.spacer} />
       <div className={styles.bar} data-visible={visible}>
         <HomeSectionLink href={whatsapp.href} target={whatsapp.target} rel="noopener" className={styles.whatsapp}>
           WhatsApp us

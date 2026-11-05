@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useReplayOnFirstView } from '@/hooks/useReplayOnFirstView';
 import { prefersReducedMotion } from '@/utils/motion';
+import { siteConfig } from '@/utils/siteConfig';
 
 import { RECEIPT_ITEMS } from './data';
 import styles from './styles.module.scss';
@@ -37,12 +38,12 @@ export default function Receipt({ feeShort }: { feeShort: string }) {
           <div className={styles.paperRoll} data-printed={printed} data-animate={printed && !reducedMotion}>
             <div className={styles.paper}>
               <div className={styles.receiptTitle}>GERMANDIANS</div>
-              <div className={styles.receiptSubtitle}>Studienberatung, Winter 2026 intake</div>
+              <div className={styles.receiptSubtitle}>Student guidance, {siteConfig.intake} intake</div>
               <div className={styles.rule} />
               {RECEIPT_ITEMS.map((item) => (
                 <div key={item} className={styles.line}>
                   <span>{item}</span>
-                  <span>inkl.</span>
+                  <span>Included</span>
                 </div>
               ))}
               <div className={styles.rule} />
@@ -51,18 +52,17 @@ export default function Receipt({ feeShort }: { feeShort: string }) {
                 <span className={styles.totalAmount}>0,00 €</span>
               </div>
               <div className={styles.rule} />
-              <div className={styles.line}>
+              <div className={styles.line} data-payment>
                 <span>Due after admission</span>
                 <span className={styles.lineValue}>{feeShort}</span>
               </div>
-              <div className={styles.line}>
+              <div className={styles.line} data-payment>
                 <span>Triggered by</span>
                 <span className={styles.lineValue}>Your admission letter</span>
               </div>
               <div className={styles.rule} />
               <div className={styles.promise}>No admission, no service fee.</div>
               <div className={styles.barcode} />
-              <div className={styles.thanks}>DANKE</div>
             </div>
             <div className={styles.tearEdge} />
           </div>

@@ -6,7 +6,8 @@ import styles from './styles.module.scss';
 import { useMonthPlayer } from './useMonthPlayer';
 
 export default function MonthExplorer() {
-  const { month, playing, select, scrub, togglePlay } = useMonthPlayer();
+  const explorerRef = useRef<HTMLDivElement>(null);
+  const { month, playing, paused, select, scrub, togglePlay } = useMonthPlayer(explorerRef);
   const trackRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
 
@@ -50,10 +51,10 @@ export default function MonthExplorer() {
     select(keys[event.key]);
   };
 
-  const playLabel = playing ? 'Pause' : month >= TOTAL_MONTHS ? 'Replay' : `Play all ${TOTAL_MONTHS} months`;
+  const playLabel = playing ? 'Pause' : paused ? 'Resume' : month >= TOTAL_MONTHS ? 'Replay' : `Play all ${TOTAL_MONTHS} months`;
 
   return (
-    <>
+    <div ref={explorerRef}>
       <div className={styles.explorerHead}>
         <div className={styles.explorerIntro}>
           <h3 className={styles.explorerTitle}>Month by month</h3>
@@ -96,6 +97,7 @@ export default function MonthExplorer() {
                 style={{ background: p.color, color: p.labelColor, borderRadius: p.radius }}
               >
                 <span className={styles.segmentLabel}>{p.name}</span>
+                <span className={styles.segmentNumber} aria-hidden="true">{p.n}</span>
               </div>
             ))}
           </div>
@@ -126,7 +128,7 @@ export default function MonthExplorer() {
               className={styles.legendItem}
               data-active={p === phase}
             >
-              <span aria-hidden="true" className={styles.legendSwatch} style={{ background: p.color }} />
+              <span aria-hidden="true" className={styles.legendSwatch} style={{ background: p.color, color: p.labelColor }}>{p.n}</span>
               <span>{p.name}</span>
             </button>
           ))}
@@ -180,6 +182,6 @@ export default function MonthExplorer() {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

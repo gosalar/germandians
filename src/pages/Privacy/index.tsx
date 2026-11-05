@@ -3,11 +3,13 @@ import { Link } from 'react-router';
 
 import BrandLink from '@/components/Brand';
 import { CONTACT, ROUTES, SECTIONS } from '@/utils/constants';
+import { privacyConfig as privacy, siteConfig } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
 
 /** Details the team still has to fill in before launch. */
-function Placeholder({ children }: { children: ReactNode }) {
+function Placeholder({ value, children }: { value: string; children: ReactNode }) {
+  if (value) return value;
   return <mark className={styles.placeholder}>{children}</mark>;
 }
 
@@ -18,6 +20,21 @@ const emailLink = (
 );
 
 export default function Privacy() {
+  const showNames = privacy.names || privacy.showPlaceholders;
+  const showAddress = privacy.address || privacy.showPlaceholders;
+  const showRetention = privacy.retention || privacy.showPlaceholders;
+  const showAuthority = privacy.authority || privacy.showPlaceholders;
+  // Visual previews retain the original unfilled template. Live forms describe
+  // the actual transport, including when a provider is set but no endpoint is.
+  const emailForm = !siteConfig.formEndpoint && !privacy.showPlaceholders;
+  // Kept as elements so the sentences below can stay on short lines without
+  // splitting a space into its own text node. That shift moves the highlight.
+  const names = <Placeholder value={privacy.names}>[full names of the people responsible]</Placeholder>;
+  const retention = <Placeholder value={privacy.retention}>[6 months]</Placeholder>;
+  const authority = (
+    <Placeholder value={privacy.authority}>[the authority for the German state where you live]</Placeholder>
+  );
+
   return (
     <>
       <nav className={styles.nav}>
@@ -41,10 +58,16 @@ export default function Privacy() {
 
           <section className={styles.section}>
             <h2 className={styles.heading}>Who is responsible</h2>
-            <p className={styles.text}>
-              Germandians is run by <Placeholder>[full names of the people responsible]</Placeholder>,{' '}
-              <Placeholder>[postal address in Germany]</Placeholder>.
-            </p>
+            {showNames || showAddress ? (
+              <p className={styles.text}>
+                {showNames ? (
+                  <>Germandians is run by {names}{showAddress ? ', ' : ''}</>
+                ) : (
+                  'Postal address: '
+                )}
+                {showAddress ? <Placeholder value={privacy.address}>[postal address in Germany]</Placeholder> : null}.
+              </p>
+            ) : null}
             <p className={styles.plain}>Email: {emailLink}</p>
           </section>
 
@@ -76,19 +99,29 @@ export default function Privacy() {
           <section className={styles.section}>
             <h2 className={styles.heading}>Who else handles it</h2>
             <ul className={styles.list}>
-              <li>
-                <span className={styles.bullet} data-color="green" />
-                <span>
-                  <Placeholder>[form service]</Placeholder> receives the form on our behalf.
-                </span>
-              </li>
-              <li>
-                <span className={styles.bullet} data-color="orange" />
-                <span>
-                  <Placeholder>[hosting provider]</Placeholder> hosts this site and keeps short technical logs, such as
-                  IP addresses and access times, to keep it running.
-                </span>
-              </li>
+              {emailForm ? (
+                <li>
+                  <span className={styles.bullet} data-color="green" />
+                  <span>The form opens your email app. You send the details to us from there.</span>
+                </li>
+              ) : privacy.formService || privacy.showPlaceholders ? (
+                <li>
+                  <span className={styles.bullet} data-color="green" />
+                  <span>
+                    <Placeholder value={privacy.formService}>[form service]</Placeholder> receives the form on our
+                    behalf.
+                  </span>
+                </li>
+              ) : null}
+              {privacy.hostingProvider || privacy.showPlaceholders ? (
+                <li>
+                  <span className={styles.bullet} data-color="orange" />
+                  <span>
+                    <Placeholder value={privacy.hostingProvider}>[hosting provider]</Placeholder> hosts this site and keeps short technical logs, such as
+                    IP addresses and access times, to keep it running.
+                  </span>
+                </li>
+              ) : null}
               <li>
                 <span className={styles.bullet} data-color="red" />
                 <span>
@@ -103,9 +136,15 @@ export default function Privacy() {
           <section className={styles.section}>
             <h2 className={styles.heading}>How long we keep it</h2>
             <p className={styles.text}>
-              If we don't end up working together, we delete your details within <Placeholder>[6 months]</Placeholder>{' '}
-              of your last message. If we do, we keep them for as long as we're helping you, plus any period the law
-              requires.
+              {showRetention ? (
+                <>
+                  If we don't end up working together, we delete your details within {retention}{' '}
+                  of your last message. If we do, we keep them for as long as we're helping you, plus any period the law
+                  requires.
+                </>
+              ) : (
+                "We keep the details you send us for as long as we're helping you, plus any period the law requires."
+              )}
             </p>
           </section>
 
@@ -120,8 +159,9 @@ export default function Privacy() {
               details before you withdrew it.
             </p>
             <p className={styles.text}>
-              You can also complain to a data protection authority, for example{' '}
-              <Placeholder>[the authority for the German state where you live]</Placeholder>.
+              You can also complain to a data protection authority{showAuthority ? (
+                <>, for example{' '}{authority}</>
+              ) : null}.
             </p>
           </section>
 

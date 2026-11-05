@@ -104,8 +104,8 @@ export default function Mentors() {
         </h3>
         <WorkloadDiagram />
         <p className={styles.ratioNote}>
-          A strong application takes about six months of work. With six mentors, capping Winter 2026 at 30 students
-          keeps it to five per mentor.
+          A strong application takes about six months of work. With six mentors, capping {siteConfig.intake} at 30
+          students keeps it to five per mentor.
         </p>
 
         <h3 className={styles.compareTitle}>Germandians vs. many consultancies</h3>

@@ -12,7 +12,8 @@
     "build:visual": "node scripts/build.mjs --visual",
     "test:visual": "playwright test",
     "test:visual:quick": "playwright test --grep @quick",
-    "test:visual:report": "playwright show-report"
+    "test:visual:report": "playwright show-report",
+    "test:ux": "playwright test --config playwright.ux.config.ts"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

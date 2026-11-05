@@ -19,6 +19,10 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  @include m.from(t.$bp-content-columns) {
+    position: sticky;
+    top: 88px;
+  }
 }
 
 .title {
@@ -139,19 +143,6 @@
 .formSubtitle {
   font-size: 16px;
   color: t.$ink-muted;
-}
-
-.formRef {
-  border: 1.5px solid t.$navy;
-  padding: 6px 10px;
-  font-family: t.$font-label;
-  font-size: 14px;
-  line-height: 1.3;
-  text-align: right;
-}
-
-.formRefStrong {
-  font-weight: 700;
 }
 
 .formRule {

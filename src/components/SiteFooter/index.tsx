@@ -4,7 +4,6 @@ import HomeSectionLink from '@/components/HomeSectionLink';
 import { CONTACT, INTAKE_SEATS, ROUTES, SECTIONS, hashLink } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
-import FitWordmark from './FitWordmark';
 import styles from './styles.module.scss';
 
 export default function SiteFooter() {
@@ -32,12 +31,11 @@ export default function SiteFooter() {
               </HomeSectionLink>
             </div>
           </div>
-          <FitWordmark />
           <div className={styles.bottom}>
             <span>© 2026 Germandians</span>
             {siteConfig.showSeatCount ? (
               <span>
-                Winter 2026: {siteConfig.seatsLeft} of {INTAKE_SEATS} places open
+                {siteConfig.intake}: {siteConfig.seatsLeft} of {INTAKE_SEATS} places open
               </span>
             ) : null}
           </div>

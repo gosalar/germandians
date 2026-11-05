@@ -29,6 +29,7 @@ The site has to match the Claude Design prototype pixel for pixel. The visual te
 npm run test:visual          # full suite: 37 checks
 npm run test:visual:quick    # 15 checks
 npm run test:visual:report   # open the last report (reference, app and diff images for failures)
+npm run test:ux              # playback, touch repainting and form focus regression checks
 ```
 
 - The full suite compares home at 10 widths, privacy at 5, and 22 interaction states including keyboard, hover, disabled and input-focus states.
@@ -56,6 +57,14 @@ The design's editable "props" are environment variables. Copy `config/.env.examp
 | `VITE_WHATSAPP_NUMBER` | WhatsApp buttons scroll to the form |
 | `VITE_FEE_AFTER_ADMISSION` | Receipt shows "Written quote" |
 | `VITE_INTAKE_STATUS` | `Not confirmed` shows no badge; `Enquiries open`, `Waitlist only`, `Enquiries closed` show one |
+| `VITE_INTAKE_SEASON` | `Winter`; accepts `Winter` or `Summer` |
+| `VITE_INTAKE_YEAR` | `2026`; accepts a four-digit year from `1000` to `9999` |
+| `VITE_PRIVACY_NAMES` | Responsible people's full names; omitted in production if empty |
+| `VITE_PRIVACY_ADDRESS` | Postal address; omitted in production if empty |
+| `VITE_PRIVACY_FORM_SERVICE` | Form provider; used only with a form endpoint; omitted in production if empty |
+| `VITE_PRIVACY_HOSTING_PROVIDER` | Hosting provider; omitted in production if empty |
+| `VITE_PRIVACY_RETENTION` | Confirmed retention period as plain text; omitted in production if empty |
+| `VITE_PRIVACY_AUTHORITY` | Relevant data protection authority; example clause omitted in production if empty |
 | `VITE_SHOW_SEAT_COUNT` / `VITE_SEATS_LEFT` | Seat count hidden |
 | `VITE_ALLOW_REPAINT` | `true`: visitors can wipe and repaint the hero painting |
 
@@ -85,7 +94,7 @@ src/
 - **Shared controls and custom artwork.** Use themed controls for buttons, fields, accordions and status badges. Keep the receipt, stamp cards, canvas, responsive comparison tables and other bespoke visuals in their feature folders. The consent checkbox uses browser-native rendering. Keep a control custom if a shared variant cannot reproduce the reference.
 - **Adding pages.** Put the UI in `src/pages/` and metadata in a thin `src/routes/` module. Register pages that use the shared header and footer inside the site layout in `src/routes.ts`. Include public static pages in the prerender list in `react-router.config.ts`.
 - **Fonts are self-hosted** (no Google Fonts requests; the privacy note says there's no third-party tracking). Hanken Grotesk is declared for weights 400–700 only, matching what the design loaded from Google, so text set at weight 800 renders at 700 just as it did in the design.
-- **Breakpoints are CSS media queries** at the design's widths (760, 940, 1100, 600, 640, 420 px), not JS resize state.
+- **Breakpoints are CSS media queries** (760, 1024, 1100, 600, 640, 420 px), not JS resize state. Navigation switches to the menu below 1100px.
 - **Sticky nav.** The nav stays sticky down the whole page, as the design's CSS specifies. In the Claude Design preview it stops sticking after the first screen because of the preview wrapper, not the design.
 - **Builds are always production builds**, even when a machine has `NODE_ENV` set to something else (see `vite.config.ts`).
-- The privacy note still contains the design's highlighted placeholders (names, address, form service, hosting provider, retention period, authority). Fill them in before launch.
+- Privacy settings accept plain text without brackets. Missing details remain highlighted in development and visual builds. Production omits missing clauses and prints a warning for each missing setting; the team must still confirm these details before launch. With no form endpoint, production explains that the visitor sends the form through their email app.

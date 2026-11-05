@@ -14,14 +14,16 @@ export default function Journey() {
         </div>
 
         <ol className={styles.stages}>
-          {STAGES.map(({ phase, when, german, body }) => (
+          {STAGES.map(({ phase, when, tag, lang, body }) => (
             <li key={phase.n} className={styles.stage}>
               <div aria-hidden="true" className={styles.stageBar} style={{ background: phase.color }} />
               <div className={styles.stageMeta}>
                 <span className={styles.stageWhen}>{when}</span>
-                <span lang="de" className={styles.stageGerman} style={{ color: phase.ink }}>
-                  {german}
-                </span>
+                {tag ? (
+                  <span lang={lang} className={styles.stageTag} style={{ color: phase.ink }}>
+                    {tag}
+                  </span>
+                ) : null}
               </div>
               <h3 className={styles.stageTitle}>{phase.name}</h3>
               <p className={styles.stageBody}>{body}</p>

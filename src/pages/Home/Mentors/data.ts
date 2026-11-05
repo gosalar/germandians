@@ -1,7 +1,9 @@
+import { siteConfig } from '@/utils/siteConfig';
+
 export const METHOD_POINTS = [
   {
     color: '#1d7a3d',
-    text: "Before anything is submitted, a mentor checks it against the university's requirements: ECTS prerequisites, APS and the full document list.",
+    text: "A mentor checks every submission against the university's ECTS prerequisites, APS and full document list.",
   },
   { color: '#ef8a21', text: 'Your SOP is written by hand with you, over several weeks.' },
   {
@@ -12,8 +14,8 @@ export const METHOD_POINTS = [
 
 export const STATS = [
   { value: '22,000+', label: 'Members in the Germandians student community', highlight: false },
-  { value: '2,000+', label: "Members who say they're aiming for Winter 2026", highlight: false },
-  { value: '30', label: "Students we'll personally support for Winter 2026", highlight: true },
+  { value: '2,000+', label: `Members who say they're aiming for ${siteConfig.intake}`, highlight: false },
+  { value: '30', label: `Students we'll personally support for ${siteConfig.intake}`, highlight: true },
 ];
 
 export const COMPARISON = [

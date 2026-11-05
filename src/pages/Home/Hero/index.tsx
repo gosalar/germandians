@@ -26,7 +26,7 @@ function IntakeStatusBadge() {
 }
 
 function Painting() {
-  const { wrapRef, canvasRef, wiped, wipe, onPointerMove, onPointerLeave } = usePaintCanvas();
+  const { wrapRef, canvasRef, wiped, restoring, wipe, onPointerMove, onPointerDown, onPointerLeave } = usePaintCanvas();
 
   return (
     <div className={styles.art}>
@@ -34,8 +34,11 @@ function Painting() {
         ref={wrapRef}
         className={styles.canvasWrap}
         data-wiped={wiped}
+        data-restoring={restoring}
         onPointerMove={onPointerMove}
-        onPointerDown={onPointerMove}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerLeave}
+        onPointerCancel={onPointerLeave}
         onPointerLeave={onPointerLeave}
       >
         <img
@@ -50,7 +53,7 @@ function Painting() {
       {siteConfig.allowRepaint ? (
         <div className={styles.repaint}>
           <span>
-            {wiped ? 'Move across the canvas to paint it back.' : 'Wipe the canvas and paint the flag back in.'}
+            {wiped ? 'Move your pointer or finger to paint. It restores when you stop.' : 'Wipe the canvas and paint the flag back in.'}
           </span>
           <button type="button" onClick={wipe} className={styles.wipeButton}>
             Wipe and repaint
@@ -85,7 +88,7 @@ export default function Hero() {
           </div>
           <div className={styles.meta}>
             <div className={styles.intake}>
-              <span className={styles.intakeLabel}>Winter 2026 intake, 30 students</span>
+              <span className={styles.intakeLabel}>{siteConfig.intake} intake, 30 students</span>
               <IntakeStatusBadge />
             </div>
             <p className={styles.community}>Run by the team behind a 22,000-member student community.</p>

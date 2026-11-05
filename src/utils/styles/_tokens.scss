@@ -55,8 +55,10 @@ $font-label: 'Barlow Semi Condensed', sans-serif;
 
 // Widths at which the design switches layout (window.innerWidth thresholds).
 $bp-mobile: 760px; // below: stacked hero/fees, card versions of both tables, sticky action bar
-$bp-nav: 940px; // below: menu button instead of inline links
+$bp-nav: 1100px; // below: menu button instead of inline links
+$bp-content-columns: 1024px; // from: FAQ/contact intros have room to stick beside their content
 $bp-stages-4: 1100px; // from: four journey stages per row
+$bp-fees-columns: 1100px; // from: receipt sits beside the fees copy
 $bp-stages-2: 600px; // from: two journey stages per row
 $bp-segment-labels: 640px; // from: labels inside the month track, below: a legend
 $bp-short-labels: 420px; // below: "Previous" / "Next"

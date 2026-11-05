@@ -17,7 +17,7 @@
   gap: clamp(36px, 5vw, 72px) clamp(40px, 6vw, 96px);
   align-items: start;
 
-  @include m.below(t.$bp-mobile) {
+  @include m.below(t.$bp-fees-columns) {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas: 'a' 'b' 'c';
   }
@@ -92,6 +92,13 @@
   overflow: hidden;
   margin: -9px 14px 0;
   padding-bottom: 12px;
+
+  // "Included" is wider than the old "inkl.", so the longest lines need the
+  // paper a little wider before they fit on one row.
+  @include m.below(t.$bp-short-labels) {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
 }
 
 .paperRoll {
@@ -110,12 +117,18 @@
 .paper {
   background: t.$receipt;
   color: t.$navy;
-  padding: 34px 24px 20px;
+  padding: 34px clamp(12px, 3vw, 24px) 20px;
   font-family: t.$font-label;
   font-size: 17px;
   display: flex;
   flex-direction: column;
   gap: 9px;
+
+  @include m.below(t.$bp-short-labels) {
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 14px;
+  }
 }
 
 .receiptTitle {
@@ -142,6 +155,16 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
+  > :first-child { min-width: 0; }
+  > :last-child { flex: none; white-space: nowrap; }
+  @include m.below(t.$bp-short-labels) {
+    gap: 8px;
+    &[data-payment] {
+      flex-direction: column;
+      gap: 2px;
+      .lineValue { text-align: left; }
+    }
+  }
 }
 
 .lineValue {
@@ -157,15 +180,17 @@
 }
 
 .totalLabel {
+  white-space: nowrap;
   font-weight: 700;
   font-size: 19px;
   padding-bottom: 10px;
 }
 
 .totalAmount {
+  white-space: nowrap;
   font-family: t.$font-display;
   font-weight: 900;
-  font-size: 60px;
+  font-size: clamp(44px, 11vw, 60px);
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -190,12 +215,6 @@
     t.$navy 13px 16px,
     transparent 16px 17px
   );
-}
-
-.thanks {
-  text-align: center;
-  font-size: 15px;
-  letter-spacing: 0.2em;
 }
 
 .tearEdge {

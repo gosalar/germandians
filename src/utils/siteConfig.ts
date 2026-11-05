@@ -17,11 +17,24 @@ const toSeats = (value: string) => {
 };
 
 const whatsappDigits = text(env.VITE_WHATSAPP_NUMBER).replace(/\D/g, '');
+const intakeSeason = text(env.VITE_INTAKE_SEASON) === 'Summer' ? 'Summer' : 'Winter';
+const intakeYear = /^[1-9]\d{3}$/.test(text(env.VITE_INTAKE_YEAR)) ? text(env.VITE_INTAKE_YEAR) : '2026';
+
+export const privacyConfig = {
+  names: text(env.VITE_PRIVACY_NAMES),
+  address: text(env.VITE_PRIVACY_ADDRESS),
+  formService: text(env.VITE_PRIVACY_FORM_SERVICE),
+  hostingProvider: text(env.VITE_PRIVACY_HOSTING_PROVIDER),
+  retention: text(env.VITE_PRIVACY_RETENTION),
+  authority: text(env.VITE_PRIVACY_AUTHORITY),
+  showPlaceholders: env.DEV || env.MODE === 'visual',
+} as const;
 
 export const siteConfig = {
   formEndpoint: text(env.VITE_FORM_ENDPOINT),
   feeAfterAdmission: text(env.VITE_FEE_AFTER_ADMISSION),
   intakeStatus: toIntakeStatus(text(env.VITE_INTAKE_STATUS)),
+  intake: `${intakeSeason} ${intakeYear}`,
   showSeatCount: text(env.VITE_SHOW_SEAT_COUNT) === 'true',
   seatsLeft: toSeats(text(env.VITE_SEATS_LEFT)),
   allowRepaint: text(env.VITE_ALLOW_REPAINT) !== 'false',

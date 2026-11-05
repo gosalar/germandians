@@ -63,10 +63,6 @@ $cell-pad: clamp(24px, 3.4vw, 44px);
   line-height: 1;
 }
 
-%column-german {
-  @include m.label-font(600, 17px);
-}
-
 .publicHeader {
   @extend %column-header;
   background: t.$navy;
@@ -85,16 +81,6 @@ $cell-pad: clamp(24px, 3.4vw, 44px);
 .privateTitle {
   @extend %column-title;
   color: t.$red;
-}
-
-.publicGerman {
-  @extend %column-german;
-  color: t.$mist;
-}
-
-.privateGerman {
-  @extend %column-german;
-  color: t.$ink-muted;
 }
 
 %cell {
