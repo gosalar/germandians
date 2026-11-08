@@ -297,6 +297,9 @@
   background: t.$yellow;
 }
 
-.cta {
+.ctas {
   align-self: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }

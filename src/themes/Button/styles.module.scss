@@ -79,6 +79,13 @@
     --brand-button-fg: #{t.$navy};
     --brand-button-hover-bg: #{t.$khaki};
   }
+  // Outlined button on navy sections.
+  &[data-variant='ring-dark'] {
+    --brand-button-bg: transparent;
+    --brand-button-fg: #{t.$white};
+    --brand-button-hover-bg: #{t.$navy-raised};
+    box-shadow: inset 0 0 0 2px t.$white;
+  }
   &[data-variant='yellow'], &[data-variant='menu'], &[data-variant='ring'] {
     box-shadow: inset 0 0 0 2px t.$navy;
   }

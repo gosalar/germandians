@@ -1,5 +1,7 @@
 import { Button } from '@mantine/core';
-import { SECTIONS, hashLink } from '@/utils/constants';
+import { Link } from 'react-router';
+
+import { ROUTES, SECTIONS, hashLink } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 import { PAID_SEPARATELY, feeCopy } from './data';
@@ -41,9 +43,14 @@ export default function Fees() {
             </ul>
             <p className={styles.detailBody}>These fees go directly to those organisations, so we can't refund them.</p>
           </div>
-          <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow-dark" size="lg" className={styles.cta}>
-            Get my profile reviewed
-          </Button>
+          <div className={styles.ctas}>
+            <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow-dark" size="lg">
+              Get my profile reviewed
+            </Button>
+            <Button component={Link} to={ROUTES.check} variant="ring-dark" size="lg">
+              Free German grade check
+            </Button>
+          </div>
         </div>
       </div>
     </section>

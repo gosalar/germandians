@@ -19,11 +19,11 @@ export const SECTIONS = {
 export const hashLink = (id: string) => `#${id}`;
 
 export const NAV_LINKS = [
+  { href: ROUTES.check, label: 'Grade check' },
   { href: hashLink(SECTIONS.community), label: 'Why us' },
   { href: hashLink(SECTIONS.fees), label: 'Fees' },
   { href: hashLink(SECTIONS.journey), label: 'Journey' },
   { href: hashLink(SECTIONS.universities), label: 'Public vs private' },
-  { href: ROUTES.check, label: 'Grade check' },
   { href: hashLink(SECTIONS.faq), label: 'FAQ' },
   { href: hashLink(SECTIONS.contact), label: 'Contact' },
 ] as const;
