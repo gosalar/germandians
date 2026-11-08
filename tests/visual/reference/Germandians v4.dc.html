@@ -101,12 +101,13 @@ button{font:inherit}
       <span style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(18px,5.4vw,22px);letter-spacing:-0.02em;white-space:nowrap">Germandians</span>
     </a>
     <sc-if value="{{ navFull }}" hint-placeholder-val="{{ true }}">
-      <div style="display:flex;align-items:center;gap:22px">
-        <div style="display:flex;gap:18px;font-weight:600;font-size:16px">
+      <div style="display:flex;align-items:center;gap:18px">
+        <div style="display:flex;gap:15px;font-weight:600;font-size:16px">
           <a href="#community" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Why us</a>
           <a href="#fees" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Fees</a>
           <a href="#journey" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Journey</a>
           <a href="#universities" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Public vs private</a>
+          <a href="/check" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Grade check</a>
           <a href="#faq" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">FAQ</a>
           <a href="#contact" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Contact</a>
         </div>
@@ -126,6 +127,7 @@ button{font:inherit}
       <a href="#fees" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Fees</a>
       <a href="#journey" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Journey</a>
       <a href="#universities" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Public vs private</a>
+      <a href="/check" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Grade check</a>
       <a href="#faq" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">FAQ</a>
       <a href="#contact" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Contact</a>
       <a href="#contact-form" onClick="{{ closeMenu }}" style="margin-top:12px;display:flex;justify-content:center;align-items:center;min-height:54px;background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e">Get my profile reviewed</a>
@@ -149,23 +151,14 @@ button{font:inherit}
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px">
-          <span style="font-weight:700;font-size:16px;color:#10182e">Winter 2026 intake, 30 students</span>
+          <span style="font-weight:700;font-size:16px;color:#10182e">Summer 2027 intake, 30 students</span>
           <sc-if value="{{ hasStatus }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:6px;background:{{ statusBg }};color:{{ statusInk }};font-weight:700;font-size:15px"><span style="width:8px;height:8px;border-radius:50%;background:{{ statusInk }}"></span><span>{{ statusLabel }}</span></span></sc-if>
         </div>
         <p style="margin:0;font-size:16px;line-height:1.5;color:#3b4460">Run by the team behind a 22,000-member student community.</p>
       </div>
     </div>
-    <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
-      <div ref="{{ heroWrap }}" onPointerMove="{{ onHeroMove }}" onPointerDown="{{ onHeroDown }}" onPointerUp="{{ onHeroLeave }}" onPointerCancel="{{ onHeroLeave }}" onPointerLeave="{{ onHeroLeave }}" style="position:relative;width:100%;aspect-ratio:1217/1168;touch-action:{{ heroTouch }};cursor:{{ heroCursor }}">
-        <img src="assets/flag-painting.jpg" alt="Palette-knife painting of the German flag sweeping into the Indian tricolour" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;user-select:none;pointer-events:none">
-        <canvas ref="{{ heroCanvas }}" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:{{ canvasOpacity }};transition:{{ canvasTransition }}"></canvas>
-      </div>
-      <sc-if value="{{ repaintOn }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px;color:#3b4460">
-          <span>{{ paintHint }}</span>
-          <button type="button" onClick="{{ wipe }}" style="background:none;border:0;padding:6px 0;font-family:'Barlow Semi Condensed',sans-serif;font-weight:500;font-size:15px;color:#3b4460;text-decoration:underline;text-decoration-color:#b9b29f;text-decoration-thickness:1.5px;text-underline-offset:4px;cursor:pointer">Wipe and repaint</button>
-        </div>
-      </sc-if>
+    <div style="position:relative;width:100%;aspect-ratio:1217/1168;min-width:0">
+      <img src="assets/flag-painting.jpg" alt="Palette-knife painting of the German flag sweeping into the Indian tricolour" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;user-select:none;pointer-events:none">
     </div>
   </div>
 </header>
@@ -210,7 +203,7 @@ button{font:inherit}
           <div style="transform:{{ receiptTransform }};transition:{{ receiptTransition }}">
             <div class="rc-paper">
               <div style="text-align:center;font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;letter-spacing:-0.01em">GERMANDIANS</div>
-              <div style="text-align:center;font-size:15px;color:#3b4460;margin-top:-6px">Student guidance, Winter 2026 intake</div>
+              <div style="text-align:center;font-size:15px;color:#3b4460;margin-top:-6px">Student guidance, Summer 2027 intake</div>
               <div style="border-top:2px dashed #10182e;margin:6px 0"></div>
               <div class="rc-line"><span>Profile evaluation</span><span>Included</span></div>
               <div class="rc-line"><span>APS application</span><span>Included</span></div>
@@ -501,11 +494,11 @@ button{font:inherit}
       </div>
       <div class="m-stat" style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
         <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#10182e">2,000+</div>
-        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members who say they're aiming for Winter 2026</div>
+        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members who say they're aiming for Summer 2027</div>
       </div>
       <div class="m-stat" style="border-top:3px solid #c4261b;padding-top:18px;display:flex;flex-direction:column;gap:8px">
         <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#c4261b">30</div>
-        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students we'll personally support for Winter 2026</div>
+        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students we'll personally support for Summer 2027</div>
         <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><div class="m-seats" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#3b4460">{{ seatsLeft }} places still open</div></sc-if>
       </div>
     </div>
@@ -552,7 +545,7 @@ button{font:inherit}
         </div>
       </div>
     </div>
-    <p class="m-rnote" style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">A strong application takes about six months of work. With six mentors, capping Winter 2026 at 30 students keeps it to five per mentor.</p>
+    <p class="m-rnote" style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">A strong application takes about six months of work. With six mentors, capping Summer 2027 at 30 students keeps it to five per mentor.</p>
 
     <h3 class="m-ctitle" style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,36px);line-height:1.1;color:#10182e;text-wrap:balance">Germandians vs. many consultancies</h3>
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
@@ -701,13 +694,14 @@ button{font:inherit}
       <div style="display:flex;gap:12px 24px;flex-wrap:wrap">
         <a href="https://instagram.com/germandians" target="_blank" rel="noopener" class="ft-link" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Instagram</a>
         <a href="mailto:thegermandians@gmail.com" class="ft-link" style="color:#ffffff;text-decoration:none;overflow-wrap:anywhere" style-hover="color:#f5c400">thegermandians@gmail.com</a>
+        <a href="/check" class="ft-link" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Grade check</a>
         <a href="Germandians%20Privacy.dc.html" class="ft-link" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Privacy</a>
         <a href="#top" class="ft-link" style="color:#ffffff;text-decoration:none" style-hover="color:#f5c400">Back to top</a>
       </div>
     </div>
     <div style="border-top:1px solid #2a3557;padding-top:24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px;color:#d3d8e4">
       <span>© 2026 Germandians</span>
-      <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><span>Winter 2026: {{ seatsLeft }} of 30 places open</span></sc-if>
+      <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><span>Summer 2027: {{ seatsLeft }} of 30 places open</span></sc-if>
     </div>
   </div>
 </footer>

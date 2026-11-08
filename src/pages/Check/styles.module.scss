@@ -1,0 +1,548 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.section {
+  padding: clamp(24px, 3vw, 40px) clamp(20px, 5vw, 72px) clamp(56px, 8vw, 104px);
+
+  @include m.below(t.$bp-mobile) {
+    padding-top: 20px;
+    padding-bottom: 48px;
+  }
+}
+
+.container {
+  @include m.container(1320px);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 920px;
+
+  @include m.below(t.$bp-mobile) {
+    gap: 8px;
+  }
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  @include m.below(t.$bp-mobile) {
+    gap: 6px;
+  }
+}
+
+.badge {
+  @include m.label-font(700, 14px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: t.$sand;
+  color: t.$navy;
+  border: 1px solid t.$hairline;
+
+  @include m.below(t.$bp-mobile) {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+
+  &[data-tone='green'] {
+    background: t.$status-green-bg;
+    color: t.$status-green-ink;
+    border-color: t.$status-green-border;
+  }
+}
+
+.title {
+  @include m.display-heading;
+  font-size: clamp(32px, 4.3vw, 62px);
+}
+
+.lede {
+  margin: 0;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.48;
+  color: t.$ink-soft;
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+.workbench {
+  margin-top: clamp(16px, 2.5vw, 28px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+
+  @include m.from(t.$bp-nav) {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 28px;
+    align-items: stretch;
+  }
+}
+
+.inputsColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.panel {
+  background: t.$white;
+  border-radius: 20px;
+  padding: clamp(16px, 2.4vw, 26px);
+  box-shadow:
+    inset 0 0 0 1.5px t.$navy,
+    0 20px 48px -32px rgba(16, 24, 46, 0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.panelHead {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 2px solid t.$navy;
+  padding-bottom: 12px;
+}
+
+.panelStep {
+  @include m.label-font(700, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: t.$red;
+}
+
+.panelTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(22px, 2.1vw, 28px);
+  line-height: 1.05;
+  color: t.$navy;
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.presetButton {
+  background: t.$paper;
+  color: t.$navy;
+  border: 1.5px solid t.$hairline;
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-height: 44px;
+  @include m.label-font(700, 15px);
+  cursor: pointer;
+  transition:
+    background var(--motion-duration, 0.2s),
+    color var(--motion-duration, 0.2s),
+    border-color var(--motion-duration, 0.2s);
+
+  &:hover {
+    border-color: t.$navy;
+  }
+
+  &[aria-pressed='true'] {
+    background: t.$navy;
+    color: t.$yellow;
+    border-color: t.$navy;
+  }
+}
+
+.scoreBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.scoreFields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+
+  @include m.below(t.$bp-short-labels) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    > :first-child {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.stepNumber {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background: t.$navy;
+  color: t.$form;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.inputError {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: t.$red;
+
+  &:not(:empty) {
+    margin-top: 10px;
+  }
+}
+
+.mobileScoreBar {
+  background: t.$navy;
+  color: t.$white;
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+
+  @include m.from(t.$bp-nav) {
+    display: none;
+  }
+}
+
+.mobileScoreLeft {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.mobileScoreLabel {
+  @include m.label-font(700, 15px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$mist;
+}
+
+.mobileScoreValue {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 1;
+  color: t.$yellow;
+}
+
+.mobileScoreClass {
+  font-size: 15px;
+  font-weight: 700;
+  color: t.$white;
+}
+
+.passNote {
+  margin: 0;
+  background: t.$note;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: t.$ink-strong;
+}
+
+.toggleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toggleLabel {
+  font-size: 16px;
+  font-weight: 700;
+  color: t.$navy;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  flex: 1 1 auto;
+  min-height: 46px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1.5px solid t.$navy;
+  background: t.$paper;
+  color: t.$navy;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    background var(--motion-duration, 0.2s),
+    color var(--motion-duration, 0.2s);
+
+  &:hover {
+    background: t.$sand;
+  }
+
+  &[aria-pressed='true'] {
+    background: t.$navy;
+    color: t.$yellow;
+  }
+}
+
+// Result & Diagnosis Column
+.result {
+  background: t.$navy;
+  color: t.$white;
+  border-radius: 24px;
+  padding: clamp(18px, 2.6vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  box-shadow: 0 28px 64px -32px rgba(16, 24, 46, 0.5);
+}
+
+.resultStickyHead {
+  background: t.$navy;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid t.$navy-line;
+
+  @include m.from(t.$bp-nav) {
+    position: sticky;
+    top: 63px;
+    z-index: 10;
+    padding-top: 10px;
+    margin-top: -10px;
+  }
+}
+
+.liveSummary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.scoreDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: none;
+}
+
+.scoreLabel {
+  @include m.label-font(700, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$mist;
+}
+
+.scoreValue {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(52px, 5.5vw, 76px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: t.$yellow;
+}
+
+.scoreHeadlineCol {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.scoreClass {
+  @include m.label-font(700, 16px);
+  color: t.$yellow;
+}
+
+.diagnosisTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(20px, 1.9vw, 25px);
+  line-height: 1.12;
+  color: t.$white;
+  text-wrap: balance;
+}
+
+.formulaMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scoreFormula {
+  @include m.label-font(600, 16px);
+  color: t.$mist-light;
+}
+
+.scaleHint {
+  font-size: 14px;
+  line-height: 1.4;
+  color: t.$mist;
+}
+
+.diagnosisCard {
+  background: t.$paper;
+  color: t.$navy;
+  border-radius: 16px;
+  padding: clamp(16px, 2.2vw, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.diagnosisKicker {
+  @include m.label-font(700, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$green;
+}
+
+.proofBox {
+  margin: 0;
+  background: t.$sand;
+  border-left: 4px solid t.$navy;
+  border-radius: 4px 8px 8px 4px;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: t.$ink-strong;
+}
+
+.diagnosisList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  > li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 15.5px;
+    line-height: 1.48;
+    color: t.$ink;
+  }
+}
+
+.diagnosisBullet {
+  @include m.square-bullet(10px, 3px, 6px);
+  background: t.$orange;
+}
+
+.diagnosisBulletTitle {
+  color: t.$navy;
+  font-weight: 700;
+}
+
+.diagnosisActions {
+  margin-top: 2px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.zeroFeeCallout {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: t.$white;
+  border: 1.5px dashed t.$navy;
+  border-radius: 10px;
+  padding: 8px 14px;
+  color: t.$navy;
+}
+
+.zeroFeeAmount {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.zeroFeeText {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: 12px;
+}
+
+.tierCard {
+  background: t.$navy-raised;
+  border: 1.5px solid t.$navy-line;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.tierBadge {
+  align-self: flex-start;
+  @include m.label-font(700, 13px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 9px;
+  border-radius: 6px;
+
+  &[data-tone='good'] {
+    background: t.$status-green-bg;
+    color: t.$status-green-ink;
+  }
+
+  &[data-tone='mid'] {
+    background: t.$status-orange-bg;
+    color: t.$status-orange-ink;
+  }
+
+  &[data-tone='tough'] {
+    background: t.$status-red-bg;
+    color: t.$status-red-ink;
+  }
+}
+
+.tierName {
+  margin: 2px 0 0;
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.15;
+  color: t.$white;
+}
+
+.tierExamples {
+  @include m.label-font(700, 14px);
+  color: t.$yellow;
+}
+
+.tierDesc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: t.$mist-soft;
+}

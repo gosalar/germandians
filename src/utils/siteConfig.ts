@@ -17,8 +17,8 @@ const toSeats = (value: string) => {
 };
 
 const whatsappDigits = text(env.VITE_WHATSAPP_NUMBER).replace(/\D/g, '');
-const intakeSeason = text(env.VITE_INTAKE_SEASON) === 'Summer' ? 'Summer' : 'Winter';
-const intakeYear = /^[1-9]\d{3}$/.test(text(env.VITE_INTAKE_YEAR)) ? text(env.VITE_INTAKE_YEAR) : '2026';
+const intakeSeason = text(env.VITE_INTAKE_SEASON) === 'Winter' ? 'Winter' : 'Summer';
+const intakeYear = /^[1-9]\d{3}$/.test(text(env.VITE_INTAKE_YEAR)) ? text(env.VITE_INTAKE_YEAR) : '2027';
 
 export const privacyConfig = {
   names: text(env.VITE_PRIVACY_NAMES),
@@ -37,7 +37,6 @@ export const siteConfig = {
   intake: `${intakeSeason} ${intakeYear}`,
   showSeatCount: text(env.VITE_SHOW_SEAT_COUNT) === 'true',
   seatsLeft: toSeats(text(env.VITE_SEATS_LEFT)),
-  allowRepaint: text(env.VITE_ALLOW_REPAINT) !== 'false',
 } as const;
 
 /** WhatsApp link, or a jump to the form when no number is configured. */

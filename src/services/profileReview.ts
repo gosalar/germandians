@@ -5,6 +5,7 @@ export interface ProfileReviewRequest {
   name: string;
   email: string;
   whatsapp: string;
+  snapshot?: string;
 }
 
 export type SubmitResult = 'sent' | 'error' | 'mailto';
@@ -19,6 +20,7 @@ export async function submitProfileReview(request: ProfileReviewRequest): Promis
       `Name: ${request.name}`,
       `Email: ${request.email}`,
       `WhatsApp: ${request.whatsapp}`,
+      ...(request.snapshot ? [`Profile check: ${request.snapshot}`] : []),
       'Consent to be contacted: yes',
       '',
       'I would like a profile review.',

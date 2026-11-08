@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
 
-import HomeSectionLink from '@/components/HomeSectionLink';
 import { CONTACT, INTAKE_SEATS, ROUTES, SECTIONS, hashLink } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
@@ -23,12 +22,15 @@ export default function SiteFooter() {
               <a href={`mailto:${CONTACT.email}`} className={`${styles.link} ${styles.email}`}>
                 {CONTACT.email}
               </a>
+              <Link to={ROUTES.check} className={styles.link}>
+                Grade check
+              </Link>
               <Link to={ROUTES.privacy} className={styles.link}>
                 Privacy
               </Link>
-              <HomeSectionLink href={hashLink(SECTIONS.top)} className={styles.link}>
+              <a href={hashLink(SECTIONS.top)} className={styles.link}>
                 Back to top
-              </HomeSectionLink>
+              </a>
             </div>
           </div>
           <div className={styles.bottom}>

@@ -41,7 +41,7 @@ function FieldLabel({ number, children }: { number: number; children: ReactNode 
 }
 
 /** "Antrag auf Erstberatung": the profile review request, styled as a German form. */
-export default function ProfileReviewForm() {
+export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
   const { formRef } = usePageChromeActions();
   const [status, setStatus] = useState<Status>('idle');
   const [receivedDate, setReceivedDate] = useState('');
@@ -56,7 +56,12 @@ export default function ProfileReviewForm() {
 
   const handleSubmit = async (values: FormValues) => {
     if (status === 'sending') return;
-    const request = { name: values.name.trim(), email: values.email.trim(), whatsapp: values.wa.trim() };
+    const request = {
+      name: values.name.trim(),
+      email: values.email.trim(),
+      whatsapp: values.wa.trim(),
+      ...(snapshot ? { snapshot } : {}),
+    };
     if (siteConfig.formEndpoint) setStatus('sending');
     const result = await submitProfileReview(request);
     if (result === 'sent') setReceivedDate(new Date().toLocaleDateString('de-DE'));
@@ -97,6 +102,12 @@ export default function ProfileReviewForm() {
       </div>
       <div className={styles.formRule} />
       <div className={styles.formIntro}>Relax, this is the shortest German form you will ever fill in.</div>
+      {snapshot ? (
+        <div className={styles.snapshot} data-testid="form-snapshot">
+          <span className={styles.snapshotLabel}>Attached from your grade check</span>
+          <span className={styles.snapshotValue}>{snapshot}</span>
+        </div>
+      ) : null}
 
       <TextInput
         id="f-name"

@@ -1,5 +1,6 @@
 export const ROUTES = {
   home: '/',
+  check: '/check',
   privacy: '/privacy',
 } as const;
 
@@ -18,12 +19,13 @@ export const SECTIONS = {
 export const hashLink = (id: string) => `#${id}`;
 
 export const NAV_LINKS = [
-  { id: SECTIONS.community, label: 'Why us' },
-  { id: SECTIONS.fees, label: 'Fees' },
-  { id: SECTIONS.journey, label: 'Journey' },
-  { id: SECTIONS.universities, label: 'Public vs private' },
-  { id: SECTIONS.faq, label: 'FAQ' },
-  { id: SECTIONS.contact, label: 'Contact' },
+  { href: hashLink(SECTIONS.community), label: 'Why us' },
+  { href: hashLink(SECTIONS.fees), label: 'Fees' },
+  { href: hashLink(SECTIONS.journey), label: 'Journey' },
+  { href: hashLink(SECTIONS.universities), label: 'Public vs private' },
+  { href: ROUTES.check, label: 'Grade check' },
+  { href: hashLink(SECTIONS.faq), label: 'FAQ' },
+  { href: hashLink(SECTIONS.contact), label: 'Contact' },
 ] as const;
 export const NAV_CTA = { id: SECTIONS.contactForm, label: 'Get my profile reviewed' } as const;
 

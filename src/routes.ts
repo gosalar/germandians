@@ -4,6 +4,7 @@ import { index, layout, route, type RouteConfig } from '@react-router/dev/routes
 export default [
   layout('routes/site-layout.tsx', [
     index('routes/home.tsx'),
+    route('check', 'routes/check.tsx'),
     ...(process.argv.includes('dev') ? [route('_theme', 'routes/theme.tsx')] : []),
   ]),
   route('privacy', 'routes/privacy.tsx'),

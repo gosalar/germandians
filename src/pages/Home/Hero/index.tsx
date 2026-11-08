@@ -5,7 +5,6 @@ import { CONTACT, SECTIONS, hashLink, type IntakeStatus } from '@/utils/constant
 import { siteConfig } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
-import { usePaintCanvas } from './usePaintCanvas';
 
 /** Badge colours per intake status ([background, ink]). "Not confirmed" shows no badge. */
 const STATUS_COLORS: Partial<Record<IntakeStatus, [string, string]>> = {
@@ -26,40 +25,15 @@ function IntakeStatusBadge() {
 }
 
 function Painting() {
-  const { wrapRef, canvasRef, wiped, restoring, wipe, onPointerMove, onPointerDown, onPointerLeave } = usePaintCanvas();
-
   return (
     <div className={styles.art}>
-      <div
-        ref={wrapRef}
-        className={styles.canvasWrap}
-        data-wiped={wiped}
-        data-restoring={restoring}
-        onPointerMove={onPointerMove}
-        onPointerDown={onPointerDown}
-        onPointerUp={onPointerLeave}
-        onPointerCancel={onPointerLeave}
-        onPointerLeave={onPointerLeave}
-      >
-        <img
-          src={flagPainting}
-          alt="Palette-knife painting of the German flag sweeping into the Indian tricolour"
-          draggable={false}
-          fetchPriority="high"
-          className={styles.painting}
-        />
-        <canvas ref={canvasRef} className={styles.canvas} />
-      </div>
-      {siteConfig.allowRepaint ? (
-        <div className={styles.repaint}>
-          <span>
-            {wiped ? 'Move your pointer or finger to paint. It restores when you stop.' : 'Wipe the canvas and paint the flag back in.'}
-          </span>
-          <button type="button" onClick={wipe} className={styles.wipeButton}>
-            Wipe and repaint
-          </button>
-        </div>
-      ) : null}
+      <img
+        src={flagPainting}
+        alt="Palette-knife painting of the German flag sweeping into the Indian tricolour"
+        draggable={false}
+        fetchPriority="high"
+        className={styles.painting}
+      />
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function SiteHeader() {
         <div className={styles.full}>
           <div className={styles.links}>
             {NAV_LINKS.map((link) => (
-              <HomeSectionLink key={link.id} href={hashLink(link.id)} className={styles.link}>
+              <HomeSectionLink key={link.href} href={link.href} className={styles.link}>
                 {link.label}
               </HomeSectionLink>
             ))}
@@ -46,7 +46,7 @@ export default function SiteHeader() {
       {menuOpen ? (
         <div id="mobile-menu" className={styles.menu}>
           {NAV_LINKS.map((link) => (
-            <HomeSectionLink key={link.id} href={hashLink(link.id)} onClick={closeMenu} className={styles.menuLink}>
+            <HomeSectionLink key={link.href} href={link.href} onClick={closeMenu} className={styles.menuLink}>
               {link.label}
             </HomeSectionLink>
           ))}

@@ -3,7 +3,7 @@ import path from 'node:path';
 import type { Config } from '@react-router/dev/config';
 import { siteBase } from './scripts/site-base.ts';
 
-const pages = ['/', '/privacy'];
+const pages = ['/', '/check', '/privacy'];
 
 export default {
   appDirectory: 'src',

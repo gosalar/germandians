@@ -156,6 +156,30 @@
   color: t.$ink-strong;
 }
 
+.snapshot {
+  background: t.$sand;
+  border: 1.5px dashed t.$navy;
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.snapshotLabel {
+  @include m.label-font(700, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$green;
+}
+
+.snapshotValue {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: t.$navy;
+}
+
 .field {
   display: flex;
   flex-direction: column;

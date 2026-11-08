@@ -15,7 +15,6 @@ interface ImportMetaEnv {
   readonly VITE_INTAKE_STATUS?: string;
   readonly VITE_SHOW_SEAT_COUNT?: string;
   readonly VITE_SEATS_LEFT?: string;
-  readonly VITE_ALLOW_REPAINT?: string;
 }
 
 interface ImportMeta {

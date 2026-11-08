@@ -4,7 +4,7 @@ import { whatsapp } from '@/utils/siteConfig';
 import ProfileReviewForm from './ProfileReviewForm';
 import styles from './styles.module.scss';
 
-export default function Contact() {
+export default function Contact({ snapshot }: { snapshot?: string }) {
   return (
     <section id={SECTIONS.contact} data-screen-label="Contact" className={styles.section}>
       <div className={styles.grid}>
@@ -28,7 +28,7 @@ export default function Contact() {
             </a>
           </div>
         </div>
-        <ProfileReviewForm />
+        <ProfileReviewForm snapshot={snapshot} />
       </div>
     </section>
   );
