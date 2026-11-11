@@ -5,7 +5,7 @@
   padding: clamp(24px, 3vw, 40px) clamp(20px, 5vw, 72px) clamp(56px, 8vw, 104px);
 
   @include m.below(t.$bp-mobile) {
-    padding-top: 20px;
+    padding-top: 12px;
     padding-bottom: 48px;
   }
 }
@@ -101,6 +101,10 @@
   flex-direction: column;
   gap: 14px;
   min-width: 0;
+
+  @include m.below(t.$bp-mobile) {
+    gap: 12px;
+  }
 }
 
 .panelHead {
@@ -407,22 +411,37 @@
 }
 
 .diagnosisKicker {
+  margin: 0;
   @include m.label-font(700, 14px);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: t.$green;
 }
 
-.proofBox {
+.explanation {
   margin: 0;
-  background: t.$sand;
-  border-left: 4px solid t.$navy;
-  border-radius: 4px 8px 8px 4px;
-  padding: 10px 14px;
   font-size: 15px;
-  font-weight: 600;
   line-height: 1.45;
   color: t.$ink-strong;
+}
+
+.profileNote {
+  margin: 0;
+  font-size: 14px;
+  color: t.$ink-soft;
+}
+
+.sources {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  color: t.$mist;
+
+  a {
+    color: t.$yellow;
+    text-underline-offset: 3px;
+  }
 }
 
 .diagnosisList {
@@ -472,77 +491,8 @@
   color: t.$navy;
 }
 
-.zeroFeeAmount {
-  font-family: t.$font-display;
-  font-weight: 900;
-  font-size: 22px;
-  line-height: 1;
-}
-
 .zeroFeeText {
   font-size: 15px;
   font-weight: 700;
   line-height: 1.25;
-}
-
-.tiers {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  gap: 12px;
-}
-
-.tierCard {
-  background: t.$navy-raised;
-  border: 1.5px solid t.$navy-line;
-  border-radius: 14px;
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  min-width: 0;
-}
-
-.tierBadge {
-  align-self: flex-start;
-  @include m.label-font(700, 13px);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 3px 9px;
-  border-radius: 6px;
-
-  &[data-tone='good'] {
-    background: t.$status-green-bg;
-    color: t.$status-green-ink;
-  }
-
-  &[data-tone='mid'] {
-    background: t.$status-orange-bg;
-    color: t.$status-orange-ink;
-  }
-
-  &[data-tone='tough'] {
-    background: t.$status-red-bg;
-    color: t.$status-red-ink;
-  }
-}
-
-.tierName {
-  margin: 2px 0 0;
-  font-family: t.$font-display;
-  font-weight: 800;
-  font-size: 18px;
-  line-height: 1.15;
-  color: t.$white;
-}
-
-.tierExamples {
-  @include m.label-font(700, 14px);
-  color: t.$yellow;
-}
-
-.tierDesc {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.45;
-  color: t.$mist-soft;
 }

@@ -3,36 +3,50 @@ import { siteConfig } from '@/utils/siteConfig';
 
 export interface ProfileReviewRequest {
   name: string;
-  email: string;
+  email?: string;
   whatsapp: string;
   snapshot?: string;
 }
 
-export type SubmitResult = 'sent' | 'error' | 'mailto';
+export type SubmitResult = 'sent' | 'error' | 'timeout' | 'mailto';
+export const SUBMISSION_TIMEOUT_MS = 15_000;
+
+export function buildEmailDraft(request: ProfileReviewRequest): string {
+  return [
+    `Name: ${request.name}`,
+    ...(request.email ? [`Email: ${request.email}`] : []),
+    `WhatsApp: ${request.whatsapp}`,
+    ...(request.snapshot ? [`Grade-check summary: ${request.snapshot}`] : []),
+    'Consent to be contacted about this profile review: yes',
+    '',
+    'I would like a profile review.',
+  ].join('\n');
+}
+
+export function buildEmailDraftUrl(request: ProfileReviewRequest): string {
+  return `mailto:${CONTACT.email}?subject=${encodeURIComponent('Profile review request')}&body=${encodeURIComponent(buildEmailDraft(request))}`;
+}
 
 /**
- * Sends a profile review request. With a form endpoint configured it POSTs
- * JSON; without one it opens the visitor's email app with the details filled in.
+ * Endpoint contract: 2xx JSON { received: true }, returned only after durable
+ * acceptance. Error bodies, redirects, empty bodies and bare 2xx are failures.
+ * A chosen provider must implement this contract through an adapter if needed;
+ * its raw HTTP status is not evidence that the request was received. See README.
  */
 export async function submitProfileReview(request: ProfileReviewRequest): Promise<SubmitResult> {
   if (!siteConfig.formEndpoint) {
-    const body = [
-      `Name: ${request.name}`,
-      `Email: ${request.email}`,
-      `WhatsApp: ${request.whatsapp}`,
-      ...(request.snapshot ? [`Profile check: ${request.snapshot}`] : []),
-      'Consent to be contacted: yes',
-      '',
-      'I would like a profile review.',
-    ].join('\n');
-    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent('Profile review request')}&body=${encodeURIComponent(body)}`;
+    try { window.location.href = buildEmailDraftUrl(request); } catch { /* The visible draft remains available. */ }
     return 'mailto';
   }
-
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), SUBMISSION_TIMEOUT_MS);
   try {
     const response = await fetch(siteConfig.formEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      credentials: 'omit',
+      redirect: 'error',
+      signal: controller.signal,
       body: JSON.stringify({
         ...request,
         consent: true,
@@ -40,8 +54,13 @@ export async function submitProfileReview(request: ProfileReviewRequest): Promis
         source: 'germandians-website',
       }),
     });
-    return response.ok ? 'sent' : 'error';
+    if (!response.ok) return 'error';
+    const body: unknown = await response.json();
+    return body !== null && typeof body === 'object' && 'received' in body && body.received === true
+      && !('error' in body) && !('errors' in body) ? 'sent' : 'error';
   } catch {
-    return 'error';
+    return controller.signal.aborted ? 'timeout' : 'error';
+  } finally {
+    clearTimeout(timeout);
   }
 }

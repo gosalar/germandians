@@ -1,4 +1,5 @@
 import { CONTACT, INTAKE_SEATS, INTAKE_STATUSES, SECTIONS, hashLink, type IntakeStatus } from '@/utils/constants';
+import { toFormEndpoint, toWhatsAppNumber } from './contactSettings';
 
 /**
  * Editable site settings. These were the design's "props" panel; here they
@@ -16,7 +17,7 @@ const toSeats = (value: string) => {
   return value !== '' && Number.isFinite(n) ? Math.max(0, Math.min(INTAKE_SEATS, Math.round(n))) : INTAKE_SEATS;
 };
 
-const whatsappDigits = text(env.VITE_WHATSAPP_NUMBER).replace(/\D/g, '');
+const whatsappDigits = toWhatsAppNumber(env.VITE_WHATSAPP_NUMBER);
 const intakeSeason = text(env.VITE_INTAKE_SEASON) === 'Winter' ? 'Winter' : 'Summer';
 const intakeYear = /^[1-9]\d{3}$/.test(text(env.VITE_INTAKE_YEAR)) ? text(env.VITE_INTAKE_YEAR) : '2027';
 
@@ -31,7 +32,7 @@ export const privacyConfig = {
 } as const;
 
 export const siteConfig = {
-  formEndpoint: text(env.VITE_FORM_ENDPOINT),
+  formEndpoint: toFormEndpoint(env.VITE_FORM_ENDPOINT),
   feeAfterAdmission: text(env.VITE_FEE_AFTER_ADMISSION),
   intakeStatus: toIntakeStatus(text(env.VITE_INTAKE_STATUS)),
   intake: `${intakeSeason} ${intakeYear}`,
@@ -45,5 +46,7 @@ export const whatsapp = whatsappDigits
       href: `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(CONTACT.whatsappGreeting)}`,
       target: '_blank',
       label: `+${whatsappDigits}`,
+      channelName: 'WhatsApp',
+      actionLabel: 'WhatsApp us',
     }
-  : { href: hashLink(SECTIONS.contactForm), target: '_self', label: 'Use the form' };
+  : { href: hashLink(SECTIONS.contactForm), target: '_self', label: 'Use the form', channelName: 'Profile review', actionLabel: 'Open review form' };

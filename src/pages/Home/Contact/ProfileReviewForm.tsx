@@ -1,16 +1,16 @@
 import { Button, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useState, type ReactNode } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router';
 
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
-import { submitProfileReview } from '@/services/profileReview';
+import { buildEmailDraft, buildEmailDraftUrl, submitProfileReview, type ProfileReviewRequest } from '@/services/profileReview';
 import { CONTACT, ROUTES, SECTIONS } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
 
-type Status = 'idle' | 'sending' | 'sent' | 'error' | 'mailto';
+type Status = 'idle' | 'sending' | 'sent' | 'error' | 'timeout' | 'mailto';
 
 interface FormValues {
   name: string;
@@ -25,9 +25,10 @@ const INITIAL_VALUES: FormValues = { name: '', email: '', wa: '', consent: false
 
 const VALIDATE = {
   name: (value: string) => (value.trim() ? null : 'Please enter your name.'),
-  email: (value: string) => (EMAIL_PATTERN.test(value.trim()) ? null : 'Please enter a valid email address.'),
+  email: (value: string) => (!value.trim() || EMAIL_PATTERN.test(value.trim()) ? null : 'Please enter a valid email address.'),
+  // Leading zeros are a trunk or international prefix ("098…", "0091…"), not part of the number.
   wa: (value: string) =>
-    value.replace(/\D/g, '').length >= 10 ? null : 'Please enter your WhatsApp number with at least 10 digits.',
+    /^[1-9]\d{9,14}$/.test(value.replace(/\D/g, '').replace(/^0+/, '')) ? null : 'Please enter your WhatsApp number with 10–15 digits, including the country code.',
   consent: (value: boolean) => (value ? null : 'Please tick the box so we can contact you.'),
 };
 
@@ -45,44 +46,54 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
   const { formRef } = usePageChromeActions();
   const [status, setStatus] = useState<Status>('idle');
   const [receivedDate, setReceivedDate] = useState('');
+  const inFlight = useRef(false);
+  const [submittedRequest, setSubmittedRequest] = useState<ProfileReviewRequest | null>(null);
 
   const form = useForm<FormValues>({
     mode: 'controlled',
     initialValues: INITIAL_VALUES,
     validate: VALIDATE,
     // Editing after a failed or mailto submit puts the form back to its ready state.
-    onValuesChange: () => setStatus((s) => (s === 'error' || s === 'mailto' ? 'idle' : s)),
+    onValuesChange: () => setStatus((s) => (s === 'error' || s === 'timeout' || s === 'mailto' ? 'idle' : s)),
   });
 
   const handleSubmit = async (values: FormValues) => {
-    if (status === 'sending') return;
+    if (inFlight.current || status === 'sent') return;
+    inFlight.current = true;
     const request = {
       name: values.name.trim(),
-      email: values.email.trim(),
+      ...(values.email.trim() ? { email: values.email.trim() } : {}),
       whatsapp: values.wa.trim(),
       ...(snapshot ? { snapshot } : {}),
     };
+    setSubmittedRequest(request);
     if (siteConfig.formEndpoint) setStatus('sending');
-    const result = await submitProfileReview(request);
-    if (result === 'sent') setReceivedDate(new Date().toLocaleDateString('de-DE'));
-    setStatus(result);
+    try {
+      const result = await submitProfileReview(request);
+      if (result === 'sent') setReceivedDate(new Date().toLocaleDateString('de-DE', { timeZone: 'Asia/Kolkata' }));
+      setStatus(result);
+    } finally {
+      inFlight.current = false;
+    }
   };
 
   const reset = () => {
     form.reset();
     setReceivedDate('');
+    setSubmittedRequest(null);
     setStatus('idle');
   };
 
   const locked = status === 'sending' || status === 'sent';
-  const canSubmit = status === 'idle' || status === 'error' || status === 'mailto';
+  const canSubmit = status === 'idle' || status === 'error' || status === 'timeout' || status === 'mailto';
+  const displayedSnapshot = locked ? submittedRequest?.snapshot : snapshot;
   const { error: consentError, ...consentProps } = form.getInputProps('consent', { type: 'checkbox' });
 
   return (
     <form
       id={SECTIONS.contactForm}
       ref={formRef}
-      onSubmit={form.onSubmit(handleSubmit, (errors) => {
+      onSubmit={(event) => form.onSubmit(handleSubmit, (errors) => {
         const first = (['name', 'email', 'wa', 'consent'] as const).find((key) => errors[key]);
         // Wait for the error descriptions to render before moving screen-reader focus.
         requestAnimationFrame(() => {
@@ -90,8 +101,9 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
           input?.focus({ preventScroll: true });
           input?.scrollIntoView({ block: 'center', behavior: 'instant' });
         });
-      })}
+      })(event)}
       noValidate
+      aria-busy={status === 'sending'}
       className={styles.form}
     >
       <div className={styles.formHead}>
@@ -102,10 +114,10 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
       </div>
       <div className={styles.formRule} />
       <div className={styles.formIntro}>Relax, this is the shortest German form you will ever fill in.</div>
-      {snapshot ? (
+      {displayedSnapshot ? (
         <div className={styles.snapshot} data-testid="form-snapshot">
           <span className={styles.snapshotLabel}>Attached from your grade check</span>
-          <span className={styles.snapshotValue}>{snapshot}</span>
+          <span className={styles.snapshotValue}>{displayedSnapshot}</span>
         </div>
       ) : null}
 
@@ -124,7 +136,7 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
         autoComplete="email"
         placeholder="you@example.com"
         disabled={locked}
-        label={<FieldLabel number={2}>Email</FieldLabel>}
+        label={<FieldLabel number={2}>Email (optional)</FieldLabel>}
         {...form.getInputProps('email')}
       />
       <TextInput
@@ -140,8 +152,12 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
 
       <div className={styles.hint}>
         <div className={styles.hintTitle}>What happens next</div>
-        <div>One of our six admins replies on WhatsApp, at the number above.</div>
-        <div>The review covers your degree, CGPA and backlogs, your APS and IELTS status, and which universities fit.</div>
+        <div>Once we receive your enquiry, an admin replies on WhatsApp, at the number above.</div>
+        <div>We use your name to address you and your WhatsApp number to reply. Email is optional.</div>
+        <div>The review looks at your academic record, APS and language evidence against programme requirements.</div>
+        {!siteConfig.formEndpoint ? (
+          <div>This opens your email app. Nothing is sent until you press send there. You can also email {CONTACT.email} directly.</div>
+        ) : null}
       </div>
 
       <div className={styles.field}>
@@ -156,8 +172,7 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
             {...consentProps}
           />
           <span>
-            I agree that Germandians can use my name, email and WhatsApp number to contact me about my profile review.
-            Details are in the{' '}
+            {`I agree that Germandians can use my name, WhatsApp number${displayedSnapshot ? ', any email address I provide and the attached grade-check summary' : ' and any email address I provide'} to contact me about my profile review. Details are in the `}
             <Link to={ROUTES.privacy} target="_blank" rel="noopener" className={styles.privacyLink}>
               privacy note
             </Link>
@@ -169,7 +184,7 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
 
       {canSubmit ? (
         <Button type="submit" variant="navy" size="submit" className={styles.submit}>
-          Request my profile review
+          {siteConfig.formEndpoint ? 'Request my profile review' : 'Open email draft'}
         </Button>
       ) : null}
       {status === 'sending' ? (
@@ -177,22 +192,31 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
           Sending…
         </Button>
       ) : null}
-      {status === 'error' ? (
-        <div role="alert" className={styles.errorMessage}>
-          That didn't go through. Please try again, or email {CONTACT.email}.
-        </div>
-      ) : null}
-      {status === 'mailto' ? (
-        <div role="status" className={styles.statusMessage}>
-          Your email app should open with these details filled in. Press send there and we'll reply on WhatsApp.
-        </div>
-      ) : null}
-      {status === 'sent' ? (
-        <div role="status" className={styles.sent}>
-          <div className={styles.sentMessage}>Received. An admin will message you on WhatsApp.</div>
-          <button type="button" onClick={reset} className={styles.sendAnother}>
-            Send another
-          </button>
+      <div role="status" aria-live="polite" aria-atomic="true" className={styles.statusRegion}>
+        {status === 'sending' ? <span className={styles.statusMessage}>Sending your enquiry…</span> : null}
+        {status === 'error' || status === 'timeout' ? (
+          <div className={styles.errorMessage}>
+            {status === 'timeout' ? 'We could not confirm receipt within 15 seconds.' : 'We could not confirm receipt.'} Your details are still here. You can try again, or email <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>. A reply may have been lost, so mention your earlier attempt if you contact us again.
+          </div>
+        ) : null}
+        {status === 'mailto' ? (
+          <div className={styles.statusMessage}>Your email draft is ready. Nothing has been sent by this page. Press send in your email app.</div>
+        ) : null}
+        {status === 'sent' ? (
+          <div className={styles.sent}>
+            <div className={styles.sentMessage}>Received. An admin will message you on WhatsApp.</div>
+            <button type="button" onClick={reset} className={styles.sendAnother}>
+              Send another
+            </button>
+          </div>
+        ) : null}
+      </div>
+      {status === 'mailto' && submittedRequest ? (
+        <div className={styles.draftFallback}>
+          <span>No email app? Copy these details and send them to <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>.</span>
+          <label htmlFor="email-draft">Email details</label>
+          <textarea id="email-draft" readOnly value={buildEmailDraft(submittedRequest)} className={styles.draftText} />
+          <a href={buildEmailDraftUrl(submittedRequest)}>Open the draft again</a>
         </div>
       ) : null}
 

@@ -71,7 +71,7 @@ const SCENARIOS: Scenario[] = [
   },
   {
     name: 'form submit hover', width: 1440,
-    act: (p) => button(p, 'Request my profile review').hover(), shot: '#contact',
+    act: (p) => button(p, 'Open email draft').hover(), shot: '#contact',
   },
   {
     name: 'form input focus', width: 1440, quick: true,
@@ -115,21 +115,21 @@ const SCENARIOS: Scenario[] = [
   {
     name: 'form errors',
     width: 1440,
-    act: (p) => button(p, 'Request my profile review').click(),
+    act: (p) => button(p, 'Open email draft').click(),
     shot: '#contact',
     quick: true,
   },
   {
     name: 'form errors (390px)',
     width: 390,
-    act: (p) => button(p, 'Request my profile review').click(),
+    act: (p) => button(p, 'Open email draft').click(),
     shot: '#contact',
   },
   {
     name: 'form errors clear as fields are edited',
     width: 1440,
     act: async (p) => {
-      await button(p, 'Request my profile review').click();
+      await button(p, 'Open email draft').click();
       await p.locator('#f-name').fill('Priya Sharma');
       await p.locator('#f-wa').fill('+91 98765');
     },
@@ -145,7 +145,7 @@ const SCENARIOS: Scenario[] = [
       // The bar appears once the hero buttons leave the screen.
       await p.waitForFunction(() =>
         [...document.querySelectorAll('a')].some(
-          (a) => a.textContent === 'WhatsApp us' && getComputedStyle(a).visibility === 'visible',
+          (a) => a.textContent === 'Open review form' && getComputedStyle(a).visibility === 'visible',
         ),
       );
     },

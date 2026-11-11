@@ -6,14 +6,15 @@ export default defineConfig({
   fullyParallel: true,
   workers: 3,
   reporter: 'list',
+  timeout: 45_000,
+  projects: [
+    { name: 'endpoint', testIgnore: '**/email.spec.ts', use: { baseURL: 'http://127.0.0.1:5603' } },
+    { name: 'email', testMatch: /(?:email|contact-common)\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:5604' } },
+  ],
   use: { baseURL: 'http://127.0.0.1:5603', channel: process.env.CI ? undefined : 'chrome', reducedMotion: 'reduce' },
-  webServer: {
-    // Vite's first request can fail while it prepares dependencies, so the
-    // suite serves the production build. That is ready before the first test,
-    // and it is what visitors get.
-    command: 'npm run build && node scripts/serve.mjs build/client 5603',
-    url: 'http://127.0.0.1:5603',
+  webServer: ['endpoint', 'email'].map((variant, index) => ({
+    command: `node scripts/serve.mjs test-results/ux-builds/${variant}/client ${5603 + index}`,
+    url: `http://127.0.0.1:${5603 + index}`,
     reuseExistingServer: false,
-    timeout: 180_000,
-  },
+  })),
 });

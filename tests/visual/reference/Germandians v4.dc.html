@@ -615,15 +615,15 @@ button{font:inherit}
   <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(40px,6vw,88px);align-items:start">
     <div class="stick-intro" style="display:flex;flex-direction:column;gap:24px">
       <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(56px,8vw,132px);line-height:.88;letter-spacing:-0.025em;word-spacing:.14em;font-stretch:74%;color:#f5c400;text-wrap:balance">Get your profile reviewed</h2>
-      <p style="margin:0;font-size:clamp(19px,1.6vw,23px);line-height:1.5;color:#e3e6ee;max-width:32ch;text-wrap:pretty">Fill in the form and an admin will message you on WhatsApp. Or reach us directly:</p>
+      <p style="margin:0;font-size:clamp(19px,1.6vw,23px);line-height:1.5;color:#e3e6ee;max-width:32ch;text-wrap:pretty">Send us your details for a profile review. Once we receive them, an admin will reply on WhatsApp. Or reach us directly:</p>
       <div style="display:flex;flex-direction:column;gap:12px">
         <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#f5c400;color:#10182e;text-decoration:none;border-radius:14px;padding:20px 22px;transition:background .2s" style-hover="background:#ffd83d;color:#10182e"><span style="font-weight:800;font-size:19px">Instagram</span><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:19px">@germandians</span></a>
-        <a href="{{ waHref }}" target="{{ waTarget }}" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#1c2643;color:#ffffff;text-decoration:none;border-radius:14px;padding:20px 22px;transition:background .2s" style-hover="background:#26315a;color:#ffffff"><span style="font-weight:800;font-size:19px">WhatsApp</span><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:19px;color:#e3e6ee">{{ waLabel }}</span></a>
+        <a href="{{ waHref }}" target="{{ waTarget }}" rel="noopener" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#1c2643;color:#ffffff;text-decoration:none;border-radius:14px;padding:20px 22px;transition:background .2s" style-hover="background:#26315a;color:#ffffff"><span style="font-weight:800;font-size:19px">{{ waChannelName }}</span><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:19px;color:#e3e6ee">{{ waLabel }}</span></a>
         <a href="mailto:thegermandians@gmail.com" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#1c2643;color:#ffffff;text-decoration:none;border-radius:14px;padding:20px 22px;transition:background .2s" style-hover="background:#26315a;color:#ffffff"><span style="font-weight:800;font-size:19px">Email</span><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:19px;color:#e3e6ee;overflow-wrap:anywhere">thegermandians@gmail.com</span></a>
       </div>
     </div>
 
-    <form id="contact-form" ref="{{ formRef }}" onSubmit="{{ onSubmit }}" noValidate="{{ true }}" style="position:relative;background:#fbfaf5;color:#10182e;border-radius:6px;padding:clamp(20px,3.4vw,40px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6);display:flex;flex-direction:column;gap:22px;scroll-margin-top:84px">
+    <form id="contact-form" ref="{{ formRef }}" onSubmit="{{ onSubmit }}" noValidate="{{ true }}" aria-busy="{{ isSending }}" style="position:relative;background:#fbfaf5;color:#10182e;border-radius:6px;padding:clamp(20px,3.4vw,40px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6);display:flex;flex-direction:column;gap:22px;scroll-margin-top:84px">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
         <div style="display:flex;flex-direction:column;gap:4px">
           <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(24px,2.4vw,30px);line-height:1.05;letter-spacing:-0.01em">Antrag auf Erstberatung</div>
@@ -639,7 +639,7 @@ button{font:inherit}
         <sc-if value="{{ errors.name }}" hint-placeholder-val="{{ false }}"><div style="font-size:15px;color:#c4261b;font-weight:600">{{ errors.name }}</div></sc-if>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <label for="f-email" style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700"><span style="flex:none;width:26px;height:26px;display:grid;place-items:center;background:#10182e;color:#fbfaf5;font-weight:700;font-size:15px">2</span><span>Email</span></label>
+        <label for="f-email" style="display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700"><span style="flex:none;width:26px;height:26px;display:grid;place-items:center;background:#10182e;color:#fbfaf5;font-weight:700;font-size:15px">2</span><span>Email (optional)</span></label>
         <input id="f-email" type="email" autocomplete="email" value="{{ form.email }}" onChange="{{ onEmail }}" disabled="{{ locked }}" placeholder="you@example.com" style="height:54px;border:1.5px solid {{ emailBorder }};border-radius:4px;background:#ffffff;padding:0 14px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:20px;color:#10182e;outline:none;width:100%" style-focus="box-shadow:0 0 0 3px #f5c400">
         <sc-if value="{{ errors.email }}" hint-placeholder-val="{{ false }}"><div style="font-size:15px;color:#c4261b;font-weight:600">{{ errors.email }}</div></sc-if>
       </div>
@@ -651,34 +651,43 @@ button{font:inherit}
 
       <div style="background:#f1eee4;border-radius:4px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:1.5;color:#1f2742">
         <div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#10182e">What happens next</div>
-        <div>One of our six admins replies on WhatsApp, at the number above.</div>
-        <div>The review covers your degree, CGPA and backlogs, your APS and IELTS status, and which universities fit.</div>
+        <div>Once we receive your enquiry, an admin replies on WhatsApp, at the number above.</div>
+        <div>We use your name to address you and your WhatsApp number to reply. Email is optional.</div>
+        <div>The review looks at your academic record, APS and language evidence against programme requirements.</div>
+        <sc-if value="{{ emailMode }}" hint-placeholder-val="{{ true }}"><div>This opens your email app. Nothing is sent until you press send there. You can also email {{ contactEmail }} directly.</div></sc-if>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:8px">
         <label for="f-consent" style="display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.5;color:#1f2742;cursor:pointer">
           <input id="f-consent" type="checkbox" checked="{{ form.consent }}" onChange="{{ onConsent }}" disabled="{{ locked }}" aria-describedby="{{ consentDescribedBy }}" style="flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:#10182e;cursor:pointer">
-          <span>I agree that Germandians can use my name, email and WhatsApp number to contact me about my profile review. Details are in the <a href="Germandians%20Privacy.dc.html" target="_blank" rel="noopener" style="font-weight:700">privacy note</a>.</span>
+          <span>I agree that Germandians can use my name, WhatsApp number and any email address I provide to contact me about my profile review. Details are in the <a href="Germandians%20Privacy.dc.html" target="_blank" rel="noopener" style="font-weight:700">privacy note</a>.</span>
         </label>
         <sc-if value="{{ errors.consent }}" hint-placeholder-val="{{ false }}"><div id="f-consent-error" style="font-size:15px;color:#c4261b;font-weight:600">{{ errors.consent }}</div></sc-if>
       </div>
 
       <sc-if value="{{ canSubmit }}" hint-placeholder-val="{{ true }}">
-        <button type="submit" style="align-self:flex-start;background:#10182e;color:#f5c400;border:0;border-radius:8px;padding:0 26px;min-height:56px;font-weight:800;font-size:18px;cursor:pointer;transition:background .2s,color .2s" style-hover="background:#f5c400;color:#10182e">Request my profile review</button>
+        <button type="submit" style="align-self:flex-start;background:#10182e;color:#f5c400;border:0;border-radius:8px;padding:0 26px;min-height:56px;font-weight:800;font-size:18px;cursor:pointer;transition:background .2s,color .2s" style-hover="background:#f5c400;color:#10182e">{{ submitLabel }}</button>
       </sc-if>
       <sc-if value="{{ isSending }}" hint-placeholder-val="{{ false }}">
         <button type="button" disabled="{{ true }}" style="align-self:flex-start;background:#4a5372;color:#ffffff;border:0;border-radius:8px;padding:0 26px;min-height:56px;font-weight:800;font-size:18px">Sending…</button>
       </sc-if>
-      <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
-        <div role="alert" style="font-size:16px;line-height:1.5;font-weight:600;color:#c4261b">That didn't go through. Please try again, or email thegermandians@gmail.com.</div>
-      </sc-if>
+      <div role="status" aria-live="polite" aria-atomic="true" style="{{ statusStyle }}">
+        <sc-if value="{{ isSending }}" hint-placeholder-val="{{ false }}"><span style="font-size:16px;line-height:1.5;font-weight:600;color:#1f2742">Sending your enquiry…</span></sc-if>
+        <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}"><div style="font-size:16px;line-height:1.5;font-weight:600;color:#c4261b">{{ failureMessage }} Your details are still here. You can try again, or email <a href="mailto:thegermandians@gmail.com">thegermandians@gmail.com</a>. A reply may have been lost, so mention your earlier attempt if you contact us again.</div></sc-if>
+        <sc-if value="{{ isMailto }}" hint-placeholder-val="{{ false }}"><div style="font-size:16px;line-height:1.5;font-weight:600;color:#1f2742">Your email draft is ready. Nothing has been sent by this page. Press send in your email app.</div></sc-if>
+        <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+            <div style="font-size:17px;font-weight:700;color:#1d7a3d">Received. An admin will message you on WhatsApp.</div>
+            <button type="button" onClick="{{ onReset }}" style="background:none;border:0;padding:6px 0;font-weight:700;font-size:16px;color:#10182e;text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer">Send another</button>
+          </div>
+        </sc-if>
+      </div>
       <sc-if value="{{ isMailto }}" hint-placeholder-val="{{ false }}">
-        <div role="status" style="font-size:16px;line-height:1.5;font-weight:600;color:#1f2742">Your email app should open with these details filled in. Press send there and we'll reply on WhatsApp.</div>
-      </sc-if>
-      <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
-        <div role="status" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
-          <div style="font-size:17px;font-weight:700;color:#1d7a3d">Received. An admin will message you on WhatsApp.</div>
-          <button type="button" onClick="{{ onReset }}" style="background:none;border:0;padding:6px 0;font-weight:700;font-size:16px;color:#10182e;text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer">Send another</button>
+        <div style="display:flex;flex-direction:column;gap:8px;overflow-wrap:anywhere">
+          <span>No email app? Copy these details and send them to <a href="mailto:thegermandians@gmail.com">thegermandians@gmail.com</a>.</span>
+          <label for="email-draft">Email details</label>
+          <textarea id="email-draft" readOnly="{{ true }}" value="{{ draftBody }}" style="width:100%;min-height:180px;padding:12px;border:1px solid #10182e;border-radius:4px;background:#ffffff;color:#10182e;font:inherit;resize:vertical"></textarea>
+          <a href="{{ draftUrl }}">Open the draft again</a>
         </div>
       </sc-if>
       <div aria-hidden="true" style="position:absolute;left:50%;top:46%;pointer-events:none;border:5px solid #1d7a3d;border-radius:10px;padding:12px 24px;color:#1d7a3d;background:rgba(251,250,245,.9);text-align:center;opacity:{{ formStampOpacity }};transform:{{ formStampTransform }};transition:transform .34s cubic-bezier(.2,1.6,.4,1),opacity .2s">
@@ -710,7 +719,7 @@ button{font:inherit}
 </footer>
 <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;left:0;right:0;bottom:0;z-index:60;background:#f7f5ef;border-top:1px solid #d9d4c6;padding:10px 12px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:1fr 1fr;gap:10px;transform:{{ barTransform }};transition:transform .3s ease;visibility:{{ barVisibility }}">
-    <a href="{{ waHref }}" target="{{ waTarget }}" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:12px;background:#1d7a3d;color:#ffffff;text-decoration:none;font-weight:700;font-size:17px">WhatsApp us</a>
+    <a href="{{ waHref }}" target="{{ waTarget }}" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:12px;background:#1d7a3d;color:#ffffff;text-decoration:none;font-weight:700;font-size:17px">{{ waActionLabel }}</a>
     <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:12px;background:#10182e;color:#f5c400;text-decoration:none;font-weight:700;font-size:17px">Instagram</a>
   </div>
 </sc-if>
@@ -929,18 +938,21 @@ class Component extends DCLogic {
 
   toggleFaq = i => this.setState(s => ({ faq: { ...s.faq, [i]: !s.faq[i] } }));
 
-  setField(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v }, errors: { ...s.errors, [k]: undefined }, status: s.status === 'error' || s.status === 'mailto' ? 'idle' : s.status })); }
+  setField(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v }, errors: { ...s.errors, [k]: undefined }, status: s.status === 'error' || s.status === 'timeout' || s.status === 'mailto' ? 'idle' : s.status })); }
   onName = e => this.setField('name', e.target.value);
   onEmail = e => this.setField('email', e.target.value);
   onWa = e => this.setField('wa', e.target.value);
   onConsent = e => this.setField('consent', e.target.checked);
-  onSubmit = e => {
+  formEndpoint() {
+    try { const url = new URL(String(this.props.formEndpoint || '').trim()); return url.protocol === 'https:' && !url.username && !url.password ? url.href : ''; } catch { return ''; }
+  }
+  onSubmit = async e => {
     e.preventDefault();
-    if (this.state.status === 'sending') return;
+    if (this.inFlight || this.state.status === 'sent') return;
     const f = this.state.form, errors = {};
     if (!f.name.trim()) errors.name = 'Please enter your name.';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) errors.email = 'Please enter a valid email address.';
-    if (f.wa.replace(/\D/g, '').length < 10) errors.wa = 'Please enter your WhatsApp number with at least 10 digits.';
+    if (f.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) errors.email = 'Please enter a valid email address.';
+    if (!/^[1-9]\d{9,14}$/.test(f.wa.replace(/\D/g, '').replace(/^0+/, ''))) errors.wa = 'Please enter your WhatsApp number with 10–15 digits, including the country code.';
     if (!f.consent) errors.consent = 'Please tick the box so we can contact you.';
     if (Object.keys(errors).length) {
       this.setState({ errors });
@@ -952,17 +964,27 @@ class Component extends DCLogic {
       });
       return;
     }
-    const ep = String(this.props.formEndpoint || '').trim();
-    if (ep) {
-      this.setState({ status: 'sending', errors: {} });
-      fetch(ep, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ name: f.name.trim(), email: f.email.trim(), whatsapp: f.wa.trim(), consent: true, consentAt: new Date().toISOString(), source: 'germandians-website' }) })
-        .then(r => this.setState({ status: r.ok ? 'sent' : 'error' }))
-        .catch(() => this.setState({ status: 'error' }));
-    } else {
-      const body = 'Name: ' + f.name.trim() + '\nEmail: ' + f.email.trim() + '\nWhatsApp: ' + f.wa.trim() + '\nConsent to be contacted: yes\n\nI would like a profile review.';
-      this.setState({ status: 'mailto', errors: {} });
-      window.location.href = 'mailto:thegermandians@gmail.com?subject=' + encodeURIComponent('Profile review request') + '&body=' + encodeURIComponent(body);
-    }
+    this.inFlight = true;
+    const ep = this.formEndpoint();
+    try {
+      if (ep) {
+        this.setState({ status: 'sending', errors: {} });
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 15000);
+        try {
+          const response = await fetch(ep, { method: 'POST', credentials: 'omit', redirect: 'error', signal: controller.signal, headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ name: f.name.trim(), ...(f.email.trim() ? { email: f.email.trim() } : {}), whatsapp: f.wa.trim(), consent: true, consentAt: new Date().toISOString(), source: 'germandians-website' }) });
+          const body = await response.json();
+          const received = response.ok && body && typeof body === 'object' && body.received === true && !('error' in body) && !('errors' in body);
+          this.setState({ status: received ? 'sent' : 'error', receivedDate: received ? new Date().toLocaleDateString('de-DE', { timeZone: 'Asia/Kolkata' }) : '' });
+        } catch { this.setState({ status: controller.signal.aborted ? 'timeout' : 'error' }); }
+        finally { clearTimeout(timer); }
+      } else {
+        const body = ['Name: ' + f.name.trim(), ...(f.email.trim() ? ['Email: ' + f.email.trim()] : []), 'WhatsApp: ' + f.wa.trim(), 'Consent to be contacted about this profile review: yes', '', 'I would like a profile review.'].join('\n');
+        const url = 'mailto:thegermandians@gmail.com?subject=' + encodeURIComponent('Profile review request') + '&body=' + encodeURIComponent(body);
+        this.setState({ status: 'mailto', errors: {}, draftBody: body, draftUrl: url });
+        try { window.location.href = url; } catch { /* The copyable draft remains available. */ }
+      }
+    } finally { this.inFlight = false; }
   };
   onReset = () => this.setState({ status: 'idle', form: { name: '', email: '', wa: '', consent: false }, errors: {} });
 
@@ -971,7 +993,9 @@ class Component extends DCLogic {
     const isMobile = s.vw < 760, compactNav = s.vw < 1100, stackedFees = s.vw < 1100;
     const STATUS = { 'Enquiries open': ['#e1f0e4', '#17692f'], 'Waitlist only': ['#fdeedb', '#8f4700'], 'Enquiries closed': ['#fbe4e1', '#a8221a'] };
     const stat = STATUS[p.intakeStatus];
-    const wa = String(p.whatsappNumber || '').replace(/\D/g, '');
+    const digits = String(p.whatsappNumber || '').replace(/\D/g, '');
+    const wa = /^[1-9]\d{9,14}$/.test(digits) ? digits : '';
+    const emailMode = !this.formEndpoint();
     const fee = String(p.feeAfterAdmission || '').trim();
     const seatsRaw = Number(p.seatsLeft);
     const seats = Number.isFinite(seatsRaw) && p.seatsLeft !== '' && p.seatsLeft != null ? Math.max(0, Math.min(30, Math.round(seatsRaw))) : 30;
@@ -1036,6 +1060,7 @@ class Component extends DCLogic {
       waHref: wa ? 'https://wa.me/' + wa + '?text=' + encodeURIComponent("Hi Germandians, I'd like a profile review.") : '#contact-form',
       waTarget: wa ? '_blank' : '_self',
       waLabel: wa ? '+' + wa : 'Use the form',
+      waChannelName: wa ? 'WhatsApp' : 'Profile review', waActionLabel: wa ? 'WhatsApp us' : 'Open review form',
       barTransform: barOn ? 'translateY(0)' : 'translateY(110%)', barVisibility: barOn ? 'visible' : 'hidden',
 
       formRef: this.formRef, footerRef: this.footerRef,
@@ -1043,8 +1068,12 @@ class Component extends DCLogic {
       form: s.form, errors: err, onName: this.onName, onEmail: this.onEmail, onWa: this.onWa, onConsent: this.onConsent, onSubmit: this.onSubmit, onReset: this.onReset,
       nameBorder: err.name ? '#c4261b' : '#10182e', emailBorder: err.email ? '#c4261b' : '#10182e', waBorder: err.wa ? '#c4261b' : '#10182e',
       locked: st === 'sending' || st === 'sent',
-      canSubmit: st === 'idle' || st === 'error' || st === 'mailto', isSending: st === 'sending', isSent: st === 'sent', isError: st === 'error', isMailto: st === 'mailto',
-      today: new Date().toLocaleDateString('de-DE'),
+      canSubmit: st === 'idle' || st === 'error' || st === 'timeout' || st === 'mailto', isSending: st === 'sending', isSent: st === 'sent', isError: st === 'error' || st === 'timeout', isMailto: st === 'mailto',
+      emailMode, contactEmail: 'thegermandians@gmail.com', submitLabel: emailMode ? 'Open email draft' : 'Request my profile review',
+      statusStyle: st === 'idle' ? 'position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)' : '',
+      failureMessage: st === 'timeout' ? 'We could not confirm receipt within 15 seconds.' : 'We could not confirm receipt.',
+      draftBody: s.draftBody || '', draftUrl: s.draftUrl || '',
+      today: s.receivedDate || '',
       formStampOpacity: st === 'sent' ? 0.95 : 0,
       formStampTransform: st === 'sent' ? 'translate(-50%,-50%) rotate(-11deg) scale(1)' : 'translate(-50%,-50%) rotate(-11deg) scale(2)'
     };

@@ -8,7 +8,9 @@ const pages = ['/', '/check', '/privacy'];
 export default {
   appDirectory: 'src',
   basename: siteBase,
-  buildDirectory: process.env.VISUAL_BUILD ? '.visual-build' : 'build',
+  buildDirectory: process.env.VISUAL_BUILD ? '.visual-build'
+    : process.env.UX_BUILD === 'endpoint' || process.env.UX_BUILD === 'email'
+      ? `test-results/ux-builds/${process.env.UX_BUILD}` : 'build',
   ssr: false,
   prerender: pages,
   routeDiscovery: { mode: 'initial' },

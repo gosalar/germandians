@@ -29,6 +29,9 @@ export const NAV_LINKS = [
 ] as const;
 export const NAV_CTA = { id: SECTIONS.contactForm, label: 'Get my profile reviewed' } as const;
 
+// Phase 2 will align the other fee mentions with the confirmed charging policy.
+export const FEE_PROMISE = '€0 service fee until you’re admitted';
+
 export const CONTACT = {
   email: 'thegermandians@gmail.com',
   instagramHandle: '@germandians',

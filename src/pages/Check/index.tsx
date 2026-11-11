@@ -3,14 +3,18 @@ import { useState, type ReactNode } from 'react';
 
 import { useSettleHashScroll } from '@/hooks/useSettleHashScroll';
 import Contact from '@/pages/Home/Contact';
-import { SECTIONS, hashLink } from '@/utils/constants';
-import { siteConfig } from '@/utils/siteConfig';
+import { FEE_PROMISE, SECTIONS, hashLink } from '@/utils/constants';
 
 import {
   APS_OPTIONS,
+  APS_SOURCE,
   BACKLOG_OPTIONS,
+  BACKLOG_QUESTIONS,
+  CHECK_COPY,
   DEFAULT_CHECK_INPUTS,
   DEGREE_OPTIONS,
+  PROGRAMME_SOURCES,
+  REQUIREMENTS,
   SCALE_PRESETS,
   buildCheckDiagnosis,
   type CheckInputs,
@@ -39,20 +43,7 @@ export default function Check() {
   const hasError = Boolean(diagnosis.errorText);
 
   const applyPreset = (preset: (typeof SCALE_PRESETS)[number]) => {
-    setInputs((prev) => {
-      const currentScore = Number(prev.score.trim().replace(',', '.'));
-      const keepScore =
-        prev.max.trim() === preset.max &&
-        Number.isFinite(currentScore) &&
-        currentScore >= Number(preset.min) &&
-        currentScore <= Number(preset.max);
-      return {
-        ...prev,
-        max: preset.max,
-        min: preset.min,
-        score: keepScore ? prev.score : preset.exampleScore,
-      };
-    });
+    setInputs((prev) => ({ ...prev, max: preset.max, min: preset.min }));
   };
 
   const updateNumberField = (field: 'score' | 'max' | 'min', value: string) => {
@@ -65,17 +56,12 @@ export default function Check() {
         <div className={styles.container}>
           <header className={styles.head}>
             <div className={styles.badges}>
-              <span className={styles.badge} data-tone="green">
-                No login or email needed
-              </span>
-              <span className={styles.badge}>KMK-recommended Bavarian formula</span>
-              <span className={styles.badge}>{siteConfig.intake} intake</span>
+              {CHECK_COPY.badges.map((badge, index) => (
+                <span key={badge} className={styles.badge} data-tone={index === 0 ? 'green' : undefined}>{badge}</span>
+              ))}
             </div>
-            <h1 className={styles.title}>Check your German grade and public university fit</h1>
-            <p className={styles.lede}>
-              Convert your marks with the KMK-recommended Modified Bavarian Formula, add the three profile details a
-              calculator misses, and see how German public universities read your application.
-            </p>
+            <h1 className={styles.title}>{CHECK_COPY.title}</h1>
+            <p className={styles.lede}>{CHECK_COPY.lede}</p>
           </header>
 
           <div className={styles.workbench}>
@@ -155,7 +141,7 @@ export default function Check() {
                 </div>
 
                 <p className={styles.passNote}>
-                  <strong>Check your transcript’s pass mark:</strong> A 7.4 CGPA converts to <strong>2.3</strong> when
+                  <strong>Example, using a 10-point scale:</strong> A 7.4 CGPA converts to <strong>2.3</strong> when
                   the minimum passing grade is 4.0, but <strong>2.5</strong> when the minimum passing grade is 5.0.
                   Never enter 0.
                 </p>
@@ -164,25 +150,28 @@ export default function Check() {
               <div className={styles.panel}>
                 <div className={styles.panelHead}>
                   <span className={styles.panelStep}>Step 2</span>
-                  <h2 className={styles.panelTitle}>Three things the formula doesn’t show</h2>
+                  <h2 className={styles.panelTitle}>{CHECK_COPY.profileTitle}</h2>
                 </div>
+                <p className={styles.profileNote}>{CHECK_COPY.profileNote}</p>
 
-                <div className={styles.toggleGroup}>
-                  <div className={styles.toggleLabel}>Backlogs (cleared or active)</div>
-                  <div className={styles.pills} role="group" aria-label="Backlogs">
-                    {BACKLOG_OPTIONS.map((option) => (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => setInputs((prev) => ({ ...prev, backlogs: option }))}
-                        aria-pressed={inputs.backlogs === option}
-                        className={styles.pill}
-                      >
-                        {option}
-                      </button>
-                    ))}
+                {BACKLOG_QUESTIONS.map(({ field, label, group }) => (
+                  <div key={field} className={styles.toggleGroup}>
+                    <div className={styles.toggleLabel}>{label}</div>
+                    <div className={styles.pills} role="group" aria-label={group}>
+                      {BACKLOG_OPTIONS.map((option) => (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => setInputs((prev) => ({ ...prev, [field]: prev[field] === option ? null : option }))}
+                          aria-pressed={inputs[field] === option}
+                          className={styles.pill}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                ))}
 
                 <div className={styles.toggleGroup}>
                   <div className={styles.toggleLabel}>Bachelor’s degree duration</div>
@@ -191,7 +180,7 @@ export default function Check() {
                       <button
                         key={option.value}
                         type="button"
-                        onClick={() => setInputs((prev) => ({ ...prev, degree: option.value }))}
+                        onClick={() => setInputs((prev) => ({ ...prev, degree: prev.degree === option.value ? null : option.value }))}
                         aria-pressed={inputs.degree === option.value}
                         className={styles.pill}
                       >
@@ -202,13 +191,13 @@ export default function Check() {
                 </div>
 
                 <div className={styles.toggleGroup}>
-                  <div className={styles.toggleLabel}>APS status for {siteConfig.intake}</div>
+                  <div className={styles.toggleLabel}>APS status</div>
                   <div className={styles.pills} role="group" aria-label="APS status">
                     {APS_OPTIONS.map((option) => (
                       <button
                         key={option.value}
                         type="button"
-                        onClick={() => setInputs((prev) => ({ ...prev, aps: option.value }))}
+                        onClick={() => setInputs((prev) => ({ ...prev, aps: prev.aps === option.value ? null : option.value }))}
                         aria-pressed={inputs.aps === option.value}
                         className={styles.pill}
                       >
@@ -236,7 +225,7 @@ export default function Check() {
                   </div>
                   <div className={styles.scoreHeadlineCol}>
                     <div className={styles.scoreClass}>{diagnosis.classification}</div>
-                    <h2 className={styles.diagnosisTitle} data-testid="band-headline">
+                    <h2 className={styles.diagnosisTitle} data-testid="check-headline">
                       {diagnosis.headline}
                     </h2>
                   </div>
@@ -249,58 +238,54 @@ export default function Check() {
               </div>
 
               <div className={styles.diagnosisCard}>
-                <div className={styles.diagnosisKicker}>
-                  What this means for your application (€0 service fee until you’re admitted)
-                </div>
-
-                {diagnosis.proofText ? (
-                  <p className={styles.proofBox} data-testid="band-proof">
-                    {diagnosis.proofText}
-                  </p>
-                ) : null}
-
-                <ul className={styles.diagnosisList}>
-                  {diagnosis.bullets.map((bullet) => (
-                    <li key={bullet.title}>
+                <h3 className={styles.diagnosisKicker}>{CHECK_COPY.resultTitle}</h3>
+                <p className={styles.explanation}>{CHECK_COPY.explanation}</p>
+                <ul className={styles.diagnosisList} data-testid="requirements-list">
+                  {REQUIREMENTS.map((requirement) => (
+                    <li key={requirement.title}>
                       <span aria-hidden="true" className={styles.diagnosisBullet} />
-                      <div>
-                        <strong className={styles.diagnosisBulletTitle}>{bullet.title}: </strong>
-                        <span>{bullet.body}</span>
-                      </div>
+                      <div><strong className={styles.diagnosisBulletTitle}>{requirement.title}: </strong>{requirement.body}</div>
                     </li>
                   ))}
                 </ul>
 
-                {diagnosis.ctaLabel ? (
-                  <div className={styles.diagnosisActions}>
-                    <Button
-                      component="a"
-                      href={hashLink(SECTIONS.contactForm)}
-                      variant="yellow"
-                      size="lg"
-                      data-testid="band-cta"
-                    >
-                      {diagnosis.ctaLabel}
-                    </Button>
-                    <div className={styles.zeroFeeCallout}>
-                      <span className={styles.zeroFeeAmount}>€0</span>
-                      <span className={styles.zeroFeeText}>service fee until you’re admitted</span>
-                    </div>
-                  </div>
+                {diagnosis.bullets.length > 0 ? (
+                  <ul className={styles.diagnosisList}>
+                    {diagnosis.bullets.map((bullet) => (
+                      <li key={bullet.title}>
+                        <span aria-hidden="true" className={styles.diagnosisBullet} />
+                        <div>
+                          <strong className={styles.diagnosisBulletTitle}>{bullet.title}: </strong>
+                          <span>{bullet.body}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
                 ) : null}
+
+                <div className={styles.diagnosisActions}>
+                  <Button
+                    component="a"
+                    href={hashLink(SECTIONS.contactForm)}
+                    variant="yellow"
+                    size="lg"
+                    data-testid="check-cta"
+                  >
+                    {CHECK_COPY.ctaLabel}
+                  </Button>
+                  <div className={styles.zeroFeeCallout}>
+                    <span className={styles.zeroFeeText}>{FEE_PROMISE}</span>
+                  </div>
+                </div>
               </div>
 
-              <div className={styles.tiers}>
-                {diagnosis.tiers.map((tier) => (
-                  <div key={tier.id} className={styles.tierCard} data-testid={tier.id}>
-                    <span className={styles.tierBadge} data-tone={tier.tone}>
-                      {tier.badge}
-                    </span>
-                    <h3 className={styles.tierName}>{tier.name}</h3>
-                    <div className={styles.tierExamples}>{tier.examples}</div>
-                    <p className={styles.tierDesc}>{tier.description}</p>
-                  </div>
+              <div className={styles.sources}>
+                <span>{CHECK_COPY.sourceLabel}</span>
+                {PROGRAMME_SOURCES.map((source) => (
+                  <a key={source.url} href={source.url} target="_blank" rel="noopener">{source.label}</a>
                 ))}
+                <a href={APS_SOURCE.url} target="_blank" rel="noopener">{APS_SOURCE.label}</a>
+                <span>Last reviewed {CHECK_COPY.reviewed}</span>
               </div>
             </div>
           </div>

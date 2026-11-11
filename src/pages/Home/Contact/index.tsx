@@ -11,7 +11,7 @@ export default function Contact({ snapshot }: { snapshot?: string }) {
         <div className={styles.intro}>
           <h2 className={styles.title}>Get your profile reviewed</h2>
           <p className={styles.body}>
-            Fill in the form and an admin will message you on WhatsApp. Or reach us directly:
+            Send us your details for a profile review. Once we receive them, an admin will reply on WhatsApp. Or reach us directly:
           </p>
           <div className={styles.channels}>
             <a href={CONTACT.instagramUrl} target="_blank" rel="noopener" className={styles.instagram}>
@@ -19,7 +19,7 @@ export default function Contact({ snapshot }: { snapshot?: string }) {
               <span className={styles.channelValue}>{CONTACT.instagramHandle}</span>
             </a>
             <a href={whatsapp.href} target={whatsapp.target} rel="noopener" className={styles.channel}>
-              <span className={styles.channelName}>WhatsApp</span>
+              <span className={styles.channelName}>{whatsapp.channelName}</span>
               <span className={styles.channelValue}>{whatsapp.label}</span>
             </a>
             <a href={`mailto:${CONTACT.email}`} className={styles.channel}>

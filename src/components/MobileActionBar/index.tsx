@@ -29,7 +29,7 @@ export default function MobileActionBar() {
     <>
       <div className={styles.bar} data-visible={visible}>
         <HomeSectionLink href={whatsapp.href} target={whatsapp.target} rel="noopener" className={styles.whatsapp}>
-          WhatsApp us
+          {whatsapp.actionLabel}
         </HomeSectionLink>
         <a href={CONTACT.instagramUrl} target="_blank" rel="noopener" className={styles.instagram}>
           Instagram

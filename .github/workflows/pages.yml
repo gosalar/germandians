@@ -33,7 +33,9 @@ jobs:
         run: npm run build
         env:
           SITE_BASE_PATH: /${{ github.event.repository.name }}/
+          # HTTPS receiver: 2xx JSON { received: true } only after durable receipt.
           VITE_FORM_ENDPOINT: ${{ vars.VITE_FORM_ENDPOINT }}
+          # 10–15 international digits; empty/invalid actions open the review form.
           VITE_WHATSAPP_NUMBER: ${{ vars.VITE_WHATSAPP_NUMBER }}
           VITE_FEE_AFTER_ADMISSION: ${{ vars.VITE_FEE_AFTER_ADMISSION }}
           VITE_INTAKE_STATUS: ${{ vars.VITE_INTAKE_STATUS }}
@@ -51,6 +53,8 @@ jobs:
         if: hashFiles('playwright.config.ts') != ''
       - run: npm run test:visual -- --workers=2
         if: hashFiles('playwright.config.ts') != ''
+      # UX builds use test-results/ux-builds; build/client remains the Pages artifact.
+      - run: npm run test:ux
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:

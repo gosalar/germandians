@@ -24,15 +24,13 @@ export default function Privacy() {
   const showAddress = privacy.address || privacy.showPlaceholders;
   const showRetention = privacy.retention || privacy.showPlaceholders;
   const showAuthority = privacy.authority || privacy.showPlaceholders;
-  // Visual previews retain the original unfilled template. Live forms describe
-  // the actual transport, including when a provider is set but no endpoint is.
-  const emailForm = !siteConfig.formEndpoint && !privacy.showPlaceholders;
+  const emailForm = !siteConfig.formEndpoint;
   // Kept as elements so the sentences below can stay on short lines without
   // splitting a space into its own text node. That shift moves the highlight.
-  const names = <Placeholder value={privacy.names}>[full names of the people responsible]</Placeholder>;
-  const retention = <Placeholder value={privacy.retention}>[6 months]</Placeholder>;
+  const names = <Placeholder value={privacy.names}>[registered business name]</Placeholder>;
+  const retention = <Placeholder value={privacy.retention}>[confirmed enquiry retention period]</Placeholder>;
   const authority = (
-    <Placeholder value={privacy.authority}>[the authority for the German state where you live]</Placeholder>
+    <Placeholder value={privacy.authority}>[relevant data protection authority]</Placeholder>
   );
 
   return (
@@ -53,7 +51,7 @@ export default function Privacy() {
             <p className={styles.text}>
               This page explains what happens to the details you send us through this website or contact us with.
             </p>
-            <p className={styles.updated}>Last updated 3 November 2026</p>
+            <p className={styles.updated}>Last updated 11 November 2026</p>
           </header>
 
           <section className={styles.section}>
@@ -61,11 +59,11 @@ export default function Privacy() {
             {showNames || showAddress ? (
               <p className={styles.text}>
                 {showNames ? (
-                  <>Germandians is run by {names}{showAddress ? ', ' : ''}</>
+                  <>Germandians is operated by {names}{showAddress ? ', ' : ''}</>
                 ) : (
                   'Postal address: '
                 )}
-                {showAddress ? <Placeholder value={privacy.address}>[postal address in Germany]</Placeholder> : null}.
+                {showAddress ? <Placeholder value={privacy.address}>[business postal address]</Placeholder> : null}.
               </p>
             ) : null}
             <p className={styles.plain}>Email: {emailLink}</p>
@@ -74,8 +72,13 @@ export default function Privacy() {
           <section className={styles.section}>
             <h2 className={styles.heading}>What we collect</h2>
             <p className={styles.text}>
-              When you send the profile review form, we receive your name, email address and WhatsApp number, the time
-              you sent it and that you agreed to be contacted.
+              When you send an enquiry, we receive your name, WhatsApp number, any email address you choose to provide,
+              the time of your message or submission, and your consent to be contacted.
+            </p>
+            <p className={styles.text}>
+              If you use the grade check, the form includes the marks and profile answers you entered, plus the
+              conversion when valid. Unanswered questions are omitted. Using the checker alone sends no profile
+              details to us; the summary is shared only when you submit the form or send the email draft.
             </p>
             <p className={styles.text}>
               If you message us on WhatsApp, Instagram or by email, we receive whatever you send there, such as your
@@ -102,7 +105,7 @@ export default function Privacy() {
               {emailForm ? (
                 <li>
                   <span className={styles.bullet} data-color="green" />
-                  <span>The form opens your email app. You send the details to us from there.</span>
+                  <span>The form opens an email draft addressed to us. Nothing is sent until you press send in your email app. Your email provider and our Gmail service then handle the message.</span>
                 </li>
               ) : privacy.formService || privacy.showPlaceholders ? (
                 <li>
@@ -130,6 +133,7 @@ export default function Privacy() {
                 </span>
               </li>
             </ul>
+            <p className={styles.text}>The Germandians team receives your enquiry to review it and reply on WhatsApp.</p>
             <p className={styles.text}>Some of these services may process data outside the EU, including in the USA.</p>
           </section>
 
@@ -155,7 +159,7 @@ export default function Privacy() {
               to send them to you in a portable format. You can also object to how we use them.
             </p>
             <p className={styles.text}>
-              You can withdraw your consent at any time by emailing us. This doesn't affect anything we did with your
+              You can ask for deletion or withdraw your consent at any time by emailing {emailLink}. This doesn't affect anything we did with your
               details before you withdrew it.
             </p>
             <p className={styles.text}>

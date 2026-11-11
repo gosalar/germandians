@@ -1,6 +1,6 @@
 # Germandians website
 
-Landing page, grade check and privacy note for Germandians. The visual reference for the landing page and privacy note lives in `tests/visual/reference/`.
+Landing page, German grade conversion and programme requirements check, and privacy note for Germandians. The checker starts empty and does not predict admission or recommend universities. The visual reference for the landing page and privacy note lives in `tests/visual/reference/`.
 
 ## Stack
 
@@ -29,7 +29,7 @@ The site has to match the Claude Design prototype pixel for pixel. The visual te
 npm run test:visual          # full suite: 37 checks
 npm run test:visual:quick    # 15 checks
 npm run test:visual:report   # open the last report (reference, app and diff images for failures)
-npm run test:ux              # playback and form focus regression checks
+npm run test:ux              # 49 checker, contact, submission and regression checks
 ```
 
 - The full suite compares home at 10 widths, privacy at 5, and 22 interaction states including keyboard, hover, disabled and input-focus states.
@@ -41,6 +41,8 @@ npm run test:ux              # playback and form focus regression checks
 - **Failures:** the reference, app and diff images are saved under `test-results/visual/<test>/`.
 - **Changing the design:** if a test fails because the design itself changed, update `tests/visual/reference/` (a new export, or a hand edit that mirrors the change) instead of loosening the test.
 
+The UX suite builds two isolated production variants under `test-results/ux-builds/`: `endpoint` pins a fictitious WhatsApp number and an intercepted HTTPS receiver; `email` leaves both empty. It checks both pages at phone and desktop widths, checker layouts, optional-field validation, success, body-level errors, network failure, timeout, retry and the email draft. No test sends a real enquiry.
+
 ## GitHub Pages
 
 In the repository's **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. To override the public site settings listed below, add repository variables under **Settings → Secrets and variables → Actions → Variables** before building.
@@ -51,23 +53,31 @@ Pull requests targeting `main` run lint, TypeScript checks, a production build a
 
 The design's editable "props" are environment variables. Copy `config/.env.example` to `config/.env.local` and fill in what you need:
 
-| Variable | Effect when empty |
+| Variable | Allowed value and default behaviour |
 | --- | --- |
-| `VITE_FORM_ENDPOINT` | The form opens the visitor's email app with their details filled in |
-| `VITE_WHATSAPP_NUMBER` | WhatsApp buttons scroll to the form |
+| `VITE_FORM_ENDPOINT` | Absolute HTTPS URL without credentials, implementing the receipt contract below. Missing or invalid: explained email draft handoff |
+| `VITE_WHATSAPP_NUMBER` | International number, 10–15 digits after stripping punctuation, first digit nonzero. Missing or invalid: “Open review form” / “Profile review” links go to the form, with a production warning |
 | `VITE_FEE_AFTER_ADMISSION` | Receipt shows "Written quote" |
 | `VITE_INTAKE_STATUS` | `Not confirmed` shows no badge; `Enquiries open`, `Waitlist only`, `Enquiries closed` show one |
 | `VITE_INTAKE_SEASON` | `Summer`; accepts `Winter` or `Summer` |
 | `VITE_INTAKE_YEAR` | `2027`; accepts a four-digit year from `1000` to `9999` |
-| `VITE_PRIVACY_NAMES` | Responsible people's full names; omitted in production if empty |
-| `VITE_PRIVACY_ADDRESS` | Postal address; omitted in production if empty |
+| `VITE_PRIVACY_NAMES` | Registered business name / responsible entity, plain text; omitted in production if empty |
+| `VITE_PRIVACY_ADDRESS` | Business postal address, plain text; omitted in production if empty |
 | `VITE_PRIVACY_FORM_SERVICE` | Form provider; used only with a form endpoint; omitted in production if empty |
 | `VITE_PRIVACY_HOSTING_PROVIDER` | Hosting provider; omitted in production if empty |
 | `VITE_PRIVACY_RETENTION` | Confirmed retention period as plain text; omitted in production if empty |
 | `VITE_PRIVACY_AUTHORITY` | Relevant data protection authority; example clause omitted in production if empty |
 | `VITE_SHOW_SEAT_COUNT` / `VITE_SEATS_LEFT` | Seat count hidden |
 
-With an endpoint set, the form POSTs JSON: `{ name, email, whatsapp, snapshot?, consent, consentAt, source }`.
+With a valid endpoint set, the form POSTs JSON: `{ name, email?, whatsapp, snapshot?, consent: true, consentAt, source: "germandians-website" }`. Name and WhatsApp are required; email is omitted when blank. `consentAt` is an ISO timestamp. `snapshot` contains only entered checker values and answered questions, with the conversion when valid; no example profile or grade band is submitted.
+
+The receiver must allow cross-origin JSON requests from the deployed site and acknowledge durable receipt with a 2xx JSON response `{ "received": true }`, with no `error` or `errors` property. HTTP errors, empty or malformed responses, redirects, and body-level failures do not count as received. The request and response body share a 15-second timeout; a failed request preserves the details for retry and shows the email alternative. A lost acknowledgement can still mean the receiver accepted the request, so retry messages explain this ambiguity.
+
+No provider has been selected or verified. This is the project's explicit receiver contract, not an assumption that every form provider supports it. Before setting `VITE_FORM_ENDPOINT`, confirm the chosen provider's documented success/error contract and adapt `src/services/profileReview.ts` if necessary. Use its hidden-field spam trap if offered; do not add provider scripts or tracking CAPTCHA. The owner must authorise a real delivery test and confirm arrival before item 8 can be closed. Automated tests intercept every endpoint request.
+
+With no valid endpoint, the button says “Open email draft” and explains the handoff before submission. Opening a draft does not show a receipt. The draft includes the optional checker summary, and the address and copyable details remain available if no email app opens.
+
+CI runs both the visual and UX suites. Their builds use `.visual-build/` and `test-results/ux-builds/`, preserving the Pages build in `build/client/` and its configured base path for artifact upload.
 
 ## Structure
 
@@ -77,7 +87,7 @@ src/
 ├── routes/                         # metadata, shared site layout, dev-only theme preview
 ├── pages/
 │   ├── Home/                       # one folder per section: index.tsx + styles.module.scss (+ data.ts, hooks)
-│   ├── Check/                      # German grade calculator and public university fit check
+│   ├── Check/                      # German grade conversion and programme requirements check
 │   ├── Privacy/                    # standalone privacy note
 │   └── ErrorPage/                  # 404 and route errors
 ├── components/                     # SiteHeader, SiteFooter, MobileActionBar, Brand, HomeSectionLink
