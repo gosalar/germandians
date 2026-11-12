@@ -153,7 +153,7 @@ Never raise `MAX_DIFF_PIXELS`, skip or delete a check, or edit the reference to 
 
 ## Plans
 
-Larger pieces of work arrive as a plan in `docs/plans/`. Read the whole plan, and the shared brief it points to, before changing anything. Plans say what to change, what done looks like and which rules apply; working out how is your job. Where a plan and this file disagree, follow the plan and say so.
+Larger pieces of work arrive as a plan: a Markdown file the owner points you to. Plans are not kept in the repository; finished ones are archived locally in the git-ignored `ImplementedFeatures/` folder, so never stage or commit them. Read the whole plan, and any shared brief it points to, before changing anything. Plans say what to change, what done looks like and which rules apply; working out how is your job. Where a plan and this file disagree, follow the plan and say so.
 
 ## Before you report
 

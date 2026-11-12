@@ -10,7 +10,7 @@ The Claude Design prototype the site must match, copied from the design handoff:
 
 Don't edit these files to make a test pass. They change only when the design does: either replace them with a new export, or edit them by hand to match a deliberate change to the site.
 
-The home page has been edited by hand since the export to include the UX review changes (`docs/plans/ux-review-fixes.md`). Rules it needs beyond inline styles (breakpoints, pseudo-elements) live in the `<style>` block at the top, as classes.
+The home page has been edited by hand since the export to include the UX review changes of early November 2026. Rules it needs beyond inline styles (breakpoints, pseudo-elements) live in the `<style>` block at the top, as classes.
 
 Phase 1 of the November 2026 review actions (grade check and enquiry flow) deliberately updates the contact intro, missing-number labels, optional email, consent, email handoff and submission states. The home reference mirrors those changes in both its markup and its `Component` validation/submission logic. The privacy reference mirrors the default email transport, optional email and checker summary disclosure, country-neutral placeholders and revised date. Other sections and the 64-pixel tolerance are unchanged.
 
