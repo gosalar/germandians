@@ -159,11 +159,6 @@
   > :last-child { flex: none; white-space: nowrap; }
   @include m.below(t.$bp-short-labels) {
     gap: 8px;
-    &[data-payment] {
-      flex-direction: column;
-      gap: 2px;
-      .lineValue { text-align: left; }
-    }
   }
 }
 
@@ -279,7 +274,7 @@
   padding: 0;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  grid-template-columns: 1fr;
   gap: 10px 24px;
   font-size: 17px;
   line-height: 1.45;
@@ -290,6 +285,12 @@
     gap: 12px;
     align-items: flex-start;
   }
+}
+
+.costHeading {
+  @include m.label-font(700, 18px);
+  margin: 10px 0 12px;
+  color: t.$yellow;
 }
 
 .bullet {

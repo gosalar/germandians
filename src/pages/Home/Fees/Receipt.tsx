@@ -2,8 +2,9 @@ import { useReducedMotion } from '@mantine/hooks';
 import { useEffect, useRef, useState } from 'react';
 
 import { useReplayOnFirstView } from '@/hooks/useReplayOnFirstView';
+import { FEE_POLICY, FEE_PROMISE } from '@/utils/constants';
 import { prefersReducedMotion } from '@/utils/motion';
-import { siteConfig } from '@/utils/siteConfig';
+import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
 
 import { RECEIPT_ITEMS } from './data';
 import styles from './styles.module.scss';
@@ -38,7 +39,7 @@ export default function Receipt({ feeShort }: { feeShort: string }) {
           <div className={styles.paperRoll} data-printed={printed} data-animate={printed && !reducedMotion}>
             <div className={styles.paper}>
               <div className={styles.receiptTitle}>GERMANDIANS</div>
-              <div className={styles.receiptSubtitle}>Student guidance, {siteConfig.intake} intake</div>
+              <div className={styles.receiptSubtitle}>{`Student guidance, ${siteConfig.intake} intake`}</div>
               <div className={styles.rule} />
               {RECEIPT_ITEMS.map((item) => (
                 <div key={item} className={styles.line}>
@@ -48,20 +49,20 @@ export default function Receipt({ feeShort }: { feeShort: string }) {
               ))}
               <div className={styles.rule} />
               <div className={styles.total}>
-                <span className={styles.totalLabel}>Due now</span>
-                <span className={styles.totalAmount}>0,00 €</span>
+                <span className={styles.totalLabel}>{FEE_POLICY.receiptLabel}</span>
+                <span className={styles.totalAmount}>{FEE_POLICY.amount}</span>
               </div>
               <div className={styles.rule} />
               <div className={styles.line} data-payment>
-                <span>Due after admission</span>
+                <span>Service fee</span>
                 <span className={styles.lineValue}>{feeShort}</span>
               </div>
               <div className={styles.line} data-payment>
                 <span>Triggered by</span>
-                <span className={styles.lineValue}>Your admission letter</span>
+                <span className={styles.lineValue}>{FEE_POLICY.trigger}</span>
               </div>
               <div className={styles.rule} />
-              <div className={styles.promise}>No admission, no service fee.</div>
+              <div className={styles.promise}>{FEE_PROMISE}</div>
               <div className={styles.barcode} />
             </div>
             <div className={styles.tearEdge} />
@@ -71,6 +72,7 @@ export default function Receipt({ feeShort }: { feeShort: string }) {
       <button type="button" onClick={print} className={styles.replay}>
         Replay receipt animation
       </button>
+      <p className={styles.detailBody}>{INTAKE_READINESS}</p>
     </div>
   );
 }

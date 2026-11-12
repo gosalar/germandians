@@ -1,8 +1,8 @@
 import { Badge, Button } from '@mantine/core';
 import flagPainting from '@/assets/images/flag-painting.jpg';
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
-import { CONTACT, SECTIONS, hashLink, type IntakeStatus } from '@/utils/constants';
-import { siteConfig } from '@/utils/siteConfig';
+import { CONTACT, FEE_POLICY, INTAKE_SEATS, SECTIONS, hashLink, type IntakeStatus } from '@/utils/constants';
+import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
 
@@ -48,8 +48,8 @@ export default function Hero() {
           <h1 className={styles.title}>Study in Germany with the people already there.</h1>
           <p className={styles.lede}>Six student mentors in Germany. Up to five students per mentor.</p>
           <a href={hashLink(SECTIONS.fees)} className={styles.feeBadge}>
-            <span className={styles.feeAmount}>€0</span>
-            <span className={styles.feeText}>service fee until you're admitted</span>
+            <span className={styles.feeAmount}>{FEE_POLICY.amount}</span>
+            <span className={styles.feeText}>{`${FEE_POLICY.timing}, ${FEE_POLICY.qualifier}`}</span>
           </a>
           <p className={styles.summary}>We guide you from profile evaluation to your first week in Germany.</p>
           <div ref={heroCtaRef} className={styles.ctas}>
@@ -62,9 +62,10 @@ export default function Hero() {
           </div>
           <div className={styles.meta}>
             <div className={styles.intake}>
-              <span className={styles.intakeLabel}>{siteConfig.intake} intake, 30 students</span>
+              <span className={styles.intakeLabel}>{`${siteConfig.intake} intake, ${INTAKE_SEATS} students`}</span>
               <IntakeStatusBadge />
             </div>
+            <p className={styles.community}>{INTAKE_READINESS}</p>
             <p className={styles.community}>Run by the team behind a 22,000-member student community.</p>
           </div>
         </div>

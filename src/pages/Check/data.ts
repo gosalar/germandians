@@ -1,4 +1,26 @@
+import { DMAT } from '@/utils/applicationFacts';
 import { NAV_CTA } from '@/utils/constants';
+
+export const DMAT_FIELDS = ['Affected field', 'Outside these fields', 'Not sure'] as const;
+export type DmatField = (typeof DMAT_FIELDS)[number];
+export const DMAT_CHECK_COPY = {
+  label: 'Bachelor’s degree field for dMAT',
+  heading: 'dMAT and APS',
+  unknown: 'Check whether dMAT applies to your degree and applicant group.',
+  affected: 'For a master’s application, you may need dMAT. Check the exemptions and transitional rules below.',
+  other: 'You reported a degree outside the affected fields. This is exempt under the current dMAT procedure; confirm any mixed or borderline degree with APS.',
+} as const;
+
+/** How much of the dMAT rule follows the guidance sentence: nothing more, the one-line rule, or the full rule with dates and fee. */
+export type DmatDetail = 'none' | 'summary' | 'full';
+
+/** A completed APS procedure settles the question; otherwise the degree field decides what the visitor needs to read. */
+function buildDmatGuidance(inputs: Pick<CheckInputs, 'aps' | 'dmatField'>): { text: string; detail: DmatDetail } {
+  if (inputs.aps === 'APS certificate received') return { text: DMAT.completed, detail: 'none' };
+  if (inputs.dmatField === 'Outside these fields') return { text: DMAT_CHECK_COPY.other, detail: 'none' };
+  if (inputs.dmatField === 'Affected field') return { text: DMAT_CHECK_COPY.affected, detail: 'full' };
+  return { text: DMAT_CHECK_COPY.unknown, detail: 'summary' };
+}
 
 /**
  * Input → conclusion: marks only set conversion and German classification;
@@ -40,9 +62,10 @@ export interface CheckInputs {
   clearedBacklogs: BacklogOption | null;
   degree: DegreeOption | null;
   aps: ApsOption | null;
+  dmatField: DmatField | null;
 }
 export const DEFAULT_CHECK_INPUTS: CheckInputs = {
-  score: '', max: '', min: '', activeBacklogs: null, clearedBacklogs: null, degree: null, aps: null,
+  score: '', max: '', min: '', activeBacklogs: null, clearedBacklogs: null, degree: null, aps: null, dmatField: null,
 };
 
 export const CHECK_COPY = {
@@ -153,6 +176,7 @@ export function buildCheckDiagnosis(inputs: CheckInputs) {
       : [];
   return {
     grade, gradeFormatted, errorText, invalidFields, bullets,
+    dmat: buildDmatGuidance(inputs),
     classification: grade !== null ? `German grade · ${classifyGermanGrade(grade)}` : 'Enter your marks to see a conversion',
     headline: grade !== null ? 'Your grade is one part of the requirements check.' : 'Start with your marks and your transcript’s grading scale.',
     formulaText: grade !== null
@@ -165,6 +189,7 @@ export function buildCheckDiagnosis(inputs: CheckInputs) {
       ...(inputs.clearedBacklogs ? [`Cleared backlogs: ${inputs.clearedBacklogs}`] : []),
       ...(inputs.degree ? [`Degree duration: ${inputs.degree}`] : []),
       ...(inputs.aps ? [inputs.aps] : []),
+      ...(inputs.dmatField ? [`dMAT degree field: ${inputs.dmatField}`] : []),
     ].join(' · '),
   };
 }

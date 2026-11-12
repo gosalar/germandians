@@ -1,0 +1,17 @@
+@use '@/utils/styles/mixins' as m;
+
+.note {
+  display: block;
+  margin-top: 8px;
+  @include m.label-font(500, 14px);
+  line-height: 1.5;
+  a {
+    color: inherit;
+    text-underline-offset: 3px;
+    @media (pointer: coarse) {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
+  }
+}

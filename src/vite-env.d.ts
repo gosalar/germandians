@@ -1,7 +1,9 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+  /** Summer (default) or Winter; winter is displayed as an academic year. */
   readonly VITE_INTAKE_SEASON?: string;
+  /** Four-digit starting year, 1000–9999; default 2027. */
   readonly VITE_INTAKE_YEAR?: string;
   /** Registered responsible business identity. */
   readonly VITE_PRIVACY_NAMES?: string;
@@ -14,6 +16,7 @@ interface ImportMetaEnv {
   readonly VITE_FORM_ENDPOINT?: string;
   /** International number, 10–15 digits after formatting removal; invalid values open the form. */
   readonly VITE_WHATSAPP_NUMBER?: string;
+  /** Advertised fee; quote confirms payment timing and exceptions. */
   readonly VITE_FEE_AFTER_ADMISSION?: string;
   readonly VITE_INTAKE_STATUS?: string;
   readonly VITE_SHOW_SEAT_COUNT?: string;

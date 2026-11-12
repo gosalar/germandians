@@ -1,6 +1,8 @@
+import SourceNote from '@/components/SourceNote';
+import { HOUSING, SOURCES } from '@/utils/applicationFacts';
 import { SECTIONS } from '@/utils/constants';
 
-import { STAGES } from './data';
+import { JOURNEY_COPY, STAGES, STAGE_SOURCES } from './data';
 import MonthExplorer from './MonthExplorer';
 import styles from './styles.module.scss';
 
@@ -10,11 +12,11 @@ export default function Journey() {
       <div className={styles.container}>
         <div className={styles.head}>
           <h2 className={styles.title}>From first call to first week in Germany</h2>
-          <p className={styles.lede}>The whole process takes 6–7 months, in four stages.</p>
+          <p className={styles.lede}>{JOURNEY_COPY.lede}</p>
         </div>
 
         <ol className={styles.stages}>
-          {STAGES.map(({ phase, when, tag, lang, body }) => (
+          {STAGES.map(({ phase, when, tag, lang }) => (
             <li key={phase.n} className={styles.stage}>
               <div aria-hidden="true" className={styles.stageBar} style={{ background: phase.color }} />
               <div className={styles.stageMeta}>
@@ -26,10 +28,23 @@ export default function Journey() {
                 ) : null}
               </div>
               <h3 className={styles.stageTitle}>{phase.name}</h3>
-              <p className={styles.stageBody}>{body}</p>
+              <p className={styles.stageBody}>{phase.desc}</p>
             </li>
           ))}
         </ol>
+
+        <div className={styles.stageNotes}>
+          <p className={styles.explorerBody}>
+            {HOUSING.preparation}
+            <SourceNote source={SOURCES.housing} />
+          </p>
+          <div>
+            <div className={styles.sourcesLabel}>{JOURNEY_COPY.sources}</div>
+            {STAGE_SOURCES.map((source) => (
+              <SourceNote key={source.url} source={source} />
+            ))}
+          </div>
+        </div>
 
         <MonthExplorer />
       </div>

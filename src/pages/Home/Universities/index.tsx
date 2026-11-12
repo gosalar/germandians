@@ -1,3 +1,5 @@
+import SourceNote from '@/components/SourceNote';
+import { SOURCES, TUITION } from '@/utils/applicationFacts';
 import { SECTIONS } from '@/utils/constants';
 
 import styles from './styles.module.scss';
@@ -5,8 +7,19 @@ import styles from './styles.module.scss';
 const ROWS = [
   {
     topic: 'Tuition',
-    public: 'No tuition fees in most German states. You still pay a semester contribution each term.',
-    private: 'Tuition fees apply, and they vary widely between universities.',
+    public: (
+      <>
+        {TUITION.public}
+        <SourceNote source={SOURCES.daad} />
+        <SourceNote source={SOURCES.tum} />
+      </>
+    ),
+    private: (
+      <>
+        {TUITION.private}
+        <SourceNote source={SOURCES.daad} />
+      </>
+    ),
   },
   {
     topic: 'Admissions',

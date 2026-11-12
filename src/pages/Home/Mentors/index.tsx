@@ -1,5 +1,6 @@
 import reichstag from '@/assets/images/reichstag.jpg';
-import { siteConfig } from '@/utils/siteConfig';
+import { INTAKE_SEATS, SECTIONS } from '@/utils/constants';
+import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
 
 import { COMPARISON, METHOD_POINTS, STATS } from './data';
 import styles from './styles.module.scss';
@@ -58,7 +59,7 @@ function ComparisonCards() {
 
 export default function Mentors() {
   return (
-    <section id="why" data-screen-label="How we work" className={styles.section}>
+    <section id={SECTIONS.mentors} data-screen-label="How we work" className={styles.section}>
       <div className={styles.container}>
         <div className={styles.intro}>
           <div className={styles.introCopy}>
@@ -104,8 +105,7 @@ export default function Mentors() {
         </h3>
         <WorkloadDiagram />
         <p className={styles.ratioNote}>
-          A strong application takes about six months of work. With six mentors, capping {siteConfig.intake} at 30
-          students keeps it to five per mentor.
+          {`The ${siteConfig.intake} capacity is ${INTAKE_SEATS} students across six mentors. ${INTAKE_READINESS}`}
         </p>
 
         <h3 className={styles.compareTitle}>Germandians vs. many consultancies</h3>

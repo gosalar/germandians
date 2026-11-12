@@ -29,7 +29,7 @@ The site has to match the Claude Design prototype pixel for pixel. The visual te
 npm run test:visual          # full suite: 37 checks
 npm run test:visual:quick    # 15 checks
 npm run test:visual:report   # open the last report (reference, app and diff images for failures)
-npm run test:ux              # 53 checker, contact, submission and typography checks
+npm run test:ux              # 63 checker, contact, submission, process and typography checks
 ```
 
 - The full suite compares home at 10 widths, privacy at 5, and 22 interaction states including keyboard, hover, disabled and input-focus states.
@@ -57,10 +57,10 @@ The design's editable "props" are environment variables. Copy `config/.env.examp
 | --- | --- |
 | `VITE_FORM_ENDPOINT` | Absolute HTTPS URL without credentials, implementing the receipt contract below. Missing or invalid: explained email draft handoff |
 | `VITE_WHATSAPP_NUMBER` | International number, 10–15 digits after stripping punctuation, first digit nonzero. Missing or invalid: “Open review form” / “Profile review” links go to the form, with a production warning |
-| `VITE_FEE_AFTER_ADMISSION` | Receipt shows "Written quote" |
+| `VITE_FEE_AFTER_ADMISSION` | Advertised service fee; empty shows "Written quote". Timing and any exception are agreed in the written quote. Values longer than 16 characters appear in full in the fee explanation, with "See quote" on the receipt |
 | `VITE_INTAKE_STATUS` | `Not confirmed` shows no badge; `Enquiries open`, `Waitlist only`, `Enquiries closed` show one |
-| `VITE_INTAKE_SEASON` | `Summer`; accepts `Winter` or `Summer` |
-| `VITE_INTAKE_YEAR` | `2027`; accepts a four-digit year from `1000` to `9999` |
+| `VITE_INTAKE_SEASON` | `Summer`; accepts `Winter` or `Summer`. Winter uses academic-year notation |
+| `VITE_INTAKE_YEAR` | `2027`; accepts a four-digit starting year from `1000` to `9999`. Winter + 2027 displays `Winter 2027/28`; summer displays `Summer 2027` |
 | `VITE_PRIVACY_NAMES` | Registered business name / responsible entity, plain text; omitted in production if empty |
 | `VITE_PRIVACY_ADDRESS` | Business postal address, plain text; omitted in production if empty |
 | `VITE_PRIVACY_FORM_SERVICE` | Form provider; used only with a form endpoint; omitted in production if empty |
@@ -90,15 +90,18 @@ src/
 │   ├── Check/                      # German grade conversion and programme requirements check
 │   ├── Privacy/                    # standalone privacy note
 │   └── ErrorPage/                  # 404 and route errors
-├── components/                     # SiteHeader, SiteFooter, MobileActionBar, Brand, HomeSectionLink
+├── components/                     # SiteHeader, SiteFooter, MobileActionBar, Brand, HomeSectionLink, SourceNote, DmatNote
 ├── contexts/PageChrome/            # menu state + hero/form visibility for the mobile action bar
 ├── hooks/                          # useReplayOnFirstView, useSettleHashScroll
 ├── services/profileReview.ts       # form submission
 ├── themes/                         # palettes, layered styles, component overrides
-└── utils/                          # constants, siteConfig (env), styles (tokens, mixins, fonts, global)
+└── utils/                          # constants, siteConfig (env), applicationFacts (dated sources and costs), styles
 ```
 
 ## Notes
+
+- **Process and costs.** Shared fee wording lives in `constants.ts`; intake labels and readiness in `siteConfig.ts`; dMAT, housing, tuition and external costs with dated official sources in `applicationFacts.ts`. Re-read the official page before changing a figure there, and update its review date. The seven-month journey is an overlapping example, not a duration promise. The fee promise is the standard arrangement; the written quote defines exceptions and payment terms.
+- **Pinned test settings.** The UX endpoint variant uses Winter 2027/28 and the fictitious fee label "Test quote"; the email variant uses Summer 2027 and an empty fee. Both pin intake status and seat settings. The visual suite uses default Summer 2027 settings.
 
 - **Adding a Mantine component.** Add its `.layer.css` and any dependent component styles to `src/themes/mantine-styles.ts`. The unlayered site SCSS takes precedence over Mantine's layer. For brand-specific defaults or variants, add an override and SCSS module under `src/themes/<Component>/` and register it in `src/themes/index.ts`. Check it at `/_theme` during development and run the visual suite.
 - **Shared controls and custom artwork.** Use themed controls for buttons, fields, accordions and status badges. Keep the receipt, stamp cards, responsive comparison tables and other bespoke visuals in their feature folders. The consent checkbox uses browser-native rendering. Keep a control custom if a shared variant cannot reproduce the reference.

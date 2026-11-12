@@ -1,4 +1,4 @@
-import { CONTACT, INTAKE_SEATS, INTAKE_STATUSES, SECTIONS, hashLink, type IntakeStatus } from '@/utils/constants';
+import { CONTACT, INTAKE_SEASONS, INTAKE_SEATS, INTAKE_STATUSES, SECTIONS, hashLink, type IntakeSeason, type IntakeStatus } from '@/utils/constants';
 import { toFormEndpoint, toWhatsAppNumber } from './contactSettings';
 
 /**
@@ -18,8 +18,16 @@ const toSeats = (value: string) => {
 };
 
 const whatsappDigits = toWhatsAppNumber(env.VITE_WHATSAPP_NUMBER);
-const intakeSeason = text(env.VITE_INTAKE_SEASON) === 'Winter' ? 'Winter' : 'Summer';
+const season = text(env.VITE_INTAKE_SEASON);
+const intakeSeason: IntakeSeason = (INTAKE_SEASONS as readonly string[]).includes(season) ? season as IntakeSeason : 'Summer';
 const intakeYear = /^[1-9]\d{3}$/.test(text(env.VITE_INTAKE_YEAR)) ? text(env.VITE_INTAKE_YEAR) : '2027';
+const intakeLabel = intakeSeason === 'Winter'
+  ? `Winter ${intakeYear}/${String(Number(intakeYear) + 1).slice(-2)}`
+  : `Summer ${intakeYear}`;
+
+/** What the site says about readiness wherever it names the intake. The second sentence also stands alone. */
+export const INTAKE_REVIEW = 'Your profile review assesses the intake you can target.';
+export const INTAKE_READINESS = `Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. ${INTAKE_REVIEW}`;
 
 export const privacyConfig = {
   names: text(env.VITE_PRIVACY_NAMES),
@@ -35,7 +43,7 @@ export const siteConfig = {
   formEndpoint: toFormEndpoint(env.VITE_FORM_ENDPOINT),
   feeAfterAdmission: text(env.VITE_FEE_AFTER_ADMISSION),
   intakeStatus: toIntakeStatus(text(env.VITE_INTAKE_STATUS)),
-  intake: `${intakeSeason} ${intakeYear}`,
+  intake: intakeLabel,
   showSeatCount: text(env.VITE_SHOW_SEAT_COUNT) === 'true',
   seatsLeft: toSeats(text(env.VITE_SEATS_LEFT)),
 } as const;

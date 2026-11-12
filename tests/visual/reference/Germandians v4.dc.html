@@ -9,7 +9,7 @@
 <x-dc>
 <helmet>
 <title>Germandians | Student-led guidance for studying in Germany</title>
-<meta name="description" content="Six students living in Germany guide Indian students from profile evaluation to their first week here. No service fee until you're admitted.">
+<meta name="description" content="Six students living in Germany guide Indian students from profile evaluation to their first week here. €0 service fee until you’re admitted, under the standard arrangement.">
 <link href="./fonts.css" rel="stylesheet">
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -31,8 +31,8 @@ button{font:inherit}
 .rc-clip{margin-right:8px;margin-left:8px}
 .rc-paper{padding-right:10px;padding-left:10px;font-size:14px}
 .rc-line{gap:8px}
-.rc-line.rc-pay{flex-direction:column;gap:2px}
-.rc-line.rc-pay>:last-child{text-align:left !important}
+
+
 }
 .seg-num{display:none}
 @media (max-width:639.98px){.seg-name{display:none}.seg-num{display:inline}}
@@ -90,6 +90,8 @@ button{font:inherit}
 .hero-ctas{flex-direction:column}
 .hero-ctas>a{width:100%;text-align:center}
 }
+.source-note{display:block;margin-top:8px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:500;font-size:14px;line-height:1.5}.source-note a{color:inherit;text-underline-offset:3px}
+@media(pointer:coarse){.source-note a{display:inline-flex;align-items:center;min-height:44px}}
 </style>
 </helmet>
 
@@ -141,7 +143,7 @@ button{font:inherit}
       <p style="margin:0;max-width:30ch;font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:clamp(22px,2.1vw,30px);line-height:1.48;color:#10182e;text-wrap:pretty">Six student mentors in Germany. Up to five students per mentor.</p>
       <a href="#fees" class="hero-fee" style="align-self:flex-start;display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#ffffff;border:2px dashed #10182e;border-radius:12px;padding:12px 18px;text-decoration:none;color:#10182e;transition:background .2s" style-hover="background:#fff6cc;color:#10182e">
         <span style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(30px,2.8vw,40px);line-height:1;letter-spacing:-0.02em">€0</span>
-        <span style="font-weight:700;font-size:clamp(17px,1.4vw,20px);line-height:1.3">service fee until you're admitted</span>
+        <span style="font-weight:700;font-size:clamp(17px,1.4vw,20px);line-height:1.3">service fee until you’re admitted, under the standard arrangement</span>
       </a>
       <p style="margin:0;max-width:38ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;font-weight:500;color:#2b3350;text-wrap:pretty">We guide you from profile evaluation to your first week in Germany.</p>
       <div ref="{{ heroCtaRef }}" class="hero-ctas" style="display:flex;flex-wrap:wrap;gap:12px">
@@ -153,7 +155,8 @@ button{font:inherit}
           <span style="font-weight:700;font-size:16px;color:#10182e">Summer 2027 intake, 30 students</span>
           <sc-if value="{{ hasStatus }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:6px;background:{{ statusBg }};color:{{ statusInk }};font-weight:700;font-size:15px"><span style="width:8px;height:8px;border-radius:50%;background:{{ statusInk }}"></span><span>{{ statusLabel }}</span></span></sc-if>
         </div>
-        <p style="margin:0;font-size:16px;line-height:1.5;color:#3b4460">Run by the team behind a 22,000-member student community.</p>
+        <p style="margin:0;font-size:16px;line-height:1.5;color:#3b4460">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review assesses the intake you can target.</p>
+<p style="margin:0;font-size:16px;line-height:1.5;color:#3b4460">Run by the team behind a 22,000-member student community.</p>
       </div>
     </div>
     <div style="position:relative;width:100%;aspect-ratio:1217/1168;min-width:0">
@@ -178,7 +181,7 @@ button{font:inherit}
       <h3 style="margin:0 0 clamp(24px,3vw,36px);font-family:'Archivo',sans-serif;font-weight:900;font-stretch:76%;font-size:clamp(44px,5vw,80px);line-height:.9;letter-spacing:-0.022em;word-spacing:.12em;color:#10182e;text-wrap:balance">By the students, for the students</h3>
       <div style="border-top:2px solid #10182e;padding:28px 0;display:flex;flex-direction:column;gap:12px">
         <h3 style="margin:0;display:flex;align-items:center;gap:14px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.4vw,48px);line-height:1;letter-spacing:-0.015em;color:#10182e"><span aria-hidden="true" style="flex:none;width:.42em;height:.42em;border-radius:4px;background:#1d7a3d"></span><span>We start from scratch</span></h3>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350;text-wrap:pretty">You can come to us with no APS, no shortlist and no idea where to begin. We start there and take you through every step in order, from the first document to your first week in Germany.</p>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350;text-wrap:pretty">You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there. Your profile review assesses the intake you can target.<br><span>dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.</span><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span></p>
       </div>
       <div style="border-top:2px solid #10182e;padding:28px 0;display:flex;flex-direction:column;gap:12px">
         <h3 style="margin:0;display:flex;align-items:center;gap:14px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.4vw,48px);line-height:1;letter-spacing:-0.015em;color:#10182e"><span aria-hidden="true" style="flex:none;width:.42em;height:.42em;border-radius:4px;background:#ef8a21"></span><span>We guide from experience</span></h3>
@@ -191,8 +194,8 @@ button{font:inherit}
 <section id="fees" data-screen-label="Fees" style="background:#10182e;color:#ffffff;padding:clamp(72px,10vw,136px) clamp(20px,5vw,72px)">
   <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:{{ feeCols }};grid-template-areas:{{ feeAreas }};gap:clamp(36px,5vw,72px) clamp(40px,6vw,96px);align-items:start">
     <div style="grid-area:a;display:flex;flex-direction:column;gap:22px;min-width:0">
-      <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;color:#f5c400;line-height:.84"><span style="display:block;font-stretch:70%;font-size:clamp(76px,9.4vw,152px);letter-spacing:-0.025em;word-spacing:.12em">Zero euros</span><span style="display:block;margin-top:16px;font-stretch:100%;font-size:clamp(28px,3vw,44px);letter-spacing:-0.02em;line-height:1.05;color:#ffffff;text-wrap:balance">service fee until you're admitted.</span></h2>
-      <p style="margin:0;max-width:44ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">You pay Germandians nothing until a university admits you. Everything on the receipt is part of the service.</p>
+      <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;color:#f5c400;line-height:.84"><span style="display:block;font-stretch:70%;font-size:clamp(76px,9.4vw,152px);letter-spacing:-0.025em;word-spacing:.12em">€0</span><span style="display:block;margin-top:16px;font-stretch:100%;font-size:clamp(28px,3vw,44px);letter-spacing:-0.02em;line-height:1.05;color:#ffffff;text-wrap:balance">service fee until you’re admitted, under the standard arrangement.</span></h2>
+      <p style="margin:0;max-width:44ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">Any exception, including a fee before admission or for partial support, is stated in your written quote before you agree to work. The receipt lists the full service; your quote confirms what yours includes.</p>
     </div>
 
     <div style="grid-area:b;display:flex;flex-direction:column;align-items:center;gap:16px;min-width:0">
@@ -212,17 +215,17 @@ button{font:inherit}
               <div class="rc-line"><span>Portal applications</span><span>Included</span></div>
               <div class="rc-line"><span>Loan and blocked account help</span><span>Included</span></div>
               <div class="rc-line"><span>Visa preparation</span><span>Included</span></div>
-              <div class="rc-line"><span>Dorm, Anmeldung, bank account</span><span>Included</span></div>
+              <div class="rc-line"><span>Housing, Anmeldung, bank account</span><span>Included</span></div>
               <div style="border-top:2px dashed #10182e;margin:6px 0"></div>
               <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px">
-                <span style="white-space:nowrap;font-weight:700;font-size:19px;padding-bottom:10px">Due now</span>
-                <span style="white-space:nowrap;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,11vw,60px);line-height:1;letter-spacing:-0.03em">0,00 €</span>
+                <span style="white-space:nowrap;font-weight:700;font-size:19px;padding-bottom:10px">Due now, as standard</span>
+                <span style="white-space:nowrap;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(44px,11vw,60px);line-height:1;letter-spacing:-0.03em">€0</span>
               </div>
               <div style="border-top:2px dashed #10182e;margin:6px 0"></div>
-              <div class="rc-line rc-pay"><span>Due after admission</span><span style="font-weight:700;text-align:right">{{ feeShort }}</span></div>
-              <div class="rc-line rc-pay"><span>Triggered by</span><span style="font-weight:700;text-align:right">Your admission letter</span></div>
+              <div class="rc-line rc-pay"><span>Service fee</span><span style="font-weight:700;text-align:right">{{ feeShort }}</span></div>
+              <div class="rc-line rc-pay"><span>Triggered by</span><span style="font-weight:700;text-align:right">As agreed in quote</span></div>
               <div style="border-top:2px dashed #10182e;margin:6px 0"></div>
-              <div style="text-align:center;font-weight:700;font-size:18px">No admission, no service fee.</div>
+              <div style="text-align:center;font-weight:700;font-size:18px">€0 service fee until you’re admitted, under the standard arrangement.</div>
               <div style="height:46px;margin:8px 18px 0;background:repeating-linear-gradient(90deg,#10182e 0 2px,transparent 2px 4px,#10182e 4px 7px,transparent 7px 9px,#10182e 9px 10px,transparent 10px 13px,#10182e 13px 16px,transparent 16px 17px)"></div>
             </div>
             <div style="height:12px;background:linear-gradient(135deg,#fffef8 50%,transparent 0) 0 0/24px 24px repeat-x,linear-gradient(225deg,#fffef8 50%,transparent 0) 0 0/24px 24px repeat-x"></div>
@@ -230,24 +233,18 @@ button{font:inherit}
         </div>
       </div>
       <button type="button" onClick="{{ print }}" style="background:none;border:0;color:#c6ccda;font-family:'Barlow Semi Condensed',sans-serif;font-weight:500;font-size:15px;cursor:pointer;text-decoration:underline;text-decoration-color:#4a5372;text-underline-offset:4px;padding:8px">Replay receipt animation</button>
+<p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review assesses the intake you can target.</p>
     </div>
 
     <div style="grid-area:c;display:flex;flex-direction:column;gap:32px;min-width:0">
       <div style="display:flex;flex-direction:column;gap:10px">
-        <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.2vw,30px);color:#ffffff">After you're admitted</h3>
+        <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.2vw,30px);color:#ffffff">Agreeing your quote</h3>
         <p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">{{ feeText }}</p>
+<p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">Before work starts, your written quote states:</p><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr;gap:10px 24px;font-size:17px;line-height:1.45;color:#e3e6ee"><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>what changes the price</span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>what counts as admission, including conditional, private and backup offers, and whether only your approved shortlist counts</span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>whether there is one fee or a fee per admission</span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>how many applications are covered</span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>what partial support includes</span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>cancellation and deferral</span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>an unsuccessful intake, a visa refusal or a funding failure</span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>the payment currency and taxes</span></li></ul></div><div style="display:flex;flex-direction:column;gap:10px"><h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.2vw,30px);color:#ffffff">When payment is due</h3><p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">Under the standard arrangement, the service fee becomes due after a university admits you. Your written quote states what triggers payment.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px">
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.2vw,30px);color:#ffffff">Paid separately, to other organisations</h3>
-        <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px 24px;font-size:17px;line-height:1.45;color:#e3e6ee">
-          <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>University and uni-assist application fees</span></li>
-          <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>APS certificate fee</span></li>
-          <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>IELTS test fee</span></li>
-          <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>Visa fee</span></li>
-          <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>Blocked account deposit (your own living money)</span></li>
-          <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span>Health insurance and flights</span></li>
-        </ul>
-        <p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">These fees go directly to those organisations, so we can't refund them.</p>
+        <p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">These costs are separate from the Germandians service fee. They are planning figures, not a quote. Check the current charge and refund terms with each provider.</p><div><h4 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;margin:10px 0 12px;color:#f5c400">Provider charges</h4><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr;gap:10px 24px;font-size:17px;line-height:1.45;color:#e3e6ee"><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>uni-assist · €75 / €30</strong><br>First course / each additional course in the same semester, including VPD. Direct university fees vary.<span class="source-note"><a href="https://www.uni-assist.de/en/how-to-apply/apply-online/pay-submit/" target="_blank" rel="noopener">uni-assist: handling fees</a> · Last reviewed 12 November 2026</span></span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>APS · ₹18,000</strong><br>Individual graduate verification procedure.<span class="source-note"><a href="https://aps-india.de/checklists/" target="_blank" rel="noopener">APS India: checklists and graduate leaflet</a> · Last reviewed 12 November 2026</span></span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>dMAT, where required · €150</strong><br>Paid to g.a.s.t. during registration; check the exemptions.<span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span></span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>IELTS, health insurance and flights</strong><br>Check the current test, policy and travel prices with your chosen providers.</span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>National visa · €75</strong><br>Fee for applicants over 18, paid in INR at the exchange rate on the appointment day. The service provider charges its own fee on top.<span class="source-note"><a href="https://india.diplo.de/in-en/service/2755482-2755482" target="_blank" rel="noopener">German Missions: national visa</a> · Last reviewed 12 November 2026</span></span></li></ul></div><div><h4 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;margin:10px 0 12px;color:#f5c400">Semester contributions</h4><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr;gap:10px 24px;font-size:17px;line-height:1.45;color:#e3e6ee"><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>Contribution per semester · €70–€430</strong><br>DAAD’s range; confirm the amount with your university. Separate from tuition.<span class="source-note"><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/finances/" target="_blank" rel="noopener">DAAD: costs</a> · Last reviewed 12 November 2026</span></span></li></ul></div><div><h4 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;margin:10px 0 12px;color:#f5c400">Tuition</h4><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr;gap:10px 24px;font-size:17px;line-height:1.45;color:#e3e6ee"><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>Public and private programmes</strong><br>Many public programmes have no tuition, but non-EU fees apply at some institutions and in some states; certain programmes also charge tuition. A semester contribution is separate. Check your programme’s fees and exemptions.<span class="source-note"><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/finances/" target="_blank" rel="noopener">DAAD: costs</a> · Last reviewed 12 November 2026</span></span></li><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>TUM example · €4,000 or €6,000</strong><br>Usual master’s tuition per semester for non-EU/EEA students liable for fees, rising to €4,600 or €6,800 from winter semester 2027/28. Programme, exemption and waiver rules apply.<span class="source-note"><a href="https://www.tum.de/en/studies/fees/tuition" target="_blank" rel="noopener">TUM: tuition fees</a> · Last reviewed 12 November 2026</span></span></li></ul></div><div><h4 style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;margin:10px 0 12px;color:#f5c400">Blocked-account deposit</h4><ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr;gap:10px 24px;font-size:17px;line-height:1.45;color:#e3e6ee"><li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:10px;height:10px;margin-top:8px;border-radius:2px;background:#f5c400"></span><span><strong>Your own living money · €992 per month</strong><br>The mission’s figure, in force since 1 September 2024. 12 months at that rate comes to €11,904. A blocked account is one way to prove funds, not a service fee. Provider charges are separate; check the current visa checklist.<span class="source-note"><a href="https://india.diplo.de/in-en/service/2546328-2546328" target="_blank" rel="noopener">German Missions: visa FAQs</a> · Last reviewed 12 November 2026</span></span></li></ul></div>
       </div>
       <div style="align-self:flex-start;display:flex;flex-wrap:wrap;gap:12px">
         <a href="#contact-form" style="background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;transition:background .2s,color .2s" style-hover="background:#ffffff;color:#10182e">Get my profile reviewed</a>
@@ -261,52 +258,53 @@ button{font:inherit}
   <div style="max-width:1240px;margin:0 auto">
     <div style="display:flex;flex-direction:column;gap:16px;max-width:860px">
       <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(46px,7vw,116px);line-height:.9;letter-spacing:-0.022em;word-spacing:.14em;font-stretch:78%;color:#10182e;text-wrap:balance">From first call to first week in Germany</h2>
-      <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">The whole process takes 6–7 months, in four stages.</p>
+      <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">Four stages that overlap. The seven months below are one example of how they can fit together, not a fixed duration.</p>
     </div>
 
     <ol style="list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:{{ stageCols }};gap:clamp(36px,4vw,48px) clamp(20px,3vw,32px)">
       <li style="display:flex;flex-direction:column;gap:12px;min-width:0">
         <div aria-hidden="true" style="height:10px;border-radius:5px;background:#1d7a3d"></div>
         <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px">
-          <span style="font-weight:600;color:#3b4460">Phase 1, months 1–2</span>
+          <span style="font-weight:600;color:#3b4460">From the start</span>
           <span lang="de" style="font-weight:700;color:#1d7a3d">APS</span>
         </div>
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,2.6vw,42px);line-height:1;letter-spacing:-0.015em;color:#10182e">Foundation</h3>
-        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We evaluate your profile and eligibility, help you apply for APS and plan your IELTS preparation.</p>
+        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We evaluate your profile and start programme research, requirement checks and deadline planning with you. Alongside that we help you apply for APS, check whether you need dMAT and plan your IELTS preparation.</p>
       </li>
       <li style="display:flex;flex-direction:column;gap:12px;min-width:0">
         <div aria-hidden="true" style="height:10px;border-radius:5px;background:#ef8a21"></div>
         <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px">
-          <span style="font-weight:600;color:#3b4460">Phase 2, months 3–4</span>
+          <span style="font-weight:600;color:#3b4460">Overlaps with Foundation</span>
         </div>
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,2.6vw,42px);line-height:1;letter-spacing:-0.015em;color:#10182e">Applications</h3>
-        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We shortlist universities with you, write your SOP with you and submit every application on the university portals.</p>
+        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We shortlist universities with you, write your SOP with you and submit every application on the university portals. Where a programme needs a VPD from uni-assist, we request it early: the university application is a separate step with its own deadline.</p>
       </li>
       <li style="display:flex;flex-direction:column;gap:12px;min-width:0">
         <div aria-hidden="true" style="height:10px;border-radius:5px;background:#d42b1f"></div>
         <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px">
-          <span style="font-weight:600;color:#3b4460">Phase 3, months 5–6</span>
+          <span style="font-weight:600;color:#3b4460">Overlaps with Applications</span>
           <span lang="en" style="font-weight:700;color:#c4261b">Visa</span>
         </div>
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,2.6vw,42px);line-height:1;letter-spacing:-0.015em;color:#10182e">Pre-departure</h3>
-        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">As admission decisions arrive, we help with your education loan, help you open your blocked account and prepare your visa documents.</p>
+        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We help with your education loan, help you open your blocked account and prepare your visa documents and appointment. We plan these with you early and complete each one as your offers and documents arrive.</p>
       </li>
       <li style="display:flex;flex-direction:column;gap:12px;min-width:0">
         <div aria-hidden="true" style="height:10px;border-radius:5px;background:#121212"></div>
         <div style="margin-top:4px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:'Barlow Semi Condensed',sans-serif;font-size:16px">
-          <span style="font-weight:600;color:#3b4460">Phase 4, month 7</span>
+          <span style="font-weight:600;color:#3b4460">Once you can travel</span>
           <span lang="de" style="font-weight:700;color:#121212">Anmeldung</span>
         </div>
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,2.6vw,42px);line-height:1;letter-spacing:-0.015em;color:#10182e">Arrival</h3>
-        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We help with your student dorm applications, take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors.</p>
+        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers.</p>
       </li>
     </ol>
 
-    <div ref="{{ explorerRef }}">
+    <div style="margin-top:32px;max-width:68ch;display:flex;flex-direction:column;gap:16px"><p style="margin:0;font-size:17px;line-height:1.5;color:#3b4460;text-wrap:pretty">Housing preparation starts before you travel. Apply as soon as each provider opens applications: rooms are allocated from waiting lists and a place is not guaranteed. Keep private rooms and temporary accommodation in view as alternatives.<span class="source-note"><a href="https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/" target="_blank" rel="noopener">Studierendenwerk München Oberbayern: housing FAQs</a> · Last reviewed 12 November 2026</span></p><div><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#1f2742">Official sources for these stages</div><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span><span class="source-note"><a href="https://www.uni-assist.de/en/how-to-apply/plan-your-application/vpd/" target="_blank" rel="noopener">uni-assist: VPD</a> · Last reviewed 12 November 2026</span><span class="source-note"><a href="https://india.diplo.de/in-en/service/2546328-2546328" target="_blank" rel="noopener">German Missions: visa FAQs</a> · Last reviewed 12 November 2026</span></div></div>
+<div ref="{{ explorerRef }}">
     <div style="margin-top:clamp(80px,9vw,120px);padding-top:clamp(32px,4vw,48px);border-top:2px solid #10182e;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 24px">
       <div style="display:flex;flex-direction:column;gap:8px;max-width:640px">
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.6vw,52px);line-height:1;letter-spacing:-0.015em;color:#10182e">Month by month</h3>
-        <p style="margin:0;font-size:17px;line-height:1.5;color:#3b4460;text-wrap:pretty">The same four stages, split into seven months. Pick a month to see what we work on with you.</p>
+        <p style="margin:0;font-size:17px;line-height:1.5;color:#3b4460;text-wrap:pretty">Each month has a main focus, shown by its colour. Work from the other stages runs alongside it, and your programme deadlines set the real dates.</p>
       </div>
       <button type="button" onClick="{{ togglePlay }}" aria-pressed="{{ playing }}" style="background:#10182e;color:#f5c400;border:0;border-radius:12px;padding:0 22px;min-height:50px;font-weight:700;font-size:16px;cursor:pointer;transition:background .2s,color .2s" style-hover="background:#f5c400;color:#10182e">{{ playLabel }}</button>
     </div>
@@ -344,14 +342,9 @@ button{font:inherit}
           <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(88px,13vw,180px);line-height:1;margin-top:8px;letter-spacing:-0.05em;color:{{ phaseInk }};transition:color .3s">{{ month }}<span style="font-size:.26em;letter-spacing:0;color:#3b4460;font-weight:700"> of 7</span></div>
         </div>
         <div aria-live="polite" style="display:flex;flex-direction:column;gap:14px">
-          <h4 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,34px);line-height:1.1;color:{{ phaseInk }};transition:color .3s">Phase {{ phaseNum }}: {{ phaseName }}</h4>
+          <h4 style="margin:0;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(24px,2.4vw,34px);line-height:1.1;color:{{ phaseInk }};transition:color .3s">Main focus: {{ phaseName }}</h4>
           <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350">{{ phaseDesc }}</p>
-          <div style="margin-top:6px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#1f2742">Month {{ month }} tasks</div>
-          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
-            <sc-for list="{{ monthTasks }}" as="item" hint-placeholder-count="2">
-              <li style="display:flex;gap:12px;align-items:center;font-size:18px;font-weight:600;color:#10182e"><span aria-hidden="true" style="flex:none;width:22px;height:22px;border-radius:5px;background:{{ phaseColor }};display:grid;place-items:center;color:#ffffff;font-size:14px;font-weight:800">✓</span><span>{{ item.t }}</span></li>
-            </sc-for>
-          </ul>
+          <div style="display:flex;flex-direction:column;gap:14px"><div style="margin-top:6px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#1f2742">What we work on</div><ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px"><sc-for list="{{ monthTasks }}" as="item"><li style="display:flex;gap:12px;align-items:flex-start;font-size:18px;font-weight:600;color:#10182e"><span aria-hidden="true" style="flex:none;width:22px;height:22px;margin-top:2px;border-radius:5px;background:{{ phaseColor }};display:grid;place-items:center;color:#ffffff;font-size:14px;font-weight:800">✓</span><span><strong>{{ item.strand }}: </strong>{{ item.text }}<sc-if value="{{ item.hasSource }}"><span class="source-note"><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.sourceLabel }}</a> · Last reviewed {{ item.reviewed }}</span></sc-if></span></li></sc-for></ul><div style="padding-top:16px;border-top:1px dashed #3b4460;display:flex;flex-direction:column;gap:14px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#1f2742">Waiting on</div><ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px"><sc-for list="{{ monthWaits }}" as="item"><li style="display:flex;gap:12px;align-items:flex-start;font-size:18px;font-weight:600;color:#10182e"><span aria-hidden="true" style="flex:0 0 22px;text-align:center;font-weight:700">…</span><span><strong>{{ item.strand }}: </strong>{{ item.text }}<sc-if value="{{ item.hasSource }}"><span class="source-note"><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.sourceLabel }}</a> · Last reviewed {{ item.reviewed }}</span></sc-if></span></li></sc-for></ul></div></div>
         </div>
       </div>
       <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -375,7 +368,7 @@ button{font:inherit}
           <div role="columnheader" style="background:#10182e;border-radius:24px 24px 0 0;padding:clamp(28px,3.4vw,44px) clamp(24px,3.4vw,44px) 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap"><h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(28px,3vw,42px);line-height:1;color:#f5c400">Public universities</h3></div>
           <div role="columnheader" style="background:#f7f5ef;border-radius:24px 24px 0 0;padding:clamp(28px,3.4vw,44px) clamp(24px,3.4vw,44px) 12px;display:flex;justify-content:space-between;align-items:baseline;gap:8px 12px;flex-wrap:wrap"><h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(28px,3vw,42px);line-height:1;color:#c4261b">Private universities</h3></div>
         </div>
-        <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Tuition</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">No tuition fees in most German states. You still pay a semester contribution each term.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Tuition</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Tuition fees apply, and they vary widely between universities.</div></div></div></div>
+        <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Tuition</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">Many public programmes have no tuition, but non-EU fees apply at some institutions and in some states; certain programmes also charge tuition. A semester contribution is separate. Check your programme’s fees and exemptions.<span class="source-note"><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/finances/" target="_blank" rel="noopener">DAAD: costs</a> · Last reviewed 12 November 2026</span><span class="source-note"><a href="https://www.tum.de/en/studies/fees/tuition" target="_blank" rel="noopener">TUM: tuition fees</a> · Last reviewed 12 November 2026</span></div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Tuition</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Private universities charge programme-specific tuition. Check the full fee schedule and any separate semester contribution.<span class="source-note"><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/finances/" target="_blank" rel="noopener">DAAD: costs</a> · Last reviewed 12 November 2026</span></div></div></div></div>
         <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Admissions</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">Strict. Your earlier credits have to match the course requirements, and incomplete documents get rejected.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Admissions</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Usually more flexible. Quality varies a lot, and some schools are predatory.</div></div></div></div>
         <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Reputation</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">The benchmark for German education, with a strong international reputation.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Reputation</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Depends entirely on the institution. We only apply to accredited, reputable ones.</div></div></div></div>
         <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px) clamp(24px,3.4vw,44px);border-radius:0 0 24px 24px;"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">What we check</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">Your ECTS credits against each course's prerequisites, your APS certificate, and every document on the checklist.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px) clamp(24px,3.4vw,44px);border-radius:0 0 24px 24px;"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">What we check</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Accreditation, genuine industry connections, and whether the total cost makes sense for your career.</div></div></div></div>
@@ -385,8 +378,8 @@ button{font:inherit}
       <div style="margin-top:32px;display:flex;flex-direction:column;gap:32px">
         <div style="display:flex;flex-direction:column;gap:10px">
           <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;line-height:1.1;color:#10182e">Tuition</h3>
-          <div style="background:#10182e;color:#ffffff;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Public</span><span style="font-size:17px;line-height:1.5">No tuition fees in most German states. You still pay a semester contribution each term.</span></div>
-          <div style="background:#f7f5ef;color:#10182e;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#c4261b">Private</span><span style="font-size:17px;line-height:1.5;color:#2b3350">Tuition fees apply, and they vary widely between universities.</span></div>
+          <div style="background:#10182e;color:#ffffff;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Public</span><span style="font-size:17px;line-height:1.5">Many public programmes have no tuition, but non-EU fees apply at some institutions and in some states; certain programmes also charge tuition. A semester contribution is separate. Check your programme’s fees and exemptions.<span class="source-note"><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/finances/" target="_blank" rel="noopener">DAAD: costs</a> · Last reviewed 12 November 2026</span><span class="source-note"><a href="https://www.tum.de/en/studies/fees/tuition" target="_blank" rel="noopener">TUM: tuition fees</a> · Last reviewed 12 November 2026</span></span></div>
+          <div style="background:#f7f5ef;color:#10182e;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#c4261b">Private</span><span style="font-size:17px;line-height:1.5;color:#2b3350">Private universities charge programme-specific tuition. Check the full fee schedule and any separate semester contribution.<span class="source-note"><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/finances/" target="_blank" rel="noopener">DAAD: costs</a> · Last reviewed 12 November 2026</span></span></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;line-height:1.1;color:#10182e">Admissions</h3>
@@ -494,10 +487,6 @@ button{font:inherit}
         <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#10182e">22,000+</div>
         <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members in the Germandians student community</div>
       </div>
-      <div class="m-stat" style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#10182e">2,000+</div>
-        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members who say they're aiming for Summer 2027</div>
-      </div>
       <div class="m-stat" style="border-top:3px solid #c4261b;padding-top:18px;display:flex;flex-direction:column;gap:8px">
         <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#c4261b">30</div>
         <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students we'll personally support for Summer 2027</div>
@@ -547,7 +536,7 @@ button{font:inherit}
         </div>
       </div>
     </div>
-    <p class="m-rnote" style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">A strong application takes about six months of work. With six mentors, capping Summer 2027 at 30 students keeps it to five per mentor.</p>
+    <p class="m-rnote" style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">The Summer 2027 capacity is 30 students across six mentors. Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review assesses the intake you can target.</p>
 
     <h3 class="m-ctitle" style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,36px);line-height:1.1;color:#10182e;text-wrap:balance">Germandians vs. many consultancies</h3>
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
@@ -561,8 +550,8 @@ button{font:inherit}
         <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Who reviews your documents</div><div role="cell" style="padding:18px 22px;color:#3b4460">An agent who may handle 100+ students</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">A mentor, before anything is submitted</div></div>
         <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Your SOP</div><div role="cell" style="padding:18px 22px;color:#3b4460">Often AI-generated or a reused template</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Written by hand with you</div></div>
         <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Filing applications</div><div role="cell" style="padding:18px 22px;color:#3b4460">Often left to you</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">We submit every application on the portal</div></div>
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">When payment is due</div><div role="cell" style="padding:18px 22px;color:#3b4460">Often upfront, admitted or not</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Only after you're admitted</div></div>
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Help after admission</div><div role="cell" style="padding:18px 22px;color:#3b4460">Varies by agency</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Help with your loan, blocked account, visa, dorm applications, Anmeldung and bank account, plus introductions to seniors</div></div>
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">When payment is due</div><div role="cell" style="padding:18px 22px;color:#3b4460">Often upfront, admitted or not</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">€0 service fee until you’re admitted, under the standard arrangement.</div></div>
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Help after admission</div><div role="cell" style="padding:18px 22px;color:#3b4460">Varies by agency</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Help with your loan, blocked account and visa. We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers.</div></div>
       </div>
     </sc-if>
     <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
@@ -571,8 +560,8 @@ button{font:inherit}
         <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Who reviews your documents</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">An agent who may handle 100+ students</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">A mentor, before anything is submitted</span></div></div>
         <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Your SOP</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often AI-generated or a reused template</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Written by hand with you</span></div></div>
         <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Filing applications</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often left to you</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">We submit every application on the portal</span></div></div>
-        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">When payment is due</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often upfront, admitted or not</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Only after you're admitted</span></div></div>
-        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Help after admission</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Varies by agency</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Help with your loan, blocked account, visa, dorm applications, Anmeldung and bank account, plus introductions to seniors</span></div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">When payment is due</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often upfront, admitted or not</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">€0 service fee until you’re admitted, under the standard arrangement.</span></div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Help after admission</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Varies by agency</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Help with your loan, blocked account and visa. We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers.</span></div></div>
       </div>
     </sc-if>
     <p class="m-foot" style="margin:16px 0 0;max-width:72ch;font-size:16px;line-height:1.55;color:#3b4460;text-wrap:pretty">The consultancy figures and descriptions reflect what students in our community commonly report. Individual agencies vary.</p>
@@ -588,7 +577,7 @@ button{font:inherit}
     <div style="display:flex;flex-direction:column;border-bottom:2px solid #10182e">
       <div style="border-top:2px solid #10182e">
         <button type="button" onClick="{{ faq.t1 }}" aria-expanded="{{ faq.o1 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Can you guarantee admission?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r1 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o1 }}" hint-placeholder-val="{{ true }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">No. Universities make every admission decision themselves. What we can promise is the payment model: if no university admits you, you owe us no service fee.</p></sc-if>
+        <sc-if value="{{ faq.o1 }}" hint-placeholder-val="{{ true }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">No. Universities make every admission decision themselves. Our standard payment model is €0 service fee until you’re admitted. Any exception, including a fee before admission or for partial support, is stated in your written quote before you agree to work.</p></sc-if>
       </div>
       <div style="border-top:2px solid #10182e">
         <button type="button" onClick="{{ faq.t3 }}" aria-expanded="{{ faq.o3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Can I apply only to public universities?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r3 }};transition:transform .25s">+</span></button>
@@ -596,7 +585,7 @@ button{font:inherit}
       </div>
       <div style="border-top:2px solid #10182e">
         <button type="button" onClick="{{ faq.t5 }}" aria-expanded="{{ faq.o5 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>What support continues after I land?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r5 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o5 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">We help with your student dorm applications, take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors at your university.</p></sc-if>
+        <sc-if value="{{ faq.o5 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers. Housing preparation starts before you travel. Apply as soon as each provider opens applications: rooms are allocated from waiting lists and a place is not guaranteed. Keep private rooms and temporary accommodation in view as alternatives.<span class="source-note"><a href="https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/" target="_blank" rel="noopener">Studierendenwerk München Oberbayern: housing FAQs</a> · Last reviewed 12 November 2026</span></p></sc-if>
       </div>
       <div style="border-top:2px solid #10182e">
         <button type="button" onClick="{{ faq.t6 }}" aria-expanded="{{ faq.o6 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Are you connected to any university?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r6 }};transition:transform .25s">+</span></button>
@@ -604,7 +593,11 @@ button{font:inherit}
       </div>
       <div style="border-top:2px solid #10182e">
         <button type="button" onClick="{{ faq.t7 }}" aria-expanded="{{ faq.o7 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>When do I get the terms in writing?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r7 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o7 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">After your profile review and before any work starts. The written terms state the fee, when it becomes due and exactly what's included.</p></sc-if>
+        <sc-if value="{{ faq.o7 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">After your profile review and before any work starts. The written quote states the fee, what triggers payment and what your support includes. The fees section lists every point it covers.</p></sc-if>
+      </div>
+      <div style="border-top:2px solid #10182e">
+        <button type="button" onClick="{{ faq.t8 }}" aria-expanded="{{ faq.o8 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Do I need dMAT for APS?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r8 }};transition:transform .25s">+</span></button>
+        <sc-if value="{{ faq.o8 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty"><span>dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.</span><span><br><strong>Affected degree fields: </strong>All B.Tech/B.Eng degrees; other engineering degrees; commerce, accounting, finance, economics; business/management; tourism, travel and hospitality. Integrated or dual degrees count if a component or major falls in these fields.</span><span><br><strong>Who is exempt: </strong>Bachelor’s and PhD applicants, other degree fields, officially confirmed exchange, double-degree or university partnership programmes and students below 5 completed semesters of a 3-year degree or 7 of a 4-year degree are exempt under the current procedure.</span><span><br><strong>Earlier APS applications: </strong>Your completed APS procedure does not require dMAT. A new APS application follows the rules then in force. APS registration or complete document shipment before 29 June 2026 exempts that procedure. New APS applications follow the rules then in force.</span><span><br><strong>dMAT and APS: </strong>You may submit APS documents before the dMAT certificate is available. Where required, APS issuance waits for the certificate and result verification. Other required academic documents must accompany the initial submission.</span><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span><span><br><strong>Test dates: </strong>16 January 2027 (register by 4 January 2027; results on 8 February 2027) and 13 March 2027 (register by 1 March 2027; results on 5 April 2027).</span><span><br><strong>Test fee: </strong>€150, paid to g.a.s.t. when you register.</span><span class="source-note"><a href="https://www.d-mat.de/en/dmat-in-india/" target="_blank" rel="noopener">g.a.s.t.: dMAT schedule</a> · Last reviewed 12 November 2026</span></p></sc-if>
       </div>
     </div>
   </div>
@@ -729,20 +722,295 @@ class Component extends DCLogic {
   heroCtaRef = React.createRef(); heroWrap = React.createRef(); heroCanvas = React.createRef(); trackRef = React.createRef(); receiptRef = React.createRef(); sopRef = React.createRef(); formRef = React.createRef(); footerRef = React.createRef(); explorerRef = React.createRef();
   reduced = typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   PHASES = [
-    { n: 1, name: 'Foundation', start: 1, color: '#1d7a3d', ink: '#1d7a3d', tint: '#e4f0e6', desc: 'We evaluate your profile and eligibility, help you apply for APS and plan your IELTS preparation.' },
-    { n: 2, name: 'Applications', start: 3, color: '#ef8a21', ink: '#b85d06', tint: '#fdeedb', desc: 'We shortlist universities with you, write your SOP with you and submit every application on the university portals.' },
-    { n: 3, name: 'Pre-departure', start: 5, color: '#d42b1f', ink: '#c4261b', tint: '#fbe4e1', desc: 'As admission decisions arrive, we help with your education loan, help you open your blocked account and prepare your visa documents and appointment.' },
-    { n: 4, name: 'Arrival', start: 7, color: '#121212', ink: '#121212', tint: '#ebebe8', desc: 'We help with your student dorm applications, take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors at your university.' }
-  ];
+  {
+    "n": 1,
+    "name": "Foundation",
+    "start": 1,
+    "color": "#1d7a3d",
+    "ink": "#1d7a3d",
+    "tint": "#e4f0e6",
+    "labelColor": "#ffffff",
+    "radius": "10px 4px 4px 10px",
+    "months": 2,
+    "desc": "We evaluate your profile and start programme research, requirement checks and deadline planning with you. Alongside that we help you apply for APS, check whether you need dMAT and plan your IELTS preparation."
+  },
+  {
+    "n": 2,
+    "name": "Applications",
+    "start": 3,
+    "color": "#ef8a21",
+    "ink": "#b85d06",
+    "tint": "#fdeedb",
+    "labelColor": "#10182e",
+    "radius": "4px",
+    "months": 2,
+    "desc": "We shortlist universities with you, write your SOP with you and submit every application on the university portals. Where a programme needs a VPD from uni-assist, we request it early: the university application is a separate step with its own deadline."
+  },
+  {
+    "n": 3,
+    "name": "Pre-departure",
+    "start": 5,
+    "color": "#d42b1f",
+    "ink": "#c4261b",
+    "tint": "#fbe4e1",
+    "labelColor": "#ffffff",
+    "radius": "4px",
+    "months": 2,
+    "desc": "We help with your education loan, help you open your blocked account and prepare your visa documents and appointment. We plan these with you early and complete each one as your offers and documents arrive."
+  },
+  {
+    "n": 4,
+    "name": "Arrival",
+    "start": 7,
+    "color": "#121212",
+    "ink": "#121212",
+    "tint": "#ebebe8",
+    "labelColor": "#ffffff",
+    "radius": "4px 10px 10px 4px",
+    "months": 1,
+    "desc": "We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers."
+  }
+];
   MONTHS = [
-    { m: 1, phase: 0, tasks: ['Profile and eligibility evaluation', 'APS application support'] },
-    { m: 2, phase: 0, tasks: ['IELTS preparation plan and guidance'] },
-    { m: 3, phase: 1, tasks: ['University shortlisting with you', 'SOP writing with you, by hand'] },
-    { m: 4, phase: 1, tasks: ['Submitting your applications on the portals'] },
-    { m: 5, phase: 2, tasks: ['Tracking admission decisions', 'Help with your education loan'] },
-    { m: 6, phase: 2, tasks: ['Help opening your blocked account', 'Visa documents and appointment booking'] },
-    { m: 7, phase: 3, tasks: ['Help with student dorm applications', 'City registration (Anmeldung)', 'Help opening a bank account', 'Introductions to seniors'] }
-  ];
+  {
+    "m": 1,
+    "phase": 0,
+    "tasks": [
+      {
+        "strand": "Foundation",
+        "text": "Profile and eligibility evaluation, and help with your APS application."
+      },
+      {
+        "strand": "Foundation",
+        "text": "We check whether you need dMAT. dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.",
+        "source": {
+          "label": "APS India: dMAT rules",
+          "url": "https://aps-india.de/dmat/",
+          "reviewed": "12 November 2026"
+        }
+      },
+      {
+        "strand": "Applications",
+        "text": "Programme research, requirement checks and a deadline plan for each course on your list."
+      },
+      {
+        "strand": "Pre-departure",
+        "text": "A first plan for funding, visa documents and housing."
+      }
+    ],
+    "waits": [
+      {
+        "strand": "APS certificate",
+        "text": "You may submit APS documents before the dMAT certificate is available. Where required, APS issuance waits for the certificate and result verification. Other required academic documents must accompany the initial submission.",
+        "source": {
+          "label": "APS India: dMAT rules",
+          "url": "https://aps-india.de/dmat/",
+          "reviewed": "12 November 2026"
+        }
+      }
+    ]
+  },
+  {
+    "m": 2,
+    "phase": 0,
+    "tasks": [
+      {
+        "strand": "Foundation",
+        "text": "IELTS preparation plan and guidance."
+      },
+      {
+        "strand": "Applications",
+        "text": "University shortlisting with you. Where a programme needs a VPD, we request it now."
+      },
+      {
+        "strand": "Housing",
+        "text": "Housing preparation starts before you travel. Apply as soon as each provider opens applications: rooms are allocated from waiting lists and a place is not guaranteed. Keep private rooms and temporary accommodation in view as alternatives.",
+        "source": {
+          "label": "Studierendenwerk München Oberbayern: housing FAQs",
+          "url": "https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/",
+          "reviewed": "12 November 2026"
+        }
+      }
+    ],
+    "waits": [
+      {
+        "strand": "dMAT result",
+        "text": "g.a.s.t. runs the test on fixed dates and releases results on a set day. Where dMAT applies, the APS certificate follows the result.",
+        "source": {
+          "label": "g.a.s.t.: dMAT schedule",
+          "url": "https://www.d-mat.de/en/dmat-in-india/",
+          "reviewed": "12 November 2026"
+        }
+      },
+      {
+        "strand": "uni-assist / VPD",
+        "text": "uni-assist says a VPD usually takes 4 to 6 weeks and advises requesting it at least 8 weeks before the deadline. You then send it to the university with your application.",
+        "source": {
+          "label": "uni-assist: VPD",
+          "url": "https://www.uni-assist.de/en/how-to-apply/plan-your-application/vpd/",
+          "reviewed": "12 November 2026"
+        }
+      }
+    ]
+  },
+  {
+    "m": 3,
+    "phase": 1,
+    "tasks": [
+      {
+        "strand": "Applications",
+        "text": "SOP writing with you, by hand."
+      },
+      {
+        "strand": "Applications",
+        "text": "Document checks against each programme’s requirements."
+      },
+      {
+        "strand": "Foundation",
+        "text": "Your language test, and answers to any questions from APS."
+      }
+    ],
+    "waits": [
+      {
+        "strand": "APS certificate",
+        "text": "APS India verifies your documents and updates your online profile with the result.",
+        "source": {
+          "label": "APS India: checklists and graduate leaflet",
+          "url": "https://aps-india.de/checklists/",
+          "reviewed": "12 November 2026"
+        }
+      }
+    ]
+  },
+  {
+    "m": 4,
+    "phase": 1,
+    "tasks": [
+      {
+        "strand": "Applications",
+        "text": "Submitting your applications on the portals."
+      },
+      {
+        "strand": "Applications",
+        "text": "Answering document requests from universities."
+      },
+      {
+        "strand": "Pre-departure",
+        "text": "Funding plan and visa document list, ready for when an offer arrives."
+      }
+    ],
+    "waits": [
+      {
+        "strand": "Admission decisions",
+        "text": "Each university decides on its own timetable."
+      }
+    ]
+  },
+  {
+    "m": 5,
+    "phase": 2,
+    "tasks": [
+      {
+        "strand": "Applications",
+        "text": "Tracking admission decisions and reviewing each offer’s conditions and acceptance deadline."
+      },
+      {
+        "strand": "Pre-departure",
+        "text": "Help with your education loan."
+      },
+      {
+        "strand": "Housing",
+        "text": "Following up your housing applications and lining up private or temporary options."
+      }
+    ],
+    "waits": [
+      {
+        "strand": "Admission decisions",
+        "text": "The remaining universities are still deciding."
+      },
+      {
+        "strand": "Loan decision",
+        "text": "Your lender runs its own checks on your documents."
+      }
+    ]
+  },
+  {
+    "m": 6,
+    "phase": 2,
+    "tasks": [
+      {
+        "strand": "Pre-departure",
+        "text": "Help opening your blocked account."
+      },
+      {
+        "strand": "Pre-departure",
+        "text": "Visa documents and appointment booking.",
+        "source": {
+          "label": "German Missions: national visa",
+          "url": "https://india.diplo.de/in-en/service/2755482-2755482",
+          "reviewed": "12 November 2026"
+        }
+      },
+      {
+        "strand": "Housing",
+        "text": "Confirming where you will stay, with a fallback if no dorm place comes through."
+      }
+    ],
+    "waits": [
+      {
+        "strand": "Visa appointment",
+        "text": "Appointments are booked through the official route and are not moved forward because a course starts sooner.",
+        "source": {
+          "label": "German Missions: visa FAQs",
+          "url": "https://india.diplo.de/in-en/service/2546328-2546328",
+          "reviewed": "12 November 2026"
+        }
+      },
+      {
+        "strand": "Visa decision",
+        "text": "The mission says processing may take several months.",
+        "source": {
+          "label": "German Missions: visa FAQs",
+          "url": "https://india.diplo.de/in-en/service/2546328-2546328",
+          "reviewed": "12 November 2026"
+        }
+      },
+      {
+        "strand": "Housing",
+        "text": "Student housing is allocated from a waiting list, and a place is not guaranteed.",
+        "source": {
+          "label": "Studierendenwerk München Oberbayern: housing FAQs",
+          "url": "https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/",
+          "reviewed": "12 November 2026"
+        }
+      }
+    ]
+  },
+  {
+    "m": 7,
+    "phase": 3,
+    "tasks": [
+      {
+        "strand": "Arrival",
+        "text": "City registration (Anmeldung)."
+      },
+      {
+        "strand": "Arrival",
+        "text": "Help opening a bank account."
+      },
+      {
+        "strand": "Arrival",
+        "text": "Introductions to seniors."
+      }
+    ],
+    "waits": [
+      {
+        "strand": "Local appointments",
+        "text": "Registration offices and banks give appointments on their own schedule."
+      }
+    ]
+  }
+];
   dots100 = Array.from({ length: 100 }, (_, i) => ({ i }));
   dots5 = [1, 2, 3, 4, 5].map(i => ({ i }));
 
@@ -1000,7 +1268,7 @@ class Component extends DCLogic {
     const seats = Number.isFinite(seatsRaw) && p.seatsLeft !== '' && p.seatsLeft != null ? Math.max(0, Math.min(30, Math.round(seatsRaw))) : 30;
     const err = s.errors, st = s.status;
     const faq = {};
-    for (let i = 1; i <= 7; i++) { faq['o' + i] = !!s.faq[i]; faq['t' + i] = () => this.toggleFaq(i); faq['r' + i] = s.faq[i] ? 'rotate(45deg)' : 'rotate(0deg)'; }
+    for (let i = 1; i <= 8; i++) { faq['o' + i] = !!s.faq[i]; faq['t' + i] = () => this.toggleFaq(i); faq['r' + i] = s.faq[i] ? 'rotate(45deg)' : 'rotate(0deg)'; }
     const seg = {}; for (let i = 1; i <= 4; i++) { const on = mo.phase === i - 1; seg['c' + i] = on ? '#10182e' : 'transparent'; seg['b' + i] = on ? '#10182e' : '#d9d4c6'; seg['g' + i] = () => this.setMonth(this.PHASES[i - 1].start); }
     const barOn = isMobile && !s.formInView && !s.heroCtaInView && !s.menuOpen && !s.footerInView;
     return {
@@ -1029,14 +1297,12 @@ class Component extends DCLogic {
       receiptRef: this.receiptRef, print: this.print,
       receiptTransform: s.printed ? 'translateY(0)' : 'translateY(-101%)',
       receiptTransition: s.printed && !this.reduced ? 'transform 2.6s steps(22, end)' : 'none',
-      feeShort: fee || 'Written quote',
-      feeText: fee
-        ? 'Our service fee is ' + fee + ', due once a university admits you. You get the full terms in writing before any work starts.'
-        : 'The fee depends on your profile and the universities you apply to. After your profile review we send you the exact amount and the terms in writing, and nothing starts until you agree to them.',
+      feeShort: fee && fee.length > 16 ? 'See quote' : fee || 'Written quote',
+      feeText: (fee ? 'Our service fee is ' + fee + '. ' : 'The fee depends on your profile and the universities you apply to. ') + 'After your profile review, you receive the amount, scope and terms in writing. Work starts only after you agree.',
 
       month: s.month, monthText: 'Month ' + s.month + ' of 7, ' + ph.name,
       phaseNum: ph.n, phaseName: ph.name, phaseDesc: ph.desc, phaseInk: ph.ink, phaseColor: ph.color,
-      monthTasks: mo.tasks.map(t => ({ t })), seg,
+      monthTasks: mo.tasks.map(t => ({ ...t, hasSource: !!t.source, url: t.source?.url, sourceLabel: t.source?.label, reviewed: t.source?.reviewed })), monthWaits: mo.waits.map(t => ({ ...t, hasSource: !!t.source, url: t.source?.url, sourceLabel: t.source?.label, reviewed: t.source?.reviewed })), seg,
       handleLeft: ((s.month - 0.5) / 7 * 100).toFixed(3) + '%',
       trackRef: this.trackRef, onTrackDown: this.onTrackDown, onTrackMove: this.onTrackMove, onTrackUp: this.onTrackUp, onTrackKey: this.onTrackKey,
       togglePlay: this.togglePlay,

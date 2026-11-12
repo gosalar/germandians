@@ -37,9 +37,11 @@ jobs:
           VITE_FORM_ENDPOINT: ${{ vars.VITE_FORM_ENDPOINT }}
           # 10–15 international digits; empty/invalid actions open the review form.
           VITE_WHATSAPP_NUMBER: ${{ vars.VITE_WHATSAPP_NUMBER }}
+          # Advertised fee; payment timing and exceptions remain in the written quote.
           VITE_FEE_AFTER_ADMISSION: ${{ vars.VITE_FEE_AFTER_ADMISSION }}
           VITE_INTAKE_STATUS: ${{ vars.VITE_INTAKE_STATUS }}
           VITE_INTAKE_SEASON: ${{ vars.VITE_INTAKE_SEASON }}
+          # Starting year: Winter + 2027 renders Winter 2027/28. Default Summer 2027.
           VITE_INTAKE_YEAR: ${{ vars.VITE_INTAKE_YEAR }}
           VITE_PRIVACY_NAMES: ${{ vars.VITE_PRIVACY_NAMES }}
           VITE_PRIVACY_ADDRESS: ${{ vars.VITE_PRIVACY_ADDRESS }}

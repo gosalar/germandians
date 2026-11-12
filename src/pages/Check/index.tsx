@@ -1,9 +1,13 @@
 import { Button, TextInput } from '@mantine/core';
 import { useState, type ReactNode } from 'react';
 
+import DmatNote from '@/components/DmatNote';
+import SourceNote from '@/components/SourceNote';
 import { useSettleHashScroll } from '@/hooks/useSettleHashScroll';
 import Contact from '@/pages/Home/Contact';
+import { DMAT, SOURCES } from '@/utils/applicationFacts';
 import { FEE_PROMISE, SECTIONS, hashLink } from '@/utils/constants';
+import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
 
 import {
   APS_OPTIONS,
@@ -13,6 +17,8 @@ import {
   CHECK_COPY,
   DEFAULT_CHECK_INPUTS,
   DEGREE_OPTIONS,
+  DMAT_CHECK_COPY,
+  DMAT_FIELDS,
   PROGRAMME_SOURCES,
   REQUIREMENTS,
   SCALE_PRESETS,
@@ -206,6 +212,24 @@ export default function Check() {
                     ))}
                   </div>
                 </div>
+                <div className={styles.toggleGroup}>
+                  <div className={styles.toggleLabel}>{DMAT_CHECK_COPY.label}</div>
+                  <p className={styles.profileNote}>{DMAT.fields}</p>
+                  <SourceNote source={SOURCES.dmat} />
+                  <div className={styles.pills} role="group" aria-label="dMAT degree field">
+                    {DMAT_FIELDS.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => setInputs((prev) => ({ ...prev, dmatField: prev.dmatField === option ? null : option }))}
+                        aria-pressed={inputs.dmatField === option}
+                        className={styles.pill}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -263,6 +287,22 @@ export default function Check() {
                   </ul>
                 ) : null}
 
+                <div data-testid="dmat-guidance">
+                  <h3 className={styles.diagnosisKicker}>{DMAT_CHECK_COPY.heading}</h3>
+                  <p className={styles.explanation} aria-live="polite">
+                    {diagnosis.dmat.text}
+                  </p>
+                  {diagnosis.dmat.detail === 'none' ? (
+                    <SourceNote source={SOURCES.dmat} />
+                  ) : (
+                    <p className={styles.explanation}>
+                      {/* The affected fields are listed beside the question, so they are not repeated here. */}
+                      <DmatNote detail={diagnosis.dmat.detail === 'full'} fields={false} />
+                    </p>
+                  )}
+                </div>
+                <h3 className={styles.diagnosisKicker}>{siteConfig.intake} readiness</h3>
+                <p className={styles.explanation}>{INTAKE_READINESS}</p>
                 <div className={styles.diagnosisActions}>
                   <Button
                     component="a"

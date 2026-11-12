@@ -1,7 +1,9 @@
 import { Button } from '@mantine/core';
 import { useRef, type KeyboardEvent, type PointerEvent } from 'react';
 
-import { MONTHS, PHASES, TOTAL_MONTHS } from './data';
+import SourceNote from '@/components/SourceNote';
+
+import { JOURNEY_COPY, MONTHS, PHASES, TOTAL_MONTHS } from './data';
 import styles from './styles.module.scss';
 import { useMonthPlayer } from './useMonthPlayer';
 
@@ -59,7 +61,7 @@ export default function MonthExplorer() {
         <div className={styles.explorerIntro}>
           <h3 className={styles.explorerTitle}>Month by month</h3>
           <p className={styles.explorerBody}>
-            The same four stages, split into seven months. Pick a month to see what we work on with you.
+            {JOURNEY_COPY.explorer}
           </p>
         </div>
         <Button type="button" onClick={togglePlay} aria-pressed={playing} variant="navy" size="md">
@@ -142,22 +144,48 @@ export default function MonthExplorer() {
               <span className={styles.detailMonthTotal}> of {TOTAL_MONTHS}</span>
             </div>
           </div>
-          <div aria-live="polite" className={styles.detailBody}>
-            <h4 className={styles.detailTitle} style={{ color: phase.ink }}>
-              Phase {phase.n}: {phase.name}
-            </h4>
-            <p className={styles.detailDesc}>{phase.desc}</p>
-            <div className={styles.tasksLabel}>Month {month} tasks</div>
-            <ul className={styles.tasks}>
-              {current.tasks.map((task) => (
-                <li key={task}>
-                  <span aria-hidden="true" className={styles.check} style={{ background: phase.color }}>
-                    ✓
-                  </span>
-                  <span>{task}</span>
-                </li>
-              ))}
-            </ul>
+          <div className={styles.detailBody}>
+            {/* Only the heading and summary are announced; the task lists are too long to read out on every step. */}
+            <div aria-live="polite" className={styles.detailLead}>
+              <h4 className={styles.detailTitle} style={{ color: phase.ink }}>
+                Main focus: {phase.name}
+              </h4>
+              <p className={styles.detailDesc}>{phase.desc}</p>
+            </div>
+            <div data-testid="month-tasks" className={styles.monthTasks}>
+              <div className={styles.tasksLabel}>{JOURNEY_COPY.work}</div>
+              <ul className={styles.tasks}>
+                {current.tasks.map((task) => (
+                  <li key={task.text}>
+                    <span aria-hidden="true" className={styles.check} style={{ background: phase.color }}>
+                      ✓
+                    </span>
+                    <span>
+                      <strong>{task.strand}: </strong>
+                      {task.text}
+                      {task.source ? <SourceNote source={task.source} /> : null}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className={styles.waits}>
+                <div className={styles.tasksLabel}>{JOURNEY_COPY.waiting}</div>
+                <ul className={styles.tasks}>
+                  {current.waits.map((task) => (
+                    <li key={task.text}>
+                      <span aria-hidden="true" className={styles.waitMark}>
+                        …
+                      </span>
+                      <span>
+                        <strong>{task.strand}: </strong>
+                        {task.text}
+                        {task.source ? <SourceNote source={task.source} /> : null}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 

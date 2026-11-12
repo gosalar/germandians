@@ -1,3 +1,5 @@
+import { HOUSING } from '@/utils/applicationFacts';
+import { FEE_PROMISE, INTAKE_SEATS } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 export const METHOD_POINTS = [
@@ -14,8 +16,7 @@ export const METHOD_POINTS = [
 
 export const STATS = [
   { value: '22,000+', label: 'Members in the Germandians student community', highlight: false },
-  { value: '2,000+', label: `Members who say they're aiming for ${siteConfig.intake}`, highlight: false },
-  { value: '30', label: `Students we'll personally support for ${siteConfig.intake}`, highlight: true },
+  { value: String(INTAKE_SEATS), label: `Students we'll personally support for ${siteConfig.intake}`, highlight: true },
 ];
 
 export const COMPARISON = [
@@ -31,10 +32,10 @@ export const COMPARISON = [
   },
   { topic: 'Your SOP', them: 'Often AI-generated or a reused template', us: 'Written by hand with you' },
   { topic: 'Filing applications', them: 'Often left to you', us: 'We submit every application on the portal' },
-  { topic: 'When payment is due', them: 'Often upfront, admitted or not', us: "Only after you're admitted" },
+  { topic: 'When payment is due', them: 'Often upfront, admitted or not', us: FEE_PROMISE },
   {
     topic: 'Help after admission',
     them: 'Varies by agency',
-    us: 'Help with your loan, blocked account, visa, dorm applications, Anmeldung and bank account, plus introductions to seniors',
+    us: `Help with your loan, blocked account and visa. ${HOUSING.arrival}`,
   },
 ];

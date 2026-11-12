@@ -93,6 +93,20 @@
   text-wrap: pretty;
 }
 
+// Housing note and official sources under the stage cards
+.stageNotes {
+  margin-top: 32px;
+  max-width: 68ch;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sourcesLabel {
+  @include m.label-font(700, 16px);
+  color: t.$ink-strong;
+}
+
 // Month explorer
 .explorerHead {
   margin-top: clamp(80px, 9vw, 120px);
@@ -330,7 +344,9 @@
   font-weight: 700;
 }
 
-.detailBody {
+.detailBody,
+.detailLead,
+.monthTasks {
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -371,17 +387,36 @@
   > li {
     display: flex;
     gap: 12px;
-    align-items: center;
+    align-items: flex-start;
     font-size: 18px;
     font-weight: 600;
     color: t.$navy;
   }
 }
 
+// Steps that depend on an outside organisation, set apart from the work above.
+.waits {
+  padding-top: 16px;
+  border-top: 1px dashed t.$ink-muted;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .tasksLabel { margin-top: 0; }
+}
+
+.waitMark {
+  flex: 0 0 22px;
+  text-align: center;
+  font-weight: 700;
+}
+
 .check {
   flex: none;
   width: 22px;
   height: 22px;
+  // Lines the tick up with the first line of a task that wraps.
+  margin-top: 2px;
   border-radius: 5px;
   display: grid;
   place-items: center;

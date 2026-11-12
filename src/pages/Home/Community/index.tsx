@@ -1,4 +1,6 @@
+import DmatNote from '@/components/DmatNote';
 import { CONTACT, SECTIONS } from '@/utils/constants';
+import { INTAKE_REVIEW } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
 
@@ -6,7 +8,13 @@ const PRINCIPLES = [
   {
     title: 'We start from scratch',
     color: '#1d7a3d',
-    body: 'You can come to us with no APS, no shortlist and no idea where to begin. We start there and take you through every step in order, from the first document to your first week in Germany.',
+    body: (
+      <>
+        {`You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there. ${INTAKE_REVIEW}`}
+        <br />
+        <DmatNote />
+      </>
+    ),
   },
   {
     title: 'We guide from experience',

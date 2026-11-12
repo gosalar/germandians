@@ -14,6 +14,7 @@ export const SECTIONS = {
   faq: 'faq',
   contact: 'contact',
   contactForm: 'contact-form',
+  mentors: 'why',
 } as const;
 
 export const hashLink = (id: string) => `#${id}`;
@@ -29,8 +30,16 @@ export const NAV_LINKS = [
 ] as const;
 export const NAV_CTA = { id: SECTIONS.contactForm, label: 'Get my profile reviewed' } as const;
 
-// Phase 2 will align the other fee mentions with the confirmed charging policy.
-export const FEE_PROMISE = '€0 service fee until you’re admitted';
+export const FEE_POLICY = {
+  amount: '€0',
+  timing: 'service fee until you’re admitted',
+  qualifier: 'under the standard arrangement',
+  exception: 'Any exception, including a fee before admission or for partial support, is stated in your written quote before you agree to work.',
+  due: 'Under the standard arrangement, the service fee becomes due after a university admits you.',
+  receiptLabel: 'Due now, as standard',
+  trigger: 'As agreed in quote',
+} as const;
+export const FEE_PROMISE = `${FEE_POLICY.amount} ${FEE_POLICY.timing}, ${FEE_POLICY.qualifier}.`;
 
 export const CONTACT = {
   email: 'thegermandians@gmail.com',
@@ -40,6 +49,8 @@ export const CONTACT = {
 } as const;
 
 export const INTAKE_SEATS = 30;
+export const INTAKE_SEASONS = ['Summer', 'Winter'] as const;
+export type IntakeSeason = (typeof INTAKE_SEASONS)[number];
 
 export const INTAKE_STATUSES = ['Not confirmed', 'Enquiries open', 'Waitlist only', 'Enquiries closed'] as const;
 export type IntakeStatus = (typeof INTAKE_STATUSES)[number];
