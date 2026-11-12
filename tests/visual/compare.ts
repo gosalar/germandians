@@ -29,10 +29,10 @@ export const MAX_DIFF_PIXELS = 64;
 /** pixelmatch colour sensitivity (0–1, lower is stricter). */
 const COLOR_THRESHOLD = 0.1;
 
-// The design runtime pulls React and Babel from unpkg and fonts from Google.
+// The design runtime pulls React and Babel from unpkg. Fonts are served locally.
 // They're cached on disk after the first run; delete .visual-cache to refresh.
 const CACHE_DIR = path.resolve('.visual-cache');
-const CDN = /^https:\/\/(unpkg\.com|fonts\.googleapis\.com|fonts\.gstatic\.com)\//;
+const CDN = /^https:\/\/unpkg\.com\//;
 
 async function writeAtomically(file: string, body: Buffer | string) {
   const tmp = `${file}.${process.pid}.${randomUUID()}.tmp`;

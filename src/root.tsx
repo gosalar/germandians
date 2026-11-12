@@ -4,8 +4,11 @@ import '@fontsource/barlow-semi-condensed/400.css';
 import '@fontsource/barlow-semi-condensed/500.css';
 import '@fontsource/barlow-semi-condensed/600.css';
 import '@fontsource/barlow-semi-condensed/700.css';
+import '@fontsource/barlow-semi-condensed/800.css';
 import '@/utils/styles/global.scss';
 
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import hankenLatin from '@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
 import { StrictMode, useEffect, type ReactNode } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
@@ -19,6 +22,8 @@ export function Layout({ children }: { children: ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={hankenLatin} as="font" type="font/woff2" crossOrigin="anonymous" />
         {/* Tints the browser toolbar on Android phones and tablets to the nav's paper colour. */}
         <meta name="theme-color" content="#f7f5ef" />
         <link rel="icon" href="data:," />

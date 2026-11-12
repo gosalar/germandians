@@ -32,9 +32,9 @@
 }
 
 .links {
+  @include m.navigation-font;
   display: flex;
   gap: 15px;
-  font-weight: 600;
   font-size: 16px;
 }
 
@@ -117,8 +117,7 @@
   min-height: 56px;
   border-bottom: 1px solid t.$line;
   text-decoration: none;
-  font-family: t.$font-display;
-  font-weight: 800;
+  @include m.navigation-font;
   font-size: 24px;
 
   &:nth-last-child(2) {

@@ -56,14 +56,11 @@
 }
 
 .title {
-  @include m.display-heading;
-  font-size: clamp(32px, 4.3vw, 62px);
+  @include m.display-heading(clamp(32px, 4.3vw, 62px));
 }
 
 .lede {
-  margin: 0;
-  font-size: clamp(15px, 1.25vw, 18px);
-  line-height: 1.48;
+  @include m.page-lead(clamp(15px, 1.25vw, 18px));
   color: t.$ink-soft;
   max-width: 68ch;
   text-wrap: pretty;
@@ -243,8 +240,7 @@
 }
 
 .mobileScoreClass {
-  font-size: 15px;
-  font-weight: 700;
+  @include m.label-font(700, 16px);
   color: t.$white;
 }
 
@@ -277,6 +273,7 @@
 }
 
 .pill {
+  @include m.label-font(700, 15px);
   flex: 1 1 auto;
   min-height: 46px;
   padding: 8px 12px;
@@ -284,8 +281,6 @@
   border: 1.5px solid t.$navy;
   background: t.$paper;
   color: t.$navy;
-  font-weight: 700;
-  font-size: 15px;
   cursor: pointer;
   text-align: center;
   transition:

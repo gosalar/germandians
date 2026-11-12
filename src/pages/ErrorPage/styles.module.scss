@@ -1,4 +1,5 @@
 @use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
 
 .nav {
   border-bottom: 1px solid t.$line;
@@ -23,14 +24,7 @@
 }
 
 .title {
-  margin: 0;
-  font-family: t.$font-display;
-  font-weight: 900;
-  font-stretch: 78%;
-  font-size: clamp(52px, 8vw, 104px);
-  line-height: 0.9;
-  letter-spacing: -0.022em;
-  color: t.$navy;
+  @include m.display-heading(clamp(52px, 8vw, 104px));
 }
 
 .text {

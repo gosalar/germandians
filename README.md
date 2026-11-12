@@ -29,14 +29,14 @@ The site has to match the Claude Design prototype pixel for pixel. The visual te
 npm run test:visual          # full suite: 37 checks
 npm run test:visual:quick    # 15 checks
 npm run test:visual:report   # open the last report (reference, app and diff images for failures)
-npm run test:ux              # 49 checker, contact, submission and regression checks
+npm run test:ux              # 53 checker, contact, submission and typography checks
 ```
 
 - The full suite compares home at 10 widths, privacy at 5, and 22 interaction states including keyboard, hover, disabled and input-focus states.
 - **Quick subset:** one desktop, one tablet and one phone layout, plus the key interactions. Good for checking a change while you work; the full suite is the gate before merging.
 - **Requirements:**
   - Locally, the tests use your installed Chrome. CI uses Playwright's Chromium.
-  - The prototype loads React, Babel and fonts from public CDNs, so the first run needs internet. Later runs serve them from `.visual-cache/`; delete that folder to refresh it.
+  - The prototype loads React and Babel from a public CDN, so the first run needs internet. Later runs serve them from `.visual-cache/`; delete that folder to refresh it. Reference fonts use the installed Fontsource binaries, with independent font-face declarations.
 - **Settings:** the test build ignores `config/.env*`, so it always uses the design's default settings.
 - **Failures:** the reference, app and diff images are saved under `test-results/visual/<test>/`.
 - **Changing the design:** if a test fails because the design itself changed, update `tests/visual/reference/` (a new export, or a hand edit that mirrors the change) instead of loosening the test.
@@ -103,7 +103,7 @@ src/
 - **Adding a Mantine component.** Add its `.layer.css` and any dependent component styles to `src/themes/mantine-styles.ts`. The unlayered site SCSS takes precedence over Mantine's layer. For brand-specific defaults or variants, add an override and SCSS module under `src/themes/<Component>/` and register it in `src/themes/index.ts`. Check it at `/_theme` during development and run the visual suite.
 - **Shared controls and custom artwork.** Use themed controls for buttons, fields, accordions and status badges. Keep the receipt, stamp cards, responsive comparison tables and other bespoke visuals in their feature folders. The consent checkbox uses browser-native rendering. Keep a control custom if a shared variant cannot reproduce the reference.
 - **Adding pages.** Put the UI in `src/pages/` and metadata in a thin `src/routes/` module. Register pages that use the shared header and footer inside the site layout in `src/routes.ts`. Include public static pages in the prerender list in `react-router.config.ts`.
-- **Fonts are self-hosted** (no Google Fonts requests; the privacy note says there's no third-party tracking). Hanken Grotesk is declared for weights 400–700 only, matching what the design loaded from Google, so text set at weight 800 renders at 700 just as it did in the design.
+- **Fonts are self-hosted** (no Google Fonts requests; the privacy note says there's no third-party tracking). Archivo is used for headings, Hanken Grotesk for prose and action buttons, and Barlow Semi Condensed for labels and compact form controls. Hanken and Archivo expose weights 400–900; Barlow loads 400–800 so the requested extra-bold weights render correctly. The shared rules and validation workflow are in `AGENTS.md`.
 - **Breakpoints are CSS media queries** (760, 1024, 1100, 600, 640, 420 px), not JS resize state. Navigation switches to the menu below 1100px.
 - **Sticky nav.** The nav stays sticky down the whole page, as the design's CSS specifies. In the Claude Design preview it stops sticking after the first screen because of the preview wrapper, not the design.
 - **Builds are always production builds**, even when a machine has `NODE_ENV` set to something else (see `vite.config.ts`).

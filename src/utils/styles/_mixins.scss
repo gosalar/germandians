@@ -42,11 +42,11 @@
 }
 
 // Large condensed section heading (Journey, Universities, Mentors).
-@mixin display-heading {
+@mixin display-heading($size: clamp(46px, 7vw, 116px)) {
   margin: 0;
   font-family: t.$font-display;
   font-weight: 900;
-  font-size: clamp(46px, 7vw, 116px);
+  font-size: $size;
   line-height: 0.9;
   letter-spacing: -0.022em;
   word-spacing: 0.14em;
@@ -68,8 +68,19 @@
 
 @mixin body-copy {
   margin: 0;
+  font-family: t.$font-body;
   font-size: clamp(17px, 1.35vw, 19px);
   line-height: 1.6;
+  text-wrap: pretty;
+}
+
+// Introductions share a family and weight; utility pages can use a compact size.
+@mixin page-lead($size: clamp(22px, 2.1vw, 30px)) {
+  margin: 0;
+  font-family: t.$font-body;
+  font-weight: 500;
+  font-size: $size;
+  line-height: 1.48;
   text-wrap: pretty;
 }
 
@@ -77,6 +88,11 @@
   font-family: t.$font-label;
   font-weight: $weight;
   font-size: $size;
+}
+
+@mixin navigation-font {
+  font-family: t.$font-body;
+  font-weight: 600;
 }
 
 @mixin square-bullet($size, $radius, $top: 0) {

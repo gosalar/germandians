@@ -10,10 +10,9 @@
 <helmet>
 <title>Germandians | Student-led guidance for studying in Germany</title>
 <meta name="description" content="Six students living in Germany guide Indian students from profile evaluation to their first week here. No service fee until you're admitted.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Barlow+Semi+Condensed:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<link href="./fonts.css" rel="stylesheet">
 <style>
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 html{scroll-behavior:smooth;scroll-padding-top:76px;overflow-x:clip}
 body{margin:0;background:#f7f5ef;color:#10182e;font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:#10182e;text-decoration-color:#f5c400;text-decoration-thickness:2px;text-underline-offset:3px}
@@ -123,13 +122,13 @@ button{font:inherit}
   </div>
   <sc-if value="{{ menuVisible }}" hint-placeholder-val="{{ false }}">
     <div id="mobile-menu" style="max-height:calc(100dvh - 66px);overflow-y:auto;overscroll-behavior:contain;border-top:1px solid #e2ddd0;background:#f7f5ef;padding:8px clamp(16px,5vw,72px) 20px;display:flex;flex-direction:column">
-      <a href="/check" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Grade check</a>
-      <a href="#community" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Why us</a>
-      <a href="#fees" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Fees</a>
-      <a href="#journey" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Journey</a>
-      <a href="#universities" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Public vs private</a>
-      <a href="#faq" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">FAQ</a>
-      <a href="#contact" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:800;font-size:24px">Contact</a>
+      <a href="/check" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Grade check</a>
+      <a href="#community" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Why us</a>
+      <a href="#fees" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Fees</a>
+      <a href="#journey" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Journey</a>
+      <a href="#universities" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Public vs private</a>
+      <a href="#faq" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">FAQ</a>
+      <a href="#contact" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Contact</a>
       <a href="#contact-form" onClick="{{ closeMenu }}" style="margin-top:12px;display:flex;justify-content:center;align-items:center;min-height:54px;background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e">Get my profile reviewed</a>
     </div>
   </sc-if>
@@ -138,8 +137,8 @@ button{font:inherit}
 <header id="top" data-screen-label="Hero" class="hero-head" style="padding:clamp(32px,5vw,72px) clamp(20px,5vw,72px) clamp(56px,8vw,104px)">
   <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:{{ heroCols }};gap:clamp(32px,4vw,64px);align-items:center">
     <div style="display:flex;flex-direction:column;gap:26px;min-width:0">
-      <h1 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(46px,6.2vw,100px);line-height:.92;letter-spacing:-0.022em;word-spacing:.12em;color:#10182e;text-wrap:balance">Study in Germany with the people already there.</h1>
-      <p style="margin:0;max-width:30ch;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(22px,2.1vw,30px);line-height:1.18;letter-spacing:-0.01em;color:#10182e;text-wrap:balance">Six student mentors in Germany. Up to five students per mentor.</p>
+      <h1 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:78%;font-size:clamp(46px,6.2vw,100px);line-height:.9;letter-spacing:-0.022em;word-spacing:.14em;color:#10182e;text-wrap:balance">Study in Germany with the people already there.</h1>
+      <p style="margin:0;max-width:30ch;font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:clamp(22px,2.1vw,30px);line-height:1.48;color:#10182e;text-wrap:pretty">Six student mentors in Germany. Up to five students per mentor.</p>
       <a href="#fees" class="hero-fee" style="align-self:flex-start;display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#ffffff;border:2px dashed #10182e;border-radius:12px;padding:12px 18px;text-decoration:none;color:#10182e;transition:background .2s" style-hover="background:#fff6cc;color:#10182e">
         <span style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(30px,2.8vw,40px);line-height:1;letter-spacing:-0.02em">€0</span>
         <span style="font-weight:700;font-size:clamp(17px,1.4vw,20px);line-height:1.3">service fee until you're admitted</span>
@@ -332,10 +331,10 @@ button{font:inherit}
       </div>
       <sc-if value="{{ segLegend }}" hint-placeholder-val="{{ false }}">
         <div style="margin-top:12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:8px">
-          <button type="button" onClick="{{ seg.g1 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b1 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#1d7a3d;color:#ffffff">1</span><span>Foundation</span></button>
-          <button type="button" onClick="{{ seg.g2 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b2 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#ef8a21;color:#10182e">2</span><span>Applications</span></button>
-          <button type="button" onClick="{{ seg.g3 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b3 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#d42b1f;color:#ffffff">3</span><span>Pre-departure</span></button>
-          <button type="button" onClick="{{ seg.g4 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b4 }};background:#ffffff;cursor:pointer;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#121212;color:#ffffff">4</span><span>Arrival</span></button>
+          <button type="button" onClick="{{ seg.g1 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b1 }};background:#ffffff;cursor:pointer;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#1d7a3d;color:#ffffff">1</span><span>Foundation</span></button>
+          <button type="button" onClick="{{ seg.g2 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b2 }};background:#ffffff;cursor:pointer;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#ef8a21;color:#10182e">2</span><span>Applications</span></button>
+          <button type="button" onClick="{{ seg.g3 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b3 }};background:#ffffff;cursor:pointer;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#d42b1f;color:#ffffff">3</span><span>Pre-departure</span></button>
+          <button type="button" onClick="{{ seg.g4 }}" style="display:flex;align-items:center;gap:6px;min-height:46px;padding:8px;border-radius:10px;border:2px solid {{ seg.b4 }};background:#ffffff;cursor:pointer;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:14px;color:#10182e;text-align:left"><span aria-hidden="true" style="display:grid;place-items:center;font-family:'Barlow Semi Condensed',sans-serif;flex:none;width:20px;height:24px;border-radius:3px;background:#121212;color:#ffffff">4</span><span>Arrival</span></button>
         </div>
       </sc-if>
 

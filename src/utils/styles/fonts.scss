@@ -1,7 +1,6 @@
 // Self-hosted brand fonts (no requests to Google; the privacy note promises no
-// third-party tracking). Weight ranges match what the design loaded from Google
-// Fonts: Hanken Grotesk 400–700, so the design's weight-800 text renders at 700
-// exactly as it did there; Archivo 400–900 at widths 62–125%.
+// third-party tracking). Expose the weights used by the UI, including genuine
+// Hanken 800/900. Archivo's wdth files contain both width and weight axes.
 
 $hanken-subsets: (
   'cyrillic-ext': 'U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F',
@@ -21,7 +20,7 @@ $archivo-subsets: (
     font-family: 'Hanken Grotesk Variable';
     font-style: normal;
     font-display: swap;
-    font-weight: 400 700;
+    font-weight: 400 900;
     src: url('@fontsource-variable/hanken-grotesk/files/hanken-grotesk-#{$subset}-wght-normal.woff2')
       format('woff2-variations');
     unicode-range: #{$range};

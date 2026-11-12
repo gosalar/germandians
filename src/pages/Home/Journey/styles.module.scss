@@ -261,6 +261,7 @@
 }
 
 .legendItem {
+  @include m.label-font(700, 14px);
   display: flex;
   align-items: center;
   gap: 6px;
@@ -270,8 +271,6 @@
   border: 2px solid t.$hairline;
   background: t.$white;
   cursor: pointer;
-  font-weight: 700;
-  font-size: 14px;
   color: t.$navy;
   text-align: left;
 
