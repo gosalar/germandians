@@ -1,12 +1,11 @@
 import type { Route } from './+types/check';
+import { pageMetadata } from '@/utils/metadata';
+import barlowBoldLatin from '@fontsource/barlow-semi-condensed/files/barlow-semi-condensed-latin-700-normal.woff2?url';
 
-export const meta: Route.MetaFunction = () => [
-  { title: 'German grade & programme requirements | Germandians' },
-  {
-    name: 'description',
-    content:
-      'Convert your CGPA or percentage with the Modified Bavarian formula and review the programme-specific requirements still to check. A conversion is not an eligibility decision.',
-  },
+export const links: Route.LinksFunction = () => [
+  { rel: 'preload', href: barlowBoldLatin, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
 ];
+
+export const meta: Route.MetaFunction = () => pageMetadata('/check');
 
 export { default } from '@/pages/Check';

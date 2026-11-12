@@ -1,4 +1,6 @@
 import { Button } from '@mantine/core';
+import { useWindowEvent } from '@mantine/hooks';
+import { useRef } from 'react';
 import BrandLink from '@/components/Brand';
 import HomeSectionLink from '@/components/HomeSectionLink';
 import { usePageChrome, usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
@@ -9,6 +11,13 @@ import styles from './styles.module.scss';
 export default function SiteHeader() {
   const { menuOpen } = usePageChrome();
   const { toggleMenu, closeMenu } = usePageChromeActions();
+  const trigger = useRef<HTMLButtonElement>(null);
+  useWindowEvent('keydown', (event) => {
+    if (event.key === 'Escape' && menuOpen) {
+      closeMenu();
+      trigger.current?.focus();
+    }
+  });
 
   return (
     <nav className={styles.nav}>
@@ -29,6 +38,7 @@ export default function SiteHeader() {
         </div>
 
         <button
+          ref={trigger}
           type="button"
           className={styles.menuButton}
           onClick={toggleMenu}

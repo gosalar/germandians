@@ -1,9 +1,12 @@
-import { copyFile, mkdir, rename, rmdir } from 'node:fs/promises';
+import { copyFile, mkdir, rename, rmdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { Config } from '@react-router/dev/config';
 import { siteBase } from './scripts/site-base.ts';
+import { loadEnv } from 'vite';
+import { PUBLIC_PAGES } from './src/utils/publicPages.ts';
+import { publicUrl, toSiteOrigin } from './src/utils/publicSite.ts';
 
-const pages = ['/', '/check', '/privacy'];
+const pages = PUBLIC_PAGES.map(page => page.path);
 
 export default {
   appDirectory: 'src',
@@ -37,5 +40,11 @@ export default {
     // Static hosts (GitHub Pages, the preview server) answer unknown paths
     // with 404.html; the SPA fallback then renders the not-found route.
     await copyFile(path.join(client, '__spa-fallback.html'), path.join(client, '404.html'));
+    const env = process.env.VISUAL_BUILD ? {} : loadEnv('production', 'config', 'VITE_');
+    const origin = toSiteOrigin(process.env.VITE_SITE_ORIGIN ?? env.VITE_SITE_ORIGIN);
+    const absolute = (suffix: string) => publicUrl(origin, siteBase, suffix);
+    const entries = pages.map(page => `<url><loc>${absolute(page === '/' ? '' : `${page}/`)}</loc></url>`).join('\n');
+    await writeFile(path.join(client, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`);
+    await writeFile(path.join(client, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${absolute('sitemap.xml')}\n`);
   },
 } satisfies Config;

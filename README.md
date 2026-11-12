@@ -29,7 +29,8 @@ The site has to match the Claude Design prototype pixel for pixel. The visual te
 npm run test:visual          # full suite: 37 checks
 npm run test:visual:quick    # 15 checks
 npm run test:visual:report   # open the last report (reference, app and diff images for failures)
-npm run test:ux              # 71 checker, contact, submission, process, trust and typography checks
+npm run test:ux              # 123 checker, contact, submission, process, trust, typography, metadata and accessibility checks
+npm run test:recheck         # responsive sweep of an already-served build (see below)
 ```
 
 - The full suite compares home at 10 widths, privacy at 5, and 22 interaction states including keyboard, hover, disabled and input-focus states.
@@ -41,13 +42,17 @@ npm run test:ux              # 71 checker, contact, submission, process, trust a
 - **Failures:** the reference, app and diff images are saved under `test-results/visual/<test>/`.
 - **Changing the design:** if a test fails because the design itself changed, update `tests/visual/reference/` (a new export, or a hand edit that mirrors the change) instead of loosening the test.
 
-The UX suite builds two isolated production variants under `test-results/ux-builds/`: `endpoint` pins a fictitious WhatsApp number and an intercepted HTTPS receiver; `email` leaves both empty. It checks both pages at phone and desktop widths, checker layouts, optional-field validation, success, body-level errors, network failure, timeout, retry and the email draft. No test sends a real enquiry.
+The UX suite builds two isolated production variants under `test-results/ux-builds/`: `endpoint` pins a fictitious WhatsApp number, a fictitious public origin and an intercepted HTTPS receiver; `email` leaves them empty or invalid. It checks both pages at phone and desktop widths, checker layouts, optional-field validation, success, body-level errors, network failure, timeout, retry and the email draft. It also runs an axe accessibility scan (development dependency `@axe-core/playwright`), keyboard focus against the sticky elements, the skip link, sharing metadata, the sitemap, and a sweep of every page at 19 viewport sizes for sideways overflow, console errors and the main controls. No test sends a real enquiry.
+
+`npm run test:recheck` runs the same viewport sweep against a build you serve yourself, by default at `http://localhost:5611/germandians` (set `RECHECK_BASE_URL` for another address). Use it for the Pages subpath: build with `SITE_BASE_PATH=/germandians/`, copy `build/client/` into a `germandians` folder, copy its `404.html` into the parent as well (GitHub Pages answers a project site's missing paths with that site's `404.html`), and serve the parent with `node scripts/serve.mjs <parent> 5611`. Screenshots go to `test-results/recheck/screenshots/` (set `RECHECK_SCREENSHOTS` for another folder); the same sweep inside the UX suite keeps none.
 
 ## GitHub Pages
 
 In the repository's **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. To override the public site settings listed below, add repository variables under **Settings → Secrets and variables → Actions → Variables** before building.
 
-Pull requests targeting `main` run lint, TypeScript checks, a production build and Playwright tests. A successful push to `main` publishes `build/client/` at [gosalar.github.io/germandians](https://gosalar.github.io/germandians/). The workflow sets `SITE_BASE_PATH` to the repository path for both Vite assets and router links. The build places both prerendered pages at their artifact-relative paths and writes the SPA fallback as `404.html`. To redeploy after changing a variable, run **Site CI and Pages deployment** manually on `main` from the Actions tab.
+Pull requests targeting `main` run lint, TypeScript checks, a production build and Playwright tests. A successful push to `main` publishes `build/client/` at [gosalar.github.io/germandians](https://gosalar.github.io/germandians/). The workflow builds with `SITE_BASE_PATH` (default `/germandians/`) for both Vite assets and router links. The build places the prerendered pages at their artifact-relative paths, writes the SPA fallback as `404.html`, and writes `sitemap.xml` and `robots.txt`. To redeploy after changing a variable, run **Site CI and Pages deployment** manually on `main` from the Actions tab.
+
+**Moving to a custom domain.** After the domain is bought and its DNS points at GitHub Pages (see GitHub's custom-domain documentation), set the domain under **Settings → Pages → Custom domain** and turn on **Enforce HTTPS**. Then set two repository variables: `SITE_BASE_PATH` to `/` and `VITE_SITE_ORIGIN` to the domain's HTTPS origin, for example `https://example.com`. A workflow deployment needs no `CNAME` file. Canonical URLs, sharing tags, the sitemap and `robots.txt` follow these two settings. A new business mailbox replaces `CONTACT.email` in `src/utils/constants.ts`; update the privacy note's description of the email provider at the same time.
 
 ## Settings
 
@@ -55,6 +60,7 @@ The design's editable "props" are environment variables. Copy `config/.env.examp
 
 | Variable | Allowed value and default behaviour |
 | --- | --- |
+| `VITE_SITE_ORIGIN` | Public HTTPS origin without a path, used for canonical, sharing and sitemap URLs; combined with `SITE_BASE_PATH`. Missing: `https://gosalar.github.io`; invalid: the same, with a build warning |
 | `VITE_FORM_ENDPOINT` | Absolute HTTPS URL without credentials, implementing the receipt contract below. Missing or invalid: explained email draft handoff |
 | `VITE_WHATSAPP_NUMBER` | International number, 10–15 digits after stripping punctuation, first digit nonzero. Missing or invalid: “Open review form” / “Profile review” links go to the form, with a production warning |
 | `VITE_FEE_AFTER_ADMISSION` | Advertised service fee; empty shows "Written quote". Timing and any exception are agreed in the written quote. Values longer than 16 characters appear in full in the fee explanation, with "See quote" on the receipt |
@@ -82,32 +88,36 @@ CI runs both the visual and UX suites. Their builds use `.visual-build/` and `te
 ## Structure
 
 ```txt
+public/                             # favicon and social preview images (copied as-is into the build)
+scripts/generate-social.mjs         # regenerates public/social/*.png from PUBLIC_PAGES with local fonts
 src/
-├── root.tsx, routes.ts             # document, Mantine provider, route configuration
+├── root.tsx, routes.ts             # document, Mantine provider, skip link, route configuration
 ├── routes/                         # metadata, shared site layout, dev-only theme preview
 ├── pages/
 │   ├── Home/                       # one folder per section: index.tsx + styles.module.scss (+ data.ts, hooks)
 │   ├── Check/                      # German grade conversion and programme requirements check
 │   ├── Privacy/                    # standalone privacy note
 │   └── ErrorPage/                  # 404 and route errors
-├── components/                     # SiteHeader, SiteFooter, MobileActionBar, Brand, HomeSectionLink, SourceNote, DmatNote
+├── components/                     # SiteHeader, SiteFooter, MobileActionBar, SkipLink, Brand, HomeSectionLink, SourceNote, DmatNote
 ├── contexts/PageChrome/            # menu state + hero/form visibility for the mobile action bar
 ├── hooks/                          # useReplayOnFirstView, useSettleHashScroll
 ├── services/profileReview.ts       # form submission
 ├── themes/                         # palettes, layered styles, component overrides
-└── utils/                          # constants, siteConfig (env), applicationFacts (dated sources and costs), styles
+└── utils/                          # constants, siteConfig (env), applicationFacts (dated sources and costs),
+                                    # publicPages (page list, titles, descriptions), metadata, publicSite, styles
 ```
 
 ## Notes
 
 - **Process and costs.** Shared fee wording lives in `constants.ts`; intake labels and readiness in `siteConfig.ts`; dMAT, housing, tuition and external costs with dated official sources in `applicationFacts.ts`. Re-read the official page before changing a figure there, and update its review date. The seven-month journey is an overlapping example, not a duration promise. The fee promise is the standard arrangement; the written quote defines exceptions and payment terms.
 - **Pinned test settings.** The UX endpoint variant uses Winter 2027/28, the fictitious fee label "Test quote" and a fictitious business name and address; the email variant uses Summer 2027, an empty fee and no business identity. Both pin intake status and seat settings. The visual suite uses default Summer 2027 settings and pins the copyright year to 2026, the year its reference shows.
-- **Claims about the team.** The community figure, the unpaid guidance before the paid service, and the statement of what the applicant checks, approves and controls each have one constant in `constants.ts`; every mention reads it. The audience figure is never used as a count of students guided. Don't add a statement about other consultancies, a mentor's details or a student's case without a source from the owner.
+- **Claims about the team.** The community figure, the unpaid guidance before the paid service, and the statement of what the applicant checks, approves and controls each have one constant in `constants.ts`; every mention reads it. The home page gives each a single job: the community section tells the origin and the audience, the hero states the unpaid guidance and the intake readiness once, and the mentor section covers delivery, capacity and commitments. The audience figure is never used as a count of students guided. Don't add a statement about other consultancies, a mentor's details or a student's case without a source from the owner.
 - **Business identity and copyright year.** The footer names the operating business from the privacy settings and shows nothing when they are empty. The year is fixed at build time (`BUILD_YEAR` in `scripts/build.mjs`, passed through `vite.config.ts`), so the prerendered page and the browser always agree.
 
 - **Adding a Mantine component.** Add its `.layer.css` and any dependent component styles to `src/themes/mantine-styles.ts`. The unlayered site SCSS takes precedence over Mantine's layer. For brand-specific defaults or variants, add an override and SCSS module under `src/themes/<Component>/` and register it in `src/themes/index.ts`. Check it at `/_theme` during development and run the visual suite.
 - **Shared controls and custom artwork.** Use themed controls for buttons, fields, accordions and status badges. Keep the receipt, stamp cards, responsive comparison tables and other bespoke visuals in their feature folders. The consent checkbox uses browser-native rendering. Keep a control custom if a shared variant cannot reproduce the reference.
-- **Adding pages.** Put the UI in `src/pages/` and metadata in a thin `src/routes/` module. Register pages that use the shared header and footer inside the site layout in `src/routes.ts`. Include public static pages in the prerender list in `react-router.config.ts`.
+- **Adding pages.** Put the UI in `src/pages/` and a thin `src/routes/` module whose `meta` calls `pageMetadata`. Register pages that use the shared header and footer inside the site layout in `src/routes.ts`. Add each public page to `PUBLIC_PAGES` in `src/utils/publicPages.ts`, with its title, description and preview-image labels; that list drives prerendering and the sitemap. Then run `node scripts/generate-social.mjs` to draw its preview image. Keep preview images free of anything that can change (fees, intake, numbers). Each page's `main` element has `id="main-content"` and `tabIndex={-1}` so the skip link can reach it.
+- **Sharing metadata.** Canonical, Open Graph and Twitter tags are absolute URLs built from `VITE_SITE_ORIGIN` and the base path. The 404 page and `/_theme` are `noindex` and are left out of the sitemap. Crawlers read `robots.txt` only at the root of a host, so it takes effect once the site is served from a custom domain; until then the sitemap can be submitted to search engines directly. Real link previews in WhatsApp and Instagram can only be checked once the site is public.
 - **Fonts are self-hosted** (no Google Fonts requests; the privacy note says there's no third-party tracking). Archivo is used for headings, Hanken Grotesk for prose and action buttons, and Barlow Semi Condensed for labels and compact form controls. Hanken and Archivo expose weights 400–900; Barlow loads 400–800 so the requested extra-bold weights render correctly. The shared rules and validation workflow are in `AGENTS.md`.
 - **Breakpoints are CSS media queries** (760, 1024, 1100, 600, 640, 420 px), not JS resize state. Navigation switches to the menu below 1100px.
 - **Sticky nav.** The nav stays sticky down the whole page, as the design's CSS specifies. In the Claude Design preview it stops sticking after the first screen because of the preview wrapper, not the design.

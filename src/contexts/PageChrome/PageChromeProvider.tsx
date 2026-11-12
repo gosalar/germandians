@@ -1,4 +1,4 @@
-import { useIntersection, useWindowEvent } from '@mantine/hooks';
+import { useIntersection } from '@mantine/hooks';
 import { useState, type ReactNode } from 'react';
 import { useLocation } from 'react-router';
 
@@ -19,10 +19,6 @@ export default function PageChromeProvider({ children }: { children: ReactNode }
   const { pathname } = useLocation();
   const heroCta = useIntersection<HTMLElement>(VISIBILITY);
   const form = useIntersection<HTMLElement>(VISIBILITY);
-
-  useWindowEvent('keydown', (event) => {
-    if (event.key === 'Escape') setMenuOpen(false);
-  });
 
   const state: PageChromeState = {
     menuOpen,

@@ -1,8 +1,8 @@
 import reichstag from '@/assets/images/reichstag.jpg';
 import { SECTIONS } from '@/utils/constants';
-import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
+import { siteConfig } from '@/utils/siteConfig';
 
-import { COMMITMENTS, MENTOR_COPY, METHOD_POINTS, STATS } from './data';
+import { COMMITMENTS, MENTOR_COPY, METHOD_POINTS } from './data';
 import styles from './styles.module.scss';
 import WorkloadDiagram from './WorkloadDiagram';
 
@@ -73,21 +73,9 @@ export default function Mentors() {
           </div>
         </div>
 
-        <div className={styles.stats}>
-          {STATS.map((stat) => (
-            <div key={stat.value} className={styles.stat} data-highlight={stat.highlight}>
-              <div className={styles.statValue}>{stat.value}</div>
-              <div className={styles.statLabel}>{stat.label}</div>
-              {stat.highlight && siteConfig.showSeatCount ? (
-                <div className={styles.seats}>{siteConfig.seatsLeft} places still open</div>
-              ) : null}
-            </div>
-          ))}
-        </div>
-
         <h3 className={styles.ratio}>{MENTOR_COPY.ratio}</h3>
         <WorkloadDiagram />
-        <p className={styles.ratioNote}>{INTAKE_READINESS}</p>
+        {siteConfig.showSeatCount ? <p className={styles.seats}>{siteConfig.seatsLeft} places still open</p> : null}
 
         <h3 className={styles.compareTitle}>{MENTOR_COPY.commitmentsTitle}</h3>
         <CommitmentsTable />

@@ -17,7 +17,7 @@ export default function ErrorPage() {
           <BrandLink to={ROUTES.home} size="fixed" />
         </div>
       </nav>
-      <main className={styles.main}>
+      <main id="main-content" tabIndex={-1} className={styles.main}>
         <h1 className={styles.title}>{notFound ? 'Page not found' : 'Something went wrong'}</h1>
         <p className={styles.text}>
           {notFound ? "This page doesn't exist or has moved." : 'Please reload the page or try again later.'}

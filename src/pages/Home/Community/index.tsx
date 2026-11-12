@@ -1,6 +1,5 @@
 import DmatNote from '@/components/DmatNote';
 import { COMMUNITY, CONTACT, SECTIONS } from '@/utils/constants';
-import { REVIEW_OUTCOME } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
 
@@ -17,7 +16,7 @@ const PRINCIPLES = [
     color: '#1d7a3d',
     body: (
       <>
-        {`You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there. ${REVIEW_OUTCOME}`}
+        You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there.
         <br />
         <DmatNote />
       </>

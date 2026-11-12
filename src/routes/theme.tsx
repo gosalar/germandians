@@ -2,10 +2,11 @@ import { Accordion, Anchor, Badge, Button, Checkbox, Table, TextInput } from '@m
 
 const variants = ['yellow', 'yellow-dark', 'navy', 'navy-step', 'outline', 'ring', 'menu'];
 const sizes = ['nav', 'md', 'lg', 'step', 'submit', 'menu'];
+export const meta = () => [{ name: 'robots', content: 'noindex' }];
 
 export default function ThemePreview() {
   return (
-    <main style={{ maxWidth: 920, margin: 'auto', padding: 24 }}>
+    <main id="main-content" tabIndex={-1} style={{ maxWidth: 920, margin: 'auto', padding: 24 }}>
       <h1>Germandians theme</h1>
       {variants.map(variant => (
         <section key={variant}>

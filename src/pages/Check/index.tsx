@@ -57,8 +57,8 @@ export default function Check() {
   };
 
   return (
-    <main id={SECTIONS.top}>
-      <section className={styles.section}>
+    <main id="main-content" tabIndex={-1}>
+      <section id={SECTIONS.top} className={styles.section}>
         <div className={styles.container}>
           <header className={styles.head}>
             <div className={styles.badges}>

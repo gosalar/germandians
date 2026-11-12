@@ -14,6 +14,7 @@ import { StrictMode, useEffect, type ReactNode } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 
 import ErrorPage from '@/pages/ErrorPage';
+import SkipLink from '@/components/SkipLink';
 import { germandiansTheme } from '@/themes';
 
 export function Layout({ children }: { children: ReactNode }) {
@@ -26,14 +27,17 @@ export function Layout({ children }: { children: ReactNode }) {
         <link rel="preload" href={hankenLatin} as="font" type="font/woff2" crossOrigin="anonymous" />
         {/* Tints the browser toolbar on Android phones and tablets to the nav's paper colour. */}
         <meta name="theme-color" content="#f7f5ef" />
-        <link rel="icon" href="data:," />
+        <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
         <Meta />
         <Links />
         <ColorSchemeScript forceColorScheme="light" />
       </head>
       <body>
         <StrictMode>
-          <MantineProvider theme={germandiansTheme} forceColorScheme="light">{children}</MantineProvider>
+          <MantineProvider theme={germandiansTheme} forceColorScheme="light">
+            <SkipLink />
+            {children}
+          </MantineProvider>
         </StrictMode>
         <ScrollRestoration />
         <Scripts />

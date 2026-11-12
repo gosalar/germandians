@@ -44,7 +44,7 @@ export default function Privacy() {
         </div>
       </nav>
 
-      <main className={styles.main}>
+      <main id="main-content" tabIndex={-1} className={styles.main}>
         <article className={styles.article}>
           <header className={styles.header}>
             <h1 className={styles.title}>Privacy note</h1>

@@ -1,6 +1,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
+  /** Public HTTPS origin, without a path, for canonical, sharing and sitemap URLs; default https://gosalar.github.io. */
+  readonly VITE_SITE_ORIGIN?: string;
   /** Summer (default) or Winter; winter is displayed as an academic year. */
   readonly VITE_INTAKE_SEASON?: string;
   /** Four-digit starting year, 1000–9999; default 2027. */

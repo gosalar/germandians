@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useReplayOnFirstView } from '@/hooks/useReplayOnFirstView';
 import { FEE_POLICY, FEE_PROMISE } from '@/utils/constants';
 import { prefersReducedMotion } from '@/utils/motion';
-import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
+import { siteConfig } from '@/utils/siteConfig';
 
 import { RECEIPT_ITEMS } from './data';
 import styles from './styles.module.scss';
@@ -72,7 +72,6 @@ export default function Receipt({ feeShort }: { feeShort: string }) {
       <button type="button" onClick={print} className={styles.replay}>
         Replay receipt animation
       </button>
-      <p className={styles.detailBody}>{INTAKE_READINESS}</p>
     </div>
   );
 }

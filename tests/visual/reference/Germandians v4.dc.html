@@ -13,12 +13,16 @@
 <link href="./fonts.css" rel="stylesheet">
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.skip-link{position:fixed;top:8px;left:16px;z-index:100;clip-path:inset(50%);padding:12px 20px;border-radius:8px;background:#10182e;color:#f7f5ef;font-family:'Hanken Grotesk',sans-serif;font-weight:600}
+.skip-link:focus{clip-path:none;outline:3px solid #f5c400;outline-offset:3px;color:#f7f5ef}
+#main-content:focus{outline:none}
+@media(max-width:759.98px){html{scroll-padding-bottom:calc(92px + env(safe-area-inset-bottom))}}
 html{scroll-behavior:smooth;scroll-padding-top:76px;overflow-x:clip}
 body{margin:0;background:#f7f5ef;color:#10182e;font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:#10182e;text-decoration-color:#f5c400;text-decoration-thickness:2px;text-underline-offset:3px}
 a:hover{color:#c4261b}
 ::selection{background:#f5c400;color:#10182e}
-input::placeholder{color:#7a8094}
+input::placeholder{color:#6a7088}
 button{font:inherit}
 *{box-sizing:border-box}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition-duration:0s !important}}
@@ -55,10 +59,7 @@ button{font:inherit}
 .m-point{font-size:16px !important;line-height:1.45 !important}
 .m-photo{height:112px;aspect-ratio:auto !important}
 .m-photo-img{object-position:center 55%}
-.m-stats{grid-template-columns:1fr !important;gap:8px !important;margin-top:24px !important}
-.m-stat{display:grid !important;grid-template-columns:100px 1fr;align-items:center;gap:8px !important;padding-top:10px !important}
-.m-stat-label{font-size:15px !important;line-height:1.3 !important}
-.m-seats{grid-column:2;font-size:15px !important}
+.m-seats{font-size:15px !important}
 .m-ratio{margin:20px 0 8px !important;line-height:1.05 !important;word-spacing:normal !important;font-size:22px !important}
 .m-diagrams{gap:10px !important;margin-top:16px !important;align-items:start !important}
 .m-diagram{border-radius:12px !important;gap:4px !important;padding:8px !important}
@@ -73,7 +74,6 @@ button{font:inherit}
 .m-tdots{width:auto;margin-inline:auto;grid-template-columns:repeat(2,auto);gap:4px 8px}
 .m-tgroup{grid-template-columns:repeat(5,6px);gap:2px}
 .m-tdot{border-width:1px}
-.m-rnote{margin-top:12px !important;font-size:15px !important;line-height:1.45 !important}
 .m-ctitle{margin-top:24px !important}
 .m-cards{gap:8px !important}
 .m-card{border-radius:10px !important}
@@ -92,6 +92,7 @@ button{font:inherit}
 </style>
 </helmet>
 
+<a href="#main-content" class="skip-link">Skip to content</a>
 <nav style="position:sticky;top:0;z-index:50;background:#f7f5ef;border-bottom:1px solid #e2ddd0">
   <div style="max-width:1320px;margin:0 auto;padding:10px clamp(16px,5vw,72px);display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:62px">
     <a href="#top" onClick="{{ closeMenu }}" style="display:flex;align-items:center;gap:clamp(8px,2.5vw,10px);text-decoration:none;color:#10182e;min-width:0">
@@ -102,7 +103,7 @@ button{font:inherit}
       <div style="display:flex;align-items:center;gap:18px">
         <div style="display:flex;gap:15px;font-weight:600;font-size:16px">
           <a href="/check" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Grade check</a>
-          <a href="#community" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Why us</a>
+          <a href="#community" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Our story</a>
           <a href="#fees" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Fees</a>
           <a href="#journey" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Journey</a>
           <a href="#universities" style="white-space:nowrap;text-decoration:none;padding:6px 0" style-hover="text-decoration:underline;text-decoration-color:#f5c400;text-decoration-thickness:3px">Public vs private</a>
@@ -122,7 +123,7 @@ button{font:inherit}
   <sc-if value="{{ menuVisible }}" hint-placeholder-val="{{ false }}">
     <div id="mobile-menu" style="max-height:calc(100dvh - 66px);overflow-y:auto;overscroll-behavior:contain;border-top:1px solid #e2ddd0;background:#f7f5ef;padding:8px clamp(16px,5vw,72px) 20px;display:flex;flex-direction:column">
       <a href="/check" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Grade check</a>
-      <a href="#community" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Why us</a>
+      <a href="#community" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Our story</a>
       <a href="#fees" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Fees</a>
       <a href="#journey" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Journey</a>
       <a href="#universities" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:56px;border-bottom:1px solid #e2ddd0;text-decoration:none;font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:24px">Public vs private</a>
@@ -133,6 +134,7 @@ button{font:inherit}
   </sc-if>
 </nav>
 
+<main id="main-content" tabindex="-1">
 <header id="top" data-screen-label="Hero" class="hero-head" style="padding:clamp(32px,5vw,72px) clamp(20px,5vw,72px) clamp(56px,8vw,104px)">
   <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:{{ heroCols }};gap:clamp(32px,4vw,64px);align-items:center">
     <div style="display:flex;flex-direction:column;gap:26px;min-width:0">
@@ -145,7 +147,7 @@ button{font:inherit}
       <p style="margin:0;max-width:38ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;font-weight:500;color:#2b3350;text-wrap:pretty">We guide you from profile evaluation to your arrival in Germany.</p>
       <div ref="{{ heroCtaRef }}" class="hero-ctas" style="display:flex;flex-wrap:wrap;gap:12px">
         <a href="#contact-form" style="background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e;transition:background .2s,color .2s" style-hover="background:#10182e;color:#f5c400">Get my profile reviewed</a>
-        <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e;transition:background .2s" style-hover="background:#ebe6d8;color:#10182e">DM us on Instagram</a>
+        <a href="/check" style="color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e;transition:background .2s" style-hover="background:#ebe6d8;color:#10182e">Free grade check</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">
         <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px">
@@ -178,7 +180,7 @@ button{font:inherit}
       <h3 style="margin:0 0 clamp(24px,3vw,36px);font-family:'Archivo',sans-serif;font-weight:900;font-stretch:76%;font-size:clamp(44px,5vw,80px);line-height:.9;letter-spacing:-0.022em;word-spacing:.12em;color:#10182e;text-wrap:balance">By the students, for the students</h3>
       <div style="border-top:2px solid #10182e;padding:28px 0;display:flex;flex-direction:column;gap:12px">
         <h3 style="margin:0;display:flex;align-items:center;gap:14px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.4vw,48px);line-height:1;letter-spacing:-0.015em;color:#10182e"><span aria-hidden="true" style="flex:none;width:.42em;height:.42em;border-radius:4px;background:#1d7a3d"></span><span>We start from scratch</span></h3>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350;text-wrap:pretty">You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there. Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.<br><span>dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.</span><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span></p>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350;text-wrap:pretty">You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there.<br><span>dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.</span><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span></p>
       </div>
       <div style="border-top:2px solid #10182e;padding:28px 0;display:flex;flex-direction:column;gap:12px">
         <h3 style="margin:0;display:flex;align-items:center;gap:14px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.4vw,48px);line-height:1;letter-spacing:-0.015em;color:#10182e"><span aria-hidden="true" style="flex:none;width:.42em;height:.42em;border-radius:4px;background:#ef8a21"></span><span>We guide from experience</span></h3>
@@ -230,7 +232,6 @@ button{font:inherit}
         </div>
       </div>
       <button type="button" onClick="{{ print }}" style="background:none;border:0;color:#c6ccda;font-family:'Barlow Semi Condensed',sans-serif;font-weight:500;font-size:15px;cursor:pointer;text-decoration:underline;text-decoration-color:#4a5372;text-underline-offset:4px;padding:8px">Replay receipt animation</button>
-<p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.</p>
     </div>
 
     <div style="grid-area:c;display:flex;flex-direction:column;gap:32px;min-width:0">
@@ -435,7 +436,7 @@ button{font:inherit}
         <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">CGPA alone did not explain the outcomes. Each decision weighed the whole application: subject fit, documents, the SOP and the grades.</p>
         <a href="#contact-form" style="margin-top:8px;align-self:flex-start;display:inline-flex;background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;transition:background .2s,color .2s" style-hover="background:#ffffff;color:#10182e">Get my profile reviewed</a>
       </div>
-      <div ref="{{ sopRef }}" onClick="{{ restamp }}" style="display:flex;flex-direction:column;gap:28px;cursor:pointer">
+      <div ref="{{ sopRef }}" style="display:flex;flex-direction:column;gap:28px">
         <div style="display:flex;flex-direction:column;transform:rotate(-1.2deg)">
           <div style="align-self:flex-start;max-width:100%;background:#ebe6d8;border-radius:10px 10px 0 0;padding:6px 16px 4px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;line-height:1.3;color:#10182e">Applicant A</div>
           <div style="background:#ebe6d8;color:#10182e;border-radius:0 14px 14px 14px;padding:24px clamp(18px,3vw,28px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px 20px">
@@ -458,6 +459,7 @@ button{font:inherit}
             <div style="flex:none;margin:6px 4px;border:4px solid #1d7a3d;border-radius:8px;padding:8px 16px;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(22px,3vw,34px);letter-spacing:.04em;color:#1d7a3d;transform:{{ admTransform }};opacity:{{ admOpacity }};transition:transform .32s cubic-bezier(.2,1.6,.4,1) .85s,opacity .2s .85s">ADMITTED</div>
           </div>
         </div>
+        <button type="button" onClick="{{ restamp }}" style="align-self:center;margin-top:-12px;background:none;border:0;color:#c6ccda;font-family:'Barlow Semi Condensed',sans-serif;font-weight:500;font-size:15px;cursor:pointer;text-decoration:underline;text-decoration-color:#4a5372;text-underline-offset:4px;padding:8px">Replay stamp animation</button>
       </div>
     </div>
   </div>
@@ -477,22 +479,6 @@ button{font:inherit}
       </div>
       <div class="m-photo" style="border-radius:18px;overflow:hidden;transform:rotate(1.2deg);box-shadow:0 24px 48px -24px rgba(16,24,46,.45);aspect-ratio:1090/788">
         <img class="m-photo-img" src="assets/reichstag.jpg" alt="A student with a backpack looking at the Reichstag building in Berlin" style="display:block;width:100%;height:100%;object-fit:cover">
-      </div>
-    </div>
-
-    <div class="m-stats" style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px 24px">
-      <div class="m-stat" style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;word-spacing:.14em;color:#10182e">Up to 70</div>
-        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students guided over two years, unpaid, before the paid service began</div>
-      </div>
-      <div class="m-stat" style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;word-spacing:.14em;color:#10182e">22,000+</div>
-        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Community audience on Instagram and WhatsApp</div>
-      </div>
-      <div class="m-stat" style="border-top:3px solid #c4261b;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;word-spacing:.14em;color:#c4261b">30</div>
-        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students we'll personally support for Summer 2027</div>
-        <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><div class="m-seats" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#3b4460">{{ seatsLeft }} places still open</div></sc-if>
       </div>
     </div>
 
@@ -531,7 +517,7 @@ button{font:inherit}
         </div>
       </div>
     </div>
-    <p class="m-rnote" style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.</p>
+    <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><p class="m-seats" style="margin:16px 0 0;font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#3b4460">{{ seatsLeft }} places still open</p></sc-if>
 
     <h3 class="m-ctitle" style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,36px);line-height:1.1;color:#10182e;text-wrap:balance">What we commit to</h3>
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
@@ -727,6 +713,7 @@ button{font:inherit}
   </div>
 </section>
 
+</main>
 <div aria-hidden="true" style="height:clamp(70px,10vw,140px);background:url(assets/flag-painting.jpg) center 12%/cover"></div>
 <footer ref="{{ footerRef }}" style="background:#0b1122;color:#c6ccda;padding:56px clamp(20px,5vw,72px) 28px">
   <div style="max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
@@ -1059,7 +1046,7 @@ class Component extends DCLogic {
     this.onResize();
     this.initHero();
     this.initObservers();
-    this.onKey = e => { if (e.key === 'Escape' && this.state.menuOpen) this.setState({ menuOpen: false }); };
+    this.onKey = e => { if (e.key === 'Escape' && this.state.menuOpen) { this.setState({ menuOpen: false }); document.querySelector('button[aria-controls="mobile-menu"]')?.focus(); } };
     window.addEventListener('keydown', this.onKey);
     this.onVisibility = () => { if (document.hidden) this.pausePlay(); };
     document.addEventListener('visibilitychange', this.onVisibility);

@@ -21,11 +21,12 @@ test('fee conditions and intake readiness agree across pages and metadata', asyn
   await expect(page.locator('#why').getByText('2,000+', { exact: true })).toHaveCount(0);
   await expect(page.locator('#top')).toContainText('Winter 2027/28');
   await expect(page.locator('#fees')).toContainText('Test quote');
-  // The receipt lists the service; the readiness sentence appears only where the intake is named.
+  // The receipt lists the service; the readiness sentence is stated once, beside the intake in the opening.
   await expect(page.locator('#fees').getByText('Included', { exact: true })).toHaveCount(9);
   await expect(page.locator('#fees')).toContainText('Due now, as standard');
-  await expect(page.getByText('visa lead time')).toHaveCount(3);
-  await expect(page.locator('#community')).toContainText('Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.');
+  await expect(page.getByText('visa lead time')).toHaveCount(1);
+  await expect(page.locator('#top')).toContainText('Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.');
+  for (const id of ['#community', '#fees', '#why']) await expect(page.locator(id)).not.toContainText('Your profile review tells you whether');
   await page.goto('/check');
   await expect(page.locator('main')).toContainText('standard arrangement');
   await expect(page.locator('main')).toContainText('visa lead time');

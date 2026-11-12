@@ -45,18 +45,17 @@ test('unsupported claims are gone from the home page and the grade check', async
 test('audience size, direct guidance and intake places are told apart', async ({ page }) => {
   await page.goto('/');
   // The audience figure carries one label wherever it appears.
-  for (const id of ['#community', '#why']) {
+  for (const id of ['#community']) {
     await expect(page.locator(id)).toContainText('22,000+');
     await expect(page.locator(id)).toContainText(AUDIENCE_LABEL);
   }
   await expect(page.locator('#top')).not.toContainText('22,000');
-  // The unpaid guidance is stated once in the opening and once as a mentor stat, in the same words.
+  // Experience stays early; the mentor section focuses on delivery and capacity.
   await expect(page.locator('#top')).toContainText(TRACK_RECORD);
   await expect(page.getByText(TRACK_RECORD)).toHaveCount(1);
   await expect(page.locator('#community')).toContainText('The consultancy grew out of what they kept asking us.');
-  await expect(page.locator('#why')).toContainText('Up to 70');
-  await expect(page.locator('#why')).toContainText('Students guided over two years, unpaid, before the paid service began');
-  await expect(page.locator('#why')).toContainText("Students we'll personally support for Winter 2027/28");
+  await expect(page.locator('#why')).not.toContainText('Up to 70');
+  await expect(page.locator('#why')).toContainText('30 places for Winter 2027/28');
   await expect(page.locator('#community')).toContainText('what the questions from our community have taught us since');
 });
 

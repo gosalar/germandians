@@ -22,7 +22,7 @@ export const hashLink = (id: string) => `#${id}`;
 
 export const NAV_LINKS = [
   { href: ROUTES.check, label: 'Grade check' },
-  { href: hashLink(SECTIONS.community), label: 'Why us' },
+  { href: hashLink(SECTIONS.community), label: 'Our story' },
   { href: hashLink(SECTIONS.fees), label: 'Fees' },
   { href: hashLink(SECTIONS.journey), label: 'Journey' },
   { href: hashLink(SECTIONS.universities), label: 'Public vs private' },
@@ -48,13 +48,9 @@ export const COMMUNITY = {
   label: 'Community audience on Instagram and WhatsApp',
 } as const;
 
-const GUIDED = { count: 'up to 70', terms: 'over two years, unpaid, before the paid service began' } as const;
-
-/** The unpaid guidance that came before the paid service. Every mention uses these words. */
+/** The unpaid guidance that came before the paid service. Stated once, in the opening. */
 export const TRACK_RECORD = {
-  value: `${GUIDED.count[0].toUpperCase()}${GUIDED.count.slice(1)}`,
-  label: `Students guided ${GUIDED.terms}`,
-  sentence: `We guided ${GUIDED.count} students ${GUIDED.terms}.`,
+  sentence: 'We guided up to 70 students over two years, unpaid, before the paid service began.',
 } as const;
 
 /** Who checks, approves and holds the accounts. Stated in full once, in the commitments table. */

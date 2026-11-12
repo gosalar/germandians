@@ -1,7 +1,8 @@
 import { Badge, Button } from '@mantine/core';
+import { Link } from 'react-router';
 import flagPainting from '@/assets/images/flag-painting.jpg';
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
-import { CONTACT, FEE_POLICY, INTAKE_SEATS, SECTIONS, TRACK_RECORD, hashLink, type IntakeStatus } from '@/utils/constants';
+import { FEE_POLICY, INTAKE_SEATS, ROUTES, SECTIONS, TRACK_RECORD, hashLink, type IntakeStatus } from '@/utils/constants';
 import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
@@ -56,8 +57,8 @@ export default function Hero() {
             <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow" size="lg">
               Get my profile reviewed
             </Button>
-            <Button component="a" href={CONTACT.instagramUrl} target="_blank" rel="noopener" variant="ring" size="lg">
-              DM us on Instagram
+            <Button component={Link} to={ROUTES.check} variant="ring" size="lg">
+              Free grade check
             </Button>
           </div>
           <div className={styles.meta}>

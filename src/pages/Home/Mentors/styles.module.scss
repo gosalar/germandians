@@ -103,72 +103,12 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 2.4fr);
   }
 }
 
-// Stats
-.stats {
-  margin-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: 16px 24px;
-
-  @include m.below(t.$bp-mobile) {
-    grid-template-columns: 1fr;
-    gap: 8px;
-    margin-top: 24px;
-  }
-}
-
-.stat {
-  border-top: 3px solid t.$navy;
-  padding-top: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  --stat-color: #{t.$navy};
-
-  @include m.below(t.$bp-mobile) {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    align-items: center;
-    gap: 8px;
-    padding-top: 10px;
-  }
-
-  &[data-highlight='true'] {
-    border-top-color: t.$red;
-    --stat-color: #{t.$red};
-  }
-}
-
-.statValue {
-  font-family: t.$font-display;
-  font-weight: 900;
-  font-stretch: 80%;
-  font-size: clamp(28px, 3vw, 44px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  // Keeps the words apart in a value such as "Up to 70" at this tight tracking.
-  word-spacing: 0.14em;
-  color: var(--stat-color);
-}
-
-.statLabel {
-  font-size: 18px;
-  line-height: 1.45;
-  font-weight: 600;
-  color: t.$ink-strong;
-
-  @include m.below(t.$bp-mobile) {
-    font-size: 15px;
-    line-height: 1.3;
-  }
-}
-
 .seats {
+  margin: 16px 0 0;
   @include m.label-font(600, 17px);
   color: t.$ink-muted;
 
   @include m.below(t.$bp-mobile) {
-    grid-column: 2;
     font-size: 15px;
   }
 }
@@ -401,21 +341,6 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 2.4fr);
 
   @include m.below(t.$bp-mobile) {
     border-width: 1px;
-  }
-}
-
-.ratioNote {
-  margin: 24px 0 0;
-  max-width: 68ch;
-  font-size: clamp(17px, 1.35vw, 19px);
-  line-height: 1.6;
-  text-wrap: pretty;
-  color: t.$ink-soft;
-
-  @include m.below(t.$bp-mobile) {
-    margin-top: 12px;
-    font-size: 15px;
-    line-height: 1.45;
   }
 }
 

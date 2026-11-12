@@ -14,7 +14,7 @@ export default function Home() {
   useSettleHashScroll();
 
   return (
-    <>
+    <main id="main-content" tabIndex={-1}>
       <Hero />
       <Community />
       <Fees />
@@ -24,6 +24,6 @@ export default function Home() {
       <Mentors />
       <Faq />
       <Contact />
-    </>
+    </main>
   );
 }

@@ -1,5 +1,6 @@
 import { CONTACT, INTAKE_SEASONS, INTAKE_SEATS, INTAKE_STATUSES, SECTIONS, hashLink, type IntakeSeason, type IntakeStatus } from '@/utils/constants';
 import { toFormEndpoint, toWhatsAppNumber } from './contactSettings';
+import { toSiteOrigin } from './publicSite';
 
 /**
  * Editable site settings. These were the design's "props" panel; here they
@@ -48,6 +49,7 @@ export const businessOperator = privacyConfig.names
 export const buildYear = __BUILD_YEAR__;
 
 export const siteConfig = {
+  publicOrigin: toSiteOrigin(env.VITE_SITE_ORIGIN),
   formEndpoint: toFormEndpoint(env.VITE_FORM_ENDPOINT),
   feeAfterAdmission: text(env.VITE_FEE_AFTER_ADMISSION),
   intakeStatus: toIntakeStatus(text(env.VITE_INTAKE_STATUS)),

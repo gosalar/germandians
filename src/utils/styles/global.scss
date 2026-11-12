@@ -1,4 +1,5 @@
 @use 'tokens' as t;
+@use 'mixins' as m;
 
 // Element defaults from the design. They sit inside :where() so any component
 // class wins over them, the same way the design's inline styles did.
@@ -13,6 +14,16 @@
   scroll-behavior: smooth;
   scroll-padding-top: 76px;
   overflow-x: clip;
+  @include m.below(t.$bp-mobile) {
+    // Leave room for the phone contact bar when native keyboard scrolling runs.
+    scroll-padding-bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+}
+
+// The skip link moves focus to the page's main landmark so the next Tab starts
+// in the content; an outline around the whole page would not help anyone.
+:where(#main-content):focus {
+  outline: none;
 }
 
 :where(body) {

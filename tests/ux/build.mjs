@@ -11,6 +11,7 @@ for (const variant of ['endpoint', 'email']) {
         VISUAL_BUILD: '',
         UX_BUILD: variant,
         SITE_BASE_PATH: '/',
+        VITE_SITE_ORIGIN: variant === 'endpoint' ? 'https://germandians.example.test' : 'invalid-origin',
         VITE_INTAKE_SEASON: variant === 'endpoint' ? 'Winter' : 'Summer',
         VITE_INTAKE_YEAR: '2027',
         VITE_FEE_AFTER_ADMISSION: variant === 'endpoint' ? 'Test quote' : '',

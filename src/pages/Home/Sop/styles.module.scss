@@ -172,7 +172,24 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
+}
+
+// Same understated control as the receipt's replay, so it doesn't compete with the section's action.
+.replay {
+  align-self: center;
+  margin-top: -12px;
+  background: none;
+  border: 0;
+  color: t.$mist;
+  font-family: t.$font-label;
+  font-weight: 500;
+  font-size: 15px;
   cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: t.$slate;
+  text-underline-offset: 4px;
+  padding: 8px;
+  @include m.touch-area;
 }
 
 .applicant {

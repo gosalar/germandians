@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useReplayOnFirstView } from '@/hooks/useReplayOnFirstView';
 import { prefersReducedMotion } from '@/utils/motion';
 
-import { APPLICANTS, CASE_CYCLE } from './data';
+import { APPLICANTS, CASE_CYCLE, SOP_COPY } from './data';
 import styles from './styles.module.scss';
 
 const RESTAMP_MS = 120;
 
-/** Two applicant cards whose verdict stamps thump down on first view, and again on click. */
+/** Two applicant cards with a keyboard-accessible replay of their verdict stamps. */
 export default function StampedCards() {
   const ref = useRef<HTMLDivElement>(null);
   const restamp = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -25,7 +25,7 @@ export default function StampedCards() {
   };
 
   return (
-    <div ref={ref} onClick={replay} className={styles.stampCards}>
+    <div ref={ref} className={styles.stampCards}>
       {APPLICANTS.map((applicant) => (
         <div key={applicant.tone} className={styles.applicant} data-tone={applicant.tone}>
           <div className={styles.applicantTab}>{applicant.tab}</div>
@@ -41,6 +41,9 @@ export default function StampedCards() {
           </div>
         </div>
       ))}
+      <button type="button" onClick={replay} className={styles.replay}>
+        {SOP_COPY.replay}
+      </button>
     </div>
   );
 }

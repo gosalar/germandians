@@ -9,7 +9,7 @@ export default defineConfig({
   timeout: 45_000,
   projects: [
     { name: 'endpoint', testIgnore: '**/email.spec.ts', use: { baseURL: 'http://127.0.0.1:5603' } },
-    { name: 'email', testMatch: /(?:email|contact-common)\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:5604' } },
+    { name: 'email', testMatch: /(?:email|contact-common|metadata)\.spec\.ts/, use: { baseURL: 'http://127.0.0.1:5604' } },
   ],
   use: { baseURL: 'http://127.0.0.1:5603', channel: process.env.CI ? undefined : 'chrome', reducedMotion: 'reduce' },
   webServer: ['endpoint', 'email'].map((variant, index) => ({

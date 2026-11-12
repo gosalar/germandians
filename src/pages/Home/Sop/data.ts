@@ -1,6 +1,7 @@
 export const CASE_CYCLE = 'Winter 2025 cycle';
 
 export const SOP_COPY = {
+  replay: 'Replay stamp animation',
   title: 'How we work on your SOP with you',
   intro: [
     'Your Statement of Purpose is the one place in the application where you explain your record in your own words, including the semesters that went badly.',

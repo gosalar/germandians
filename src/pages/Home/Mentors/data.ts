@@ -1,5 +1,5 @@
 import { HOUSING } from '@/utils/applicationFacts';
-import { APPLICANT_CONTROL, COMMUNITY, FEE_PROMISE, INTAKE_SEATS, TRACK_RECORD } from '@/utils/constants';
+import { APPLICANT_CONTROL, FEE_PROMISE, INTAKE_SEATS } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 const MENTORS = 6;
@@ -27,13 +27,6 @@ export const METHOD_POINTS = [
     color: '#d42b1f',
     text: 'A mentor helps you draft and revise your SOP and reviews every document before it is submitted.',
   },
-];
-
-/** Three different counts: direct guidance, audience size and the places for this intake. */
-export const STATS = [
-  { value: TRACK_RECORD.value, label: TRACK_RECORD.label, highlight: false },
-  { value: COMMUNITY.size, label: COMMUNITY.label, highlight: false },
-  { value: String(INTAKE_SEATS), label: `Students we'll personally support for ${siteConfig.intake}`, highlight: true },
 ];
 
 /** The cap in numbers: what one mentor takes on, and what that adds up to for the intake. */
