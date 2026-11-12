@@ -13,6 +13,9 @@ export default defineConfig(({ command, mode }) => {
 
   return {
     base: siteBase,
+    // The copyright year is fixed here so the prerendered HTML and the browser agree.
+    // scripts/build.mjs sets BUILD_YEAR once for both build environments.
+    define: { __BUILD_YEAR__: JSON.stringify(process.env.BUILD_YEAR ?? String(new Date().getFullYear())) },
     // The visual-test build ignores config/.env* so it always has the design's default settings.
     envDir: mode === 'visual' ? false : 'config',
     // Same alias as tsconfig "paths"; declared here too so Sass @use resolves it.

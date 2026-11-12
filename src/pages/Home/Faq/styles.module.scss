@@ -38,6 +38,32 @@
   font-weight: 700;
 }
 
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 4vw, 48px);
+  min-width: 0;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupTitle {
+  margin: 0 0 12px;
+  @include m.label-font(700, 18px);
+  color: t.$red;
+}
+
+.groupNote {
+  margin: 0 0 16px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: t.$ink-soft;
+  text-wrap: pretty;
+}
+
 .answer {
   margin: 0;
   padding: 0 50px 22px 0;

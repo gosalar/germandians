@@ -5,8 +5,9 @@ interface ImportMetaEnv {
   readonly VITE_INTAKE_SEASON?: string;
   /** Four-digit starting year, 1000–9999; default 2027. */
   readonly VITE_INTAKE_YEAR?: string;
-  /** Registered responsible business identity. */
+  /** Registered business name; shown in the privacy note and the footer. */
   readonly VITE_PRIVACY_NAMES?: string;
+  /** Business postal address; shown with the name in both places. */
   readonly VITE_PRIVACY_ADDRESS?: string;
   readonly VITE_PRIVACY_FORM_SERVICE?: string;
   readonly VITE_PRIVACY_HOSTING_PROVIDER?: string;
@@ -26,3 +27,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+/** Four-digit year the site was built in, set in vite.config.ts. */
+declare const __BUILD_YEAR__: string;

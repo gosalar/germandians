@@ -11,7 +11,7 @@ export default function Journey() {
     <section id={SECTIONS.journey} data-screen-label="Journey" className={styles.section}>
       <div className={styles.container}>
         <div className={styles.head}>
-          <h2 className={styles.title}>From first call to first week in Germany</h2>
+          <h2 className={styles.title}>From first call to arrival in Germany</h2>
           <p className={styles.lede}>{JOURNEY_COPY.lede}</p>
         </div>
 

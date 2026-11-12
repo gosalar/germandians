@@ -9,7 +9,7 @@
 <x-dc>
 <helmet>
 <title>Germandians | Student-led guidance for studying in Germany</title>
-<meta name="description" content="Six students living in Germany guide Indian students from profile evaluation to their first week here. €0 service fee until you’re admitted, under the standard arrangement.">
+<meta name="description" content="Six students living in Germany guide Indian students from profile evaluation to their arrival here. €0 service fee until you’re admitted, under the standard arrangement.">
 <link href="./fonts.css" rel="stylesheet">
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -40,6 +40,9 @@ button{font:inherit}
 .ft-link{display:inline-flex;align-items:center;min-height:44px}
 .m-sdots{display:flex;justify-content:center;gap:12px;padding:6px 0}
 .m-sdot{width:72px;height:72px;border-radius:50%;background:#f5c400}
+.m-tdots{display:grid;width:100%;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 20px}
+.m-tgroup{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.m-tdot{aspect-ratio:1;border-radius:50%;background:#f5c400;border:1.5px solid #10182e}
 @media (min-width:760px){
 .m-sdots{display:grid;width:100%;min-width:0;align-self:stretch;grid-template-columns:repeat(5,minmax(0,72px))}
 .m-sdot{width:100%;height:auto;min-width:0;aspect-ratio:1}
@@ -56,13 +59,10 @@ button{font:inherit}
 .m-stat{display:grid !important;grid-template-columns:100px 1fr;align-items:center;gap:8px !important;padding-top:10px !important}
 .m-stat-label{font-size:15px !important;line-height:1.3 !important}
 .m-seats{grid-column:2;font-size:15px !important}
-.m-ratio{margin:20px 0 8px !important;line-height:1.05 !important;word-spacing:normal !important}
-.m-ratio-ours{font-size:22px !important}
-.m-ratio-theirs{margin-top:4px !important;font-size:16px !important}
+.m-ratio{margin:20px 0 8px !important;line-height:1.05 !important;word-spacing:normal !important;font-size:22px !important}
 .m-diagrams{gap:10px !important;margin-top:16px !important;align-items:start !important}
 .m-diagram{border-radius:12px !important;gap:4px !important;padding:8px !important}
 .m-dtitle{font-size:18px !important}
-.m-dsource{font-size:12px !important;line-height:1.3}
 .m-dbox{padding:4px 6px !important;font-size:13px !important;border-radius:8px !important}
 .m-crowd{flex:none !important;gap:4px !important;padding:6px 4px !important}
 .m-dstrong{font-size:14px !important}
@@ -70,18 +70,15 @@ button{font:inherit}
 .m-arrow{display:none}
 .m-sdots{gap:4px;padding:2px 0}
 .m-sdot{width:12px;height:12px}
-.m-adots{width:auto !important;margin-inline:auto;grid-template-columns:repeat(10,6px) !important;gap:2px !important}
-.m-adot{border-width:1px !important}
+.m-tdots{width:auto;margin-inline:auto;grid-template-columns:repeat(2,auto);gap:4px 8px}
+.m-tgroup{grid-template-columns:repeat(5,6px);gap:2px}
+.m-tdot{border-width:1px}
 .m-rnote{margin-top:12px !important;font-size:15px !important;line-height:1.45 !important}
 .m-ctitle{margin-top:24px !important}
 .m-cards{gap:8px !important}
 .m-card{border-radius:10px !important}
 .m-ctopic{padding:8px 12px !important;font-size:16px !important}
-.m-cside{display:block !important;padding:6px 12px !important}
-.m-clabel{margin-right:6px;font-size:13px !important}
-.m-clabel::after{content:':'}
-.m-ctext{font-size:15px !important;line-height:1.35}
-.m-foot{font-size:14px !important;line-height:1.45 !important}
+.m-cus{padding:8px 12px !important;font-size:15px !important;line-height:1.35}
 }
 @media (max-width:759.98px){
 .hero-head{padding-top:56px !important}
@@ -145,7 +142,7 @@ button{font:inherit}
         <span style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(30px,2.8vw,40px);line-height:1;letter-spacing:-0.02em">€0</span>
         <span style="font-weight:700;font-size:clamp(17px,1.4vw,20px);line-height:1.3">service fee until you’re admitted, under the standard arrangement</span>
       </a>
-      <p style="margin:0;max-width:38ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;font-weight:500;color:#2b3350;text-wrap:pretty">We guide you from profile evaluation to your first week in Germany.</p>
+      <p style="margin:0;max-width:38ch;font-size:clamp(17px,1.4vw,20px);line-height:1.5;font-weight:500;color:#2b3350;text-wrap:pretty">We guide you from profile evaluation to your arrival in Germany.</p>
       <div ref="{{ heroCtaRef }}" class="hero-ctas" style="display:flex;flex-wrap:wrap;gap:12px">
         <a href="#contact-form" style="background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e;transition:background .2s,color .2s" style-hover="background:#10182e;color:#f5c400">Get my profile reviewed</a>
         <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;box-shadow:inset 0 0 0 2px #10182e;transition:background .2s" style-hover="background:#ebe6d8;color:#10182e">DM us on Instagram</a>
@@ -155,8 +152,8 @@ button{font:inherit}
           <span style="font-weight:700;font-size:16px;color:#10182e">Summer 2027 intake, 30 students</span>
           <sc-if value="{{ hasStatus }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;gap:8px;padding:4px 10px;border-radius:6px;background:{{ statusBg }};color:{{ statusInk }};font-weight:700;font-size:15px"><span style="width:8px;height:8px;border-radius:50%;background:{{ statusInk }}"></span><span>{{ statusLabel }}</span></span></sc-if>
         </div>
-        <p style="margin:0;font-size:16px;line-height:1.5;color:#3b4460">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review assesses the intake you can target.</p>
-<p style="margin:0;font-size:16px;line-height:1.5;color:#3b4460">Run by the team behind a 22,000-member student community.</p>
+        <p style="margin:0;font-size:16px;line-height:1.5;color:#3b4460">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.</p>
+<p style="margin:0;font-size:16px;line-height:1.5;color:#3b4460">We guided up to 70 students over two years, unpaid, before the paid service began.</p>
       </div>
     </div>
     <div style="position:relative;width:100%;aspect-ratio:1217/1168;min-width:0">
@@ -168,24 +165,24 @@ button{font:inherit}
 <section id="community" data-screen-label="Community" style="background:#efebe2;padding:clamp(64px,9vw,120px) clamp(20px,5vw,72px)">
   <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(40px,6vw,96px);align-items:center">
     <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
-      <h2 style="margin:0 0 clamp(8px,1.2vw,16px);font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,3.2vw,46px);line-height:1;letter-spacing:-0.015em;color:#c4261b">Why we are different</h2>
+      <h2 style="margin:0 0 clamp(8px,1.2vw,16px);font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,3.2vw,46px);line-height:1;letter-spacing:-0.015em;color:#c4261b">Where we started</h2>
       <div style="font-family:'Archivo',sans-serif;font-weight:900;color:#10182e">
         <span style="display:block;font-stretch:72%;font-size:clamp(88px,10vw,160px);line-height:.8;letter-spacing:-0.035em;white-space:nowrap">22,000+</span>
         <span aria-hidden="true" style="display:block;height:clamp(14px,1.6vw,22px);margin:clamp(14px,1.6vw,22px) 0 clamp(16px,1.8vw,24px);width:100%;max-width:600px;border-radius:3px;background:url(assets/flag-painting.jpg) 50% 50%/160% auto"></span>
-        <span style="display:block;font-stretch:100%;font-size:clamp(26px,2.8vw,40px);line-height:1.08;letter-spacing:-0.02em;text-wrap:balance">students in the Germandians community</span>
+        <span style="display:block;font-stretch:100%;font-size:clamp(26px,2.8vw,40px);line-height:1.08;letter-spacing:-0.02em;text-wrap:balance">Community audience on Instagram and WhatsApp</span>
       </div>
-      <p style="margin:0;max-width:42ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#333c56;text-wrap:pretty">Germandians began as a page where we answered questions from Indian students who wanted to study in Germany. More than 22,000 have joined since, and the consultancy grew out of what they kept asking us.</p>
+      <p style="margin:0;max-width:42ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#333c56;text-wrap:pretty">Germandians began as a page where we answered questions from Indian students who wanted to study in Germany. The consultancy grew out of what they kept asking us.</p>
       <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="align-self:flex-start;font-weight:700;font-size:17px;padding:6px 0">See the community on Instagram</a>
     </div>
     <div style="display:flex;flex-direction:column;min-width:0;border-bottom:2px solid #10182e">
       <h3 style="margin:0 0 clamp(24px,3vw,36px);font-family:'Archivo',sans-serif;font-weight:900;font-stretch:76%;font-size:clamp(44px,5vw,80px);line-height:.9;letter-spacing:-0.022em;word-spacing:.12em;color:#10182e;text-wrap:balance">By the students, for the students</h3>
       <div style="border-top:2px solid #10182e;padding:28px 0;display:flex;flex-direction:column;gap:12px">
         <h3 style="margin:0;display:flex;align-items:center;gap:14px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.4vw,48px);line-height:1;letter-spacing:-0.015em;color:#10182e"><span aria-hidden="true" style="flex:none;width:.42em;height:.42em;border-radius:4px;background:#1d7a3d"></span><span>We start from scratch</span></h3>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350;text-wrap:pretty">You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there. Your profile review assesses the intake you can target.<br><span>dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.</span><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span></p>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350;text-wrap:pretty">You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there. Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.<br><span>dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.</span><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span></p>
       </div>
       <div style="border-top:2px solid #10182e;padding:28px 0;display:flex;flex-direction:column;gap:12px">
         <h3 style="margin:0;display:flex;align-items:center;gap:14px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.4vw,48px);line-height:1;letter-spacing:-0.015em;color:#10182e"><span aria-hidden="true" style="flex:none;width:.42em;height:.42em;border-radius:4px;background:#ef8a21"></span><span>We guide from experience</span></h3>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350;text-wrap:pretty">All six of us went through APS, university applications, the blocked account, the visa and Anmeldung ourselves. You get what we learned doing it, plus what we've seen across 22,000 members' applications and questions.</p>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#2b3350;text-wrap:pretty">All six of us went through APS, university applications, the blocked account, the visa and Anmeldung ourselves. You get what we learned doing it, and what the questions from our community have taught us since.</p>
       </div>
     </div>
   </div>
@@ -211,8 +208,8 @@ button{font:inherit}
               <div class="rc-line"><span>APS application</span><span>Included</span></div>
               <div class="rc-line"><span>IELTS guidance</span><span>Included</span></div>
               <div class="rc-line"><span>University shortlist</span><span>Included</span></div>
-              <div class="rc-line"><span>SOP, written with you</span><span>Included</span></div>
-              <div class="rc-line"><span>Portal applications</span><span>Included</span></div>
+              <div class="rc-line"><span>SOP drafting and review</span><span>Included</span></div>
+              <div class="rc-line"><span>Applications, approved by you</span><span>Included</span></div>
               <div class="rc-line"><span>Loan and blocked account help</span><span>Included</span></div>
               <div class="rc-line"><span>Visa preparation</span><span>Included</span></div>
               <div class="rc-line"><span>Housing, Anmeldung, bank account</span><span>Included</span></div>
@@ -233,7 +230,7 @@ button{font:inherit}
         </div>
       </div>
       <button type="button" onClick="{{ print }}" style="background:none;border:0;color:#c6ccda;font-family:'Barlow Semi Condensed',sans-serif;font-weight:500;font-size:15px;cursor:pointer;text-decoration:underline;text-decoration-color:#4a5372;text-underline-offset:4px;padding:8px">Replay receipt animation</button>
-<p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review assesses the intake you can target.</p>
+<p style="margin:0;max-width:46ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#d3d8e4;text-wrap:pretty">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.</p>
     </div>
 
     <div style="grid-area:c;display:flex;flex-direction:column;gap:32px;min-width:0">
@@ -257,7 +254,7 @@ button{font:inherit}
 <section id="journey" data-screen-label="Journey" style="padding:clamp(72px,10vw,136px) clamp(20px,5vw,72px)">
   <div style="max-width:1240px;margin:0 auto">
     <div style="display:flex;flex-direction:column;gap:16px;max-width:860px">
-      <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(46px,7vw,116px);line-height:.9;letter-spacing:-0.022em;word-spacing:.14em;font-stretch:78%;color:#10182e;text-wrap:balance">From first call to first week in Germany</h2>
+      <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(46px,7vw,116px);line-height:.9;letter-spacing:-0.022em;word-spacing:.14em;font-stretch:78%;color:#10182e;text-wrap:balance">From first call to arrival in Germany</h2>
       <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">Four stages that overlap. The seven months below are one example of how they can fit together, not a fixed duration.</p>
     </div>
 
@@ -277,7 +274,7 @@ button{font:inherit}
           <span style="font-weight:600;color:#3b4460">Overlaps with Foundation</span>
         </div>
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(30px,2.6vw,42px);line-height:1;letter-spacing:-0.015em;color:#10182e">Applications</h3>
-        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We shortlist universities with you, write your SOP with you and submit every application on the university portals. Where a programme needs a VPD from uni-assist, we request it early: the university application is a separate step with its own deadline.</p>
+        <p style="margin:0;font-size:17px;line-height:1.55;color:#333c56;text-wrap:pretty">We shortlist universities with you, help you draft and revise your SOP and prepare each application with you. You approve every submission. Where a programme needs a VPD from uni-assist, we help you request it early: the university application is a separate step with its own deadline.</p>
       </li>
       <li style="display:flex;flex-direction:column;gap:12px;min-width:0">
         <div aria-hidden="true" style="height:10px;border-radius:5px;background:#d42b1f"></div>
@@ -370,7 +367,7 @@ button{font:inherit}
         </div>
         <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Tuition</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">Many public programmes have no tuition, but non-EU fees apply at some institutions and in some states; certain programmes also charge tuition. A semester contribution is separate. Check your programme’s fees and exemptions.<span class="source-note"><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/finances/" target="_blank" rel="noopener">DAAD: costs</a> · Last reviewed 12 November 2026</span><span class="source-note"><a href="https://www.tum.de/en/studies/fees/tuition" target="_blank" rel="noopener">TUM: tuition fees</a> · Last reviewed 12 November 2026</span></div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Tuition</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Private universities charge programme-specific tuition. Check the full fee schedule and any separate semester contribution.<span class="source-note"><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/finances/" target="_blank" rel="noopener">DAAD: costs</a> · Last reviewed 12 November 2026</span></div></div></div></div>
         <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Admissions</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">Strict. Your earlier credits have to match the course requirements, and incomplete documents get rejected.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Admissions</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Usually more flexible. Quality varies a lot, and some schools are predatory.</div></div></div></div>
-        <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Reputation</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">The benchmark for German education, with a strong international reputation.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Reputation</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Depends entirely on the institution. We only apply to accredited, reputable ones.</div></div></div></div>
+        <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">Reputation</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">The benchmark for German education, with a strong international reputation.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px);"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">Reputation</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Depends entirely on the institution. We only shortlist accredited, reputable ones.</div></div></div></div>
         <div role="row" style="display:contents"><div role="cell" style="background:#10182e;padding:0 clamp(24px,3.4vw,44px) clamp(24px,3.4vw,44px);border-radius:0 0 24px 24px;"><div style="height:100%;padding:16px 0;border-top:1px solid #2a3557;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#f5c400">What we check</div><div style="font-size:18px;line-height:1.5;color:#e3e6ee">Your ECTS credits against each course's prerequisites, your APS certificate, and every document on the checklist.</div></div></div><div role="cell" style="background:#f7f5ef;padding:0 clamp(24px,3.4vw,44px) clamp(24px,3.4vw,44px);border-radius:0 0 24px 24px;"><div style="height:100%;padding:16px 0;border-top:1px solid #d9d4c6;display:flex;flex-direction:column;gap:4px"><div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px;color:#c4261b">What we check</div><div style="font-size:18px;line-height:1.5;color:#2b3350">Accreditation, genuine industry connections, and whether the total cost makes sense for your career.</div></div></div></div>
       </div>
     </sc-if>
@@ -389,7 +386,7 @@ button{font:inherit}
         <div style="display:flex;flex-direction:column;gap:10px">
           <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;line-height:1.1;color:#10182e">Reputation</h3>
           <div style="background:#10182e;color:#ffffff;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Public</span><span style="font-size:17px;line-height:1.5">The benchmark for German education, with a strong international reputation.</span></div>
-          <div style="background:#f7f5ef;color:#10182e;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#c4261b">Private</span><span style="font-size:17px;line-height:1.5;color:#2b3350">Depends entirely on the institution. We only apply to accredited, reputable ones.</span></div>
+          <div style="background:#f7f5ef;color:#10182e;border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#c4261b">Private</span><span style="font-size:17px;line-height:1.5;color:#2b3350">Depends entirely on the institution. We only shortlist accredited, reputable ones.</span></div>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:26px;line-height:1.1;color:#10182e">What we check</h3>
@@ -404,15 +401,15 @@ button{font:inherit}
 <section id="sop" data-screen-label="SOP" style="background:#10182e;color:#ffffff;overflow-x:clip;padding:clamp(72px,10vw,136px) clamp(20px,5vw,72px)">
   <div style="max-width:1240px;margin:0 auto">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,5vw,88px);align-items:end">
-      <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(48px,6.6vw,108px);line-height:.9;letter-spacing:-0.025em;word-spacing:.14em;font-stretch:74%;color:#f5c400;text-wrap:balance">How we write your SOP with you</h2>
+      <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(48px,6.6vw,108px);line-height:.9;letter-spacing:-0.025em;word-spacing:.14em;font-stretch:74%;color:#f5c400;text-wrap:balance">How we work on your SOP with you</h2>
       <div style="display:flex;flex-direction:column;gap:16px">
         <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Your Statement of Purpose is the one place in the application where you explain your record in your own words, including the semesters that went badly.</p>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Many consultancies generate SOPs with AI or reuse templates. We write yours by hand with you, over several weeks. Nothing is submitted until you've approved the final version.</p>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">It stays your statement. Your mentor helps you draft and revise it over several weeks. Nothing is submitted until you’ve approved the final version.</p>
       </div>
     </div>
 
     <div style="margin-top:clamp(56px,7vw,88px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px">
-      <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.6vw,52px);line-height:1;letter-spacing:-0.015em;color:#ffffff;text-wrap:balance">What a rewrite looks like</h3>
+      <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.6vw,52px);line-height:1;letter-spacing:-0.015em;color:#ffffff;text-wrap:balance">What a revision looks like</h3>
       <p style="margin:0;font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#c6ccda">Illustrative example. The student and details are invented.</p>
     </div>
     <div style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:24px">
@@ -421,7 +418,7 @@ button{font:inherit}
         <p style="margin:0;font-size:clamp(17px,1.4vw,19px);line-height:1.65">Since my childhood I have always been passionate about mechanical engineering. I am a hardworking, dedicated and sincere student. Due to some personal reasons I had backlogs, but I cleared them all and I am now fully ready for a master's degree in Germany.</p>
       </div>
       <div style="background:#fffdf4;color:#10182e;border-radius:6px;padding:clamp(20px,3vw,32px);box-shadow:inset 0 0 0 3px #f5c400;display:flex;flex-direction:column;gap:14px">
-        <div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px">Rewritten with the student</div>
+        <div style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:16px">Revised with a mentor</div>
         <p style="margin:0;font-size:clamp(17px,1.4vw,19px);line-height:1.65"><mark style="background:#fde98a;color:#10182e;padding:1px 2px;border-radius:3px">In my fourth semester I failed six subjects while working evenings at my uncle's workshop after my father's surgery.</mark><sup style="font-weight:800;color:#c4261b;padding-left:2px">1</sup> I cleared every one of them over the next two semesters, and <mark style="background:#fde98a;color:#10182e;padding:1px 2px;border-radius:3px">the workshop is where I learned to diagnose hydraulic faults, the problem my final-year project on pump efficiency set out to solve.</mark><sup style="font-weight:800;color:#c4261b;padding-left:2px">2</sup></p>
       </div>
     </div>
@@ -432,14 +429,15 @@ button{font:inherit}
 
     <div style="margin-top:clamp(72px,9vw,120px);padding-top:clamp(40px,5vw,64px);border-top:1px solid #2a3557;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(40px,6vw,88px);align-items:center">
       <div style="display:flex;flex-direction:column;gap:16px">
+        <p style="margin:0;font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#c6ccda">Real case from the Winter 2025 cycle.</p>
         <h3 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:84%;font-size:clamp(32px,3.6vw,52px);line-height:1;letter-spacing:-0.015em;color:#ffffff;text-wrap:balance">Two applicants, one university</h3>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Both applied to the same German technical university in the Winter 2025 cycle.</p>
-        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Each decision weighed the whole application: grades, course fit, documents and the SOP. The SOP is the part we write with you.</p>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">Both applied to the same German technical university. Applicant B worked with us on the application, including the SOP.</p>
+        <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#d3d8e4">CGPA alone did not explain the outcomes. Each decision weighed the whole application: subject fit, documents, the SOP and the grades.</p>
         <a href="#contact-form" style="margin-top:8px;align-self:flex-start;display:inline-flex;background:#f5c400;color:#10182e;text-decoration:none;font-weight:700;font-size:17px;padding:16px 24px;border-radius:12px;transition:background .2s,color .2s" style-hover="background:#ffffff;color:#10182e">Get my profile reviewed</a>
       </div>
       <div ref="{{ sopRef }}" onClick="{{ restamp }}" style="display:flex;flex-direction:column;gap:28px;cursor:pointer">
         <div style="display:flex;flex-direction:column;transform:rotate(-1.2deg)">
-          <div style="align-self:flex-start;max-width:100%;background:#ebe6d8;border-radius:10px 10px 0 0;padding:6px 16px 4px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;line-height:1.3;color:#10182e">Standard, non-personalised SOP</div>
+          <div style="align-self:flex-start;max-width:100%;background:#ebe6d8;border-radius:10px 10px 0 0;padding:6px 16px 4px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;line-height:1.3;color:#10182e">Applicant A</div>
           <div style="background:#ebe6d8;color:#10182e;border-radius:0 14px 14px 14px;padding:24px clamp(18px,3vw,28px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px 20px">
             <div style="display:flex;flex-direction:column;gap:6px">
               <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(38px,4vw,52px);line-height:1;letter-spacing:-0.02em;white-space:nowrap">7.8 CGPA</div>
@@ -450,7 +448,7 @@ button{font:inherit}
           </div>
         </div>
         <div style="display:flex;flex-direction:column;transform:rotate(.8deg)">
-          <div style="align-self:flex-start;max-width:100%;background:#f5c400;border-radius:10px 10px 0 0;padding:6px 16px 4px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;line-height:1.3;color:#10182e">Germandians SOP, written with the student</div>
+          <div style="align-self:flex-start;max-width:100%;background:#f5c400;border-radius:10px 10px 0 0;padding:6px 16px 4px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;line-height:1.3;color:#10182e">Applicant B, mentored by Germandians</div>
           <div style="background:#fffdf4;color:#10182e;border-radius:0 14px 14px 14px;padding:24px clamp(18px,3vw,28px);box-shadow:inset 0 0 0 3px #f5c400;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:28px 20px">
             <div style="display:flex;flex-direction:column;gap:6px">
               <div style="font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(38px,4vw,52px);line-height:1;letter-spacing:-0.02em;white-space:nowrap">7.1 CGPA</div>
@@ -470,11 +468,11 @@ button{font:inherit}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,56px);align-items:center">
       <div class="m-copy" style="display:flex;flex-direction:column;gap:24px">
         <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(46px,7vw,116px);line-height:.9;letter-spacing:-0.022em;word-spacing:.14em;font-stretch:78%;color:#10182e;text-wrap:balance">How our mentors work</h2>
-        <p class="m-body" style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">Each of our six mentors works with up to five students at a time. That limit is what lets us write every SOP by hand and check every document before it goes out.</p>
+        <p class="m-body" style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">Our six mentors are Indian students at German universities who went through this process themselves. Each works with up to five students at a time, so there is time to check your programme requirements, review your documents and work on your SOP with you.</p>
         <ul class="m-points" style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px">
-          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#1d7a3d"></span><span>A mentor checks every submission against the university's ECTS prerequisites, APS and full document list.</span></li>
-          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#ef8a21"></span><span>Your SOP is written by hand with you, over several weeks.</span></li>
-          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#d42b1f"></span><span>Because the group is small, we can introduce you to seniors at the universities you're applying to.</span></li>
+          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#1d7a3d"></span><span>We check each programme’s admission requirements before it goes on your shortlist: the degree it accepts, language evidence, tests and deadlines.</span></li>
+          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#ef8a21"></span><span>We compare your subject credits with each programme’s prerequisites. Formal requirements decide eligibility, so this comes before the SOP.</span></li>
+          <li class="m-point" style="display:flex;gap:16px;align-items:flex-start;font-size:clamp(17px,1.35vw,19px);line-height:1.5;color:#1f2742"><span style="flex:none;width:14px;height:14px;margin-top:6px;border-radius:3px;background:#d42b1f"></span><span>A mentor helps you draft and revise your SOP and reviews every document before it is submitted.</span></li>
         </ul>
       </div>
       <div class="m-photo" style="border-radius:18px;overflow:hidden;transform:rotate(1.2deg);box-shadow:0 24px 48px -24px rgba(16,24,46,.45);aspect-ratio:1090/788">
@@ -484,20 +482,24 @@ button{font:inherit}
 
     <div class="m-stats" style="margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px 24px">
       <div class="m-stat" style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#10182e">22,000+</div>
-        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Members in the Germandians student community</div>
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;word-spacing:.14em;color:#10182e">Up to 70</div>
+        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students guided over two years, unpaid, before the paid service began</div>
+      </div>
+      <div class="m-stat" style="border-top:3px solid #10182e;padding-top:18px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;word-spacing:.14em;color:#10182e">22,000+</div>
+        <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Community audience on Instagram and WhatsApp</div>
       </div>
       <div class="m-stat" style="border-top:3px solid #c4261b;padding-top:18px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;color:#c4261b">30</div>
+        <div style="font-family:'Archivo',sans-serif;font-weight:900;font-stretch:80%;font-size:clamp(28px,3vw,44px);line-height:1;letter-spacing:-0.03em;word-spacing:.14em;color:#c4261b">30</div>
         <div class="m-stat-label" style="font-size:18px;line-height:1.45;font-weight:600;color:#1f2742">Students we'll personally support for Summer 2027</div>
         <sc-if value="{{ showSeats }}" hint-placeholder-val="{{ false }}"><div class="m-seats" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:17px;color:#3b4460">{{ seatsLeft }} places still open</div></sc-if>
       </div>
     </div>
 
-    <h3 class="m-ratio" style="margin:clamp(48px,6vw,80px) 0 24px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:76%;line-height:.92;letter-spacing:-0.022em;word-spacing:.14em;text-wrap:balance"><span class="m-ratio-ours" style="display:block;font-size:clamp(42px,6.2vw,100px);color:#10182e">One mentor, up to five students.</span><span class="m-ratio-theirs" style="display:block;margin-top:14px;font-size:clamp(26px,3.2vw,48px);color:#c4261b">Many agencies: one agent, 100 or more.</span></h3>
+    <h3 class="m-ratio" style="margin:clamp(48px,6vw,80px) 0 24px;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:76%;line-height:.92;letter-spacing:-0.022em;word-spacing:.14em;font-size:clamp(42px,6.2vw,100px);color:#10182e;text-wrap:balance">One mentor, up to five students.</h3>
     <div class="m-diagrams" style="margin-top:32px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:stretch">
       <div class="m-diagram" style="background:#10182e;color:#ffffff;border:2px dashed #f5c400;border-radius:22px;padding:clamp(12px,2vw,24px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
-        <div class="m-dtitle" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#f5c400">Germandians</div>
+        <div class="m-dtitle" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#f5c400">Each mentor</div>
         <div class="m-dbox" style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:14px;font-weight:700;font-size:18px">1 mentor</div>
         <div aria-hidden="true" class="m-arrow" style="font-size:22px;color:#c6ccda">↓</div>
         <div class="m-dbox m-crowd" style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:center;flex:1;align-items:center;gap:12px">
@@ -511,60 +513,51 @@ button{font:inherit}
         <div aria-hidden="true" class="m-arrow" style="font-size:22px;color:#c6ccda">↓</div>
         <div class="m-dbox" style="width:100%;border:2px solid #f5c400;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px">
           <div class="m-dstrong" style="font-weight:700;font-size:18px">A shortlist for each student</div>
-          <div class="m-dnote" style="font-size:16px;color:#d3d8e4">Every application written for that one student</div>
+          <div class="m-dnote" style="font-size:16px;color:#d3d8e4">Requirements, documents and SOP reviewed for that one student</div>
         </div>
       </div>
-      <div class="m-diagram" style="border:2px dashed #d42b1f;border-radius:22px;padding:clamp(12px,2vw,24px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
-        <div style="display:flex;flex-direction:column;gap:2px">
-          <div class="m-dtitle" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#c4261b">Many agencies</div>
-          <div class="m-dsource" style="font-size:15px;color:#3b4460">As students in our community describe them</div>
-        </div>
-        <div class="m-dbox" style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:14px;font-weight:700;font-size:18px">1 agent</div>
+      <div class="m-diagram" style="border:2px dashed #10182e;border-radius:22px;padding:clamp(12px,2vw,24px);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+        <div class="m-dtitle" style="font-family:'Archivo',sans-serif;font-weight:800;font-size:26px;color:#10182e">The whole team</div>
+        <div class="m-dbox" style="width:100%;border:2px solid #10182e;border-radius:12px;padding:14px;font-weight:700;font-size:18px">6 mentors</div>
         <div aria-hidden="true" class="m-arrow" style="font-size:22px;color:#4a5372">↓</div>
-        <div class="m-dbox m-crowd" style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:center;flex:1;gap:12px">
-          <div aria-hidden="true" class="m-adots" style="display:grid;width:100%;grid-template-columns:repeat(20,1fr);gap:4px">
-            <sc-for list="{{ dots100 }}" as="item" hint-placeholder-count="100">
-              <span class="m-adot" style="aspect-ratio:1;border-radius:50%;border:1.5px solid #d42b1f"></span>
-            </sc-for>
-          </div>
-          <div class="m-dstrong" style="font-weight:700;font-size:18px">100+ students</div>
+        <div class="m-dbox m-crowd" style="width:100%;border:2px solid #10182e;border-radius:12px;padding:16px;display:flex;flex-direction:column;justify-content:center;flex:1;gap:12px">
+          <div aria-hidden="true" class="m-tdots"><span class="m-tgroup"><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span></span><span class="m-tgroup"><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span></span><span class="m-tgroup"><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span></span><span class="m-tgroup"><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span></span><span class="m-tgroup"><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span></span><span class="m-tgroup"><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span><span class="m-tdot"></span></span></div>
+          <div class="m-dstrong" style="font-weight:700;font-size:18px">Up to 5 students each</div>
         </div>
         <div aria-hidden="true" class="m-arrow" style="font-size:22px;color:#4a5372">↓</div>
-        <div class="m-dbox" style="width:100%;border:2px solid #d42b1f;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px">
-          <div class="m-dstrong" style="font-weight:700;font-size:18px">1,000+ applications</div>
-          <div class="m-dnote" style="font-size:16px;color:#3b4460">About 10 each, so SOPs often get templated or reused</div>
+        <div class="m-dbox" style="width:100%;border:2px solid #10182e;border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px">
+          <div class="m-dstrong" style="font-weight:700;font-size:18px">30 places for Summer 2027</div>
+          <div class="m-dnote" style="font-size:16px;color:#3b4460">Our capacity for this intake</div>
         </div>
       </div>
     </div>
-    <p class="m-rnote" style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">The Summer 2027 capacity is 30 students across six mentors. Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review assesses the intake you can target.</p>
+    <p class="m-rnote" style="margin:24px 0 0;max-width:68ch;font-size:clamp(17px,1.35vw,19px);line-height:1.6;text-wrap:pretty;color:#333c56">Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.</p>
 
-    <h3 class="m-ctitle" style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,36px);line-height:1.1;color:#10182e;text-wrap:balance">Germandians vs. many consultancies</h3>
+    <h3 class="m-ctitle" style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(26px,2.6vw,36px);line-height:1.1;color:#10182e;text-wrap:balance">What we commit to</h3>
     <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
-      <div role="table" style="border-radius:18px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e;font-size:17px;line-height:1.45">
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr)">
-          <div role="columnheader" style="padding:18px 22px;background:#efebe2;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px"></div>
-          <div role="columnheader" style="padding:18px 22px;background:#efebe2;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px">Many consultancies</div>
-          <div role="columnheader" style="padding:18px 22px;background:#10182e;color:#f5c400;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px">Germandians</div>
+      <div role="table" aria-label="What we commit to" style="border-radius:18px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e;font-size:17px;line-height:1.45">
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.4fr)">
+          <div role="columnheader" style="padding:18px 22px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;background:#efebe2">Part of the service</div>
+          <div role="columnheader" style="padding:18px 22px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;background:#10182e;color:#f5c400">Our commitment</div>
         </div>
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Who advises you</div><div role="cell" style="padding:18px 22px;color:#3b4460">Agents, often with outdated information</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Students living in Germany right now</div></div>
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Who reviews your documents</div><div role="cell" style="padding:18px 22px;color:#3b4460">An agent who may handle 100+ students</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">A mentor, before anything is submitted</div></div>
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Your SOP</div><div role="cell" style="padding:18px 22px;color:#3b4460">Often AI-generated or a reused template</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Written by hand with you</div></div>
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Filing applications</div><div role="cell" style="padding:18px 22px;color:#3b4460">Often left to you</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">We submit every application on the portal</div></div>
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">When payment is due</div><div role="cell" style="padding:18px 22px;color:#3b4460">Often upfront, admitted or not</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">€0 service fee until you’re admitted, under the standard arrangement.</div></div>
-        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr) minmax(0,1.3fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Help after admission</div><div role="cell" style="padding:18px 22px;color:#3b4460">Varies by agency</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Help with your loan, blocked account and visa. We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers.</div></div>
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.4fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Who advises you</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Students living in Germany right now</div></div>
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.4fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Your documents</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Reviewed by a mentor before anything is submitted</div></div>
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.4fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Your SOP</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Your statement in your own words, drafted and revised with your mentor</div></div>
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.4fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Your applications</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">You check the facts, approve each submission and keep control of your own accounts, so the confirmations come to you.</div></div>
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.4fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">When payment is due</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">€0 service fee until you’re admitted, under the standard arrangement.</div></div>
+        <div role="row" style="display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,2.4fr);border-top:1px solid #d9d4c6"><div role="rowheader" style="padding:18px 22px;font-weight:700">Help after admission</div><div role="cell" style="padding:18px 22px;background:#10182e;color:#ffffff;font-weight:600;border-top:1px solid #26304f">Help with your loan, blocked account and visa. We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers.</div></div>
       </div>
     </sc-if>
     <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
       <div class="m-cards" style="display:flex;flex-direction:column;gap:14px">
-        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Who advises you</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Agents, often with outdated information</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Students living in Germany right now</span></div></div>
-        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Who reviews your documents</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">An agent who may handle 100+ students</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">A mentor, before anything is submitted</span></div></div>
-        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Your SOP</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often AI-generated or a reused template</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Written by hand with you</span></div></div>
-        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Filing applications</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often left to you</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">We submit every application on the portal</span></div></div>
-        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">When payment is due</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Often upfront, admitted or not</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">€0 service fee until you’re admitted, under the standard arrangement.</span></div></div>
-        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Help after admission</div><div class="m-cside" style="padding:0 18px 14px;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#3b4460">Many consultancies</span><span class="m-ctext" style="font-size:17px;color:#3b4460">Varies by agency</span></div><div class="m-cside" style="padding:14px 18px;background:#10182e;color:#ffffff;display:flex;flex-direction:column;gap:2px"><span class="m-clabel" style="font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:15px;color:#f5c400">Germandians</span><span class="m-ctext" style="font-size:17px;font-weight:600">Help with your loan, blocked account and visa. We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers.</span></div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Who advises you</div><div class="m-cus" style="padding:14px 18px;background:#10182e;color:#ffffff;font-size:17px;font-weight:600">Students living in Germany right now</div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Your documents</div><div class="m-cus" style="padding:14px 18px;background:#10182e;color:#ffffff;font-size:17px;font-weight:600">Reviewed by a mentor before anything is submitted</div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Your SOP</div><div class="m-cus" style="padding:14px 18px;background:#10182e;color:#ffffff;font-size:17px;font-weight:600">Your statement in your own words, drafted and revised with your mentor</div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Your applications</div><div class="m-cus" style="padding:14px 18px;background:#10182e;color:#ffffff;font-size:17px;font-weight:600">You check the facts, approve each submission and keep control of your own accounts, so the confirmations come to you.</div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">When payment is due</div><div class="m-cus" style="padding:14px 18px;background:#10182e;color:#ffffff;font-size:17px;font-weight:600">€0 service fee until you’re admitted, under the standard arrangement.</div></div>
+        <div class="m-card" style="border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px #10182e"><div class="m-ctopic" style="padding:14px 18px;font-weight:800;font-size:18px">Help after admission</div><div class="m-cus" style="padding:14px 18px;background:#10182e;color:#ffffff;font-size:17px;font-weight:600">Help with your loan, blocked account and visa. We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers.</div></div>
       </div>
     </sc-if>
-    <p class="m-foot" style="margin:16px 0 0;max-width:72ch;font-size:16px;line-height:1.55;color:#3b4460;text-wrap:pretty">The consultancy figures and descriptions reflect what students in our community commonly report. Individual agencies vary.</p>
   </div>
 </section>
 
@@ -574,30 +567,74 @@ button{font:inherit}
       <h2 style="margin:0;font-family:'Archivo',sans-serif;font-weight:900;font-size:clamp(46px,6vw,96px);line-height:.9;letter-spacing:-0.022em;word-spacing:.14em;font-stretch:78%;color:#10182e;text-wrap:balance">Before you send your details</h2>
       <p style="margin:0;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:#333c56;text-wrap:pretty">Answers to what students ask us first. Anything else, <a href="https://instagram.com/germandians" target="_blank" rel="noopener" style="font-weight:700">DM us on Instagram</a>.</p>
     </div>
-    <div style="display:flex;flex-direction:column;border-bottom:2px solid #10182e">
-      <div style="border-top:2px solid #10182e">
-        <button type="button" onClick="{{ faq.t1 }}" aria-expanded="{{ faq.o1 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Can you guarantee admission?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r1 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o1 }}" hint-placeholder-val="{{ true }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">No. Universities make every admission decision themselves. Our standard payment model is €0 service fee until you’re admitted. Any exception, including a fee before admission or for partial support, is stated in your written quote before you agree to work.</p></sc-if>
+    <div style="display:flex;flex-direction:column;gap:clamp(32px,4vw,48px);min-width:0">
+      <div style="display:flex;flex-direction:column">
+        <h3 style="margin:0 0 12px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;color:#c4261b">The service</h3>
+        <div style="display:flex;flex-direction:column;border-bottom:2px solid #10182e">
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t1 }}" aria-expanded="{{ faq.o1 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Can you guarantee admission?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r1 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o1 }}" hint-placeholder-val="{{ true }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">No. Universities make every admission decision themselves. Our standard payment model is €0 service fee until you’re admitted. Any exception, including a fee before admission or for partial support, is stated in your written quote before you agree to work.</p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t2 }}" aria-expanded="{{ faq.o2 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Is the service right for my degree and stage?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r2 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o2 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">Tell us your degree goal, your subject area and how far you have got, for example with APS or applications already under way. Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target. If you need only part of the service, your written quote states what partial support includes.</p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t3 }}" aria-expanded="{{ faq.o3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Can I apply only to public universities?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r3 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o3 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">Yes. Tell us in your profile review. We check your subject credits against the requirements of the public programmes you want and tell you where they match and where they fall short.</p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t4 }}" aria-expanded="{{ faq.o4 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>What support continues after I land?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r4 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o4 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers. If a step could fall later, such as a registration appointment, raise it in your profile review before you agree the quote. Housing preparation starts before you travel. Apply as soon as each provider opens applications: rooms are allocated from waiting lists and a place is not guaranteed. Keep private rooms and temporary accommodation in view as alternatives.<span class="source-note"><a href="https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/" target="_blank" rel="noopener">Studierendenwerk München Oberbayern: housing FAQs</a> · Last reviewed 12 November 2026</span></p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t5 }}" aria-expanded="{{ faq.o5 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Are you connected to any university?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r5 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o5 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">No. We study at German universities, but we don't represent any of them and none of them pay us. We recommend universities only on how well they fit your profile.</p></sc-if>
+        </div>
+        </div>
       </div>
-      <div style="border-top:2px solid #10182e">
-        <button type="button" onClick="{{ faq.t3 }}" aria-expanded="{{ faq.o3 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Can I apply only to public universities?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r3 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o3 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">Yes. Tell us in your profile review. We'll check how your ECTS credits match the public courses you want and tell you plainly how your chances look.</p></sc-if>
+      <div style="display:flex;flex-direction:column">
+        <h3 style="margin:0 0 12px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;color:#c4261b">Fees and terms</h3>
+        <div style="display:flex;flex-direction:column;border-bottom:2px solid #10182e">
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t6 }}" aria-expanded="{{ faq.o6 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>When do I get the terms in writing?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r6 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o6 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">After your profile review and before any work starts. The written quote states the fee, what triggers payment and what your support includes. The fees section lists every point it covers.</p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t7 }}" aria-expanded="{{ faq.o7 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>What if I’m not admitted, or my visa is refused?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r7 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o7 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">Your written quote states what happens after an unsuccessful intake, a visa refusal or a funding failure, and its terms for cancellation and deferral. You receive it before any work starts.</p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t8 }}" aria-expanded="{{ faq.o8 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Do you help with funding?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r8 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o8 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">Yes. Help with your education loan and with opening your blocked account is part of the full service. Your lender decides on the loan. The fees section lists the costs you pay to other organisations, with their official sources.</p></sc-if>
+        </div>
+        </div>
       </div>
-      <div style="border-top:2px solid #10182e">
-        <button type="button" onClick="{{ faq.t5 }}" aria-expanded="{{ faq.o5 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>What support continues after I land?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r5 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o5 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers. Housing preparation starts before you travel. Apply as soon as each provider opens applications: rooms are allocated from waiting lists and a place is not guaranteed. Keep private rooms and temporary accommodation in view as alternatives.<span class="source-note"><a href="https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/" target="_blank" rel="noopener">Studierendenwerk München Oberbayern: housing FAQs</a> · Last reviewed 12 November 2026</span></p></sc-if>
-      </div>
-      <div style="border-top:2px solid #10182e">
-        <button type="button" onClick="{{ faq.t6 }}" aria-expanded="{{ faq.o6 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Are you connected to any university?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r6 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o6 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">No. We study at German universities, but we don't represent any of them and none of them pay us. We recommend universities only on how well they fit your profile.</p></sc-if>
-      </div>
-      <div style="border-top:2px solid #10182e">
-        <button type="button" onClick="{{ faq.t7 }}" aria-expanded="{{ faq.o7 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>When do I get the terms in writing?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r7 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o7 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">After your profile review and before any work starts. The written quote states the fee, what triggers payment and what your support includes. The fees section lists every point it covers.</p></sc-if>
-      </div>
-      <div style="border-top:2px solid #10182e">
-        <button type="button" onClick="{{ faq.t8 }}" aria-expanded="{{ faq.o8 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Do I need dMAT for APS?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r8 }};transition:transform .25s">+</span></button>
-        <sc-if value="{{ faq.o8 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty"><span>dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.</span><span><br><strong>Affected degree fields: </strong>All B.Tech/B.Eng degrees; other engineering degrees; commerce, accounting, finance, economics; business/management; tourism, travel and hospitality. Integrated or dual degrees count if a component or major falls in these fields.</span><span><br><strong>Who is exempt: </strong>Bachelor’s and PhD applicants, other degree fields, officially confirmed exchange, double-degree or university partnership programmes and students below 5 completed semesters of a 3-year degree or 7 of a 4-year degree are exempt under the current procedure.</span><span><br><strong>Earlier APS applications: </strong>Your completed APS procedure does not require dMAT. A new APS application follows the rules then in force. APS registration or complete document shipment before 29 June 2026 exempts that procedure. New APS applications follow the rules then in force.</span><span><br><strong>dMAT and APS: </strong>You may submit APS documents before the dMAT certificate is available. Where required, APS issuance waits for the certificate and result verification. Other required academic documents must accompany the initial submission.</span><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span><span><br><strong>Test dates: </strong>16 January 2027 (register by 4 January 2027; results on 8 February 2027) and 13 March 2027 (register by 1 March 2027; results on 5 April 2027).</span><span><br><strong>Test fee: </strong>€150, paid to g.a.s.t. when you register.</span><span class="source-note"><a href="https://www.d-mat.de/en/dmat-in-india/" target="_blank" rel="noopener">g.a.s.t.: dMAT schedule</a> · Last reviewed 12 November 2026</span></p></sc-if>
+      <div style="display:flex;flex-direction:column">
+        <h3 style="margin:0 0 12px;font-family:'Barlow Semi Condensed',sans-serif;font-weight:700;font-size:18px;color:#c4261b">Requirements</h3>
+        <p style="margin:0 0 16px;font-size:17px;line-height:1.5;color:#333c56;text-wrap:pretty">Universities decide admission, and each programme sets its own rules. <a href="/check" style="font-weight:700">See what to check for each programme</a>.</p>
+        <div style="display:flex;flex-direction:column;border-bottom:2px solid #10182e">
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t9 }}" aria-expanded="{{ faq.o9 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Do I need dMAT for APS?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r9 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o9 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty"><span>dMAT applies to selected Indian master’s applicants from Summer 2027 onwards; exemptions apply.</span><span><br><strong>Affected degree fields: </strong>All B.Tech/B.Eng degrees; other engineering degrees; commerce, accounting, finance, economics; business/management; tourism, travel and hospitality. Integrated or dual degrees count if a component or major falls in these fields.</span><span><br><strong>Who is exempt: </strong>Bachelor’s and PhD applicants, other degree fields, officially confirmed exchange, double-degree or university partnership programmes and students below 5 completed semesters of a 3-year degree or 7 of a 4-year degree are exempt under the current procedure.</span><span><br><strong>Earlier APS applications: </strong>Your completed APS procedure does not require dMAT. A new APS application follows the rules then in force. APS registration or complete document shipment before 29 June 2026 exempts that procedure. New APS applications follow the rules then in force.</span><span><br><strong>dMAT and APS: </strong>You may submit APS documents before the dMAT certificate is available. Where required, APS issuance waits for the certificate and result verification. Other required academic documents must accompany the initial submission.</span><span class="source-note"><a href="https://aps-india.de/dmat/" target="_blank" rel="noopener">APS India: dMAT rules</a> · Last reviewed 12 November 2026</span><span><br><strong>Test dates: </strong>16 January 2027 (register by 4 January 2027; results on 8 February 2027) and 13 March 2027 (register by 1 March 2027; results on 5 April 2027).</span><span><br><strong>Test fee: </strong>€150, paid to g.a.s.t. when you register.</span><span class="source-note"><a href="https://www.d-mat.de/en/dmat-in-india/" target="_blank" rel="noopener">g.a.s.t.: dMAT schedule</a> · Last reviewed 12 November 2026</span></p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t10 }}" aria-expanded="{{ faq.o10 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Can I apply with backlogs?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r10 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o10 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">That depends on the programme. Its admission rules decide how your transcript is assessed and whether it accepts a degree with exams still to clear. We check those rules against your record in the profile review.</p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t11 }}" aria-expanded="{{ faq.o11 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Is a three-year bachelor’s degree enough?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r11 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o11 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">That depends on the programme. Duration alone does not establish a credit total: each programme sets the degree and credits it requires. We compare your credits and subjects with those requirements in the profile review.</p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t12 }}" aria-expanded="{{ faq.o12 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Does a gap year matter?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r12 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o12 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">That depends on the programme. We check what each programme on your list asks for in the profile review. Your SOP is where you explain your record in your own words.</p></sc-if>
+        </div>
+        <div style="border-top:2px solid #10182e">
+          <button type="button" onClick="{{ faq.t13 }}" aria-expanded="{{ faq.o13 }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:0;padding:20px 0;min-height:64px;text-align:left;cursor:pointer;font-weight:700;font-size:clamp(18px,1.6vw,21px);line-height:1.35;color:#10182e"><span>Which language certificate do I need?</span><span aria-hidden="true" style="flex:none;width:34px;height:34px;border-radius:8px;background:#10182e;color:#f5c400;display:grid;place-items:center;font-size:22px;font-weight:700;transform:{{ faq.r13 }};transition:transform .25s">+</span></button>
+          <sc-if value="{{ faq.o13 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 50px 22px 0;font-size:18px;line-height:1.6;color:#2b3350;text-wrap:pretty">That depends on the programme and the language it is taught in. Each programme lists the certificates, scores and exemptions it accepts, and we check them for every programme on your list.</p></sc-if>
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -744,7 +781,7 @@ class Component extends DCLogic {
     "labelColor": "#10182e",
     "radius": "4px",
     "months": 2,
-    "desc": "We shortlist universities with you, write your SOP with you and submit every application on the university portals. Where a programme needs a VPD from uni-assist, we request it early: the university application is a separate step with its own deadline."
+    "desc": "We shortlist universities with you, help you draft and revise your SOP and prepare each application with you. You approve every submission. Where a programme needs a VPD from uni-assist, we help you request it early: the university application is a separate step with its own deadline."
   },
   {
     "n": 3,
@@ -820,7 +857,7 @@ class Component extends DCLogic {
       },
       {
         "strand": "Applications",
-        "text": "University shortlisting with you. Where a programme needs a VPD, we request it now."
+        "text": "University shortlisting with you. Where a programme needs a VPD, we help you request it now."
       },
       {
         "strand": "Housing",
@@ -859,7 +896,7 @@ class Component extends DCLogic {
     "tasks": [
       {
         "strand": "Applications",
-        "text": "SOP writing with you, by hand."
+        "text": "SOP drafting and revision with your mentor."
       },
       {
         "strand": "Applications",
@@ -888,7 +925,7 @@ class Component extends DCLogic {
     "tasks": [
       {
         "strand": "Applications",
-        "text": "Submitting your applications on the portals."
+        "text": "Your applications go in on the portals once you have approved each one."
       },
       {
         "strand": "Applications",
@@ -1011,7 +1048,6 @@ class Component extends DCLogic {
     ]
   }
 ];
-  dots100 = Array.from({ length: 100 }, (_, i) => ({ i }));
   dots5 = [1, 2, 3, 4, 5].map(i => ({ i }));
 
   componentDidMount() {
@@ -1268,7 +1304,7 @@ class Component extends DCLogic {
     const seats = Number.isFinite(seatsRaw) && p.seatsLeft !== '' && p.seatsLeft != null ? Math.max(0, Math.min(30, Math.round(seatsRaw))) : 30;
     const err = s.errors, st = s.status;
     const faq = {};
-    for (let i = 1; i <= 8; i++) { faq['o' + i] = !!s.faq[i]; faq['t' + i] = () => this.toggleFaq(i); faq['r' + i] = s.faq[i] ? 'rotate(45deg)' : 'rotate(0deg)'; }
+    for (let i = 1; i <= 13; i++) { faq['o' + i] = !!s.faq[i]; faq['t' + i] = () => this.toggleFaq(i); faq['r' + i] = s.faq[i] ? 'rotate(45deg)' : 'rotate(0deg)'; }
     const seg = {}; for (let i = 1; i <= 4; i++) { const on = mo.phase === i - 1; seg['c' + i] = on ? '#10182e' : 'transparent'; seg['b' + i] = on ? '#10182e' : '#d9d4c6'; seg['g' + i] = () => this.setMonth(this.PHASES[i - 1].start); }
     const barOn = isMobile && !s.formInView && !s.heroCtaInView && !s.menuOpen && !s.footerInView;
     return {
@@ -1318,7 +1354,7 @@ class Component extends DCLogic {
       rejTransform: s.stampsIn ? 'rotate(-12deg) scale(1)' : 'rotate(-12deg) scale(1.9)', rejOpacity: s.stampsIn ? 0.95 : 0,
       admTransform: s.stampsIn ? 'rotate(-7deg) scale(1)' : 'rotate(-7deg) scale(1.9)', admOpacity: s.stampsIn ? 0.95 : 0,
 
-      dots100: this.dots100, dots5: this.dots5,
+      dots5: this.dots5,
       showSeats: p.showSeatCount === true, seatsLeft: seats,
       faq,
 

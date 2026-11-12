@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 
 import { CONTACT, INTAKE_SEATS, ROUTES, SECTIONS, hashLink } from '@/utils/constants';
-import { siteConfig } from '@/utils/siteConfig';
+import { buildYear, businessOperator, siteConfig } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
 
@@ -34,7 +34,8 @@ export default function SiteFooter() {
             </div>
           </div>
           <div className={styles.bottom}>
-            <span>© 2026 Germandians</span>
+            <span>{`© ${buildYear} Germandians`}</span>
+            {businessOperator ? <span data-testid="business-operator">{`Operated by ${businessOperator}`}</span> : null}
             {siteConfig.showSeatCount ? (
               <span>
                 {siteConfig.intake}: {siteConfig.seatsLeft} of {INTAKE_SEATS} places open

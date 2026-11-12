@@ -25,9 +25,9 @@ const intakeLabel = intakeSeason === 'Winter'
   ? `Winter ${intakeYear}/${String(Number(intakeYear) + 1).slice(-2)}`
   : `Summer ${intakeYear}`;
 
-/** What the site says about readiness wherever it names the intake. The second sentence also stands alone. */
-export const INTAKE_REVIEW = 'Your profile review assesses the intake you can target.';
-export const INTAKE_READINESS = `Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. ${INTAKE_REVIEW}`;
+/** What the profile review settles. It also closes the readiness sentence shown wherever the intake is named. */
+export const REVIEW_OUTCOME = 'Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.';
+export const INTAKE_READINESS = `Readiness depends on your APS and dMAT position, programme deadlines, remaining documents and visa lead time. ${REVIEW_OUTCOME}`;
 
 export const privacyConfig = {
   names: text(env.VITE_PRIVACY_NAMES),
@@ -38,6 +38,14 @@ export const privacyConfig = {
   authority: text(env.VITE_PRIVACY_AUTHORITY),
   showPlaceholders: env.DEV || env.MODE === 'visual',
 } as const;
+
+/** The business behind the site, from the same settings as the privacy note. Empty until the team supplies them. */
+export const businessOperator = privacyConfig.names
+  ? [privacyConfig.names, privacyConfig.address].filter(Boolean).join(', ')
+  : '';
+
+/** Fixed when the site is built, so the prerendered page and the browser agree. */
+export const buildYear = __BUILD_YEAR__;
 
 export const siteConfig = {
   formEndpoint: toFormEndpoint(env.VITE_FORM_ENDPOINT),

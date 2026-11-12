@@ -25,7 +25,7 @@ test('fee conditions and intake readiness agree across pages and metadata', asyn
   await expect(page.locator('#fees').getByText('Included', { exact: true })).toHaveCount(9);
   await expect(page.locator('#fees')).toContainText('Due now, as standard');
   await expect(page.getByText('visa lead time')).toHaveCount(3);
-  await expect(page.locator('#community')).toContainText('Your profile review assesses the intake you can target.');
+  await expect(page.locator('#community')).toContainText('Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.');
   await page.goto('/check');
   await expect(page.locator('main')).toContainText('standard arrangement');
   await expect(page.locator('main')).toContainText('visa lead time');
@@ -99,6 +99,7 @@ for (const width of [390, 768, 1440]) {
       await expect(journey).toContainText('Waiting on');
       // The stages say what the mentors do, and nothing is phrased as a disclaimer.
       await expect(journey).toContainText('We shortlist universities with you');
+      await expect(journey).toContainText('You approve every submission.');
       await expect(journey).toContainText('Official sources for these stages');
       for (let month = 1; month <= 7; month++) {
         await page.getByRole('button', { name: `Month ${month}`, exact: true }).click();

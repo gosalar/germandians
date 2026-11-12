@@ -43,6 +43,7 @@ jobs:
           VITE_INTAKE_SEASON: ${{ vars.VITE_INTAKE_SEASON }}
           # Starting year: Winter + 2027 renders Winter 2027/28. Default Summer 2027.
           VITE_INTAKE_YEAR: ${{ vars.VITE_INTAKE_YEAR }}
+          # Registered business name and address; shown in the privacy note and the footer.
           VITE_PRIVACY_NAMES: ${{ vars.VITE_PRIVACY_NAMES }}
           VITE_PRIVACY_ADDRESS: ${{ vars.VITE_PRIVACY_ADDRESS }}
           VITE_PRIVACY_FORM_SERVICE: ${{ vars.VITE_PRIVACY_FORM_SERVICE }}

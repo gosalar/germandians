@@ -1,7 +1,7 @@
 import { Badge, Button } from '@mantine/core';
 import flagPainting from '@/assets/images/flag-painting.jpg';
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
-import { CONTACT, FEE_POLICY, INTAKE_SEATS, SECTIONS, hashLink, type IntakeStatus } from '@/utils/constants';
+import { CONTACT, FEE_POLICY, INTAKE_SEATS, SECTIONS, TRACK_RECORD, hashLink, type IntakeStatus } from '@/utils/constants';
 import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
@@ -51,7 +51,7 @@ export default function Hero() {
             <span className={styles.feeAmount}>{FEE_POLICY.amount}</span>
             <span className={styles.feeText}>{`${FEE_POLICY.timing}, ${FEE_POLICY.qualifier}`}</span>
           </a>
-          <p className={styles.summary}>We guide you from profile evaluation to your first week in Germany.</p>
+          <p className={styles.summary}>We guide you from profile evaluation to your arrival in Germany.</p>
           <div ref={heroCtaRef} className={styles.ctas}>
             <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow" size="lg">
               Get my profile reviewed
@@ -65,8 +65,8 @@ export default function Hero() {
               <span className={styles.intakeLabel}>{`${siteConfig.intake} intake, ${INTAKE_SEATS} students`}</span>
               <IntakeStatusBadge />
             </div>
-            <p className={styles.community}>{INTAKE_READINESS}</p>
-            <p className={styles.community}>Run by the team behind a 22,000-member student community.</p>
+            <p className={styles.note}>{INTAKE_READINESS}</p>
+            <p className={styles.note}>{TRACK_RECORD.sentence}</p>
           </div>
         </div>
         <Painting />

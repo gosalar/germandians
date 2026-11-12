@@ -66,6 +66,28 @@ for (const path of ['/', '/check', '/privacy', '/not-a-real-page']) {
   });
 }
 
+test('the footer and privacy note name the business only when it is configured', async ({ page }, testInfo) => {
+  const operator = 'Test Operator Example, Test Street 1, 00000 Testville';
+  for (const path of ['/', '/check']) {
+    await page.goto(path);
+    const footer = page.locator('footer');
+    // The year is fixed when the site is built; the suite builds it moments before it runs.
+    await expect(footer).toContainText(`© ${new Date().getFullYear()} Germandians`);
+    if (testInfo.project.name === 'endpoint') {
+      await expect(footer.getByTestId('business-operator')).toHaveText(`Operated by ${operator}`);
+    } else {
+      await expect(footer.getByTestId('business-operator')).toHaveCount(0);
+      await expect(footer).not.toContainText('Operated by');
+    }
+  }
+  await page.goto('/privacy');
+  if (testInfo.project.name === 'endpoint') {
+    await expect(page.locator('main')).toContainText(`Germandians is operated by ${operator}.`);
+  } else {
+    await expect(page.locator('main')).not.toContainText('operated by');
+  }
+});
+
 test('production privacy text follows the transport and has no placeholders', async ({ page }, testInfo) => {
   await page.goto('/privacy');
   await expect(page.locator('main')).not.toContainText(/\[|\]/);

@@ -15,6 +15,7 @@ export const SECTIONS = {
   contact: 'contact',
   contactForm: 'contact-form',
   mentors: 'why',
+  sop: 'sop',
 } as const;
 
 export const hashLink = (id: string) => `#${id}`;
@@ -40,6 +41,24 @@ export const FEE_POLICY = {
   trigger: 'As agreed in quote',
 } as const;
 export const FEE_PROMISE = `${FEE_POLICY.amount} ${FEE_POLICY.timing}, ${FEE_POLICY.qualifier}.`;
+
+/** What the community figure counts: an audience. It is not students guided or applications handled. */
+export const COMMUNITY = {
+  size: '22,000+',
+  label: 'Community audience on Instagram and WhatsApp',
+} as const;
+
+const GUIDED = { count: 'up to 70', terms: 'over two years, unpaid, before the paid service began' } as const;
+
+/** The unpaid guidance that came before the paid service. Every mention uses these words. */
+export const TRACK_RECORD = {
+  value: `${GUIDED.count[0].toUpperCase()}${GUIDED.count.slice(1)}`,
+  label: `Students guided ${GUIDED.terms}`,
+  sentence: `We guided ${GUIDED.count} students ${GUIDED.terms}.`,
+} as const;
+
+/** Who checks, approves and holds the accounts. Stated in full once, in the commitments table. */
+export const APPLICANT_CONTROL = 'You check the facts, approve each submission and keep control of your own accounts, so the confirmations come to you.';
 
 export const CONTACT = {
   email: 'thegermandians@gmail.com',

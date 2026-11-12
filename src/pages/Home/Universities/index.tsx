@@ -29,7 +29,7 @@ const ROWS = [
   {
     topic: 'Reputation',
     public: 'The benchmark for German education, with a strong international reputation.',
-    private: 'Depends entirely on the institution. We only apply to accredited, reputable ones.',
+    private: 'Depends entirely on the institution. We only shortlist accredited, reputable ones.',
   },
   {
     topic: 'What we check',

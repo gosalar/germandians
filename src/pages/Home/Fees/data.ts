@@ -5,8 +5,8 @@ export const RECEIPT_ITEMS = [
   'APS application',
   'IELTS guidance',
   'University shortlist',
-  'SOP, written with you',
-  'Portal applications',
+  'SOP drafting and review',
+  'Applications, approved by you',
   'Loan and blocked account help',
   'Visa preparation',
   'Housing, Anmeldung, bank account',
@@ -21,6 +21,13 @@ export const FEES_COPY = {
   separate: 'These costs are separate from the Germandians service fee. They are planning figures, not a quote. Check the current charge and refund terms with each provider.',
 } as const;
 
+/** Quote topics the FAQ also refers to, so both name them the same way. */
+export const QUOTE_TOPIC = {
+  partial: 'what partial support includes',
+  cancellation: 'cancellation and deferral',
+  setbacks: 'an unsuccessful intake, a visa refusal or a funding failure',
+} as const;
+
 /** What the written quote settles before work starts. The site names the topics; the quote answers them. */
 export const QUOTE_TOPICS = {
   lead: 'Before work starts, your written quote states:',
@@ -29,9 +36,9 @@ export const QUOTE_TOPICS = {
     'what counts as admission, including conditional, private and backup offers, and whether only your approved shortlist counts',
     'whether there is one fee or a fee per admission',
     'how many applications are covered',
-    'what partial support includes',
-    'cancellation and deferral',
-    'an unsuccessful intake, a visa refusal or a funding failure',
+    QUOTE_TOPIC.partial,
+    QUOTE_TOPIC.cancellation,
+    QUOTE_TOPIC.setbacks,
     'the payment currency and taxes',
   ],
 } as const;

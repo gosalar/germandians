@@ -1,34 +1,30 @@
 import reichstag from '@/assets/images/reichstag.jpg';
-import { INTAKE_SEATS, SECTIONS } from '@/utils/constants';
+import { SECTIONS } from '@/utils/constants';
 import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
 
-import { COMPARISON, METHOD_POINTS, STATS } from './data';
+import { COMMITMENTS, MENTOR_COPY, METHOD_POINTS, STATS } from './data';
 import styles from './styles.module.scss';
 import WorkloadDiagram from './WorkloadDiagram';
 
-/** Three-column table from 760px up. */
-function ComparisonTable() {
+/** Two-column table from 760px up. */
+function CommitmentsTable() {
   return (
-    <div role="table" className={styles.table}>
+    <div role="table" aria-label={MENTOR_COPY.commitmentsTitle} className={styles.table}>
       <div role="row" className={styles.tableRow}>
-        <div role="columnheader" className={styles.tableHeader} />
         <div role="columnheader" className={styles.tableHeader}>
-          Many consultancies
+          {MENTOR_COPY.topicHeader}
         </div>
         <div role="columnheader" className={`${styles.tableHeader} ${styles.tableHeaderOurs}`}>
-          Germandians
+          {MENTOR_COPY.commitmentHeader}
         </div>
       </div>
-      {COMPARISON.map((row) => (
+      {COMMITMENTS.map((row) => (
         <div key={row.topic} role="row" className={`${styles.tableRow} ${styles.tableBodyRow}`}>
           <div role="rowheader" className={styles.tableTopic}>
             {row.topic}
           </div>
-          <div role="cell" className={styles.tableThem}>
-            {row.them}
-          </div>
           <div role="cell" className={styles.tableUs}>
-            {row.us}
+            {row.commitment}
           </div>
         </div>
       ))}
@@ -37,20 +33,13 @@ function ComparisonTable() {
 }
 
 /** One card per row below 760px. */
-function ComparisonCards() {
+function CommitmentCards() {
   return (
     <div className={styles.compareCards}>
-      {COMPARISON.map((row) => (
+      {COMMITMENTS.map((row) => (
         <div key={row.topic} className={styles.compareCard}>
           <div className={styles.compareCardTopic}>{row.topic}</div>
-          <div className={styles.compareCardThem}>
-            <span className={styles.compareCardLabel}>Many consultancies</span>
-            <span className={styles.compareCardThemText}>{row.them}</span>
-          </div>
-          <div className={styles.compareCardUs}>
-            <span className={styles.compareCardLabel}>Germandians</span>
-            <span className={styles.compareCardUsText}>{row.us}</span>
-          </div>
+          <div className={styles.compareCardUs}>{row.commitment}</div>
         </div>
       ))}
     </div>
@@ -63,11 +52,8 @@ export default function Mentors() {
       <div className={styles.container}>
         <div className={styles.intro}>
           <div className={styles.introCopy}>
-            <h2 className={styles.title}>How our mentors work</h2>
-            <p className={styles.body}>
-              Each of our six mentors works with up to five students at a time. That limit is what lets us write every
-              SOP by hand and check every document before it goes out.
-            </p>
+            <h2 className={styles.title}>{MENTOR_COPY.title}</h2>
+            <p className={styles.body}>{MENTOR_COPY.intro}</p>
             <ul className={styles.points}>
               {METHOD_POINTS.map((point) => (
                 <li key={point.text}>
@@ -99,22 +85,13 @@ export default function Mentors() {
           ))}
         </div>
 
-        <h3 className={styles.ratio}>
-          <span className={styles.ratioOurs}>One mentor, up to five students.</span>
-          <span className={styles.ratioTheirs}>Many agencies: one agent, 100 or more.</span>
-        </h3>
+        <h3 className={styles.ratio}>{MENTOR_COPY.ratio}</h3>
         <WorkloadDiagram />
-        <p className={styles.ratioNote}>
-          {`The ${siteConfig.intake} capacity is ${INTAKE_SEATS} students across six mentors. ${INTAKE_READINESS}`}
-        </p>
+        <p className={styles.ratioNote}>{INTAKE_READINESS}</p>
 
-        <h3 className={styles.compareTitle}>Germandians vs. many consultancies</h3>
-        <ComparisonTable />
-        <ComparisonCards />
-        <p className={styles.footnote}>
-          The consultancy figures and descriptions reflect what students in our community commonly report. Individual
-          agencies vary.
-        </p>
+        <h3 className={styles.compareTitle}>{MENTOR_COPY.commitmentsTitle}</h3>
+        <CommitmentsTable />
+        <CommitmentCards />
       </div>
     </section>
   );

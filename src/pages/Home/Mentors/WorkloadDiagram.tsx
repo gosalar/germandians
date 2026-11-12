@@ -1,8 +1,17 @@
+import { WORKLOAD } from './data';
 import styles from './styles.module.scss';
 
 // Static and never changes, so built once at module load.
-const studentDots = Array.from({ length: 5 }, (_, i) => <span key={i} className={styles.studentDot} />);
-const agencyDots = Array.from({ length: 100 }, (_, i) => <span key={i} className={styles.agencyDot} />);
+const studentDots = Array.from({ length: WORKLOAD.studentsPerMentor }, (_, i) => (
+  <span key={i} className={styles.studentDot} />
+));
+const teamGroups = Array.from({ length: WORKLOAD.mentors }, (_, group) => (
+  <span key={group} className={styles.teamGroup}>
+    {Array.from({ length: WORKLOAD.studentsPerMentor }, (_, i) => (
+      <span key={i} className={styles.teamDot} />
+    ))}
+  </span>
+));
 
 const arrow = (
   <div aria-hidden="true" className={styles.arrow}>
@@ -10,44 +19,43 @@ const arrow = (
   </div>
 );
 
-/** One mentor with five students next to one agent with a hundred. */
+/** One mentor's students next to the whole team's places for the intake. */
 export default function WorkloadDiagram() {
+  const { mentor, team } = WORKLOAD;
+
   return (
     <div className={styles.diagrams}>
-      <div className={styles.diagram} data-tone="ours">
-        <div className={styles.diagramTitle}>Germandians</div>
-        <div className={styles.diagramBox}>1 mentor</div>
+      <div className={styles.diagram} data-tone="mentor">
+        <div className={styles.diagramTitle}>{mentor.title}</div>
+        <div className={styles.diagramBox}>{mentor.head}</div>
         {arrow}
         <div className={`${styles.diagramBox} ${styles.diagramCrowd}`}>
           <div aria-hidden="true" className={styles.studentDots}>
             {studentDots}
           </div>
-          <div className={styles.diagramStrong}>Up to 5 students</div>
+          <div className={styles.diagramStrong}>{mentor.crowd}</div>
         </div>
         {arrow}
         <div className={`${styles.diagramBox} ${styles.diagramOutcome}`}>
-          <div className={styles.diagramStrong}>A shortlist for each student</div>
-          <div className={styles.diagramNote}>Every application written for that one student</div>
+          <div className={styles.diagramStrong}>{mentor.outcome}</div>
+          <div className={styles.diagramNote}>{mentor.note}</div>
         </div>
       </div>
 
-      <div className={styles.diagram} data-tone="theirs">
-        <div className={styles.diagramHead}>
-          <div className={styles.diagramTitle}>Many agencies</div>
-          <div className={styles.diagramSource}>As students in our community describe them</div>
-        </div>
-        <div className={styles.diagramBox}>1 agent</div>
+      <div className={styles.diagram} data-tone="team">
+        <div className={styles.diagramTitle}>{team.title}</div>
+        <div className={styles.diagramBox}>{team.head}</div>
         {arrow}
         <div className={`${styles.diagramBox} ${styles.diagramCrowd}`}>
-          <div aria-hidden="true" className={styles.agencyDots}>
-            {agencyDots}
+          <div aria-hidden="true" className={styles.teamDots}>
+            {teamGroups}
           </div>
-          <div className={styles.diagramStrong}>100+ students</div>
+          <div className={styles.diagramStrong}>{team.crowd}</div>
         </div>
         {arrow}
         <div className={`${styles.diagramBox} ${styles.diagramOutcome}`}>
-          <div className={styles.diagramStrong}>1,000+ applications</div>
-          <div className={styles.diagramNote}>About 10 each, so SOPs often get templated or reused</div>
+          <div className={styles.diagramStrong}>{team.outcome}</div>
+          <div className={styles.diagramNote}>{team.note}</div>
         </div>
       </div>
     </div>

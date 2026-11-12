@@ -54,7 +54,7 @@ export const PHASES: Phase[] = [
     labelColor: '#10182e',
     radius: '4px',
     months: 2,
-    desc: 'We shortlist universities with you, write your SOP with you and submit every application on the university portals. Where a programme needs a VPD from uni-assist, we request it early: the university application is a separate step with its own deadline.',
+    desc: 'We shortlist universities with you, help you draft and revise your SOP and prepare each application with you. You approve every submission. Where a programme needs a VPD from uni-assist, we help you request it early: the university application is a separate step with its own deadline.',
   },
   {
     n: 3,
@@ -116,7 +116,7 @@ export const MONTHS: JourneyMonth[] = [
     phase: 0,
     tasks: [
       { strand: 'Foundation', text: 'IELTS preparation plan and guidance.' },
-      { strand: 'Applications', text: 'University shortlisting with you. Where a programme needs a VPD, we request it now.' },
+      { strand: 'Applications', text: 'University shortlisting with you. Where a programme needs a VPD, we help you request it now.' },
       { strand: 'Housing', text: HOUSING.preparation, source: SOURCES.housing },
     ],
     waits: [
@@ -136,7 +136,7 @@ export const MONTHS: JourneyMonth[] = [
     m: 3,
     phase: 1,
     tasks: [
-      { strand: 'Applications', text: 'SOP writing with you, by hand.' },
+      { strand: 'Applications', text: 'SOP drafting and revision with your mentor.' },
       { strand: 'Applications', text: 'Document checks against each programme’s requirements.' },
       { strand: 'Foundation', text: 'Your language test, and answers to any questions from APS.' },
     ],
@@ -152,7 +152,7 @@ export const MONTHS: JourneyMonth[] = [
     m: 4,
     phase: 1,
     tasks: [
-      { strand: 'Applications', text: 'Submitting your applications on the portals.' },
+      { strand: 'Applications', text: 'Your applications go in on the portals once you have approved each one.' },
       { strand: 'Applications', text: 'Answering document requests from universities.' },
       { strand: 'Pre-departure', text: 'Funding plan and visa document list, ready for when an offer arrives.' },
     ],

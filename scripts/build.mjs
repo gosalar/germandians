@@ -27,10 +27,19 @@ if (!visual) {
   for (const name of missing) {
     console.warn(`[privacy] Missing VITE_PRIVACY_${name}; confirm this detail before publishing the privacy note.`);
   }
+  if (!read('VITE_PRIVACY_NAMES')) {
+    console.warn('[identity] Missing VITE_PRIVACY_NAMES; the footer cannot name the business responsible for the site.');
+  } else if (!read('VITE_PRIVACY_ADDRESS')) {
+    console.warn('[identity] Missing VITE_PRIVACY_ADDRESS; the footer names the business without its address.');
+  }
 }
+// One year for the server and client builds, even if the build runs across New Year.
+process.env.BUILD_YEAR ??= String(new Date().getFullYear());
 if (visual) {
   process.env.VISUAL_BUILD = 'true';
   process.env.SITE_BASE_PATH = '/';
+  // The design reference is static, so the visual build pins the year it shows.
+  process.env.BUILD_YEAR = '2026';
 }
 const cli = createRequire(import.meta.url).resolve('@react-router/dev/package.json').replace(/package\.json$/, 'bin.cjs');
 process.argv = [process.execPath, cli, 'build', ...(visual ? ['--mode', 'visual'] : [])];

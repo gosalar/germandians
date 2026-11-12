@@ -1,7 +1,7 @@
 @use '@/utils/styles/tokens' as t;
 @use '@/utils/styles/mixins' as m;
 
-$table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
+$table-columns: minmax(0, 0.9fr) minmax(0, 2.4fr);
 
 .section {
   @include m.section-padding;
@@ -146,6 +146,8 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
   font-size: clamp(28px, 3vw, 44px);
   line-height: 1;
   letter-spacing: -0.03em;
+  // Keeps the words apart in a value such as "Up to 70" at this tight tracking.
+  word-spacing: 0.14em;
   color: var(--stat-color);
 }
 
@@ -179,34 +181,15 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
   line-height: 0.92;
   letter-spacing: -0.022em;
   word-spacing: 0.14em;
+  font-size: clamp(42px, 6.2vw, 100px);
+  color: t.$navy;
   text-wrap: balance;
 
   @include m.below(t.$bp-mobile) {
     margin: 20px 0 8px;
     line-height: 1.05;
     word-spacing: normal;
-  }
-}
-
-.ratioOurs {
-  display: block;
-  font-size: clamp(42px, 6.2vw, 100px);
-  color: t.$navy;
-
-  @include m.below(t.$bp-mobile) {
     font-size: 22px;
-  }
-}
-
-.ratioTheirs {
-  display: block;
-  margin-top: 14px;
-  font-size: clamp(26px, 3.2vw, 48px);
-  color: t.$red;
-
-  @include m.below(t.$bp-mobile) {
-    margin-top: 4px;
-    font-size: 16px;
   }
 }
 
@@ -239,7 +222,7 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
     padding: 8px;
   }
 
-  &[data-tone='ours'] {
+  &[data-tone='mentor'] {
     background: t.$navy;
     color: t.$white;
     border: 2px dashed t.$yellow;
@@ -248,22 +231,16 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
     --diagram-note: #{t.$mist-soft};
   }
 
-  &[data-tone='theirs'] {
-    border: 2px dashed t.$red-bright;
-    --diagram-accent: #{t.$red-bright};
+  &[data-tone='team'] {
+    border: 2px dashed t.$navy;
+    --diagram-accent: #{t.$navy};
     --diagram-arrow: #{t.$slate};
     --diagram-note: #{t.$ink-muted};
 
     .diagramTitle {
-      color: t.$red;
+      color: t.$navy;
     }
   }
-}
-
-.diagramHead {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
 }
 
 .diagramTitle {
@@ -274,16 +251,6 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
 
   @include m.below(t.$bp-mobile) {
     font-size: 18px;
-  }
-}
-
-.diagramSource {
-  font-size: 15px;
-  color: t.$ink-muted;
-
-  @include m.below(t.$bp-mobile) {
-    font-size: 12px;
-    line-height: 1.3;
   }
 }
 
@@ -312,7 +279,7 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
   font-weight: normal;
   font-size: inherit;
 
-  [data-tone='ours'] & {
+  [data-tone='mentor'] & {
     align-items: center;
   }
 
@@ -400,24 +367,37 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
   }
 }
 
-.agencyDots {
+// Six groups of five: one group per mentor.
+.teamDots {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(20, 1fr);
-  gap: 4px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px 20px;
 
   @include m.below(t.$bp-mobile) {
     width: auto;
     margin-inline: auto;
-    grid-template-columns: repeat(10, 6px);
+    grid-template-columns: repeat(2, auto);
+    gap: 4px 8px;
+  }
+}
+
+.teamGroup {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+
+  @include m.below(t.$bp-mobile) {
+    grid-template-columns: repeat(5, 6px);
     gap: 2px;
   }
 }
 
-.agencyDot {
+.teamDot {
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 1.5px solid t.$red-bright;
+  background: t.$yellow;
+  border: 1.5px solid t.$navy;
 
   @include m.below(t.$bp-mobile) {
     border-width: 1px;
@@ -491,11 +471,6 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
   font-weight: 700;
 }
 
-.tableThem {
-  padding: 18px 22px;
-  color: t.$ink-muted;
-}
-
 .tableUs {
   padding: 18px 22px;
   background: t.$navy;
@@ -539,83 +514,16 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.3fr);
   }
 }
 
-.compareCardThem {
-  padding: 0 18px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-
-  @include m.below(t.$bp-mobile) {
-    display: block;
-    padding: 6px 12px;
-  }
-
-  .compareCardLabel {
-    color: t.$ink-muted;
-  }
-}
-
 .compareCardUs {
   padding: 14px 18px;
   background: t.$navy;
   color: t.$white;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-
-  @include m.below(t.$bp-mobile) {
-    display: block;
-    padding: 6px 12px;
-  }
-
-  .compareCardLabel {
-    color: t.$yellow;
-  }
-}
-
-.compareCardLabel {
-  @include m.label-font(700, 15px);
-
-  @include m.below(t.$bp-mobile) {
-    margin-right: 6px;
-    font-size: 13px;
-
-    &::after {
-      content: ':';
-    }
-  }
-}
-
-.compareCardThemText {
-  font-size: 17px;
-  color: t.$ink-muted;
-
-  @include m.below(t.$bp-mobile) {
-    font-size: 15px;
-    line-height: 1.35;
-  }
-}
-
-.compareCardUsText {
   font-size: 17px;
   font-weight: 600;
 
   @include m.below(t.$bp-mobile) {
+    padding: 8px 12px;
     font-size: 15px;
     line-height: 1.35;
-  }
-}
-
-.footnote {
-  margin: 16px 0 0;
-  max-width: 72ch;
-  font-size: 16px;
-  line-height: 1.55;
-  color: t.$ink-muted;
-  text-wrap: pretty;
-
-  @include m.below(t.$bp-mobile) {
-    font-size: 14px;
-    line-height: 1.45;
   }
 }

@@ -1,9 +1,13 @@
 import { Accordion } from '@mantine/core';
+import { Link } from 'react-router';
 
-import { CONTACT, SECTIONS } from '@/utils/constants';
+import { CONTACT, ROUTES, SECTIONS } from '@/utils/constants';
 
-import { QUESTIONS } from './data';
+import { FAQ_GROUPS } from './data';
 import styles from './styles.module.scss';
+
+/** Group and question position of the answer that starts open. */
+const FIRST_OPEN = '0-0';
 
 export default function Faq() {
   return (
@@ -20,17 +24,34 @@ export default function Faq() {
           </p>
         </div>
 
-        {/* Each answer opens independently; the first starts open. */}
-        <Accordion multiple defaultValue={['0']}>
-          {QUESTIONS.map((item, i) => (
-            <Accordion.Item key={item.q} value={String(i)}>
-              <Accordion.Control>{item.q}</Accordion.Control>
-              <Accordion.Panel>
-                <p className={styles.answer}>{item.a}</p>
-              </Accordion.Panel>
-            </Accordion.Item>
+        <div className={styles.groups}>
+          {FAQ_GROUPS.map((group, groupIndex) => (
+            <div key={group.title} className={styles.group}>
+              <h3 className={styles.groupTitle}>{group.title}</h3>
+              {group.note ? (
+                <p className={styles.groupNote}>
+                  {group.note.text}{' '}
+                  <Link to={ROUTES.check} className={styles.inlineLink}>
+                    {group.note.checkLink}
+                  </Link>
+                  .
+                </p>
+              ) : null}
+              {/* Each answer opens independently; the first one on the page starts open.
+                  Item values become element ids, so they are short codes, not the question text. */}
+              <Accordion multiple defaultValue={[FIRST_OPEN]}>
+                {group.questions.map((item, index) => (
+                  <Accordion.Item key={item.q} value={`${groupIndex}-${index}`}>
+                    <Accordion.Control>{item.q}</Accordion.Control>
+                    <Accordion.Panel>
+                      <p className={styles.answer}>{item.a}</p>
+                    </Accordion.Panel>
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </div>
           ))}
-        </Accordion>
+        </div>
       </div>
     </section>
   );

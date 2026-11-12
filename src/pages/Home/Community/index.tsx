@@ -1,8 +1,15 @@
 import DmatNote from '@/components/DmatNote';
-import { CONTACT, SECTIONS } from '@/utils/constants';
-import { INTAKE_REVIEW } from '@/utils/siteConfig';
+import { COMMUNITY, CONTACT, SECTIONS } from '@/utils/constants';
+import { REVIEW_OUTCOME } from '@/utils/siteConfig';
 
 import styles from './styles.module.scss';
+
+const COPY = {
+  kicker: 'Where we started',
+  story: 'Germandians began as a page where we answered questions from Indian students who wanted to study in Germany. The consultancy grew out of what they kept asking us.',
+  instagram: 'See the community on Instagram',
+  motto: 'By the students, for the students',
+} as const;
 
 const PRINCIPLES = [
   {
@@ -10,7 +17,7 @@ const PRINCIPLES = [
     color: '#1d7a3d',
     body: (
       <>
-        {`You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there. ${INTAKE_REVIEW}`}
+        {`You can come to us before you have APS or a shortlist. We start with your profile and take the steps in order from there. ${REVIEW_OUTCOME}`}
         <br />
         <DmatNote />
       </>
@@ -19,7 +26,7 @@ const PRINCIPLES = [
   {
     title: 'We guide from experience',
     color: '#ef8a21',
-    body: "All six of us went through APS, university applications, the blocked account, the visa and Anmeldung ourselves. You get what we learned doing it, plus what we've seen across 22,000 members' applications and questions.",
+    body: 'All six of us went through APS, university applications, the blocked account, the visa and Anmeldung ourselves. You get what we learned doing it, and what the questions from our community have taught us since.',
   },
 ];
 
@@ -28,23 +35,20 @@ export default function Community() {
     <section id={SECTIONS.community} data-screen-label="Community" className={styles.section}>
       <div className={styles.grid}>
         <div className={styles.story}>
-          <h2 className={styles.kicker}>Why we are different</h2>
+          <h2 className={styles.kicker}>{COPY.kicker}</h2>
           <div className={styles.stat}>
-            <span className={styles.statNumber}>22,000+</span>
+            <span className={styles.statNumber}>{COMMUNITY.size}</span>
             <span aria-hidden="true" className={styles.flagBar} />
-            <span className={styles.statLabel}>students in the Germandians community</span>
+            <span className={styles.statLabel}>{COMMUNITY.label}</span>
           </div>
-          <p className={styles.body}>
-            Germandians began as a page where we answered questions from Indian students who wanted to study in
-            Germany. More than 22,000 have joined since, and the consultancy grew out of what they kept asking us.
-          </p>
+          <p className={styles.body}>{COPY.story}</p>
           <a href={CONTACT.instagramUrl} target="_blank" rel="noopener" className={styles.instagram}>
-            See the community on Instagram
+            {COPY.instagram}
           </a>
         </div>
 
         <div className={styles.principles}>
-          <h3 className={styles.motto}>By the students, for the students</h3>
+          <h3 className={styles.motto}>{COPY.motto}</h3>
           {PRINCIPLES.map((item) => (
             <div key={item.title} className={styles.principle}>
               <h3 className={styles.principleTitle}>

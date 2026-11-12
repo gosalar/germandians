@@ -19,8 +19,9 @@ for (const variant of ['endpoint', 'email']) {
         VITE_SEATS_LEFT: '',
         VITE_FORM_ENDPOINT: variant === 'endpoint' ? 'https://enquiries.example.test/profile' : '',
         VITE_WHATSAPP_NUMBER: variant === 'endpoint' ? '4915123456789' : '',
-        VITE_PRIVACY_NAMES: '',
-        VITE_PRIVACY_ADDRESS: '',
+        // Fictitious identity: the endpoint variant shows the footer and privacy note with it set.
+        VITE_PRIVACY_NAMES: variant === 'endpoint' ? 'Test Operator Example' : '',
+        VITE_PRIVACY_ADDRESS: variant === 'endpoint' ? 'Test Street 1, 00000 Testville' : '',
         VITE_PRIVACY_HOSTING_PROVIDER: '',
         VITE_PRIVACY_RETENTION: '',
         VITE_PRIVACY_AUTHORITY: '',
