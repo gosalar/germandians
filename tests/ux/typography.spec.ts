@@ -19,6 +19,34 @@ async function renderedFonts(page: Page, selector: string) {
   }
 }
 
+// A variable font's reported name depends on the platform: Windows names the
+// instance ("Hanken-Grotesk-ExtraBold"), Linux does not. Compare the family
+// only, and prove the weight by measuring it (see paintsWeight).
+async function expectFamily(page: Page, selector: string, family: string) {
+  const names = await renderedFonts(page, selector);
+  const painted = names.every(name => name.replace(/[^a-z]/gi, '').toLowerCase().startsWith(family));
+  expect(painted, `${selector} painted by ${family}, got ${names.join(', ')}`).toBe(true);
+}
+
+// Text set one step lighter must be narrower. If the font were capped below
+// this weight, both widths would be equal.
+async function paintsWeight(page: Page, selector: string, weight: number) {
+  return page.locator(selector).first().evaluate((el, expected) => {
+    const css = getComputedStyle(el);
+    if (css.fontWeight !== String(expected)) return false;
+    const width = (value: number) => {
+      const probe = document.createElement('span');
+      probe.textContent = 'Germandians mentors 0123456789';
+      probe.style.cssText = `position:absolute;visibility:hidden;white-space:nowrap;font-size:200px;font-family:${css.fontFamily};font-stretch:${css.fontStretch};font-weight:${value}`;
+      document.body.append(probe);
+      const measured = probe.getBoundingClientRect().width;
+      probe.remove();
+      return measured;
+    };
+    return width(expected) > width(expected - 100);
+  }, weight);
+}
+
 async function typography(page: Page, selector: string) {
   return page.locator(selector).first().evaluate(el => {
     const css = getComputedStyle(el);
@@ -42,14 +70,17 @@ for (const [width, height] of [[320, 900], [412, 891], [800, 1280], [1440, 900]]
     await page.evaluate(() => document.fonts.ready);
     const heading = await typography(page, 'h1');
     const lead = await typography(page, 'h1 + p');
-    expect((await renderedFonts(page, 'h1')).every(font => font.startsWith('Archivo'))).toBe(true);
-    expect((await renderedFonts(page, 'h1 + p')).every(font => font.startsWith('Hanken'))).toBe(true);
-    expect(await renderedFonts(page, '[class*="channelName"]')).toEqual(['Hanken-Grotesk-ExtraBold']);
+    await expectFamily(page, 'h1', 'archivo');
+    await expectFamily(page, 'h1 + p', 'hankengrotesk');
+    await expectFamily(page, '[class*="channelName"]', 'hankengrotesk');
+    expect(await paintsWeight(page, '[class*="channelName"]', 800)).toBe(true);
+    // Barlow is one file per weight, so its name is the same on every platform.
     expect(await renderedFonts(page, '[aria-label="Month 1"]')).toEqual(['BarlowSemiCondensed-ExtraBold']);
     if (width < 1100) {
       await page.getByRole('button', { name: 'Menu', exact: true }).click();
       expect(await typography(page, '[class*="menuLink"]')).toEqual(await typography(page, 'nav [class*="_links_"] > a'));
-      expect(await renderedFonts(page, '[class*="menuLink"]')).toEqual(['Hanken-Grotesk-SemiBold']);
+      await expectFamily(page, '[class*="menuLink"]', 'hankengrotesk');
+      expect(await paintsWeight(page, '[class*="menuLink"]', 600)).toBe(true);
       await page.getByRole('button', { name: 'Close', exact: true }).click();
     }
     expect(await typography(page, '[class*="legendItem"]')).toEqual(await typography(page, '[class*="_segment_"]'));
@@ -80,7 +111,7 @@ for (const [width, height] of [[320, 900], [412, 891], [800, 1280], [1440, 900]]
       await page.goto(path);
       await page.evaluate(() => document.fonts.ready);
       expect(await typography(page, 'h1')).toEqual(heading);
-      expect((await renderedFonts(page, 'h1')).every(font => font.startsWith('Archivo'))).toBe(true);
+      await expectFamily(page, 'h1', 'archivo');
     }
     expect(failedFonts).toEqual([]);
   });
