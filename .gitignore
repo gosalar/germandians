@@ -8,6 +8,7 @@ build/
 *.log
 .claude/
 initial-implementation-plans
+ImplementedFeatures/
 # Visual tests
 .visual-build
 test-results
