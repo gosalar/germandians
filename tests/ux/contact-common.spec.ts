@@ -1,5 +1,23 @@
 import { expect, test } from '@playwright/test';
 
+// A direct load reports the path with or without a trailing slash, depending on the host.
+for (const path of ['/check', '/check/']) {
+  test(`header contact links stay on the grade check when ${path} is loaded directly`, async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(path);
+    await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+    const nav = page.locator('nav').first();
+    const review = nav.getByRole('link', { name: 'Get my profile reviewed', exact: true });
+    await expect(review).toHaveAttribute('href', '#contact-form');
+    await expect(nav.getByRole('link', { name: 'Contact', exact: true })).toHaveAttribute('href', '#contact');
+    // Sections that only Home has still lead there.
+    await expect(nav.getByRole('link', { name: 'Fees', exact: true })).toHaveAttribute('href', '/#fees');
+    await review.click();
+    await expect(page.locator('#contact-form')).toBeInViewport();
+    expect(new URL(page.url()).pathname).toBe(path);
+  });
+}
+
 for (const path of ['/', '/check']) for (const width of [390, 1440]) {
   test(`contact destinations and visibility ${path} at ${width}`, async ({ page }, testInfo) => {
     const configured = testInfo.project.name === 'endpoint';

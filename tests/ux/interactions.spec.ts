@@ -57,6 +57,9 @@ for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     const submit = page.getByRole('button', { name: 'Request my profile review' });
     await submit.click();
+    // The form moves focus to the first invalid field on the next frame. Wait for
+    // that before typing elsewhere, or the typed text lands in the name field.
+    await expect(page.locator('#f-name')).toBeFocused();
     // A filled invalid optional email must be checked, in visual field order.
     await page.locator('#f-email').fill('invalid');
     for (const [id, value] of [['f-name', 'Priya Sharma'], ['f-email', 'priya@example.com'], ['f-wa', '+91 9876543210'], ['f-consent', '']]) {
