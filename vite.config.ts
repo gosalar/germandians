@@ -6,7 +6,7 @@ import { reactCompilerPreset } from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { siteBase } from './scripts/site-base.ts';
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command }) => {
   // A machine-wide NODE_ENV (e.g. "localhost") would otherwise make Vite ship
   // React's development build. Builds are always production builds.
   if (command === 'build') process.env.NODE_ENV = 'production';
@@ -16,8 +16,7 @@ export default defineConfig(({ command, mode }) => {
     // The copyright year is fixed here so the prerendered HTML and the browser agree.
     // scripts/build.mjs sets BUILD_YEAR once for both build environments.
     define: { __BUILD_YEAR__: JSON.stringify(process.env.BUILD_YEAR ?? String(new Date().getFullYear())) },
-    // The visual-test build ignores config/.env* so it always has the design's default settings.
-    envDir: mode === 'visual' ? false : 'config',
+    envDir: 'config',
     // Same alias as tsconfig "paths"; declared here too so Sass @use resolves it.
     resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
     plugins: [reactRouter(), babel({ presets: [reactCompilerPreset()] })],

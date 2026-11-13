@@ -1,7 +1,7 @@
 import { useSettleHashScroll } from '@/hooks/useSettleHashScroll';
 
 import Community from './Community';
-import Contact from './Contact';
+import Contact from '@/components/Contact';
 import Faq from './Faq';
 import Fees from './Fees';
 import Hero from './Hero';

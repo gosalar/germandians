@@ -1,14 +1,11 @@
 import { HOUSING } from '@/utils/applicationFacts';
-import { APPLICANT_CONTROL, FEE_PROMISE, INTAKE_SEATS } from '@/utils/constants';
+import { APPLICANT_CONTROL, FEE_PROMISE, INTAKE_SEATS, STUDENTS_PER_MENTOR, TEAM_SIZE } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
-
-const MENTORS = 6;
-const STUDENTS_PER_MENTOR = INTAKE_SEATS / MENTORS;
 
 export const MENTOR_COPY = {
   title: 'How our mentors work',
-  intro: 'Our six mentors are Indian students at German universities who went through this process themselves. Each works with up to five students at a time, so there is time to check your programme requirements, review your documents and work on your SOP with you.',
-  ratio: 'One mentor, up to five students.',
+  intro: `Our ${TEAM_SIZE.word} mentors are Indian students at German universities who went through this process themselves. Each works with up to ${STUDENTS_PER_MENTOR.word} students at a time, so there is time to check your programme requirements, review your documents and work on your SOP with you.`,
+  ratio: `One mentor, up to ${STUDENTS_PER_MENTOR.word} students.`,
   commitmentsTitle: 'What we commit to',
   topicHeader: 'Part of the service',
   commitmentHeader: 'Our commitment',
@@ -34,19 +31,17 @@ export const WORKLOAD = {
   mentor: {
     title: 'Each mentor',
     head: '1 mentor',
-    crowd: `Up to ${STUDENTS_PER_MENTOR} students`,
+    crowd: `Up to ${STUDENTS_PER_MENTOR.count} students`,
     outcome: 'A shortlist for each student',
     note: 'Requirements, documents and SOP reviewed for that one student',
   },
   team: {
     title: 'The whole team',
-    head: `${MENTORS} mentors`,
-    crowd: `Up to ${STUDENTS_PER_MENTOR} students each`,
+    head: `${TEAM_SIZE.count} mentors`,
+    crowd: `Up to ${STUDENTS_PER_MENTOR.count} students each`,
     outcome: `${INTAKE_SEATS} places for ${siteConfig.intake}`,
     note: 'Our capacity for this intake',
   },
-  studentsPerMentor: STUDENTS_PER_MENTOR,
-  mentors: MENTORS,
 } as const;
 
 /** What Germandians commits to. Each row is something a client can hold the team to. */

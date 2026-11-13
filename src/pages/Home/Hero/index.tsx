@@ -2,9 +2,10 @@ import { Badge, Button } from '@mantine/core';
 import { Link } from 'react-router';
 import flagPainting from '@/assets/images/flag-painting.jpg';
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
-import { FEE_POLICY, INTAKE_SEATS, ROUTES, SECTIONS, TRACK_RECORD, hashLink, type IntakeStatus } from '@/utils/constants';
+import { FEE_POLICY, ROUTES, SECTIONS, TRACK_RECORD, hashLink, type IntakeStatus } from '@/utils/constants';
 import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
 
+import { HERO_COPY } from './data';
 import styles from './styles.module.scss';
 
 /** Badge colours per intake status ([background, ink]). "Not confirmed" shows no badge. */
@@ -30,7 +31,7 @@ function Painting() {
     <div className={styles.art}>
       <img
         src={flagPainting}
-        alt="Palette-knife painting of the German flag sweeping into the Indian tricolour"
+        alt={HERO_COPY.paintingAlt}
         draggable={false}
         fetchPriority="high"
         className={styles.painting}
@@ -46,24 +47,24 @@ export default function Hero() {
     <header id={SECTIONS.top} className={styles.hero}>
       <div className={styles.grid}>
         <div className={styles.copy}>
-          <h1 className={styles.title}>Study in Germany with the people already there.</h1>
-          <p className={styles.lede}>Six student mentors in Germany. Up to five students per mentor.</p>
+          <h1 className={styles.title}>{HERO_COPY.title}</h1>
+          <p className={styles.lede}>{HERO_COPY.lede}</p>
           <a href={hashLink(SECTIONS.fees)} className={styles.feeBadge}>
             <span className={styles.feeAmount}>{FEE_POLICY.amount}</span>
             <span className={styles.feeText}>{`${FEE_POLICY.timing}, ${FEE_POLICY.qualifier}`}</span>
           </a>
-          <p className={styles.summary}>We guide you from profile evaluation to your arrival in Germany.</p>
+          <p className={styles.summary}>{HERO_COPY.summary}</p>
           <div ref={heroCtaRef} className={styles.ctas}>
             <Button component="a" href={hashLink(SECTIONS.contactForm)} variant="yellow" size="lg">
-              Get my profile reviewed
+              {HERO_COPY.profileReview}
             </Button>
             <Button component={Link} to={ROUTES.check} variant="ring" size="lg">
-              Free grade check
+              {HERO_COPY.gradeCheck}
             </Button>
           </div>
           <div className={styles.meta}>
             <div className={styles.intake}>
-              <span className={styles.intakeLabel}>{`${siteConfig.intake} intake, ${INTAKE_SEATS} students`}</span>
+              <span className={styles.intakeLabel}>{HERO_COPY.intakeLabel}</span>
               <IntakeStatusBadge />
             </div>
             <p className={styles.note}>{INTAKE_READINESS}</p>

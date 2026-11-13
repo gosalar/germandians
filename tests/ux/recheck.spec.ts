@@ -1,9 +1,6 @@
-import { mkdir } from 'node:fs/promises';
 import { expect, test, type Page } from '@playwright/test';
 
 const viewports = [[320,568],[360,800],[375,812],[390,844],[412,891],[768,1024],[800,1280],[891,900],[1024,900],[1280,900],[1440,900],[1536,900],[1920,953],[891,412],[1280,585],[1536,730],[1099,900],[1100,900],[1101,900]];
-// Full-page screenshots are kept only when a folder is named (the recheck config names one).
-const evidence = process.env.RECHECK_SCREENSHOTS;
 const paths = ['', 'check', 'privacy', 'missing-page'];
 
 async function ready(page: Page) {
@@ -16,7 +13,7 @@ async function noOverflow(page: Page) {
 }
 
 for (const [width, height] of viewports) {
-  test(`full page sweep ${width}x${height}`, async ({ browser, baseURL }, testInfo) => {
+  test(`full page sweep ${width}x${height}`, async ({ browser, baseURL }) => {
     test.setTimeout(120_000);
     const context = await browser.newContext({ viewport: { width, height }, hasTouch: width < 1100, reducedMotion: 'reduce' });
     const page = await context.newPage();
@@ -27,7 +24,6 @@ for (const [width, height] of viewports) {
     });
     // Never let a form submission leave the test browser.
     await page.route('https://enquiries.example.test/**', route => route.fulfill({ json: { received: true } }));
-    if (evidence) await mkdir(evidence, { recursive: true });
     for (const path of paths) {
       const url = `${baseURL!.replace(/\/$/, '')}/${path}`;
       await page.goto(url);
@@ -40,7 +36,6 @@ for (const [width, height] of viewports) {
       await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
       await page.keyboard.press('Enter');
       await expect(page.getByRole('main')).toBeFocused();
-      if (evidence) await page.screenshot({ path: `${evidence}/${testInfo.project.name}-${path || 'home'}-${width}x${height}.png`, fullPage: true });
       if (path === '' || path === 'check') {
         if (width < 1100) {
           const menu = page.getByRole('button', { name: 'Menu', exact: true });

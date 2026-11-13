@@ -26,8 +26,6 @@ npm run typecheck            # route types, then TypeScript
 npm run build                # typecheck, production build, prerender into build/client/
 npm run preview              # serves build/client at http://localhost:4173
 npm run test:ux              # behaviour, layout, form and typography checks
-npm run test:visual          # legacy reference comparison; pending retirement
-npm run test:visual:quick    # fast subset of the legacy comparison
 ```
 
 ## Stack and structure
@@ -35,15 +33,16 @@ npm run test:visual:quick    # fast subset of the legacy comparison
 React 19, React Router 8 in framework mode with build-time prerendering, Vite 8, strict TypeScript, Mantine 9 with a brand theme, SCSS modules, React Compiler.
 
 - **Pages** live in `src/pages/`. Each home section is a folder under `src/pages/Home/` with `index.tsx`, `styles.module.scss`, and `data.ts` when it has copy or data.
-- **Routes** in `src/routes/` are thin: metadata plus a re-export of the page. Register them in `src/routes.ts` and add public pages to the prerender list in `react-router.config.ts`.
-- **Copy and rules live in data, not in components.** `src/pages/Check/data.ts` holds the formula, the options and every line of result copy; `index.tsx` makes no copy decisions. Follow that split.
-- **Cross-page constants** (routes, section ids, nav links, contact details, shared wording such as `FEE_PROMISE`) are in `src/utils/constants.ts`.
-- **One source per fact.** Anything stated in more than one place reads from one constant or setting, the way every intake mention reads `siteConfig.intake`. Never retype a shared fact.
+- **Routes** in `src/routes/` are thin: metadata plus a re-export of the page. A public page is one entry in the page registry (`src/utils/pageRegistry.ts`), with its title, description and preview-image labels in `src/utils/publicPages.ts`. Routes, `ROUTES`, prerendering and the sitemap derive from the registry entry; metadata and social images read both. Both files must load in plain Node.
+- **Copy and rules live in data, not in components.** `src/pages/Check/data.ts` holds the options and every line of result copy. The checker's calculations sit in their own logic module, apart from the copy. `index.tsx` makes no copy decisions. Follow that split.
+- **Cross-page constants** (nav links, contact details, shared wording such as `FEE_PROMISE`) are in `src/utils/constants.ts`. Section ids live in `src/utils/sections.ts` and are re-exported from `constants.ts`. Routes are derived from the page registry, not typed in `constants.ts`.
+- **One source per fact.** Anything stated in more than one place reads from one constant or setting, the way every intake mention reads `siteConfig.intake`. Team size, students per mentor and intake places are defined in `src/utils/constants.ts`. Publishing a fact in a section is a separate choice from holding it. Never retype a shared fact.
 - **Settings** are `VITE_*` variables read and validated once in `src/utils/siteConfig.ts`. A new setting is documented in four places: `config/.env.example`, the README "Settings" table, `src/vite-env.d.ts` and the `env:` block of `.github/workflows/pages.yml`. Empty or invalid values fall back to a safe default. Validators that the build script also needs live in `src/utils/contactSettings.ts`. `scripts/build.mjs` warns about settings that should be filled in before launch.
 - **Option lists are `as const` arrays with types derived from them.** An invalid value should be a type error.
-- **The contact section is shared** by `/` and `/check` (`src/pages/Home/Contact/`). `/check` passes it a summary of what the visitor entered; it must never contain example or default values.
-- **Section links** that can appear on another page go through `HomeSectionLink`, which decides between in-page scrolling and routing home.
-- **The site shell** (`src/routes/site-layout.tsx`) wraps `/` and `/check` with the header, footer, phone action bar and `PageChromeProvider`. `/privacy` and the 404 page have their own minimal nav.
+- **The contact section is shared** by `/` and `/check` (`src/components/Contact/`). Pages import its public entry only. `/check` passes it a summary of what the visitor entered; it must never contain example or default values.
+- Shared components, services and fact modules never import from a page folder.
+- **Section links** that can appear on another page go through `HomeSectionLink`. Navigation destinations are defined once for the nav, the phone menu and the footer. A section link scrolls locally when the page's registry entry lists that section, and routes to Home otherwise. Grouped menus are built when a feature first needs one.
+- **The site shell** (`src/routes/site-layout.tsx`) wraps `/` and `/check` with the header, footer, phone action bar and `PageChromeProvider`. `/privacy` and the 404 page use the shared minimal navigation, and utility pages use the shared page header and container. The error page's pieces must render without providers.
 - **Shared controls come from Mantine** with a brand theme in `src/themes/`. See "Mantine" below.
 
 ## Mantine
@@ -68,6 +67,8 @@ Mantine 9 is used with its own styles: not in unstyled mode, and not through a C
 - **External links** open in a new tab with `rel="noopener"`.
 - **Facts from outside organisations** (APS, dMAT, uni-assist, visas, tuition) come from the official source, are re-read when you change them, and are shown with a source link and a "last reviewed" date kept in data.
 - **Keep the README true.** Update the pages list, the Settings table, the Structure tree, the test counts and the Notes when your change affects them.
+- **Logic and state:** keep substantial pure logic, interaction state and network calls apart where it helps; keep shared context narrow.
+- **Documentation upkeep:** a change that alters one of these conventions updates `AGENTS.md` in the same change; a one-off exception is recorded with its scope.
 
 ## Styling
 
@@ -120,32 +121,29 @@ Three self-hosted brand fonts, used by role:
 | `npm run lint`, `npm run typecheck` | ESLint, route types, TypeScript | |
 | `npm run build` | Production build and prerender | Reads `config/.env.local` if present |
 | `npm run test:ux` | Grade check, form states and delivery, contact labels, journey playback, typography roles, console and hydration errors | Builds two pinned variants into `test-results/ux-builds/`: `endpoint` (number and form endpoint set, port 5603) and `email` (both empty, port 5604). Local settings never affect it |
-| `npm run test:visual` | Legacy comparison of `/` and `/privacy` with the design reference, plus interaction states | Pending retirement. Builds with default settings only, into `.visual-build/` (ports 5601 and 5602) |
 
-CI currently runs lint, build, the legacy visual suite and the UX suite on every pull request and push to `main`. A failure blocks deployment. The legacy gate remains until its workflow and supporting files are retired; this policy update alone does not remove it.
+CI runs lint, the build and the UX suite on every pull request and push to `main`. A failure blocks deployment.
 
 - **Keep automated tests proportional to the risk.** Add or update a focused Playwright test when a change affects an important user flow or prevents a meaningful regression: navigation, enquiry validation/submission, calculations, mock-test completion and timing when implemented, or keyboard access. Reuse existing coverage; do not add tests simply because a file changed.
 - **Routine edits should stay lightweight.** Copy, spacing, colour and static-content edits do not automatically need new tests. Use browser review for their visual impact. Add an automated check only when there is a specific behaviour or defect worth protecting.
 - **Assert outcomes, not incidental implementation.** Prefer roles, labels and accessible names for interaction targets; use stable IDs where appropriate. Keep exact text assertions when the wording itself matters, such as consent or fee terms, rather than duplicating whole marketing paragraphs in behaviour tests. Do not remove useful accessible-name checks merely to avoid a text match.
 - **Run the checks affected by the change.** Use focused existing specs for local work; run the full UX suite for changes spanning shared behaviour or when narrower coverage cannot address the risk. Broaden or repeat checks when new edits, failures or unresolved concerns justify it.
-- **Settings need configured and fallback coverage when their behaviour changes.** Use the pinned UX variants rather than relying on the legacy visual suite for defaults. Tests must continue to intercept every enquiry request.
-- There is currently no unit-test runner. This guidance does not install one or add Storybook; tooling changes belong to their own scoped work.
+- **Settings need configured and fallback coverage when their behaviour changes.** Use the pinned UX variants: `endpoint` for the configured state and `email` for the defaults. Tests must continue to intercept every enquiry request.
+- A unit-test runner and Storybook are deferred until a feature needs them.
 
 ### Visual review and the retired reference approach
 
 The reference HTML was an independent target for porting the original design into production React. That porting role is finished. The production React components are now the implementation to maintain.
 
 - Do not mirror intentional React changes into a second HTML implementation or introduce mandatory screenshot baselines. Review the rendered changes at the representative widths above, including neighbouring content that could be affected.
-- Retiring the reference HTML and its supporting scripts/configuration is agreed work, but the files and CI gate still exist. Report any conflict with that legacy gate explicitly rather than updating the duplicate site, loosening its tolerance or claiming it passed.
-- When retiring the suite, assess its interaction scenarios and retain valuable behaviour coverage in the UX suite where it is not already covered. Pixel comparisons and duplicated assertions do not need replacements merely to preserve test counts.
 
 ## Environment
 
 - **Builds force production mode** (`vite.config.ts`, `scripts/build.mjs`) because a machine-wide `NODE_ENV` would otherwise ship React's development build. Don't remove the guards; use `npm run build`.
 - **Windows with PowerShell and Git Bash.** Write files with editing tools, not shell heredocs. In Git Bash, set `MSYS_NO_PATHCONV=1` when passing a path that starts with `/`, such as `SITE_BASE_PATH=/germandians/`.
-- **Ports in use by tooling:** 5173 dev, 4173 preview, 5601 and 5602 visual suite, 5603 and 5604 UX suite. Don't start your own server on one a suite is about to use. Node runs through shims here, so freeing a port means ending both the parent and child process.
+- **Ports in use by tooling:** 5173 dev, 4173 preview, 5603 and 5604 UX suite. Don't start your own server on one a suite is about to use. Node runs through shims here, so freeing a port means ending both the parent and child process.
 - **Node 24 in CI, newer locally.** `scripts/build.mjs` imports a `.ts` file directly, so it needs a Node version that runs TypeScript natively.
-- **Git-ignored output:** `build/`, `.visual-build/`, `.visual-cache/`, `test-results/`, `playwright-report/`. Save screenshots and measurements under `test-results/`.
+- **Git-ignored output:** `build/`, `test-results/`, `playwright-report/`. Save measurements and other scratch output under `test-results/`.
 - **Sass prints `map-get` deprecation warnings** from `fonts.scss` during builds. Known noise.
 - **Measure scroll positions in headless Playwright,** not in a browser pane that may be hidden: the site uses smooth scrolling, which stalls in background tabs.
 - **Pages deployment** builds with `SITE_BASE_PATH` set to the repository path. Asset and link URLs must respect the base path; the README explains how to preview the subpath locally.
@@ -159,6 +157,5 @@ Larger pieces of work arrive as a plan: a Markdown file the owner points you to.
 1. For code or configuration changes affecting the application, run `npm run lint`, `npm run typecheck` and `npm run build`. Documentation-only changes need a diff/consistency check, not an application build or browser run.
 2. Run the relevant behaviour checks as described above and report their results. New tests are justified by risk, not required for every edit.
 3. For UI changes, review the rendered result at the representative widths above and exercise affected interactions, with zero console or hydration errors.
-4. Report any remaining legacy CI limitation separately. Do not present reference-suite retirement or a new testing tool as complete until its actual files and workflow have changed.
 
 Then report: what changed and where, every copy change as before → after, new or changed settings, test results with counts, and plainly what you could not verify. Chrome device emulation is not a test on a physical phone or in Safari; name the engines and viewports you actually used.

@@ -50,8 +50,8 @@ export function HydrateFallback() { return null; }
 export { ErrorPage as ErrorBoundary };
 export default function App() {
   // Parent effects run after their children's, so this marks the moment the
-  // prerendered page is hydrated and every page effect has run. The visual
-  // tests wait for it before measuring or interacting.
+  // prerendered page is hydrated and every page effect has run. The UX tests
+  // wait for `html[data-hydrated]` before they measure or interact.
   useEffect(() => {
     document.documentElement.dataset.hydrated = '';
   }, []);

@@ -1,12 +1,13 @@
 import type { MetaDescriptor } from 'react-router';
 import { PUBLIC_PAGES } from './publicPages';
+import { ROUTES } from './constants';
 import { publicUrl } from './publicSite';
 import { siteConfig } from './siteConfig';
 
 export function pageMetadata(path: (typeof PUBLIC_PAGES)[number]['path']): MetaDescriptor[] {
   const page = PUBLIC_PAGES.find(page => page.path === path)!;
   const absolute = (path: string) => publicUrl(siteConfig.publicOrigin, import.meta.env.BASE_URL, path);
-  const url = absolute(path === '/' ? '' : `${path}/`);
+  const url = absolute(path === ROUTES.home ? '' : `${path}/`);
   const image = absolute(page.image);
   return [
     { title: page.title },

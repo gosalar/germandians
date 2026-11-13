@@ -1,50 +1,17 @@
 @use '@/utils/styles/tokens' as t;
 @use '@/utils/styles/mixins' as m;
 
-.nav {
-  border-bottom: 1px solid t.$line;
-}
-
-.navInner {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 10px clamp(16px, 5vw, 72px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  min-height: 62px;
-}
-
-.back {
-  font-weight: 700;
-  font-size: 16px;
-  @include m.touch-area;
-}
-
 .main {
   padding: clamp(48px, 8vw, 104px) clamp(20px, 5vw, 72px) clamp(72px, 10vw, 120px);
 }
 
 .article {
-  max-width: 760px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 44px;
   font-size: 18px;
   line-height: 1.65;
   color: t.$ink;
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.title {
-  @include m.display-heading(clamp(52px, 8vw, 104px));
 }
 
 .updated {

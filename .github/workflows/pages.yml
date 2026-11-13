@@ -57,9 +57,6 @@ jobs:
           VITE_SHOW_SEAT_COUNT: ${{ vars.VITE_SHOW_SEAT_COUNT }}
           VITE_SEATS_LEFT: ${{ vars.VITE_SEATS_LEFT }}
       - run: npx playwright install --with-deps chromium
-        if: hashFiles('playwright.config.ts') != ''
-      - run: npm run test:visual -- --workers=2
-        if: hashFiles('playwright.config.ts') != ''
       # UX builds use test-results/ux-builds; build/client remains the Pages artifact.
       - run: npm run test:ux
       - uses: actions/upload-pages-artifact@v3

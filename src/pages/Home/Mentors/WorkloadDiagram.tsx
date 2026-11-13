@@ -1,13 +1,15 @@
+import { STUDENTS_PER_MENTOR, TEAM_SIZE } from '@/utils/constants';
+
 import { WORKLOAD } from './data';
 import styles from './styles.module.scss';
 
 // Static and never changes, so built once at module load.
-const studentDots = Array.from({ length: WORKLOAD.studentsPerMentor }, (_, i) => (
+const studentDots = Array.from({ length: STUDENTS_PER_MENTOR.count }, (_, i) => (
   <span key={i} className={styles.studentDot} />
 ));
-const teamGroups = Array.from({ length: WORKLOAD.mentors }, (_, group) => (
+const teamGroups = Array.from({ length: TEAM_SIZE.count }, (_, group) => (
   <span key={group} className={styles.teamGroup}>
-    {Array.from({ length: WORKLOAD.studentsPerMentor }, (_, i) => (
+    {Array.from({ length: STUDENTS_PER_MENTOR.count }, (_, i) => (
       <span key={i} className={styles.teamDot} />
     ))}
   </span>

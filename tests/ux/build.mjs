@@ -8,7 +8,6 @@ for (const variant of ['endpoint', 'email']) {
       stdio: 'inherit',
       env: {
         ...process.env,
-        VISUAL_BUILD: '',
         UX_BUILD: variant,
         SITE_BASE_PATH: '/',
         VITE_SITE_ORIGIN: variant === 'endpoint' ? 'https://germandians.example.test' : 'invalid-origin',

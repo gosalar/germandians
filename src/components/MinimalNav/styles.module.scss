@@ -1,0 +1,23 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.nav {
+  border-bottom: 1px solid t.$line;
+}
+
+.inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px clamp(16px, 5vw, 72px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 62px;
+}
+
+.back {
+  font-weight: 700;
+  font-size: 16px;
+  @include m.touch-area;
+}

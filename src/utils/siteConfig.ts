@@ -37,7 +37,7 @@ export const privacyConfig = {
   hostingProvider: text(env.VITE_PRIVACY_HOSTING_PROVIDER),
   retention: text(env.VITE_PRIVACY_RETENTION),
   authority: text(env.VITE_PRIVACY_AUTHORITY),
-  showPlaceholders: env.DEV || env.MODE === 'visual',
+  showPlaceholders: env.DEV,
 } as const;
 
 /** The business behind the site, from the same settings as the privacy note. Empty until the team supplies them. */

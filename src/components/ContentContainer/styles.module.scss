@@ -1,0 +1,15 @@
+@use '@/utils/styles/mixins' as m;
+
+.wide {
+  @include m.container(1320px);
+}
+
+.prose {
+  @include m.container(760px);
+}
+
+// Same measure as `prose`, but the padding sits inside the max width.
+.inset {
+  @include m.container(760px);
+  padding: clamp(48px, 8vw, 104px) clamp(20px, 5vw, 72px);
+}

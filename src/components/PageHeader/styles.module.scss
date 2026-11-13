@@ -1,0 +1,53 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+  &[data-variant='compact'] {
+    gap: 10px;
+    max-width: 920px;
+
+    @include m.below(t.$bp-mobile) {
+      gap: 8px;
+    }
+
+    .title {
+      @include m.display-heading(clamp(32px, 4.3vw, 62px));
+    }
+
+    .introduction {
+      @include m.page-lead(clamp(15px, 1.25vw, 18px));
+      color: t.$ink-soft;
+      max-width: 68ch;
+    }
+  }
+
+  &[data-variant='regular'] {
+    gap: 16px;
+  }
+
+  &[data-variant='loose'] {
+    gap: 20px;
+  }
+
+  &[data-variant='regular'],
+  &[data-variant='loose'] {
+    .title {
+      @include m.display-heading(clamp(52px, 8vw, 104px));
+    }
+
+    // Body copy, not page-lead: page-lead would change the weight and line-height.
+    .introduction {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.65;
+      color: t.$ink;
+    }
+  }
+
+  &[data-variant='regular'] .introduction {
+    text-wrap: pretty;
+  }
+}

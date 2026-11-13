@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router';
 
-import BrandLink from '@/components/Brand';
+import ContentContainer from '@/components/ContentContainer';
+import MinimalNav from '@/components/MinimalNav';
+import PageHeader from '@/components/PageHeader';
 import { CONTACT, ROUTES, SECTIONS } from '@/utils/constants';
 import { privacyConfig as privacy, siteConfig } from '@/utils/siteConfig';
 
@@ -35,24 +37,17 @@ export default function Privacy() {
 
   return (
     <>
-      <nav className={styles.nav}>
-        <div className={styles.navInner}>
-          <BrandLink to={ROUTES.home} size="fixed" />
-          <Link to={ROUTES.home} className={styles.back}>
-            Back to the site
-          </Link>
-        </div>
-      </nav>
+      <MinimalNav back={{ to: ROUTES.home, label: 'Back to the site' }} />
 
       <main id="main-content" tabIndex={-1} className={styles.main}>
+        <ContentContainer width="prose">
         <article className={styles.article}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>Privacy note</h1>
-            <p className={styles.text}>
-              This page explains what happens to the details you send us through this website or contact us with.
-            </p>
-            <p className={styles.updated}>Last updated 11 November 2026</p>
-          </header>
+          <PageHeader
+            variant="regular"
+            title="Privacy note"
+            introduction="This page explains what happens to the details you send us through this website or contact us with."
+            meta={<p className={styles.updated}>Last updated 11 November 2026</p>}
+          />
 
           <section className={styles.section}>
             <h2 className={styles.heading}>Who is responsible</h2>
@@ -176,6 +171,7 @@ export default function Privacy() {
             </Link>
           </div>
         </article>
+        </ContentContainer>
       </main>
     </>
   );

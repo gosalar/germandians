@@ -1,6 +1,6 @@
 # Germandians website
 
-Landing page, German grade conversion and programme requirements check, and privacy note for Germandians. The checker starts empty and does not predict admission or recommend universities. The visual reference for the landing page and privacy note lives in `tests/visual/reference/`.
+Landing page, German grade conversion and programme requirements check, and privacy note for Germandians. The checker starts empty and does not predict admission or recommend universities.
 
 ## Stack
 
@@ -21,30 +21,24 @@ npm run lint
 
 To preview the Pages subpath locally, build with `SITE_BASE_PATH=/germandians/`, copy `build/client/` to a folder named `germandians` inside a temporary directory, and serve that parent directory. Open `/germandians/` and `/germandians/privacy/`. For ordinary local preview, leave `SITE_BASE_PATH` unset. In Git Bash on Windows, also set `MSYS_NO_PATHCONV=1`, otherwise Git Bash rewrites `/germandians/` into a Windows path and the build rejects it.
 
-## Visual tests
-
-The site has to match the Claude Design prototype pixel for pixel. The visual tests render the prototype (`tests/visual/reference/`) and a fresh production build side by side in Chrome, and fail if any screenshot differs by more than 64 pixels.
+## Tests
 
 ```bash
-npm run test:visual          # full suite: 37 checks
-npm run test:visual:quick    # 15 checks
-npm run test:visual:report   # open the last report (reference, app and diff images for failures)
-npm run test:ux              # 123 checker, contact, submission, process, trust, typography, metadata and accessibility checks
-npm run test:recheck         # responsive sweep of an already-served build (see below)
+npm run test:ux       # checker, contact, submission, process, trust, typography, metadata and accessibility checks
+npm run test:recheck  # viewport sweep of a build you are already serving
 ```
 
-- The full suite compares home at 10 widths, privacy at 5, and 22 interaction states including keyboard, hover, disabled and input-focus states.
-- **Quick subset:** one desktop, one tablet and one phone layout, plus the key interactions. Good for checking a change while you work; the full suite is the gate before merging.
-- **Requirements:**
-  - Locally, the tests use your installed Chrome. CI uses Playwright's Chromium.
-  - The prototype loads React and Babel from a public CDN, so the first run needs internet. Later runs serve them from `.visual-cache/`; delete that folder to refresh it. Reference fonts use the installed Fontsource binaries, with independent font-face declarations.
-- **Settings:** the test build ignores `config/.env*`, so it always uses the design's default settings.
-- **Failures:** the reference, app and diff images are saved under `test-results/visual/<test>/`.
-- **Changing the design:** if a test fails because the design itself changed, update `tests/visual/reference/` (a new export, or a hand edit that mirrors the change) instead of loosening the test.
+The UX suite builds two isolated production variants under `test-results/ux-builds/`: `endpoint` pins a fictitious WhatsApp number, a fictitious public origin and an intercepted HTTPS receiver; `email` leaves them empty or invalid. It checks both pages at phone and desktop widths, checker layouts, optional-field validation, success, body-level errors, network failure, timeout, retry and the email draft. It also runs an axe accessibility scan (development dependency `@axe-core/playwright`), keyboard focus against the sticky elements, the skip link, sharing metadata, the sitemap, and a sweep of every page at 19 viewport sizes for sideways overflow, console errors and the main controls. Locally the tests use your installed Chrome. CI uses Playwright's Chromium. No test sends a real enquiry.
 
-The UX suite builds two isolated production variants under `test-results/ux-builds/`: `endpoint` pins a fictitious WhatsApp number, a fictitious public origin and an intercepted HTTPS receiver; `email` leaves them empty or invalid. It checks both pages at phone and desktop widths, checker layouts, optional-field validation, success, body-level errors, network failure, timeout, retry and the email draft. It also runs an axe accessibility scan (development dependency `@axe-core/playwright`), keyboard focus against the sticky elements, the skip link, sharing metadata, the sitemap, and a sweep of every page at 19 viewport sizes for sideways overflow, console errors and the main controls. No test sends a real enquiry.
+To run one spec against those freshly built variants, build them and pass the spec to Playwright:
 
-`npm run test:recheck` runs the same viewport sweep against a build you serve yourself, by default at `http://localhost:5611/germandians` (set `RECHECK_BASE_URL` for another address). Use it for the Pages subpath: build with `SITE_BASE_PATH=/germandians/`, copy `build/client/` into a `germandians` folder, copy its `404.html` into the parent as well (GitHub Pages answers a project site's missing paths with that site's `404.html`), and serve the parent with `node scripts/serve.mjs <parent> 5611`. Screenshots go to `test-results/recheck/screenshots/` (set `RECHECK_SCREENSHOTS` for another folder); the same sweep inside the UX suite keeps none.
+```bash
+node tests/ux/build.mjs && npx playwright test --config playwright.ux.config.ts tests/ux/enquiry.spec.ts
+```
+
+A focused spec is enough while a change stays inside one flow. Run the full `npm run test:ux` when a change spans shared behaviour, or when one spec cannot cover the risk.
+
+`npm run test:recheck` runs the same viewport sweep against a build you serve yourself, by default at `http://localhost:5611/germandians` (set `RECHECK_BASE_URL` for another address). Use it for the Pages subpath: build with `SITE_BASE_PATH=/germandians/`, copy `build/client/` into a `germandians` folder, copy its `404.html` into the parent as well (GitHub Pages answers a project site's missing paths with that site's `404.html`), and serve the parent with `node scripts/serve.mjs <parent> 5611`.
 
 ## GitHub Pages
 
@@ -83,7 +77,7 @@ No provider has been selected or verified. This is the project's explicit receiv
 
 With no valid endpoint, the button says “Open email draft” and explains the handoff before submission. Opening a draft does not show a receipt. The draft includes the optional checker summary, and the address and copyable details remain available if no email app opens.
 
-CI runs both the visual and UX suites. Their builds use `.visual-build/` and `test-results/ux-builds/`, preserving the Pages build in `build/client/` and its configured base path for artifact upload.
+CI runs the UX suite. Its builds use `test-results/ux-builds/`, preserving the Pages build in `build/client/` and its configured base path for artifact upload.
 
 ## Structure
 
@@ -95,31 +89,36 @@ src/
 ├── routes/                         # metadata, shared site layout, dev-only theme preview
 ├── pages/
 │   ├── Home/                       # one folder per section: index.tsx + styles.module.scss (+ data.ts, hooks)
-│   ├── Check/                      # German grade conversion and programme requirements check
+│   ├── Check/                      # data.ts holds the copy; logic.ts holds the calculations
 │   ├── Privacy/                    # standalone privacy note
-│   └── ErrorPage/                  # 404 and route errors
-├── components/                     # SiteHeader, SiteFooter, MobileActionBar, SkipLink, Brand, HomeSectionLink, SourceNote, DmatNote
+│   └── ErrorPage/                  # 404 and route errors; copy in data.ts
+├── components/
+│   ├── Contact/                    # shared enquiry form for / and /check (copy, form, submission)
+│   ├── ContentContainer/, MinimalNav/, PageHeader/  # shared layout pieces
+│   └── SiteHeader, SiteFooter, MobileActionBar, SkipLink, Brand, HomeSectionLink, SourceNote, DmatNote
 ├── contexts/PageChrome/            # menu state + hero/form visibility for the mobile action bar
 ├── hooks/                          # useReplayOnFirstView, useSettleHashScroll
 ├── services/profileReview.ts       # form submission
 ├── themes/                         # palettes, layered styles, component overrides
-└── utils/                          # constants, siteConfig (env), applicationFacts (dated sources and costs),
-                                    # publicPages (page list, titles, descriptions), metadata, publicSite, styles
+└── utils/                          # constants (nav, contact, shared wording); sections.ts (section ids,
+                                    # re-exported from constants.ts); pageRegistry (one entry per public page);
+                                    # publicPages (titles and descriptions); siteConfig (env); applicationFacts
+                                    # (dated sources and costs); metadata, publicSite, contactSettings, styles
 ```
 
 ## Notes
 
 - **Process and costs.** Shared fee wording lives in `constants.ts`; intake labels and readiness in `siteConfig.ts`; dMAT, housing, tuition and external costs with dated official sources in `applicationFacts.ts`. Re-read the official page before changing a figure there, and update its review date. The seven-month journey is an overlapping example, not a duration promise. The fee promise is the standard arrangement; the written quote defines exceptions and payment terms.
-- **Pinned test settings.** The UX endpoint variant uses Winter 2027/28, the fictitious fee label "Test quote" and a fictitious business name and address; the email variant uses Summer 2027, an empty fee and no business identity. Both pin intake status and seat settings. The visual suite uses default Summer 2027 settings and pins the copyright year to 2026, the year its reference shows.
+- **Pinned test settings.** The UX endpoint variant uses Winter 2027/28, the fictitious fee label "Test quote" and a fictitious business name and address; the email variant uses Summer 2027, an empty fee and no business identity. Both pin intake status and seat settings.
 - **Claims about the team.** The community figure, the unpaid guidance before the paid service, and the statement of what the applicant checks, approves and controls each have one constant in `constants.ts`; every mention reads it. The home page gives each a single job: the community section tells the origin and the audience, the hero states the unpaid guidance and the intake readiness once, and the mentor section covers delivery, capacity and commitments. The audience figure is never used as a count of students guided. Don't add a statement about other consultancies, a mentor's details or a student's case without a source from the owner.
 - **Business identity and copyright year.** The footer names the operating business from the privacy settings and shows nothing when they are empty. The year is fixed at build time (`BUILD_YEAR` in `scripts/build.mjs`, passed through `vite.config.ts`), so the prerendered page and the browser always agree.
 
-- **Adding a Mantine component.** Add its `.layer.css` and any dependent component styles to `src/themes/mantine-styles.ts`. The unlayered site SCSS takes precedence over Mantine's layer. For brand-specific defaults or variants, add an override and SCSS module under `src/themes/<Component>/` and register it in `src/themes/index.ts`. Check it at `/_theme` during development and run the visual suite.
-- **Shared controls and custom artwork.** Use themed controls for buttons, fields, accordions and status badges. Keep the receipt, stamp cards, responsive comparison tables and other bespoke visuals in their feature folders. The consent checkbox uses browser-native rendering. Keep a control custom if a shared variant cannot reproduce the reference.
-- **Adding pages.** Put the UI in `src/pages/` and a thin `src/routes/` module whose `meta` calls `pageMetadata`. Register pages that use the shared header and footer inside the site layout in `src/routes.ts`. Add each public page to `PUBLIC_PAGES` in `src/utils/publicPages.ts`, with its title, description and preview-image labels; that list drives prerendering and the sitemap. Then run `node scripts/generate-social.mjs` to draw its preview image. Keep preview images free of anything that can change (fees, intake, numbers). Each page's `main` element has `id="main-content"` and `tabIndex={-1}` so the skip link can reach it.
+- **Adding a Mantine component.** Add its `.layer.css` and any dependent component styles to `src/themes/mantine-styles.ts`. The unlayered site SCSS takes precedence over Mantine's layer. For brand-specific defaults or variants, add an override and SCSS module under `src/themes/<Component>/` and register it in `src/themes/index.ts`. Check it at `/_theme` during development and review it in the browser.
+- **Shared controls and custom artwork.** Use themed controls for buttons, fields, accordions and status badges. Keep the receipt, stamp cards, responsive comparison tables and other bespoke visuals in their feature folders. The consent checkbox uses browser-native rendering. Keep a control custom if a shared variant cannot reproduce the design.
+- **Adding pages.** Put the UI in `src/pages/` and a thin module in `src/routes/` whose `meta` calls `pageMetadata`. Add one entry to `PAGE_REGISTRY` in `src/utils/pageRegistry.ts` (path, route file, shell, prerender, sitemap and the sections that page renders) and its title, description and preview-image labels in `src/utils/publicPages.ts`. Routes, prerendering and the sitemap follow that entry. If the page should be linked, add a destination in `src/utils/constants.ts` and place it in `NAV_ITEMS` there (the header and the phone menu) or in `FOOTER_LINKS` in `src/components/SiteFooter/data.ts`. Then run `node scripts/generate-social.mjs` to draw its preview image. Keep preview images free of anything that can change (fees, intake, numbers). Each page's `main` element has `id="main-content"` and `tabIndex={-1}` so the skip link can reach it.
 - **Sharing metadata.** Canonical, Open Graph and Twitter tags are absolute URLs built from `VITE_SITE_ORIGIN` and the base path. The 404 page and `/_theme` are `noindex` and are left out of the sitemap. Crawlers read `robots.txt` only at the root of a host, so it takes effect once the site is served from a custom domain; until then the sitemap can be submitted to search engines directly. Real link previews in WhatsApp and Instagram can only be checked once the site is public.
 - **Fonts are self-hosted** (no Google Fonts requests; the privacy note says there's no third-party tracking). Archivo is used for headings, Hanken Grotesk for prose and action buttons, and Barlow Semi Condensed for labels and compact form controls. Hanken and Archivo expose weights 400–900; Barlow loads 400–800 so the requested extra-bold weights render correctly. The shared rules and validation workflow are in `AGENTS.md`.
 - **Breakpoints are CSS media queries** (760, 1024, 1100, 600, 640, 420 px), not JS resize state. Navigation switches to the menu below 1100px.
 - **Sticky nav.** The nav stays sticky down the whole page, as the design's CSS specifies. In the Claude Design preview it stops sticking after the first screen because of the preview wrapper, not the design.
 - **Builds are always production builds**, even when a machine has `NODE_ENV` set to something else (see `vite.config.ts`).
-- Privacy settings accept plain text without brackets. Missing details remain highlighted in development and visual builds. Production omits missing clauses and prints a warning for each missing setting; the team must still confirm these details before launch. With no form endpoint, production explains that the visitor sends the form through their email app.
+- Privacy settings accept plain text without brackets. Missing details remain highlighted in development builds. Production omits missing clauses and prints a warning for each missing setting; the team must still confirm these details before launch. With no form endpoint, production explains that the visitor sends the form through their email app.

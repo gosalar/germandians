@@ -1,4 +1,3 @@
-import { mkdir } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
@@ -27,13 +26,37 @@ test('play all starts at one, pause resumes, and leaving the explorer pauses', a
   await expect(slider).toHaveAttribute('aria-valuenow', '1');
 });
 
+for (const width of [390, 1024]) {
+  test(`month stepper and ${width === 390 ? 'phase' : 'month'} selection respect bounds at ${width}`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const slider = page.getByRole('slider', { name: 'Journey month' });
+    const previous = page.getByRole('button', { name: /^Previous(?: month)?$/ });
+    const next = page.getByRole('button', { name: /^Next(?: month)?$/ });
+    await expect(previous).toBeDisabled();
+    await next.click();
+    await expect(slider).toHaveAttribute('aria-valuenow', '2');
+    await previous.click();
+    await expect(slider).toHaveAttribute('aria-valuenow', '1');
+    await expect(previous).toBeDisabled();
+    await page.getByRole('button', { name: width === 390 ? 'Arrival' : 'Month 7', exact: true }).click();
+    await expect(slider).toHaveAttribute('aria-valuenow', '7');
+    await expect(page.getByRole('heading', { name: 'Main focus: Arrival' })).toBeVisible();
+    await expect(next).toBeDisabled();
+    await previous.focus();
+    await page.keyboard.press('Enter');
+    await expect(slider).toHaveAttribute('aria-valuenow', '6');
+    await next.focus();
+    await page.keyboard.press('Space');
+    await expect(slider).toHaveAttribute('aria-valuenow', '7');
+    await expect(next).toBeDisabled();
+  });
+}
+
 for (const width of [390, 1440]) {
   test(`invalid form focuses fields in order below the header at ${width}`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     const submit = page.getByRole('button', { name: 'Request my profile review' });
     await submit.click();
-    await mkdir('test-results/review-actions/phase-1', { recursive: true });
-    await page.locator('#contact-form').screenshot({ path: `test-results/review-actions/phase-1/form-invalid-${width}.png` });
     // A filled invalid optional email must be checked, in visual field order.
     await page.locator('#f-email').fill('invalid');
     for (const [id, value] of [['f-name', 'Priya Sharma'], ['f-email', 'priya@example.com'], ['f-wa', '+91 9876543210'], ['f-consent', '']]) {

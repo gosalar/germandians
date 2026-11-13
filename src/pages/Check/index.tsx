@@ -1,10 +1,12 @@
 import { Button, TextInput } from '@mantine/core';
 import { useState, type ReactNode } from 'react';
 
+import Contact from '@/components/Contact';
+import ContentContainer from '@/components/ContentContainer';
 import DmatNote from '@/components/DmatNote';
+import PageHeader from '@/components/PageHeader';
 import SourceNote from '@/components/SourceNote';
 import { useSettleHashScroll } from '@/hooks/useSettleHashScroll';
-import Contact from '@/pages/Home/Contact';
 import { DMAT, SOURCES } from '@/utils/applicationFacts';
 import { FEE_PROMISE, SECTIONS, hashLink } from '@/utils/constants';
 import { INTAKE_READINESS, siteConfig } from '@/utils/siteConfig';
@@ -22,9 +24,9 @@ import {
   PROGRAMME_SOURCES,
   REQUIREMENTS,
   SCALE_PRESETS,
-  buildCheckDiagnosis,
   type CheckInputs,
 } from './data';
+import { buildCheckDiagnosis } from './logic';
 import styles from './styles.module.scss';
 
 const ERROR_ID = 'check-input-error';
@@ -59,26 +61,29 @@ export default function Check() {
   return (
     <main id="main-content" tabIndex={-1}>
       <section id={SECTIONS.top} className={styles.section}>
-        <div className={styles.container}>
-          <header className={styles.head}>
-            <div className={styles.badges}>
-              {CHECK_COPY.badges.map((badge, index) => (
-                <span key={badge} className={styles.badge} data-tone={index === 0 ? 'green' : undefined}>{badge}</span>
-              ))}
-            </div>
-            <h1 className={styles.title}>{CHECK_COPY.title}</h1>
-            <p className={styles.lede}>{CHECK_COPY.lede}</p>
-          </header>
+        <ContentContainer width="wide">
+          <PageHeader
+            title={CHECK_COPY.title}
+            introduction={CHECK_COPY.lede}
+            variant="compact"
+            leading={(
+              <div className={styles.badges}>
+                {CHECK_COPY.badges.map((badge, index) => (
+                  <span key={badge} className={styles.badge} data-tone={index === 0 ? 'green' : undefined}>{badge}</span>
+                ))}
+              </div>
+            )}
+          />
 
           <div className={styles.workbench}>
             <div className={styles.inputsColumn}>
               <div className={styles.panel}>
                 <div className={styles.panelHead}>
-                  <span className={styles.panelStep}>Step 1</span>
-                  <h2 className={styles.panelTitle}>Your marks (Modified Bavarian formula)</h2>
+                  <span className={styles.panelStep}>{CHECK_COPY.stepOne}</span>
+                  <h2 className={styles.panelTitle}>{CHECK_COPY.marksTitle}</h2>
                 </div>
 
-                <div className={styles.presets} role="group" aria-label="Indian grading scale presets">
+                <div className={styles.presets} role="group" aria-label={CHECK_COPY.presetsLabel}>
                   {SCALE_PRESETS.map((preset) => (
                     <button
                       key={preset.id}
@@ -104,7 +109,7 @@ export default function Check() {
                       attributes={
                         hasError && diagnosis.invalidFields.score ? { input: { 'aria-describedby': ERROR_ID } } : undefined
                       }
-                      label={<StepNumber number={1}>Your score</StepNumber>}
+                      label={<StepNumber number={1}>{CHECK_COPY.scoreFieldLabel}</StepNumber>}
                     />
                     <TextInput
                       id="check-max"
@@ -116,7 +121,7 @@ export default function Check() {
                       attributes={
                         hasError && diagnosis.invalidFields.max ? { input: { 'aria-describedby': ERROR_ID } } : undefined
                       }
-                      label={<StepNumber number={2}>Max possible</StepNumber>}
+                      label={<StepNumber number={2}>{CHECK_COPY.maxFieldLabel}</StepNumber>}
                     />
                     <TextInput
                       id="check-min"
@@ -128,7 +133,7 @@ export default function Check() {
                       attributes={
                         hasError && diagnosis.invalidFields.min ? { input: { 'aria-describedby': ERROR_ID } } : undefined
                       }
-                      label={<StepNumber number={3}>Min passing</StepNumber>}
+                      label={<StepNumber number={3}>{CHECK_COPY.minFieldLabel}</StepNumber>}
                     />
                   </div>
 
@@ -140,22 +145,20 @@ export default function Check() {
                 {/* On phones and narrow tablets, show the calculated grade right below the score inputs. */}
                 <div aria-hidden="true" className={styles.mobileScoreBar}>
                   <div className={styles.mobileScoreLeft}>
-                    <span className={styles.mobileScoreLabel}>German grade</span>
-                    <span className={styles.mobileScoreValue}>{diagnosis.gradeFormatted ?? '—'}</span>
+                    <span className={styles.mobileScoreLabel}>{CHECK_COPY.mobileGradeLabel}</span>
+                    <span className={styles.mobileScoreValue}>{diagnosis.gradeFormatted ?? CHECK_COPY.emptyGrade}</span>
                   </div>
                   <span className={styles.mobileScoreClass}>{diagnosis.classification}</span>
                 </div>
 
                 <p className={styles.passNote}>
-                  <strong>Example, using a 10-point scale:</strong> A 7.4 CGPA converts to <strong>2.3</strong> when
-                  the minimum passing grade is 4.0, but <strong>2.5</strong> when the minimum passing grade is 5.0.
-                  Never enter 0.
+                  <strong>{CHECK_COPY.exampleLead}</strong>{CHECK_COPY.exampleBeforeFirst}<strong>{CHECK_COPY.exampleFirst}</strong>{CHECK_COPY.exampleBetween}<strong>{CHECK_COPY.exampleSecond}</strong>{CHECK_COPY.exampleAfter}
                 </p>
               </div>
 
               <div className={styles.panel}>
                 <div className={styles.panelHead}>
-                  <span className={styles.panelStep}>Step 2</span>
+                  <span className={styles.panelStep}>{CHECK_COPY.stepTwo}</span>
                   <h2 className={styles.panelTitle}>{CHECK_COPY.profileTitle}</h2>
                 </div>
                 <p className={styles.profileNote}>{CHECK_COPY.profileNote}</p>
@@ -180,8 +183,8 @@ export default function Check() {
                 ))}
 
                 <div className={styles.toggleGroup}>
-                  <div className={styles.toggleLabel}>Bachelor’s degree duration</div>
-                  <div className={styles.pills} role="group" aria-label="Bachelor's degree duration">
+                  <div className={styles.toggleLabel}>{CHECK_COPY.degreeLabel}</div>
+                  <div className={styles.pills} role="group" aria-label={CHECK_COPY.degreeGroupLabel}>
                     {DEGREE_OPTIONS.map((option) => (
                       <button
                         key={option.value}
@@ -197,8 +200,8 @@ export default function Check() {
                 </div>
 
                 <div className={styles.toggleGroup}>
-                  <div className={styles.toggleLabel}>APS status</div>
-                  <div className={styles.pills} role="group" aria-label="APS status">
+                  <div className={styles.toggleLabel}>{CHECK_COPY.apsLabel}</div>
+                  <div className={styles.pills} role="group" aria-label={CHECK_COPY.apsLabel}>
                     {APS_OPTIONS.map((option) => (
                       <button
                         key={option.value}
@@ -216,7 +219,7 @@ export default function Check() {
                   <div className={styles.toggleLabel}>{DMAT_CHECK_COPY.label}</div>
                   <p className={styles.profileNote}>{DMAT.fields}</p>
                   <SourceNote source={SOURCES.dmat} />
-                  <div className={styles.pills} role="group" aria-label="dMAT degree field">
+                  <div className={styles.pills} role="group" aria-label={CHECK_COPY.dmatGroupLabel}>
                     {DMAT_FIELDS.map((option) => (
                       <button
                         key={option}
@@ -242,9 +245,9 @@ export default function Check() {
                   className={styles.liveSummary}
                 >
                   <div className={styles.scoreDisplay}>
-                    <div className={styles.scoreLabel}>Your German grade</div>
+                    <div className={styles.scoreLabel}>{CHECK_COPY.resultGradeLabel}</div>
                     <div className={styles.scoreValue} data-testid="german-grade-value">
-                      {diagnosis.gradeFormatted ?? '—'}
+                      {diagnosis.gradeFormatted ?? CHECK_COPY.emptyGrade}
                     </div>
                   </div>
                   <div className={styles.scoreHeadlineCol}>
@@ -301,7 +304,7 @@ export default function Check() {
                     </p>
                   )}
                 </div>
-                <h3 className={styles.diagnosisKicker}>{siteConfig.intake} readiness</h3>
+                <h3 className={styles.diagnosisKicker}>{siteConfig.intake} {CHECK_COPY.readinessLabel}</h3>
                 <p className={styles.explanation}>{INTAKE_READINESS}</p>
                 <div className={styles.diagnosisActions}>
                   <Button
@@ -325,11 +328,11 @@ export default function Check() {
                   <a key={source.url} href={source.url} target="_blank" rel="noopener">{source.label}</a>
                 ))}
                 <a href={APS_SOURCE.url} target="_blank" rel="noopener">{APS_SOURCE.label}</a>
-                <span>Last reviewed {CHECK_COPY.reviewed}</span>
+                <span>{CHECK_COPY.reviewedLabel} {CHECK_COPY.reviewed}</span>
               </div>
             </div>
           </div>
-        </div>
+        </ContentContainer>
       </section>
 
       <Contact snapshot={diagnosis.snapshot} />

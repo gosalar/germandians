@@ -1,7 +1,4 @@
-import { mkdir } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
-
-const evidence = 'test-results/review-actions/phase-1';
 
 for (const path of ['/', '/check']) for (const width of [390, 1440]) {
   test(`contact destinations and visibility ${path} at ${width}`, async ({ page }, testInfo) => {
@@ -34,8 +31,6 @@ for (const path of ['/', '/check']) for (const width of [390, 1440]) {
         await page.locator('#check-score').evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'center' }));
       }
       await expect(actionBar).toBeVisible();
-      await mkdir(evidence, { recursive: true });
-      await page.screenshot({ path: `${evidence}/bar-${testInfo.project.name}-${path === '/' ? 'home' : 'check'}.png` });
       await page.locator('nav').getByRole('button', { name: 'Menu', exact: true }).click();
       await expect(actionBar).not.toBeVisible();
       await page.locator('nav').getByRole('button', { name: 'Close', exact: true }).click();

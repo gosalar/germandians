@@ -1,16 +1,10 @@
-import { mkdir } from 'node:fs/promises';
 import { expect, test, type Page } from '@playwright/test';
 
 const endpoint = 'https://enquiries.example.test/profile';
-const evidence = 'test-results/review-actions/phase-1';
 async function fill(page: Page) {
   await page.locator('#f-name').fill('Test visitor');
   await page.locator('#f-wa').fill('+91 9876543210');
   await page.locator('#f-consent').check();
-}
-async function screenshot(page: Page, name: string) {
-  await mkdir(evidence, { recursive: true });
-  await page.locator('#contact-form').screenshot({ path: `${evidence}/form-${name}.png` });
 }
 
 test.beforeEach(async ({ page }) => {
@@ -48,13 +42,11 @@ test('sending is locked, one request includes the summary, and receipt needs exp
     (form as HTMLFormElement).requestSubmit();
   });
   await expect.poll(() => count).toBe(1);
-  await screenshot(page, 'sending');
   release();
   await expect(page.locator('#contact-form [role="status"]')).toContainText('Received. An admin will message you on WhatsApp.');
   expect(count).toBe(1);
   expect(payload).toMatchObject({ name: 'Test visitor', email: 'visitor@example.test', whatsapp: '+91 9876543210', consent: true, source: 'germandians-website', snapshot: 'German grade 2.3 (7.4 / 10, pass 4) · APS applied, awaiting certificate' });
   expect(Number.isFinite(Date.parse(String(payload.consentAt)))).toBe(true);
-  await screenshot(page, 'received');
 });
 
 for (const failure of ['http', 'body', 'malformed', 'empty', 'network']) {
@@ -76,11 +68,9 @@ for (const failure of ['http', 'body', 'malformed', 'empty', 'network']) {
     await expect(page.locator('#f-wa')).toHaveValue('+91 9876543210');
     await expect(page.locator('#f-consent')).toBeChecked();
     await expect(page.locator('#contact-form [role="status"]')).toContainText('thegermandians@gmail.com');
-    if (failure === 'body') await screenshot(page, 'failure');
     await page.getByRole('button', { name: 'Request my profile review' }).click();
     await expect(page.locator('#contact-form [role="status"]')).toContainText('Received.');
     expect(attempt).toBe(2);
-    if (failure === 'body') await screenshot(page, 'retry-received');
   });
 }
 
@@ -98,7 +88,6 @@ test('a stalled response times out, keeps the form editable and allows retry', a
   await expect(page.locator('#contact-form [role="status"]')).toContainText('within 15 seconds', { timeout: 20_000 });
   release();
   await expect(page.locator('#f-name')).toBeEnabled();
-  await screenshot(page, 'timeout');
   await page.getByRole('button', { name: 'Request my profile review' }).click();
   await expect(page.locator('#contact-form [role="status"]')).toContainText('Received.');
   expect(count).toBe(2);

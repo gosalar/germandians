@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import HomeSectionLink from '@/components/HomeSectionLink';
 import { usePageChrome } from '@/contexts/PageChrome/usePageChrome';
-import { CONTACT } from '@/utils/constants';
+import { DESTINATIONS } from '@/utils/constants';
 import { whatsapp } from '@/utils/siteConfig';
 
+import { ACTION_BAR_COPY } from './data';
 import styles from './styles.module.scss';
 
 /**
@@ -27,12 +28,12 @@ export default function MobileActionBar() {
 
   return (
     <>
-      <aside aria-label="Contact actions" className={styles.bar} data-visible={visible}>
+      <aside aria-label={ACTION_BAR_COPY.label} className={styles.bar} data-visible={visible}>
         <HomeSectionLink href={whatsapp.href} target={whatsapp.target} rel="noopener" className={styles.whatsapp}>
           {whatsapp.actionLabel}
         </HomeSectionLink>
-        <a href={CONTACT.instagramUrl} target="_blank" rel="noopener" className={styles.instagram}>
-          Instagram
+        <a href={DESTINATIONS.instagram.href} target={DESTINATIONS.instagram.target} rel={DESTINATIONS.instagram.rel} className={styles.instagram}>
+          {ACTION_BAR_COPY.instagram}
         </a>
       </aside>
     </>

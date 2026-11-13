@@ -1,4 +1,3 @@
-import { mkdir } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 
 for (const path of ['/', '/check']) for (const width of [390, 1440]) {
@@ -35,7 +34,5 @@ for (const path of ['/', '/check']) for (const width of [390, 1440]) {
     const url = new URL((await page.getByRole('link', { name: 'Open the draft again' }).getAttribute('href'))!);
     expect(url.searchParams.get('body')).toBe(draft);
     expect(posts).toEqual([]);
-    await mkdir('test-results/review-actions/phase-1', { recursive: true });
-    await form.screenshot({ path: `test-results/review-actions/phase-1/form-email-${path === '/' ? 'home' : 'check'}-${width}.png` });
   });
 }

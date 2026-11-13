@@ -1,7 +1,5 @@
-import { mkdir } from 'node:fs/promises';
 import { expect, test } from '@playwright/test';
 
-const evidence = 'test-results/review-actions/phase-1';
 const grades = [
   ['7.4', '10', '4', '2.3'], ['7.4', '10', '5', '2.5'], ['7.1', '10', '4', '2.4'],
   ['8.0', '10', '5', '2.2'], ['72', '100', '40', '2.4'], ['10', '10', '4', '1.0'], ['4', '10', '4', '4.0'],
@@ -98,13 +96,11 @@ test('invalid marks use a permanent polite error region and clear field associat
 for (const [width, height] of [[412,891],[891,412],[800,1280],[1280,800],[1536,730],[1280,585],[1920,953],[320,900],[375,900],[768,900],[1440,900]]) {
   test(`checker layout and grade visibility ${width}x${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
-    await mkdir(evidence, { recursive: true });
     if (width === 412) {
       const grade = (await page.locator('[class*="mobileScoreBar"]').boundingBox())!;
       const action = (await page.getByRole('link', { name: 'WhatsApp us', exact: true }).boundingBox())!;
       expect(grade.y + grade.height).toBeLessThanOrEqual(action.y - 10);
     }
-    if (width === 412 || width === 1440) await page.screenshot({ path: `${evidence}/check-empty-${width}.png`, fullPage: true });
     await page.getByRole('button', { name: 'CGPA / 10 (Pass 4.0)', exact: true }).click();
     await page.locator('#check-score').fill('7.4');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -137,7 +133,6 @@ for (const [width, height] of [[412,891],[891,412],[800,1280],[1280,800],[1536,7
       await page.getByRole('button', { name: '3-year', exact: true }).click();
       await page.getByRole('button', { name: 'Applied, waiting', exact: true }).click();
       await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
-      await page.screenshot({ path: `${evidence}/check-filled-${width}.png`, fullPage: true });
     }
   });
 }

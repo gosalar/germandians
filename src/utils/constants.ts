@@ -1,34 +1,14 @@
-export const ROUTES = {
-  home: '/',
-  check: '/check',
-  privacy: '/privacy',
-} as const;
+import { PAGE_REGISTRY } from './pageRegistry.ts';
+import { SECTIONS } from './sections.ts';
 
-/** In-page anchors on the home page. */
-export const SECTIONS = {
-  top: 'top',
-  community: 'community',
-  fees: 'fees',
-  journey: 'journey',
-  universities: 'universities',
-  faq: 'faq',
-  contact: 'contact',
-  contactForm: 'contact-form',
-  mentors: 'why',
-  sop: 'sop',
-} as const;
+export { SECTIONS } from './sections.ts';
+
+export const ROUTES = Object.fromEntries(PAGE_REGISTRY.map(({ key, path }) => [key, path])) as {
+  readonly [Page in (typeof PAGE_REGISTRY)[number] as Page['key']]: Page['path'];
+};
 
 export const hashLink = (id: string) => `#${id}`;
 
-export const NAV_LINKS = [
-  { href: ROUTES.check, label: 'Grade check' },
-  { href: hashLink(SECTIONS.community), label: 'Our story' },
-  { href: hashLink(SECTIONS.fees), label: 'Fees' },
-  { href: hashLink(SECTIONS.journey), label: 'Journey' },
-  { href: hashLink(SECTIONS.universities), label: 'Public vs private' },
-  { href: hashLink(SECTIONS.faq), label: 'FAQ' },
-  { href: hashLink(SECTIONS.contact), label: 'Contact' },
-] as const;
 export const NAV_CTA = { id: SECTIONS.contactForm, label: 'Get my profile reviewed' } as const;
 
 export const FEE_POLICY = {
@@ -63,9 +43,88 @@ export const CONTACT = {
   whatsappGreeting: "Hi Germandians, I'd like a profile review.",
 } as const;
 
+/**
+ * Stated facts: team size and intake places.
+ * Derived: students per mentor is intake places divided by team size.
+ * Word fields are those figures in a sentence, not separate facts.
+ * `sentence` is the word at the start of a sentence; `word` is used inside one.
+ */
+export const TEAM_SIZE = {
+  count: 6,
+  word: 'six',
+  sentence: 'Six',
+} as const;
+
 export const INTAKE_SEATS = 30;
+
+export const STUDENTS_PER_MENTOR = {
+  count: INTAKE_SEATS / TEAM_SIZE.count,
+  word: 'five',
+} as const;
+
 export const INTAKE_SEASONS = ['Summer', 'Winter'] as const;
 export type IntakeSeason = (typeof INTAKE_SEASONS)[number];
 
 export const INTAKE_STATUSES = ['Not confirmed', 'Enquiries open', 'Waitlist only', 'Enquiries closed'] as const;
 export type IntakeStatus = (typeof INTAKE_STATUSES)[number];
+
+type SectionId = (typeof SECTIONS)[keyof typeof SECTIONS];
+
+/** A later menu may group destinations. Nothing renders a group yet. */
+export type NavigationGroup = {
+  kind: 'group';
+  label: string;
+  items: readonly NavigationDestination[];
+};
+
+export type NavigationDestination =
+  | { kind: 'page'; page: keyof typeof ROUTES }
+  | { kind: 'section'; section: SectionId }
+  | { kind: 'external'; href: string; target?: '_blank'; rel?: 'noopener' }
+  | { kind: 'scroll-top' }
+  | NavigationGroup;
+
+type PlacedDestination = Exclude<NavigationDestination, NavigationGroup>;
+
+export function destinationHref(destination: PlacedDestination): string {
+  switch (destination.kind) {
+    case 'page':
+      return ROUTES[destination.page];
+    case 'section':
+      return hashLink(destination.section);
+    case 'external':
+      return destination.href;
+    case 'scroll-top':
+      return hashLink(SECTIONS.top);
+  }
+}
+
+export const DESTINATIONS = {
+  gradeCheck: { kind: 'page', page: 'check' },
+  privacy: { kind: 'page', page: 'privacy' },
+  ourStory: { kind: 'section', section: SECTIONS.community },
+  fees: { kind: 'section', section: SECTIONS.fees },
+  journey: { kind: 'section', section: SECTIONS.journey },
+  universities: { kind: 'section', section: SECTIONS.universities },
+  faq: { kind: 'section', section: SECTIONS.faq },
+  contact: { kind: 'section', section: SECTIONS.contact },
+  profileReview: { kind: 'section', section: NAV_CTA.id },
+  instagram: { kind: 'external', href: CONTACT.instagramUrl, target: '_blank' as const, rel: 'noopener' as const },
+  email: { kind: 'external', href: `mailto:${CONTACT.email}`, target: undefined, rel: undefined },
+  backToTop: { kind: 'scroll-top' },
+} as const satisfies Record<string, PlacedDestination>;
+
+const NAV_ITEMS = [
+  { destination: DESTINATIONS.gradeCheck, label: 'Grade check' },
+  { destination: DESTINATIONS.ourStory, label: 'Our story' },
+  { destination: DESTINATIONS.fees, label: 'Fees' },
+  { destination: DESTINATIONS.journey, label: 'Journey' },
+  { destination: DESTINATIONS.universities, label: 'Public vs private' },
+  { destination: DESTINATIONS.faq, label: 'FAQ' },
+  { destination: DESTINATIONS.contact, label: 'Contact' },
+] as const;
+
+export const NAV_LINKS = NAV_ITEMS.map((item) => ({
+  href: destinationHref(item.destination),
+  label: item.label,
+}));

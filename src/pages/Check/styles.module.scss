@@ -10,21 +10,6 @@
   }
 }
 
-.container {
-  @include m.container(1320px);
-}
-
-.head {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 920px;
-
-  @include m.below(t.$bp-mobile) {
-    gap: 8px;
-  }
-}
-
 .badges {
   display: flex;
   flex-wrap: wrap;
@@ -53,17 +38,6 @@
     color: t.$status-green-ink;
     border-color: t.$status-green-border;
   }
-}
-
-.title {
-  @include m.display-heading(clamp(32px, 4.3vw, 62px));
-}
-
-.lede {
-  @include m.page-lead(clamp(15px, 1.25vw, 18px));
-  color: t.$ink-soft;
-  max-width: 68ch;
-  text-wrap: pretty;
 }
 
 .workbench {

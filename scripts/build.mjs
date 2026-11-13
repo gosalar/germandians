@@ -8,43 +8,34 @@ import { DEFAULT_SITE_ORIGIN, parseSiteOrigin } from '../src/utils/publicSite.ts
 // The CLI imports React before Vite loads its config. Prerender and client
 // must select the same production runtime even with a machine-wide NODE_ENV.
 process.env.NODE_ENV = 'production';
-const visual = process.argv.includes('--visual');
 
 // Vite evaluates its config once per environment, so a warning there is repeated.
 // This script is the production build, and it runs once.
-if (!visual) {
-  const fileEnv = loadEnv('production', 'config', 'VITE_');
-  const read = (key) => (process.env[key] ?? fileEnv[key] ?? '').trim();
-  const missing = ['NAMES', 'ADDRESS', 'HOSTING_PROVIDER', 'RETENTION', 'AUTHORITY'].filter(
-    (name) => !read(`VITE_PRIVACY_${name}`),
-  );
-  if (toFormEndpoint(read('VITE_FORM_ENDPOINT')) && !read('VITE_PRIVACY_FORM_SERVICE')) missing.push('FORM_SERVICE');
-  if (!toWhatsAppNumber(read('VITE_WHATSAPP_NUMBER'))) {
-    console.warn('[contact] Missing or invalid VITE_WHATSAPP_NUMBER; contact actions open the review form.');
-  }
-  if (read('VITE_SITE_ORIGIN') && !parseSiteOrigin(read('VITE_SITE_ORIGIN'))) {
-    console.warn(`[site] Invalid VITE_SITE_ORIGIN; canonical, sharing and sitemap URLs use ${DEFAULT_SITE_ORIGIN}. Supply an HTTPS origin without a path.`);
-  }
-  if (read('VITE_FORM_ENDPOINT') && !toFormEndpoint(read('VITE_FORM_ENDPOINT'))) {
-    console.warn('[contact] Invalid VITE_FORM_ENDPOINT; using the email-app handoff. Supply a public HTTPS endpoint.');
-  }
-  for (const name of missing) {
-    console.warn(`[privacy] Missing VITE_PRIVACY_${name}; confirm this detail before publishing the privacy note.`);
-  }
-  if (!read('VITE_PRIVACY_NAMES')) {
-    console.warn('[identity] Missing VITE_PRIVACY_NAMES; the footer cannot name the business responsible for the site.');
-  } else if (!read('VITE_PRIVACY_ADDRESS')) {
-    console.warn('[identity] Missing VITE_PRIVACY_ADDRESS; the footer names the business without its address.');
-  }
+const fileEnv = loadEnv('production', 'config', 'VITE_');
+const read = (key) => (process.env[key] ?? fileEnv[key] ?? '').trim();
+const missing = ['NAMES', 'ADDRESS', 'HOSTING_PROVIDER', 'RETENTION', 'AUTHORITY'].filter(
+  (name) => !read(`VITE_PRIVACY_${name}`),
+);
+if (toFormEndpoint(read('VITE_FORM_ENDPOINT')) && !read('VITE_PRIVACY_FORM_SERVICE')) missing.push('FORM_SERVICE');
+if (!toWhatsAppNumber(read('VITE_WHATSAPP_NUMBER'))) {
+  console.warn('[contact] Missing or invalid VITE_WHATSAPP_NUMBER; contact actions open the review form.');
+}
+if (read('VITE_SITE_ORIGIN') && !parseSiteOrigin(read('VITE_SITE_ORIGIN'))) {
+  console.warn(`[site] Invalid VITE_SITE_ORIGIN; canonical, sharing and sitemap URLs use ${DEFAULT_SITE_ORIGIN}. Supply an HTTPS origin without a path.`);
+}
+if (read('VITE_FORM_ENDPOINT') && !toFormEndpoint(read('VITE_FORM_ENDPOINT'))) {
+  console.warn('[contact] Invalid VITE_FORM_ENDPOINT; using the email-app handoff. Supply a public HTTPS endpoint.');
+}
+for (const name of missing) {
+  console.warn(`[privacy] Missing VITE_PRIVACY_${name}; confirm this detail before publishing the privacy note.`);
+}
+if (!read('VITE_PRIVACY_NAMES')) {
+  console.warn('[identity] Missing VITE_PRIVACY_NAMES; the footer cannot name the business responsible for the site.');
+} else if (!read('VITE_PRIVACY_ADDRESS')) {
+  console.warn('[identity] Missing VITE_PRIVACY_ADDRESS; the footer names the business without its address.');
 }
 // One year for the server and client builds, even if the build runs across New Year.
 process.env.BUILD_YEAR ??= String(new Date().getFullYear());
-if (visual) {
-  process.env.VISUAL_BUILD = 'true';
-  process.env.SITE_BASE_PATH = '/';
-  // The design reference is static, so the visual build pins the year it shows.
-  process.env.BUILD_YEAR = '2026';
-}
 const cli = createRequire(import.meta.url).resolve('@react-router/dev/package.json').replace(/package\.json$/, 'bin.cjs');
-process.argv = [process.execPath, cli, 'build', ...(visual ? ['--mode', 'visual'] : [])];
+process.argv = [process.execPath, cli, 'build'];
 await import(pathToFileURL(cli).href);
