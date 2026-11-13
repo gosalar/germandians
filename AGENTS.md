@@ -26,8 +26,8 @@ npm run typecheck            # route types, then TypeScript
 npm run build                # typecheck, production build, prerender into build/client/
 npm run preview              # serves build/client at http://localhost:4173
 npm run test:ux              # behaviour, layout, form and typography checks
-npm run test:visual          # pixel comparison with the design reference
-npm run test:visual:quick    # the fast subset, for use while working
+npm run test:visual          # legacy reference comparison; pending retirement
+npm run test:visual:quick    # fast subset of the legacy comparison
 ```
 
 ## Stack and structure
@@ -54,7 +54,7 @@ Mantine 9 is used with its own styles: not in unstyled mode, and not through a C
 - **The brand look lives in the theme.** `src/themes/index.ts` builds it with `createTheme`. Each overridden component has a folder `src/themes/<Component>/` holding `index.ts` (`Component.extend` with `defaultProps` and `classNames`) and `styles.module.scss`. Variants and sizes are styled through data attributes (`&[data-variant='navy']`, `&[data-size='lg']`), not through wrapper components.
 - **Use the themed controls for shared UI:** buttons, text fields, accordions and status badges. `Button` takes `variant` (`navy`, `navy-step`, `yellow`, `yellow-dark`, `ring`, `ring-dark`, `outline`, `menu`) and `size` (`nav`, `md`, `lg`, `step`, `submit`, `menu`). A link that looks like a button is a `Button` with `component="a"`, `component={Link}` or `component={HomeSectionLink}`.
 - **A new look is a new variant in the theme,** not a one-off override in a page's stylesheet.
-- **Adding a component:** add its `.layer.css`, and those of any component it depends on, to `mantine-styles.ts`. If it needs brand styling, add its override folder and register it in `src/themes/index.ts`. Add it to the dev-only preview at `/_theme` (`src/routes/theme.tsx`), then run the visual suite.
+- **Adding a component:** add its `.layer.css`, and those of any component it depends on, to `mantine-styles.ts`. If it needs brand styling, add its override folder and register it in `src/themes/index.ts`. Add it to the dev-only preview at `/_theme` (`src/routes/theme.tsx`), then review it in the browser and check its affected uses as described below.
 - **Per-instance styling** uses `className` or `classNames` with SCSS module classes. Use inline `style` only for values that come from data, as the intake badge's colours do.
 - **Forms use `@mantine/form`** (`useForm` with a `validate` map, as in `ProfileReviewForm`). Reach for `@mantine/hooks` (`useIntersection`, `useReducedMotion`, `useWindowEvent`) before writing your own hook.
 - **The theme sets the cross-cutting behaviour:** light scheme only, the focus ring (`focusClassName`), `respectReducedMotion`, and font families through CSS variables. Don't override those per component.
@@ -110,7 +110,8 @@ Three self-hosted brand fonts, used by role:
 
 - Keyboard access, visible focus, labels, ARIA and reduced-motion behaviour must keep working wherever you touch them. Errors are announced and understandable without colour.
 - Sticky elements (the nav, sticky section intros, the phone action bar) must never cover the focused element.
-- Check changes at phone, tablet and desktop widths: at least 320, 390, 768, 1024 and 1440, plus the in-between widths around the breakpoint you touched. No sideways scrolling at any width.
+- For UI changes, review affected pages or components in a real browser at phone, tablet and desktop widths: 320, 390, 768, 1024 and 1440, plus the in-between widths around any breakpoint you touched. Check wrapping, spacing, clipping, sideways scrolling and sticky overlap, and exercise affected controls by keyboard and pointer. Review shared layout or theme changes on their affected page types; unrelated pages do not need a fresh sweep for every edit.
+- Visual quality is assessed in the rendered UI; tests do not replace that review.
 
 ## Tests
 
@@ -119,26 +120,24 @@ Three self-hosted brand fonts, used by role:
 | `npm run lint`, `npm run typecheck` | ESLint, route types, TypeScript | |
 | `npm run build` | Production build and prerender | Reads `config/.env.local` if present |
 | `npm run test:ux` | Grade check, form states and delivery, contact labels, journey playback, typography roles, console and hydration errors | Builds two pinned variants into `test-results/ux-builds/`: `endpoint` (number and form endpoint set, port 5603) and `email` (both empty, port 5604). Local settings never affect it |
-| `npm run test:visual` | `/` and `/privacy` compared pixel for pixel with the design reference, plus interaction states | Builds with default settings only, into `.visual-build/` (ports 5601 and 5602) |
+| `npm run test:visual` | Legacy comparison of `/` and `/privacy` with the design reference, plus interaction states | Pending retirement. Builds with default settings only, into `.visual-build/` (ports 5601 and 5602) |
 
-CI runs lint, build, the visual suite and the UX suite on every pull request and push to `main`. A failure blocks deployment.
+CI currently runs lint, build, the legacy visual suite and the UX suite on every pull request and push to `main`. A failure blocks deployment. The legacy gate remains until its workflow and supporting files are retired; this policy update alone does not remove it.
 
-- **Add or update a test in `tests/ux/` for every behaviour you change.** There is no unit-test runner; pure logic is tested through the page.
-- **A setting has two states to cover.** The visual suite always sees defaults; pin the configured state in the UX suite's `endpoint` variant.
-- **`/check` has no design reference.** Only the UX suite and your own browser checks cover it.
+- **Keep automated tests proportional to the risk.** Add or update a focused Playwright test when a change affects an important user flow or prevents a meaningful regression: navigation, enquiry validation/submission, calculations, mock-test completion and timing when implemented, or keyboard access. Reuse existing coverage; do not add tests simply because a file changed.
+- **Routine edits should stay lightweight.** Copy, spacing, colour and static-content edits do not automatically need new tests. Use browser review for their visual impact. Add an automated check only when there is a specific behaviour or defect worth protecting.
+- **Assert outcomes, not incidental implementation.** Prefer roles, labels and accessible names for interaction targets; use stable IDs where appropriate. Keep exact text assertions when the wording itself matters, such as consent or fee terms, rather than duplicating whole marketing paragraphs in behaviour tests. Do not remove useful accessible-name checks merely to avoid a text match.
+- **Run the checks affected by the change.** Use focused existing specs for local work; run the full UX suite for changes spanning shared behaviour or when narrower coverage cannot address the risk. Broaden or repeat checks when new edits, failures or unresolved concerns justify it.
+- **Settings need configured and fallback coverage when their behaviour changes.** Use the pinned UX variants rather than relying on the legacy visual suite for defaults. Tests must continue to intercept every enquiry request.
+- There is currently no unit-test runner. This guidance does not install one or add Storybook; tooling changes belong to their own scoped work.
 
-### Deliberate design changes
+### Visual review and the retired reference approach
 
-`tests/visual/reference/` is a hand-maintained copy of the design. When you change how `/` or `/privacy` looks or behaves on purpose:
+The reference HTML was an independent target for porting the original design into production React. That porting role is finished. The production React components are now the implementation to maintain.
 
-1. Run the full visual suite before you start; it must pass.
-2. Make the change, then triage every failing check from the diff images in `test-results/visual/<test>/`. A difference outside the element you meant to change is a regression.
-3. Mirror the change in the reference and note it in `tests/visual/reference/README.md`.
-4. Run the full suite again. It must pass with the tolerance untouched.
-
-The home reference is a template: inline-styled markup with `{{ }}` bindings and `sc-if` / `sc-for` blocks, classes in the `<style>` block for anything needing breakpoints, and a `Component` class at the bottom that holds its data and behaviour (months, FAQ toggles, form validation and submit, contact labels). Behaviour changes are mirrored in that class, not only in markup. Its fonts come from `fonts.css`, served from the installed font packages.
-
-Never raise `MAX_DIFF_PIXELS`, skip or delete a check, or edit the reference to hide a regression. If a scenario names text you changed, update the scenario in the same change.
+- Do not mirror intentional React changes into a second HTML implementation or introduce mandatory screenshot baselines. Review the rendered changes at the representative widths above, including neighbouring content that could be affected.
+- Retiring the reference HTML and its supporting scripts/configuration is agreed work, but the files and CI gate still exist. Report any conflict with that legacy gate explicitly rather than updating the duplicate site, loosening its tolerance or claiming it passed.
+- When retiring the suite, assess its interaction scenarios and retain valuable behaviour coverage in the UX suite where it is not already covered. Pixel comparisons and duplicated assertions do not need replacements merely to preserve test counts.
 
 ## Environment
 
@@ -157,9 +156,9 @@ Larger pieces of work arrive as a plan: a Markdown file the owner points you to.
 
 ## Before you report
 
-1. `npm run lint`, `npm run typecheck` and `npm run build` pass.
-2. `npm run test:ux` passes, including the tests you added.
-3. `npm run test:visual` passes, with the reference mirrored if the design changed on purpose.
-4. You looked at the change in a real browser at phone, tablet and desktop widths, by keyboard as well as pointer, with zero console errors.
+1. For code or configuration changes affecting the application, run `npm run lint`, `npm run typecheck` and `npm run build`. Documentation-only changes need a diff/consistency check, not an application build or browser run.
+2. Run the relevant behaviour checks as described above and report their results. New tests are justified by risk, not required for every edit.
+3. For UI changes, review the rendered result at the representative widths above and exercise affected interactions, with zero console or hydration errors.
+4. Report any remaining legacy CI limitation separately. Do not present reference-suite retirement or a new testing tool as complete until its actual files and workflow have changed.
 
 Then report: what changed and where, every copy change as before → after, new or changed settings, test results with counts, and plainly what you could not verify. Chrome device emulation is not a test on a physical phone or in Safari; name the engines and viewports you actually used.
