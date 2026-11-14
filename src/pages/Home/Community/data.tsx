@@ -1,5 +1,4 @@
 import DmatNote from '@/components/DmatNote';
-import { TEAM_SIZE } from '@/utils/constants';
 
 export const COPY = {
   kicker: 'Where we started',
@@ -23,6 +22,6 @@ export const PRINCIPLES = [
   {
     title: 'We guide from experience',
     color: '#ef8a21',
-    body: `All ${TEAM_SIZE.word} of us went through APS, university applications, the blocked account, the visa and Anmeldung ourselves. You get what we learned doing it, and what the questions from our community have taught us since.`,
+    body: 'Every mentor on our team went through APS, university applications, the blocked account, the visa and Anmeldung themselves. You get what we learned doing it, and what the questions from our community have taught us since.',
   },
 ];

@@ -36,6 +36,19 @@ export const TRACK_RECORD = {
 /** Who checks, approves and holds the accounts. Stated in full once, in the commitments table. */
 export const APPLICANT_CONTROL = 'You check the facts, approve each submission and keep control of your own accounts, so the confirmations come to you.';
 
+/**
+ * Help with housing and settling in, as the owners describe the service. Official housing facts and their
+ * sources stay in applicationFacts. The home section lists this help in full; the journey, the commitments
+ * table and the FAQ read these sentences rather than retyping them.
+ */
+export const ARRIVAL_SUPPORT = {
+  availability: 'Housing depends on availability, so a room is not guaranteed.',
+  settling: 'After you arrive, we take you through city registration (Anmeldung) and opening a bank account, help you find your way around and introduce you to seniors. We also guide you on finding part-time work and help you understand the rules for international students, and where to check them.',
+  /** Not part of the standard service, so not on the receipt. The subject is the help, never the stay. */
+  complimentary: 'Help finding a temporary stay and guidance on part-time work are complimentary.',
+  quote: 'Your written quote sets out what this support covers.',
+} as const;
+
 export const CONTACT = {
   email: 'thegermandians@gmail.com',
   instagramHandle: '@germandians',
@@ -46,13 +59,11 @@ export const CONTACT = {
 /**
  * Stated facts: team size and intake places.
  * Derived: students per mentor is intake places divided by team size.
- * Word fields are those figures in a sentence, not separate facts.
- * `sentence` is the word at the start of a sentence; `word` is used inside one.
+ * Team size is held for that calculation only. The site publishes the cap per mentor and the intake places, not the size of the team.
+ * `word` is the per-mentor figure in a sentence, not a separate fact.
  */
-export const TEAM_SIZE = {
+const TEAM_SIZE = {
   count: 6,
-  word: 'six',
-  sentence: 'Six',
 } as const;
 
 export const INTAKE_SEATS = 30;

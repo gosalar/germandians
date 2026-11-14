@@ -3,6 +3,7 @@ export const SECTIONS = {
   top: 'top',
   community: 'community',
   fees: 'fees',
+  housing: 'housing',
   journey: 'journey',
   universities: 'universities',
   faq: 'faq',

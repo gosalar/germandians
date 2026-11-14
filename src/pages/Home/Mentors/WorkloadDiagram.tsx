@@ -1,4 +1,4 @@
-import { STUDENTS_PER_MENTOR, TEAM_SIZE } from '@/utils/constants';
+import { INTAKE_SEATS, STUDENTS_PER_MENTOR } from '@/utils/constants';
 
 import { WORKLOAD } from './data';
 import styles from './styles.module.scss';
@@ -7,13 +7,8 @@ import styles from './styles.module.scss';
 const studentDots = Array.from({ length: STUDENTS_PER_MENTOR.count }, (_, i) => (
   <span key={i} className={styles.studentDot} />
 ));
-const teamGroups = Array.from({ length: TEAM_SIZE.count }, (_, group) => (
-  <span key={group} className={styles.teamGroup}>
-    {Array.from({ length: STUDENTS_PER_MENTOR.count }, (_, i) => (
-      <span key={i} className={styles.teamDot} />
-    ))}
-  </span>
-));
+// One dot per place, not grouped by mentor.
+const placeDots = Array.from({ length: INTAKE_SEATS }, (_, i) => <span key={i} className={styles.placeDot} />);
 
 const arrow = (
   <div aria-hidden="true" className={styles.arrow}>
@@ -21,9 +16,9 @@ const arrow = (
   </div>
 );
 
-/** One mentor's students next to the whole team's places for the intake. */
+/** One mentor's students next to the intake places the per-mentor cap allows. */
 export default function WorkloadDiagram() {
-  const { mentor, team } = WORKLOAD;
+  const { mentor, intake } = WORKLOAD;
 
   return (
     <div className={styles.diagrams}>
@@ -44,20 +39,20 @@ export default function WorkloadDiagram() {
         </div>
       </div>
 
-      <div className={styles.diagram} data-tone="team">
-        <div className={styles.diagramTitle}>{team.title}</div>
-        <div className={styles.diagramBox}>{team.head}</div>
+      <div className={styles.diagram} data-tone="intake">
+        <div className={styles.diagramTitle}>{intake.title}</div>
+        <div className={styles.diagramBox}>{intake.head}</div>
         {arrow}
         <div className={`${styles.diagramBox} ${styles.diagramCrowd}`}>
-          <div aria-hidden="true" className={styles.teamDots}>
-            {teamGroups}
+          <div aria-hidden="true" className={styles.placeDots}>
+            {placeDots}
           </div>
-          <div className={styles.diagramStrong}>{team.crowd}</div>
+          <div className={styles.diagramStrong}>{intake.crowd}</div>
         </div>
         {arrow}
         <div className={`${styles.diagramBox} ${styles.diagramOutcome}`}>
-          <div className={styles.diagramStrong}>{team.outcome}</div>
-          <div className={styles.diagramNote}>{team.note}</div>
+          <div className={styles.diagramStrong}>{intake.outcome}</div>
+          <div className={styles.diagramNote}>{intake.note}</div>
         </div>
       </div>
     </div>

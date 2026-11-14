@@ -54,7 +54,6 @@ export const DMAT_LABELS = {
 
 export const HOUSING = {
   preparation: 'Housing preparation starts before you travel. Apply as soon as each provider opens applications: rooms are allocated from waiting lists and a place is not guaranteed. Keep private rooms and temporary accommodation in view as alternatives.',
-  arrival: 'We help with your housing applications before you travel, then take you through city registration (Anmeldung) and opening a bank account, and introduce you to seniors. Your written quote sets out what this support covers.',
 } as const;
 
 export const TUITION = {

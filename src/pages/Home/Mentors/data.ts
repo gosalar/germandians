@@ -1,10 +1,9 @@
-import { HOUSING } from '@/utils/applicationFacts';
-import { APPLICANT_CONTROL, FEE_PROMISE, INTAKE_SEATS, STUDENTS_PER_MENTOR, TEAM_SIZE } from '@/utils/constants';
+import { APPLICANT_CONTROL, ARRIVAL_SUPPORT, FEE_PROMISE, INTAKE_SEATS, STUDENTS_PER_MENTOR } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 export const MENTOR_COPY = {
   title: 'How our mentors work',
-  intro: `Our ${TEAM_SIZE.word} mentors are Indian students at German universities who went through this process themselves. Each works with up to ${STUDENTS_PER_MENTOR.word} students at a time, so there is time to check your programme requirements, review your documents and work on your SOP with you.`,
+  intro: `Our mentors are Indian students at German universities who went through this process themselves. Each works with up to ${STUDENTS_PER_MENTOR.word} students at a time, so there is time to check your programme requirements, review your documents and work on your SOP with you.`,
   ratio: `One mentor, up to ${STUDENTS_PER_MENTOR.word} students.`,
   commitmentsTitle: 'What we commit to',
   topicHeader: 'Part of the service',
@@ -26,7 +25,7 @@ export const METHOD_POINTS = [
   },
 ];
 
-/** The cap in numbers: what one mentor takes on, and what that adds up to for the intake. */
+/** The cap in numbers: what one mentor takes on, and the intake places the cap allows. */
 export const WORKLOAD = {
   mentor: {
     title: 'Each mentor',
@@ -35,12 +34,12 @@ export const WORKLOAD = {
     outcome: 'A shortlist for each student',
     note: 'Requirements, documents and SOP reviewed for that one student',
   },
-  team: {
-    title: 'The whole team',
-    head: `${TEAM_SIZE.count} mentors`,
-    crowd: `Up to ${STUDENTS_PER_MENTOR.count} students each`,
-    outcome: `${INTAKE_SEATS} places for ${siteConfig.intake}`,
-    note: 'Our capacity for this intake',
+  intake: {
+    title: 'The whole intake',
+    head: `Up to ${STUDENTS_PER_MENTOR.count} students per mentor`,
+    crowd: `${INTAKE_SEATS} places for ${siteConfig.intake}`,
+    outcome: 'Places are capped',
+    note: 'Capacity is set by what each mentor can take on',
   },
 } as const;
 
@@ -51,8 +50,9 @@ export const COMMITMENTS = [
   { topic: 'Your SOP', commitment: 'Your statement in your own words, drafted and revised with your mentor' },
   { topic: 'Your applications', commitment: APPLICANT_CONTROL },
   { topic: 'When payment is due', commitment: FEE_PROMISE },
+  { topic: 'Help after admission', commitment: 'Help with your loan, blocked account and visa.' },
   {
-    topic: 'Help after admission',
-    commitment: `Help with your loan, blocked account and visa. ${HOUSING.arrival}`,
+    topic: 'Housing and settling in',
+    commitment: `Help finding housing or a temporary stay before you travel, and help settling in after you arrive. ${ARRIVAL_SUPPORT.availability} ${ARRIVAL_SUPPORT.complimentary} ${ARRIVAL_SUPPORT.quote}`,
   },
 ];

@@ -1,4 +1,4 @@
-import { FEE_PROMISE, TEAM_SIZE } from './constants.ts';
+import { FEE_PROMISE } from './constants.ts';
 import { PAGE_REGISTRY, type PageKey } from './pageRegistry.ts';
 
 type Sharing = {
@@ -13,7 +13,7 @@ type Sharing = {
 const METADATA = {
   home: {
     title: 'Germandians | Student-led guidance for studying in Germany',
-    description: `${TEAM_SIZE.sentence} students living in Germany guide Indian students from profile evaluation to their arrival here. ${FEE_PROMISE}`,
+    description: `Students living in Germany guide Indian students from profile evaluation to the housing search and settling in. ${FEE_PROMISE}`,
     image: 'social/home.png',
     imageTitle: 'Study in Germany',
     imageSubtitle: 'Student-led guidance',

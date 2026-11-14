@@ -9,7 +9,8 @@ export const RECEIPT_ITEMS = [
   'Applications, approved by you',
   'Loan and blocked account help',
   'Visa preparation',
-  'Housing, Anmeldung, bank account',
+  'Housing help',
+  'Anmeldung and bank account',
 ];
 
 export const FEES_COPY = {

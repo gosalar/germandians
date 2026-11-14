@@ -1,0 +1,140 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.section {
+  background: t.$sand;
+  @include m.section-padding;
+}
+
+.container {
+  @include m.container;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 860px;
+}
+
+.title {
+  @include m.display-heading;
+}
+
+.lede {
+  @include m.body-copy;
+  color: t.$ink-soft;
+}
+
+// Housing beside settling in; stacked when there is no room for two.
+.cards {
+  margin-top: clamp(32px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: clamp(16px, 2.4vw, 32px);
+  align-items: stretch;
+}
+
+.card {
+  min-width: 0;
+  border-radius: 22px;
+  padding: clamp(24px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include m.below(t.$bp-mobile) {
+    border-radius: 16px;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  &[data-tone='housing'] {
+    background: t.$navy;
+    color: t.$white;
+    --card-label: #{t.$mist-soft};
+    --card-title: #{t.$yellow};
+    --card-bullet: #{t.$yellow};
+  }
+
+  &[data-tone='settling'] {
+    background: t.$white;
+    color: t.$ink-strong;
+    box-shadow: inset 0 0 0 1.5px t.$navy;
+    --card-label: #{t.$ink-muted};
+    --card-title: #{t.$navy};
+    --card-bullet: #{t.$red-bright};
+  }
+}
+
+.when {
+  margin: 0;
+  @include m.label-font(700, 16px);
+  color: var(--card-label);
+}
+
+.cardTitle {
+  @include m.sub-heading;
+  color: var(--card-title);
+  text-wrap: balance;
+}
+
+.points {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  > li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: clamp(17px, 1.35vw, 19px);
+    line-height: 1.5;
+
+    @include m.below(t.$bp-mobile) {
+      font-size: 16px;
+      line-height: 1.45;
+    }
+  }
+}
+
+.bullet {
+  @include m.square-bullet(14px, 3px, 6px);
+  background: var(--card-bullet);
+}
+
+// The limit sits inside the housing card, next to the offer it qualifies.
+.availability {
+  margin: 8px 0 0;
+  padding: 14px 18px;
+  border: 2px dashed t.$yellow;
+  border-radius: 12px;
+  font-size: 17px;
+  line-height: 1.5;
+  text-wrap: pretty;
+
+  @include m.below(t.$bp-mobile) {
+    padding: 12px 14px;
+    font-size: 16px;
+  }
+}
+
+.costs {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$mist-soft;
+  text-wrap: pretty;
+}
+
+.quote {
+  margin: clamp(20px, 2.4vw, 32px) 0 0;
+  max-width: 68ch;
+  font-size: 17px;
+  line-height: 1.5;
+  color: t.$ink-muted;
+  text-wrap: pretty;
+}

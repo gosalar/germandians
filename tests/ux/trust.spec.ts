@@ -3,6 +3,8 @@ import { expect, test } from '@playwright/test';
 const TRACK_RECORD = 'We guided up to 70 students over two years, unpaid, before the paid service began.';
 const AUDIENCE_LABEL = 'Community audience on Instagram and WhatsApp';
 const APPLICANT_CONTROL = 'You check the facts, approve each submission and keep control of your own accounts, so the confirmations come to you.';
+const HOUSING_AVAILABILITY = 'Housing depends on availability, so a room is not guaranteed.';
+const COMPLIMENTARY = 'Help finding a temporary stay and guidance on part-time work are complimentary.';
 
 /** Claims the site made before, which nothing on record supports. */
 const REMOVED_CLAIMS = [
@@ -32,14 +34,29 @@ const REMOVED_CLAIMS = [
   'how your chances look',
 ];
 
+/** The team's size is held for the capacity calculation, not published. Other uses of "six" are fine. */
+const TEAM_COUNT = /\b(six|6)\s+(student\s+)?(mentors|students living in Germany)\b|\bteam of (six|6)\b|\ball (six|6) of us\b/i;
+
 test('unsupported claims are gone from the home page and the grade check', async ({ page }) => {
   for (const path of ['/', '/check']) {
     await page.goto(path);
     const text = await page.locator('body').innerText();
     for (const claim of REMOVED_CLAIMS) expect(text, `${path} still says "${claim}"`).not.toContain(claim);
+    expect(text, `${path} states the team's size`).not.toMatch(TEAM_COUNT);
   }
   await page.goto('/');
   await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', /first week/);
+  await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content', TEAM_COUNT);
+  // Closed answers and other months are not in the page text until they are opened.
+  await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+  for (const question of await page.locator('#faq').getByRole('button').all()) {
+    if ((await question.getAttribute('aria-expanded')) === 'false') await question.click();
+  }
+  expect(await page.locator('#faq').innerText()).not.toMatch(TEAM_COUNT);
+  for (let month = 1; month <= 7; month++) {
+    await page.getByRole('button', { name: `Month ${month}`, exact: true }).click();
+    expect(await page.locator('#journey').innerText()).not.toMatch(TEAM_COUNT);
+  }
 });
 
 test('audience size, direct guidance and intake places are told apart', async ({ page }) => {
@@ -84,8 +101,8 @@ test('the mentor section lists commitments as a table, and as cards on a phone',
   await expect(section.getByRole('heading', { level: 3, name: 'What we commit to' })).toBeVisible();
   const table = section.getByRole('table', { name: 'What we commit to' });
   await expect(table.getByRole('columnheader')).toHaveText(['Part of the service', 'Our commitment']);
-  await expect(table.getByRole('rowheader')).toHaveCount(6);
-  await expect(table.getByRole('cell')).toHaveCount(6);
+  await expect(table.getByRole('rowheader')).toHaveCount(7);
+  await expect(table.getByRole('cell')).toHaveCount(7);
   // Applicant control is stated in full once: in the table, and in its card version on a phone.
   await expect(table.getByRole('row', { name: /Your applications/ }).getByRole('cell')).toHaveText(APPLICANT_CONTROL);
   await expect(page.getByText(APPLICANT_CONTROL).filter({ visible: true })).toHaveCount(1);
@@ -96,7 +113,7 @@ test('the mentor section lists commitments as a table, and as cards on a phone',
   await expect(points.nth(1)).toContainText('subject credits');
   await expect(points.nth(2)).toContainText('SOP');
   // The diagram shows the cap in numbers for the pinned intake.
-  await expect(section).toContainText('Up to 5 students each');
+  await expect(section).toContainText('Up to 5 students per mentor');
   await expect(section).toContainText('30 places for Winter 2027/28');
 
   await page.setViewportSize({ width: 390, height: 844 });
@@ -114,6 +131,25 @@ test('the receipt, journey and FAQ describe drafting and approval the same way',
   await page.getByRole('button', { name: 'Month 4', exact: true }).click();
   await expect(page.getByTestId('month-tasks')).toContainText('once you have approved each one');
   await expect(page.locator('#universities')).toContainText('We only shortlist accredited, reputable ones.');
+});
+
+test('housing help names temporary stays with its availability limit beside the offer', async ({ page }) => {
+  await page.goto('/');
+  const section = page.locator('#housing');
+  await expect(section.getByRole('heading', { level: 2, name: 'Housing and settling in' })).toBeVisible();
+  const offer = section.getByTestId('housing-offer');
+  await expect(offer).toContainText('temporary stay');
+  await expect(offer).toContainText(HOUSING_AVAILABILITY);
+  await expect(section).toContainText('Anmeldung');
+  await expect(section).toContainText('Part-time work');
+  await expect(section).toContainText(COMPLIMENTARY);
+  // The commitments and the FAQ state the same limit and charge terms in the same words.
+  for (const terms of [HOUSING_AVAILABILITY, COMPLIMENTARY]) await expect(page.locator('#why')).toContainText(terms);
+  const faq = page.locator('#faq');
+  await faq.getByRole('button', { name: 'What help do you give with housing and settling in?' }).click();
+  for (const terms of [HOUSING_AVAILABILITY, COMPLIMENTARY]) await expect(faq).toContainText(terms);
+  // Complimentary help is outside the standard service, so the receipt does not list it.
+  await expect(page.locator('#fees')).not.toContainText(/temporary stay|part-time/i);
 });
 
 test('the FAQ groups thirteen questions, opens each on its own and works by keyboard', async ({ page }) => {

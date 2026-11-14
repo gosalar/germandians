@@ -171,7 +171,7 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 2.4fr);
     --diagram-note: #{t.$mist-soft};
   }
 
-  &[data-tone='team'] {
+  &[data-tone='intake'] {
     border: 2px dashed t.$navy;
     --diagram-accent: #{t.$navy};
     --diagram-arrow: #{t.$slate};
@@ -307,33 +307,21 @@ $table-columns: minmax(0, 0.9fr) minmax(0, 2.4fr);
   }
 }
 
-// One group per mentor.
-.teamDots {
+// One dot per intake place, in rows of ten.
+.placeDots {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px 20px;
+  grid-template-columns: repeat(10, minmax(0, 36px));
+  justify-content: center;
+  gap: 8px;
 
   @include m.below(t.$bp-mobile) {
-    width: auto;
-    margin-inline: auto;
-    grid-template-columns: repeat(2, auto);
-    gap: 4px 8px;
-  }
-}
-
-.teamGroup {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 4px;
-
-  @include m.below(t.$bp-mobile) {
-    grid-template-columns: repeat(5, 6px);
+    grid-template-columns: repeat(10, 6px);
     gap: 2px;
   }
 }
 
-.teamDot {
+.placeDot {
   aspect-ratio: 1;
   border-radius: 50%;
   background: t.$yellow;

@@ -5,6 +5,7 @@ import Contact from '@/components/Contact';
 import Faq from './Faq';
 import Fees from './Fees';
 import Hero from './Hero';
+import Housing from './Housing';
 import Journey from './Journey';
 import Mentors from './Mentors';
 import Sop from './Sop';
@@ -18,6 +19,7 @@ export default function Home() {
       <Hero />
       <Community />
       <Fees />
+      <Housing />
       <Journey />
       <Universities />
       <Sop />

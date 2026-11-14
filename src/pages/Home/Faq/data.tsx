@@ -1,10 +1,8 @@
 import type { ReactNode } from 'react';
 
 import DmatNote from '@/components/DmatNote';
-import SourceNote from '@/components/SourceNote';
 import { QUOTE_TOPIC } from '@/pages/Home/Fees/data';
-import { HOUSING, SOURCES } from '@/utils/applicationFacts';
-import { FEE_POLICY } from '@/utils/constants';
+import { ARRIVAL_SUPPORT, FEE_POLICY } from '@/utils/constants';
 import { REVIEW_OUTCOME } from '@/utils/siteConfig';
 
 interface Question {
@@ -36,13 +34,8 @@ export const FAQ_GROUPS: QuestionGroup[] = [
         a: 'Yes. Tell us in your profile review. We check your subject credits against the requirements of the public programmes you want and tell you where they match and where they fall short.',
       },
       {
-        q: 'What support continues after I land?',
-        a: (
-          <>
-            {`${HOUSING.arrival} If a step could fall later, such as a registration appointment, raise it in your profile review before you agree the quote. ${HOUSING.preparation}`}
-            <SourceNote source={SOURCES.housing} />
-          </>
-        ),
+        q: 'What help do you give with housing and settling in?',
+        a: `Before you travel, we help you look for housing and apply, and help you find a temporary stay if no longer-term place is confirmed. ${ARRIVAL_SUPPORT.availability} ${ARRIVAL_SUPPORT.settling} ${ARRIVAL_SUPPORT.complimentary} ${ARRIVAL_SUPPORT.quote} If a step could fall later, such as a registration appointment, raise it in your profile review before you agree the quote.`,
       },
       {
         q: 'Are you connected to any university?',

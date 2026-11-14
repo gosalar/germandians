@@ -1,4 +1,5 @@
 import { DMAT, HOUSING, SOURCES, type OfficialSource } from '@/utils/applicationFacts';
+import { ARRIVAL_SUPPORT } from '@/utils/constants';
 
 export const JOURNEY_COPY = {
   lede: 'Four stages that overlap. The seven months below are one example of how they can fit together, not a fixed duration.',
@@ -66,7 +67,7 @@ export const PHASES: Phase[] = [
     labelColor: '#ffffff',
     radius: '4px',
     months: 2,
-    desc: 'We help with your education loan, help you open your blocked account and prepare your visa documents and appointment. We plan these with you early and complete each one as your offers and documents arrive.',
+    desc: 'We help with your education loan, help you open your blocked account and prepare your visa documents and appointment. We plan these with you early and complete each one as your offers and documents arrive. Alongside them, we help you look for housing or a temporary stay.',
   },
   {
     n: 4,
@@ -78,7 +79,7 @@ export const PHASES: Phase[] = [
     labelColor: '#ffffff',
     radius: '4px 10px 10px 4px',
     months: 1,
-    desc: HOUSING.arrival,
+    desc: ARRIVAL_SUPPORT.settling,
   },
 ];
 
@@ -177,7 +178,7 @@ export const MONTHS: JourneyMonth[] = [
     tasks: [
       { strand: 'Pre-departure', text: 'Help opening your blocked account.' },
       { strand: 'Pre-departure', text: 'Visa documents and appointment booking.', source: SOURCES.visaFee },
-      { strand: 'Housing', text: 'Confirming where you will stay, with a fallback if no dorm place comes through.' },
+      { strand: 'Housing', text: 'Confirming where you will stay, or looking for a temporary stay if no longer-term place comes through.' },
     ],
     waits: [
       {
@@ -199,7 +200,8 @@ export const MONTHS: JourneyMonth[] = [
     tasks: [
       { strand: 'Arrival', text: 'City registration (Anmeldung).' },
       { strand: 'Arrival', text: 'Help opening a bank account.' },
-      { strand: 'Arrival', text: 'Introductions to seniors.' },
+      { strand: 'Arrival', text: 'Getting oriented, with introductions to seniors.' },
+      { strand: 'Arrival', text: 'Guidance on part-time work and the rules for international students.' },
     ],
     waits: [
       { strand: 'Local appointments', text: 'Registration offices and banks give appointments on their own schedule.' },
