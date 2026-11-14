@@ -1,4 +1,4 @@
-import { FEE_PROMISE } from './constants.ts';
+import { FEE_PROMISE, GERMAN_LESSONS } from './constants.ts';
 import { PAGE_REGISTRY, type PageKey } from './pageRegistry.ts';
 
 type Sharing = {
@@ -26,6 +26,30 @@ const METADATA = {
     imageTitle: 'German grade check',
     imageSubtitle: 'Conversion and programme requirements',
     imageAlt: 'Germandians: German grade conversion and programme requirements check',
+  },
+  about: {
+    title: 'About us | Germandians',
+    description: 'How Germandians began, and the Indian students living in Germany who guide applicants through steps they took themselves.',
+    image: 'social/about.png',
+    imageTitle: 'About us',
+    imageSubtitle: 'The people behind Germandians',
+    imageAlt: 'Germandians: about the people behind Germandians',
+  },
+  community: {
+    title: 'Community | Germandians',
+    description: 'Where to find the Germandians community on Instagram and WhatsApp, and how it differs from our paid mentoring.',
+    image: 'social/community.png',
+    imageTitle: 'Community',
+    imageSubtitle: 'Where Germandians began',
+    imageAlt: 'Germandians: the community where Germandians began',
+  },
+  learnGerman: {
+    title: 'Learn German | Germandians',
+    description: `${GERMAN_LESSONS.offer} ${GERMAN_LESSONS.charges} ${GERMAN_LESSONS.certificate}`,
+    image: 'social/learn-german.png',
+    imageTitle: 'Learn German',
+    imageSubtitle: 'Explanations in your own language',
+    imageAlt: 'Germandians: learn German with explanations in your own language',
   },
   privacy: {
     title: 'Privacy note | Germandians',

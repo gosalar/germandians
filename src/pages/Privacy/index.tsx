@@ -76,6 +76,11 @@ export default function Privacy() {
               details to us; the summary is shared only when you submit the form or send the email draft.
             </p>
             <p className={styles.text}>
+              If you ask about German lessons, through their form or the “Teach me German” box on the profile-review
+              form, we also receive that interest and any answers you give: the language you’d like explanations in,
+              what you need German for and any German you already have.
+            </p>
+            <p className={styles.text}>
               If you message us on WhatsApp, Instagram or by email, we receive whatever you send there, such as your
               transcripts or test scores.
             </p>
@@ -84,7 +89,8 @@ export default function Privacy() {
           <section className={styles.section}>
             <h2 className={styles.heading}>What we use it for</h2>
             <p className={styles.text}>
-              We use your details only to reply to you and to carry out your profile review. We don't sell them, use
+              We use your details only to reply to you, to carry out your profile review and to answer your questions
+              about German lessons. We don't sell them, use
               them for advertising or add you to a mailing list.
             </p>
             <p className={styles.text}>

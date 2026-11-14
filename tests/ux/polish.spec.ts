@@ -1,18 +1,22 @@
 import { expect, test } from '@playwright/test';
 
+import { PUBLIC_PAGES } from '../../src/utils/publicPages.ts';
+
 test('opening actions and section roles stay distinct', async ({ page }) => {
   await page.goto('/');
   const hero = page.locator('header#top');
   await expect(hero.getByRole('link', { name: 'Free grade check', exact: true })).toHaveAttribute('href', '/check');
   await expect(hero.getByRole('link', { name: 'Get my profile reviewed', exact: true })).toBeVisible();
   await expect(hero.getByRole('link', { name: /Instagram/ })).toHaveCount(0);
+  // The story section tells the origin and leads to About; the community intro carries the audience figure.
+  await expect(page.locator('#story').getByRole('link', { name: 'More about us', exact: true })).toHaveAttribute('href', '/about');
+  await expect(page.locator('#story')).not.toContainText('22,000');
   await expect(page.locator('#community')).toContainText('Community audience on Instagram and WhatsApp');
   await expect(page.locator('#why')).not.toContainText('22,000');
   await expect(page.locator('#why')).not.toContainText('Up to 70');
-  await expect(page.locator('nav').getByRole('link', { name: 'Our story', exact: true })).toHaveAttribute('href', '#community');
 });
 
-for (const route of ['/', '/check', '/privacy', '/missing-page']) {
+for (const route of [...PUBLIC_PAGES.map((page) => page.path), '/missing-page']) {
   test(`skip navigation reaches the single main landmark on ${route}`, async ({ page }) => {
     await page.goto(route);
     await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });

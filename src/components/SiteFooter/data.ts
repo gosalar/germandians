@@ -1,4 +1,4 @@
-import { CONTACT, DESTINATIONS } from '@/utils/constants';
+import { CONTACT, DESTINATIONS, PAGE_LINKS } from '@/utils/constants';
 
 export const FOOTER_COPY = {
   tagline: 'Guidance for Indian students heading to Germany, from students who are already there.',
@@ -11,7 +11,10 @@ export const FOOTER_COPY = {
 export const FOOTER_LINKS = [
   { destination: DESTINATIONS.instagram, label: 'Instagram' },
   { destination: DESTINATIONS.email, label: CONTACT.email },
-  { destination: DESTINATIONS.gradeCheck, label: 'Grade check' },
-  { destination: DESTINATIONS.privacy, label: 'Privacy' },
+  PAGE_LINKS.gradeCheck,
+  PAGE_LINKS.about,
+  PAGE_LINKS.community,
+  PAGE_LINKS.learnGerman,
+  PAGE_LINKS.privacy,
   { destination: DESTINATIONS.backToTop, label: 'Back to top' },
 ] as const;

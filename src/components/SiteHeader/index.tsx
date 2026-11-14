@@ -5,9 +5,10 @@ import { useLocation } from 'react-router';
 import BrandLink from '@/components/Brand';
 import HomeSectionLink from '@/components/HomeSectionLink';
 import { usePageChrome, usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
-import { DESTINATIONS, NAV_CTA, NAV_LINKS, ROUTES, SECTIONS, destinationHref, hashLink } from '@/utils/constants';
+import { DESTINATIONS, NAV_CTA, NAV_MENU, ROUTES, SECTIONS, destinationHref, hashLink } from '@/utils/constants';
 
 import { HEADER_COPY } from './data';
+import NavGroup from './NavGroup';
 import styles from './styles.module.scss';
 
 export default function SiteHeader() {
@@ -31,11 +32,15 @@ export default function SiteHeader() {
 
         <div className={styles.full}>
           <div className={styles.links}>
-            {NAV_LINKS.map((link) => (
-              <HomeSectionLink key={link.href} href={link.href} className={styles.link}>
-                {link.label}
-              </HomeSectionLink>
-            ))}
+            {NAV_MENU.map((entry) =>
+              entry.kind === 'group' ? (
+                <NavGroup key={entry.id} group={entry} />
+              ) : (
+                <HomeSectionLink key={entry.href} href={entry.href} className={styles.link}>
+                  {entry.label}
+                </HomeSectionLink>
+              ),
+            )}
           </div>
           <Button component={HomeSectionLink} href={destinationHref(DESTINATIONS.profileReview)} variant="navy" size="nav">
             {NAV_CTA.label}
@@ -60,11 +65,22 @@ export default function SiteHeader() {
 
       {menuOpen ? (
         <div id="mobile-menu" className={styles.menu}>
-          {NAV_LINKS.map((link) => (
-            <HomeSectionLink key={link.href} href={link.href} onClick={closeMenu} className={styles.menuLink}>
-              {link.label}
-            </HomeSectionLink>
-          ))}
+          {NAV_MENU.map((entry) =>
+            entry.kind === 'group' ? (
+              <div key={entry.id} role="group" aria-labelledby={`${entry.id}-label`} className={styles.menuGroup}>
+                <p id={`${entry.id}-label`} className={styles.menuGroupLabel}>{entry.label}</p>
+                {entry.links.map((link) => (
+                  <HomeSectionLink key={link.href} href={link.href} onClick={closeMenu} className={styles.menuLink}>
+                    {link.label}
+                  </HomeSectionLink>
+                ))}
+              </div>
+            ) : (
+              <HomeSectionLink key={entry.href} href={entry.href} onClick={closeMenu} className={styles.menuLink}>
+                {entry.label}
+              </HomeSectionLink>
+            ),
+          )}
           <Button component={HomeSectionLink} href={destinationHref(DESTINATIONS.profileReview)} onClick={closeMenu}
             variant="menu" size="menu" className={styles.menuCta}>
             {NAV_CTA.label}

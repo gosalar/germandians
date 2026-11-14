@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+import { PUBLIC_PAGES } from '../../src/utils/publicPages.ts';
+
 // A direct load reports the path with or without a trailing slash, depending on the host.
 for (const path of ['/check', '/check/']) {
   test(`header contact links stay on the grade check when ${path} is loaded directly`, async ({ page }) => {
@@ -44,7 +46,7 @@ for (const path of ['/', '/check']) for (const width of [390, 1440]) {
     if (width === 390) {
       if (path === '/') {
         await expect(actionBar).not.toBeVisible();
-        await page.locator('#universities').evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'start' }));
+        await page.locator('#journey').evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'start' }));
       } else {
         await page.locator('#check-score').evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'center' }));
       }
@@ -65,7 +67,7 @@ for (const path of ['/', '/check']) for (const width of [390, 1440]) {
   });
 }
 
-for (const path of ['/', '/check', '/privacy', '/not-a-real-page']) {
+for (const path of [...PUBLIC_PAGES.map((page) => page.path), '/not-a-real-page']) {
   test(`no console errors or hydration warnings ${path}`, async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -113,5 +115,21 @@ test('production privacy text follows the transport and has no placeholders', as
   } else {
     await expect(page.locator('main')).toContainText('Nothing is sent until you press send in your email app');
     await expect(page.locator('main')).not.toContainText('receives the form on our behalf');
+  }
+});
+
+test('the community page offers a WhatsApp join link only when an invitation is configured', async ({ page }, testInfo) => {
+  await page.goto('/community');
+  const main = page.getByRole('main');
+  for (const link of await main.locator('a[target="_blank"]').all()) await expect(link).toHaveAttribute('rel', 'noopener');
+  await expect(main.getByRole('link', { name: 'Follow @germandians on Instagram' })).toHaveAttribute('href', 'https://instagram.com/germandians');
+  if (testInfo.project.name === 'endpoint') {
+    const join = main.getByRole('link', { name: 'Join the WhatsApp community' });
+    await expect(join).toHaveAttribute('href', 'https://chat.whatsapp.com/GermandiansTestInvite');
+    await expect(join).toHaveAttribute('target', '_blank');
+  } else {
+    await expect(main.locator('a[href*="chat.whatsapp.com"], a[href*="whatsapp.com/channel"]')).toHaveCount(0);
+    await expect(main).not.toContainText(/join the whatsapp/i);
+    await expect(main.getByRole('link', { name: 'Ask about the WhatsApp community on Instagram' })).toHaveAttribute('href', 'https://instagram.com/germandians');
   }
 });

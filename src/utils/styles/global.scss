@@ -70,3 +70,8 @@
     --motion-duration: 0s;
   }
 }
+
+// A page with an open dialog doesn't scroll behind it.
+html:has(dialog[open]) {
+  overflow: hidden;
+}

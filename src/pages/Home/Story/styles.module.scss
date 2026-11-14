@@ -11,7 +11,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
   gap: clamp(40px, 6vw, 96px);
-  align-items: center;
+  align-items: start;
 }
 
 .story {
@@ -32,38 +32,13 @@
   color: t.$red;
 }
 
-.stat {
-  font-family: t.$font-display;
-  font-weight: 900;
-  color: t.$navy;
-}
-
-.statNumber {
-  display: block;
-  font-stretch: 72%;
-  font-size: clamp(88px, 10vw, 160px);
-  line-height: 0.8;
-  letter-spacing: -0.035em;
-  white-space: nowrap;
-}
-
 .flagBar {
   display: block;
   height: clamp(14px, 1.6vw, 22px);
-  margin: clamp(14px, 1.6vw, 22px) 0 clamp(16px, 1.8vw, 24px);
   width: 100%;
   max-width: 600px;
   border-radius: 3px;
   background: url('../../../assets/images/flag-painting.jpg') 50% 50% / 160% auto;
-}
-
-.statLabel {
-  display: block;
-  font-stretch: 100%;
-  font-size: clamp(26px, 2.8vw, 40px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
 }
 
 .body {
@@ -75,7 +50,7 @@
   text-wrap: pretty;
 }
 
-.instagram {
+.aboutLink {
   align-self: flex-start;
   font-weight: 700;
   font-size: 17px;

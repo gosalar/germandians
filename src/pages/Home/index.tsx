@@ -1,15 +1,16 @@
 import { useSettleHashScroll } from '@/hooks/useSettleHashScroll';
 
-import Community from './Community';
+import CommunityIntro from './CommunityIntro';
 import Contact from '@/components/Contact';
 import Faq from './Faq';
 import Fees from './Fees';
 import Hero from './Hero';
 import Housing from './Housing';
 import Journey from './Journey';
+import LearnGermanIntro from './LearnGermanIntro';
 import Mentors from './Mentors';
 import Sop from './Sop';
-import Universities from './Universities';
+import Story from './Story';
 
 export default function Home() {
   useSettleHashScroll();
@@ -17,11 +18,12 @@ export default function Home() {
   return (
     <main id="main-content" tabIndex={-1}>
       <Hero />
-      <Community />
+      <Story />
       <Fees />
       <Housing />
       <Journey />
-      <Universities />
+      <CommunityIntro />
+      <LearnGermanIntro />
       <Sop />
       <Mentors />
       <Faq />

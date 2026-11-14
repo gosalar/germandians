@@ -26,11 +26,19 @@ export const FEE_PROMISE = `${FEE_POLICY.amount} ${FEE_POLICY.timing}, ${FEE_POL
 export const COMMUNITY = {
   size: '22,000+',
   label: 'Community audience on Instagram and WhatsApp',
+  /** What the community is, without saying who is in it: the figure counts an audience, not students. */
+  description: 'On Instagram and in our WhatsApp community, people ask us about studying in Germany.',
 } as const;
 
-/** The unpaid guidance that came before the paid service. Stated once, in the opening. */
+/** How Germandians began, as the owners tell it. The home story section and the About page read it. */
+export const ORIGIN_STORY = 'Germandians began as a page where we answered questions from Indian students who wanted to study in Germany. The consultancy grew out of what they kept asking us.';
+
+/** The unpaid guidance that came before the paid service. Stated once on Home, in the opening. */
 export const TRACK_RECORD = {
   sentence: 'We guided up to 70 students over two years, unpaid, before the paid service began.',
+  /** The same fact as a sticker: the figure, then what it counts. */
+  figure: 'Up to 70',
+  short: 'students guided, unpaid, before we charged',
 } as const;
 
 /** Who checks, approves and holds the accounts. Stated in full once, in the commitments table. */
@@ -54,6 +62,32 @@ export const CONTACT = {
   instagramHandle: '@germandians',
   instagramUrl: 'https://instagram.com/germandians',
   whatsappGreeting: "Hi Germandians, I'd like a profile review.",
+} as const;
+
+/**
+ * German lessons, as the owners describe them: help learning German, explained in the student's native
+ * language. Separate from the admissions service and its fee promise, with its own enquiry form on the
+ * Learn German page. The profile-review form can only note an interest ("Teach me German") and links to
+ * that form. The home intro, the page, its form and the tick box read these sentences, and each shows the
+ * charge and certificate terms beside its action. The languages taught are not published until the
+ * owners confirm them.
+ */
+export const GERMAN_LESSONS = {
+  offer: 'We can help you learn German, with explanations in your native language.',
+  separate: 'German lessons are separate from our admissions service.',
+  languages: 'Ask us whether we can teach in your language.',
+  charges: 'Additional charges may apply.',
+  certificate: 'We do not provide a certificate for these lessons.',
+  enquiry: {
+    /** The email subject when the enquiry goes as a draft. */
+    subject: 'German lessons',
+  },
+  /** The tick box in the profile-review form, and its link to the German lessons form. */
+  interest: {
+    label: 'Teach me German',
+    more: 'Know more',
+    moreLabel: 'Know more about German lessons (opens in a new tab)',
+  },
 } as const;
 
 /**
@@ -81,23 +115,13 @@ export type IntakeStatus = (typeof INTAKE_STATUSES)[number];
 
 type SectionId = (typeof SECTIONS)[keyof typeof SECTIONS];
 
-/** A later menu may group destinations. Nothing renders a group yet. */
-export type NavigationGroup = {
-  kind: 'group';
-  label: string;
-  items: readonly NavigationDestination[];
-};
-
 export type NavigationDestination =
   | { kind: 'page'; page: keyof typeof ROUTES }
   | { kind: 'section'; section: SectionId }
   | { kind: 'external'; href: string; target?: '_blank'; rel?: 'noopener' }
-  | { kind: 'scroll-top' }
-  | NavigationGroup;
+  | { kind: 'scroll-top' };
 
-type PlacedDestination = Exclude<NavigationDestination, NavigationGroup>;
-
-export function destinationHref(destination: PlacedDestination): string {
+export function destinationHref(destination: NavigationDestination): string {
   switch (destination.kind) {
     case 'page':
       return ROUTES[destination.page];
@@ -112,30 +136,53 @@ export function destinationHref(destination: PlacedDestination): string {
 
 export const DESTINATIONS = {
   gradeCheck: { kind: 'page', page: 'check' },
+  about: { kind: 'page', page: 'about' },
+  community: { kind: 'page', page: 'community' },
+  learnGerman: { kind: 'page', page: 'learnGerman' },
   privacy: { kind: 'page', page: 'privacy' },
-  ourStory: { kind: 'section', section: SECTIONS.community },
   fees: { kind: 'section', section: SECTIONS.fees },
   journey: { kind: 'section', section: SECTIONS.journey },
-  universities: { kind: 'section', section: SECTIONS.universities },
   faq: { kind: 'section', section: SECTIONS.faq },
   contact: { kind: 'section', section: SECTIONS.contact },
   profileReview: { kind: 'section', section: NAV_CTA.id },
   instagram: { kind: 'external', href: CONTACT.instagramUrl, target: '_blank' as const, rel: 'noopener' as const },
   email: { kind: 'external', href: `mailto:${CONTACT.email}`, target: undefined, rel: undefined },
   backToTop: { kind: 'scroll-top' },
-} as const satisfies Record<string, PlacedDestination>;
+} as const satisfies Record<string, NavigationDestination>;
 
-const NAV_ITEMS = [
-  { destination: DESTINATIONS.gradeCheck, label: 'Grade check' },
-  { destination: DESTINATIONS.ourStory, label: 'Our story' },
+/** A destination with the words that link to it. The header, the phone menu and the footer share these. */
+export type NavigationLink = { destination: NavigationDestination; label: string };
+
+/** Related links behind one disclosure button in the header, and under one label in the phone menu. */
+export type NavigationGroup = { kind: 'group'; id: string; label: string; links: readonly NavigationLink[] };
+
+export const PAGE_LINKS = {
+  gradeCheck: { destination: DESTINATIONS.gradeCheck, label: 'Grade check' },
+  about: { destination: DESTINATIONS.about, label: 'About us' },
+  community: { destination: DESTINATIONS.community, label: 'Community' },
+  learnGerman: { destination: DESTINATIONS.learnGerman, label: 'Learn German' },
+  privacy: { destination: DESTINATIONS.privacy, label: 'Privacy' },
+} as const satisfies Record<string, NavigationLink>;
+
+/**
+ * Header order. The row has no room for another top-level link at 1100px, the narrowest inline
+ * layout, so the two pages about the people and the community share the About group.
+ */
+const NAV_ENTRIES: readonly (NavigationLink | NavigationGroup)[] = [
+  PAGE_LINKS.gradeCheck,
+  { kind: 'group', id: 'nav-about', label: 'About', links: [PAGE_LINKS.about, PAGE_LINKS.community] },
+  PAGE_LINKS.learnGerman,
   { destination: DESTINATIONS.fees, label: 'Fees' },
   { destination: DESTINATIONS.journey, label: 'Journey' },
-  { destination: DESTINATIONS.universities, label: 'Public vs private' },
   { destination: DESTINATIONS.faq, label: 'FAQ' },
   { destination: DESTINATIONS.contact, label: 'Contact' },
-] as const;
+];
 
-export const NAV_LINKS = NAV_ITEMS.map((item) => ({
-  href: destinationHref(item.destination),
-  label: item.label,
-}));
+type NavMenuLink = { kind: 'link'; href: string; label: string };
+export type NavMenuEntry = NavMenuLink | { kind: 'group'; id: string; label: string; links: NavMenuLink[] };
+
+const toMenuLink = (link: NavigationLink): NavMenuLink => ({ kind: 'link', href: destinationHref(link.destination), label: link.label });
+
+export const NAV_MENU: readonly NavMenuEntry[] = NAV_ENTRIES.map((entry) =>
+  'kind' in entry ? { kind: 'group', id: entry.id, label: entry.label, links: entry.links.map(toMenuLink) } : toMenuLink(entry),
+);

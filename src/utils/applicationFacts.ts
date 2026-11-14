@@ -91,7 +91,7 @@ export const EXTERNAL_COSTS: { group: string; items: ExternalCost[] }[] = [
   {
     group: 'Tuition',
     items: [
-      { label: 'Public and private programmes', detail: TUITION.public, source: SOURCES.daad },
+      { label: 'Public and private programmes', detail: `${TUITION.public} ${TUITION.private}`, source: SOURCES.daad },
       { label: 'TUM example', amount: '€4,000 or €6,000', detail: 'Usual master’s tuition per semester for non-EU/EEA students liable for fees, rising to €4,600 or €6,800 from winter semester 2027/28. Programme, exemption and waiver rules apply.', source: SOURCES.tum },
     ],
   },

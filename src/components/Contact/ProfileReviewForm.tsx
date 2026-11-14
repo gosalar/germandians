@@ -1,10 +1,11 @@
 import { Button, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { type ReactNode } from 'react';
+import { Link } from 'react-router';
 
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
 import { buildEmailDraft, buildEmailDraftUrl } from '@/services/profileReview';
-import { SECTIONS } from '@/utils/constants';
+import { GERMAN_LESSONS, ROUTES, SECTIONS } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 import {
@@ -20,7 +21,7 @@ import { useProfileReviewSubmission, type ProfileReviewValues } from './useProfi
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const INITIAL_VALUES: ProfileReviewValues = { name: '', email: '', wa: '', consent: false };
+const INITIAL_VALUES: ProfileReviewValues = { name: '', email: '', wa: '', german: false, consent: false };
 
 const VALIDATE = {
   name: (value: string) => (value.trim() ? null : FORM_COPY.nameError),
@@ -68,6 +69,7 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
   };
 
   const { error: consentError, ...consentProps } = form.getInputProps('consent', { type: 'checkbox' });
+  const wantsGerman = Boolean(form.values.german);
 
   return (
     <form
@@ -130,6 +132,33 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
         {...form.getInputProps('wa')}
       />
 
+      {/* An interest in German lessons travels with the review; the lessons enquiry has its own form. */}
+      <div className={styles.interest}>
+        <label htmlFor="f-german" className={styles.interestChoice}>
+          <input
+            id="f-german"
+            type="checkbox"
+            disabled={locked}
+            className={styles.checkbox}
+            {...form.getInputProps('german', { type: 'checkbox' })}
+          />
+          <span className={styles.interestLabel}>{GERMAN_LESSONS.interest.label}</span>
+        </label>
+        <Link
+          to={`${ROUTES.learnGerman}#${SECTIONS.germanLessonsForm}`}
+          target="_blank"
+          rel="noopener"
+          aria-label={GERMAN_LESSONS.interest.moreLabel}
+          className={styles.interestMore}
+        >
+          {GERMAN_LESSONS.interest.more}
+          <span aria-hidden="true"> →</span>
+        </Link>
+        <p className={styles.interestTerms}>
+          {GERMAN_LESSONS.charges} {GERMAN_LESSONS.certificate}
+        </p>
+      </div>
+
       <div className={styles.hint}>
         <div className={styles.hintTitle}>{FORM_COPY.hintTitle}</div>
         <div>{FORM_COPY.hintReply}</div>
@@ -152,7 +181,7 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
             {...consentProps}
           />
           <span>
-            {consentSentence(Boolean(displayedSnapshot))}
+            {consentSentence(Boolean(displayedSnapshot), wantsGerman)}
           </span>
         </label>
         {consentError ? <div id="f-consent-error" className={styles.fieldError}>{consentError}</div> : null}

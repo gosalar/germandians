@@ -1,0 +1,530 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.container {
+  @include m.container;
+}
+
+.sectionTitle {
+  @include m.display-heading(clamp(40px, 5.6vw, 84px));
+}
+
+// Header: title and introduction, with the audience badge beside them from 1024px.
+.top {
+  padding: clamp(48px, 8vw, 104px) clamp(20px, 5vw, 72px) clamp(64px, 9vw, 120px);
+  overflow: hidden;
+}
+
+.topGrid {
+  display: grid;
+  gap: clamp(40px, 6vw, 56px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    column-gap: clamp(48px, 6vw, 96px);
+    align-items: center;
+  }
+}
+
+.heading {
+  min-width: 0;
+  max-width: 720px;
+}
+
+.audience {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+// The figure in a round yellow badge, with chat bubbles bobbing around it.
+.badgeWrap {
+  position: relative;
+  padding: 26px;
+}
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: clamp(250px, 28vw, 360px);
+  aspect-ratio: 1;
+  margin: 0;
+  padding: 28px;
+  border: 4px solid t.$navy;
+  border-radius: 50%;
+  background: t.$yellow;
+  color: t.$navy;
+  text-align: center;
+  transform: rotate(-6deg);
+  @include m.pop-shadow(8px);
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: badge-pop 0.7s cubic-bezier(0.2, 1.4, 0.4, 1) 0.15s both;
+  }
+}
+
+@keyframes badge-pop {
+  from {
+    opacity: 0;
+    transform: rotate(-20deg) scale(0.6);
+  }
+}
+
+.statNumber {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 72%;
+  font-size: clamp(58px, 6.4vw, 92px);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.statLabel {
+  max-width: 11em;
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-stretch: 90%;
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.bubble {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 3px solid t.$navy;
+  border-radius: 50% 50% 50% 8px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 32px;
+  line-height: 1;
+  @include m.pop-shadow(3px);
+
+  &[data-bubble='question'] {
+    top: 0;
+    left: 0;
+    background: t.$navy;
+    color: t.$yellow;
+    @include m.float(0s);
+  }
+
+  &[data-bubble='answer'] {
+    right: 0;
+    bottom: 34px;
+    border-radius: 50% 50% 8px 50%;
+    background: t.$red;
+    color: t.$white;
+    @include m.float(1.2s);
+  }
+
+  &[data-bubble='heart'] {
+    top: 18px;
+    right: 6px;
+    width: 46px;
+    height: 46px;
+    background: t.$white;
+    @include m.float(2.4s);
+
+    &::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background: t.$red;
+      clip-path: path('M9 17 L1.6 9.4 A4.6 4.6 0 0 1 9 3.4 A4.6 4.6 0 0 1 16.4 9.4 Z');
+    }
+  }
+}
+
+.audienceNote {
+  margin: 0;
+  max-width: 40ch;
+  font-size: 17px;
+  line-height: 1.5;
+  color: t.$ink-muted;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+// Where to find it: each channel as a phone screen.
+.channelsSection {
+  background: t.$sand;
+  @include m.section-padding;
+}
+
+.channels {
+  margin: clamp(36px, 4vw, 56px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 32px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 40px);
+  }
+}
+
+.channel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 3px solid t.$navy;
+  border-radius: 28px;
+  background: t.$white;
+  overflow: hidden;
+  @include m.pop-shadow(8px);
+  @include m.reveal-on-scroll;
+}
+
+.screenBar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 36px 24px 22px;
+  border-bottom: 3px solid t.$navy;
+
+  .channel[data-tone='instagram'] & {
+    background: linear-gradient(120deg, t.$yellow 0%, t.$orange 48%, t.$red 100%);
+    color: t.$navy;
+  }
+
+  .channel[data-tone='whatsapp'] & {
+    background: t.$green;
+    color: t.$white;
+  }
+}
+
+.notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 64px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(t.$navy, 0.35);
+  transform: translateX(-50%);
+}
+
+.glyph {
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+
+.platform {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.channelBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px clamp(20px, 2.4vw, 28px) 28px;
+}
+
+.channelTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(26px, 2.6vw, 36px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: t.$navy;
+  overflow-wrap: break-word;
+}
+
+.channelText {
+  @include m.body-copy;
+  color: t.$ink;
+}
+
+.channelAction {
+  align-self: flex-start;
+  max-width: 100%;
+  margin-top: auto;
+}
+
+// How it shaped Germandians: three speech bubbles.
+.originSection {
+  background: t.$yellow;
+  @include m.section-padding;
+}
+
+.originHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 40px;
+}
+
+.originLede {
+  @include m.page-lead;
+  max-width: 22ch;
+  color: t.$navy;
+}
+
+.flow {
+  margin: clamp(56px, 6vw, 80px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 52px;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+}
+
+.flowStep {
+  position: relative;
+  padding: 50px 24px 28px;
+  border: 3px solid t.$navy;
+  border-radius: 28px 28px 28px 6px;
+  background: t.$white;
+  color: t.$navy;
+  @include m.pop-shadow(6px);
+  @include m.reveal-on-scroll;
+
+  &[data-step='answered'] {
+    border-radius: 28px 28px 6px 28px;
+    background: t.$navy;
+    color: t.$white;
+  }
+
+  &[data-step='mentoring'] {
+    background: t.$red;
+    color: t.$white;
+  }
+}
+
+.flowMark {
+  position: absolute;
+  top: -30px;
+  left: 22px;
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border: 3px solid t.$navy;
+  border-radius: 50%;
+  background: t.$navy;
+  color: t.$yellow;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 1;
+
+  .flowStep[data-step='answered'] & {
+    background: t.$yellow;
+    color: t.$navy;
+  }
+
+  .flowStep[data-step='mentoring'] & {
+    background: t.$white;
+    color: t.$red;
+  }
+}
+
+.flowTitle {
+  margin: 0 0 10px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(26px, 2.4vw, 34px);
+  line-height: 1.02;
+  color: inherit;
+}
+
+.flowText {
+  @include m.body-copy;
+  color: inherit;
+}
+
+.originLink {
+  display: inline-block;
+  margin-top: clamp(32px, 4vw, 48px);
+  padding: 6px 0;
+  font-weight: 800;
+  font-size: 18px;
+  color: t.$navy;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+  @include m.touch-area;
+
+  &:hover {
+    color: t.$red;
+  }
+}
+
+// The community and the paid mentoring, as two tickets.
+.mentoringSection {
+  background: t.$navy;
+  @include m.section-padding;
+}
+
+.mentoringTitle {
+  @include m.display-heading(clamp(40px, 5.6vw, 84px));
+  color: t.$yellow;
+}
+
+.tickets {
+  margin-top: clamp(36px, 4vw, 56px);
+  display: grid;
+  gap: 32px;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    align-items: start;
+    gap: 40px;
+  }
+}
+
+.ticket {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 28px clamp(24px, 3vw, 40px) 32px;
+  border-radius: 18px;
+  color: t.$navy;
+  @include m.reveal-on-scroll;
+
+  // Punched notches on both edges, in the section's colour.
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 64px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: t.$navy;
+  }
+
+  &::before {
+    left: -14px;
+  }
+
+  &::after {
+    right: -14px;
+  }
+
+  &[data-ticket='community'] {
+    background: t.$cream;
+    transform: rotate(-1.2deg);
+  }
+
+  &[data-ticket='mentoring'] {
+    background: t.$yellow;
+  }
+}
+
+.ticketKicker {
+  margin: 0 0 20px;
+  padding-bottom: 18px;
+  border-bottom: 2px dashed rgba(t.$navy, 0.45);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
+  @include m.label-font(800, 18px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ticketKickerEn {
+  @include m.label-font(500, 15px);
+  letter-spacing: 0;
+  text-transform: none;
+  color: t.$ink-muted;
+}
+
+.ticketTitle {
+  margin: 0 0 12px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.02;
+  color: t.$navy;
+}
+
+.ticketText {
+  @include m.body-copy;
+  color: t.$ink-strong;
+}
+
+.ticketStamp {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 22px;
+  padding: 6px 14px;
+  border: 3px solid t.$green;
+  border-radius: 6px;
+  color: t.$green;
+  font-family: t.$font-label;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.05;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+
+  > span:last-child {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+}
+
+.facts {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  li {
+    display: flex;
+    gap: 12px;
+    font-size: 17px;
+    line-height: 1.45;
+    color: t.$ink-strong;
+  }
+}
+
+.factBullet {
+  @include m.square-bullet(10px, 2px, 7px);
+  background: t.$navy;
+}
+
+.ticketActions {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

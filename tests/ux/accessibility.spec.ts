@@ -1,7 +1,11 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-for (const width of [390, 1440]) for (const route of ['/', '/check', '/privacy', '/missing-page']) {
+import { PUBLIC_PAGES } from '../../src/utils/publicPages.ts';
+
+const ROUTES = [...PUBLIC_PAGES.map((page) => page.path), '/missing-page'];
+
+for (const width of [390, 1440]) for (const route of ROUTES) {
   test(`accessibility audit ${route} at ${width}`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(route);
@@ -34,7 +38,7 @@ for (const route of ['/', '/check']) {
   });
 }
 
-for (const width of [390, 1440]) for (const route of ['/', '/check', '/privacy', '/missing-page']) {
+for (const width of [390, 1440]) for (const route of ROUTES) {
   test(`keyboard focus is visible and unobscured ${route} at ${width}`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
     await page.goto(route);

@@ -1,11 +1,14 @@
-/** In-page anchors on the home page. */
+/** In-page anchors. All are on the home page except the German lessons form, on Learn German. */
 export const SECTIONS = {
   top: 'top',
-  community: 'community',
+  story: 'story',
   fees: 'fees',
   housing: 'housing',
   journey: 'journey',
-  universities: 'universities',
+  community: 'community',
+  learnGerman: 'learn-german',
+  /** The German lessons enquiry form, on the Learn German page. */
+  germanLessonsForm: 'german-lessons-form',
   faq: 'faq',
   contact: 'contact',
   contactForm: 'contact-form',

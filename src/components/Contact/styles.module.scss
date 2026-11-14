@@ -227,6 +227,51 @@
   color: t.$navy;
 }
 
+// "Teach me German": a tick box, a link to the lessons form, and the lesson terms beside them.
+.interest {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 18px;
+  padding: 12px 14px;
+  border: 1.5px dashed t.$navy;
+  border-radius: 6px;
+  background: t.$white;
+}
+
+.interestChoice {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.interestLabel {
+  font-weight: 800;
+  font-size: 17px;
+  color: t.$navy;
+}
+
+.interestMore {
+  padding: 4px 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: t.$navy;
+  text-decoration: underline;
+  text-decoration-color: t.$yellow;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  @include m.touch-area;
+}
+
+.interestTerms {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: t.$ink-muted;
+}
+
 .consent {
   display: flex;
   gap: 12px;

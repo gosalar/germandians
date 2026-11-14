@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+import { PUBLIC_PAGES } from '../../src/utils/publicPages.ts';
+
 const TRACK_RECORD = 'We guided up to 70 students over two years, unpaid, before the paid service began.';
 const AUDIENCE_LABEL = 'Community audience on Instagram and WhatsApp';
 const APPLICANT_CONTROL = 'You check the facts, approve each submission and keep control of your own accounts, so the confirmations come to you.';
@@ -37,8 +39,8 @@ const REMOVED_CLAIMS = [
 /** The team's size is held for the capacity calculation, not published. Other uses of "six" are fine. */
 const TEAM_COUNT = /\b(six|6)\s+(student\s+)?(mentors|students living in Germany)\b|\bteam of (six|6)\b|\ball (six|6) of us\b/i;
 
-test('unsupported claims are gone from the home page and the grade check', async ({ page }) => {
-  for (const path of ['/', '/check']) {
+test('unsupported claims and the team size are absent from every site page', async ({ page }) => {
+  for (const path of PUBLIC_PAGES.filter((entry) => entry.shell === 'site').map((entry) => entry.path)) {
     await page.goto(path);
     const text = await page.locator('body').innerText();
     for (const claim of REMOVED_CLAIMS) expect(text, `${path} still says "${claim}"`).not.toContain(claim);
@@ -62,18 +64,21 @@ test('unsupported claims are gone from the home page and the grade check', async
 test('audience size, direct guidance and intake places are told apart', async ({ page }) => {
   await page.goto('/');
   // The audience figure carries one label wherever it appears.
-  for (const id of ['#community']) {
-    await expect(page.locator(id)).toContainText('22,000+');
-    await expect(page.locator(id)).toContainText(AUDIENCE_LABEL);
-  }
-  await expect(page.locator('#top')).not.toContainText('22,000');
+  await expect(page.locator('#community')).toContainText('22,000+');
+  await expect(page.locator('#community')).toContainText(AUDIENCE_LABEL);
+  for (const id of ['#top', '#story']) await expect(page.locator(id)).not.toContainText('22,000');
   // Experience stays early; the mentor section focuses on delivery and capacity.
   await expect(page.locator('#top')).toContainText(TRACK_RECORD);
   await expect(page.getByText(TRACK_RECORD)).toHaveCount(1);
-  await expect(page.locator('#community')).toContainText('The consultancy grew out of what they kept asking us.');
+  await expect(page.locator('#story')).toContainText('The consultancy grew out of what they kept asking us.');
   await expect(page.locator('#why')).not.toContainText('Up to 70');
   await expect(page.locator('#why')).toContainText('30 places for Winter 2027/28');
-  await expect(page.locator('#community')).toContainText('what the questions from our community have taught us since');
+  await expect(page.locator('#story')).toContainText('what the questions from our community have taught us since');
+  // The community page shows the figure with the same label, and never as people guided.
+  await page.goto('/community');
+  await expect(page.locator('main')).toContainText('22,000+');
+  await expect(page.locator('main')).toContainText(AUDIENCE_LABEL);
+  await expect(page.locator('main')).not.toContainText(/students guided|members joined|clients/i);
 });
 
 test('the real case and the invented example are each labelled, without a claimed cause', async ({ page }) => {
@@ -130,7 +135,6 @@ test('the receipt, journey and FAQ describe drafting and approval the same way',
   await expect(page.locator('#journey')).toContainText('help you draft and revise your SOP');
   await page.getByRole('button', { name: 'Month 4', exact: true }).click();
   await expect(page.getByTestId('month-tasks')).toContainText('once you have approved each one');
-  await expect(page.locator('#universities')).toContainText('We only shortlist accredited, reputable ones.');
 });
 
 test('housing help names temporary stays with its availability limit beside the offer', async ({ page }) => {

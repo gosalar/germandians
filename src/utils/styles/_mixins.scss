@@ -102,3 +102,65 @@
   margin-top: $top;
   border-radius: $radius;
 }
+
+// Playful pieces for the About, Community and Learn German pages. Motion only runs when the visitor
+// allows it; without it every piece shows in its finished state.
+
+// A hard offset shadow, like a sticker or a printed card lifted off the page.
+@mixin pop-shadow($offset: 6px, $colour: t.$navy) {
+  box-shadow: $offset $offset 0 $colour;
+}
+
+// A small label printed on a sticker: thick outline, rounded, slightly tilted.
+@mixin sticker($bg: t.$yellow, $ink: t.$navy, $tilt: -2deg) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 2.5px solid t.$navy;
+  border-radius: 999px;
+  background: $bg;
+  color: $ink;
+  font-family: t.$font-label;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.15;
+  transform: rotate($tilt);
+  @include pop-shadow(3px);
+}
+
+// Rises into place as it scrolls into view, where the browser supports scroll-driven animation.
+@mixin reveal-on-scroll($distance: 28px) {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: fun-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+
+  // Declared beside each use: CSS modules scope keyframe names to the module that names them.
+  @at-root {
+    @keyframes fun-reveal {
+      from {
+        opacity: 0;
+        translate: 0 $distance;
+      }
+    }
+  }
+}
+
+// A slow bob for decorative pieces. $delay staggers neighbours.
+@mixin float($delay: 0s, $distance: 8px) {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: fun-float 5s ease-in-out $delay infinite;
+  }
+
+  @at-root {
+    @keyframes fun-float {
+      50% {
+        translate: 0 (-$distance);
+      }
+    }
+  }
+}

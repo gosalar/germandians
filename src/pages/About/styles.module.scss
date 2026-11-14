@@ -1,0 +1,1058 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+$record-steps: 5;
+
+.container {
+  @include m.container;
+}
+
+// Title and introduction beside the record when there is room for both; stacked below that.
+.top {
+  padding: clamp(32px, 5vw, 72px) clamp(20px, 5vw, 72px) clamp(64px, 8vw, 112px);
+}
+
+.topGrid {
+  @include m.container;
+  display: grid;
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+// The record: a German form, filled in and stamped.
+.record {
+  min-width: 0;
+  width: 100%;
+  max-width: 640px;
+  background: t.$form;
+  color: t.$navy;
+  border-radius: 6px;
+  padding: clamp(20px, 3.4vw, 40px);
+  box-shadow:
+    inset 0 0 0 1.5px t.$navy,
+    0 32px 64px -32px rgba(16, 24, 46, 0.45);
+  display: flex;
+  flex-direction: column;
+
+  @include m.from(t.$bp-content-columns) {
+    transform: rotate(0.8deg);
+  }
+}
+
+.recordHead {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.recordTitle {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  hyphens: auto;
+}
+
+.recordSubtitle {
+  font-size: 16px;
+  color: t.$ink-muted;
+}
+
+.recordRule {
+  height: 3px;
+  margin: 18px 0 0;
+  background: t.$navy;
+}
+
+.recordColumns {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid t.$navy;
+  @include m.label-font(600, 14px);
+  color: t.$ink-muted;
+}
+
+.recordSteps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recordStep {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(12px, 1.6vw, 18px);
+  padding: clamp(12px, 1.4vw, 16px) 0;
+  border-bottom: 1px solid t.$hairline;
+}
+
+.stepNumber {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  background: t.$navy;
+  color: t.$form;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.stepText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+// The entries, as if written into the form.
+.stepTerm {
+  @include m.label-font(700, clamp(20px, 2vw, 25px));
+  line-height: 1.15;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.stepTranslation {
+  font-size: 16px;
+  line-height: 1.35;
+  color: t.$ink-muted;
+}
+
+.stepBox {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: t.$white;
+  box-shadow: inset 0 0 0 2px t.$navy;
+}
+
+.tick {
+  width: 24px;
+  height: 24px;
+  overflow: visible;
+}
+
+.tickMark {
+  fill: none;
+  stroke: t.$green;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.recordFoot {
+  display: flex;
+  justify-content: flex-end;
+  padding: clamp(20px, 2.4vw, 28px) clamp(4px, 1.6vw, 16px) 4px 0;
+}
+
+.stamp {
+  border: 4px solid t.$green;
+  border-radius: 8px;
+  padding: 8px 18px 6px;
+  color: t.$green;
+  text-align: center;
+  transform: rotate(-7deg);
+  opacity: 0.95;
+}
+
+.stampTitle {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.stampNote {
+  margin-top: 4px;
+  @include m.label-font(700, 16px);
+}
+
+// One sequence on load: each box is ticked in turn, then the stamp comes down.
+// Without motion the record is simply shown finished.
+@media (prefers-reduced-motion: no-preference) {
+  .tickMark {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: tick-draw 0.26s ease-out forwards;
+  }
+
+  @for $i from 1 through $record-steps {
+    .recordStep:nth-child(#{$i}) .tickMark {
+      animation-delay: 0.3s + 0.16s * ($i - 1);
+    }
+  }
+
+  .stamp {
+    animation: stamp-down 0.34s cubic-bezier(0.2, 1.6, 0.4, 1) (0.3s + 0.16s * $record-steps + 0.15s) both;
+  }
+}
+
+@keyframes tick-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes stamp-down {
+  from {
+    opacity: 0;
+    transform: rotate(-7deg) scale(1.9);
+  }
+
+  to {
+    opacity: 0.95;
+    transform: rotate(-7deg) scale(1);
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+// "Hallo!" in a speech bubble above the page title.
+.greeting {
+  margin: 0 0 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 16px;
+}
+
+.greetingBubble {
+  position: relative;
+  display: inline-block;
+  padding: 10px 18px;
+  border: 2.5px solid t.$navy;
+  border-radius: 18px;
+  background: t.$yellow;
+  color: t.$navy;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.1;
+  transform: rotate(-2deg);
+  @include m.pop-shadow(4px);
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 24px;
+    bottom: -10px;
+    width: 16px;
+    height: 16px;
+    background: t.$yellow;
+    border-right: 2.5px solid t.$navy;
+    border-bottom: 2.5px solid t.$navy;
+    transform: rotate(45deg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: greeting-wave 0.9s ease-out 0.2s both;
+  }
+}
+
+@keyframes greeting-wave {
+  0% {
+    opacity: 0;
+    transform: rotate(-12deg) scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(3deg) scale(1.06);
+  }
+  100% {
+    transform: rotate(-2deg) scale(1);
+  }
+}
+
+.greetingEnglish {
+  @include m.label-font(600, 16px);
+  color: t.$ink-muted;
+}
+
+// Facts as stickers under the introduction.
+.stickers {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 12px;
+}
+
+.sticker {
+  @include m.sticker(t.$yellow, t.$navy, -2deg);
+  max-width: 100%;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+
+  strong {
+    font-family: t.$font-display;
+    font-weight: 900;
+    font-size: 18px;
+  }
+
+  &[data-sticker='audience'] {
+    background: t.$white;
+    transform: rotate(1.5deg);
+  }
+
+  &[data-sticker='track-record'] {
+    background: t.$status-green-bg;
+    transform: rotate(-1deg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: rotate(0deg) scale(1.04);
+    }
+  }
+}
+
+// The company's story as three numbered cards.
+.story {
+  background: t.$sand;
+  @include m.section-padding;
+}
+
+.storyTitle {
+  @include m.display-heading(clamp(40px, 5.6vw, 84px));
+}
+
+.milestones {
+  margin: clamp(48px, 5vw, 72px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 48px;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+}
+
+.milestone {
+  position: relative;
+  padding: 40px 24px 26px;
+  border: 2px solid t.$navy;
+  border-radius: 18px;
+  background: t.$paper;
+  @include m.pop-shadow(6px);
+  @include m.reveal-on-scroll;
+}
+
+.milestoneNumber {
+  position: absolute;
+  top: -26px;
+  left: 22px;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 3px solid t.$navy;
+  border-radius: 50%;
+  background: t.$yellow;
+  color: t.$navy;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 24px;
+  @include m.pop-shadow(3px);
+
+  .milestone:nth-child(2) & {
+    background: t.$red;
+    color: t.$white;
+  }
+
+  .milestone:nth-child(3) & {
+    background: t.$navy;
+    color: t.$yellow;
+  }
+}
+
+.milestoneWhen {
+  margin: 0 0 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  @include m.label-font(700, 16px);
+  color: t.$red;
+}
+
+.milestoneWhenEn {
+  font-weight: 500;
+  color: t.$ink-muted;
+}
+
+.milestoneTitle {
+  margin: 0 0 12px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(24px, 2.2vw, 30px);
+  line-height: 1.04;
+  color: t.$navy;
+  text-wrap: balance;
+}
+
+.milestoneText {
+  @include m.body-copy;
+  color: t.$ink;
+}
+
+// The team: polaroids pinned to a navy board.
+.team {
+  @include m.section-padding;
+  background-color: t.$navy;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+.teamHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 40px;
+}
+
+.teamTitle {
+  @include m.display-heading(clamp(40px, 5.6vw, 84px));
+  color: t.$yellow;
+}
+
+.teamLede {
+  @include m.body-copy;
+  max-width: 36ch;
+  color: t.$mist-light;
+}
+
+.board {
+  margin: clamp(44px, 5vw, 72px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 52px) clamp(14px, 3vw, 40px);
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.member {
+  --tilt: -2deg;
+  min-width: 0;
+
+  &:nth-child(even) {
+    --tilt: 1.6deg;
+  }
+
+  &:nth-child(3n) {
+    --tilt: -0.8deg;
+  }
+}
+
+.polaroid {
+  appearance: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: clamp(8px, 1.2vw, 14px) clamp(8px, 1.2vw, 14px) clamp(12px, 1.6vw, 20px);
+  border: 0;
+  border-radius: 4px;
+  background: t.$white;
+  color: t.$navy;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transform: rotate(var(--tilt));
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: rotate(0deg) translateY(-6px) scale(1.02);
+    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.45);
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 5px;
+  }
+}
+
+.tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 40%;
+  height: 24px;
+  background: rgba(t.$yellow, 0.78);
+  transform: translateX(-50%) rotate(-3deg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+
+  .member:nth-child(even) & {
+    transform: translateX(-50%) rotate(4deg);
+  }
+}
+
+.polaroidPhoto {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: t.$sand;
+
+  > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.portraitArt {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// Stand-in animals blink when their card is hovered or focused.
+.eye {
+  transform-box: fill-box;
+  transform-origin: center;
+
+  @media (prefers-reduced-motion: no-preference) {
+    .polaroid:hover &,
+    .polaroid:focus-visible & {
+      animation: blink 0.45s ease-in-out 0.1s 2;
+    }
+  }
+}
+
+@keyframes blink {
+  50% {
+    transform: scaleY(0.1);
+  }
+}
+
+.polaroidCaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+.memberName {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(18px, 1.9vw, 26px);
+  line-height: 1.05;
+  color: t.$navy;
+  overflow-wrap: break-word;
+}
+
+.memberRole {
+  @include m.label-font(700, 15px);
+  color: t.$red;
+}
+
+.animalTag {
+  align-self: flex-start;
+  margin-top: 10px;
+  padding: 3px 10px;
+  border: 1.5px solid t.$navy;
+  border-radius: 999px;
+  background: t.$note;
+  @include m.label-font(600, 14px);
+  color: t.$navy;
+}
+
+// The profile sheet in its dialog. The dialog's right and bottom padding leave room for the sheet's
+// offset shadow; a click there counts as outside the sheet.
+.dialog {
+  width: min(900px, calc(100% - 24px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0 10px 10px 0;
+  border: 0;
+  background: transparent;
+  color: t.$navy;
+  overflow: auto;
+  overscroll-behavior: contain;
+
+  &::backdrop {
+    background: rgba(t.$navy, 0.72);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &[open] {
+      animation: sheet-in 0.28s ease-out;
+    }
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+}
+
+.sheet {
+  border-radius: 10px;
+  background: t.$form;
+  box-shadow:
+    inset 0 0 0 2px t.$navy,
+    10px 10px 0 t.$red;
+  overflow: hidden;
+}
+
+.sheetStrip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px 10px 20px;
+  background: t.$yellow;
+  border-bottom: 2px solid t.$navy;
+}
+
+.sheetStripTitle {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1.1;
+  color: t.$navy;
+}
+
+.sheetStripNote {
+  @include m.label-font(600, 15px);
+  color: t.$ink-muted;
+}
+
+.sheetClose {
+  appearance: none;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 2px solid t.$navy;
+  border-radius: 999px;
+  background: transparent;
+  color: t.$navy;
+  @include m.navigation-font;
+  font-size: 15px;
+  cursor: pointer;
+
+  &:hover {
+    background: t.$navy;
+    color: t.$yellow;
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$navy;
+    outline-offset: 2px;
+  }
+}
+
+.sheetCloseCross {
+  position: relative;
+  width: 12px;
+  height: 12px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 2px;
+    height: 100%;
+    background: currentColor;
+    transform: rotate(45deg);
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+}
+
+.sheetBody {
+  display: grid;
+  gap: 24px;
+  padding: clamp(18px, 3vw, 32px);
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: 36px;
+  }
+}
+
+.sheetPortrait {
+  position: relative;
+  align-self: start;
+  width: 100%;
+  max-width: 240px;
+  margin: 0;
+
+  @include m.from(t.$bp-mobile) {
+    max-width: none;
+  }
+}
+
+.sheetPhoto {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 2px solid t.$navy;
+  border-radius: 4px;
+  background: t.$sand;
+
+  > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.standInStamp {
+  position: absolute;
+  right: -10px;
+  bottom: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 12px;
+  border: 3px solid t.$red;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.88);
+  color: t.$red;
+  font-family: t.$font-label;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+
+  > span:last-child {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+}
+
+.sheetPhotoCaption {
+  margin-top: 10px;
+}
+
+.sheetAnimal {
+  @include m.label-font(600, 15px);
+  color: t.$ink-muted;
+}
+
+.sheetInfo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sheetName {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: t.$navy;
+  overflow-wrap: break-word;
+}
+
+.sheetRole {
+  margin: 0;
+  @include m.label-font(700, 18px);
+  color: t.$red;
+}
+
+.sheetBio {
+  @include m.body-copy;
+  color: t.$ink;
+}
+
+.sheetDetails {
+  margin: 4px 0 0;
+}
+
+.sheetDetail {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: 4px 16px;
+  padding: 10px 0;
+  border-top: 1px dashed t.$underline-muted;
+
+  dt {
+    display: flex;
+    flex-direction: column;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.45;
+    color: t.$ink-strong;
+    overflow-wrap: break-word;
+  }
+}
+
+.sheetLabelDe {
+  @include m.label-font(700, 15px);
+  color: t.$navy;
+}
+
+.sheetLabelEn {
+  @include m.label-font(500, 13px);
+  color: t.$ink-muted;
+}
+
+.sheetSteps {
+  margin-top: 4px;
+  padding: 14px 16px 16px;
+  border-radius: 8px;
+  background: t.$note;
+}
+
+.sheetStepsTitle {
+  margin: 0 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+}
+
+.sheetStepList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sheetStep {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 6px;
+  padding: 6px 12px 6px 8px;
+  border: 1.5px solid t.$navy;
+  border-radius: 999px;
+  background: t.$white;
+  font-size: 15px;
+  font-weight: 650;
+  color: t.$navy;
+}
+
+.sheetStepEn {
+  font-weight: 500;
+  color: t.$ink-muted;
+}
+
+.sheetStepTick {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: t.$green;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 9px;
+    border: solid t.$white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+.sheetLinks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+
+.sheetLink {
+  display: inline-block;
+  padding: 6px 0;
+  font-weight: 700;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+  @include m.touch-area;
+}
+
+// What the experience means for an applicant, as three cards, then where to go next.
+.meaning {
+  @include m.section-padding;
+}
+
+.meaningTitle {
+  @include m.display-heading(clamp(40px, 5.6vw, 84px));
+}
+
+.meaningPoints {
+  margin: clamp(36px, 4vw, 56px) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 24px;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+  }
+}
+
+.meaningPoint {
+  --accent: #{t.$yellow};
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 24px 26px;
+  border: 2px solid t.$navy;
+  border-top: 12px solid var(--accent);
+  border-radius: 16px;
+  background: t.$white;
+  @include m.pop-shadow(6px);
+  @include m.reveal-on-scroll;
+
+  &:nth-child(2) {
+    --accent: #{t.$red};
+  }
+
+  &:nth-child(3) {
+    --accent: #{t.$green};
+  }
+}
+
+.meaningPointTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  color: t.$navy;
+  text-wrap: balance;
+}
+
+.meaningPointText {
+  @include m.body-copy;
+  color: t.$ink;
+}
+
+.next {
+  margin-top: clamp(48px, 6vw, 88px);
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: 22px;
+  background: t.$navy;
+  @include m.pop-shadow(8px, t.$yellow);
+  // The actions sit beside the copy when both fit, and wrap below it otherwise.
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 40px;
+
+  @include m.below(t.$bp-mobile) {
+    border-radius: 16px;
+    padding: 22px 20px;
+  }
+}
+
+.nextCopy {
+  flex: 1 1 22rem;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nextTitle {
+  @include m.sub-heading;
+  color: t.$yellow;
+}
+
+.nextBody {
+  @include m.body-copy;
+  color: t.$mist-light;
+}
+
+.nextActions {
+  flex: 0 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 16px;
+}
+
+.nextLink {
+  padding: 6px 0;
+  font-weight: 700;
+  font-size: 17px;
+  color: t.$white;
+  @include m.touch-area;
+
+  &:hover {
+    color: t.$yellow;
+  }
+}

@@ -5,7 +5,7 @@ test.describe('touch source links', () => {
   test('official source links have a 44px touch target', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/');
-    const source = page.locator('#community a[href="https://aps-india.de/dmat/"]');
+    const source = page.locator('#story a[href="https://aps-india.de/dmat/"]');
     expect((await source.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   });
 });
@@ -26,7 +26,7 @@ test('fee conditions and intake readiness agree across pages and metadata', asyn
   await expect(page.locator('#fees')).toContainText('Due now, as standard');
   await expect(page.getByText('visa lead time')).toHaveCount(1);
   await expect(page.locator('#top')).toContainText('Your profile review tells you whether the service fits your degree goal and stage, and which intake you can target.');
-  for (const id of ['#community', '#fees', '#why']) await expect(page.locator(id)).not.toContainText('Your profile review tells you whether');
+  for (const id of ['#story', '#community', '#fees', '#why']) await expect(page.locator(id)).not.toContainText('Your profile review tells you whether');
   await page.goto('/check');
   await expect(page.locator('main')).toContainText('standard arrangement');
   await expect(page.locator('main')).toContainText('visa lead time');
@@ -84,8 +84,10 @@ test('dMAT dates and sourced costs are visible with review dates', async ({ page
   await expect(fees).toContainText('rising to €4,600 or €6,800 from winter semester 2027/28');
   await expect(fees).toContainText('in force since 1 September 2024');
   await expect(fees).not.toContainText('exemptions may apply');
-  await expect(page.locator('#universities')).toContainText('non-EU');
-  await expect(page.locator('#universities')).toContainText('Last reviewed');
+  // Tuition for public and private programmes stays in the costs, with its source.
+  await expect(fees).toContainText('non-EU');
+  await expect(fees).toContainText('Private universities charge programme-specific tuition');
+  await expect(fees).toContainText('Last reviewed');
 });
 
 for (const width of [390, 768, 1440]) {

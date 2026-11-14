@@ -41,6 +41,8 @@ jobs:
           VITE_FORM_ENDPOINT: ${{ vars.VITE_FORM_ENDPOINT }}
           # 10–15 international digits; empty/invalid actions open the review form.
           VITE_WHATSAPP_NUMBER: ${{ vars.VITE_WHATSAPP_NUMBER }}
+          # WhatsApp community invitation; empty/invalid shows no join link.
+          VITE_WHATSAPP_COMMUNITY_URL: ${{ vars.VITE_WHATSAPP_COMMUNITY_URL }}
           # Advertised fee; payment timing and exceptions remain in the written quote.
           VITE_FEE_AFTER_ADMISSION: ${{ vars.VITE_FEE_AFTER_ADMISSION }}
           VITE_INTAKE_STATUS: ${{ vars.VITE_INTAKE_STATUS }}

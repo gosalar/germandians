@@ -1,5 +1,5 @@
 import { CONTACT, INTAKE_SEASONS, INTAKE_SEATS, INTAKE_STATUSES, SECTIONS, hashLink, type IntakeSeason, type IntakeStatus } from '@/utils/constants';
-import { toFormEndpoint, toWhatsAppNumber } from './contactSettings';
+import { toFormEndpoint, toWhatsAppCommunityUrl, toWhatsAppNumber } from './contactSettings';
 import { toSiteOrigin } from './publicSite';
 
 /**
@@ -56,6 +56,8 @@ export const siteConfig = {
   intake: intakeLabel,
   showSeatCount: text(env.VITE_SHOW_SEAT_COUNT) === 'true',
   seatsLeft: toSeats(text(env.VITE_SEATS_LEFT)),
+  /** The WhatsApp community invitation the owners have published, or '' for none. */
+  whatsappCommunityUrl: toWhatsAppCommunityUrl(env.VITE_WHATSAPP_COMMUNITY_URL),
 } as const;
 
 /** WhatsApp link, or a jump to the form when no number is configured. */

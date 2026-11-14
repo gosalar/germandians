@@ -92,3 +92,26 @@ test('a stalled response times out, keeps the form editable and allows retry', a
   await expect(page.locator('#contact-form [role="status"]')).toContainText('Received.');
   expect(count).toBe(2);
 });
+
+test('"Teach me German" adds the interest to the review, with the lesson terms and a link to the lessons form', async ({ page }) => {
+  let payload: Record<string, unknown> = {};
+  await page.route(endpoint, async route => {
+    payload = route.request().postDataJSON();
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"received":true}' });
+  });
+  const form = page.locator('#contact-form');
+  const more = form.getByRole('link', { name: /^Know more about German lessons/ });
+  await expect(more).toHaveAttribute('href', '/learn-german#german-lessons-form');
+  await expect(more).toHaveAttribute('target', '_blank');
+  await expect(more).toHaveAttribute('rel', 'noopener');
+  await expect(form).toContainText('Additional charges may apply. We do not provide a certificate for these lessons.');
+  const consent = page.locator('label[for="f-consent"]');
+  await expect(consent).not.toContainText('German lessons');
+  await fill(page);
+  await page.getByRole('checkbox', { name: 'Teach me German' }).check();
+  await expect(consent).toContainText('about my profile review and German lessons');
+  await page.getByRole('button', { name: 'Request my profile review' }).click();
+  await expect(form.locator('[role="status"]')).toContainText('Received.');
+  expect(payload).toMatchObject({ name: 'Test visitor', whatsapp: '+91 9876543210', germanLessons: true, consent: true });
+  expect(payload).not.toHaveProperty('enquiry');
+});

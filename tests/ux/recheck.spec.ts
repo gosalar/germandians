@@ -1,7 +1,11 @@
 import { expect, test, type Page } from '@playwright/test';
 
+import { PUBLIC_PAGES } from '../../src/utils/publicPages.ts';
+
 const viewports = [[320,568],[360,800],[375,812],[390,844],[412,891],[768,1024],[800,1280],[891,900],[1024,900],[1280,900],[1440,900],[1536,900],[1920,953],[891,412],[1280,585],[1536,730],[1099,900],[1100,900],[1101,900]];
-const paths = ['', 'check', 'privacy', 'missing-page'];
+const paths = [...PUBLIC_PAGES.map((entry) => entry.path.replace(/^\//, '')), 'missing-page'];
+/** Pages inside the site shell, which have the full header. */
+const shellPaths = PUBLIC_PAGES.filter((entry) => entry.shell === 'site').map((entry) => entry.path.replace(/^\//, ''));
 
 async function ready(page: Page) {
   await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
@@ -14,7 +18,7 @@ async function noOverflow(page: Page) {
 
 for (const [width, height] of viewports) {
   test(`full page sweep ${width}x${height}`, async ({ browser, baseURL }) => {
-    test.setTimeout(120_000);
+    test.setTimeout(180_000);
     const context = await browser.newContext({ viewport: { width, height }, hasTouch: width < 1100, reducedMotion: 'reduce' });
     const page = await context.newPage();
     const errors: string[] = [];
@@ -36,7 +40,7 @@ for (const [width, height] of viewports) {
       await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused();
       await page.keyboard.press('Enter');
       await expect(page.getByRole('main')).toBeFocused();
-      if (path === '' || path === 'check') {
+      if (shellPaths.includes(path)) {
         if (width < 1100) {
           const menu = page.getByRole('button', { name: 'Menu', exact: true });
           await menu.click();
@@ -49,8 +53,14 @@ for (const [width, height] of viewports) {
           await page.keyboard.press('Escape');
           await expect(menu).toBeFocused();
         } else {
-          const links = await page.locator('nav a').evaluateAll(nodes => nodes.map(n => n.getBoundingClientRect().toJSON()));
+          // The About group opens inside the window, and the row still fits with it open.
+          const about = page.locator('nav').getByRole('button', { name: 'About', exact: true });
+          await about.click();
+          await expect(about).toHaveAttribute('aria-expanded', 'true');
+          const links = await page.locator('nav a:visible').evaluateAll(nodes => nodes.map(n => n.getBoundingClientRect().toJSON()));
           expect(links.every(box => box.x >= 0 && box.right <= width)).toBe(true);
+          await page.keyboard.press('Escape');
+          await expect(about).toHaveAttribute('aria-expanded', 'false');
         }
       }
       if (!path) {

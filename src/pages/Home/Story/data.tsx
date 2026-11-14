@@ -2,8 +2,7 @@ import DmatNote from '@/components/DmatNote';
 
 export const COPY = {
   kicker: 'Where we started',
-  story: 'Germandians began as a page where we answered questions from Indian students who wanted to study in Germany. The consultancy grew out of what they kept asking us.',
-  instagram: 'See the community on Instagram',
+  aboutLink: 'More about us',
   motto: 'By the students, for the students',
 } as const;
 

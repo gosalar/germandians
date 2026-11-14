@@ -19,6 +19,8 @@ interface ImportMetaEnv {
   readonly VITE_FORM_ENDPOINT?: string;
   /** International number, 10–15 digits after formatting removal; invalid values open the form. */
   readonly VITE_WHATSAPP_NUMBER?: string;
+  /** WhatsApp community invitation (chat.whatsapp.com or whatsapp.com/channel/); invalid values show no join link. */
+  readonly VITE_WHATSAPP_COMMUNITY_URL?: string;
   /** Advertised fee; quote confirms payment timing and exceptions. */
   readonly VITE_FEE_AFTER_ADMISSION?: string;
   readonly VITE_INTAKE_STATUS?: string;

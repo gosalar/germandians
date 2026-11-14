@@ -51,6 +51,75 @@
   }
 }
 
+// The About group: a disclosure button and its list of links.
+.group {
+  position: relative;
+}
+
+.groupTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  @include m.touch-area;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: t.$yellow;
+    text-decoration-thickness: 3px;
+  }
+}
+
+.chevron {
+  width: 7px;
+  height: 7px;
+  margin-top: -4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform var(--motion-duration, 0.2s);
+
+  &[data-open='true'] {
+    margin-top: 3px;
+    transform: rotate(225deg);
+  }
+}
+
+.groupPanel {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: -14px;
+  min-width: 200px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  background: t.$paper;
+  border: 1.5px solid t.$navy;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgb(16 24 46 / 0.12);
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.groupLink {
+  padding: 10px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  text-decoration: none;
+
+  &:hover {
+    background: t.$khaki;
+  }
+}
+
 // Menu button below 1100px.
 .menuButton {
   flex: none;
@@ -123,6 +192,28 @@
   &:nth-last-child(2) {
     border-bottom: 0;
   }
+}
+
+// The group's links sit under its label, indented, with the same font as every other menu link.
+.menuGroup {
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+  border-bottom: 1px solid t.$line;
+
+  .menuLink {
+    padding-left: 18px;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+.menuGroupLabel {
+  margin: 0;
+  @include m.label-font(700, 16px);
+  color: t.$slate;
 }
 
 .menuCta {

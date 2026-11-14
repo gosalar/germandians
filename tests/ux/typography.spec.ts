@@ -107,7 +107,7 @@ for (const [width, height] of [[320, 900], [412, 891], [800, 1280], [1440, 900]]
     expect(await typography(page, compact)).toEqual(await typography(page, full));
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
-    for (const path of ['/privacy', '/missing-typography-page']) {
+    for (const path of ['/about', '/community', '/learn-german', '/privacy', '/missing-typography-page']) {
       await page.goto(path);
       await page.evaluate(() => document.fonts.ready);
       expect(await typography(page, 'h1')).toEqual(heading);

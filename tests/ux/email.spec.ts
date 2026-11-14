@@ -36,3 +36,27 @@ for (const path of ['/', '/check']) for (const width of [390, 1440]) {
     expect(posts).toEqual([]);
   });
 }
+
+test('the German lessons form leaves a complete email draft and sends nothing itself', async ({ page }) => {
+  const posts: string[] = [];
+  page.on('request', request => { if (request.method() === 'POST') posts.push(request.url()); });
+  await page.goto('/learn-german');
+  await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+  const form = page.locator('#german-lessons-form');
+  await expect(form).toContainText('Nothing is sent until you press send there');
+  await page.locator('#g-name').fill('Test visitor');
+  await page.locator('#g-wa').fill('+91 9876543210');
+  await page.locator('#g-language').fill('Test language');
+  await page.locator('#g-consent').check();
+  await form.getByRole('button', { name: 'Open email draft', exact: true }).click();
+  await expect(form.locator('[role="status"]')).toContainText('Nothing has been sent by this page');
+  const draft = await page.locator('#german-lessons-draft').inputValue();
+  expect(draft).toContain('Language for explanations: Test language');
+  expect(draft).toContain('Consent to be contacted about German lessons: yes');
+  expect(draft).not.toContain('Email:');
+  expect(draft).not.toContain('What I need German for');
+  const url = new URL((await form.getByRole('link', { name: 'Open the draft again' }).getAttribute('href'))!);
+  expect(url.searchParams.get('subject')).toBe('German lessons');
+  expect(url.searchParams.get('body')).toBe(draft);
+  expect(posts).toEqual([]);
+});

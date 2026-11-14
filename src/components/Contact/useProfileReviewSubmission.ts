@@ -9,6 +9,8 @@ export interface ProfileReviewValues {
   name: string;
   email: string;
   wa: string;
+  /** "Teach me German": an interest noted with the profile review, not a lessons enquiry. */
+  german: boolean;
   consent: boolean;
 }
 
@@ -30,6 +32,7 @@ export function useProfileReviewSubmission(snapshot?: string) {
       ...(values.email.trim() ? { email: values.email.trim() } : {}),
       whatsapp: values.wa.trim(),
       ...(snapshot ? { snapshot } : {}),
+      ...(values.german ? { germanLessons: true as const } : {}),
     };
     setSubmittedRequest(request);
     if (siteConfig.formEndpoint) setStatus('sending');

@@ -1,8 +1,9 @@
+import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 
 import { loadEnv } from 'vite';
-import { toFormEndpoint, toWhatsAppNumber } from '../src/utils/contactSettings.ts';
+import { toFormEndpoint, toWhatsAppCommunityUrl, toWhatsAppNumber } from '../src/utils/contactSettings.ts';
 import { DEFAULT_SITE_ORIGIN, parseSiteOrigin } from '../src/utils/publicSite.ts';
 
 // The CLI imports React before Vite loads its config. Prerender and client
@@ -19,6 +20,14 @@ const missing = ['NAMES', 'ADDRESS', 'HOSTING_PROVIDER', 'RETENTION', 'AUTHORITY
 if (toFormEndpoint(read('VITE_FORM_ENDPOINT')) && !read('VITE_PRIVACY_FORM_SERVICE')) missing.push('FORM_SERVICE');
 if (!toWhatsAppNumber(read('VITE_WHATSAPP_NUMBER'))) {
   console.warn('[contact] Missing or invalid VITE_WHATSAPP_NUMBER; contact actions open the review form.');
+}
+if (read('VITE_WHATSAPP_COMMUNITY_URL') && !toWhatsAppCommunityUrl(read('VITE_WHATSAPP_COMMUNITY_URL'))) {
+  console.warn('[contact] Invalid VITE_WHATSAPP_COMMUNITY_URL; the community page shows no join link. Supply an https://chat.whatsapp.com/ or https://whatsapp.com/channel/ link.');
+}
+// The team data imports photos, so it can't be loaded here; count the stand-in entries in its source.
+const standIns = readFileSync(new URL('../src/pages/About/data.ts', import.meta.url), 'utf8').match(/^\s*standIn\(\d+, '\w+'\),?$/gm)?.length ?? 0;
+if (standIns > 0) {
+  console.warn(`[about] ${standIns} team profiles on the About page are stand-ins; replace them with the owners' approved profiles before launch.`);
 }
 if (read('VITE_SITE_ORIGIN') && !parseSiteOrigin(read('VITE_SITE_ORIGIN'))) {
   console.warn(`[site] Invalid VITE_SITE_ORIGIN; canonical, sharing and sitemap URLs use ${DEFAULT_SITE_ORIGIN}. Supply an HTTPS origin without a path.`);

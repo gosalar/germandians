@@ -47,10 +47,10 @@ export function emailAppHint() {
   return <>This opens your email app. Nothing is sent until you press send there. You can also email {CONTACT.email} directly.</>;
 }
 
-export function consentSentence(includesSummary: boolean) {
+export function consentSentence(includesSummary: boolean, includesGerman = false) {
   return (
     <>
-      {`I agree that Germandians can use my name, WhatsApp number${includesSummary ? ', any email address I provide and the attached grade-check summary' : ' and any email address I provide'} to contact me about my profile review. Details are in the `}
+      {`I agree that Germandians can use my name, WhatsApp number${includesSummary ? ', any email address I provide and the attached grade-check summary' : ' and any email address I provide'} to contact me about my profile review${includesGerman ? ' and German lessons' : ''}. Details are in the `}
       <Link to={ROUTES.privacy} target="_blank" rel="noopener" className={styles.privacyLink}>
         privacy note
       </Link>
