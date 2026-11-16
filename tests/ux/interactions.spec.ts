@@ -76,6 +76,24 @@ for (const width of [390, 1440]) {
   });
 }
 
+test('the consent sentence names the grade-check summary only while it is ticked', async ({ page }) => {
+  await page.goto('/check');
+  await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+  const consent = page.locator('label[for="f-consent"]');
+  const plain = 'my name, WhatsApp number and any email address I provide to contact me';
+  await page.getByRole('button', { name: 'CGPA / 10 (Pass 4.0)', exact: true }).click();
+  await page.locator('#check-score').fill('7.4');
+  await expect(page.getByTestId('form-snapshot')).toBeVisible();
+  await expect(consent).toContainText(plain);
+  const include = page.getByRole('checkbox', { name: 'Attach this summary to my enquiry' });
+  await include.focus();
+  await page.keyboard.press('Space');
+  await expect(include).toBeChecked();
+  await expect(consent).toContainText('my name, WhatsApp number, any email address I provide and the attached grade-check summary to contact me');
+  await include.uncheck();
+  await expect(consent).toContainText(plain);
+});
+
 test('WhatsApp numbers may start with a prefix zero, and the consent sentence names what is collected', async ({ page }) => {
   const submit = page.getByRole('button', { name: 'Request my profile review' });
   const wa = page.locator('#f-wa');

@@ -11,60 +11,74 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => document.fonts.ready);
 });
 
-test('neutral start, unchanged grade table and requirements for every grade', async ({ page }) => {
+test('neutral start, unchanged grade table, no profile questions and one link to the requirements page', async ({ page }) => {
   const html = await (await page.request.get('/check')).text();
   expect(html).toContain('Start with your marks and your transcript’s grading scale.');
   expect(html).not.toContain('data-testid="form-snapshot"');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('German grade check');
   await expect(page.getByTestId('german-grade-value')).toHaveText('—');
   await expect(page.getByTestId('form-snapshot')).toHaveCount(0);
   await expect(page.locator('#check-input-error')).toBeEmpty();
   await expect(page.locator('#check-score')).not.toHaveAttribute('aria-invalid', 'true');
+  // One input panel: the marks. No profile questions, step labels or requirement list remain.
+  await expect(page.getByRole('group', { name: 'Indian grading scale presets', exact: true })).toBeVisible();
+  await expect(page.getByRole('group', { name: 'Active backlogs', exact: true })).toHaveCount(0);
+  await expect(page.locator('main')).not.toContainText(/Step [12]|What still needs checking|Active backlogs|APS status|dMAT degree field/);
+  const link = page.getByTestId('check-requirements-link').getByRole('link', { name: 'See what else programmes check', exact: true });
+  await expect(link).toHaveAttribute('href', '/requirements');
   await page.getByRole('button', { name: 'CGPA / 10 (Pass 4.0)', exact: true }).click();
   await expect(page.locator('#check-score')).toHaveValue('');
-  // Choosing a scale alone is not an entry: no error, no invalid field, nothing attached.
+  // Choosing a scale alone is not an entry: no error, no invalid field, nothing to attach.
   await expect(page.locator('#check-input-error')).toBeEmpty();
   await expect(page.locator('#check-score')).not.toHaveAttribute('aria-invalid', 'true');
   await expect(page.getByTestId('german-grade-value')).toHaveText('—');
   await expect(page.getByTestId('form-snapshot')).toHaveCount(0);
-  const requirements = await page.getByTestId('requirements-list').locator('li').allTextContents();
-  expect(await page.getByTestId('requirements-list').locator('li').count()).toBe(6);
   for (const [score, max, min, expected] of grades) {
     await page.locator('#check-max').fill(max);
     await page.locator('#check-min').fill(min);
     await page.locator('#check-score').fill(score);
     await expect(page.getByTestId('german-grade-value')).toHaveText(expected);
-    await expect(page.getByTestId('requirements-list').locator('li')).toHaveText(requirements);
-    await expect(page.getByTestId('check-headline')).toHaveText('Your grade is one part of the requirements check.');
+    await expect(page.getByTestId('check-headline')).toHaveText('Your grade is one part of your application.');
     await expect(page.getByTestId('check-cta')).toHaveText('Get my profile reviewed');
     await expect(page.locator('main')).not.toContainText(/TU Munich|RWTH Aachen|KIT|TU Berlin|TU Darmstadt|FAU Erlangen|TU Dresden|Passau|TU Dortmund|OVGU Magdeburg|TU Chemnitz|FH Aachen/);
     await expect(page.locator('main')).not.toContainText(/Tier [123]|Competitive|Realistic reach|Strong fit|Selective|Primary target|Low odds|Not a fit this intake|\bBand:/);
     await expect(page.locator('[data-testid^="tier-"]')).toHaveCount(0);
   }
-  await expect(page.getByTestId('check-live-region')).not.toContainText(/formula:|Universities may round|Subject credits/);
+  await expect(page.getByTestId('check-live-region')).not.toContainText(/formula:|Universities may round|programmes check/);
   await page.locator('nav').getByRole('link', { name: 'Germandians', exact: true }).click();
   await expect(page).toHaveURL(/\/(#top)?$/);
 });
 
-test('summary contains only entered marks and answered questions; inputs do not predict eligibility', async ({ page }) => {
+test('the summary holds only a valid conversion and is attached only when ticked', async ({ page }) => {
+  const summary = page.getByTestId('form-snapshot');
+  const include = page.locator('#f-summary');
+  const consent = page.locator('label[for="f-consent"]');
+  // An incomplete conversion attaches nothing: a score without its scale offers no summary.
   await page.locator('#check-score').fill('8,8');
-  await expect(page.getByTestId('form-snapshot')).toContainText('Score entered: 8,8');
-  await expect(page.getByTestId('form-snapshot')).not.toContainText(/Active backlogs|Cleared backlogs|Degree duration|APS/);
+  await expect(page.locator('#check-input-error')).not.toBeEmpty();
+  await expect(summary).toHaveCount(0);
+  await expect(consent).not.toContainText('summary');
+  // A valid conversion shows the block; only sending needs the tick.
   await page.getByRole('button', { name: 'CGPA / 10 (Pass 4.0)', exact: true }).click();
-  await page.getByRole('group', { name: 'Active backlogs', exact: true }).getByRole('button', { name: 'Yes', exact: true }).click();
-  await page.getByRole('group', { name: 'Cleared backlogs', exact: true }).getByRole('button', { name: 'Yes', exact: true }).click();
-  await page.getByRole('button', { name: '3-year', exact: true }).click();
-  await page.getByRole('button', { name: 'Applied, waiting', exact: true }).click();
-  await expect(page.getByTestId('form-snapshot')).toHaveText('Attached from your grade checkGerman grade 1.6 (8,8 / 10, pass 4) · Active backlogs: Yes · Cleared backlogs: Yes · Degree duration: 3-year · APS applied, awaiting certificate');
-  await expect(page.getByTestId('form-snapshot')).not.toContainText(/ECTS|Band/);
+  await expect(summary).toContainText('From your grade check');
+  await expect(summary.getByRole('listitem')).toHaveText(['German grade 1.6 (8,8 / 10, pass 4)']);
+  await expect(summary).not.toContainText(/ECTS|Band|backlog|APS|Degree duration|Score entered/);
+  await expect(include).not.toBeChecked();
+  await expect(page.getByRole('checkbox', { name: 'Attach this summary to my enquiry' })).toHaveAttribute('id', 'f-summary');
+  await expect(consent).not.toContainText('summary');
   await expect(page.getByTestId('german-grade-value')).toHaveText('1.6');
-  await expect(page.locator('main')).toContainText('You still have exams to clear.');
-  await expect(page.locator('main')).toContainText('APS student portal');
-  await page.getByRole('button', { name: 'Applied, waiting', exact: true }).click();
-  await expect(page.getByTestId('form-snapshot')).not.toContainText('APS');
-  await page.getByRole('button', { name: 'Have APS', exact: true }).click();
-  await expect(page.locator('main')).toContainText('Keep the original digital certificate');
-  await page.getByRole('button', { name: 'Not started yet', exact: true }).click();
-  await expect(page.locator('main')).toContainText('requirements quiz');
+  await include.check();
+  await expect(consent).toContainText('any email address I provide and the attached grade-check summary to contact me');
+  // An invalid conversion removes the block and the tick; a new summary starts unticked.
+  await page.locator('#check-score').fill('11');
+  await expect(summary).toHaveCount(0);
+  await expect(consent).not.toContainText('summary');
+  await page.locator('#check-score').fill('');
+  await expect(summary).toHaveCount(0);
+  await page.locator('#check-score').fill('8,8');
+  await expect(summary.getByRole('listitem')).toHaveText(['German grade 1.6 (8,8 / 10, pass 4)']);
+  await expect(include).not.toBeChecked();
+  await expect(consent).not.toContainText('summary');
   await page.getByRole('button', { name: 'Percentage % (Pass 40)', exact: true }).click();
   await expect(page.locator('#check-score')).toHaveValue('8,8');
 });
@@ -105,8 +119,9 @@ for (const [width, height] of [[412,891],[891,412],[800,1280],[1280,800],[1536,7
     await page.locator('#check-score').fill('7.4');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     if (width >= 1100) {
-      for (const group of ['Active backlogs','Cleared backlogs',"Bachelor's degree duration",'APS status']) {
-        await page.getByRole('group', { name: group, exact: true }).evaluate(el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
+      // The grade stays in view while the visitor works through the marks and the result.
+      for (const target of [page.locator('#check-score'), page.getByTestId('check-requirements-link')]) {
+        await target.evaluate(el => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
         const grade = (await page.getByTestId('german-grade-value').boundingBox())!;
         const headline = (await page.getByTestId('check-headline').boundingBox())!;
         const nav = (await page.locator('nav').first().boundingBox())!;
@@ -126,13 +141,6 @@ for (const [width, height] of [[412,891],[891,412],[800,1280],[1280,800],[1536,7
         const action = (await page.getByRole('link', { name: 'WhatsApp us', exact: true }).boundingBox())!;
         expect(grade.y + grade.height).toBeLessThanOrEqual(action.y - 10);
       }
-    }
-    if (width === 412 || width === 1440) {
-      await page.getByRole('group', { name: 'Active backlogs', exact: true }).getByRole('button', { name: 'Yes', exact: true }).click();
-      await page.getByRole('group', { name: 'Cleared backlogs', exact: true }).getByRole('button', { name: 'Yes', exact: true }).click();
-      await page.getByRole('button', { name: '3-year', exact: true }).click();
-      await page.getByRole('button', { name: 'Applied, waiting', exact: true }).click();
-      await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
     }
   });
 }

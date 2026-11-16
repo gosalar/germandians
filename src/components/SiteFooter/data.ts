@@ -12,6 +12,7 @@ export const FOOTER_LINKS = [
   { destination: DESTINATIONS.instagram, label: 'Instagram' },
   { destination: DESTINATIONS.email, label: CONTACT.email },
   PAGE_LINKS.gradeCheck,
+  PAGE_LINKS.requirements,
   PAGE_LINKS.about,
   PAGE_LINKS.community,
   PAGE_LINKS.learnGerman,

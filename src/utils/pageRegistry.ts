@@ -26,6 +26,15 @@ export const PAGE_REGISTRY = [
     sections: [SECTIONS.top, SECTIONS.contact, SECTIONS.contactForm],
   },
   {
+    key: 'requirements',
+    path: '/requirements',
+    file: 'routes/requirements.tsx',
+    shell: 'site',
+    prerender: true,
+    sitemap: true,
+    sections: [SECTIONS.top, SECTIONS.contact, SECTIONS.contactForm],
+  },
+  {
     key: 'about',
     path: '/about',
     file: 'routes/about.tsx',

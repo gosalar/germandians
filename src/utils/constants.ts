@@ -11,6 +11,9 @@ export const hashLink = (id: string) => `#${id}`;
 
 export const NAV_CTA = { id: SECTIONS.contactForm, label: 'Get my profile reviewed' } as const;
 
+/** The site's own tools (the grade check, the requirements questions) work without an account. */
+export const NO_LOGIN_NEEDED = 'No login or email needed';
+
 export const FEE_POLICY = {
   amount: '€0',
   timing: 'service fee until you’re admitted',
@@ -136,6 +139,7 @@ export function destinationHref(destination: NavigationDestination): string {
 
 export const DESTINATIONS = {
   gradeCheck: { kind: 'page', page: 'check' },
+  requirements: { kind: 'page', page: 'requirements' },
   about: { kind: 'page', page: 'about' },
   community: { kind: 'page', page: 'community' },
   learnGerman: { kind: 'page', page: 'learnGerman' },
@@ -158,6 +162,7 @@ export type NavigationGroup = { kind: 'group'; id: string; label: string; links:
 
 export const PAGE_LINKS = {
   gradeCheck: { destination: DESTINATIONS.gradeCheck, label: 'Grade check' },
+  requirements: { destination: DESTINATIONS.requirements, label: 'Requirements' },
   about: { destination: DESTINATIONS.about, label: 'About us' },
   community: { destination: DESTINATIONS.community, label: 'Community' },
   learnGerman: { destination: DESTINATIONS.learnGerman, label: 'Learn German' },
@@ -165,11 +170,14 @@ export const PAGE_LINKS = {
 } as const satisfies Record<string, NavigationLink>;
 
 /**
- * Header order. The row has no room for another top-level link at 1100px, the narrowest inline
- * layout, so the two pages about the people and the community share the About group.
+ * Header order. The inline row starts at 1220px (`$bp-nav`), the narrowest width at which these entries
+ * fit on one line with the About group open; below it the menu button takes over. The row has no spare
+ * room for another top-level link at 1220px, so the two pages about the people and the community share
+ * the About group. Re-measure at 1219, 1220 and 1221px before adding an entry.
  */
 const NAV_ENTRIES: readonly (NavigationLink | NavigationGroup)[] = [
   PAGE_LINKS.gradeCheck,
+  PAGE_LINKS.requirements,
   { kind: 'group', id: 'nav-about', label: 'About', links: [PAGE_LINKS.about, PAGE_LINKS.community] },
   PAGE_LINKS.learnGerman,
   { destination: DESTINATIONS.fees, label: 'Fees' },

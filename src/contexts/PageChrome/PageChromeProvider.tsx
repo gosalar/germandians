@@ -8,6 +8,12 @@ import { PageChromeActionsContext, PageChromeStateContext, type PageChromeAction
 
 const VISIBILITY = { threshold: 0.05 };
 
+/** Pages that prerender action buttons above the fold, so the phone action bar waits for them to scroll away. */
+const ABOVE_FOLD_ACTIONS: readonly string[] = [ROUTES.home, ROUTES.requirements];
+
+/** The prerender and static hosts report `/requirements/`; the routes are written without the slash. */
+const withoutTrailingSlash = (path: string) => (path.length > 1 ? path.replace(/\/+$/, '') : path);
+
 /**
  * Narrow UI state shared by the nav, hero, contact form and the mobile action
  * bar: whether the menu is open and whether the hero CTAs or the form are on
@@ -22,9 +28,9 @@ export default function PageChromeProvider({ children }: { children: ReactNode }
 
   const state: PageChromeState = {
     menuOpen,
-    // Only home prerenders an above-the-fold hero. Unobserved sections on
-    // other pages are off screen, so their mobile action bar is available.
-    heroCtaInView: heroCta.entry?.isIntersecting ?? (pathname === ROUTES.home),
+    // Until the observer reports, assume the buttons are on screen on the pages
+    // that open with them. Elsewhere the mobile action bar is available at once.
+    heroCtaInView: heroCta.entry?.isIntersecting ?? ABOVE_FOLD_ACTIONS.includes(withoutTrailingSlash(pathname)),
     formInView: form.entry?.isIntersecting ?? false,
   };
 

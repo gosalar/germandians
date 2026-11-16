@@ -3,8 +3,8 @@ import { expect, test } from '@playwright/test';
 import { PUBLIC_PAGES } from '../../src/utils/publicPages.ts';
 
 // A direct load reports the path with or without a trailing slash, depending on the host.
-for (const path of ['/check', '/check/']) {
-  test(`header contact links stay on the grade check when ${path} is loaded directly`, async ({ page }) => {
+for (const path of ['/check', '/check/', '/requirements', '/requirements/']) {
+  test(`header contact links stay on the page when ${path} is loaded directly`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto(path);
     await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
@@ -20,7 +20,7 @@ for (const path of ['/check', '/check/']) {
   });
 }
 
-for (const path of ['/', '/check']) for (const width of [390, 1440]) {
+for (const path of ['/', '/check', '/requirements']) for (const width of [390, 1440]) {
   test(`contact destinations and visibility ${path} at ${width}`, async ({ page }, testInfo) => {
     const configured = testInfo.project.name === 'endpoint';
     await page.setViewportSize({ width, height: 900 });
@@ -47,6 +47,10 @@ for (const path of ['/', '/check']) for (const width of [390, 1440]) {
       if (path === '/') {
         await expect(actionBar).not.toBeVisible();
         await page.locator('#journey').evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'start' }));
+      } else if (path === '/requirements') {
+        // Like Home, the bar waits while the opening's buttons are on screen.
+        await expect(actionBar).not.toBeVisible();
+        await page.locator('#guide').evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'start' }));
       } else {
         await page.locator('#check-score').evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'center' }));
       }
@@ -83,7 +87,7 @@ for (const path of [...PUBLIC_PAGES.map((page) => page.path), '/not-a-real-page'
 
 test('the footer and privacy note name the business only when it is configured', async ({ page }, testInfo) => {
   const operator = 'Test Operator Example, Test Street 1, 00000 Testville';
-  for (const path of ['/', '/check']) {
+  for (const path of ['/', '/check', '/requirements']) {
     await page.goto(path);
     const footer = page.locator('footer');
     // The year is fixed when the site is built; the suite builds it moments before it runs.

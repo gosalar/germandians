@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => document.fonts.ready);
 });
 
-test('sending is locked, one request includes the summary, and receipt needs explicit acknowledgement', async ({ page }) => {
+test('sending is locked, one request includes the ticked summary, and receipt needs explicit acknowledgement', async ({ page }) => {
   let count = 0;
   let payload: Record<string, unknown> = {};
   let release!: () => void;
@@ -28,13 +28,16 @@ test('sending is locked, one request includes the summary, and receipt needs exp
   });
   await page.getByRole('button', { name: 'CGPA / 10 (Pass 4.0)', exact: true }).click();
   await page.locator('#check-score').fill('7.4');
-  await page.getByRole('button', { name: 'Applied, waiting', exact: true }).click();
   await fill(page);
+  await page.locator('#f-summary').check();
   await page.locator('#f-email').fill('visitor@example.test');
   await page.locator('#f-wa').focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#contact-form')).toHaveAttribute('aria-busy', 'true');
   await expect(page.getByRole('button', { name: 'Sending…', exact: true })).toBeDisabled();
+  // While sending, the block shows what was sent and cannot be changed.
+  await expect(page.locator('#f-summary')).toBeChecked();
+  await expect(page.locator('#f-summary')).toBeDisabled();
   await expect(page.locator('#contact-form [role="status"]')).toContainText('Sending your enquiry');
   await page.keyboard.press('Enter');
   await page.locator('#contact-form').evaluate(form => {
@@ -45,8 +48,28 @@ test('sending is locked, one request includes the summary, and receipt needs exp
   release();
   await expect(page.locator('#contact-form [role="status"]')).toContainText('Received. An admin will message you on WhatsApp.');
   expect(count).toBe(1);
-  expect(payload).toMatchObject({ name: 'Test visitor', email: 'visitor@example.test', whatsapp: '+91 9876543210', consent: true, source: 'germandians-website', snapshot: 'German grade 2.3 (7.4 / 10, pass 4) · APS applied, awaiting certificate' });
+  expect(payload).toMatchObject({ name: 'Test visitor', email: 'visitor@example.test', whatsapp: '+91 9876543210', consent: true, source: 'germandians-website', snapshot: 'German grade 2.3 (7.4 / 10, pass 4)' });
   expect(Number.isFinite(Date.parse(String(payload.consentAt)))).toBe(true);
+  await expect(page.getByTestId('form-snapshot').getByRole('listitem')).toHaveText(['German grade 2.3 (7.4 / 10, pass 4)']);
+});
+
+test('an unticked summary is shown but not sent', async ({ page }) => {
+  let payload: Record<string, unknown> = {};
+  await page.route(endpoint, async route => {
+    payload = route.request().postDataJSON();
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"received":true}' });
+  });
+  await page.getByRole('button', { name: 'CGPA / 10 (Pass 4.0)', exact: true }).click();
+  await page.locator('#check-score').fill('7.4');
+  await expect(page.getByTestId('form-snapshot')).toContainText('German grade 2.3 (7.4 / 10, pass 4)');
+  await fill(page);
+  await expect(page.locator('#f-summary')).not.toBeChecked();
+  await page.getByRole('button', { name: 'Request my profile review' }).click();
+  await expect(page.locator('#contact-form [role="status"]')).toContainText('Received.');
+  expect(payload).toMatchObject({ name: 'Test visitor', whatsapp: '+91 9876543210', consent: true });
+  expect(payload).not.toHaveProperty('snapshot');
+  // Nothing was attached, so after receipt no summary is shown as sent.
+  await expect(page.getByTestId('form-snapshot')).toHaveCount(0);
 });
 
 for (const failure of ['http', 'body', 'malformed', 'empty', 'network']) {

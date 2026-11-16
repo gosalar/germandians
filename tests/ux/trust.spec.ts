@@ -156,13 +156,13 @@ test('housing help names temporary stays with its availability limit beside the 
   await expect(page.locator('#fees')).not.toContainText(/temporary stay|part-time/i);
 });
 
-test('the FAQ groups thirteen questions, opens each on its own and works by keyboard', async ({ page }) => {
+test('the FAQ groups fourteen questions, opens each on its own and works by keyboard', async ({ page }) => {
   await page.goto('/');
   await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
   const faq = page.locator('#faq');
   await expect(faq.getByRole('heading', { level: 3 })).toHaveText(['The service', 'Fees and terms', 'Requirements']);
   const questions = faq.getByRole('button');
-  await expect(questions).toHaveCount(13);
+  await expect(questions).toHaveCount(14);
   // Every question points at its own answer panel, and the panel is named by its question.
   const links = await questions.evaluateAll((buttons) =>
     buttons.map((button) => {
@@ -170,10 +170,10 @@ test('the FAQ groups thirteen questions, opens each on its own and works by keyb
       return Boolean(panel) && !/\s/.test(button.id) && panel?.getAttribute('aria-labelledby') === button.id;
     }),
   );
-  expect(links).toEqual(Array(13).fill(true));
+  expect(links).toEqual(Array(14).fill(true));
   // Only the first answer starts open.
   await expect(questions.nth(0)).toHaveAttribute('aria-expanded', 'true');
-  for (let i = 1; i < 13; i++) await expect(questions.nth(i)).toHaveAttribute('aria-expanded', 'false');
+  for (let i = 1; i < 14; i++) await expect(questions.nth(i)).toHaveAttribute('aria-expanded', 'false');
   await expect(faq).toContainText('Universities make every admission decision themselves.');
 
   // Keyboard: Enter opens one answer and leaves the others as they were.
@@ -200,7 +200,13 @@ test('the FAQ groups thirteen questions, opens each on its own and works by keyb
   await faq.getByRole('button', { name: 'Are you connected to any university?' }).click();
   await expect(faq).toContainText('none of them pay us');
 
+  // Funding and degree answers point to their topic in the requirements guide.
+  await faq.getByRole('button', { name: 'Do you help with funding?' }).click();
+  await expect(faq.getByRole('link', { name: 'Costs in the requirements guide' })).toHaveAttribute('href', '/requirements#costs');
+  await expect(faq.getByRole('link', { name: 'Your degree', exact: true })).toHaveAttribute('href', '/requirements#degree');
+  await expect(faq.getByRole('link', { name: 'Subject match and credits', exact: true })).toHaveAttribute('href', '/requirements#subject-credits');
+
   await faq.getByRole('link', { name: 'See what to check for each programme' }).click();
-  await expect(page).toHaveURL(/\/check\/?$/);
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('German grade and requirements check');
+  await expect(page).toHaveURL(/\/requirements\/?$/);
+  await expect(page).toHaveTitle('Requirements for a master’s in Germany | Germandians');
 });

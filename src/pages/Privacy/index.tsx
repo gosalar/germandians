@@ -71,9 +71,11 @@ export default function Privacy() {
               the time of your message or submission, and your consent to be contacted.
             </p>
             <p className={styles.text}>
-              If you use the grade check, the form includes the marks and profile answers you entered, plus the
-              conversion when valid. Unanswered questions are omitted. Using the checker alone sends no profile
-              details to us; the summary is shared only when you submit the form or send the email draft.
+              If you use the grade check and get a result, the contact form shows a summary of the marks you entered and
+              your German grade. If you answer questions on the requirements page, the form shows a summary of your
+              answers, and your German grade if you have one. Unanswered questions are omitted. A summary reaches us only
+              if you tick the box to attach it and then submit the form or send the email draft. Using the grade check or
+              the requirements page alone sends nothing to us.
             </p>
             <p className={styles.text}>
               If you ask about German lessons, through their form or the “Teach me German” box on the profile-review

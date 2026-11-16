@@ -1,3 +1,4 @@
+import type { EnquirySummary } from '@/services/profileReview';
 import { CONTACT, SECTIONS } from '@/utils/constants';
 import { whatsapp } from '@/utils/siteConfig';
 
@@ -5,7 +6,8 @@ import { CONTACT_COPY } from './data';
 import ProfileReviewForm from './ProfileReviewForm';
 import styles from './styles.module.scss';
 
-export default function Contact({ snapshot }: { snapshot?: string }) {
+/** `summary`: what the visitor entered on this page, offered to attach to the review. Pass it only when it has lines. */
+export default function Contact({ summary }: { summary?: EnquirySummary }) {
   return (
     <section id={SECTIONS.contact} data-screen-label={CONTACT_COPY.screenLabel} className={styles.section}>
       <div className={styles.grid}>
@@ -27,7 +29,7 @@ export default function Contact({ snapshot }: { snapshot?: string }) {
             </a>
           </div>
         </div>
-        <ProfileReviewForm snapshot={snapshot} />
+        <ProfileReviewForm summary={summary} />
       </div>
     </section>
   );

@@ -64,11 +64,47 @@
   text-wrap: pretty;
 }
 
-.answer {
+.answer,
+.answerBlock {
   margin: 0;
   padding: 0 50px 22px 0;
   font-size: 18px;
   line-height: 1.6;
   color: t.$ink;
   text-wrap: pretty;
+}
+
+// An answer with its own paragraphs, a list or links. The data supplies plain elements; the look is set here.
+.answerBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  p,
+  ul {
+    margin: 0;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  li {
+    display: flex;
+    gap: 12px;
+
+    &::before {
+      content: '';
+      @include m.square-bullet(8px, 2px, 0.62em);
+      background: t.$red;
+    }
+  }
+
+  :where(p > a) {
+    font-weight: 700;
+  }
 }

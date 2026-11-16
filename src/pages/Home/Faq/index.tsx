@@ -26,13 +26,13 @@ export default function Faq() {
 
         <div className={styles.groups}>
           {FAQ_GROUPS.map((group, groupIndex) => (
-            <div key={group.title} className={styles.group}>
+            <div key={group.title} id={group.id} className={styles.group}>
               <h3 className={styles.groupTitle}>{group.title}</h3>
               {group.note ? (
                 <p className={styles.groupNote}>
                   {group.note.text}{' '}
-                  <Link to={ROUTES.check} className={styles.inlineLink}>
-                    {group.note.checkLink}
+                  <Link to={ROUTES.requirements} className={styles.inlineLink}>
+                    {group.note.link}
                   </Link>
                   .
                 </p>
@@ -44,7 +44,11 @@ export default function Faq() {
                   <Accordion.Item key={item.q} value={`${groupIndex}-${index}`}>
                     <Accordion.Control>{item.q}</Accordion.Control>
                     <Accordion.Panel>
-                      <p className={styles.answer}>{item.a}</p>
+                      {typeof item.a === 'string' ? (
+                        <p className={styles.answer}>{item.a}</p>
+                      ) : (
+                        <div className={styles.answerBlock}>{item.a}</div>
+                      )}
                     </Accordion.Panel>
                   </Accordion.Item>
                 ))}

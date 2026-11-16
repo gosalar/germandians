@@ -4,14 +4,17 @@ import MobileActionBar from '@/components/MobileActionBar';
 import SiteFooter from '@/components/SiteFooter';
 import SiteHeader from '@/components/SiteHeader';
 import PageChromeProvider from '@/contexts/PageChrome/PageChromeProvider';
+import VisitAnswersProvider from '@/contexts/VisitAnswers/VisitAnswersProvider';
 
 export default function SiteLayout() {
   return (
     <PageChromeProvider>
-      <SiteHeader />
-      <Outlet />
-      <SiteFooter />
-      <MobileActionBar />
+      <VisitAnswersProvider>
+        <SiteHeader />
+        <Outlet />
+        <SiteFooter />
+        <MobileActionBar />
+      </VisitAnswersProvider>
     </PageChromeProvider>
   );
 }

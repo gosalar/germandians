@@ -1,0 +1,192 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+// The Laufzettel: receipt paper (as on the fees receipt) with tick boxes and a torn edge.
+
+// Below the sticky header, with a margin under the slip so the torn edge stays on screen.
+$slip-top: 92px;
+$slip-gap: 24px;
+// On tall screens the slip stays shorter than the window, so it stays whole beside the questions for
+// longer before the end of the paper carries it away.
+$slip-max: 640px;
+
+.slip {
+  min-width: 0;
+  scroll-margin-top: 92px;
+
+  // Beside the questions: stays in view under the sticky header and never runs under the viewport.
+  // The whole slip fits below the header; a long list of steps scrolls inside it (`.region`) while the
+  // title and the two buttons stay in view.
+  @include m.from(t.$bp-content-columns) {
+    position: sticky;
+    top: $slip-top;
+    display: flex;
+    flex-direction: column;
+    max-height: min(calc(100vh - #{$slip-top + $slip-gap}), $slip-max);
+    max-height: min(calc(100dvh - #{$slip-top + $slip-gap}), $slip-max);
+  }
+}
+
+.paper {
+  background: t.$receipt;
+  color: t.$navy;
+  padding: 28px clamp(14px, 2.4vw, 22px) 20px;
+  font-family: t.$font-label;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  @include m.from(t.$bp-content-columns) {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+}
+
+.region {
+  @include m.from(t.$bp-content-columns) {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    // Room for the focus ring inside the scroll box.
+    margin: 0 -6px;
+    padding: 0 6px;
+  }
+}
+
+.title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+}
+
+.name {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: 26px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  @include m.label-font(600, 16px);
+  color: t.$ink-muted;
+}
+
+.rule {
+  border-top: 2px dashed t.$navy;
+  margin: 4px 0;
+}
+
+.empty {
+  margin: 0;
+  padding: 18px 4px;
+  text-align: center;
+  @include m.label-font(500, 17px);
+  color: t.$ink-muted;
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 0;
+
+  & + & {
+    border-top: 1.5px dashed t.$hairline;
+  }
+
+  &:first-child {
+    padding-top: 6px;
+  }
+}
+
+.box {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  border: 2px solid t.$navy;
+  border-radius: 3px;
+  background: t.$white;
+}
+
+.stepBody {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+// Each label has its words; colour only repeats them.
+.label {
+  @include m.label-font(700, 14px);
+  line-height: 1.4;
+  padding: 1px 8px;
+  border-radius: 6px;
+  border: 1.5px solid t.$navy;
+  background: t.$white;
+  color: t.$navy;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  &[data-label='do-next'] {
+    background: t.$navy;
+    color: t.$yellow;
+  }
+
+  &[data-label='find-out'] {
+    background: t.$highlight;
+  }
+
+  &[data-label='does-not-apply'] {
+    background: t.$status-green-bg;
+    border-color: t.$status-green-border;
+    color: t.$status-green-ink;
+  }
+}
+
+.text {
+  margin: 0;
+  @include m.label-font(500, 17px);
+  line-height: 1.45;
+  color: t.$ink-strong;
+}
+
+.topicLink {
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+  text-underline-offset: 3px;
+  @include m.touch-area;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 6px;
+}
+
+.status {
+  margin: 0;
+  @include m.label-font(600, 15px);
+  color: t.$ink-muted;
+  text-align: center;
+}
+
+.tearEdge {
+  flex: none;
+  height: 12px;
+  background:
+    linear-gradient(135deg, t.$receipt 50%, transparent 0) 0 0 / 24px 24px repeat-x,
+    linear-gradient(225deg, t.$receipt 50%, transparent 0) 0 0 / 24px 24px repeat-x;
+}

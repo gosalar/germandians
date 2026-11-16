@@ -4,12 +4,13 @@ import { type ReactNode } from 'react';
 import { Link } from 'react-router';
 
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
-import { buildEmailDraft, buildEmailDraftUrl } from '@/services/profileReview';
+import { buildEmailDraft, buildEmailDraftUrl, type EnquirySummary } from '@/services/profileReview';
 import { GERMAN_LESSONS, ROUTES, SECTIONS } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 import {
   FORM_COPY,
+  SUMMARY_COPY,
   consentSentence,
   draftFallbackPrompt,
   emailAppHint,
@@ -42,7 +43,7 @@ function FieldLabel({ number, children }: { number: number; children: ReactNode 
 }
 
 /** "Antrag auf Erstberatung": the profile review request, styled as a German form. */
-export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
+export default function ProfileReviewForm({ summary }: { summary?: EnquirySummary }) {
   const { formRef } = usePageChromeActions();
   const {
     status,
@@ -53,8 +54,10 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
     clearSubmission,
     locked,
     canSubmit,
-    displayedSnapshot,
-  } = useProfileReviewSubmission(snapshot);
+    displayedSummary,
+    summaryIncluded,
+    setSummaryIncluded,
+  } = useProfileReviewSubmission(summary);
 
   const form = useForm<ProfileReviewValues>({
     mode: 'controlled',
@@ -96,10 +99,25 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
       </div>
       <div className={styles.formRule} />
       <div className={styles.formIntro}>{FORM_COPY.intro}</div>
-      {displayedSnapshot ? (
+      {/* A page's summary of the visitor's answers, shown in full; it goes with the request only when ticked. */}
+      {displayedSummary ? (
         <div className={styles.snapshot} data-testid="form-snapshot">
-          <span className={styles.snapshotLabel}>{FORM_COPY.snapshotLabel}</span>
-          <span className={styles.snapshotValue}>{displayedSnapshot}</span>
+          <span id="f-summary-source" className={styles.snapshotLabel}>{SUMMARY_COPY[displayedSummary.source].label}</span>
+          <ul className={styles.snapshotLines} aria-labelledby="f-summary-source">
+            {displayedSummary.lines.map((line) => <li key={line}>{line}</li>)}
+          </ul>
+          <label htmlFor="f-summary" className={styles.summaryChoice}>
+            <input
+              id="f-summary"
+              type="checkbox"
+              checked={summaryIncluded}
+              disabled={locked}
+              onChange={(event) => setSummaryIncluded(event.currentTarget.checked)}
+              aria-describedby="f-summary-source"
+              className={styles.checkbox}
+            />
+            <span>{FORM_COPY.includeSummary}</span>
+          </label>
         </div>
       ) : null}
 
@@ -181,7 +199,7 @@ export default function ProfileReviewForm({ snapshot }: { snapshot?: string }) {
             {...consentProps}
           />
           <span>
-            {consentSentence(Boolean(displayedSnapshot), wantsGerman)}
+            {consentSentence(summaryIncluded && displayedSummary ? displayedSummary.source : null, wantsGerman)}
           </span>
         </label>
         {consentError ? <div id="f-consent-error" className={styles.fieldError}>{consentError}</div> : null}

@@ -1,0 +1,39 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.blocks {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+.block {
+  min-width: 0;
+  padding: 20px;
+  border: 1.5px dashed t.$navy;
+  border-radius: 16px;
+  background: t.$cream;
+  color: t.$ink;
+}
+
+.title {
+  @include m.sub-heading;
+  font-size: 24px;
+  line-height: 1.05;
+  color: t.$navy;
+}
+
+.body {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}

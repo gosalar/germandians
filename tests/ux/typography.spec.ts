@@ -76,7 +76,7 @@ for (const [width, height] of [[320, 900], [412, 891], [800, 1280], [1440, 900]]
     expect(await paintsWeight(page, '[class*="channelName"]', 800)).toBe(true);
     // Barlow is one file per weight, so its name is the same on every platform.
     expect(await renderedFonts(page, '[aria-label="Month 1"]')).toEqual(['BarlowSemiCondensed-ExtraBold']);
-    if (width < 1100) {
+    if (width < 1220) {
       await page.getByRole('button', { name: 'Menu', exact: true }).click();
       expect(await typography(page, '[class*="menuLink"]')).toEqual(await typography(page, 'nav [class*="_links_"] > a'));
       await expectFamily(page, '[class*="menuLink"]', 'hankengrotesk');
@@ -93,11 +93,13 @@ for (const [width, height] of [[320, 900], [412, 891], [800, 1280], [1440, 900]]
     await page.evaluate(() => document.fonts.ready);
     expect(await typography(page, 'h1')).toEqual(heading);
     expect(await typography(page, 'h1 + p')).toEqual(lead);
+    // Preset buttons on /check and answer buttons on /requirements share one role.
     const preset = '[class*="presetButton"]';
     const answer = '[class*="_pill_"]';
-    expect(await typography(page, preset)).toEqual(await typography(page, answer));
+    const fontSize = (selector: string) => page.locator(selector).first().evaluate(el => getComputedStyle(el).fontSize);
+    const presetRole = { ...(await typography(page, preset)), size: await fontSize(preset) };
+    expect(presetRole.size).toBe('15px');
     expect(await renderedFonts(page, preset)).toEqual(['BarlowSemiCondensed-Bold']);
-    expect(await renderedFonts(page, answer)).toEqual(['BarlowSemiCondensed-Bold']);
     const full = '[class*="_scoreClass_"]';
     const compact = '[class*="mobileScoreClass"]';
     expect(await typography(page, compact)).toEqual(await typography(page, full));
@@ -106,6 +108,13 @@ for (const [width, height] of [[320, 900], [412, 891], [800, 1280], [1440, 900]]
     await page.setViewportSize({ width: width < 1100 ? 1440 : 412, height });
     expect(await typography(page, compact)).toEqual(await typography(page, full));
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.setViewportSize({ width, height });
+
+    await page.goto('/requirements');
+    await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+    await page.evaluate(() => document.fonts.ready);
+    expect({ ...(await typography(page, answer)), size: await fontSize(answer) }).toEqual(presetRole);
+    expect(await renderedFonts(page, answer)).toEqual(['BarlowSemiCondensed-Bold']);
 
     for (const path of ['/about', '/community', '/learn-german', '/privacy', '/missing-typography-page']) {
       await page.goto(path);

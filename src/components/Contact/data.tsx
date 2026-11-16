@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 
+import type { SummarySource } from '@/services/profileReview';
 import { CONTACT, ROUTES } from '@/utils/constants';
 
 import styles from './styles.module.scss';
@@ -16,7 +17,7 @@ export const FORM_COPY = {
   title: 'Antrag auf Erstberatung',
   subtitle: 'Application for a first consultation',
   intro: 'Relax, this is the shortest German form you will ever fill in.',
-  snapshotLabel: 'Attached from your grade check',
+  includeSummary: 'Attach this summary to my enquiry',
   nameLabel: 'Name',
   namePlaceholder: 'e.g. Priya Sharma',
   emailLabel: 'Email (optional)',
@@ -43,14 +44,27 @@ export const FORM_COPY = {
   consentError: 'Please tick the box so we can contact you.',
 } as const;
 
+/** How the form names each page's summary: above its lines, and in the consent sentence once it is attached. */
+export const SUMMARY_COPY: Record<SummarySource, { label: string; consent: string }> = {
+  'grade-check': {
+    label: 'From your grade check',
+    consent: 'the attached grade-check summary',
+  },
+  requirements: {
+    label: 'From your answers',
+    consent: 'the attached summary of my answers',
+  },
+};
+
 export function emailAppHint() {
   return <>This opens your email app. Nothing is sent until you press send there. You can also email {CONTACT.email} directly.</>;
 }
 
-export function consentSentence(includesSummary: boolean, includesGerman = false) {
+/** `attachedSummary` is the source of the summary the visitor ticked to attach, or null when none is attached. */
+export function consentSentence(attachedSummary: SummarySource | null, includesGerman = false) {
   return (
     <>
-      {`I agree that Germandians can use my name, WhatsApp number${includesSummary ? ', any email address I provide and the attached grade-check summary' : ' and any email address I provide'} to contact me about my profile review${includesGerman ? ' and German lessons' : ''}. Details are in the `}
+      {`I agree that Germandians can use my name, WhatsApp number${attachedSummary ? `, any email address I provide and ${SUMMARY_COPY[attachedSummary].consent}` : ' and any email address I provide'} to contact me about my profile review${includesGerman ? ' and German lessons' : ''}. Details are in the `}
       <Link to={ROUTES.privacy} target="_blank" rel="noopener" className={styles.privacyLink}>
         privacy note
       </Link>

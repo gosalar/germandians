@@ -1,0 +1,57 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+// The questions are ruled like the topic card's "More detail" row: a dashed line above each, the
+// same + / − box, and the answer indented under the question.
+
+.list {
+  max-width: 860px;
+  border-bottom: 1.5px dashed t.$underline-muted;
+}
+
+.item {
+  border-top: 1.5px dashed t.$underline-muted;
+}
+
+.question {
+  padding: 8px 0;
+  font-family: t.$font-body;
+  font-weight: 700;
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.answer {
+  max-width: 65ch;
+  // Under the question text: the box is 26px wide with a 12px gap.
+  padding: 2px 0 22px 38px;
+
+  @include m.below(t.$bp-mobile) {
+    padding-left: 0;
+  }
+}
+
+.answerText {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: t.$ink;
+  text-wrap: pretty;
+}
+
+.topicLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  @include m.label-font(700, 16px);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}

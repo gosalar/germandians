@@ -16,7 +16,7 @@ for (const width of [390, 1440]) for (const route of ROUTES) {
 }
 
 // The audit above does not look at placeholder text, so its contrast is measured here.
-for (const route of ['/', '/check']) {
+for (const route of ['/', '/check', '/requirements']) {
   test(`placeholder text meets 4.5:1 on ${route}`, async ({ page }) => {
     await page.goto(route);
     const ratios = await page.locator('input[placeholder]').evaluateAll((inputs) => {

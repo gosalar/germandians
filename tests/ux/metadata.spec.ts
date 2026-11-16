@@ -2,11 +2,11 @@ import { expect, test } from '@playwright/test';
 
 import { PUBLIC_PAGES } from '../../src/utils/publicPages.ts';
 
-/** Every registered page. The about, community and German pages are also checked by name. */
+/** Every registered page. The requirements, about, community and German pages are also checked by name. */
 const ROUTES = PUBLIC_PAGES.map((page) => page.path);
-const NEW_PAGES = ['/about', '/community', '/learn-german'];
+const NEW_PAGES = ['/requirements', '/about', '/community', '/learn-german'];
 
-test('the registry lists the about, community and German pages', () => {
+test('the registry lists the requirements, about, community and German pages', () => {
   expect(ROUTES).toEqual(expect.arrayContaining(NEW_PAGES));
 });
 
@@ -39,7 +39,7 @@ for (const route of ROUTES) {
 test('sitemap and robots list only public pages and unknown routes stay noindex', async ({ page, request }, testInfo) => {
   const origin = testInfo.project.name === 'endpoint' ? 'https://germandians.example.test' : 'https://gosalar.github.io';
   const sitemap = await (await request.get('/sitemap.xml')).text();
-  const expected = ['/', '/check/', '/about/', '/community/', '/learn-german/', '/privacy/'];
+  const expected = ['/', '/check/', '/requirements/', '/about/', '/community/', '/learn-german/', '/privacy/'];
   for (const path of expected) expect(sitemap).toContain(`<loc>${origin}${path}</loc>`);
   expect(sitemap.match(/<loc>/g)).toHaveLength(expected.length);
   expect(sitemap).not.toMatch(/_theme|404/);

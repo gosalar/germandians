@@ -20,7 +20,7 @@
   min-height: 62px;
 }
 
-// Inline links + CTA from 1100px up.
+// Inline links + CTA from 1220px ($bp-nav) up.
 .full {
   display: flex;
   align-items: center;
@@ -120,7 +120,7 @@
   }
 }
 
-// Menu button below 1100px.
+// Menu button below 1220px ($bp-nav).
 .menuButton {
   flex: none;
   display: flex;

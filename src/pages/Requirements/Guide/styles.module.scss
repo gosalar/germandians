@@ -1,0 +1,595 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+// The guide: the contents list beside the topic cards from 1024px, and every card built from the
+// same parts in the same places. Red is kept for the stamp and its dot in the contents list.
+
+// How far the stamp rises above a card's top edge. Cards are spaced and scrolled so it is never cut off.
+$stamp-overhang: 30px;
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(28px, 3vw, 48px);
+  align-items: start;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  @include m.from(t.$bp-nav) {
+    grid-template-columns: 230px minmax(0, 1fr);
+  }
+}
+
+// Contents list: from 1024px, in view beside the cards and below the sticky header.
+.contents {
+  display: none;
+
+  @include m.from(t.$bp-content-columns) {
+    display: block;
+    position: sticky;
+    top: 88px;
+    max-height: calc(100vh - 112px);
+    overflow-y: auto;
+    // Room for the focus ring inside the scroll box.
+    padding: 4px;
+    margin: -4px;
+  }
+}
+
+.contentsTitle {
+  margin: 0;
+  @include m.label-font(700, 15px);
+  color: t.$slate;
+}
+
+.contentsList {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  border-left: 2px solid t.$hairline;
+}
+
+.contentsLink {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-left: -2px;
+  padding: 7px 4px 7px 14px;
+  border-left: 2px solid transparent;
+  color: t.$ink;
+  text-decoration: none;
+  @include m.navigation-font;
+  font-size: 15.5px;
+  line-height: 1.3;
+
+  &:hover {
+    border-left-color: t.$navy;
+    color: t.$navy;
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$navy;
+    outline-offset: -1px;
+    border-radius: 4px;
+  }
+}
+
+.contentsNumber {
+  flex: none;
+  width: 18px;
+  @include m.label-font(700, 14px);
+  color: t.$slate;
+}
+
+.contentsName {
+  min-width: 0;
+}
+
+.contentsDot {
+  flex: none;
+  align-self: center;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: t.$red;
+}
+
+// The cards. The gap leaves room for a stamp above the next card.
+.topics {
+  display: grid;
+  gap: clamp(40px, 4vw, 48px);
+  min-width: 0;
+}
+
+.card {
+  position: relative;
+  min-width: 0;
+  padding: clamp(24px, 2.6vw, 32px);
+  border-radius: 20px;
+  background: t.$white;
+  box-shadow: inset 0 0 0 1.5px t.$navy;
+  // A deep link lands below the sticky header with the stamp's overhang in view too.
+  scroll-margin-top: $stamp-overhang + 12px;
+
+  @include m.below(t.$bp-mobile) {
+    padding: 24px 18px 18px;
+    border-radius: 16px;
+  }
+}
+
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.cardNumber {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: t.$navy;
+  color: t.$yellow;
+  @include m.label-font(700, 20px);
+  line-height: 1;
+}
+
+.cardTitle {
+  @include m.sub-heading;
+  min-width: 0;
+  font-size: clamp(26px, 2.8vw, 36px);
+  color: t.$navy;
+  text-wrap: balance;
+}
+
+// The German word and its meaning, on a sticker.
+.word {
+  @include m.sticker(t.$cream, t.$navy, -2deg);
+  gap: 6px;
+  align-items: baseline;
+  margin: 0;
+  padding: 5px 12px;
+  font-size: 15px;
+}
+
+.wordGerman {
+  @include m.label-font(700, 15px);
+}
+
+.wordMeaning {
+  @include m.label-font(600, 14px);
+  color: t.$slate;
+}
+
+.summary {
+  @include m.page-lead(clamp(18px, 1.5vw, 20px));
+  max-width: 62ch;
+  margin-top: 16px;
+  color: t.$ink-strong;
+}
+
+// The three panels, in reading order (need, steps, sources). Phones stack them. Tablets, and the cards
+// beside the contents list up to $bp-nav, put "Who this applies to" across the card with "What to do" and
+// "Where to check" side by side beneath: three across would leave each about 200px wide there. From
+// $bp-nav the card is wide enough for three across.
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  @include m.from(t.$bp-nav) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+}
+
+.panel {
+  min-width: 0;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: t.$paper;
+
+  @media (min-width: t.$bp-mobile) and (max-width: (t.$bp-nav - 0.02px)) {
+    // "Who this applies to" takes its own row, and so does a panel left without a partner beside it.
+    &[data-part='need'],
+    &[data-part='steps']:last-child,
+    &[data-part='sources']:first-child,
+    &[data-part='need'] + &[data-part='sources'] {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+// After "What to do": a link to the tool its steps name (the grade check).
+.panelLink {
+  margin: 12px 0 0;
+  padding-left: 26px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+
+  a {
+    @include m.touch-area;
+  }
+}
+
+.panelTitle {
+  margin: 0 0 8px;
+  @include m.label-font(700, 15px);
+  line-height: 1.2;
+  color: t.$slate;
+}
+
+.panelText {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: t.$ink;
+  text-wrap: pretty;
+}
+
+.todo {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todoItem {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink;
+  text-wrap: pretty;
+}
+
+.tickBox {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  border: 2px solid t.$navy;
+  border-radius: 4px;
+  background: t.$white;
+}
+
+.sourceList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: t.$ink;
+
+  > li:first-child > * {
+    margin-top: 0;
+  }
+}
+
+// "More detail": the page's native disclosure (`disclosureSummary` and `disclosureIcon` in the page
+// styles), so it opens without JavaScript.
+.more {
+  margin-top: 20px;
+  border-top: 1.5px dashed t.$hairline;
+}
+
+.moreSummary {
+  margin-top: 6px;
+  @include m.label-font(700, 16px);
+}
+
+.moreBody {
+  display: grid;
+  gap: 18px;
+  max-width: 65ch;
+  padding: 6px 0 8px;
+}
+
+.detailHeading {
+  margin: 0;
+  font-family: t.$font-body;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: t.$ink-strong;
+}
+
+.detailBody {
+  margin: 4px 0 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: t.$ink;
+  text-wrap: pretty;
+}
+
+.detailList {
+  margin: 4px 0 0;
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: t.$ink;
+
+  li + li {
+    margin-top: 2px;
+  }
+}
+
+.detailLink {
+  margin: 8px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+
+  a {
+    @include m.touch-area;
+  }
+}
+
+// A small table of facts in "More detail" (the dMAT test dates). Below the phone breakpoint each row
+// is a block, and every cell shows its column name.
+.factTable {
+  width: 100%;
+  max-width: 36rem;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 16px;
+  line-height: 1.45;
+  color: t.$ink;
+
+  th,
+  td {
+    padding: 8px 16px 8px 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid t.$line;
+  }
+}
+
+.factHead th {
+  @include m.label-font(700, 15px);
+  line-height: 1.2;
+  color: t.$slate;
+  border-bottom: 1.5px solid t.$navy;
+}
+
+.factRowHeader {
+  font-weight: 700;
+  color: t.$ink-strong;
+}
+
+@include m.below(t.$bp-mobile) {
+  .factTable,
+  .factTable tbody,
+  .factRow {
+    display: block;
+  }
+
+  .factHead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .factRow {
+    padding: 10px 0;
+    border-bottom: 1px solid t.$line;
+
+    .factTable & > * {
+      display: grid;
+      grid-template-columns: 7.5em minmax(0, 1fr);
+      gap: 12px;
+      padding: 2px 0;
+      border: 0;
+    }
+
+    > *::before {
+      content: attr(data-label);
+      @include m.label-font(600, 15px);
+      color: t.$slate;
+    }
+  }
+}
+
+// Phones and tablets: back to the route card. From 1024px the contents list is beside the cards.
+.allTopics {
+  margin: 10px 0 0;
+  @include m.label-font(700, 15px);
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  @include m.from(t.$bp-content-columns) {
+    display: none;
+  }
+}
+
+// Costs: a plain table; one block per cost on phones.
+.costs {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink;
+
+  th,
+  td {
+    padding: 12px 16px 12px 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid t.$line;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 0;
+  }
+}
+
+.costsHead th {
+  @include m.label-font(700, 15px);
+  line-height: 1.2;
+  color: t.$slate;
+  border-bottom: 1.5px solid t.$navy;
+}
+
+.costGroupName {
+  @include m.label-font(700, 16px);
+  line-height: 1.3;
+  color: t.$navy;
+  background: t.$paper;
+
+  .costs & {
+    padding: 10px 12px;
+  }
+}
+
+.costName {
+  width: 26%;
+  font-family: t.$font-body;
+  font-weight: 700;
+  color: t.$ink-strong;
+}
+
+.costAmount {
+  @include m.label-font(700, 17px);
+  line-height: 1.35;
+  color: t.$navy;
+  white-space: nowrap;
+
+  &[data-empty] {
+    @include m.label-font(600, 15px);
+    color: t.$slate;
+  }
+}
+
+.costDetail {
+  text-wrap: pretty;
+}
+
+@include m.below(t.$bp-mobile) {
+  .costs,
+  .costGroup,
+  .costRow {
+    display: block;
+  }
+
+  .costsHead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .costGroupRow {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .costGroupName {
+    display: block;
+    border-radius: 8px;
+
+    .costs & {
+      border-bottom: 0;
+    }
+  }
+
+  .costRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2px 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid t.$line;
+
+    .costs & > * {
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  .costName {
+    width: auto;
+  }
+
+  .costAmount {
+    text-align: right;
+    white-space: normal;
+  }
+
+  .costDetail {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+}
+
+// "Für dich": the page's one moment of motion. It overhangs the card's top right corner.
+.stamp {
+  position: absolute;
+  top: -$stamp-overhang;
+  right: 16px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 5px 12px 4px;
+  border: 3px double t.$red;
+  border-radius: 6px;
+  background: t.$white;
+  color: t.$red;
+  text-align: center;
+  transform: rotate(6deg);
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: stamp-land 0.32s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+
+    // Below the fold: hidden until the card scrolls into view, then it lands.
+    &[data-waiting] {
+      animation: none;
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes stamp-land {
+  from {
+    opacity: 0;
+    transform: rotate(-8deg) scale(1.4);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(6deg) scale(1);
+  }
+}
+
+.stampWord {
+  @include m.label-font(700, 15px);
+  line-height: 1.05;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.stampNote {
+  @include m.label-font(600, 13px);
+  line-height: 1.2;
+}

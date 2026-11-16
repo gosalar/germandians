@@ -1,0 +1,294 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+// The questions section: the Fragebogen (form paper) and the Laufzettel (the slip, styled in NextSteps)
+// share one grid. Phones and tablets stack them; from $bp-content-columns the slip sits beside.
+
+.section {
+  background: t.$sand;
+  @include m.section-padding;
+}
+
+.inner {
+  @include m.container;
+}
+
+.head {
+  max-width: 44em;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.heading {
+  @include m.display-heading(clamp(40px, 5.4vw, 76px));
+}
+
+.lead {
+  @include m.body-copy;
+  margin-top: 14px;
+  color: t.$ink-strong;
+}
+
+.grid {
+  display: grid;
+  gap: clamp(28px, 3vw, 40px);
+  align-items: start;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  }
+}
+
+// The Fragebogen: a sibling of the contact form's paper, lifted with the hard navy shadow.
+.paper {
+  min-width: 0;
+  background: t.$form;
+  color: t.$navy;
+  border: 1.5px solid t.$navy;
+  border-radius: 6px;
+  padding: clamp(18px, 2.6vw, 32px);
+  @include m.pop-shadow(6px);
+}
+
+.paperTitle {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  padding-bottom: 14px;
+  border-bottom: 3px solid t.$navy;
+}
+
+.paperName {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(26px, 2.6vw, 32px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.paperSubtitle {
+  @include m.label-font(600, 16px);
+  color: t.$ink-muted;
+}
+
+.note {
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$ink-muted;
+}
+
+// Only without JavaScript (inside <noscript>): the questions cannot work, the guide can.
+.noScript {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border-left: 4px solid t.$navy;
+  background: t.$note;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$ink-strong;
+}
+
+// Two columns from tablet up. Question 3 carries the dMAT field list, so it spans both: the list and
+// its answers side by side, its follow-ups side by side beneath. Question 5 (APS), which can open a
+// follow-up, spans two rows, so question 6 sits under question 4. That keeps the columns even.
+.questions {
+  display: grid;
+  gap: 26px 28px;
+  margin-top: 22px;
+  align-items: start;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    // Rows: 1 and 2, 3, then 4 and 5, then 5 (continued) and 6. The last row is flexible, so a tall
+    // question 5 grows that row only and question 6 stays close under question 4.
+    grid-template-rows: auto auto auto 1fr;
+  }
+}
+
+.item {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  // Phones: one question at a time; its follow-ups show with it.
+  @include m.below(t.$bp-mobile) {
+    &:not([data-current]) {
+      display: none;
+    }
+  }
+
+  @include m.from(t.$bp-mobile) {
+    &[data-wide] {
+      grid-column: 1 / -1;
+    }
+
+    &[data-tall] {
+      grid-row: span 2;
+    }
+  }
+}
+
+// Follow-ups under their question: one column, or two when they share a question that spans the paper.
+.followUps {
+  display: grid;
+  gap: 14px 28px;
+  align-items: start;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  }
+}
+
+%group {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  scroll-margin-top: 92px;
+}
+
+.question {
+  @extend %group;
+  padding: 0;
+}
+
+// A follow-up: a note-coloured slip of the same form, directly under its question.
+.followUp {
+  @extend %group;
+  padding: 14px;
+  border-radius: 10px;
+  background: t.$note;
+  border-left: 4px solid t.$navy;
+}
+
+// Floated so the legend sits inside the group's padding and background like any other line.
+.legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: t.$font-body;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: t.$ink-strong;
+
+  .followUp & {
+    font-size: 16px;
+  }
+}
+
+.number {
+  @include m.label-font(700, 15px);
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: t.$navy;
+  color: t.$yellow;
+}
+
+// The hint and the answers under the floated legend. A wide question puts them side by side from tablet up.
+.body {
+  clear: both;
+
+  @include m.from(t.$bp-mobile) {
+    [data-wide] > & {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 28px;
+      align-items: start;
+    }
+  }
+}
+
+.hint {
+  padding-top: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$ink-soft;
+
+  p {
+    margin: 0;
+  }
+
+  strong {
+    color: t.$navy;
+  }
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.pill {
+  @include m.label-font(700, 15px);
+  flex: 1 1 auto;
+  min-height: 46px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1.5px solid t.$navy;
+  background: t.$paper;
+  color: t.$navy;
+  cursor: pointer;
+  text-align: center;
+  // A long answer that wraps on a narrow phone splits evenly rather than leaving one word alone.
+  text-wrap: balance;
+  transition:
+    background var(--motion-duration, 0.2s),
+    color var(--motion-duration, 0.2s);
+
+  &:hover {
+    background: t.$sand;
+  }
+
+  &[data-unsure] {
+    border-style: dashed;
+  }
+
+  &[aria-pressed='true'] {
+    background: t.$navy;
+    color: t.$yellow;
+    border-style: solid;
+  }
+}
+
+// Phone stepper: Back, "Question 3 of 6", Skip or Next.
+.stepper {
+  display: none;
+
+  @include m.below(t.$bp-mobile) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1.5px dashed t.$hairline;
+  }
+}
+
+.stepButton {
+  flex: none;
+
+  &[aria-disabled='true'] {
+    opacity: 0.45;
+    cursor: default;
+  }
+}
+
+.progress {
+  @include m.label-font(700, 15px);
+  color: t.$slate;
+  text-align: center;
+}

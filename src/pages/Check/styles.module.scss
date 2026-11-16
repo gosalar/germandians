@@ -47,18 +47,10 @@
   gap: 20px;
   align-items: start;
 
-  @include m.from(t.$bp-nav) {
+  @include m.from(t.$bp-check-columns) {
     grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
     gap: 28px;
-    align-items: stretch;
   }
-}
-
-.inputsColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  min-width: 0;
 }
 
 .panel {
@@ -84,13 +76,6 @@
   gap: 4px;
   border-bottom: 2px solid t.$navy;
   padding-bottom: 12px;
-}
-
-.panelStep {
-  @include m.label-font(700, 14px);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: t.$red;
 }
 
 .panelTitle {
@@ -187,7 +172,7 @@
   justify-content: space-between;
   gap: 8px 16px;
 
-  @include m.from(t.$bp-nav) {
+  @include m.from(t.$bp-check-columns) {
     display: none;
   }
 }
@@ -228,49 +213,6 @@
   color: t.$ink-strong;
 }
 
-.toggleGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.toggleLabel {
-  font-size: 16px;
-  font-weight: 700;
-  color: t.$navy;
-}
-
-.pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.pill {
-  @include m.label-font(700, 15px);
-  flex: 1 1 auto;
-  min-height: 46px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1.5px solid t.$navy;
-  background: t.$paper;
-  color: t.$navy;
-  cursor: pointer;
-  text-align: center;
-  transition:
-    background var(--motion-duration, 0.2s),
-    color var(--motion-duration, 0.2s);
-
-  &:hover {
-    background: t.$sand;
-  }
-
-  &[aria-pressed='true'] {
-    background: t.$navy;
-    color: t.$yellow;
-  }
-}
-
 // Result & Diagnosis Column
 .result {
   background: t.$navy;
@@ -289,7 +231,7 @@
   padding-bottom: 14px;
   border-bottom: 1.5px solid t.$navy-line;
 
-  @include m.from(t.$bp-nav) {
+  @include m.from(t.$bp-check-columns) {
     position: sticky;
     top: 63px;
     z-index: 10;
@@ -369,6 +311,13 @@
   color: t.$mist;
 }
 
+.formulaSource {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: t.$mist;
+}
+
 .diagnosisCard {
   background: t.$paper;
   color: t.$navy;
@@ -394,51 +343,18 @@
   color: t.$ink-strong;
 }
 
-.profileNote {
-  margin: 0;
-  font-size: 14px;
-  color: t.$ink-soft;
-}
-
-.sources {
+// The one link to the requirements page, set off from the conversion by a rule.
+.requirementsLink {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
-  font-size: 14px;
-  color: t.$mist;
-
-  a {
-    color: t.$yellow;
-    text-underline-offset: 3px;
-  }
+  padding-top: 14px;
+  border-top: 1.5px solid t.$hairline;
 }
 
-.diagnosisList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  > li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 15.5px;
-    line-height: 1.48;
-    color: t.$ink;
-  }
-}
-
-.diagnosisBullet {
-  @include m.square-bullet(10px, 3px, 6px);
-  background: t.$orange;
-}
-
-.diagnosisBulletTitle {
-  color: t.$navy;
-  font-weight: 700;
+.requirementsButton {
+  margin-top: 4px;
 }
 
 .diagnosisActions {

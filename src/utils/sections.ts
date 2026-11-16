@@ -10,6 +10,8 @@ export const SECTIONS = {
   /** The German lessons enquiry form, on the Learn German page. */
   germanLessonsForm: 'german-lessons-form',
   faq: 'faq',
+  /** The FAQ's "Fees and terms" group, the target of the fees section's "How the quote works". */
+  faqFees: 'faq-fees',
   contact: 'contact',
   contactForm: 'contact-form',
   mentors: 'why',

@@ -7,25 +7,21 @@
   @include m.section-padding;
 }
 
+// The copy (headline, introduction, links, buttons) beside the receipt from $bp-fees-columns; stacked below.
 .grid {
   @include m.container;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  grid-template-areas:
-    'a b'
-    'c b';
-  gap: clamp(36px, 5vw, 72px) clamp(40px, 6vw, 96px);
-  align-items: start;
+  gap: clamp(48px, 6vw, 96px);
+  align-items: center;
 
   @include m.below(t.$bp-fees-columns) {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: 'a' 'b' 'c';
+    align-items: start;
   }
 }
 
-// Intro (area a)
-.intro {
-  grid-area: a;
+.copy {
   display: flex;
   flex-direction: column;
   gap: 22px;
@@ -65,14 +61,63 @@
   color: t.$mist-soft;
 }
 
-// Receipt (area b)
+// Where the quote terms and outside costs are answered: two rows, ruled like an index.
+.links {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 30rem;
+  border-top: 1px solid t.$navy-line;
+
+  > li {
+    border-bottom: 1px solid t.$navy-line;
+  }
+}
+
+.link {
+  @include m.navigation-font;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 52px;
+  padding: 10px 2px;
+  font-size: clamp(18px, 1.5vw, 20px);
+  line-height: 1.3;
+  color: t.$white;
+  text-decoration: none;
+
+  &:hover {
+    color: t.$yellow;
+  }
+
+  // The theme's focus ring, for a link that is not a Mantine control.
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 2px;
+  }
+}
+
+.linkArrow {
+  flex: none;
+  color: t.$yellow;
+  font-size: 1.1em;
+}
+
+// Receipt
 .printer {
-  grid-area: b;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
   min-width: 0;
+
+  // Stacked from tablet up: the receipt lines up under the copy's left edge, so the section reads as
+  // one column. (On phones it fills the width anyway.)
+  @include m.below(t.$bp-fees-columns) {
+    justify-self: start;
+    width: min(100%, 390px);
+  }
 }
 
 .printerBody {
@@ -234,73 +279,10 @@
   @include m.touch-area;
 }
 
-// Details (area c)
-.details {
-  grid-area: c;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  min-width: 0;
-}
-
-.afterAdmission {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.paidSeparately {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.detailTitle {
-  margin: 0;
-  font-family: t.$font-display;
-  font-weight: 800;
-  font-size: clamp(24px, 2.2vw, 30px);
-  color: t.$white;
-}
-
-.detailBody {
-  @include m.body-copy;
-  max-width: 46ch;
-  color: t.$mist-soft;
-}
-
-.costList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px 24px;
-  font-size: 17px;
-  line-height: 1.45;
-  color: t.$mist-light;
-
-  > li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-  }
-}
-
-.costHeading {
-  @include m.label-font(700, 18px);
-  margin: 10px 0 12px;
-  color: t.$yellow;
-}
-
-.bullet {
-  @include m.square-bullet(10px, 2px, 8px);
-  background: t.$yellow;
-}
-
 .ctas {
   align-self: flex-start;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin-top: 10px;
 }

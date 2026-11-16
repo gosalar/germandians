@@ -15,10 +15,13 @@ export const RECEIPT_ITEMS = [
 
 export const FEES_COPY = {
   intro: `${FEE_POLICY.exception} The receipt lists the full service; your quote confirms what yours includes.`,
-  quoteTitle: 'Agreeing your quote',
-  paymentTitle: 'When payment is due',
+  /** Link to the FAQ's fee questions, where the quote terms and payment timing are answered. */
+  quoteLink: 'How the quote works',
+  /** Link to the costs topic on /requirements: what students pay to other organisations. */
+  costsLink: 'Other costs to plan for',
+  /** Read by the FAQ's "When is payment due?". */
   payment: `${FEE_POLICY.due} Your written quote states what triggers payment.`,
-  separateTitle: 'Paid separately, to other organisations',
+  /** Read by the FAQ's "Do you help with funding?", after its link to the costs topic. Never on /requirements: it names the service fee. */
   separate: 'These costs are separate from the Germandians service fee. They are planning figures, not a quote. Check the current charge and refund terms with each provider.',
 } as const;
 
@@ -29,7 +32,7 @@ export const QUOTE_TOPIC = {
   setbacks: 'an unsuccessful intake, a visa refusal or a funding failure',
 } as const;
 
-/** What the written quote settles before work starts. The site names the topics; the quote answers them. */
+/** What the written quote settles before work starts. The site names the topics (in the FAQ); the quote answers them. */
 export const QUOTE_TOPICS = {
   lead: 'Before work starts, your written quote states:',
   items: [
