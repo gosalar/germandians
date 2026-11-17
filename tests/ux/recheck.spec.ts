@@ -45,11 +45,11 @@ for (const [width, height] of viewports) {
         if (width === 1219) {
           // Below the header breakpoint the menu button replaces the inline row.
           await expect(page.getByRole('button', { name: 'Menu', exact: true })).toBeVisible();
-          await expect(row.getByRole('link', { name: 'Requirements', exact: true })).toBeHidden();
+          await expect(row.getByRole('button', { name: 'Requirements', exact: true })).toBeHidden();
         }
         if (width === 1220) {
-          // From the breakpoint the inline row holds every entry, Requirements included, on one line.
-          await expect(row.getByRole('link', { name: 'Requirements', exact: true })).toBeVisible();
+          // From the breakpoint the inline row holds every entry, the Requirements menu included, on one line.
+          await expect(row.getByRole('button', { name: 'Requirements', exact: true })).toBeVisible();
           const lines = await row.evaluate(element => {
             const items = [...element.children].filter(child => child.getBoundingClientRect().width > 0);
             const centres = items.map(child => { const box = child.getBoundingClientRect(); return box.top + box.height / 2; });

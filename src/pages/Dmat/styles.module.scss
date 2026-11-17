@@ -1,0 +1,192 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.page {
+  background: t.$paper;
+}
+
+.opening {
+  @include m.section-padding;
+  background: t.$sand;
+  border-bottom: 1px solid t.$hairline;
+}
+
+.openingGrid {
+  display: grid;
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.65fr);
+  }
+}
+
+.openingMeta {
+  display: grid;
+  gap: 6px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.guideNav {
+  @include m.pop-shadow(4px);
+  padding: clamp(14px, 3vw, 28px);
+  border: 2px solid t.$navy;
+  background: t.$receipt;
+
+  p {
+    @include m.sticker;
+    @include m.label-font(800, 16px);
+    margin-bottom: 10px;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    border-top: 1px solid t.$line;
+  }
+
+  a {
+    @include m.navigation-font;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 4px;
+  }
+}
+
+.guide {
+  display: grid;
+  gap: 16px;
+  padding-top: clamp(28px, 5vw, 64px);
+}
+
+.guideContent {
+  padding-inline: clamp(20px, 5vw, 72px);
+}
+
+.section {
+  display: grid;
+  gap: clamp(14px, 3vw, 36px);
+  padding: clamp(14px, 3vw, 36px);
+  border: 1px solid t.$hairline;
+  border-radius: 8px;
+  background: t.$receipt;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.6fr);
+  }
+
+  h2 {
+    @include m.display-heading(clamp(27px, 3vw, 40px));
+    align-self: start;
+    line-height: 1.04;
+  }
+}
+
+.sectionBody {
+  @include m.body-copy;
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  font-size: 17px;
+
+  > p {
+    margin: 0;
+  }
+}
+
+.sources {
+  display: grid;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 10px 0 0;
+  border-top: 1px solid t.$line;
+}
+
+.action a {
+  @include m.touch-area;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.puzzles {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+
+  div {
+    padding: 10px 14px;
+    border-inline-start: 3px solid t.$yellow;
+    background: t.$paper;
+  }
+
+  dt {
+    @include m.label-font(800, 17px);
+  }
+
+  dd {
+    margin: 2px 0 0;
+  }
+}
+
+.registration {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+.dates {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 8px clamp(4px, 1.5vw, 16px);
+    border-bottom: 1px solid t.$line;
+    text-align: left;
+  }
+
+  thead {
+    @include m.label-font(800, 16px);
+    background: t.$sand;
+  }
+
+  tbody {
+    font-size: 16px;
+  }
+}
+
+.practice {
+  @include m.pop-shadow(5px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 32px;
+  margin-block: clamp(28px, 5vw, 64px);
+  padding: clamp(16px, 3vw, 36px);
+  border: 2px solid t.$navy;
+  background: t.$highlight;
+
+  h2 {
+    @include m.display-heading(clamp(30px, 4vw, 48px));
+  }
+
+  p {
+    @include m.body-copy;
+    margin-top: 8px;
+  }
+}

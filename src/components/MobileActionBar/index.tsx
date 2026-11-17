@@ -13,7 +13,7 @@ import styles from './styles.module.scss';
  * hero buttons have scrolled away and hides again while the form is on screen.
  */
 export default function MobileActionBar() {
-  const { heroCtaInView, formInView, menuOpen } = usePageChrome();
+  const { heroCtaInView, formInView, menuOpen, immersive } = usePageChrome();
   const [footerInView, setFooterInView] = useState(false);
   useEffect(() => {
     const footer = document.querySelector('footer');
@@ -23,8 +23,12 @@ export default function MobileActionBar() {
     });
     observer.observe(footer);
     return () => observer.disconnect();
-  }, []);
+    // The footer leaves the page during a test and is a new element afterwards.
+  }, [immersive]);
   const visible = !heroCtaInView && !formInView && !menuOpen && !footerInView;
+
+  // A running test has the screen to itself.
+  if (immersive) return null;
 
   return (
     <>

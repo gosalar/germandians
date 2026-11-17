@@ -1,0 +1,268 @@
+{
+  "area": "mathematics",
+  "blocks": [
+    {
+      "text": "A sequence is a list of numbers in a fixed order. Its members are called terms, and a₁, a₂, a₃ and so on stand for the first, second and third term; aₙ is the term in place n. Two kinds of sequence follow a simple rule and appear wherever something grows or shrinks step by step.",
+      "type": "p"
+    },
+    {
+      "text": "In an arithmetic sequence, each term is the previous one plus a fixed number d, the common difference. The sequence 10, 13, 16, 19 has d = 3; a sequence that falls has a negative d. To reach term n from the first term, d is added n − 1 times:",
+      "type": "p"
+    },
+    {
+      "text": "aₙ = a₁ + (n − 1) × d",
+      "type": "formula"
+    },
+    {
+      "text": "To add the first n terms, write the sum forwards and backwards and add the two lines. Each of the n columns then adds up to a₁ + aₙ: the first column pairs the first term with the last, the second column the second term with the second-to-last, and so on. So twice the sum is n × (a₁ + aₙ), and the sum Sₙ is n × (a₁ + aₙ) ÷ 2.",
+      "type": "p"
+    },
+    {
+      "text": "In a geometric sequence, each term is the previous one multiplied by a fixed number r, the common ratio. The sequence 2, 6, 18, 54 has r = 3. If r lies between 0 and 1, the terms shrink in size, each a fixed fraction of the one before. To reach term n, the first term is multiplied by r a total of n − 1 times:",
+      "type": "p"
+    },
+    {
+      "text": "aₙ = a₁ × r^(n − 1)",
+      "type": "formula"
+    },
+    {
+      "text": "For r other than 1, the sum of the first n terms is",
+      "type": "p"
+    },
+    {
+      "text": "Sₙ = a₁ × (1 − rⁿ) ÷ (1 − r)",
+      "type": "formula"
+    },
+    {
+      "text": "The difference between the two kinds matters in practice. An arithmetic sequence grows by the same amount at every step. A geometric sequence with a positive first term and r greater than 1 grows by the same factor, so its steps get larger and larger; however slowly it starts, it overtakes any arithmetic sequence in the end. Table 1 lists the first four terms of four sequences.",
+      "type": "p"
+    },
+    {
+      "caption": "Table 1. The first four terms of four sequences.",
+      "head": [
+        "Sequence",
+        "a₁",
+        "a₂",
+        "a₃",
+        "a₄"
+      ],
+      "rows": [
+        [
+          "A",
+          "3",
+          "7",
+          "11",
+          "15"
+        ],
+        [
+          "B",
+          "5",
+          "10",
+          "20",
+          "40"
+        ],
+        [
+          "C",
+          "2",
+          "4",
+          "8",
+          "14"
+        ],
+        [
+          "D",
+          "96",
+          "48",
+          "24",
+          "12"
+        ]
+      ],
+      "type": "table"
+    }
+  ],
+  "id": "p10",
+  "questions": [
+    {
+      "explanation": "The fourth paragraph: in a geometric sequence each term is the previous one multiplied by a fixed number r, so the ratio of each term to the one before is r.",
+      "id": "p10-q1",
+      "level": 1,
+      "options": [
+        {
+          "text": "The difference between consecutive terms.",
+          "why": "That stays the same in an arithmetic sequence."
+        },
+        {
+          "text": "The sum of consecutive terms.",
+          "why": "In 2, 6, 18, 54 the sums of neighbours are 8, 24 and 72."
+        },
+        {
+          "text": "The size of each step.",
+          "why": "With r greater than 1 the steps get larger and larger, as the text says."
+        },
+        {
+          "correct": true,
+          "text": "The ratio of each term to the one before.",
+          "why": "Each term is the previous one multiplied by the common ratio r."
+        }
+      ],
+      "stem": "According to the text, what stays the same from one term to the next in a geometric sequence?",
+      "type": "R"
+    },
+    {
+      "explanation": "Sequence C goes 2, 4, 8, 14. Its differences are 2, 4, 6, so it is not arithmetic; 4 ÷ 2 = 2 but 14 ÷ 8 = 1.75, so it is not geometric. D shrinks, but by the same factor each time, which makes it geometric.",
+      "id": "p10-q2",
+      "level": 2,
+      "options": [
+        {
+          "text": "Sequence A.",
+          "why": "It adds 4 at every step: arithmetic."
+        },
+        {
+          "text": "Sequence B.",
+          "why": "It is multiplied by 2 at every step: geometric, growing."
+        },
+        {
+          "correct": true,
+          "text": "Sequence C.",
+          "why": "The differences are 2, 4, 6, not the same, and the ratios are not the same either."
+        },
+        {
+          "text": "Sequence D.",
+          "why": "It is multiplied by 1/2 at every step: geometric, shrinking."
+        }
+      ],
+      "stem": "Which sequence in Table 1 is neither arithmetic nor geometric?",
+      "type": "C"
+    },
+    {
+      "explanation": "Sequence A starts at 3 and adds 4 each time. aₙ = a₁ + (n − 1) × d = 3 + 19 × 4 = 79.",
+      "id": "p10-q3",
+      "level": 2,
+      "options": [
+        {
+          "text": "76",
+          "why": "This is how much is added, (20 − 1) × 4, without the first term 3."
+        },
+        {
+          "correct": true,
+          "text": "79",
+          "why": "3 + (20 − 1) × 4."
+        },
+        {
+          "text": "80",
+          "why": "This is 20 × 4, which leaves out the first term."
+        },
+        {
+          "text": "83",
+          "why": "This adds d 20 times. From the first to the 20th term it is added 19 times."
+        }
+      ],
+      "stem": "What is the 20th term of sequence A in Table 1?",
+      "type": "A"
+    },
+    {
+      "explanation": "The 10th term is 3 + 9 × 4 = 39. Sₙ = n × (a₁ + aₙ) ÷ 2 = 10 × (3 + 39) ÷ 2 = 210.",
+      "id": "p10-q4",
+      "level": 2,
+      "options": [
+        {
+          "text": "180",
+          "why": "This adds only the differences, 0 + 4 + … + 36, and leaves out the first term 3, which every term contains."
+        },
+        {
+          "correct": true,
+          "text": "210",
+          "why": "10 × (3 + 39) ÷ 2."
+        },
+        {
+          "text": "220",
+          "why": "This takes term k to be k × 4, so it adds 4 + 8 + … + 40. Term k is 3 + (k − 1) × 4."
+        },
+        {
+          "text": "230",
+          "why": "This uses 43 as the 10th term; it is 39."
+        }
+      ],
+      "stem": "What is the sum of the first 10 terms of sequence A in Table 1?",
+      "type": "A"
+    },
+    {
+      "explanation": "Each step multiplies by r = 2. From place 9 to place 12 there are 3 steps, so the factor is 2^3 = 8. The formula agrees: a12 ÷ a9 = r^(11) ÷ r^(8) = r^3.",
+      "id": "p10-q5",
+      "level": 2,
+      "options": [
+        {
+          "text": "3",
+          "why": "This is the number of steps, 12 − 9. Each step multiplies by 2."
+        },
+        {
+          "text": "6",
+          "why": "This multiplies 3 steps by 2. Multiplying by 2 three times gives 2 to the power 3, not 2 × 3."
+        },
+        {
+          "correct": true,
+          "text": "8",
+          "why": "From the 9th to the 12th term the sequence is multiplied by 2 three times: 2³."
+        },
+        {
+          "text": "16",
+          "why": "This multiplies by 2 four times, one step too many: from place 9 to place 12 there are 3 steps."
+        }
+      ],
+      "stem": "In sequence B of Table 1, how many times as large is the 12th term as the 9th term?",
+      "type": "D"
+    },
+    {
+      "explanation": "Offer X is arithmetic: the last week pays 200 + 7 × 20 = €340, so the total is 8 × (200 + 340) ÷ 2 = €2,160. Offer Y is geometric with r = 2: 10 × (1 − 2^8) ÷ (1 − 2) = 10 × 255 = €2,550. Offer Y pays €390 more, although it pays less than X in each of the first five weeks.",
+      "id": "p10-q6",
+      "level": 3,
+      "options": [
+        {
+          "text": "Offer X, by €890.",
+          "why": "This adds up only 7 weeks of offer Y: €1,270. Over 8 weeks it pays €2,550."
+        },
+        {
+          "text": "Offer Y, by €940.",
+          "why": "This compares only the last week: €1,280 against €340. The question asks about the whole 8 weeks."
+        },
+        {
+          "text": "Offer Y, by €3,000.",
+          "why": "This uses the arithmetic sum formula for offer Y, which is geometric: (€10 + €1,280) × 8 ÷ 2."
+        },
+        {
+          "correct": true,
+          "text": "Offer Y, by €390.",
+          "why": "€2,550 against €2,160."
+        }
+      ],
+      "stem": "A summer job lasts 8 weeks. Offer X pays €200 in the first week and €20 more each week than the week before. Offer Y pays €10 in the first week and twice as much each week as the week before. Which offer pays more over the 8 weeks, and by how much?",
+      "type": "T"
+    },
+    {
+      "explanation": "Each term is the one before multiplied by r. With a positive first term and r between 0 and 1, every term is positive and smaller than the term before; the text says the terms shrink, each a fixed fraction of the one before.",
+      "id": "p10-q7",
+      "level": 2,
+      "options": [
+        {
+          "correct": true,
+          "text": "Each term is smaller than the one before.",
+          "why": "Multiplying a positive number by a number between 0 and 1 makes it smaller, as sequence D shows."
+        },
+        {
+          "text": "The differences between consecutive terms are all equal.",
+          "why": "In sequence D the terms fall by 48, 24 and 12: the steps are not equal."
+        },
+        {
+          "text": "After enough terms, the terms become negative.",
+          "why": "Multiplying a positive number by a positive ratio always gives a positive number."
+        },
+        {
+          "text": "The sum of the first n terms grows beyond any number if n is large enough.",
+          "why": "rⁿ shrinks towards 0, so the sum a₁ × (1 − rⁿ) ÷ (1 − r) stays below a₁ ÷ (1 − r); for sequence D that is 192."
+        }
+      ],
+      "stem": "A geometric sequence has a positive first term and a common ratio greater than 0 and less than 1. Which statement is true for every such sequence?",
+      "type": "S"
+    }
+  ],
+  "title": "Arithmetic and Geometric Sequences"
+}

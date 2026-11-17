@@ -1,0 +1,502 @@
+[
+  {
+    "band": "low",
+    "equations": [
+      "12 − B = A",
+      "3 + B = 13"
+    ],
+    "id": "section-E-l5",
+    "kind": "equations",
+    "solution": {
+      "A": 2,
+      "B": 10
+    },
+    "steps": [
+      "3 + B = 13 has only one letter: B = 10.",
+      "Put B = 10 into 12 − B = A: A = 2."
+    ],
+    "tags": [
+      "2-letters",
+      "step-by-step"
+    ]
+  },
+  {
+    "band": "low",
+    "equations": [
+      "A − 1 = 2",
+      "3 × A − 5 = B"
+    ],
+    "id": "section-E-l6",
+    "kind": "equations",
+    "solution": {
+      "A": 3,
+      "B": 4
+    },
+    "steps": [
+      "A − 1 = 2 has only one letter: A = 3.",
+      "Put A = 3 into 3 × A − 5 = B: B = 4."
+    ],
+    "tags": [
+      "2-letters",
+      "step-by-step"
+    ]
+  },
+  {
+    "band": "low",
+    "equations": [
+      "B ÷ 2 = 1",
+      "B + 12 = A"
+    ],
+    "id": "section-E-l1",
+    "kind": "equations",
+    "solution": {
+      "A": 14,
+      "B": 2
+    },
+    "steps": [
+      "B ÷ 2 = 1 has only one letter: B = 2.",
+      "Put B = 2 into B + 12 = A: A = 14."
+    ],
+    "tags": [
+      "2-letters",
+      "step-by-step",
+      "division"
+    ]
+  },
+  {
+    "band": "low",
+    "equations": [
+      "A − 1 = 2",
+      "A ÷ 3 = B"
+    ],
+    "id": "section-E-l2",
+    "kind": "equations",
+    "solution": {
+      "A": 3,
+      "B": 1
+    },
+    "steps": [
+      "A − 1 = 2 has only one letter: A = 3.",
+      "Put A = 3 into A ÷ 3 = B: B = 1."
+    ],
+    "tags": [
+      "2-letters",
+      "step-by-step",
+      "division"
+    ]
+  },
+  {
+    "band": "low",
+    "equations": [
+      "A + 10 = B",
+      "B + A = 30"
+    ],
+    "id": "section-E-l3",
+    "kind": "equations",
+    "solution": {
+      "A": 10,
+      "B": 20
+    },
+    "steps": [
+      "Write B = A + 10 (from A + 10 = B). Put this into B + A = 30: (A + 10) + A = 30. This simplifies to 2A = 20, so A = 10.",
+      "Put A = 10 into A + 10 = B: B = 20."
+    ],
+    "tags": [
+      "2-letters",
+      "one-substitution"
+    ]
+  },
+  {
+    "band": "low",
+    "equations": [
+      "A + 2 × C = 20",
+      "4 × C − 1 = B",
+      "17 − C = A"
+    ],
+    "id": "section-E-l4",
+    "kind": "equations",
+    "solution": {
+      "A": 14,
+      "B": 11,
+      "C": 3
+    },
+    "steps": [
+      "Write A = 17 − C (from 17 − C = A). Put this into A + 2 × C = 20: (17 − C) + 2 × C = 20. This simplifies to C = 3.",
+      "Put C = 3 into 4 × C − 1 = B: B = 11.",
+      "Put C = 3 into 17 − C = A: A = 14."
+    ],
+    "tags": [
+      "3-letters",
+      "one-substitution",
+      "stretch"
+    ]
+  },
+  {
+    "band": "medium",
+    "equations": [
+      "6 + A = C",
+      "18 − A = B",
+      "2 × A + C = 42"
+    ],
+    "id": "section-E-m21",
+    "kind": "equations",
+    "solution": {
+      "A": 12,
+      "B": 6,
+      "C": 18
+    },
+    "steps": [
+      "Write C = A + 6 (from 6 + A = C). Put this into 2 × A + C = 42: 2 × A + (A + 6) = 42. This simplifies to 3A = 36, so A = 12.",
+      "Put A = 12 into 6 + A = C: C = 18.",
+      "Put A = 12 into 18 − A = B: B = 6."
+    ],
+    "tags": [
+      "3-letters",
+      "one-substitution"
+    ]
+  },
+  {
+    "band": "medium",
+    "equations": [
+      "2 × B + A = 13",
+      "9 − B = A",
+      "2 × B = C"
+    ],
+    "id": "section-E-m22",
+    "kind": "equations",
+    "solution": {
+      "A": 5,
+      "B": 4,
+      "C": 8
+    },
+    "steps": [
+      "Write A = 9 − B (from 9 − B = A). Put this into 2 × B + A = 13: 2 × B + (9 − B) = 13. This simplifies to B = 4.",
+      "Put B = 4 into 9 − B = A: A = 5.",
+      "Put B = 4 into 2 × B = C: C = 8."
+    ],
+    "tags": [
+      "3-letters",
+      "one-substitution"
+    ]
+  },
+  {
+    "band": "medium",
+    "equations": [
+      "A + 2 = B",
+      "A + 6 = C",
+      "B + A = 12"
+    ],
+    "id": "section-E-m23",
+    "kind": "equations",
+    "solution": {
+      "A": 5,
+      "B": 7,
+      "C": 11
+    },
+    "steps": [
+      "Write B = A + 2 (from A + 2 = B). Put this into B + A = 12: (A + 2) + A = 12. This simplifies to 2A = 10, so A = 5.",
+      "Put A = 5 into A + 2 = B: B = 7.",
+      "Put A = 5 into A + 6 = C: C = 11."
+    ],
+    "tags": [
+      "3-letters",
+      "one-substitution"
+    ]
+  },
+  {
+    "band": "medium",
+    "equations": [
+      "14 − C = A",
+      "15 − C = B",
+      "2 × C + A = 15"
+    ],
+    "id": "section-E-m26",
+    "kind": "equations",
+    "solution": {
+      "A": 13,
+      "B": 14,
+      "C": 1
+    },
+    "steps": [
+      "Write A = 14 − C (from 14 − C = A). Put this into 2 × C + A = 15: 2 × C + (14 − C) = 15. This simplifies to C = 1.",
+      "Put C = 1 into 14 − C = A: A = 13.",
+      "Put C = 1 into 15 − C = B: B = 14."
+    ],
+    "tags": [
+      "3-letters",
+      "one-substitution"
+    ]
+  },
+  {
+    "band": "medium",
+    "equations": [
+      "C ÷ 2 = B",
+      "B + C = 15",
+      "C + 9 = A"
+    ],
+    "id": "section-E-m25",
+    "kind": "equations",
+    "solution": {
+      "A": 19,
+      "B": 5,
+      "C": 10
+    },
+    "steps": [
+      "Write C = 2 × B (from C ÷ 2 = B). Put this into B + C = 15: B + 2 × B = 15. This simplifies to 3B = 15, so B = 5.",
+      "Put B = 5 into C ÷ 2 = B: C = 10.",
+      "Put C = 10 into C + 9 = A: A = 19."
+    ],
+    "tags": [
+      "3-letters",
+      "one-substitution",
+      "division"
+    ]
+  },
+  {
+    "band": "medium",
+    "equations": [
+      "A − 2 = B",
+      "2 × A − B = 12",
+      "21 − A = C"
+    ],
+    "id": "section-E-m27",
+    "kind": "equations",
+    "solution": {
+      "A": 10,
+      "B": 8,
+      "C": 11
+    },
+    "steps": [
+      "Write B = A − 2 (from A − 2 = B). Put this into 2 × A − B = 12: 2 × A − (A − 2) = 12. The minus sign applies to the whole bracket. This simplifies to A = 10.",
+      "Put A = 10 into A − 2 = B: B = 8.",
+      "Put A = 10 into 21 − A = C: C = 11."
+    ],
+    "tags": [
+      "3-letters",
+      "one-substitution",
+      "minus-before-bracket"
+    ]
+  },
+  {
+    "band": "medium",
+    "equations": [
+      "A − B + C = 19",
+      "4 × A = C",
+      "A ÷ 4 = B"
+    ],
+    "id": "section-E-m24",
+    "kind": "equations",
+    "solution": {
+      "A": 4,
+      "B": 1,
+      "C": 16
+    },
+    "steps": [
+      "Write A = 4 × B (from A ÷ 4 = B) and C = 16 × B (from 4 × A = C, with A = 4 × B). Put these into A − B + C = 19: 4 × B − B + 16 × B = 19. This simplifies to 19B = 19, so B = 1.",
+      "Put B = 1 into A ÷ 4 = B: A = 4.",
+      "Put A = 4 into 4 × A = C: C = 16."
+    ],
+    "tags": [
+      "3-letters",
+      "multi-substitution",
+      "division",
+      "stretch"
+    ]
+  },
+  {
+    "band": "medium",
+    "equations": [
+      "2 × B = A",
+      "B − C + A = 8",
+      "B ÷ 3 = C"
+    ],
+    "id": "section-E-m28",
+    "kind": "equations",
+    "solution": {
+      "A": 6,
+      "B": 3,
+      "C": 1
+    },
+    "steps": [
+      "Write B = 3 × C (from B ÷ 3 = C) and A = 6 × C (from 2 × B = A, with B = 3 × C). Put these into B − C + A = 8: 3 × C − C + 6 × C = 8. This simplifies to 8C = 8, so C = 1.",
+      "Put C = 1 into B ÷ 3 = C: B = 3.",
+      "Put B = 3 into 2 × B = A: A = 6."
+    ],
+    "tags": [
+      "3-letters",
+      "multi-substitution",
+      "division",
+      "stretch"
+    ]
+  },
+  {
+    "band": "high",
+    "equations": [
+      "21 − A = D",
+      "12 − A = C",
+      "3 × A − 6 = B",
+      "B + A − D = 13"
+    ],
+    "id": "section-E-h41",
+    "kind": "equations",
+    "solution": {
+      "A": 8,
+      "B": 18,
+      "C": 4,
+      "D": 13
+    },
+    "steps": [
+      "Write B = 3 × A − 6 (from 3 × A − 6 = B) and D = 21 − A (from 21 − A = D). Put these into B + A − D = 13: (3 × A − 6) + A − (21 − A) = 13. The minus sign applies to the whole bracket. This simplifies to 5A = 40, so A = 8.",
+      "Put A = 8 into 21 − A = D: D = 13.",
+      "Put A = 8 into 12 − A = C: C = 4.",
+      "Put A = 8 into 3 × A − 6 = B: B = 18."
+    ],
+    "tags": [
+      "4-letters",
+      "multi-substitution",
+      "minus-before-bracket"
+    ]
+  },
+  {
+    "band": "high",
+    "equations": [
+      "2 × D − 6 = C",
+      "3 + D = B",
+      "D + 6 = A",
+      "C − A + D = 4"
+    ],
+    "id": "section-E-h42",
+    "kind": "equations",
+    "solution": {
+      "A": 14,
+      "B": 11,
+      "C": 10,
+      "D": 8
+    },
+    "steps": [
+      "Write C = 2 × D − 6 (from 2 × D − 6 = C) and A = D + 6 (from D + 6 = A). Put these into C − A + D = 4: (2 × D − 6) − (D + 6) + D = 4. The minus sign applies to the whole bracket. This simplifies to 2D = 16, so D = 8.",
+      "Put D = 8 into 2 × D − 6 = C: C = 10.",
+      "Put D = 8 into 3 + D = B: B = 11.",
+      "Put D = 8 into D + 6 = A: A = 14."
+    ],
+    "tags": [
+      "4-letters",
+      "multi-substitution",
+      "minus-before-bracket"
+    ]
+  },
+  {
+    "band": "high",
+    "equations": [
+      "D − A + C = 11",
+      "D − 1 = A",
+      "17 − D = B",
+      "2 × D = C"
+    ],
+    "id": "section-E-h43",
+    "kind": "equations",
+    "solution": {
+      "A": 4,
+      "B": 12,
+      "C": 10,
+      "D": 5
+    },
+    "steps": [
+      "Write A = D − 1 (from D − 1 = A) and C = 2 × D (from 2 × D = C). Put these into D − A + C = 11: D − (D − 1) + 2 × D = 11. The minus sign applies to the whole bracket. This simplifies to 2D = 10, so D = 5.",
+      "Put D = 5 into D − 1 = A: A = 4.",
+      "Put D = 5 into 17 − D = B: B = 12.",
+      "Put D = 5 into 2 × D = C: C = 10."
+    ],
+    "tags": [
+      "4-letters",
+      "multi-substitution",
+      "minus-before-bracket"
+    ]
+  },
+  {
+    "band": "high",
+    "equations": [
+      "C − B + A + D = 14",
+      "2 × A = D",
+      "A + 6 = B",
+      "A − 7 = C"
+    ],
+    "id": "section-E-h45",
+    "kind": "equations",
+    "solution": {
+      "A": 9,
+      "B": 15,
+      "C": 2,
+      "D": 18
+    },
+    "steps": [
+      "Write C = A − 7 (from A − 7 = C), B = A + 6 (from A + 6 = B) and D = 2 × A (from 2 × A = D). Put these into C − B + A + D = 14: (A − 7) − (A + 6) + A + 2 × A = 14. The minus sign applies to the whole bracket. This simplifies to 3A = 27, so A = 9.",
+      "Put A = 9 into 2 × A = D: D = 18.",
+      "Put A = 9 into A + 6 = B: B = 15.",
+      "Put A = 9 into A − 7 = C: C = 2."
+    ],
+    "tags": [
+      "4-letters",
+      "multi-substitution",
+      "minus-before-bracket"
+    ]
+  },
+  {
+    "band": "high",
+    "equations": [
+      "2 + C = D",
+      "B − D + A + C = 29",
+      "1 + C = A",
+      "2 × C = B"
+    ],
+    "id": "section-E-h46",
+    "kind": "equations",
+    "solution": {
+      "A": 11,
+      "B": 20,
+      "C": 10,
+      "D": 12
+    },
+    "steps": [
+      "Write B = 2 × C (from 2 × C = B), D = C + 2 (from 2 + C = D) and A = C + 1 (from 1 + C = A). Put these into B − D + A + C = 29: 2 × C − (C + 2) + (C + 1) + C = 29. The minus sign applies to the whole bracket. This simplifies to 3C = 30, so C = 10.",
+      "Put C = 10 into 2 + C = D: D = 12.",
+      "Put C = 10 into 1 + C = A: A = 11.",
+      "Put C = 10 into 2 × C = B: B = 20."
+    ],
+    "tags": [
+      "4-letters",
+      "multi-substitution",
+      "minus-before-bracket"
+    ]
+  },
+  {
+    "band": "high",
+    "equations": [
+      "4 + A = D",
+      "B − D + C + A = 5",
+      "A ÷ 2 = C",
+      "A − 6 = B"
+    ],
+    "id": "section-E-h44",
+    "kind": "equations",
+    "solution": {
+      "A": 10,
+      "B": 4,
+      "C": 5,
+      "D": 14
+    },
+    "steps": [
+      "Write A = 2 × C (from A ÷ 2 = C), B = 2 × C − 6 (from A − 6 = B, with A = 2 × C) and D = 2 × C + 4 (from 4 + A = D, with A = 2 × C). Put these into B − D + C + A = 5: (2 × C − 6) − (2 × C + 4) + C + 2 × C = 5. The minus sign applies to the whole bracket. This simplifies to 3C = 15, so C = 5.",
+      "Put C = 5 into A ÷ 2 = C: A = 10.",
+      "Put A = 10 into 4 + A = D: D = 14.",
+      "Put A = 10 into A − 6 = B: B = 4."
+    ],
+    "tags": [
+      "4-letters",
+      "multi-substitution",
+      "minus-before-bracket",
+      "division",
+      "stretch"
+    ]
+  }
+]

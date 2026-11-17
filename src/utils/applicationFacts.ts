@@ -13,6 +13,13 @@ const reviewed = '12 November 2026';
 export const SOURCES = {
   dmat: { label: 'APS India: dMAT rules', url: 'https://aps-india.de/dmat/', reviewed: '16 November 2026' },
   test: { label: 'g.a.s.t.: dMAT schedule', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed },
+  // Read for the dMAT guide and the practice page; each keeps the date it was read.
+  dmatFaq: { label: 'g.a.s.t.: dMAT questions and answers for graduates in India', url: 'https://www.d-mat.de/en/faq-graduate-students-india/', reviewed: '17 November 2026' },
+  // The preparation material is a PDF linked from this page; the PDF's own URL changes with each edition.
+  dmatPreparation: { label: 'g.a.s.t.: dMAT preparation material (PDF linked from this page)', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed: '17 November 2026' },
+  // The videos on how the exam works on screen, linked from this page. Watched, not re-read: the date is the day they were watched.
+  dmatVideos: { label: 'g.a.s.t.: videos on how the dMAT works on screen (linked from this page)', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed: '16 November 2026' },
+  dmatTerms: { label: 'g.a.s.t.: dMAT terms and exam-day rules', url: 'https://www.d-mat.de/en/terms-conditions/', reviewed: '17 November 2026' },
   // The fee is in the graduate leaflet linked from this page; the leaflet's own URL changes with each edition.
   aps: { label: 'APS India: checklists and graduate leaflet', url: 'https://aps-india.de/checklists/', reviewed },
   // The checklists page and the APS FAQs both point applicants who are unsure which APS procedure applies to this quiz.
@@ -219,6 +226,65 @@ export const DMAT = {
   schedule: `${DMAT_WINDOWS.map((window) => `${window.test} (register by ${window.deadline}; results on ${window.results})`).join(' and ')}.`,
   /** The fee with who is paid and when, wherever the full rule is shown. */
   feeNote: `${DMAT_FEE}, paid to g.a.s.t. when you register.`,
+} as const;
+
+/**
+ * How the test runs, in numbers. The subtests, their tasks and minutes, the academic module's minutes and
+ * the break are in the preparation material (`SOURCES.dmatPreparation`); the number of academic questions
+ * is an average g.a.s.t. gives in its questions and answers (`SOURCES.dmatFaq`); the pause between Core
+ * subtests is the countdown the official videos show (`SOURCES.dmatVideos`). The practice page's clock
+ * and the guide read these; nobody retypes a number.
+ */
+export const DMAT_FORMAT = {
+  subtests: 3,
+  tasksPerSubtest: 20,
+  subtestMinutes: 25,
+  pauseMinutes: 2,
+  breakMinutes: 30,
+  academicMinutes: 90,
+  academicQuestions: 'about 60',
+} as const;
+
+/** Official test format and preparation. Practice controls and feedback live with the practice page. */
+export const DMAT_EXAM = {
+  organiser: 'The full name of g.a.s.t. is the Society for Academic Study Preparation and Test Development.',
+  aps: 'APS India is the Academic Evaluation Center, which checks Indian academic documents for the German Embassy.',
+  format: {
+    modules: 'For the APS procedure, applicants who need the dMAT take both the Core Module and the General Academic Module.',
+    core: `The Core Module has ${DMAT_FORMAT.subtests} subtests. Each gives you ${DMAT_FORMAT.subtestMinutes} minutes for ${DMAT_FORMAT.tasksPerSubtest} tasks.`,
+    puzzles: [
+      { name: 'Figure Sequences', task: 'Work out how the shapes change and use the pattern to choose the next two grids.' },
+      { name: 'Mathematical Equations', task: 'Work out which values make every equation in a set true.' },
+      { name: 'Latin Squares', task: 'Use the letters already in the grid to find the missing letter, without repeating a letter in any row or column.' },
+    ],
+    pause: `The official on-screen demo shows a ${DMAT_FORMAT.pauseMinutes}-minute pause between Core subtests.`,
+    break: `A ${DMAT_FORMAT.breakMinutes}-minute break separates the two modules.`,
+    academic: `In the General Academic Module, you have ${DMAT_FORMAT.academicMinutes} minutes to read passages and answer questions about them. The question count is ${DMAT_FORMAT.academicQuestions} on average and can vary.`,
+    choices: 'The General Academic Module is in English. Choose one answer per question.',
+    guessing: 'For the questions with answer options, the official preparation material advises choosing your best guess if you are unsure.',
+  },
+  day: {
+    passport: 'Bring the original of the valid passport you registered with. If you have replaced it, update the passport details in the participant portal.',
+    desk: 'Keep only your passport on the desk. Notes and aids such as calculators are prohibited. Taking in an unauthorised aid or attempting to cheat can lead to exclusion.',
+    checkIn: 'Check the participant portal for your check-in time, meeting point and exam-day details. The India FAQ says to look for this information around five days before your test.',
+    software: 'Watch the official videos before test day. The India FAQ says the test software will give no further detailed guidance on how to use it during the exam.',
+  },
+} as const;
+
+/** Booking and results for the APS procedure, from the India FAQ, schedule and APS India. */
+export const DMAT_PORTAL = {
+  bookingUrl: 'https://www.gast.de/portal/center-search/center-search/dmat/exams/worldwide?lang=en',
+  registration: [
+    'Choose a test date and centre through the participant portal. Each date has its own registration deadline.',
+    'Enter your details as they appear in your valid passport, the only accepted ID. Upload a passport-style photo in the portal by the deadline.',
+    'Pay with PayPal or a Visa or Mastercard credit card with 3D Secure enabled. The booking system does not accept debit cards.',
+    'To cancel your booking, use the participant portal by the registration deadline.',
+  ],
+  results: [
+    'The certificate reports a percentile rank, the share of other participants whose result was at or below yours. Each module has a score on a 0–200 scale, with an average of 100. Adding the two module scores gives the total.',
+    'You can take the test again.',
+    'Download the certificate from the participant portal and submit it to APS India for your verification procedure.',
+  ],
 } as const;
 
 /** Labels for the parts of the dMAT rule where it is shown in full. */

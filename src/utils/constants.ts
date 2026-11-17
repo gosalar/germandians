@@ -110,6 +110,23 @@ export const STUDENTS_PER_MENTOR = {
   word: 'five',
 } as const;
 
+/**
+ * The community beside the paid service, with the service's limits next to it. The Community page and
+ * the mentoring block on the dMAT pages read these sentences. The intake's name is a site setting, which
+ * this file cannot read (it also loads in plain Node), so the caller passes it to `places`.
+ */
+export const MENTORING = {
+  community: 'The community is open conversation. Following us or asking a question does not sign you up for our mentoring.',
+  mentoring: 'Mentoring is a separate, paid service. A mentor checks your programme requirements, reviews your documents and works on your SOP with you.',
+  /** The facts that need no setting: how it starts, the cap per mentor, the fee promise. */
+  facts: [
+    'It starts with a profile review, then a written quote.',
+    `Each mentor works with up to ${STUDENTS_PER_MENTOR.word} students at a time.`,
+    FEE_PROMISE,
+  ],
+  places: (intake: string) => `${INTAKE_SEATS} places for the ${intake} intake.`,
+} as const;
+
 export const INTAKE_SEASONS = ['Summer', 'Winter'] as const;
 export type IntakeSeason = (typeof INTAKE_SEASONS)[number];
 
@@ -140,6 +157,8 @@ export function destinationHref(destination: NavigationDestination): string {
 export const DESTINATIONS = {
   gradeCheck: { kind: 'page', page: 'check' },
   requirements: { kind: 'page', page: 'requirements' },
+  dmat: { kind: 'page', page: 'dmat' },
+  dmatPractice: { kind: 'page', page: 'dmatPractice' },
   about: { kind: 'page', page: 'about' },
   community: { kind: 'page', page: 'community' },
   learnGerman: { kind: 'page', page: 'learnGerman' },
@@ -163,6 +182,8 @@ export type NavigationGroup = { kind: 'group'; id: string; label: string; links:
 export const PAGE_LINKS = {
   gradeCheck: { destination: DESTINATIONS.gradeCheck, label: 'Grade check' },
   requirements: { destination: DESTINATIONS.requirements, label: 'Requirements' },
+  dmat: { destination: DESTINATIONS.dmat, label: 'dMAT guide' },
+  dmatPractice: { destination: DESTINATIONS.dmatPractice, label: 'dMAT practice' },
   about: { destination: DESTINATIONS.about, label: 'About us' },
   community: { destination: DESTINATIONS.community, label: 'Community' },
   learnGerman: { destination: DESTINATIONS.learnGerman, label: 'Learn German' },
@@ -171,13 +192,21 @@ export const PAGE_LINKS = {
 
 /**
  * Header order. The inline row starts at 1220px (`$bp-nav`), the narrowest width at which these entries
- * fit on one line with the About group open; below it the menu button takes over. The row has no spare
- * room for another top-level link at 1220px, so the two pages about the people and the community share
- * the About group. Re-measure at 1219, 1220 and 1221px before adding an entry.
+ * fit on one line with a group open; below it the menu button takes over. The row has no spare room for
+ * another top-level link at 1220px, so related pages share a group: the requirements guide and the two
+ * dMAT pages under Requirements, the people and the community under About. Measured on 17 November 2026
+ * at 1219, 1220 and 1221px with each group open: one line, nothing clipped, 27px between the brand and
+ * the row at 1220px. Re-measure at those widths before adding an entry.
  */
 const NAV_ENTRIES: readonly (NavigationLink | NavigationGroup)[] = [
   PAGE_LINKS.gradeCheck,
-  PAGE_LINKS.requirements,
+  {
+    kind: 'group',
+    id: 'nav-requirements',
+    label: 'Requirements',
+    // Under the "Requirements" button the page needs its own name.
+    links: [{ destination: DESTINATIONS.requirements, label: 'Requirements guide' }, PAGE_LINKS.dmat, PAGE_LINKS.dmatPractice],
+  },
   { kind: 'group', id: 'nav-about', label: 'About', links: [PAGE_LINKS.about, PAGE_LINKS.community] },
   PAGE_LINKS.learnGerman,
   { destination: DESTINATIONS.fees, label: 'Fees' },

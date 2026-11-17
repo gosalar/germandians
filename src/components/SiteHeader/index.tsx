@@ -13,7 +13,7 @@ import styles from './styles.module.scss';
 
 export default function SiteHeader() {
   const { pathname } = useLocation();
-  const { menuOpen } = usePageChrome();
+  const { menuOpen, immersive } = usePageChrome();
   const { toggleMenu, closeMenu } = usePageChromeActions();
   const trigger = useRef<HTMLButtonElement>(null);
   useWindowEvent('keydown', (event) => {
@@ -24,6 +24,9 @@ export default function SiteHeader() {
   });
   // The brand goes to Home: scroll on Home, route there from every other page.
   const brandTo = pathname === ROUTES.home ? hashLink(SECTIONS.top) : `${ROUTES.home}#${SECTIONS.top}`;
+
+  // A running test has the screen to itself.
+  if (immersive) return null;
 
   return (
     <nav className={styles.nav}>

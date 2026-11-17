@@ -45,8 +45,8 @@ export default function Privacy() {
           <PageHeader
             variant="regular"
             title="Privacy note"
-            introduction="This page explains what happens to the details you send us through this website or contact us with."
-            meta={<p className={styles.updated}>Last updated 11 November 2026</p>}
+            introduction="This page explains what stays in your browser and what happens to the details you send us."
+            meta={<p className={styles.updated}>Last updated 17 November 2026</p>}
           />
 
           <section className={styles.section}>
@@ -76,6 +76,12 @@ export default function Privacy() {
               answers, and your German grade if you have one. Unanswered questions are omitted. A summary reaches us only
               if you tick the box to attach it and then submit the form or send the email draft. Using the grade check or
               the requirements page alone sends nothing to us.
+            </p>
+            <p className={styles.text}>
+              Your dMAT practice progress stays in your browser on your device. This includes your answers, marked tasks,
+              start time and time spent on each task, so you can reload without losing your test or record. The site never
+              sends this data. It clears the saved test when you discard it or start another one. If you return after seven
+              days, the page removes the saved test.
             </p>
             <p className={styles.text}>
               If you ask about German lessons, through their form or the “Teach me German” box on the profile-review

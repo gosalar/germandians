@@ -1,0 +1,42 @@
+[
+  {
+    "area": "mathematics",
+    "id": "p10",
+    "title": "Arithmetic and Geometric Sequences"
+  },
+  {
+    "area": "computational sciences",
+    "id": "p11",
+    "title": "Boolean Logic and Truth Tables"
+  },
+  {
+    "area": "natural sciences",
+    "id": "p12",
+    "title": "The pH Scale"
+  },
+  {
+    "area": "engineering",
+    "id": "p13",
+    "title": "Levers and Mechanical Advantage"
+  },
+  {
+    "area": "business administration",
+    "id": "p14",
+    "title": "Net Present Value"
+  },
+  {
+    "area": "economics",
+    "id": "p15",
+    "title": "Comparative Advantage"
+  },
+  {
+    "area": "social sciences",
+    "id": "p16",
+    "title": "Correlation and Causation"
+  },
+  {
+    "area": "humanities",
+    "id": "p17",
+    "title": "Source Criticism"
+  }
+]

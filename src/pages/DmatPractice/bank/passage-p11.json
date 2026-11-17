@@ -1,0 +1,260 @@
+{
+  "area": "computational sciences",
+  "blocks": [
+    {
+      "text": "Computers make decisions with Boolean logic, named after the mathematician George Boole. A Boolean value is either true or false, written 1 and 0. Operations combine such values into new ones. A AND B is true only when A and B are both true. A OR B is true when at least one of them is true, including when both are. NOT A is true when A is false, and false when A is true. A XOR B, the exclusive or, is true when exactly one of A and B is true, that is, when the two differ.",
+      "type": "p"
+    },
+    {
+      "text": "Two further operations reverse the result of another. A NAND B means NOT (A AND B), and A NOR B means NOT (A OR B). In an electronic circuit each operation is carried out by a logic gate, which takes one or more input signals, each high (1) or low (0), and produces an output signal.",
+      "type": "p"
+    },
+    {
+      "text": "A truth table lists the output for every possible combination of inputs. Each input can be 0 or 1, so every extra input doubles the number of combinations: a table for n inputs has 2ⁿ rows. Table 1 is the truth table of three operations for two inputs.",
+      "type": "p"
+    },
+    {
+      "caption": "Table 1. Truth table of AND, OR and XOR.",
+      "head": [
+        "A",
+        "B",
+        "A AND B",
+        "A OR B",
+        "A XOR B"
+      ],
+      "rows": [
+        [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "1",
+          "1",
+          "1",
+          "0"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "text": "Longer expressions are worked out step by step. Brackets are worked out first, and NOT applies only to the value or bracket that directly follows it. Two expressions are equivalent if they give the same output in every row of their truth table. Two useful equivalences are known as De Morgan's laws:",
+      "type": "p"
+    },
+    {
+      "text": "NOT (A AND B) = (NOT A) OR (NOT B)",
+      "type": "formula"
+    },
+    {
+      "text": "NOT (A OR B) = (NOT A) AND (NOT B)",
+      "type": "formula"
+    },
+    {
+      "text": "In words: \"not both\" means \"at least one is not\", and \"neither\" means \"both are not\". Engineers use such laws to rewrite a circuit with fewer or cheaper gates without changing what it does.",
+      "type": "p"
+    }
+  ],
+  "id": "p11",
+  "questions": [
+    {
+      "explanation": "The first paragraph: A XOR B is true when exactly one of A and B is true, that is, when they differ. Table 1 shows 1 in the two rows where A and B differ.",
+      "id": "p11-q1",
+      "level": 1,
+      "options": [
+        {
+          "text": "When A and B are both true.",
+          "why": "Then A and B do not differ, so A XOR B is false. This is where XOR differs from OR."
+        },
+        {
+          "text": "When at least one of A and B is true.",
+          "why": "That describes OR, which is also true when both are."
+        },
+        {
+          "text": "When A and B are both false.",
+          "why": "Then A and B do not differ, so A XOR B is false."
+        },
+        {
+          "correct": true,
+          "text": "When exactly one of A and B is true.",
+          "why": "This is the definition in the first paragraph: XOR is true when the two inputs differ."
+        }
+      ],
+      "stem": "According to the text, when is A XOR B true?",
+      "type": "R"
+    },
+    {
+      "explanation": "Compare the last two columns of Table 1 row by row. They agree in three rows and differ only where A = 1 and B = 1: OR gives 1, XOR gives 0.",
+      "id": "p11-q2",
+      "level": 1,
+      "options": [
+        {
+          "text": "A = 0, B = 0",
+          "why": "In this row both give 0."
+        },
+        {
+          "text": "A = 0, B = 1",
+          "why": "In this row both give 1."
+        },
+        {
+          "text": "A = 1, B = 0",
+          "why": "In this row both give 1."
+        },
+        {
+          "correct": true,
+          "text": "A = 1, B = 1",
+          "why": "A OR B is 1 but A XOR B is 0: OR includes the case where both are true, XOR does not."
+        }
+      ],
+      "stem": "According to Table 1, for which inputs do A OR B and A XOR B give different outputs?",
+      "type": "F"
+    },
+    {
+      "explanation": "Work out the bracket first. The expression is true only when A OR B is 1 and NOT C is 1, that is, when at least one of A and B is 1 and C is 0. Only one of the four inputs meets both conditions.",
+      "id": "p11-q3",
+      "level": 2,
+      "options": [
+        {
+          "text": "A = 0, B = 0, C = 0",
+          "why": "A OR B is 0, so the AND is 0 whatever C is."
+        },
+        {
+          "text": "A = 1, B = 0, C = 1",
+          "why": "A OR B is 1, but C = 1 makes NOT C 0, so the AND is 0."
+        },
+        {
+          "text": "A = 1, B = 1, C = 1",
+          "why": "A OR B is 1, but C = 1 makes NOT C 0, so the AND is 0."
+        },
+        {
+          "correct": true,
+          "text": "A = 0, B = 1, C = 0",
+          "why": "A OR B is 1 and NOT C is 1, so the AND is 1."
+        }
+      ],
+      "stem": "For which of these inputs is (A OR B) AND (NOT C) true?",
+      "type": "A"
+    },
+    {
+      "explanation": "A table for n inputs has 2ⁿ rows. With 5 inputs that is 2^5 = 32: the 8 rows are doubled 2 times.",
+      "id": "p11-q4",
+      "level": 2,
+      "options": [
+        {
+          "text": "10",
+          "why": "This adds one row per new input. Each new input doubles the number of rows."
+        },
+        {
+          "text": "16",
+          "why": "This doubles only once, as if one input had been added."
+        },
+        {
+          "correct": true,
+          "text": "32",
+          "why": "2^5: each of the 2 new inputs doubles the number of rows."
+        },
+        {
+          "text": "64",
+          "why": "This is 2^6, one doubling too many."
+        }
+      ],
+      "stem": "The truth table of a circuit with 3 inputs has 8 rows. The circuit gets 2 more inputs. How many rows does its truth table have now?",
+      "type": "D"
+    },
+    {
+      "explanation": "By De Morgan's second law, NOT (A OR B) = (NOT A) AND (NOT B). The other expressions each differ from it in at least one row; NOT (A AND B) is the other law's left-hand side, which equals (NOT A) OR (NOT B).",
+      "id": "p11-q5",
+      "level": 2,
+      "options": [
+        {
+          "text": "(NOT A) OR (NOT B)",
+          "why": "For A = 0, B = 1 it gives 1, but NOT (A OR B) gives 0."
+        },
+        {
+          "correct": true,
+          "text": "(NOT A) AND (NOT B)",
+          "why": "This is the second of De Morgan's laws: \"neither A nor B\" means \"not A and not B\"."
+        },
+        {
+          "text": "(NOT A) AND B",
+          "why": "For A = 0, B = 0 it gives 0, but NOT (A OR B) gives 1."
+        },
+        {
+          "text": "NOT (A AND B)",
+          "why": "For A = 0, B = 1 it gives 1, but NOT (A OR B) gives 0."
+        }
+      ],
+      "stem": "Which expression gives the same output as NOT (A OR B) for every combination of A and B?",
+      "type": "S"
+    },
+    {
+      "explanation": "Translate each condition: cold is C; at least one person at home is P OR Q, which needs brackets because it must be worked out before the AND; the window not open is NOT W. All three must hold, so they are joined by AND: C AND (P OR Q) AND (NOT W).",
+      "id": "p11-q6",
+      "level": 3,
+      "options": [
+        {
+          "correct": true,
+          "text": "C AND (P OR Q) AND (NOT W)",
+          "why": "Cold, and at least one person at home, and the window not open: each condition is one part of the AND."
+        },
+        {
+          "text": "C AND P AND Q AND (NOT W)",
+          "why": "For C = 1, P = 0, Q = 1, W = 0 this gives 0, but the heater should run."
+        },
+        {
+          "text": "(C AND P) OR (Q AND (NOT W))",
+          "why": "For C = 0, P = 0, Q = 1, W = 0 this gives 1, but the heater should stay off."
+        },
+        {
+          "text": "(C AND (P OR Q)) OR (NOT W)",
+          "why": "For C = 0, P = 0, Q = 0, W = 0 this gives 1, but the heater should stay off."
+        }
+      ],
+      "stem": "A heater should run when it is cold (C = 1) and at least one of two people, P and Q, is at home (P = 1 or Q = 1, or both), but never while the window is open (W = 1). Which expression switches the heater on exactly when it should run?",
+      "type": "T"
+    },
+    {
+      "explanation": "A NAND B means NOT (A AND B). AND gives 1 only when both inputs are 1, so NAND gives 0 only when both inputs are 1 and 1 in every other case.",
+      "id": "p11-q7",
+      "level": 2,
+      "options": [
+        {
+          "text": "AND",
+          "why": "AND gives 0 for the inputs 00, 01, 10."
+        },
+        {
+          "text": "NOR",
+          "why": "NOR gives 0 for the inputs 01, 10, 11."
+        },
+        {
+          "correct": true,
+          "text": "NAND",
+          "why": "NAND is NOT (A AND B). A AND B is 1 only when both inputs are 1, so NAND is 0 only then."
+        },
+        {
+          "text": "XOR",
+          "why": "XOR gives 0 for the inputs 00, 11."
+        }
+      ],
+      "stem": "Which gate gives the output 0 only when both of its inputs are 1?",
+      "type": "C"
+    }
+  ],
+  "title": "Boolean Logic and Truth Tables"
+}

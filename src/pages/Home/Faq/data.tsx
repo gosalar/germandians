@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import DmatNote from '@/components/DmatNote';
 import { FEES_COPY, QUOTE_TOPIC, QUOTE_TOPICS, feeCopy } from '@/pages/Home/Fees/data';
 import { DMAT } from '@/utils/applicationFacts';
-import { ARRIVAL_SUPPORT, FEE_POLICY, SECTIONS } from '@/utils/constants';
+import { ARRIVAL_SUPPORT, FEE_POLICY, ROUTES, SECTIONS } from '@/utils/constants';
 import { REQUIREMENT_TOPIC_TITLES, requirementsHref } from '@/utils/requirements/topics';
 import { REVIEW_OUTCOME, siteConfig } from '@/utils/siteConfig';
 
@@ -111,6 +111,7 @@ export const FAQ_GROUPS: QuestionGroup[] = [
             </p>
             <p>
               See <Link to={requirementsHref('aps-dmat')}>{REQUIREMENT_TOPIC_TITLES['aps-dmat']} in the requirements guide</Link>.
+              {' '}For the test itself, <Link to={ROUTES.dmat}>read the dMAT guide</Link>.
             </p>
           </>
         ),

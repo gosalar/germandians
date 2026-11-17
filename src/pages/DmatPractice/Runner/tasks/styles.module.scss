@@ -1,0 +1,176 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.figures, .equations, .latin, .academic, .explanation {
+  color: t.$navy;
+  font-family: t.$font-body;
+  font-size: inherit;
+  line-height: 1.5;
+  min-width: 0;
+
+  h2 { @include m.display-heading(1.5em); line-height: 1.15; margin-bottom: 16px; }
+  h3, h4 { @include m.label-font(700, 1.1em); margin: 0 0 12px; }
+  fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+  legend { padding: 0; margin-bottom: 12px; font-weight: 700; }
+  input { accent-color: t.$navy; }
+  input:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+    outline: 3px solid t.$navy;
+    outline-offset: 3px;
+  }
+}
+
+.matrix { width: 100%; height: auto; display: block; background: t.$white; }
+.matrixFrame { fill: t.$white; stroke: t.$navy; stroke-width: 2.5; }
+.matrixGrid { stroke: t.$hairline; stroke-width: 1; }
+.questionMark { @include m.label-font(800, 44px); fill: t.$navy; }
+.figures {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px 8px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+.missingMatrix { display: none; }
+.figures .figureOptions {
+  grid-column: span 2;
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  padding: 4px;
+  legend { @include m.label-font(700, 1em); text-align: center; width: 100%; }
+}
+.figureOption {
+  display: grid;
+  position: relative;
+  width: min(100%, clamp(104px, 30vw, 136px));
+  min-width: 44px;
+  min-height: 44px;
+  border: 2px solid transparent;
+  padding: 3px;
+  border-radius: 4px;
+  cursor: pointer;
+  input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: pointer; }
+  &[data-selected='true'] { border-color: t.$navy; background: t.$highlight; }
+  &:has(input:focus-visible) { outline: 3px solid t.$navy; outline-offset: 2px; }
+  &[data-correct='true'] { border-style: double; border-width: 4px; border-color: t.$green; }
+  &:not(:has(input)) { cursor: default; }
+}
+.optionNumber, .optionStatus { @include m.label-font(700, .875em); display: block; overflow-wrap: anywhere; }
+.optionNumber { padding-bottom: 3px; }
+.partResult { font-size: .875em; margin: 0; width: 100%; overflow-wrap: anywhere; }
+
+@include m.from(t.$bp-dmat-figure-columns) {
+  .figures { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px 12px; }
+  .missingMatrix { display: block; }
+  .figures .figureOptions { grid-column: 5; grid-row: 2; }
+  .figures .figureOptions:last-child { grid-column: 6; }
+}
+
+.equations {
+  display: grid;
+  gap: 28px;
+  max-width: 860px;
+  margin: 0 auto;
+  @include m.from(t.$bp-dmat-figure-columns) { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; }
+}
+.equationLines { list-style: none; padding: 0; margin: 0; font-size: 1.5em; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; li + li { margin-top: 12px; } }
+.letterInput {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-size: 1.5em;
+  input { @include m.label-font(700, 1em); width: 4ch; min-width: 64px; height: 56px; text-align: center; border: 2px solid t.$navy; border-radius: 4px; background: t.$cream; color: t.$navy; }
+}
+.answerReview { margin: 12px 0; padding: 12px; border-left: 3px solid t.$navy; background: t.$paper; overflow-wrap: anywhere; }
+.latin { display: grid; gap: 28px; max-width: 800px; margin: 0 auto; align-items: start; @include m.from(t.$bp-dmat-figure-columns) { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; } }
+.square {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  max-width: 380px;
+  caption { @include m.label-font(700, 1.1em); text-align: left; margin-bottom: 12px; }
+  td { border: 2px solid t.$navy; height: clamp(44px, 8vw, 64px); text-align: center; font-size: 1.5em; font-weight: 700; }
+  th { @include m.label-font(600, .8em); color: t.$slate; }
+  th:first-child, thead td { width: 20px; }
+  thead td { border: 0; height: 24px; }
+  [data-target='true'] { background: t.$highlight; border: 3px solid t.$navy; }
+}
+.letters { display: flex; gap: 8px; flex-wrap: wrap; @include m.from(t.$bp-dmat-figure-columns) { flex-direction: column; align-items: start; } }
+.letterOption {
+  position: relative;
+  input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; margin: 0; }
+  span { @include m.label-font(700, 1.25em); width: 44px; min-height: 44px; display: grid; place-items: center; border: 2px solid t.$navy; border-radius: 4px; background: t.$white; }
+  input:checked + span { background: t.$navy; color: t.$white; }
+  input:focus-visible + span { outline: 3px solid t.$navy; outline-offset: 3px; }
+}
+
+.academic { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
+.academicScroll { display: grid; gap: 28px; min-width: 0; }
+.passage, .questions { min-width: 0; padding: 6px; }
+.passage p { margin: 0 0 16px; }
+.passage, .questions, .tableScroll { scroll-padding: 12px; }
+.academic[data-immersive='true'] {
+  height: 100%;
+  .academicScroll { display: flex; flex-direction: column; overflow: auto; overscroll-behavior: contain; scroll-padding: 12px; }
+  .passage, .questions { flex: none; }
+  .questions { min-height: 100%; }
+}
+.formula { @include m.label-font(600, 1.1em); padding: 12px; text-align: center; background: t.$paper; border-left: 4px solid t.$yellow; overflow-wrap: anywhere; }
+.tableScroll { max-width: 100%; overflow-x: auto; margin: 12px 0; }
+.passageTable { border-collapse: collapse; width: 100%; caption { @include m.label-font(700, 1em); text-align: left; margin-bottom: 8px; } th, td { padding: 8px; border: 1px solid t.$hairline; text-align: left; overflow-wrap: anywhere; } th { background: t.$paper; } }
+.figureBlock { margin: 20px 0; figcaption { @include m.label-font(600, .9em); margin: 8px 0; } }
+// Passage figures are SVG strings the bank script wrote, with plain class names. Lines in SVG have no
+// stroke by default, so every rule they need is here. They were drawn for about 520px; wider, their text
+// would outgrow the passage's.
+.passageFigure {
+  min-width: 0;
+  max-width: 520px;
+  margin: 0 auto;
+  :global(svg) { width: 100%; max-width: 100%; height: auto; display: block; }
+  line { stroke: t.$black; stroke-width: 1.5; }
+  text { font-family: t.$font-body; font-size: 17px; fill: t.$ink-strong; }
+  :global(.prob) { font-weight: 600; }
+  :global(.grid) line { stroke: t.$hairline; stroke-width: 1; }
+  :global(.ticks) text { font-size: 18px; }
+  :global(.title) { font-size: 18px; font-weight: 600; }
+  :global(.big) { font-size: 22px; }
+  :global(.curve) { fill: none; stroke: #1d4ed8; stroke-width: 3; }
+  :global(.curve-2) { stroke: #b45309; }
+  :global(.curve-3) { stroke: #5b5b66; stroke-dasharray: 7 5; }
+  :global(.label-1) { fill: #1d4ed8; font-weight: 600; }
+  :global(.label-2) { fill: #b45309; font-weight: 600; }
+  :global(.label-3) { fill: #5b5b66; font-weight: 600; }
+  :global(.wire) { fill: none; stroke: t.$black; stroke-width: 2; }
+  :global(.part) { fill: t.$white; stroke: t.$black; stroke-width: 2; }
+  :global(.dot) { fill: t.$black; }
+  :global(.alt) { display: none; }
+}
+
+// The enlarged figure in its dialog may use the dialog's full width.
+.figureDialog .passageFigure { max-width: none; }
+.figureDialog { width: min(1100px, calc(100vw - 24px)); max-width: calc(100vw - 24px); max-height: calc(100dvh - 24px); padding: 16px; border: 2px solid t.$navy; background: t.$white; color: t.$navy; overflow: auto; &::backdrop { background: rgba(t.$navy, .7); } }
+.figureDialogBar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 20px; h3 { flex: 1 1 220px; margin: 0; } }
+.question { border-top: 1px solid t.$line; padding-bottom: 16px; summary { min-height: 44px; padding: 12px 4px; cursor: pointer; font-weight: 700; } }
+.answered { @include m.label-font(600, .85em); margin-left: 12px; text-decoration: underline; }
+.questionOptions legend { font-weight: 600; }
+.questionOption { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 10px; margin-bottom: 8px; border: 2px solid transparent; border-radius: 4px; input { width: 20px; height: 20px; flex: none; margin: 3px 0 0; } &:has(input) { cursor: pointer; } &[data-selected='true'] { border-color: t.$navy; background: t.$paper; } &[data-correct='true'] { border-color: t.$green; border-style: dashed; } }
+.jumpBar { padding: 8px 4px; border-top: 1px solid t.$line; background: t.$white; display: flex; justify-content: flex-end; }
+@include m.from(t.$bp-dmat-passage-columns) {
+  .academicScroll { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 28px; }
+  .academic[data-immersive='true'] .academicScroll { display: grid; overflow: hidden; }
+  .academic[data-immersive='true'] .passage, .academic[data-immersive='true'] .questions { min-height: 0; overflow: auto; overscroll-behavior: contain; padding-right: 16px; }
+  .jumpBar { display: none; }
+}
+.explanation { margin: 20px 0; padding: 16px; background: t.$paper; border-left: 4px solid t.$yellow; ol { padding-left: 1.3em; margin: 0; } li + li { margin-top: 8px; } h4 { margin-top: 20px; } p { margin: 12px 0 0; } }

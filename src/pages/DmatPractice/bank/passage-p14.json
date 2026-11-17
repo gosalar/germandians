@@ -1,0 +1,245 @@
+{
+  "area": "business administration",
+  "blocks": [
+    {
+      "text": "A euro today is worth more than a euro in a year, because today's euro can be invested and earn interest in the meantime. So when a firm decides whether to invest, it cannot simply add up payments that arrive at different times. It first converts every future payment into its value today, its present value.",
+      "type": "p"
+    },
+    {
+      "text": "If money can earn a rate r per year, an amount C received in t years has the present value",
+      "type": "p"
+    },
+    {
+      "text": "PV = C ÷ (1 + r)^t",
+      "type": "formula"
+    },
+    {
+      "text": "The number 1 ÷ (1 + r)^t is called the discount factor: the present value is the amount times the discount factor. The rate r is called the discount rate; a firm usually takes the return it could earn on another investment of similar risk. The further away a payment is, and the higher the discount rate, the smaller the discount factor, and so the less the payment is worth today. Table 1 gives the discount factors for two rates; the questions use these rounded values.",
+      "type": "p"
+    },
+    {
+      "caption": "Table 1. Discount factors 1 ÷ (1 + r)^t, rounded to three decimals.",
+      "head": [
+        "Years from now (t)",
+        "r = 5%",
+        "r = 10%"
+      ],
+      "rows": [
+        [
+          "1",
+          "0.952",
+          "0.909"
+        ],
+        [
+          "2",
+          "0.907",
+          "0.826"
+        ],
+        [
+          "3",
+          "0.864",
+          "0.751"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "text": "The net present value (NPV) of a project is the sum of the present values of all the payments it brings in, minus the investment it needs now:",
+      "type": "p"
+    },
+    {
+      "text": "NPV = PV of all future cash flows − investment today",
+      "type": "formula"
+    },
+    {
+      "text": "A positive NPV means the project's return is higher than the discount rate: it is worth more than the alternative. A negative NPV means its return is lower. Under the NPV rule a firm accepts projects with a positive NPV and rejects those with a negative one; at an NPV of exactly zero it is indifferent. In the questions, a firm can invest €12,000 today in a machine that brings in €5,000 at the end of each of the next 3 years. All cash flows are assumed to arrive at the end of the year in which they occur.",
+      "type": "p"
+    }
+  ],
+  "id": "p14",
+  "questions": [
+    {
+      "explanation": "The first paragraph: today's euro can be invested and earn interest in the meantime, so it is worth more than a euro received later.",
+      "id": "p14-q1",
+      "level": 1,
+      "options": [
+        {
+          "text": "Because prices always rise from one year to the next.",
+          "why": "The text does not argue from prices; its reason is that money can earn interest in the meantime."
+        },
+        {
+          "correct": true,
+          "text": "Because today's euro can be invested and earn interest until then.",
+          "why": "This is the reason the first paragraph gives."
+        },
+        {
+          "text": "Because a payment in the future may not be made at all.",
+          "why": "Risk can matter in practice, but it is not the reason the text gives."
+        },
+        {
+          "text": "Because the discount factor for one year is greater than 1.",
+          "why": "Discount factors for future years are less than 1; that is why future payments are worth less today."
+        }
+      ],
+      "stem": "According to the text, why is a euro today worth more than a euro in a year?",
+      "type": "R"
+    },
+    {
+      "explanation": "PV = amount × discount factor = 5,000 × 0.826 = €4,130.",
+      "id": "p14-q2",
+      "level": 1,
+      "options": [
+        {
+          "correct": true,
+          "text": "€4,130",
+          "why": "€5,000 × 0.826, the factor for t = 2 at 10%."
+        },
+        {
+          "text": "€4,535",
+          "why": "This uses the factor for 5%, from the wrong column."
+        },
+        {
+          "text": "€4,545",
+          "why": "This uses the factor for one year, from the wrong row."
+        },
+        {
+          "text": "€5,000",
+          "why": "This is the amount itself, not discounted."
+        }
+      ],
+      "stem": "Using Table 1, what is the present value of €5,000 received in 2 years at a discount rate of 10%?",
+      "type": "F"
+    },
+    {
+      "explanation": "PV of the payments = 5,000 × (0.909 + 0.826 + 0.751) = 5,000 × 2.486 = €12,430. NPV = €12,430 − €12,000 = €430.",
+      "id": "p14-q3",
+      "level": 2,
+      "options": [
+        {
+          "text": "−€3,325",
+          "why": "This counts only two of the 3 payments."
+        },
+        {
+          "correct": true,
+          "text": "€430",
+          "why": "5,000 × (0.909 + 0.826 + 0.751) − 12,000."
+        },
+        {
+          "text": "€3,000",
+          "why": "This adds the payments without discounting them."
+        },
+        {
+          "text": "€12,430",
+          "why": "This is the present value of the payments; the investment still has to be subtracted."
+        }
+      ],
+      "stem": "What is the net present value of the machine at a discount rate of 10%?",
+      "type": "A"
+    },
+    {
+      "explanation": "At 5%: 5,000 × (0.952 + 0.907 + 0.864) − 12,000 = €1,615. At 10%: €430. The higher rate makes every future payment worth less today, so the NPV falls by €1,185.",
+      "id": "p14-q4",
+      "level": 3,
+      "options": [
+        {
+          "text": "It stays the same, because the payments do not change.",
+          "why": "The payments are the same, but each is worth less today at a higher rate."
+        },
+        {
+          "text": "It rises by €1,185.",
+          "why": "This has the direction wrong: a higher rate makes every discount factor smaller."
+        },
+        {
+          "correct": true,
+          "text": "It falls by €1,185.",
+          "why": "From €1,615 at 5% to €430 at 10%."
+        },
+        {
+          "text": "It falls to half, because the rate doubles.",
+          "why": "The NPV does not change in proportion to the rate: it goes from €1,615 to €430."
+        }
+      ],
+      "stem": "How does the net present value of the machine change if the discount rate is 10% instead of 5%?",
+      "type": "D"
+    },
+    {
+      "explanation": "The last paragraph: a negative NPV means the project's return is lower than the discount rate, and the NPV rule rejects it. The NPV is not a cash loss: it compares present values, so the undiscounted payments can still be larger than the investment.",
+      "id": "p14-q5",
+      "level": 1,
+      "options": [
+        {
+          "correct": true,
+          "text": "The project's return is lower than the discount rate, so under the NPV rule it is rejected.",
+          "why": "A negative NPV means the project is worth less than the alternative the discount rate stands for."
+        },
+        {
+          "text": "The project loses €200 in cash over its life.",
+          "why": "The NPV compares discounted values. The payments added up without discounting can still exceed the investment."
+        },
+        {
+          "text": "The project would have a positive NPV at a higher discount rate.",
+          "why": "A higher rate lowers every discount factor, so the NPV would fall further below zero."
+        },
+        {
+          "text": "The project would have a positive NPV at every lower discount rate.",
+          "why": "A lower rate raises the NPV, but not necessarily above zero."
+        }
+      ],
+      "stem": "A different project has a net present value of −€200 at the firm's discount rate. What does this tell the firm?",
+      "type": "C"
+    },
+    {
+      "explanation": "The whole €15,000 arrives at the end of year 3, so it is multiplied by the factor for t = 3 at 10%: 15,000 × 0.751 = €11,265. NPV = €11,265 − €12,000 = −€735. The payments add up to more than the investment, but they arrive so late that the machine is not worth buying at this rate.",
+      "id": "p14-q6",
+      "level": 2,
+      "options": [
+        {
+          "correct": true,
+          "text": "−€735",
+          "why": "15,000 × 0.751 − 12,000."
+        },
+        {
+          "text": "€960",
+          "why": "This uses the factor for 5%, from the wrong column."
+        },
+        {
+          "text": "€1,635",
+          "why": "This discounts the payment by one year only. It arrives at the end of year 3."
+        },
+        {
+          "text": "€3,000",
+          "why": "This leaves the payment undiscounted."
+        }
+      ],
+      "stem": "A second machine also costs €12,000 today, but brings in a single payment of €15,000 at the end of year 3. What is its net present value at a discount rate of 10%?",
+      "type": "T"
+    },
+    {
+      "explanation": "The present value is the amount times 1 ÷ (1 + r)^t. With r above zero, this factor gets smaller as t grows, as each column of Table 1 shows. So the later the payment, the less it is worth today.",
+      "id": "p14-q7",
+      "level": 1,
+      "options": [
+        {
+          "text": "Its present value is larger than the amount.",
+          "why": "Discount factors for future years are below 1, so the present value is smaller."
+        },
+        {
+          "text": "A higher discount rate raises its present value.",
+          "why": "A higher rate lowers every discount factor, as Table 1 shows."
+        },
+        {
+          "text": "Its present value is the amount minus the discount rate times the amount.",
+          "why": "For one year at 10% that gives 0.900 times the amount; the discount factor is 0.909."
+        },
+        {
+          "correct": true,
+          "text": "The later it is received, the lower its present value.",
+          "why": "Each further year divides by (1 + r) once more; in Table 1 the factors fall down every column."
+        }
+      ],
+      "stem": "A fixed amount will be received at some time in the future, and the discount rate is above zero. Which statement is always true?",
+      "type": "S"
+    }
+  ],
+  "title": "Net Present Value"
+}

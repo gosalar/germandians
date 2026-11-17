@@ -1,0 +1,267 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.record {
+  color: t.$navy;
+}
+
+.overview,
+.review,
+.another {
+  padding-inline: clamp(16px, 4vw, 48px);
+}
+
+.overview {
+  display: grid;
+  gap: clamp(25px, 5vw, 56px);
+  align-items: start;
+  padding-block: clamp(28px, 5vw, 56px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.paperWrap {
+  min-width: 0;
+  filter: drop-shadow(3px 4px 0 t.$hairline);
+
+  &::after {
+    display: block;
+    height: 10px;
+    background: conic-gradient(from 45deg at 50% 100%, transparent 0 270deg, t.$receipt 0) 0 0 / 20px 10px repeat-x;
+    content: '';
+  }
+}
+
+.paper {
+  padding: clamp(15px, 3vw, 30px);
+  background: t.$receipt;
+}
+
+.paperHeader {
+  border-bottom: 2px dashed t.$navy;
+  padding-bottom: 14px;
+
+  h1 {
+    @include m.display-heading(clamp(35px, 5.7vw, 67px));
+    line-height: 1;
+    text-wrap: wrap;
+  }
+
+  p {
+    @include m.label-font(600, 17px);
+    color: t.$slate;
+    margin: 4px 0 0;
+  }
+
+  .paperName {
+    @include m.label-font(700, 18px);
+    color: t.$navy;
+    margin: 0 0 7px;
+  }
+}
+
+.right {
+  @include m.label-font(700, 19px);
+  margin: 12px 0 0;
+}
+
+.counts {
+  @include m.label-font(600, 17px);
+  margin: 6px 0 0;
+}
+
+.row,
+.unanswered {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px 12px;
+  align-items: baseline;
+  padding-block: 7px;
+  border-top: 1px solid t.$line;
+
+  dd {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin: 0;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  dd span {
+    min-width: 4ch;
+    text-align: right;
+    color: t.$slate;
+  }
+}
+
+.row {
+  @include m.below(t.$bp-short-labels) {
+    flex-wrap: wrap;
+
+    dt { flex-basis: 100%; }
+  }
+}
+
+.unanswered {
+  margin-top: 4px;
+  border-top: 2px solid t.$navy;
+}
+
+.stamps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 13px;
+  list-style: none;
+  padding: 3px 0;
+  margin: 16px 0;
+}
+
+.stamp {
+  @include m.sticker(t.$highlight, t.$navy, -3deg);
+  display: grid;
+  justify-items: center;
+  gap: 1px;
+  border-radius: 7px;
+  text-align: center;
+
+  &:nth-child(even) {
+    background: t.$status-green-bg;
+    transform: rotate(2deg);
+  }
+
+  &[data-stamp='puenktlich'],
+  &[data-stamp='wiederDa'] {
+    background: t.$navy;
+    color: t.$receipt;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: land 420ms ease-out both;
+  }
+}
+
+@keyframes land {
+  from { opacity: 0; scale: 1.35; }
+  to { opacity: 1; scale: 1; }
+}
+
+.notice {
+  @include m.label-font(700, 17px);
+  padding: 8px 10px;
+  margin: 15px 0 0;
+  border: 1px solid t.$navy;
+  background: t.$cream-hover;
+}
+
+.next,
+.review {
+  min-width: 0;
+
+  h2 {
+    @include m.sub-heading;
+    font-size: clamp(27px, 3.8vw, 40px);
+  }
+}
+
+.group {
+  margin-top: 15px;
+
+  h3 {
+    @include m.label-font(700, 20px);
+    margin: 0 0 3px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px 10px;
+    padding-block: 6px;
+    border-top: 1px solid t.$line;
+  }
+
+  li > div > span {
+    display: block;
+    color: t.$slate;
+  }
+}
+
+.review {
+  padding-bottom: clamp(34px, 5vw, 62px);
+
+  > p { margin: 8px 0 16px; }
+}
+
+.disclosure {
+  border-top: 1px solid t.$hairline;
+
+  &:last-child { border-bottom: 1px solid t.$hairline; }
+
+  > summary {
+    @include m.label-font(700, 20px);
+    min-height: 44px;
+    padding: 10px 6px;
+    cursor: pointer;
+  }
+}
+
+.reviewItem {
+  padding: clamp(12px, 2.6vw, 25px);
+  margin-bottom: 12px;
+  border: 1px solid t.$navy;
+  border-radius: 10px;
+  background: t.$receipt;
+
+  > h3 {
+    @include m.label-font(700, 20px);
+    margin: 0 0 9px;
+  }
+}
+
+.flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 6px 0 12px;
+  padding: 0;
+  list-style: none;
+
+  li {
+    @include m.label-font(700, 15px);
+    padding: 3px 7px;
+    border: 1px solid t.$navy;
+    border-radius: 4px;
+    background: t.$sand;
+  }
+}
+
+.reviewLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 14px;
+  margin-top: 10px;
+
+  a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: t.$navy;
+    text-underline-offset: 3px;
+  }
+}
+
+.another {
+  padding-block: 28px;
+}

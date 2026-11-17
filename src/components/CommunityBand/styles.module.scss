@@ -1,0 +1,60 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.band {
+  @include m.section-padding;
+  background: t.$navy;
+  color: t.$white;
+}
+
+.layout {
+  display: grid;
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: max-content minmax(0, 1fr);
+  }
+}
+
+.count {
+  @include m.display-heading(clamp(56px, 8vw, 96px));
+  color: t.$yellow;
+}
+
+.audience {
+  @include m.label-font(600, 17px);
+  max-width: 15em;
+  margin-top: 8px;
+  color: t.$mist;
+}
+
+.title {
+  @include m.display-heading(clamp(28px, 4vw, 48px));
+  max-width: 24ch;
+  color: t.$white;
+  line-height: 1.02;
+}
+
+.description,
+.note {
+  @include m.body-copy;
+  max-width: 58ch;
+  margin-top: 12px;
+  color: t.$mist;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  text-align: center;
+}

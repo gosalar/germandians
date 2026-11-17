@@ -1,0 +1,1994 @@
+[
+  {
+    "area": "mathematics",
+    "blocks": [
+      {
+        "text": "A probability is a number from 0 to 1 that says how likely an event is: 0 means it never happens, 1 means it always happens. Many situations unfold in stages. A parcel, for example, is first handed to a carrier and then arrives late or on time. A probability tree draws such a situation from left to right, with one set of branches for each stage and a probability written on every branch. A path is one route through the tree from the start to an end, taking one branch at each stage. Exactly one of the branches that leave a point is taken, so their probabilities add up to 1. The probabilities at a later stage may depend on what happened before: if a first choice changes what is left, the branches after it change too.",
+        "type": "p"
+      },
+      {
+        "text": "The branches of the second stage carry conditional probabilities. A conditional probability is the probability of one event given that another event is known to happen or to have happened. The probability of B given A is written P(B | A). In Figure 1, the 0.1 on the \"Late\" branch after \"Van\" is P(late | van): of the parcels that go by van, one in ten arrives late.",
+        "type": "p"
+      },
+      {
+        "alt": "A tree with two stages. First stage: van 0.7, bike 0.3. After van: late 0.1, on time 0.9. After bike: late 0.6, on time 0.4.",
+        "caption": "Figure 1. A probability tree for the parcels of one depot. Each parcel is carried by van or by bike, and then arrives late or on time.",
+        "id": "p01-fig1",
+        "svg": "<svg viewBox=\"0 0 440 300\" role=\"img\" aria-labelledby=\"p01-fig1-alt\">\n  <g class=\"branches\">\n    <line x1=\"68\" y1=\"150\" x2=\"178\" y2=\"80\"/><text class=\"prob\" x=\"123\" y=\"106\" text-anchor=\"middle\">0.7</text>\n    <line x1=\"68\" y1=\"150\" x2=\"178\" y2=\"220\"/><text class=\"prob\" x=\"123\" y=\"206\" text-anchor=\"middle\">0.3</text>\n    <line x1=\"236\" y1=\"80\" x2=\"350\" y2=\"36\"/><text class=\"prob\" x=\"293\" y=\"49\" text-anchor=\"middle\">0.1</text>\n    <line x1=\"236\" y1=\"80\" x2=\"350\" y2=\"124\"/><text class=\"prob\" x=\"293\" y=\"123\" text-anchor=\"middle\">0.9</text>\n    <line x1=\"236\" y1=\"220\" x2=\"350\" y2=\"176\"/><text class=\"prob\" x=\"293\" y=\"189\" text-anchor=\"middle\">0.6</text>\n    <line x1=\"236\" y1=\"220\" x2=\"350\" y2=\"264\"/><text class=\"prob\" x=\"293\" y=\"263\" text-anchor=\"middle\">0.4</text>\n  </g>\n  <g class=\"nodes\">\n    <text x=\"34\" y=\"156\" text-anchor=\"middle\">Parcel</text>\n    <text x=\"207\" y=\"86\" text-anchor=\"middle\">Van</text>\n    <text x=\"207\" y=\"226\" text-anchor=\"middle\">Bike</text>\n    <text x=\"358\" y=\"42\">Late</text>\n    <text x=\"358\" y=\"130\">On time</text>\n    <text x=\"358\" y=\"182\">Late</text>\n    <text x=\"358\" y=\"270\">On time</text>\n  </g>\n</svg>",
+        "type": "figure"
+      },
+      {
+        "text": "Two rules turn the tree into answers. First, multiply along a path: the probability that A and B both happen is",
+        "type": "p"
+      },
+      {
+        "text": "P(A and B) = P(A) × P(B | A)",
+        "type": "formula"
+      },
+      {
+        "text": "Second, add across paths: when an event can be reached by more than one path, its probability is the sum of the probabilities of those paths.",
+        "type": "p"
+      },
+      {
+        "text": "A tree also lets you turn a condition around. In general, P(A | B) is not the same as P(B | A). To find P(A | B), divide the probability of the path on which both A and B happen by the total probability of B, which the second rule gives:",
+        "type": "p"
+      },
+      {
+        "text": "P(A | B) = P(A and B) ÷ P(B)",
+        "type": "formula"
+      },
+      {
+        "text": "Two events are called independent if knowing that one has happened does not change the probability of the other, so that P(B | A) = P(B). If the probability of B depends on whether A has happened, the events are dependent.",
+        "type": "p"
+      }
+    ],
+    "id": "p01",
+    "questions": [
+      {
+        "explanation": "The first paragraph states it: exactly one of the branches that leave a point is taken, so their probabilities add up to 1.",
+        "id": "p01-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "The probabilities on the branches that leave the same point add up to 1.",
+            "why": "Exactly one of those branches is taken, as the first paragraph says."
+          },
+          {
+            "text": "The probabilities on all the branches of the tree add up to 1.",
+            "why": "Each branching point has its own set of branches adding up to 1. Figure 1 has three such points, so all its branches add up to 3."
+          },
+          {
+            "text": "The probabilities along one path add up to 1.",
+            "why": "Along a path the probabilities are multiplied, not added. On the path \"van, late\" they are 0.7 and 0.1."
+          },
+          {
+            "text": "Every path through the tree has the same probability.",
+            "why": "The four paths in Figure 1 have the probabilities 0.07, 0.63, 0.18 and 0.12."
+          }
+        ],
+        "stem": "Which statement about the probabilities in a probability tree is correct?",
+        "type": "R"
+      },
+      {
+        "explanation": "Follow the path \"van, on time\" and multiply: 0.7 × 0.9 = 0.63.",
+        "id": "p01-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "0.07",
+            "why": "This is the path \"van, late\", not \"van, on time\"."
+          },
+          {
+            "text": "0.12",
+            "why": "This is the path \"bike, on time\"."
+          },
+          {
+            "correct": true,
+            "text": "0.63",
+            "why": "Multiply along the path: 0.7 × 0.9."
+          },
+          {
+            "text": "0.90",
+            "why": "This is P(on time | van) alone. It leaves out the probability that the parcel goes by van at all."
+          }
+        ],
+        "stem": "According to Figure 1, what is the probability that a parcel is carried by van and arrives on time?",
+        "type": "F"
+      },
+      {
+        "explanation": "Multiply along each path that ends in \"late\", then add: 0.7 × 0.1 + 0.3 × 0.6 = 0.07 + 0.18 = 0.25.",
+        "id": "p01-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "0.07",
+            "why": "This is only one of the two paths that end in \"late\"."
+          },
+          {
+            "correct": true,
+            "text": "0.25",
+            "why": "Two paths end in \"late\": 0.07 + 0.18."
+          },
+          {
+            "text": "0.35",
+            "why": "This is the average of 0.1 and 0.6. It ignores that the van carries more parcels than the bike."
+          },
+          {
+            "text": "0.70",
+            "why": "This adds the two conditional probabilities 0.1 and 0.6 without first multiplying along each path."
+          }
+        ],
+        "stem": "What is the probability that a parcel from this depot arrives late?",
+        "type": "A"
+      },
+      {
+        "explanation": "Turn the condition around: P(bike | late) = P(bike and late) ÷ P(late) = 0.18 ÷ 0.25 = 0.72. The bike carries 0.3 of all parcels but 0.72 of the late ones.",
+        "id": "p01-q4",
+        "level": 3,
+        "options": [
+          {
+            "text": "0.18",
+            "why": "This is the probability that a parcel goes by bike and is late. It has not been divided by the probability of being late."
+          },
+          {
+            "text": "0.30",
+            "why": "This is the share of all parcels that go by bike. It ignores what is known: this parcel is late."
+          },
+          {
+            "text": "0.60",
+            "why": "This is P(late | bike), the condition the wrong way round."
+          },
+          {
+            "correct": true,
+            "text": "0.72",
+            "why": "P(bike | late) = P(bike and late) ÷ P(late) = 0.18 ÷ 0.25."
+          }
+        ],
+        "stem": "A parcel from this depot has arrived late. What is the probability that it was carried by bike?",
+        "type": "T"
+      },
+      {
+        "explanation": "Before: 0.07 + 0.18 = 0.25. After: 0.07 + 0.3 × 0.2 = 0.13. The probability falls by 0.12.",
+        "id": "p01-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "It falls by 0.12.",
+            "why": "The path \"bike, late\" falls from 0.18 to 0.06; the path \"van, late\" stays at 0.07."
+          },
+          {
+            "text": "It falls by 0.18.",
+            "why": "That would remove the whole path \"bike, late\". The path only shrinks, from 0.18 to 0.06."
+          },
+          {
+            "text": "It falls by 0.4.",
+            "why": "0.4 is the change on the bike branch. Only 0.3 of the parcels go by bike, so the effect on all parcels is 0.3 × 0.4."
+          },
+          {
+            "text": "It falls to a third of what it was.",
+            "why": "Only the path \"bike, late\" falls to a third. The total goes from 0.25 to 0.13."
+          }
+        ],
+        "stem": "The depot trains its bike couriers, and the probability that a bike parcel arrives late falls from 0.6 to 0.2. The shares carried by van and by bike and the figures for the van stay the same. What happens to the probability that a parcel arrives late?",
+        "type": "D"
+      },
+      {
+        "explanation": "Independent means that knowing the carrier does not change the probability of being late: P(late | bike) = P(late). P(late) = P(van) × P(late | van) + P(bike) × P(late | bike) is a weighted average of the two \"late\" branches, so it equals P(late | bike) only when both branches carry the same probability.",
+        "id": "p01-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "When van and bike each carry half of the parcels.",
+            "why": "The shares in the first stage say nothing about whether lateness depends on the carrier."
+          },
+          {
+            "text": "When the two paths that end in \"late\" have the same probability.",
+            "why": "Take a depot where the van carries 0.8 of the parcels with P(late | van) = 0.1, and the bike 0.2 with P(late | bike) = 0.4. Both paths are 0.08, yet a bike parcel is four times as likely to be late as a van parcel."
+          },
+          {
+            "correct": true,
+            "text": "When P(late | van) and P(late | bike) are equal.",
+            "why": "Then a parcel is equally likely to be late whichever carrier has it, so P(late | bike) = P(late)."
+          },
+          {
+            "text": "When P(late | van) and P(late | bike) add up to 1.",
+            "why": "The values 0.1 and 0.9 add up to 1, but lateness then clearly depends on the carrier."
+          }
+        ],
+        "stem": "Another depot has a tree like Figure 1 with different numbers. In which case must \"carried by bike\" and \"arrives late\" be independent events?",
+        "type": "C"
+      },
+      {
+        "explanation": "Draw a tree with two stages. After the first battery is taken, 5 are left, so the second-stage probabilities change. Both charged: 3/6 × 2/5 = 0.20. Both flat: 3/6 × 2/5 = 0.20. Together: 0.40.",
+        "id": "p01-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "0.20",
+            "why": "This is only one of the two paths, \"charged, charged\". The path \"flat, flat\" has the same probability and also counts."
+          },
+          {
+            "correct": true,
+            "text": "0.40",
+            "why": "Both charged: 3/6 × 2/5 = 0.20. Both flat: 3/6 × 2/5 = 0.20. Add the two paths."
+          },
+          {
+            "text": "0.50",
+            "why": "This treats the second battery as if the first had been put back: (3/6)² + (3/6)²."
+          },
+          {
+            "text": "0.60",
+            "why": "This is the probability that the two batteries are of different kinds."
+          }
+        ],
+        "stem": "A box holds 6 batteries: 3 are charged and 3 are flat. Two batteries are taken out at random, one after the other, and the first is not put back. What is the probability that both are of the same kind?",
+        "type": "T"
+      }
+    ],
+    "title": "Probability Trees"
+  },
+  {
+    "area": "computational sciences",
+    "blocks": [
+      {
+        "text": "Computers spend much of their time looking things up: a name in a customer file, a word in a dictionary, a product in a catalogue. How long a search takes depends on the method and on the length of the list. To compare methods, we count checks. One check compares the wanted item with one item of the list.",
+        "type": "p"
+      },
+      {
+        "text": "Linear search is the simplest method. It checks the items one after another from the start of the list until it finds the wanted item or reaches the end. It works on any list, in any order. On a list of n items it needs one check if the wanted item comes first, and n checks if the item comes last or is not in the list at all.",
+        "type": "p"
+      },
+      {
+        "text": "Binary search is usually much faster on long lists, but it only works on a sorted list, here one that runs from the smallest item to the largest, in which the computer can go straight to any position. It checks the item in the middle. If that is the wanted item, the search is over. If the wanted item is smaller, it can only lie in the lower half, so the upper half is dropped together with the item just checked; if it is larger, the lower half and the checked item are dropped. The search then repeats on the part that is left, until the item is found or nothing is left. Where a part has two middle items, the lower one is checked. After each unsuccessful check, at most half of the items are still left.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. The largest number of checks each method can need.",
+        "head": [
+          "Items in the list",
+          "Linear search",
+          "Binary search"
+        ],
+        "rows": [
+          [
+            "15",
+            "15",
+            "4"
+          ],
+          [
+            "500",
+            "500",
+            "9"
+          ],
+          [
+            "1,000",
+            "1,000",
+            "10"
+          ],
+          [
+            "1,000,000",
+            "1,000,000",
+            "20"
+          ]
+        ],
+        "type": "table"
+      },
+      {
+        "text": "Table 1 shows what this means for long lists. Compare the rows for 500 and 1,000 items: when a list becomes twice as long, the largest number of checks doubles for linear search, but grows by only one for binary search.",
+        "type": "p"
+      },
+      {
+        "text": "This speed has a price. A list must be sorted before binary search can be used, and sorting takes work. A sorted list must also be kept in order whenever items are added. For a short list, or for an unsorted list that is searched only once, linear search can therefore be the better choice.",
+        "type": "p"
+      }
+    ],
+    "id": "p02",
+    "questions": [
+      {
+        "explanation": "The third paragraph says binary search only works on a sorted list. Linear search works on any list, in any order.",
+        "id": "p02-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "A list with an odd number of items.",
+            "why": "Binary search also works on a list with an even number of items: it then checks the lower of the two middle items."
+          },
+          {
+            "correct": true,
+            "text": "A list that is sorted.",
+            "why": "Dropping half the list is only safe if every item in that half is known to be smaller, or larger, than the item checked."
+          },
+          {
+            "text": "A list that contains the wanted item.",
+            "why": "Both methods also work when the item is missing: the search ends when nothing is left to check."
+          },
+          {
+            "text": "A list that is short.",
+            "why": "The longer the list, the greater the advantage of binary search, as Table 1 shows."
+          }
+        ],
+        "stem": "What does binary search need that linear search does not?",
+        "type": "R"
+      },
+      {
+        "explanation": "The last row of Table 1 gives 1,000,000 checks for linear search and 20 for binary search. 1,000,000 ÷ 20 = 50,000.",
+        "id": "p02-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "20",
+            "why": "This is the number of checks binary search needs, not how many times more linear search needs."
+          },
+          {
+            "correct": true,
+            "text": "50,000",
+            "why": "1,000,000 ÷ 20."
+          },
+          {
+            "text": "100,000",
+            "why": "This divides by 10, the binary search figure for 1,000 items, from the wrong row of the table."
+          },
+          {
+            "text": "999,980",
+            "why": "This is the difference between the two numbers. \"How many times as many\" asks for a division."
+          }
+        ],
+        "stem": "A list has 1,000,000 items. According to Table 1, how many times as many checks can linear search need as binary search?",
+        "type": "F"
+      },
+      {
+        "explanation": "The middle of the 11 numbers is 26. 34 is larger, so the search continues in 30, 34, 39, 45, 51, whose middle is 39. 34 is smaller, so 30 and 34 are left. The lower of the two, 30, is checked; 34 is larger, so 34 is the only number left, and it is checked next.",
+        "id": "p02-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "26, 30, 34",
+            "why": "After checking 26, this walks on item by item. Binary search jumps to the middle of the part that is left, which is 39."
+          },
+          {
+            "text": "26, 39, 34",
+            "why": "The first two checks are right. Then two numbers are left, 30 and 34, and the lower of two middle items is checked first."
+          },
+          {
+            "correct": true,
+            "text": "26, 39, 30, 34",
+            "why": "Each check takes the middle of what is left: first of all 11 numbers, then of the 5 above 26, then of the 2 below 39, then the one number left."
+          },
+          {
+            "text": "3, 8, 12, 17, 21, 26, 30, 34",
+            "why": "This is linear search: it starts at the first number and checks every one."
+          }
+        ],
+        "stem": "A sorted list holds these 11 numbers: 3, 8, 12, 17, 21, 26, 30, 34, 39, 45, 51. Binary search looks for 34. Which numbers does it check, in this order?",
+        "type": "A"
+      },
+      {
+        "explanation": "Table 1 gives 10 checks for 1,000 items. A list twice as long needs one check more: 11.",
+        "id": "p02-q4",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "11",
+            "why": "The list is twice as long as one with 1,000 items, so one check is added to 10."
+          },
+          {
+            "text": "12",
+            "why": "This adds two checks. Doubling the list adds only one."
+          },
+          {
+            "text": "20",
+            "why": "This doubles the 10 checks. Doubling is what happens with linear search."
+          },
+          {
+            "text": "1,000",
+            "why": "This is half the list. Binary search does not check half the items; it drops half with each check."
+          }
+        ],
+        "stem": "A sorted list holds 2,000 items. What is the largest number of checks binary search can need?",
+        "type": "D"
+      },
+      {
+        "explanation": "After each unsuccessful check at most half of the items are still left. 64 → 32 → 16 → 8.",
+        "id": "p02-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "8",
+            "why": "Each unsuccessful check leaves at most half: 64 → 32 → 16 → 8."
+          },
+          {
+            "text": "16",
+            "why": "This is what can be left after two checks, not 3."
+          },
+          {
+            "text": "32",
+            "why": "This is what can be left after one check."
+          },
+          {
+            "text": "61",
+            "why": "This removes one item per check, as linear search does: 64 − 3."
+          }
+        ],
+        "stem": "Binary search runs on a sorted list of 64 items. Its first 3 checks are all unsuccessful. At most how many items can still be left to search?",
+        "type": "A"
+      },
+      {
+        "explanation": "The last paragraph names the cases: a short list, or an unsorted list searched only once. The pile of exam papers is short, unsorted and searched once. The invoice archive is searched once but is already sorted; the article list is unsorted but searched thousands of times.",
+        "id": "p02-q6",
+        "level": 2,
+        "options": [
+          {
+            "text": "A phone keeps 2,000 contacts in alphabetical order, and the owner looks up names many times a day.",
+            "why": "The list is already sorted and searched often, which is where binary search pays off."
+          },
+          {
+            "text": "A clerk looks once for one invoice, by its number, in an archive of 50,000 invoices sorted by number.",
+            "why": "The archive is searched only once, but it is already sorted, so binary search can be used straight away and needs far fewer checks."
+          },
+          {
+            "correct": true,
+            "text": "A teacher looks once for one paper in an unsorted pile of 30 exam papers.",
+            "why": "The list is short and searched only once, so sorting it first would cost more than it saves."
+          },
+          {
+            "text": "A shop receives an unsorted list of a million article numbers and will look articles up in it thousands of times a day.",
+            "why": "The list is unsorted, but it is long and searched very often, so sorting it once pays off many times over."
+          }
+        ],
+        "stem": "In which of these situations is linear search the more sensible method?",
+        "type": "C"
+      },
+      {
+        "explanation": "Each linear search can need 1,000 checks, each binary search 10 (Table 1). After k searches the totals are 1,000 × k and 10,000 + 10 × k. For k = 10: 10,000 against 10,100, so sorting has not yet paid off. For k = 11: 11,000 against 10,110.",
+        "id": "p02-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "From the 1st search.",
+            "why": "One linear search costs at most 1,000 checks. Sorting alone costs 10,000."
+          },
+          {
+            "text": "From the 10th search.",
+            "why": "After 10 searches linear search has cost 10,000 checks. Sorting plus 10 binary searches costs 10,100, which is still more."
+          },
+          {
+            "correct": true,
+            "text": "From the 11th search.",
+            "why": "After 11 searches linear search has cost 11,000 checks, and sorting plus 11 binary searches 10,110."
+          },
+          {
+            "text": "Never.",
+            "why": "Each binary search saves 990 checks over a linear one, so the cost of sorting is recovered after enough searches."
+          }
+        ],
+        "stem": "An unsorted list of 1,000 items will be searched several times. Sorting it once costs as much work as 10,000 checks. Counting the largest number of checks each search can need, from which search onwards is sorting first and then using binary search less work in total than using linear search every time?",
+        "type": "T"
+      }
+    ],
+    "title": "Searching a List"
+  },
+  {
+    "area": "natural sciences",
+    "blocks": [
+      {
+        "text": "The nucleus of a radioactive atom is unstable. Sooner or later it decays: it gives off radiation and usually becomes a different nucleus. When one particular nucleus will decay cannot be predicted; it happens at random. A sample of material, however, holds an enormous number of nuclei, and so many random events together follow a regular pattern.",
+        "type": "p"
+      },
+      {
+        "text": "The half-life of a radioactive isotope, written T½, is the time in which half of the radioactive nuclei present in a sample decay. For a single nucleus it is the time in which it has a 50% chance of decaying; across the many nuclei of a sample, that chance shows up as half of them decaying. During the next half-life, half of those that are left decay, and so on. After one half-life half of the nuclei remain, after two a quarter, after three an eighth. The number of radioactive nuclei left after a time t is",
+        "type": "p"
+      },
+      {
+        "text": "N = N₀ × (1/2)^(t ÷ T½)",
+        "type": "formula"
+      },
+      {
+        "text": "where N₀ is the number at the start. The quotient t ÷ T½ counts how many half-lives have passed; it need not be a whole number. Half-lives differ widely from one isotope to another, but the half-life of a given isotope is fixed: it does not depend on how large the sample is.",
+        "type": "p"
+      },
+      {
+        "text": "Nuclei cannot easily be counted, but their decays can. The activity A of a sample is the number of nuclei that decay per second. Its unit is the becquerel (Bq): 1 Bq is one decay per second. The activity is proportional to the number of radioactive nuclei present, so it halves in every half-life too:",
+        "type": "p"
+      },
+      {
+        "text": "A = A₀ × (1/2)^(t ÷ T½)",
+        "type": "formula"
+      },
+      {
+        "text": "Figure 1 shows how the activity of one sample falls over twelve hours. The curve falls steeply at first and then more and more slowly, because each half-life removes the same fraction of what is left, not the same amount. The half-life can be read from such a curve: it is the time the activity takes to fall from any value to half that value.",
+        "type": "p"
+      },
+      {
+        "alt": "A falling curve. Activity in becquerel against time in hours. It starts at 1,600 Bq at 0 hours and passes through 800 Bq at 3 hours, 400 Bq at 6 hours, 200 Bq at 9 hours, 100 Bq at 12 hours. The grid has a line every hour and every 200 Bq.",
+        "caption": "Figure 1. The activity of a sample of one radioactive isotope over twelve hours.",
+        "id": "p03-fig1",
+        "svg": "<svg viewBox=\"0 0 460 300\" role=\"img\" aria-labelledby=\"p03-fig1-alt\">\n  <g class=\"grid\"><line x1=\"62\" y1=\"248\" x2=\"62\" y2=\"34\"/><line x1=\"93.3\" y1=\"248\" x2=\"93.3\" y2=\"34\"/><line x1=\"124.7\" y1=\"248\" x2=\"124.7\" y2=\"34\"/><line x1=\"156\" y1=\"248\" x2=\"156\" y2=\"34\"/><line x1=\"187.3\" y1=\"248\" x2=\"187.3\" y2=\"34\"/><line x1=\"218.7\" y1=\"248\" x2=\"218.7\" y2=\"34\"/><line x1=\"250\" y1=\"248\" x2=\"250\" y2=\"34\"/><line x1=\"281.3\" y1=\"248\" x2=\"281.3\" y2=\"34\"/><line x1=\"312.7\" y1=\"248\" x2=\"312.7\" y2=\"34\"/><line x1=\"344\" y1=\"248\" x2=\"344\" y2=\"34\"/><line x1=\"375.3\" y1=\"248\" x2=\"375.3\" y2=\"34\"/><line x1=\"406.7\" y1=\"248\" x2=\"406.7\" y2=\"34\"/><line x1=\"438\" y1=\"248\" x2=\"438\" y2=\"34\"/><line x1=\"62\" y1=\"248\" x2=\"438\" y2=\"248\"/><line x1=\"62\" y1=\"221.3\" x2=\"438\" y2=\"221.3\"/><line x1=\"62\" y1=\"194.5\" x2=\"438\" y2=\"194.5\"/><line x1=\"62\" y1=\"167.8\" x2=\"438\" y2=\"167.8\"/><line x1=\"62\" y1=\"141\" x2=\"438\" y2=\"141\"/><line x1=\"62\" y1=\"114.3\" x2=\"438\" y2=\"114.3\"/><line x1=\"62\" y1=\"87.5\" x2=\"438\" y2=\"87.5\"/><line x1=\"62\" y1=\"60.8\" x2=\"438\" y2=\"60.8\"/><line x1=\"62\" y1=\"34\" x2=\"438\" y2=\"34\"/></g>\n  <g class=\"axis\"><line x1=\"62\" y1=\"248\" x2=\"438\" y2=\"248\"/><line x1=\"62\" y1=\"248\" x2=\"62\" y2=\"34\"/></g>\n  <g class=\"ticks\"><text x=\"62\" y=\"269\" text-anchor=\"middle\">0</text><text x=\"93.3\" y=\"269\" text-anchor=\"middle\">1</text><text x=\"124.7\" y=\"269\" text-anchor=\"middle\">2</text><text x=\"156\" y=\"269\" text-anchor=\"middle\">3</text><text x=\"187.3\" y=\"269\" text-anchor=\"middle\">4</text><text x=\"218.7\" y=\"269\" text-anchor=\"middle\">5</text><text x=\"250\" y=\"269\" text-anchor=\"middle\">6</text><text x=\"281.3\" y=\"269\" text-anchor=\"middle\">7</text><text x=\"312.7\" y=\"269\" text-anchor=\"middle\">8</text><text x=\"344\" y=\"269\" text-anchor=\"middle\">9</text><text x=\"375.3\" y=\"269\" text-anchor=\"middle\">10</text><text x=\"406.7\" y=\"269\" text-anchor=\"middle\">11</text><text x=\"438\" y=\"269\" text-anchor=\"middle\">12</text><text x=\"54\" y=\"253\" text-anchor=\"end\">0</text><text x=\"54\" y=\"199.5\" text-anchor=\"end\">400</text><text x=\"54\" y=\"146\" text-anchor=\"end\">800</text><text x=\"54\" y=\"92.5\" text-anchor=\"end\">1,200</text><text x=\"54\" y=\"39\" text-anchor=\"end\">1,600</text></g>\n  <text class=\"title\" x=\"250\" y=\"292\" text-anchor=\"middle\">Time in hours</text>\n  <text class=\"title\" x=\"6\" y=\"18\">Activity in Bq</text>\n  <polyline class=\"curve\" points=\"62,34 65.9,40.1 69.8,46 73.8,51.8 77.7,57.3 81.6,62.8 85.5,68 89.4,73.2 93.3,78.1 97.3,83 101.2,87.7 105.1,92.2 109,96.7 112.9,101 116.8,105.2 120.8,109.2 124.7,113.2 128.6,117 132.5,120.8 136.4,124.4 140.3,127.9 144.3,131.3 148.2,134.6 152.1,137.9 156,141 159.9,144 163.8,147 167.8,149.9 171.7,152.7 175.6,155.4 179.5,158 183.4,160.6 187.3,163.1 191.3,165.5 195.2,167.8 199.1,170.1 203,172.3 206.9,174.5 210.8,176.6 214.8,178.6 218.7,180.6 222.6,182.5 226.5,184.4 230.4,186.2 234.3,187.9 238.3,189.7 242.2,191.3 246.1,192.9 250,194.5 253.9,196 257.8,197.5 261.8,198.9 265.7,200.3 269.6,201.7 273.5,203 277.4,204.3 281.3,205.5 285.3,206.7 289.2,207.9 293.1,209.1 297,210.2 300.9,211.2 304.8,212.3 308.8,213.3 312.7,214.3 316.6,215.3 320.5,216.2 324.4,217.1 328.3,218 332.3,218.8 336.2,219.7 340.1,220.5 344,221.3 347.9,222 351.8,222.8 355.8,223.5 359.7,224.2 363.6,224.8 367.5,225.5 371.4,226.1 375.3,226.8 379.3,227.4 383.2,228 387.1,228.5 391,229.1 394.9,229.6 398.8,230.1 402.8,230.7 406.7,231.1 410.6,231.6 414.5,232.1 418.4,232.5 422.3,233 426.3,233.4 430.2,233.8 434.1,234.2 438,234.6\"/>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p03",
+    "questions": [
+      {
+        "explanation": "Find the time at which the activity is half its starting value: 800 Bq is half of 1,600 Bq, and the curve reaches it at 3 hours. The same time takes it from 800 to 400 Bq.",
+        "id": "p03-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "1.5 hours",
+            "why": "At 1.5 hours the activity is still about 1,130 Bq, more than half of 1,600 Bq."
+          },
+          {
+            "correct": true,
+            "text": "3.0 hours",
+            "why": "The activity falls from 1,600 Bq to 800 Bq, half its starting value, in 3 hours."
+          },
+          {
+            "text": "6.0 hours",
+            "why": "By 6 hours the activity has fallen to 400 Bq, a quarter of the start. That is two half-lives."
+          },
+          {
+            "text": "12.0 hours",
+            "why": "12 hours is the whole graph. By then the activity has fallen to 100 Bq, a sixteenth of the start."
+          }
+        ],
+        "stem": "According to Figure 1, what is the half-life of this isotope?",
+        "type": "F"
+      },
+      {
+        "explanation": "The second paragraph defines the half-life as the time in which half of the radioactive nuclei present in a sample decay.",
+        "id": "p03-q2",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "The time in which half of the radioactive nuclei present in a sample decay.",
+            "why": "This is the definition in the second paragraph."
+          },
+          {
+            "text": "Half of the time it takes for every nucleus in a sample to decay.",
+            "why": "Each half-life removes half of what is left, so after two half-lives a quarter of the nuclei still remains. Halving never reaches zero, so there is no fixed time at which every nucleus has gone."
+          },
+          {
+            "text": "The time after which one particular nucleus is certain to have decayed.",
+            "why": "The text says the decay of one particular nucleus happens at random and cannot be predicted."
+          },
+          {
+            "text": "The time in which the activity of a sample falls by a fixed number of becquerels.",
+            "why": "The activity falls by a fixed fraction, not a fixed amount: in Figure 1 it drops by 800 Bq in the first three hours and by 400 Bq in the next three."
+          }
+        ],
+        "stem": "According to the text, what is the half-life of a radioactive isotope?",
+        "type": "R"
+      },
+      {
+        "explanation": "t ÷ T½ = 15 ÷ 3 = 5. A = 1,600 × (1/2)^5 = 1,600 ÷ 32 = 50 Bq.",
+        "id": "p03-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "25 Bq",
+            "why": "This halves the activity 6 times. 15 ÷ 3 = 5."
+          },
+          {
+            "correct": true,
+            "text": "50 Bq",
+            "why": "15 hours are 5 half-lives, so the activity is 1,600 × (1/2)^5."
+          },
+          {
+            "text": "100 Bq",
+            "why": "This is the activity after 12 hours, one half-life too few."
+          },
+          {
+            "text": "320 Bq",
+            "why": "This divides 1,600 by 5, the number of half-lives. Each half-life halves the activity, so it must be divided by 2 that many times."
+          }
+        ],
+        "stem": "The sample in Figure 1 is measured again 15 hours after the start. What activity is found?",
+        "type": "A"
+      },
+      {
+        "explanation": "The activity is proportional to the number of radioactive nuclei, so the nuclei halve every 3 hours as the activity does. After 9 hours, 3 half-lives, 1/8 = 12.5% remain, so 87.5% have decayed. Figure 1 agrees: 200 Bq is 1/8 of 1,600 Bq.",
+        "id": "p03-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "12.5%",
+            "why": "This is the share that remains, not the share that has decayed."
+          },
+          {
+            "text": "75.0%",
+            "why": "This is the share decayed after 6 hours, two half-lives."
+          },
+          {
+            "correct": true,
+            "text": "87.5%",
+            "why": "9 hours are 3 half-lives, so 1/8 of the nuclei remain and the rest have decayed."
+          },
+          {
+            "text": "93.8%",
+            "why": "This is the share decayed after 12 hours, four half-lives."
+          }
+        ],
+        "stem": "For the sample in Figure 1, what percentage of the radioactive nuclei present at the start have decayed after 9 hours?",
+        "type": "A"
+      },
+      {
+        "explanation": "In 12 hours the first sample passes 4 half-lives and falls to 1,600 ÷ 16 = 100 Bq. The second passes 2 and falls to 1,600 ÷ 4 = 400 Bq, which is 4 times as much.",
+        "id": "p03-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "It is half as large.",
+            "why": "A longer half-life means slower decay, so more activity is left, not less."
+          },
+          {
+            "text": "It is the same.",
+            "why": "Both start at 1,600 Bq, but the second sample halves only every 6 hours."
+          },
+          {
+            "text": "It is twice as large.",
+            "why": "This assumes the activity is proportional to the half-life. In 12 hours the first sample halves 4 times and the second 2 times."
+          },
+          {
+            "correct": true,
+            "text": "It is four times as large.",
+            "why": "400 Bq against 100 Bq."
+          }
+        ],
+        "stem": "A second isotope has a half-life twice as long as the one in Figure 1. A sample of it starts with the same activity as the sample in Figure 1. How does its activity after 12 hours compare with the activity of the sample in Figure 1 after 12 hours?",
+        "type": "D"
+      },
+      {
+        "explanation": "250 Bq is 1/8 of 2,000 Bq, and 8 = 2^3, so 3 half-lives have passed: 2,000 → 1,000 → 500 → 250. 36 ÷ 3 = 12.0 minutes.",
+        "id": "p03-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "4.5 minutes",
+            "why": "This divides 36 minutes by 8, the factor by which the activity fell. The factor 8 is 3 halvings, so the time is divided by 3."
+          },
+          {
+            "text": "9.0 minutes",
+            "why": "This counts 4 halvings. 2,000 Bq halved 4 times would be 125 Bq."
+          },
+          {
+            "correct": true,
+            "text": "12.0 minutes",
+            "why": "2,000 → 1,000 → 500 → 250 is 3 halvings in 36 minutes."
+          },
+          {
+            "text": "18.0 minutes",
+            "why": "This assumes the activity halved once in 36 minutes. It fell to 1/8 of its value."
+          }
+        ],
+        "stem": "The activity of a sample of another isotope falls from 2,000 Bq to 250 Bq in 36 minutes. What is the half-life of this isotope?",
+        "type": "T"
+      },
+      {
+        "explanation": "t ÷ T½ = 32 ÷ 8 = 4, so A = A₀ × (1/2)^4 = A₀ ÷ 16. The activity at the time of use must be 150 Bq, so A₀ = 150 × 16 = 2,400 Bq. Check by halving: 2,400 → 1,200 → 600 → 300 → 150.",
+        "id": "p03-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "300 Bq",
+            "why": "This doubles 150 Bq once, as if the 32 hours were a single half-life. They are 4 half-lives."
+          },
+          {
+            "text": "600 Bq",
+            "why": "This multiplies 150 Bq by 4, the number of half-lives. Each half-life halves the activity, so the value at the start is 150 Bq doubled 4 times."
+          },
+          {
+            "text": "1,200 Bq",
+            "why": "This doubles 150 Bq 3 times, which covers 24 hours. In 32 hours 4 half-lives pass."
+          },
+          {
+            "correct": true,
+            "text": "2,400 Bq",
+            "why": "32 hours are 4 half-lives, so the activity falls to 1/16 of its value on the way. 150 × 16 = 2,400."
+          }
+        ],
+        "stem": "A hospital orders a sample of an isotope whose half-life is 8 hours. The sample is used 32 hours after it is sent, and at that moment its activity must be 150 Bq. What activity must the sample have when it is sent?",
+        "type": "T"
+      }
+    ],
+    "title": "Radioactive Decay and Half-Life"
+  },
+  {
+    "area": "engineering",
+    "blocks": [
+      {
+        "text": "An electric circuit is a closed path along which charge can flow. Three quantities describe it. The current I, measured in amperes (A), is how much charge passes a point each second. The voltage V, measured in volts (V), drives the current; a battery supplies it. The resistance R, measured in ohms (Ω), is how strongly a component opposes the current. For the resistors in this passage the three are linked by Ohm's law:",
+        "type": "p"
+      },
+      {
+        "text": "V = I × R",
+        "type": "formula"
+      },
+      {
+        "text": "Resistors can be joined in two basic ways. In series they lie one after another on a single path, so the same current flows through each. For two resistors Ra and Rb their resistances add up, R = Ra + Rb, and the voltages across them add up to the voltage of the source. The larger resistance takes the larger share of the voltage.",
+        "type": "p"
+      },
+      {
+        "text": "In parallel the resistors sit on separate branches between the same two junctions, the points where the wire divides and joins again. Each branch therefore has the same voltage across it. The current divides at the first junction and comes together at the second; the currents in the branches add up to the current that arrives. The branch with the smaller resistance carries the larger current. The combined resistance R of two resistors Ra and Rb in parallel follows from",
+        "type": "p"
+      },
+      {
+        "text": "1/R = 1/Ra + 1/Rb",
+        "type": "formula"
+      },
+      {
+        "text": "Adding a branch gives the current an extra path, so the combined resistance is always smaller than the smallest resistance in the group. A circuit that mixes both arrangements is solved in steps: replace each parallel group by its combined resistance, add the resistances in series, and use Ohm's law for the current.",
+        "type": "p"
+      },
+      {
+        "text": "A resistor turns electrical energy into heat. The power P, in watts (W), is the energy it converts each second:",
+        "type": "p"
+      },
+      {
+        "text": "P = V × I",
+        "type": "formula"
+      },
+      {
+        "text": "Here V is the voltage across that resistor and I the current through it. Figure 1 shows a circuit with one resistor in series and two in parallel; the connecting wires have no resistance.",
+        "type": "p"
+      },
+      {
+        "alt": "A 36 V battery. From it the wire runs through resistor R1 (8 Ω) to a junction, where it divides into two branches: one through R2 (20 Ω) and one through R3 (5 Ω). The branches join again at a second junction, and the wire returns to the battery.",
+        "caption": "Figure 1. A circuit with a battery and three resistors.",
+        "id": "p04-fig1",
+        "svg": "<svg viewBox=\"0 0 440 250\" role=\"img\" aria-labelledby=\"p04-fig1-alt\">\n  <polyline class=\"wire\" points=\"80,105 80,44 130,44\"/>\n  <polyline class=\"wire\" points=\"210,44 380,44\"/>\n  <polyline class=\"wire\" points=\"80,121 80,215 380,215\"/>\n  <polyline class=\"wire\" points=\"260,44 260,95\"/><polyline class=\"wire\" points=\"260,165 260,215\"/>\n  <polyline class=\"wire\" points=\"380,44 380,95\"/><polyline class=\"wire\" points=\"380,165 380,215\"/>\n  <line x1=\"58\" y1=\"105\" x2=\"102\" y2=\"105\" style=\"stroke-width:3\"/>\n  <line x1=\"69\" y1=\"121\" x2=\"91\" y2=\"121\" style=\"stroke-width:6\"/>\n  <text class=\"big\" x=\"50\" y=\"100\" text-anchor=\"end\">+</text>\n  <text class=\"big\" x=\"50\" y=\"128\" text-anchor=\"end\">36 V</text>\n  <rect class=\"part\" x=\"130\" y=\"32\" width=\"80\" height=\"24\"/>\n  <text class=\"big\" x=\"170\" y=\"22\" text-anchor=\"middle\">R1 = 8 Ω</text>\n  <rect class=\"part\" x=\"248\" y=\"95\" width=\"24\" height=\"70\"/>\n  <text class=\"big\" x=\"238\" y=\"126\" text-anchor=\"end\">R2</text>\n  <text class=\"big\" x=\"238\" y=\"152\" text-anchor=\"end\">20 Ω</text>\n  <rect class=\"part\" x=\"368\" y=\"95\" width=\"24\" height=\"70\"/>\n  <text class=\"big\" x=\"402\" y=\"126\">R3</text>\n  <text class=\"big\" x=\"402\" y=\"152\">5 Ω</text>\n  <circle class=\"dot\" cx=\"260\" cy=\"44\" r=\"4.5\"/><circle class=\"dot\" cx=\"260\" cy=\"215\" r=\"4.5\"/>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p04",
+    "questions": [
+      {
+        "explanation": "The third paragraph says that each branch of a parallel arrangement has the same voltage across it, because all branches connect the same two junctions.",
+        "id": "p04-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "The current through it.",
+            "why": "The current divides between the branches; the branch with the smaller resistance carries more."
+          },
+          {
+            "text": "The power converted in it.",
+            "why": "P = V × I. The voltage is the same, but the currents differ, so the powers differ too."
+          },
+          {
+            "correct": true,
+            "text": "The voltage across it.",
+            "why": "All branches lie between the same two junctions, so each has the same voltage across it."
+          },
+          {
+            "text": "The resistance in it.",
+            "why": "Branches can hold any resistances; in Figure 1 they are different."
+          }
+        ],
+        "stem": "According to the text, what is the same for every branch of a parallel arrangement?",
+        "type": "R"
+      },
+      {
+        "explanation": "The current from the battery flows through R1 before it reaches the junction where it divides between R2 and R3. R1 is in series with the rest of the circuit, so it carries the whole current.",
+        "id": "p04-q2",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "R1 only.",
+            "why": "R1 lies on the single path between the battery and the first junction, so it is in series with the battery and the parallel pair."
+          },
+          {
+            "text": "R2 only.",
+            "why": "R2 is on one of two branches; it carries only part of the current."
+          },
+          {
+            "text": "R3 only.",
+            "why": "R3 is on one of two branches; it carries only part of the current."
+          },
+          {
+            "text": "R2 and R3, each of them.",
+            "why": "The current divides at the junction; each branch carries part of it, and the two parts add up to the whole."
+          }
+        ],
+        "stem": "In Figure 1, which resistor carries the whole current that leaves the battery?",
+        "type": "F"
+      },
+      {
+        "explanation": "For two resistors in parallel, 1/R = 1/20 + 1/5 = 0.05 + 0.20 = 0.25, so R = 1 ÷ 0.25 = 4 Ω. As the text says, this is smaller than 5 Ω, the smaller of the two.",
+        "id": "p04-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "0.25 Ω",
+            "why": "This is 1/R. The sum 1/20 + 1/5 still has to be turned upside down."
+          },
+          {
+            "correct": true,
+            "text": "4 Ω",
+            "why": "1/R = 1/20 + 1/5 = 0.25, so R = 4 Ω."
+          },
+          {
+            "text": "12.5 Ω",
+            "why": "This is the average of the two. The combined resistance must be smaller than the smaller of them."
+          },
+          {
+            "text": "25 Ω",
+            "why": "This adds the resistances as if they were in series."
+          }
+        ],
+        "stem": "What is the combined resistance of R2 and R3 in Figure 1?",
+        "type": "A"
+      },
+      {
+        "explanation": "Replace R2 and R3 by their combined resistance, 4 Ω. It is in series with R1, so the total is 8 + 4 = 12 Ω. Ohm's law: I = 36 ÷ 12 = 3.00 A.",
+        "id": "p04-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "1.09 A",
+            "why": "This treats all three resistors as if they were in series: 36 ÷ 33."
+          },
+          {
+            "text": "1.76 A",
+            "why": "This uses 12.5 Ω, the average of R2 and R3, for the parallel pair."
+          },
+          {
+            "correct": true,
+            "text": "3.00 A",
+            "why": "The total resistance is 8 + 4 = 12 Ω, and 36 ÷ 12 = 3.00 A."
+          },
+          {
+            "text": "9.00 A",
+            "why": "This divides the battery voltage by the parallel pair alone and leaves out R1."
+          }
+        ],
+        "stem": "What current leaves the battery in Figure 1?",
+        "type": "A"
+      },
+      {
+        "explanation": "The fourth paragraph states that the combined resistance of a parallel group is always smaller than its smallest resistance. In Figure 1: 4 Ω against 5 Ω and 20 Ω.",
+        "id": "p04-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "The larger resistor carries the larger current.",
+            "why": "Both have the same voltage across them, so by I = V ÷ R the larger resistor carries the smaller current."
+          },
+          {
+            "text": "Their combined resistance is half the sum of the two.",
+            "why": "That is their average. The combined resistance is smaller than the smaller of the two, so it is below the average."
+          },
+          {
+            "text": "The same current flows through each of them.",
+            "why": "That holds for resistors in series. In parallel the currents are equal only if the resistances are."
+          },
+          {
+            "correct": true,
+            "text": "Their combined resistance is smaller than the smaller of the two.",
+            "why": "Each branch is an extra path for the current, as the fourth paragraph says."
+          }
+        ],
+        "stem": "Which statement is true for any two resistors connected in parallel?",
+        "type": "S"
+      },
+      {
+        "explanation": "Without R3 the circuit is R1 and R2 in series: 8 + 20 = 28 Ω instead of 12 Ω. The current falls from 3.00 A to 1.29 A, so the voltage across R1 falls from 24.0 V to 10.3 V. The rest of the 36 V, 25.7 V, is now across R2, up from 12.0 V.",
+        "id": "p04-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "It falls to zero.",
+            "why": "R2 is still connected to the battery through R1, so current still flows through it."
+          },
+          {
+            "text": "It falls.",
+            "why": "The total resistance rises, which lowers the current and so the voltage across R1. The battery voltage is fixed, so more of it is left for R2."
+          },
+          {
+            "text": "It stays the same.",
+            "why": "Branches in parallel share one voltage, but that voltage is what the battery leaves after R1, and it changes when the current changes."
+          },
+          {
+            "correct": true,
+            "text": "It rises.",
+            "why": "The total resistance rises from 12 to 28 Ω, so the current falls and R1 takes less of the voltage; more is left for R2, which rises from 12.0 V to 25.7 V."
+          }
+        ],
+        "stem": "R3 is taken out of the circuit in Figure 1, leaving its branch open, so no current can flow through it. Everything else stays the same, and the battery keeps its voltage. What happens to the voltage across R2?",
+        "type": "D"
+      },
+      {
+        "explanation": "The current is 3.00 A (total resistance 12 Ω). The voltage across the parallel pair is 3.00 A × 4 Ω = 12.0 V, so the current through R3 is 12.0 V ÷ 5 Ω = 2.40 A. P = V × I = 12.0 V × 2.40 A = 28.8 W.",
+        "id": "p04-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "12.0 W",
+            "why": "This is I × R for R3, which is its voltage in volts, not its power."
+          },
+          {
+            "correct": true,
+            "text": "28.8 W",
+            "why": "R3 has 12.0 V across it and carries 2.40 A: 12.0 V × 2.40 A."
+          },
+          {
+            "text": "36.0 W",
+            "why": "This multiplies the voltage across R3 by the whole current, 3.00 A. Only 2.40 A of it flows through R3."
+          },
+          {
+            "text": "259.2 W",
+            "why": "This puts the full 36 V of the battery across R3. R1 takes 24.0 V of it."
+          }
+        ],
+        "stem": "What power is converted into heat in R3 in Figure 1?",
+        "type": "T"
+      }
+    ],
+    "title": "Series and Parallel Circuits"
+  },
+  {
+    "area": "business administration",
+    "blocks": [
+      {
+        "text": "Before a firm launches a product, it wants to know how many units it must sell to avoid a loss. Break-even analysis answers this by sorting the costs into two kinds.",
+        "type": "p"
+      },
+      {
+        "text": "Fixed costs stay the same in total however many units are made, at least within the range of output the firm plans for. Rent and insurance are examples. Variable costs rise in proportion to output: for example, each unit needs the same amount of material, so the variable cost per unit stays the same. With F for the fixed costs, v for the variable cost per unit and q for the number of units, the total cost is",
+        "type": "p"
+      },
+      {
+        "text": "total cost = F + v × q",
+        "type": "formula"
+      },
+      {
+        "text": "If each unit sells at the price p, revenue is p × q. The difference p − v is called the contribution margin per unit. Each unit sold contributes this amount, first towards covering the fixed costs and, once they are covered, towards profit:",
+        "type": "p"
+      },
+      {
+        "text": "profit = (p − v) × q − F",
+        "type": "formula"
+      },
+      {
+        "text": "The break-even point is the number of units at which revenue equals total cost, so that profit is zero. Setting the profit to zero gives",
+        "type": "p"
+      },
+      {
+        "text": "break-even quantity = F ÷ (p − v)",
+        "type": "formula"
+      },
+      {
+        "text": "Below this quantity the firm makes a loss; every unit beyond it adds the contribution margin to profit. The same reasoning tells the firm how many units it needs for a profit it aims at: the contribution margins must then cover the fixed costs and that profit together.",
+        "type": "p"
+      },
+      {
+        "text": "Figure 1 shows the monthly figures for one product. The revenue line starts at zero. The total cost line starts at the fixed costs, because they arise even if nothing is sold, and climbs more gently than the revenue line. The break-even point is where the two lines cross; to its right the gap between them is the profit. The analysis assumes that every unit made is sold and that the price and the variable cost per unit do not change with the number sold.",
+        "type": "p"
+      },
+      {
+        "alt": "Three straight lines, euros per month against units sold per month from 0 to 1,000. Fixed costs: a horizontal line at €6,000. Total cost: from €6,000 at 0 units to €16,000 at 1,000 units. Revenue: from €0 at 0 units to €25,000 at 1,000 units. Revenue and total cost cross at 400 units and €10,000. The grid has a line every 100 units and every €2,500.",
+        "caption": "Figure 1. Revenue and costs of one product per month.",
+        "id": "p05-fig1",
+        "svg": "<svg viewBox=\"0 0 480 300\" role=\"img\" aria-labelledby=\"p05-fig1-alt\">\n  <g class=\"grid\"><line x1=\"76\" y1=\"248\" x2=\"76\" y2=\"34\"/><line x1=\"114.2\" y1=\"248\" x2=\"114.2\" y2=\"34\"/><line x1=\"152.4\" y1=\"248\" x2=\"152.4\" y2=\"34\"/><line x1=\"190.6\" y1=\"248\" x2=\"190.6\" y2=\"34\"/><line x1=\"228.8\" y1=\"248\" x2=\"228.8\" y2=\"34\"/><line x1=\"267\" y1=\"248\" x2=\"267\" y2=\"34\"/><line x1=\"305.2\" y1=\"248\" x2=\"305.2\" y2=\"34\"/><line x1=\"343.4\" y1=\"248\" x2=\"343.4\" y2=\"34\"/><line x1=\"381.6\" y1=\"248\" x2=\"381.6\" y2=\"34\"/><line x1=\"419.8\" y1=\"248\" x2=\"419.8\" y2=\"34\"/><line x1=\"458\" y1=\"248\" x2=\"458\" y2=\"34\"/><line x1=\"76\" y1=\"248\" x2=\"458\" y2=\"248\"/><line x1=\"76\" y1=\"226.6\" x2=\"458\" y2=\"226.6\"/><line x1=\"76\" y1=\"205.2\" x2=\"458\" y2=\"205.2\"/><line x1=\"76\" y1=\"183.8\" x2=\"458\" y2=\"183.8\"/><line x1=\"76\" y1=\"162.4\" x2=\"458\" y2=\"162.4\"/><line x1=\"76\" y1=\"141\" x2=\"458\" y2=\"141\"/><line x1=\"76\" y1=\"119.6\" x2=\"458\" y2=\"119.6\"/><line x1=\"76\" y1=\"98.2\" x2=\"458\" y2=\"98.2\"/><line x1=\"76\" y1=\"76.8\" x2=\"458\" y2=\"76.8\"/><line x1=\"76\" y1=\"55.4\" x2=\"458\" y2=\"55.4\"/><line x1=\"76\" y1=\"34\" x2=\"458\" y2=\"34\"/></g>\n  <g class=\"axis\"><line x1=\"76\" y1=\"248\" x2=\"458\" y2=\"248\"/><line x1=\"76\" y1=\"248\" x2=\"76\" y2=\"34\"/></g>\n  <g class=\"ticks\"><text x=\"76\" y=\"269\" text-anchor=\"middle\">0</text><text x=\"152.4\" y=\"269\" text-anchor=\"middle\">200</text><text x=\"228.8\" y=\"269\" text-anchor=\"middle\">400</text><text x=\"305.2\" y=\"269\" text-anchor=\"middle\">600</text><text x=\"381.6\" y=\"269\" text-anchor=\"middle\">800</text><text x=\"458\" y=\"269\" text-anchor=\"middle\">1,000</text><text x=\"68\" y=\"253\" text-anchor=\"end\">0</text><text x=\"68\" y=\"210.2\" text-anchor=\"end\">5,000</text><text x=\"68\" y=\"167.4\" text-anchor=\"end\">10,000</text><text x=\"68\" y=\"124.6\" text-anchor=\"end\">15,000</text><text x=\"68\" y=\"81.8\" text-anchor=\"end\">20,000</text><text x=\"68\" y=\"39\" text-anchor=\"end\">25,000</text></g>\n  <text class=\"title\" x=\"267\" y=\"292\" text-anchor=\"middle\">Units sold per month</text>\n  <text class=\"title\" x=\"6\" y=\"18\">Euros per month</text>\n  \n  <line class=\"curve curve-3\" x1=\"76\" y1=\"196.6\" x2=\"458\" y2=\"196.6\"/>\n  <line class=\"curve curve-2\" x1=\"76\" y1=\"196.6\" x2=\"458\" y2=\"111\"/>\n  <line class=\"curve\" x1=\"76\" y1=\"248\" x2=\"458\" y2=\"34\"/>\n  <text class=\"label-1\" x=\"289.9\" y=\"111\" text-anchor=\"end\">Revenue</text>\n  <text class=\"label-2\" x=\"458\" y=\"99\" text-anchor=\"end\">Total cost</text>\n  <text class=\"label-3\" x=\"458\" y=\"218.6\" text-anchor=\"end\">Fixed costs</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p05",
+    "questions": [
+      {
+        "explanation": "A variable cost rises in proportion to the number of units made. Only the flour does: every loaf needs the same amount. Rent, insurance and the oven lease stay the same however many loaves are sold, so they are fixed costs.",
+        "id": "p05-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "The rent for the shop, paid every month.",
+            "why": "The rent is the same whether the bakery sells many loaves or few: a fixed cost."
+          },
+          {
+            "text": "The insurance for the building, paid once a year.",
+            "why": "The premium does not depend on the number of loaves: a fixed cost."
+          },
+          {
+            "text": "The lease for the oven, paid every month.",
+            "why": "The lease is owed whether or not the oven is used: a fixed cost."
+          },
+          {
+            "correct": true,
+            "text": "The flour, of which every loaf needs the same amount.",
+            "why": "Twice as many loaves need twice as much flour, so this cost rises in proportion to output."
+          }
+        ],
+        "stem": "A bakery sells bread. Which of its costs is a variable cost?",
+        "type": "C"
+      },
+      {
+        "explanation": "The third paragraph defines the contribution margin per unit as p − v: the price minus the variable cost per unit. Each unit sold contributes this amount towards the fixed costs and then towards profit.",
+        "id": "p05-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "The price minus the total cost per unit.",
+            "why": "The total cost per unit includes a share of the fixed costs. The contribution margin subtracts only the variable cost."
+          },
+          {
+            "text": "The revenue minus the fixed costs.",
+            "why": "This leaves the variable costs in and is not a figure per unit."
+          },
+          {
+            "correct": true,
+            "text": "The price minus the variable cost per unit.",
+            "why": "This is p − v, as the third paragraph defines it."
+          },
+          {
+            "text": "The fixed costs divided by the number of units.",
+            "why": "This is the fixed cost per unit, which changes with the number of units."
+          }
+        ],
+        "stem": "According to the text, what is the contribution margin per unit?",
+        "type": "R"
+      },
+      {
+        "explanation": "The break-even point is where the revenue line and the total cost line cross: at 400 units, with €10,000 on both. The formula agrees: 6,000 ÷ (25 − 10) = 400.",
+        "id": "p05-q3",
+        "level": 1,
+        "options": [
+          {
+            "text": "240 units",
+            "why": "Here the revenue line crosses the fixed-cost line. Revenue then covers the fixed costs but not the variable costs, so the firm still makes a loss."
+          },
+          {
+            "correct": true,
+            "text": "400 units",
+            "why": "The revenue line crosses the total cost line at 400 units, where both are €10,000."
+          },
+          {
+            "text": "600 units",
+            "why": "At 600 units revenue is €15,000 and total cost €12,000, so the firm is already making a profit."
+          },
+          {
+            "text": "10,000 units",
+            "why": "10,000 is the height of the crossing point in euros, not a number of units."
+          }
+        ],
+        "stem": "According to Figure 1, how many units must the firm sell per month to break even?",
+        "type": "F"
+      },
+      {
+        "explanation": "Profit = (p − v) × q − F = 15 × 700 − 6,000 = 10,500 − 6,000 = €4,500. Check: revenue €17,500 minus total cost €13,000.",
+        "id": "p05-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "€3,000",
+            "why": "This multiplies the 300 units beyond the break-even point by the variable cost. Each of them adds the contribution margin, €15."
+          },
+          {
+            "correct": true,
+            "text": "€4,500",
+            "why": "(25 − 10) × 700 − 6,000."
+          },
+          {
+            "text": "€7,500",
+            "why": "This multiplies the 300 units beyond the break-even point by the price. Each of them adds only the contribution margin, €15."
+          },
+          {
+            "text": "€10,500",
+            "why": "This is the total contribution margin. The fixed costs still have to be subtracted."
+          }
+        ],
+        "stem": "What profit does the firm in Figure 1 make in a month in which it sells 700 units?",
+        "type": "A"
+      },
+      {
+        "explanation": "Rent is a fixed cost. The fixed costs rise from €9,000 to €10,200, so the break-even quantity rises from 9,000 ÷ 20 = 450 to 10,200 ÷ 20 = 510 units: 60 more.",
+        "id": "p05-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "It rises by 60 units.",
+            "why": "1,200 ÷ 20 more units are needed to cover the extra rent."
+          },
+          {
+            "text": "It rises by 24 units.",
+            "why": "This divides €1,200 by the price. Each extra unit covers only its contribution margin, €20, of the extra rent."
+          },
+          {
+            "text": "It rises by 40 units.",
+            "why": "This divides by the variable cost per unit. The extra rent is covered by the contribution margin, €20 per unit."
+          },
+          {
+            "text": "It stays the same.",
+            "why": "Rent is a fixed cost, and the break-even quantity is F ÷ (p − v), so it rises with the fixed costs."
+          }
+        ],
+        "stem": "Another firm sells a product at €50 with a variable cost of €30 per unit and fixed costs of €9,000 a month. Its rent rises by €1,200 a month; price and variable cost per unit stay the same. What happens to its break-even quantity?",
+        "type": "D"
+      },
+      {
+        "explanation": "At the new price the contribution margin is 20 − 10 = €10 per unit. The contributions must cover the fixed costs and the profit together: (6,000 + 3,000) ÷ 10 = 900 units.",
+        "id": "p05-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "300 units",
+            "why": "This covers the target profit but forgets the fixed costs of €6,000."
+          },
+          {
+            "text": "450 units",
+            "why": "This divides by the new price. Each unit contributes only the price minus the variable cost, €10."
+          },
+          {
+            "text": "600 units",
+            "why": "This is the new break-even quantity, where profit is zero."
+          },
+          {
+            "correct": true,
+            "text": "900 units",
+            "why": "(6,000 + 3,000) ÷ (20 − 10)."
+          }
+        ],
+        "stem": "The firm in Figure 1 cuts its price to €20 per unit. Fixed costs and variable cost per unit stay the same. How many units must it now sell per month to make a profit of €3,000?",
+        "type": "T"
+      },
+      {
+        "explanation": "In the formula profit = (p − v) × q − F, each extra unit adds p − v. Beyond the break-even point the fixed costs are already covered, so this addition is profit.",
+        "id": "p05-q7",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "Each unit sold beyond the break-even point raises profit by the contribution margin per unit.",
+            "why": "Profit = (p − v) × q − F, so each extra unit adds p − v."
+          },
+          {
+            "text": "At the break-even point, revenue equals the fixed costs.",
+            "why": "At the break-even point revenue equals total cost, which includes the variable costs; the two are the same only if the variable cost is zero."
+          },
+          {
+            "text": "Doubling the price halves the break-even quantity.",
+            "why": "The contribution margin more than doubles, because v stays the same. In Figure 1, a price of €50 gives a break-even quantity of 150, not 200."
+          },
+          {
+            "text": "A higher variable cost per unit lowers the break-even quantity.",
+            "why": "A higher v makes p − v smaller, so more units are needed: the break-even quantity rises."
+          }
+        ],
+        "stem": "For a product whose price is above its variable cost per unit, which statement is always true in the model of the text?",
+        "type": "S"
+      }
+    ],
+    "title": "Break-Even Analysis"
+  },
+  {
+    "area": "economics",
+    "blocks": [
+      {
+        "text": "When the price of a good rises, people usually buy less of it. How much less is measured by the price elasticity of demand: the percentage change in the quantity demanded divided by the percentage change in the price.",
+        "type": "p"
+      },
+      {
+        "text": "elasticity = % change in quantity ÷ % change in price",
+        "type": "formula"
+      },
+      {
+        "text": "A percentage change depends on the value it is measured from. A rise from 20 to 25 is 25% of 20, but a fall from 25 to 20 is only 20% of 25. To get the same answer in both directions, this passage uses the midpoint method, which measures every change against the average of the old and the new value:",
+        "type": "p"
+      },
+      {
+        "text": "% change = (new − old) ÷ ((new + old) ÷ 2) × 100",
+        "type": "formula"
+      },
+      {
+        "text": "Because price and quantity normally move in opposite directions, the elasticity of demand is normally negative. What matters for most purposes is its size, ignoring the sign. Demand is called elastic if that size is greater than 1: the quantity changes by a larger percentage than the price. It is inelastic if the size is less than 1, and unit elastic if it is exactly 1.",
+        "type": "p"
+      },
+      {
+        "text": "Elasticity tells a seller what a price change does to revenue, the price times the quantity sold. If demand is elastic, a price rise lowers revenue, because the lost sales outweigh the higher price. If demand is inelastic, a price rise raises revenue. If demand is unit elastic, revenue stays the same. With the midpoint method these rules hold exactly.",
+        "type": "p"
+      },
+      {
+        "text": "Several things make demand more elastic. An important one is the number of close substitutes: if buyers can easily switch to something similar, they react strongly to a price rise. Demand for necessities, which people keep buying even when the price rises, tends to be inelastic. Time matters too: buyers react more to a price change over months than over days, because they have longer to find alternatives.",
+        "type": "p"
+      },
+      {
+        "text": "Table 1 shows how many tickets a small cinema sold per week at four different prices.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Ticket price and tickets sold per week at one cinema.",
+        "head": [
+          "Price per ticket",
+          "Tickets sold per week"
+        ],
+        "rows": [
+          [
+            "€6",
+            "1,100"
+          ],
+          [
+            "€10",
+            "900"
+          ],
+          [
+            "€14",
+            "600"
+          ],
+          [
+            "€18",
+            "200"
+          ]
+        ],
+        "type": "table"
+      }
+    ],
+    "id": "p06",
+    "questions": [
+      {
+        "explanation": "The third paragraph defines elastic demand: the elasticity, ignoring its sign, is greater than 1, so the quantity changes by a larger percentage than the price.",
+        "id": "p06-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "When the quantity demanded falls as the price rises.",
+            "why": "That is true of almost all demand, elastic or not. The text uses the size of the elasticity to tell them apart."
+          },
+          {
+            "text": "When revenue rises after a price rise.",
+            "why": "That happens when demand is inelastic."
+          },
+          {
+            "text": "When the elasticity, ignoring its sign, is less than 1.",
+            "why": "That is the definition of inelastic demand."
+          },
+          {
+            "correct": true,
+            "text": "When the elasticity, ignoring its sign, is greater than 1.",
+            "why": "Then the quantity changes by a larger percentage than the price, as the third paragraph says."
+          }
+        ],
+        "stem": "According to the text, when is demand called elastic?",
+        "type": "R"
+      },
+      {
+        "explanation": "Quantity: from 900 to 600, a change of −300 against an average of 750, which is −40%. Price: from €10 to €14, a change of 4 against an average of 12, which is +33.3%. Elasticity = −40% ÷ 33.3% = −1.20.",
+        "id": "p06-q2",
+        "level": 2,
+        "options": [
+          {
+            "text": "−75.00",
+            "why": "This divides the change in tickets, −300, by the change in price, 4. Elasticity compares percentage changes."
+          },
+          {
+            "correct": true,
+            "text": "−1.20",
+            "why": "Quantity: −300 ÷ 750 = −40%. Price: 4 ÷ 12 = 33.3%. Then −40% ÷ 33.3% = −1.20."
+          },
+          {
+            "text": "−1.00",
+            "why": "This measures the quantity change against the average but the price change against the old price, €10. The midpoint method uses the average for both."
+          },
+          {
+            "text": "−0.83",
+            "why": "This divides the price change by the quantity change, the formula upside down: 33.3% ÷ −40%. Measuring both changes from the old values instead, −33.3% ÷ 40%, happens to give the same wrong number."
+          }
+        ],
+        "stem": "Using the midpoint method, what is the price elasticity of demand in Table 1 when the price rises from €10 to €14?",
+        "type": "A"
+      },
+      {
+        "explanation": "Revenue is price times tickets sold: €6 gives €6,600, €10 gives €9,000, €14 gives €8,400, €18 gives €3,600. The most is at €10. Neither the lowest price, with the most tickets, nor the highest price brings in the most.",
+        "id": "p06-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "€6",
+            "why": "€6 × 1,100 = €6,600, less than the €9,000 at €10."
+          },
+          {
+            "correct": true,
+            "text": "€10",
+            "why": "€10 × 900 = €9,000, the largest of the four."
+          },
+          {
+            "text": "€14",
+            "why": "€14 × 600 = €8,400, less than the €9,000 at €10."
+          },
+          {
+            "text": "€18",
+            "why": "€18 × 200 = €3,600, less than the €9,000 at €10."
+          }
+        ],
+        "stem": "At which price in Table 1 does the cinema take the most money from tickets per week?",
+        "type": "F"
+      },
+      {
+        "explanation": "The fourth paragraph: if demand is inelastic, a price rise raises revenue. Measured by the midpoint method, the quantity falls by a smaller percentage than the price rises, so price times quantity goes up.",
+        "id": "p06-q4",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "It rises.",
+            "why": "With inelastic demand the higher price outweighs the smaller number of tickets sold."
+          },
+          {
+            "text": "It falls, because fewer tickets are sold.",
+            "why": "Fewer tickets are sold, but with inelastic demand the quantity falls by a smaller percentage than the price rises."
+          },
+          {
+            "text": "It stays the same.",
+            "why": "Revenue stays the same only when demand is unit elastic."
+          },
+          {
+            "text": "It cannot be said without knowing the company's costs.",
+            "why": "Revenue is price times quantity; costs do not enter it. The elasticity alone settles the direction."
+          }
+        ],
+        "stem": "A railway company finds that demand for its tickets is inelastic at its current fares. It raises its fares a little. What happens to its revenue from tickets?",
+        "type": "D"
+      },
+      {
+        "explanation": "The fifth paragraph names close substitutes as a cause of elastic demand. One brand of bottled water has several close substitutes on the same shelf. The other three are necessities without easy substitutes, and for tap water and electricity the time to find alternatives is also short.",
+        "id": "p06-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Tap water for a household over the next week.",
+            "why": "A necessity with no easy substitute, over a short time: demand is likely to be inelastic."
+          },
+          {
+            "text": "A medicine that a patient needs and that has no substitute.",
+            "why": "A necessity without substitutes: demand is likely to be inelastic."
+          },
+          {
+            "text": "Electricity for a home over the next week.",
+            "why": "Over a week a household can hardly change its appliances or supplier, and it needs electricity: demand is likely to be inelastic."
+          },
+          {
+            "correct": true,
+            "text": "One brand of bottled water in a supermarket that sells several brands.",
+            "why": "Other brands are close substitutes on the same shelf, so buyers switch easily when this one becomes dearer."
+          }
+        ],
+        "stem": "Following the text, for which of these is demand likely to be the most elastic?",
+        "type": "C"
+      },
+      {
+        "explanation": "Price: a change of 2 against an average of 10 is 20%. With an elasticity of −1.5 the quantity changes by −1.5 × 20% = −30% of the average quantity. The quickest route is to test the options: for 850, the fall is 300 against an average of 1,000, which is 30%. The algebra gives the same. Call the new quantity x:(x − 1,150) ÷ ((x + 1,150) ÷ 2) = −0.30, so x − 1,150 = −0.15 × (x + 1,150). That gives 1.15 × x = 0.85 × 1,150, so x = 850.",
+        "id": "p06-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "805",
+            "why": "This takes 30% off the old quantity, 1,150. In the midpoint method the percentage is of the average of the old and new quantities."
+          },
+          {
+            "correct": true,
+            "text": "850",
+            "why": "From 1,150 to 850 is a fall of 300 against an average of 1,000: 30%, which is 1.5 × 20%."
+          },
+          {
+            "text": "920",
+            "why": "This lets the quantity fall by the same 20% as the price rose, which ignores the elasticity of −1.5."
+          },
+          {
+            "text": "941",
+            "why": "This keeps revenue the same, which would need an elasticity of −1."
+          }
+        ],
+        "stem": "A museum raises its entry price from €9 to €11. At €9 it sold 1,150 tickets a week. Over this range its price elasticity of demand, by the midpoint method, is −1.5. How many tickets a week does it sell at €11?",
+        "type": "T"
+      },
+      {
+        "explanation": "By the rules in the fourth paragraph, a price rise lowers revenue only when demand is elastic; inelastic demand raises revenue, and unit elastic demand leaves it unchanged. So demand must be elastic over this range.",
+        "id": "p06-q7",
+        "level": 2,
+        "options": [
+          {
+            "text": "The elasticity lies between 0 and −1.",
+            "why": "That is inelastic demand, under which a price rise would raise revenue."
+          },
+          {
+            "text": "The quantity fell by a smaller percentage than the price rose.",
+            "why": "With midpoint percentages, price times quantity would then have risen. Revenue fell, so the quantity fell by the larger percentage."
+          },
+          {
+            "correct": true,
+            "text": "Demand is elastic.",
+            "why": "Only elastic demand makes revenue fall when the price rises."
+          },
+          {
+            "text": "The good is a necessity.",
+            "why": "Demand for necessities tends to be inelastic, under which a price rise would raise revenue."
+          }
+        ],
+        "stem": "A seller raises the price of a good while nothing else changes, and the revenue from it falls. Which statement must be true about demand over this price range, measured by the midpoint method?",
+        "type": "S"
+      }
+    ],
+    "title": "Price Elasticity of Demand"
+  },
+  {
+    "area": "social sciences",
+    "blocks": [
+      {
+        "text": "Researchers who want to know what a large group thinks or does rarely ask everyone. The population is the whole group they want to learn about, for example all students at one university. A sample is the part of it they actually study. They usually draw it from a sampling frame, a list of the members of the population such as the register of enrolled students. A sample is useful only if it is representative: it should resemble the population in the ways that matter for the question.",
+        "type": "p"
+      },
+      {
+        "text": "Four methods choose the sample by chance. In a simple random sample every member of the frame has the same chance of being chosen, and so does every possible group of the chosen size. A systematic sample starts at a randomly chosen place in the list and then takes every k-th member after it. A stratified sample first divides the population into groups that share a feature, called strata, such as the year of study, and then draws a random sample from every stratum, usually in proportion to its size; so every stratum is sure to be represented. A cluster sample divides the population into groups, called clusters, such as the halls of residence; it chooses some of the clusters at random and then includes every member of the chosen clusters.",
+        "type": "p"
+      },
+      {
+        "text": "A convenience sample consists of whoever is easy to reach, such as the people who pass a stand in the main hall one morning. In a voluntary response sample the researcher invites everyone to take part, for example through a link on a website, and the sample consists of those who choose to. Neither method gives the members of the population a known chance of being chosen.",
+        "type": "p"
+      },
+      {
+        "text": "Bias is a systematic difference between what a method's samples show and the population, one that would not average out if the sampling were repeated many times in the same way. Sampling bias arises when some members of the population are less likely to be chosen than others, in a way the researcher does not know or allow for. One cause is a frame that leaves people out: a sample drawn from a list of landline numbers cannot include anyone without a landline. A well-chosen sample can still end up biased. Non-response bias arises when some of the people chosen do not take part and differ from those who do in ways that matter for the question. Self-selection, as in a voluntary response sample, has a similar effect from the start: people with strong views on the topic are more likely to join.",
+        "type": "p"
+      },
+      {
+        "text": "Even an unbiased sample differs from the population by chance; another random sample would give a slightly different result. This sampling error becomes smaller as the sample grows, even in a biased survey. Bias does not: a biased method gives a biased result however large the sample is, and a larger sample only makes the wrong answer look more precise.",
+        "type": "p"
+      }
+    ],
+    "id": "p07",
+    "questions": [
+      {
+        "explanation": "The first paragraph defines the sampling frame as a list of the members of the population, such as a register of enrolled students, from which the sample is drawn.",
+        "id": "p07-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "The list of members of the population from which the sample is drawn.",
+            "why": "This is the definition in the first paragraph, with the register of students as its example."
+          },
+          {
+            "text": "The part of the population that is actually studied.",
+            "why": "That is the sample."
+          },
+          {
+            "text": "The whole group the researchers want to learn about.",
+            "why": "That is the population."
+          },
+          {
+            "text": "The groups into which a stratified sample divides the population.",
+            "why": "Those are the strata."
+          }
+        ],
+        "stem": "According to the text, what is a sampling frame?",
+        "type": "R"
+      },
+      {
+        "explanation": "The second paragraph describes a systematic sample: start at a randomly chosen place in the list and take every k-th member after it. Here k is 40.",
+        "id": "p07-q2",
+        "level": 2,
+        "options": [
+          {
+            "text": "A simple random sample.",
+            "why": "Each student does have the same 1-in-40 chance, but not every group of 300 is possible: two students who stand next to each other in the list can never both be chosen."
+          },
+          {
+            "text": "A cluster sample.",
+            "why": "No groups are chosen and taken whole; single students are taken at fixed intervals."
+          },
+          {
+            "text": "A stratified sample.",
+            "why": "The list is not divided into strata with a random sample drawn from each."
+          },
+          {
+            "correct": true,
+            "text": "A systematic sample.",
+            "why": "A random starting place, then every 40th member of the list."
+          }
+        ],
+        "stem": "A university lists its 12,000 students by matriculation number. A researcher draws a number from 1 to 40 by lot, takes the student in that place in the list, and then every 40th student after it, 300 students in all. What kind of sample is this?",
+        "type": "C"
+      },
+      {
+        "explanation": "The second paragraph: a cluster sample chooses some of the clusters at random and includes every member of the chosen ones. Only the first plan does both. The fourth takes whole schools too, but chooses them for convenience; the third draws from every school, which makes the schools strata.",
+        "id": "p07-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "The 30 schools are numbered and 6 numbers are drawn by lot. Every teacher at those 6 schools is interviewed.",
+            "why": "Schools are the clusters: some are chosen at random, and everyone in them is included."
+          },
+          {
+            "text": "The teachers of all 30 schools are put on one list, and 120 names are drawn by lot from it.",
+            "why": "Single teachers are drawn from one list: a simple random sample."
+          },
+          {
+            "text": "At each of the 30 schools, 4 teachers are drawn by lot from that school's staff list.",
+            "why": "Every school is represented and a random sample is drawn within each: the schools act as strata, so this is a stratified sample."
+          },
+          {
+            "text": "The researcher visits the 6 schools nearest to the office and interviews every teacher there.",
+            "why": "Whole schools are taken, but they are chosen because they are easy to reach, not at random: a convenience sample."
+          }
+        ],
+        "stem": "A researcher wants to survey the teachers at a town's 30 primary schools. Which of these plans produces a cluster sample?",
+        "type": "C"
+      },
+      {
+        "explanation": "The fourth paragraph says a well-chosen sample can still end up biased when the people who do not take part differ from those who do. Here the random draw from a complete register was sound, but the 450 who replied were mostly library users, a group with a particular interest in the topic.",
+        "id": "p07-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "The sampling frame leaves out part of the population.",
+            "why": "The register is complete, so every resident could be drawn."
+          },
+          {
+            "text": "It is a convenience sample.",
+            "why": "The residents were drawn at random, not picked because they were easy to reach."
+          },
+          {
+            "correct": true,
+            "text": "Non-response bias: those who answered differ from those who did not.",
+            "why": "The sample was well chosen, but regular library users were more likely to reply, and they are the people most affected by the question."
+          },
+          {
+            "text": "Only sampling error, which a larger number of replies would remove.",
+            "why": "With more questionnaires posted, library users would still reply more often than others. That difference is bias, which a larger sample does not remove."
+          }
+        ],
+        "stem": "A city council draws 2,000 residents at random from its complete register of residents and posts each of them a questionnaire about the opening hours of the city library. Only a small share of the city's residents use the library regularly, but of the 450 who send the questionnaire back, most are regular library users. Which problem does this survey show, in the terms of the text?",
+        "type": "C"
+      },
+      {
+        "explanation": "The last paragraph: sampling error becomes smaller as the sample grows, but a biased method gives a biased result however large the sample is. Both surveys are voluntary response samples from the visitors of one sports club's website, so the bias stays.",
+        "id": "p07-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Less sampling error and less bias.",
+            "why": "Bias does not shrink with sample size; the same self-selected visitors of the same website answer."
+          },
+          {
+            "text": "The same sampling error, but less bias.",
+            "why": "Both parts are the wrong way round: sampling error shrinks as the sample grows, and the bias of the method stays."
+          },
+          {
+            "text": "The same sampling error and the same bias.",
+            "why": "Sampling error shrinks as the sample grows, as the last paragraph says."
+          },
+          {
+            "correct": true,
+            "text": "Less sampling error, but the same bias.",
+            "why": "More answers reduce chance variation; the method, and so its bias, is unchanged."
+          }
+        ],
+        "stem": "A researcher posts a survey link on a sports club's website and receives 400 answers. The researcher then repeats the survey in exactly the same way, with the same link on the same website, and this time receives 4,000 answers. Compared with the first survey, what does the second have?",
+        "type": "D"
+      },
+      {
+        "explanation": "The aim needs two things: enough final-year students to compare, and no bias. A simple random sample of 200 would give about 200 × 8% = 16 final-year students. Stratifying by year and drawing 100 at random from each year meets both needs; the other two plans reach 100 per group only by giving up random selection.",
+        "id": "p07-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "A simple random sample of 200 students drawn from the whole register.",
+            "why": "It is unbiased, but it would contain only about 16 final-year students, too few to compare with confidence."
+          },
+          {
+            "text": "Interviewers stand at the library entrance during the exam period and question the first 100 first-year and the first 100 final-year students who pass.",
+            "why": "It gives 100 per group, but it is a convenience sample: students in the library during exams may work fewer hours than others."
+          },
+          {
+            "text": "An email invites all 10,000 students to answer online, and the first 100 replies from each of the two years are used.",
+            "why": "It gives 100 per group, but it is a voluntary response sample: students with time to answer quickly may differ from the rest."
+          },
+          {
+            "correct": true,
+            "text": "The register is divided by year of study, and 100 students are drawn at random from the first year and 100 from the final year.",
+            "why": "Each group is a random sample of its own year, so each group's result is unbiased for that year, and 100 per year makes the small final-year group large enough to compare."
+          }
+        ],
+        "stem": "A researcher wants to compare first-year with final-year students on how many hours they work alongside their studies; the study is only about these two years. Of the university's 10,000 students, 8% are in their final year. The budget allows 200 interviews, and the register lists every student's year of study. Which plan suits this aim best?",
+        "type": "T"
+      }
+    ],
+    "title": "Sampling Methods and Bias"
+  },
+  {
+    "area": "humanities",
+    "blocks": [
+      {
+        "text": "In logic, an argument is a set of statements in which some, the premises, are offered as reasons for another, the conclusion. For example: \"All metals conduct electricity. Copper is a metal. So copper conducts electricity.\" Logic asks whether the premises really support the conclusion.",
+        "type": "p"
+      },
+      {
+        "text": "A deductive argument is valid if its form makes it impossible for all its premises to be true while its conclusion is false: no argument of the same form has true premises and a false conclusion. Validity depends only on the form of the argument, that is, its structure rather than its subject matter. It does not depend on whether the premises are in fact true. \"All fish can fly. A trout is a fish. So a trout can fly.\" is valid: if both premises were true, the conclusion would have to be true as well. It is still a poor argument, because its first premise is false. An argument is sound if it is valid and all its premises are true. The conclusion of a sound argument must therefore be true. The copper argument is sound; the trout argument is valid but not sound.",
+        "type": "p"
+      },
+      {
+        "text": "Some forms are known by name. They start from a premise of the form \"If P, then Q\", in which P is called the antecedent and Q the consequent. Two forms are valid: modus ponens (\"If P, then Q. P. So Q.\") and modus tollens (\"If P, then Q. Not Q. So not P.\"). Two forms look similar but are invalid: affirming the consequent (\"If P, then Q. Q. So P.\") and denying the antecedent (\"If P, then Q. Not P. So not Q.\"). Take \"If a plant gets no water, it wilts. This plant has wilted. So it got no water.\" The plant may have wilted from heat or disease, so the premises can be true while the conclusion is false: the argument affirms the consequent and is invalid. An invalid argument can happen to have true premises and a true conclusion; it is invalid because its premises do not guarantee its conclusion.",
+        "type": "p"
+      },
+      {
+        "text": "A fallacy is a mistake in reasoning. Affirming the consequent and denying the antecedent are formal fallacies: the error lies in the form itself. Informal fallacies cannot be detected from the form alone; spotting them depends on the content and context, and three are especially common in debate. An ad hominem attacks the person who makes a claim, their character or motives, instead of the claim. A straw man misrepresents an opponent's position, usually as something more extreme or weaker than it is, and then refutes that version. A false dilemma presents two options as the only ones when there are others. Spotting a fallacy shows that an argument fails to support its conclusion; it does not show that the conclusion is false.",
+        "type": "p"
+      }
+    ],
+    "id": "p08",
+    "questions": [
+      {
+        "explanation": "The second paragraph: an argument is sound if it is valid and all its premises are true. The copper argument is sound; the trout argument is valid but not sound.",
+        "id": "p08-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "When its conclusion is true.",
+            "why": "A true conclusion can come from an invalid argument or from false premises. Soundness is about the argument, not only its conclusion."
+          },
+          {
+            "text": "When it is valid.",
+            "why": "Valid is not enough: the trout argument is valid but not sound, because a premise is false."
+          },
+          {
+            "correct": true,
+            "text": "When it is valid and all its premises are true.",
+            "why": "This is the definition in the second paragraph."
+          },
+          {
+            "text": "When all its premises are true.",
+            "why": "True premises are not enough: the premises must also guarantee the conclusion, which is validity."
+          }
+        ],
+        "stem": "According to the text, when is an argument sound?",
+        "type": "R"
+      },
+      {
+        "explanation": "The argument has the form \"If P, then Q. Q. So P.\", affirming the consequent, which the text calls invalid. Both premises and the conclusion happen to be true, but the form does not guarantee the conclusion: put 4 in place of 12 and the premises stay true while the conclusion becomes false. The third paragraph says an invalid argument can have true premises and a true conclusion.",
+        "id": "p08-q2",
+        "level": 2,
+        "options": [
+          {
+            "text": "It is valid and sound.",
+            "why": "It is not valid, so it cannot be sound."
+          },
+          {
+            "text": "It is valid but not sound.",
+            "why": "It is not valid: it has the form of affirming the consequent."
+          },
+          {
+            "text": "It is invalid, because its conclusion is false.",
+            "why": "The conclusion is true: 12 ÷ 6 = 2. A false conclusion is not what makes an argument invalid."
+          },
+          {
+            "correct": true,
+            "text": "It is invalid, although its premises and its conclusion are true.",
+            "why": "The form \"If P, then Q. Q. So P.\" does not guarantee the conclusion: the same form with 4 in place of 12 has true premises and a false conclusion."
+          }
+        ],
+        "stem": "Consider the argument: \"If a number is divisible by 6, it is even. 12 is even. So 12 is divisible by 6.\" Which description is correct?",
+        "type": "C"
+      },
+      {
+        "explanation": "P is \"the library is open\" and Q is \"the lights in the reading room are on\". The second premise is \"not P\" and the conclusion \"not Q\": the third paragraph calls this form denying the antecedent, and it is invalid.",
+        "id": "p08-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "Denying the antecedent.",
+            "why": "The form is \"If P, then Q. Not P. So not Q.\" The lights could be on for a cleaner even when the library is closed."
+          },
+          {
+            "text": "Modus ponens.",
+            "why": "Modus ponens has the second premise \"P\" (the library is open). Here the second premise is \"not P\"."
+          },
+          {
+            "text": "Modus tollens.",
+            "why": "Modus tollens has the second premise \"not Q\" (the lights are not on). Here the second premise denies P instead."
+          },
+          {
+            "text": "Affirming the consequent.",
+            "why": "That form has the second premise \"Q\" (the lights are on). Here the second premise is \"not P\"."
+          }
+        ],
+        "stem": "Which form does this argument have? \"If the library is open, the lights in the reading room are on. The library is not open. So the lights in the reading room are not on.\"",
+        "type": "C"
+      },
+      {
+        "explanation": "Valid means it is impossible for all the premises to be true and the conclusion false. So if the conclusion of a valid argument is false, the premises cannot all be true. Nothing follows the other way: false premises can lead to a true or a false conclusion.",
+        "id": "p08-q4",
+        "level": 3,
+        "options": [
+          {
+            "text": "Its conclusion is true.",
+            "why": "The trout argument is valid and its conclusion, that a trout can fly, is false."
+          },
+          {
+            "correct": true,
+            "text": "If its conclusion is false, at least one of its premises is false.",
+            "why": "If all the premises were true, a valid argument could not have a false conclusion."
+          },
+          {
+            "text": "If one of its premises is false, its conclusion is false.",
+            "why": "A valid argument with a false premise can still have a true conclusion, such as \"All fish are mammals. A whale is a fish. So a whale is a mammal.\""
+          },
+          {
+            "text": "All its premises are true.",
+            "why": "Validity says nothing about whether the premises are true; the trout argument is valid with a false premise."
+          }
+        ],
+        "stem": "Which statement is true of every valid argument?",
+        "type": "S"
+      },
+      {
+        "explanation": "P is \"the substance is a metal\" and Q is \"it is liquid at room temperature\". The argument runs \"If P, then Q. Not Q. So not P.\": modus tollens, which is valid. But the first premise is false, so the argument is not sound, and its conclusion is false too. This is the trout case from the second paragraph in another form.",
+        "id": "p08-q5",
+        "level": 3,
+        "options": [
+          {
+            "text": "It is valid and sound.",
+            "why": "Its first premise is false, since most metals, iron among them, are solid at room temperature; so it is not sound."
+          },
+          {
+            "correct": true,
+            "text": "It is valid but not sound.",
+            "why": "It has the valid form of modus tollens, but its first premise is false."
+          },
+          {
+            "text": "It is invalid, because it denies the antecedent.",
+            "why": "The second premise denies the consequent (\"not liquid\"), not the antecedent. That is modus tollens, which is valid."
+          },
+          {
+            "text": "It is invalid, because its conclusion is false.",
+            "why": "A false conclusion does not make an argument invalid. Here it comes from a false premise in a valid form."
+          }
+        ],
+        "stem": "Consider the argument: \"If a substance is a metal, it is liquid at room temperature. Iron is not liquid at room temperature. So iron is not a metal.\" Which description is correct?",
+        "type": "T"
+      },
+      {
+        "explanation": "The fourth paragraph: an ad hominem attacks the person, their character or motives, instead of the claim. Only the first reply does that. The second is a straw man, the third a false dilemma, and the fourth addresses the proposal itself.",
+        "id": "p08-q6",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "\"Sam only wants this because Sam never plans ahead, so we can ignore the argument.\"",
+            "why": "This attacks Sam's character and motives instead of the proposal."
+          },
+          {
+            "text": "\"Sam wants the library open all night, every night of the year, and we could never pay for that.\"",
+            "why": "This replaces Sam's proposal with a more extreme one and attacks that: a straw man."
+          },
+          {
+            "text": "\"Either we keep the present hours or we double the student fees, and nobody wants higher fees.\"",
+            "why": "This offers two options as if they were the only ones: a false dilemma."
+          },
+          {
+            "text": "\"Staying open until midnight would need two more staff each night, and the budget does not cover them.\"",
+            "why": "This answers the proposal itself with a reason about cost. It may be right or wrong, but it is not a fallacy of the kinds in the text."
+          }
+        ],
+        "stem": "Sam argues that the university library should stay open until midnight during the exam period. Which reply is an ad hominem?",
+        "type": "C"
+      }
+    ],
+    "title": "Arguments, Validity and Fallacies"
+  },
+  {
+    "area": "natural sciences",
+    "blocks": [
+      {
+        "text": "Some traits of plants and animals are passed on according to simple rules first described by Gregor Mendel, who crossed garden peas. A trait such as flower colour is controlled by a gene, which comes in different versions called alleles. A pea plant carries two alleles of each gene, one inherited from each parent. If the two are the same, the plant is homozygous for that gene; if they differ, it is heterozygous. The pair of alleles a plant carries is its genotype; the trait we can see is its phenotype.",
+        "type": "p"
+      },
+      {
+        "text": "In pea flowers the allele for violet, written V, is dominant over the allele for white, written v, which is recessive. A plant with at least one V has violet flowers, so VV and Vv plants look alike. Only a vv plant has white flowers. Not every gene behaves this way, but flower colour in peas does.",
+        "type": "p"
+      },
+      {
+        "text": "When a plant forms its gametes, the pollen and egg cells, its two alleles separate, and each gamete receives one of them, each with the same probability; this is called the law of segregation. Which allele an offspring receives from one parent is independent of which it receives from the other. The possible offspring of a cross can therefore be listed in a Punnett square, a grid with the alleles of one parent along the top and those of the other down the side; each of the four boxes is equally likely. For two Vv parents the boxes are VV, Vv, Vv and vv (the heterozygote fills two boxes): on average a quarter of the offspring are VV, a half Vv and a quarter vv, so three quarters have violet flowers and one quarter white.",
+        "type": "p"
+      },
+      {
+        "text": "A plant with violet flowers may be VV or Vv. To find out which, it can be crossed with a white plant, which can only pass on v; this is called a test cross. If the violet plant is Vv, about half of the offspring will be white; if it is VV, none will. Real counts only come close to the expected shares, because each offspring receives its alleles by chance. Table 1 shows the results of three crosses made by a gardener.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Flower colour of the offspring of three crosses of pea plants.",
+        "head": [
+          "Cross",
+          "Parents",
+          "Violet offspring",
+          "White offspring"
+        ],
+        "rows": [
+          [
+            "1",
+            "violet × white",
+            "86",
+            "0"
+          ],
+          [
+            "2",
+            "violet × white",
+            "47",
+            "53"
+          ],
+          [
+            "3",
+            "violet × violet",
+            "152",
+            "49"
+          ]
+        ],
+        "type": "table"
+      }
+    ],
+    "id": "p09",
+    "questions": [
+      {
+        "explanation": "The first paragraph: a plant whose two alleles differ is heterozygous; if they are the same, it is homozygous.",
+        "id": "p09-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "It has violet flowers.",
+            "why": "Violet plants can be VV, which is homozygous, or Vv."
+          },
+          {
+            "text": "It carries only one allele of the gene.",
+            "why": "Every pea plant carries two alleles of each gene, one from each parent."
+          },
+          {
+            "text": "Its two alleles of the gene are the same.",
+            "why": "That is homozygous."
+          },
+          {
+            "correct": true,
+            "text": "Its two alleles of the gene are different.",
+            "why": "This is the definition in the first paragraph; Vv is an example."
+          }
+        ],
+        "stem": "According to the text, what does it mean that a plant is heterozygous for a gene?",
+        "type": "R"
+      },
+      {
+        "explanation": "A white (vv) offspring received a v from each parent. So a violet parent whose cross produced any white offspring must be Vv: that rules out crosses 2 and 3. In cross 1 all 86 offspring are violet, which is what a VV parent crossed with a white one gives.",
+        "id": "p09-q2",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "In cross 1 only.",
+            "why": "A VV parent with a white one gives only violet offspring, as in cross 1. In crosses 2 and 3 white offspring appear, and each white offspring needs a v from every parent."
+          },
+          {
+            "text": "In cross 2 only.",
+            "why": "Cross 2 has 53 white offspring. Each received a v from the violet parent, so that parent must be Vv."
+          },
+          {
+            "text": "In crosses 1 and 3.",
+            "why": "Cross 3 has 49 white offspring, each with a v from both violet parents, so both are Vv."
+          },
+          {
+            "text": "In crosses 2 and 3.",
+            "why": "Both crosses produced white offspring. A white offspring is vv, so it received a v from each parent, and a VV parent has no v to give."
+          }
+        ],
+        "stem": "In which of the crosses in Table 1 could a violet parent be homozygous (VV)?",
+        "type": "F"
+      },
+      {
+        "explanation": "The white offspring show that both violet parents in cross 3 are Vv. A Vv × Vv cross gives the boxes VV, Vv, Vv and vv, each equally likely. Two of the four boxes, VV and vv, are homozygous: 1/2.",
+        "id": "p09-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "1/4",
+            "why": "That is the share of one homozygous type only, VV or vv. Both are homozygous."
+          },
+          {
+            "text": "3/4",
+            "why": "That is the share of violet offspring, which includes the heterozygous Vv plants."
+          },
+          {
+            "correct": true,
+            "text": "1/2",
+            "why": "VV (1/4) and vv (1/4) are both homozygous."
+          },
+          {
+            "text": "1/3",
+            "why": "This counts three genotypes (VV, Vv, vv) as equally likely. In the Punnett square Vv fills two of the four boxes."
+          }
+        ],
+        "stem": "In cross 3, what share of the offspring is expected to be homozygous?",
+        "type": "A"
+      },
+      {
+        "explanation": "Both parents are Vv, so the four boxes are VV, Vv, Vv and vv. The chosen plant is violet, which leaves three equally likely boxes: VV and two Vv. Two of them are heterozygous: 2/3.",
+        "id": "p09-q4",
+        "level": 3,
+        "options": [
+          {
+            "text": "1/4",
+            "why": "That is the share of VV among all offspring, not the share of Vv among the violet ones."
+          },
+          {
+            "text": "1/2",
+            "why": "That is the share of Vv among all offspring. The plant chosen is known to be violet, so the white quarter is ruled out."
+          },
+          {
+            "text": "3/4",
+            "why": "That is the share of violet plants among all offspring."
+          },
+          {
+            "correct": true,
+            "text": "2/3",
+            "why": "Of the three equally likely violet boxes, VV and the two Vv boxes, two are heterozygous."
+          }
+        ],
+        "stem": "One of the violet-flowered offspring of cross 3 is chosen at random. What is the probability that it is heterozygous?",
+        "type": "T"
+      },
+      {
+        "explanation": "The fourth paragraph describes this cross. The white plant passes on only v, so the offspring show which allele the violet plant passed on: about half white if it is Vv, none if it is VV.",
+        "id": "p09-q5",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "A white-flowered plant.",
+            "why": "A white plant can only pass on v, so any white offspring shows that the violet plant carries v."
+          },
+          {
+            "text": "A violet-flowered plant known to be VV.",
+            "why": "Every offspring receives V from this plant and so has violet flowers whatever the genotype of the plant being tested."
+          },
+          {
+            "text": "A violet-flowered plant whose genotype is also unknown.",
+            "why": "If that plant is VV, all offspring are violet whatever the tested plant is, so the cross may show nothing."
+          },
+          {
+            "text": "Any violet-flowered plant, as long as many offspring are counted.",
+            "why": "If the partner is VV, no offspring can be white, however many are counted."
+          }
+        ],
+        "stem": "A gardener has a violet-flowered pea plant and wants to find out whether it is VV or Vv. With which plant should it be crossed?",
+        "type": "C"
+      },
+      {
+        "explanation": "Every offspring of cross 1 has violet flowers, so it carries a V, and it received a v from its white parent: it is Vv. Vv × Vv gives 1/4 white offspring. In cross 2 (Vv × vv) half the boxes are vv: 1/2. 1/4 is half of 1/2.",
+        "id": "p09-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "None at all.",
+            "why": "The offspring of cross 1 look violet, but each received v from the white parent, so they are Vv and can pass it on."
+          },
+          {
+            "text": "The same share.",
+            "why": "Cross 2 is Vv × vv and gives 1/2 white; Vv × Vv gives only 1/4."
+          },
+          {
+            "correct": true,
+            "text": "Half the share.",
+            "why": "1/4 white against 1/2 in cross 2."
+          },
+          {
+            "text": "Twice the share.",
+            "why": "This has the two crosses the wrong way round: Vv × Vv gives 1/4 white, Vv × vv gives 1/2."
+          }
+        ],
+        "stem": "The offspring of cross 1 are crossed with each other. Compared with the share expected in cross 2, what share of their offspring is expected to have white flowers?",
+        "type": "D"
+      }
+    ],
+    "title": "Mendelian Inheritance"
+  }
+]

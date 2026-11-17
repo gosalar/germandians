@@ -13,6 +13,8 @@ export const FOOTER_LINKS = [
   { destination: DESTINATIONS.email, label: CONTACT.email },
   PAGE_LINKS.gradeCheck,
   PAGE_LINKS.requirements,
+  PAGE_LINKS.dmat,
+  PAGE_LINKS.dmatPractice,
   PAGE_LINKS.about,
   PAGE_LINKS.community,
   PAGE_LINKS.learnGerman,

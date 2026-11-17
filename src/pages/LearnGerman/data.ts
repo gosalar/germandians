@@ -1,4 +1,5 @@
 import { FEE_POLICY, GERMAN_LESSONS } from '@/utils/constants';
+import { GERMAN_WORD_CARDS } from '@/utils/germanWords';
 
 /**
  * Copy for the Learn German page. The shared terms (languages, charges, certificate) and the enquiry
@@ -133,48 +134,5 @@ export const WORDS = {
   title: 'Six words you’ll hear early on',
   lede: 'Tap a card to turn it over.',
   hint: 'Tap to turn',
-  cards: [
-    {
-      id: 'mensa',
-      article: 'die',
-      word: 'Mensa',
-      meaning: 'the university canteen',
-      example: { de: 'Wir treffen uns in der Mensa.', en: 'We’ll meet in the canteen.' },
-    },
-    {
-      id: 'vorlesung',
-      article: 'die',
-      word: 'Vor­lesung',
-      meaning: 'a lecture',
-      example: { de: 'Die Vorlesung beginnt um zehn.', en: 'The lecture starts at ten.' },
-    },
-    {
-      id: 'kommilitone',
-      article: 'der',
-      word: 'Kommi­litone',
-      meaning: 'a fellow student (die Kommilitonin for a woman)',
-      example: { de: 'Mein Kommilitone erklärt mir die Aufgabe.', en: 'My fellow student explains the task to me.' },
-    },
-    {
-      id: 'termin',
-      article: 'der',
-      word: 'Termin',
-      meaning: 'an appointment',
-      example: { de: 'Ich habe morgen einen Termin.', en: 'I have an appointment tomorrow.' },
-    },
-    {
-      id: 'feierabend',
-      article: 'der',
-      word: 'Feier­abend',
-      meaning: 'the end of the working day, and the free time after it',
-      example: { de: 'Schönen Feierabend!', en: 'Enjoy your evening!' },
-    },
-    {
-      id: 'doch',
-      article: '',
-      word: 'doch',
-      meaning: '“yes, actually”, when you contradict a negative',
-      example: { de: 'Kommst du nicht mit? – Doch!', en: 'Aren’t you coming along? – Yes, I am!' },
-    },
-  ],
+  cards: GERMAN_WORD_CARDS,
 } as const;

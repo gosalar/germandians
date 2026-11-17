@@ -218,7 +218,9 @@ test('answers and a valid grade survive client-side navigation and clear on relo
   await page.locator('#check-score').fill('7.4');
   await expect(page.getByTestId('german-grade-value')).toHaveText('2.3');
 
-  await nav.getByRole('link', { name: 'Requirements', exact: true }).click();
+  // The requirements pages share one header menu.
+  await nav.getByRole('button', { name: 'Requirements', exact: true }).click();
+  await nav.getByRole('link', { name: 'Requirements guide', exact: true }).click();
   await expect(page).toHaveURL(/\/requirements$/);
   expect(await page.evaluate(() => (window as unknown as { visitMarker?: boolean }).visitMarker)).toBe(true);
   await expect(option(page, 'length', '3-year')).toHaveAttribute('aria-pressed', 'true');

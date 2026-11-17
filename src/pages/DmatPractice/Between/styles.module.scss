@@ -1,0 +1,143 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.between {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(24px, 5vw, 56px) clamp(16px, 4vw, 32px);
+  background: t.$paper;
+  color: t.$navy;
+
+  &[data-break] { background: t.$sand; }
+}
+
+.card {
+  width: min(100%, 600px);
+  text-align: center;
+
+  > p:not(.timer) {
+    @include m.body-copy;
+    max-width: 36ch;
+    margin: 5px auto 0;
+  }
+}
+
+.title {
+  @include m.display-heading(clamp(36px, 7vw, 72px));
+  line-height: 1;
+}
+
+.translation {
+  @include m.label-font(600, 19px);
+  display: block;
+  margin-top: 8px;
+  letter-spacing: normal;
+  word-spacing: normal;
+}
+
+.timer {
+  @include m.display-heading(clamp(58px, 12vw, 100px));
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  margin: 14px 0 6px;
+}
+
+.cup {
+  position: relative;
+  width: 94px;
+  height: 62px;
+  margin: 0 auto 17px;
+  border-bottom: 3px solid t.$navy;
+
+  span {
+    position: absolute;
+    left: 13px;
+    bottom: 5px;
+    width: 57px;
+    height: 42px;
+    border: 3px solid t.$navy;
+    border-radius: 0 0 19px 19px;
+    background: linear-gradient(t.$receipt 34%, t.$orange-ink 34%);
+  }
+
+  span::after {
+    position: absolute;
+    top: 5px;
+    left: 100%;
+    width: 15px;
+    height: 19px;
+    border: 3px solid t.$navy;
+    border-left: 0;
+    border-radius: 0 12px 12px 0;
+    content: '';
+  }
+}
+
+.wordDeck {
+  width: min(100%, 370px);
+  margin: 23px auto 0;
+}
+
+.wordLabel {
+  @include m.label-font(700, 16px);
+  color: t.$slate;
+  margin: 0 0 8px;
+}
+
+.wordCard {
+  @include m.pop-shadow(4px);
+  display: grid;
+  align-items: center;
+  width: 100%;
+  min-height: 132px;
+  padding: 14px 18px;
+  border: 2px solid t.$navy;
+  border-radius: 12px;
+  background: t.$receipt;
+  color: t.$navy;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+
+  &[aria-pressed='true'] {
+    background: t.$highlight;
+
+    .front { opacity: 0; }
+    .back { opacity: 1; }
+  }
+}
+
+.front,
+.back {
+  grid-area: 1 / 1;
+  display: grid;
+  gap: 4px;
+}
+
+.front { @include m.label-font(600, 16px); }
+.back { opacity: 0; }
+
+.word {
+  @include m.display-heading(clamp(28px, 6vw, 40px));
+  line-height: 1.08;
+  text-align: left;
+}
+
+.actions,
+.wordLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 20px;
+}
+
+.wordLinks a {
+  display: inline-grid;
+  align-items: center;
+  min-height: 44px;
+  color: t.$navy;
+  text-underline-offset: 3px;
+}

@@ -1,0 +1,249 @@
+{
+  "area": "natural sciences",
+  "blocks": [
+    {
+      "text": "Water always contains a few hydronium ions, H₃O⁺, and hydroxide ions, OH⁻. An acid dissolved in water raises the concentration of hydronium ions; a base raises that of hydroxide ions. Concentrations are measured in moles per litre (mol/L), and the concentration of hydronium ions is written [H₃O⁺].",
+      "type": "p"
+    },
+    {
+      "text": "These concentrations span many powers of ten, so chemists describe them with the pH, a logarithmic scale:",
+      "type": "p"
+    },
+    {
+      "text": "pH = −log₁₀ [H₃O⁺], so [H₃O⁺] = 10^(−pH) mol/L",
+      "type": "formula"
+    },
+    {
+      "text": "For a concentration that is an exact power of ten the pH is simply the exponent without its minus sign: [H₃O⁺] = 1 × 10⁻⁴ mol/L gives a pH of 4. Because of the minus sign, a higher concentration of hydronium ions means a lower pH. Because the scale is logarithmic, a solution whose pH is one unit lower has ten times the concentration of hydronium ions, and one whose pH is two units lower has a hundred times as much.",
+      "type": "p"
+    },
+    {
+      "text": "At 25 °C, pure water has [H₃O⁺] = [OH⁻] = 1 × 10⁻⁷ mol/L, so its pH is 7. A solution with pH 7 at this temperature is called neutral: it has as many hydronium as hydroxide ions. A solution with a pH below 7 is acidic, and one with a pH above 7 is basic. Most solutions lie between 0 and 14, although very concentrated ones can go beyond.",
+      "type": "p"
+    },
+    {
+      "text": "The hydroxide ions are described in the same way by the pOH, −log₁₀ [OH⁻]. In every solution in water at 25 °C the product of the two concentrations is fixed, [H₃O⁺] × [OH⁻] = 1 × 10⁻¹⁴ (mol/L)², so",
+      "type": "p"
+    },
+    {
+      "text": "pH + pOH = 14 (at 25 °C)",
+      "type": "formula"
+    },
+    {
+      "text": "Even a basic solution therefore contains some hydronium ions, only fewer than hydroxide ions. A strong acid ionises completely, each molecule giving its hydrogen ion to water, so adding water to it simply spreads the hydronium ions through a larger volume and lowers their concentration in proportion, as long as [H₃O⁺] stays well above the 1 × 10⁻⁷ mol/L of pure water; diluting an acid never makes it basic. A weak acid behaves differently, because more of it reacts as it is diluted. Table 1 gives [H₃O⁺] for four solutions at 25 °C.",
+      "type": "p"
+    },
+    {
+      "caption": "Table 1. Concentration of hydronium ions in four solutions at 25 °C.",
+      "head": [
+        "Solution",
+        "[H₃O⁺] in mol/L"
+      ],
+      "rows": [
+        [
+          "W",
+          "1 × 10⁻³"
+        ],
+        [
+          "X",
+          "1 × 10⁻⁹"
+        ],
+        [
+          "Y",
+          "1 × 10⁻⁶"
+        ],
+        [
+          "Z",
+          "1 × 10⁻¹¹"
+        ]
+      ],
+      "type": "table"
+    }
+  ],
+  "id": "p12",
+  "questions": [
+    {
+      "explanation": "The fourth paragraph: at 25 °C a solution with pH 7 is neutral, with as many hydronium as hydroxide ions, 1 × 10⁻⁷ mol/L of each.",
+      "id": "p12-q1",
+      "level": 1,
+      "options": [
+        {
+          "text": "It contains no hydronium ions.",
+          "why": "It contains 1 × 10⁻⁷ mol/L of them, as pure water does. The text says even a basic solution contains some."
+        },
+        {
+          "text": "It is acidic.",
+          "why": "Acidic solutions have a pH below 7."
+        },
+        {
+          "correct": true,
+          "text": "It has as many hydronium ions as hydroxide ions.",
+          "why": "This is what the text calls neutral."
+        },
+        {
+          "text": "Its concentration of hydronium ions is 7 mol/L.",
+          "why": "The pH is the exponent without its minus sign: pH 7 means 1 × 10⁻⁷ mol/L."
+        }
+      ],
+      "stem": "According to the text, what is true of a solution with a pH of 7 at 25 °C?",
+      "type": "R"
+    },
+    {
+      "explanation": "The most acidic solution has the highest [H₃O⁺], which is the lowest pH. 1 × 10⁻³ mol/L (pH 3, solution W) is the highest concentration in the table, 100,000,000 times the lowest (1 × 10⁻¹¹ mol/L, solution Z). A larger exponent after the minus sign means a smaller number.",
+      "id": "p12-q2",
+      "level": 1,
+      "options": [
+        {
+          "correct": true,
+          "text": "Solution W",
+          "why": "1 × 10⁻³ mol/L is the highest concentration of hydronium ions in the table, so its pH, 3, is the lowest."
+        },
+        {
+          "text": "Solution X",
+          "why": "Its pH is 9, so it is basic. 1 × 10⁻⁹ is a smaller number than 1 × 10⁻³."
+        },
+        {
+          "text": "Solution Y",
+          "why": "Its pH is 6, higher than the 3 of solution W. 1 × 10⁻⁶ is a smaller number than 1 × 10⁻³."
+        },
+        {
+          "text": "Solution Z",
+          "why": "Its pH is 11, so it is basic. 1 × 10⁻¹¹ is a smaller number than 1 × 10⁻³."
+        }
+      ],
+      "stem": "Which solution in Table 1 is the most acidic?",
+      "type": "F"
+    },
+    {
+      "explanation": "[H₃O⁺] = 1 × 10⁻⁹ mol/L gives pH 9. At 25 °C pH + pOH = 14, so pOH = 14 − 9 = 5.",
+      "id": "p12-q3",
+      "level": 2,
+      "options": [
+        {
+          "correct": true,
+          "text": "5",
+          "why": "The pH of X is 9, and pH + pOH = 14."
+        },
+        {
+          "text": "7",
+          "why": "This is the pH, and the pOH, of a neutral solution. Solution X is not neutral."
+        },
+        {
+          "text": "9",
+          "why": "This is the pH of X, not its pOH."
+        },
+        {
+          "text": "14",
+          "why": "14 is what the pH and the pOH add up to, not the pOH itself."
+        }
+      ],
+      "stem": "What is the pOH of solution X in Table 1?",
+      "type": "A"
+    },
+    {
+      "explanation": "W has pH 3 and Y pH 6. A pH 3 units lower means 10^3 = 1,000 times the concentration: 1 × 10⁻³ ÷ 1 × 10⁻⁶ = 1,000.",
+      "id": "p12-q4",
+      "level": 2,
+      "options": [
+        {
+          "text": "0.001",
+          "why": "This is the ratio the wrong way round: W has the higher concentration."
+        },
+        {
+          "text": "2",
+          "why": "This divides the pH values, 6 ÷ 3. The pH is a logarithm, so a difference of pH units is a factor of ten each."
+        },
+        {
+          "text": "3",
+          "why": "This is the difference in pH units, not in concentration. Each unit is a factor of ten."
+        },
+        {
+          "correct": true,
+          "text": "1,000",
+          "why": "The pH values differ by 3 units, and each unit is a factor of ten."
+        }
+      ],
+      "stem": "How many times as large is [H₃O⁺] in solution W as in solution Y?",
+      "type": "D"
+    },
+    {
+      "explanation": "10 mL made up to 1,000 mL is a 100-fold dilution, so [H₃O⁺] falls from 1 × 10⁻³ to 1 × 10⁻⁵ mol/L. A concentration 100 times lower is a pH 2 units higher: 3 + 2 = 5.",
+      "id": "p12-q5",
+      "level": 3,
+      "options": [
+        {
+          "text": "1",
+          "why": "This lowers the pH. Diluting lowers [H₃O⁺], so the pH rises."
+        },
+        {
+          "text": "3",
+          "why": "This leaves the pH unchanged, but the hydronium ions are now spread through a larger volume."
+        },
+        {
+          "correct": true,
+          "text": "5",
+          "why": "The volume grows 100 times, so [H₃O⁺] falls to 1 × 10⁻⁵ mol/L."
+        },
+        {
+          "text": "7",
+          "why": "Diluting makes the solution less acidic, but [H₃O⁺] is still 1 × 10⁻⁵ mol/L, a hundred times that of pure water."
+        }
+      ],
+      "stem": "Solution W is a strong acid. A sample of 10 mL is diluted with water to a total volume of 1,000 mL at 25 °C. What is the pH of the diluted solution?",
+      "type": "T"
+    },
+    {
+      "explanation": "At 25 °C pH + pOH = 14, so the pH is 14 − 4 = 10. A pH above 7 is basic. A low pOH means many hydroxide ions.",
+      "id": "p12-q6",
+      "level": 2,
+      "options": [
+        {
+          "text": "Acidic.",
+          "why": "This reads the pOH as if it were the pH. A pOH of 4 means a pH of 10."
+        },
+        {
+          "text": "Neutral.",
+          "why": "A neutral solution at 25 °C has pH and pOH both 7."
+        },
+        {
+          "text": "It cannot be told without its concentration of hydronium ions.",
+          "why": "At 25 °C the pH follows from the pOH: 14 − 4 = 10."
+        },
+        {
+          "correct": true,
+          "text": "Basic.",
+          "why": "Its pH is 14 − 4 = 10, above 7."
+        }
+      ],
+      "stem": "At 25 °C a solution has a pOH of 4. How is it classified?",
+      "type": "C"
+    },
+    {
+      "explanation": "A higher [H₃O⁺] gives a lower pH. One unit stands for a factor of ten, and a factor of two is less than that, so the pH falls by less than one unit: −log₁₀ (2 × [H₃O⁺]) = pH − log₁₀ 2, about 0.3 lower.",
+      "id": "p12-q7",
+      "level": 3,
+      "options": [
+        {
+          "correct": true,
+          "text": "It falls by less than one unit.",
+          "why": "Doubling is less than the factor of ten that one unit stands for: the pH falls by log₁₀ 2, about 0.3."
+        },
+        {
+          "text": "It falls by exactly two units.",
+          "why": "Two units stand for a factor of a hundred, not two."
+        },
+        {
+          "text": "It rises by less than one unit.",
+          "why": "More hydronium ions mean a lower pH, because of the minus sign in the definition."
+        },
+        {
+          "text": "It halves.",
+          "why": "The pH is a logarithm: multiplying the concentration by a factor subtracts a fixed amount from the pH, it does not divide it."
+        }
+      ],
+      "stem": "The concentration of hydronium ions in a solution doubles. What happens to its pH?",
+      "type": "S"
+    }
+  ],
+  "title": "The pH Scale"
+}

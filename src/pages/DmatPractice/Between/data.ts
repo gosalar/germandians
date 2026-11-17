@@ -1,0 +1,21 @@
+export const BETWEEN_COPY = {
+  pauseTitle: (next: string) => `${next} is next`,
+  pauseNext: 'The next subtest starts automatically when the countdown reaches zero.',
+  closed: 'The finished subtest is closed and cannot be reopened.',
+  start: 'Start now',
+  break: { de: 'Kaffeepause', en: 'Coffee break' },
+  breakNext: 'Take the break or start the academic module when you’re ready.',
+  breakOver: 'The break has ended. Start the academic module when you’re ready.',
+  academic: 'Start the academic module',
+  word: 'A German word while you wait',
+  turn: 'Turn the card over',
+  nextWord: 'Next word',
+  learnGerman: 'Learn German (opens in a new tab)',
+  leave: 'Leave test',
+  confirm: {
+    title: 'Leave this test?',
+    description: 'You can review what you answered in your practice record.',
+    cancel: 'Keep working',
+    accept: 'Leave and see my record',
+  },
+} as const;

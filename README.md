@@ -1,6 +1,6 @@
 # Germandians website
 
-Landing page, German grade conversion, a beginner's guide to master's requirements, About us, Community and Learn German pages, and privacy note for Germandians. The grade check and the requirements questions start empty and do not predict admission or recommend universities.
+Landing page, German grade conversion, a beginner's guide to master's requirements, a dMAT guide and practice tests, About us, Community and Learn German pages, and privacy note for Germandians. The grade check and the requirements questions start empty and do not predict admission or recommend universities.
 
 ## Stack
 
@@ -15,16 +15,17 @@ npm run typecheck  # generate route types and check TypeScript
 npm run build      # type-check, build, and prerender into build/client/
 npm run preview    # serve the default build at http://localhost:4173
 npm run lint
+npm run check:bank # validate the dMAT question bank
 ```
 
-`build/client/` contains ready-to-serve HTML for every page in the page registry: home, the grade check, requirements, about, community, learn German and privacy. Configure your static host to serve directory indexes and to answer missing pages with `404.html` (a copy of the SPA fallback that the build writes). GitHub Pages and the preview server do both.
+`build/client/` contains ready-to-serve HTML for every page in the page registry, including `/dmat/` and `/dmat/practice/`. Configure your static host to serve directory indexes and to answer missing pages with `404.html` (a copy of the SPA fallback that the build writes). GitHub Pages and the preview server do both.
 
 To preview the Pages subpath locally, build with `SITE_BASE_PATH=/germandians/`, copy `build/client/` to a folder named `germandians` inside a temporary directory, and serve that parent directory. Open `/germandians/`, `/germandians/about/` and `/germandians/privacy/`. For ordinary local preview, leave `SITE_BASE_PATH` unset. In Git Bash on Windows, also set `MSYS_NO_PATHCONV=1`, otherwise Git Bash rewrites `/germandians/` into a Windows path and the build rejects it.
 
 ## Tests
 
 ```bash
-npm run test:ux       # checker, requirements, contact, submission, process, trust, typography, metadata and accessibility checks
+npm run test:ux       # includes the dMAT guide, practice flows, clock and browser storage
 npm run test:recheck  # viewport sweep of a build you are already serving
 ```
 
@@ -38,13 +39,15 @@ node tests/ux/build.mjs && npx playwright test --config playwright.ux.config.ts 
 
 A focused spec is enough while a change stays inside one flow. Run the full `npm run test:ux` when a change spans shared behaviour, or when one spec cannot cover the risk.
 
+The suite has 239 cases across its two variants. The dMAT specs cover guide navigation, all three practice modes, keyboard answers, the clock, local storage and the practice record.
+
 `npm run test:recheck` runs the same viewport sweep against a build you serve yourself, by default at `http://localhost:5611/germandians` (set `RECHECK_BASE_URL` for another address). Use it for the Pages subpath: build with `SITE_BASE_PATH=/germandians/`, copy `build/client/` into a `germandians` folder, copy its `404.html` into the parent as well (GitHub Pages answers a project site's missing paths with that site's `404.html`), and serve the parent with `node scripts/serve.mjs <parent> 5611`.
 
 ## GitHub Pages
 
 In the repository's **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. To override the public site settings listed below, add repository variables under **Settings → Secrets and variables → Actions → Variables** before building.
 
-Pull requests targeting `main` run lint, TypeScript checks, a production build and Playwright tests. A successful push to `main` publishes `build/client/` at [gosalar.github.io/germandians](https://gosalar.github.io/germandians/). The workflow builds with `SITE_BASE_PATH` (default `/germandians/`) for both Vite assets and router links. The build places the prerendered pages at their artifact-relative paths, writes the SPA fallback as `404.html`, and writes `sitemap.xml` and `robots.txt`. To redeploy after changing a variable, run **Site CI and Pages deployment** manually on `main` from the Actions tab.
+Pull requests targeting `main` run lint, the dMAT bank check, TypeScript checks, a production build and Playwright tests. A successful push to `main` publishes `build/client/` at [gosalar.github.io/germandians](https://gosalar.github.io/germandians/). The workflow builds with `SITE_BASE_PATH` (default `/germandians/`) for both Vite assets and router links. The build places the prerendered pages at their artifact-relative paths, writes the SPA fallback as `404.html`, and writes `sitemap.xml` and `robots.txt`. To redeploy after changing a variable, run **Site CI and Pages deployment** manually on `main` from the Actions tab.
 
 **Moving to a custom domain.** After the domain is bought and its DNS points at GitHub Pages (see GitHub's custom-domain documentation), set the domain under **Settings → Pages → Custom domain** and turn on **Enforce HTTPS**. Then set two repository variables: `SITE_BASE_PATH` to `/` and `VITE_SITE_ORIGIN` to the domain's HTTPS origin, for example `https://example.com`. A workflow deployment needs no `CNAME` file. Canonical URLs, sharing tags, the sitemap and `robots.txt` follow these two settings. A new business mailbox replaces `CONTACT.email` in `src/utils/constants.ts`; update the privacy note's description of the email provider at the same time.
 
@@ -87,9 +90,10 @@ CI runs the UX suite. Its builds use `test-results/ux-builds/`, preserving the P
 ```txt
 public/                             # favicon and social preview images (copied as-is into the build)
 scripts/generate-social.mjs         # regenerates public/social/*.png from PUBLIC_PAGES with local fonts
+scripts/dmat/                       # Core generator, academic passages and bank checks
 src/
 ├── root.tsx, routes.ts             # document, Mantine provider, skip link, route configuration
-├── routes/                         # metadata, shared site layout, dev-only theme preview
+├── routes/                         # metadata, shared site layout, dev-only previews at /_theme and /_dmat
 ├── pages/
 │   ├── Home/                       # one folder per section: index.tsx + styles.module.scss (+ data.ts, hooks);
 │   │                               # Story, CommunityIntro and LearnGermanIntro lead to the pages below
@@ -97,16 +101,19 @@ src/
 │   ├── Requirements/               # beginner's guide to master's admission; copy in each folder's data.ts:
 │   │                               # Opening, Questions (the Fragebogen), NextSteps (the Laufzettel), Guide, CommonQuestions, OtherApplicants;
 │   │                               # Guide holds TopicCard, CostsTable, Stamp and one file per topic in topics/
+│   ├── Dmat/                       # official format, registration and test-day guide
+│   ├── DmatPractice/               # start, runner, breaks, record and lazily loaded question files
 │   ├── About/                      # data.ts holds the copy and TEAM; TeamGallery (portraits and profile dialog), Portraits (stand-in animals), ExperienceRecord
 │   ├── Community/                  # community page; channels and copy in data.ts
 │   ├── LearnGerman/                # German lessons page; GermanLessonsForm is its enquiry form, WordDeck the flip cards
 │   ├── Privacy/                    # standalone privacy note
 │   └── ErrorPage/                  # 404 and route errors; copy in data.ts
 ├── components/
-│   ├── Contact/                    # shared enquiry form for /, /check and /requirements (copy, form, submission)
+│   ├── Contact/                    # shared enquiry form for /, /check, /requirements, /dmat and /dmat/practice
+│   ├── CommunityBand/, MentoringOffer/  # reusable community and service sections
 │   ├── ContentContainer/, MinimalNav/, PageHeader/  # shared layout pieces
 │   └── SiteHeader (with NavGroup), SiteFooter, MobileActionBar, SkipLink, Brand, HomeSectionLink, SourceNote, DmatNote
-├── contexts/PageChrome/            # menu state + hero/form visibility for the mobile action bar
+├── contexts/PageChrome/            # menu state, hero/form visibility and immersive practice screens
 ├── contexts/VisitAnswers/          # marks typed on /check and answers given on /requirements, kept in memory for the visit
 ├── hooks/                          # useReplayOnFirstView, useSettleHashScroll
 ├── services/profileReview.ts       # form submission
@@ -117,10 +124,12 @@ src/
                                     # publicPages (titles and descriptions); siteConfig (env); applicationFacts
                                     # (dated sources and costs); gradeConversion (marks to German grade, shared by
                                     # /check and /requirements); requirements/ (topics, questions, logic);
-                                    # metadata, publicSite, contactSettings, styles
+                                    # dmat/ (session timing, marking and storage); metadata, publicSite, contactSettings, styles
 ```
 
 ## Notes
+
+- **dMAT question bank.** The Core questions are generated with seeded runs and the academic passages are maintained in `scripts/dmat/`. Both follow the task formats published by g.a.s.t. Regenerate the bank with `node scripts/dmat/build-bank.ts`, then run `npm run check:bank`. Change the generators or passages when updating the content. The practice route loads each section when it is needed, and the homepage never fetches the bank.
 
 - **Process and costs.** Shared fee wording lives in `constants.ts`; intake labels and readiness in `siteConfig.ts`; dMAT, housing, tuition and external costs with dated official sources in `applicationFacts.ts`. Re-read the official page before changing a figure there, and update its review date. The seven-month journey is an overlapping example, not a duration promise. The fee promise is the standard arrangement; the written quote defines exceptions and payment terms.
 - **Requirements page.** The ten guide topics are data: one file each in `src/pages/Requirements/Guide/topics/`, in the shape of `Guide/types.ts`, shown by `TopicCard`. Topic ids, titles (`REQUIREMENT_TOPIC_TITLES`) and anchors are in `src/utils/requirements/topics.ts`, and links from other pages use its `requirementsHref`. The six questions, the next-steps logic and the summary lines are in `src/utils/requirements/`; the step wording is `STEP_COPY` in `NextSteps/data.ts`. The guide is in the prerendered HTML and reads without JavaScript; only the questions and the slip need it. Answers are held in `contexts/VisitAnswers/`, mounted by the site shell, so they survive moving between pages and clear on reload. Nothing is stored. The costs topic and the dMAT detail read `applicationFacts.ts`, and every official page the guide links is one `SOURCES` entry there, with its review date.

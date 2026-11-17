@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 
+import { usePageChrome } from '@/contexts/PageChrome/usePageChrome';
 import { INTAKE_SEATS, ROUTES, destinationHref } from '@/utils/constants';
 import { buildYear, businessOperator, siteConfig } from '@/utils/siteConfig';
 
@@ -36,6 +37,10 @@ function FooterLink({
 }
 
 export default function SiteFooter() {
+  const { immersive } = usePageChrome();
+  // A running test has the screen to itself.
+  if (immersive) return null;
+
   return (
     <>
       <div aria-hidden="true" className={styles.flagBand} />

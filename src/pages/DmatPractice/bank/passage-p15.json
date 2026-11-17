@@ -1,0 +1,228 @@
+{
+  "area": "economics",
+  "blocks": [
+    {
+      "text": "Why do countries trade even when one of them is better at making everything? The answer rests on opportunity cost: the cost of a choice measured by the best alternative given up. A worker who spends a day making baskets cannot spend that day fishing, so the opportunity cost of the baskets is the fish that could have been caught instead.",
+      "type": "p"
+    },
+    {
+      "text": "Table 1 shows what one worker can produce in a day on two islands, Kova and Tari. Kova's workers produce more of both goods: Kova has an absolute advantage in both, meaning it makes each good with less work. The opportunity costs, however, can tell a different story. On each island, a worker who makes one basket gives up the fish they could have caught in the same time, and that number of fish is the cost of the basket. An island has a comparative advantage in a good if it produces that good at a lower opportunity cost than the other island. Since a lower cost of baskets in fish means a higher cost of fish in baskets, each island has a comparative advantage in exactly one good, unless the costs are equal.",
+      "type": "p"
+    },
+    {
+      "caption": "Table 1. Output of one worker in one day.",
+      "head": [
+        "Island",
+        "Fish",
+        "Baskets"
+      ],
+      "rows": [
+        [
+          "Kova",
+          "15",
+          "5"
+        ],
+        [
+          "Tari",
+          "6",
+          "3"
+        ]
+      ],
+      "type": "table"
+    },
+    {
+      "text": "If each island specialises in the good in which it has the comparative advantage and then trades, the two islands together can produce more of one good without producing less of the other. What matters is the comparison of opportunity costs, not who is faster: absolute advantage alone does not decide who should make what.",
+      "type": "p"
+    },
+    {
+      "text": "For both islands to gain, the rate at which they exchange the goods, called the terms of trade, must lie between their two opportunity costs. An island will not pay more fish for a basket than a basket costs it to make at home, and it will not sell a basket for fewer fish than making it costs. Any price strictly between the two costs leaves both islands better off than producing everything themselves. This reasoning assumes that the output per worker stays the same however much is produced and that moving goods between the islands costs nothing.",
+      "type": "p"
+    }
+  ],
+  "id": "p15",
+  "questions": [
+    {
+      "explanation": "The second paragraph: an island has a comparative advantage in a good if it produces it at a lower opportunity cost than the other island. Producing more per worker is an absolute advantage.",
+      "id": "p15-q1",
+      "level": 1,
+      "options": [
+        {
+          "correct": true,
+          "text": "When it produces that good at a lower opportunity cost than the other island.",
+          "why": "This is the definition in the second paragraph."
+        },
+        {
+          "text": "When one of its workers produces more of that good in a day than a worker on the other island.",
+          "why": "That is an absolute advantage. Kova has it in both goods, but a comparative advantage in only one."
+        },
+        {
+          "text": "When it produces more of that good than of the other good.",
+          "why": "Comparing an island's two outputs says nothing about the other island."
+        },
+        {
+          "text": "When it can sell that good at a higher price than the other island.",
+          "why": "The definition compares opportunity costs of production, not selling prices."
+        }
+      ],
+      "stem": "According to the text, when does an island have a comparative advantage in a good?",
+      "type": "R"
+    },
+    {
+      "explanation": "A Kova worker can make 5 baskets or catch 15 fish in a day. Making 5 baskets gives up 15 fish, so one basket gives up 15 ÷ 5 = 3 fish.",
+      "id": "p15-q2",
+      "level": 2,
+      "options": [
+        {
+          "text": "0.33 fish",
+          "why": "This is the cost of one fish in baskets, 5 ÷ 15, not the cost of a basket in fish."
+        },
+        {
+          "correct": true,
+          "text": "3 fish",
+          "why": "In a day a worker makes 5 baskets or catches 15 fish, so one basket costs 15 ÷ 5 fish."
+        },
+        {
+          "text": "5 fish",
+          "why": "This is the number of baskets a worker makes in a day."
+        },
+        {
+          "text": "10 fish",
+          "why": "This subtracts the two outputs. The cost of one basket is a ratio: the fish given up per basket made."
+        }
+      ],
+      "stem": "According to Table 1, what is the opportunity cost of one basket on Kova?",
+      "type": "A"
+    },
+    {
+      "explanation": "Baskets: 15 ÷ 5 = 3 fish each on Kova, 6 ÷ 3 = 2 on Tari, so Tari has the comparative advantage in baskets. Fish: 5 ÷ 15 = 0.33 baskets each on Kova, 3 ÷ 6 = 0.50 on Tari, so Kova has it in fish.",
+      "id": "p15-q3",
+      "level": 2,
+      "options": [
+        {
+          "text": "Kova in both goods.",
+          "why": "Kova has the absolute advantage in both, but a lower cost in baskets means a higher cost in fish, so it cannot have the lower cost in both."
+        },
+        {
+          "text": "Kova in baskets, Tari in fish.",
+          "why": "A basket costs 3 fish on Kova but only 2 on Tari, so Tari has the lower cost of baskets."
+        },
+        {
+          "correct": true,
+          "text": "Kova in fish, Tari in baskets.",
+          "why": "A basket costs 2 fish on Tari against 3 on Kova; a fish costs 0.33 baskets on Kova against 0.50 on Tari."
+        },
+        {
+          "text": "Tari in both goods.",
+          "why": "Tari's workers produce less of both, and as with Kova, no island can have the lower cost in both goods."
+        }
+      ],
+      "stem": "According to Table 1, which island has the comparative advantage in which good?",
+      "type": "C"
+    },
+    {
+      "explanation": "The third and fourth paragraphs: what matters is the comparison of opportunity costs, not who is faster. Each island has a comparative advantage in one good, so both can gain from specialising and trading at a price between their costs.",
+      "id": "p15-q4",
+      "level": 2,
+      "options": [
+        {
+          "text": "Kova gains nothing from trading with Tari.",
+          "why": "If Kova makes fewer baskets and buys them for less than they cost it at home, it ends up with more in total."
+        },
+        {
+          "text": "Tari should produce neither good.",
+          "why": "Tari has the comparative advantage in baskets, so it should make baskets."
+        },
+        {
+          "text": "Tari can only gain if it becomes faster than Kova at one good.",
+          "why": "Comparative advantage depends on opportunity costs, not on being faster."
+        },
+        {
+          "correct": true,
+          "text": "Both islands can gain by specialising and trading.",
+          "why": "Each has a comparative advantage in one good, and any price between the two costs leaves both better off."
+        }
+      ],
+      "stem": "Kova's workers produce more of both goods than Tari's. Which statement follows from the text?",
+      "type": "S"
+    },
+    {
+      "explanation": "A basket costs Tari 2 fish to make and Kova 3 fish. Tari gains if it gets more than 2 fish per basket; Kova gains if it pays less than 3. Only 2.5 fish lies strictly between.",
+      "id": "p15-q5",
+      "level": 2,
+      "options": [
+        {
+          "text": "1.5 fish",
+          "why": "This is below Tari's own cost of 2 fish per basket, so Tari would lose by selling."
+        },
+        {
+          "text": "2 fish",
+          "why": "This equals Tari's own cost of 2 fish per basket, so Tari gains nothing. For both to gain, the price must lie strictly between the two costs."
+        },
+        {
+          "correct": true,
+          "text": "2.5 fish",
+          "why": "This lies between Tari's cost of 2 fish and Kova's cost of 3 fish."
+        },
+        {
+          "text": "3.5 fish",
+          "why": "This is above Kova's own cost of 3 fish per basket, so Kova would rather make its own baskets."
+        }
+      ],
+      "stem": "Tari sells baskets to Kova and is paid in fish. At which of these prices per basket do both islands gain?",
+      "type": "T"
+    },
+    {
+      "explanation": "On Tari a basket would cost 12 ÷ 3 = 4 fish, more than the 15 ÷ 5 = 3 on Kova. Kova has the lower cost, so it has the comparative advantage in baskets, although Tari's workers still catch fewer fish than Kova's.",
+      "id": "p15-q6",
+      "level": 3,
+      "options": [
+        {
+          "text": "Tari.",
+          "why": "A basket would cost 4 fish on Tari, more than the 3 on Kova."
+        },
+        {
+          "text": "Neither island.",
+          "why": "That would need equal costs. A basket would cost 4 fish on Tari and 3 on Kova."
+        },
+        {
+          "correct": true,
+          "text": "Kova.",
+          "why": "A basket would cost 3 fish on Kova against 4 on Tari."
+        },
+        {
+          "text": "Both islands.",
+          "why": "Only one island can have the lower cost of a basket, and so the comparative advantage in it."
+        }
+      ],
+      "stem": "New boats raise the catch on Tari to 12 fish per worker per day; basket-making on both islands and fishing on Kova stay as in Table 1. Which island then has the comparative advantage in baskets?",
+      "type": "D"
+    },
+    {
+      "explanation": "Before: fish 450 + 180 = 630; baskets 150 + 90 = 240. After: Tari makes 60 × 3 = 180 baskets, so Kova needs 60 more, which take 12 days; its other 48 days catch 720 fish. The total rises by 90 fish with the same number of baskets.",
+      "id": "p15-q7",
+      "level": 3,
+      "options": [
+        {
+          "text": "0",
+          "why": "Specialising by comparative advantage raises total output; it does not only move it between the islands."
+        },
+        {
+          "correct": true,
+          "text": "90",
+          "why": "Total fish rise from 630 to 720, with 240 baskets before and after."
+        },
+        {
+          "text": "180",
+          "why": "This is the 180 fish Tari gives up, not the change in the total."
+        },
+        {
+          "text": "270",
+          "why": "This lets Kova fish all 60 days, but then the islands would have only 180 baskets, fewer than before."
+        }
+      ],
+      "stem": "Each island has 60 worker-days. At first each spends half of them on fish and half on baskets. Then Tari makes only baskets, and Kova makes the baskets still needed to keep the total number of baskets the same, and spends the rest of its days fishing. How many more fish do the two islands catch in total?",
+      "type": "T"
+    }
+  ],
+  "title": "Comparative Advantage"
+}

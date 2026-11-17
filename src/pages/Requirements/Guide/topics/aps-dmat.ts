@@ -1,4 +1,5 @@
 import { APS, DMAT, DMAT_LABELS, SOURCES } from '@/utils/applicationFacts';
+import { ROUTES } from '@/utils/constants';
 import { REQUIREMENT_TOPIC_TITLES } from '@/utils/requirements/topics';
 
 import { STEP_COPY } from '../../NextSteps/data';
@@ -29,6 +30,7 @@ export const apsDmat = {
     'Check your status in the APS online student portal. The certificate arrives as a PDF by email: send it unchanged to universities, uni-assist (explained under How to apply) and the German Missions, without renaming, editing or merging it.',
   ],
   sources: [SOURCES.apsQuiz, SOURCES.aps, SOURCES.apsFaqs, SOURCES.tumAps, SOURCES.dmat, SOURCES.test],
+  link: { label: 'Read the dMAT guide', to: ROUTES.dmat },
   detail: [
     {
       heading: 'What APS is',
@@ -62,6 +64,11 @@ export const apsDmat = {
         rows: DMAT.windows.map((window) => [window.test, window.deadline, window.results]),
       },
       source: SOURCES.test,
+    },
+    {
+      heading: 'Practise for the dMAT',
+      body: 'Read about the test in the dMAT guide, then try the format with Germandians’ independent practice.',
+      link: { label: 'Open dMAT practice', to: ROUTES.dmatPractice },
     },
   ],
 } satisfies StandardTopic;

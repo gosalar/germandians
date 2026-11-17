@@ -35,6 +35,22 @@ const METADATA = {
     imageSubtitle: 'What you need to apply in Germany',
     imageAlt: 'Germandians: what you need for a master’s in Germany',
   },
+  dmat: {
+    title: 'dMAT guide | Germandians',
+    description: 'What the official sources say about the dMAT for Indian master’s applicants: what is in the test, registering, the test day and results, each with the page to check.',
+    image: 'social/dmat.png',
+    imageTitle: 'dMAT guide',
+    imageSubtitle: 'The test, registering and the test day',
+    imageAlt: 'Germandians: a guide to the dMAT for master’s applicants',
+  },
+  dmatPractice: {
+    title: 'dMAT practice | Germandians',
+    description: 'Practise the dMAT’s task types against the clock: a full mock, one section or untimed practice, with worked explanations. Independent practice material, not affiliated with g.a.s.t.',
+    image: 'social/dmat-practice.png',
+    imageTitle: 'dMAT practice',
+    imageSubtitle: 'A full mock, one section or untimed practice',
+    imageAlt: 'Germandians: dMAT practice with a full mock, one section or untimed practice',
+  },
   about: {
     title: 'About us | Germandians',
     description: 'How Germandians began, and the Indian students living in Germany who guide applicants through steps they took themselves.',

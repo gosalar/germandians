@@ -1,0 +1,181 @@
+{
+  "area": "humanities",
+  "blocks": [
+    {
+      "text": "Historians cannot observe the past; they reconstruct it from sources: letters, diaries, official records, newspapers, photographs, buildings and objects. Source criticism is the careful judging of how far a source can be trusted for a particular question.",
+      "type": "p"
+    },
+    {
+      "text": "Historians mainly distinguish primary and secondary sources; reference guides often add a third kind, tertiary sources. A primary source was created at the time under study, often by people who took part in the events or saw them: the minutes of a meeting, a soldier's letter, a photograph. A secondary source was made later by someone looking back, who interprets and analyses primary sources; a historian's book is the typical example. A tertiary source, such as an encyclopedia or a reference book, collects and summarises what primary and secondary sources say. These labels depend on the question being asked. A school textbook written in the 1960s about an event in 1900 is a secondary source on that event, but a primary source for anyone studying how history was taught in the 1960s.",
+      "type": "p"
+    },
+    {
+      "text": "Criticism starts with two separate questions. The first is whether the source is genuine: is it what it claims to be, made by the stated author at the stated time, or was it forged or altered later? The second is whether what it says is credible. Here the historian asks who made the source, when, and for what purpose. A source made close in time to the events, by someone who was there, is generally trusted more than one written many years later from memory. An author who had a reason to show events in a particular light, to defend themselves or to win support, may have distorted them; a record kept for a routine purpose, by people with nothing to gain from distortion, has less reason to mislead.",
+      "type": "p"
+    },
+    {
+      "text": "Finally, historians compare sources. When several independent sources report the same thing, their agreement strongly raises its credibility. The sources must really be independent: if one source copied from another, their agreement adds nothing, because the claim still rests on a single origin. None of these rules works automatically. A primary source is not always right, since eyewitnesses can be mistaken or biased, and a careful secondary source that weighs many primary sources can be more accurate on some points than any one of them.",
+      "type": "p"
+    }
+  ],
+  "id": "p17",
+  "questions": [
+    {
+      "explanation": "The second paragraph: a primary source was created at the time under study, often by people who took part in the events or saw them.",
+      "id": "p17-q1",
+      "level": 1,
+      "options": [
+        {
+          "correct": true,
+          "text": "A source that was created at the time under study.",
+          "why": "This is the definition in the second paragraph; it is often made by people who took part or saw the events."
+        },
+        {
+          "text": "The most reliable source on a question.",
+          "why": "The text says a primary source is not always right; eyewitnesses can be mistaken or biased."
+        },
+        {
+          "text": "A source written later that interprets earlier sources.",
+          "why": "That is a secondary source."
+        },
+        {
+          "text": "A source that collects and summarises other sources.",
+          "why": "That is a tertiary source, such as an encyclopedia."
+        }
+      ],
+      "stem": "According to the text, what is a primary source?",
+      "type": "R"
+    },
+    {
+      "explanation": "The second paragraph: a secondary source was made later by someone looking back, who interprets and analyses primary sources. The historian's book does that. The minutes and the diary date from the strike itself; the encyclopedia entry summarises other sources, which makes it tertiary.",
+      "id": "p17-q2",
+      "level": 1,
+      "options": [
+        {
+          "text": "The minutes of the strike committee's meetings in 1923.",
+          "why": "Made at the time by people who took part: a primary source."
+        },
+        {
+          "text": "An encyclopedia entry from 2010 that summarises what is known about the strike.",
+          "why": "Collecting and summarising what other sources say makes it a tertiary source."
+        },
+        {
+          "correct": true,
+          "text": "A historian's book from 1998 that analyses the strike using the committee's minutes and the strikers' letters.",
+          "why": "Made later by someone looking back who interprets primary sources."
+        },
+        {
+          "text": "A diary kept by one of the strikers in 1923.",
+          "why": "Made at the time by a participant: a primary source."
+        }
+      ],
+      "stem": "A student is studying a dock strike in 1923. Using the text's definitions, which of these is a secondary source for that study?",
+      "type": "C"
+    },
+    {
+      "explanation": "The second paragraph says the labels depend on the question. For a study of the strike itself, an article written 30 years later that reviews books would not be a primary source. But this study is about how the strike was remembered in the 1950s, so an article written in 1953 is a primary source for it, as the textbook example in the text shows.",
+      "id": "p17-q3",
+      "level": 3,
+      "options": [
+        {
+          "text": "A secondary source, because it was written 30 years after the strike.",
+          "why": "Written 30 years after the strike, it would not be a primary source for a study of the strike itself. This study, though, is about the 1950s."
+        },
+        {
+          "text": "A tertiary source, because it summarises books.",
+          "why": "For this study the article is not a summary to rely on but a piece of evidence from the time being studied."
+        },
+        {
+          "text": "Not a source at all, because it only discusses other people's books.",
+          "why": "It is evidence of how people in the 1950s wrote about the strike, which is exactly what the study is about."
+        },
+        {
+          "correct": true,
+          "text": "A primary source, because it was created at the time the study is about.",
+          "why": "The study is about the 1950s, and the article was written then."
+        }
+      ],
+      "stem": "A newspaper article from 1953 reviews three books about the dock strike of 1923. A researcher uses it to study how the strike was remembered in the 1950s. For this study, what kind of source is the article?",
+      "type": "C"
+    },
+    {
+      "explanation": "The last paragraph: agreement raises credibility only when the sources are independent. If one source copied from another, their agreement adds nothing, because the claim still rests on a single origin.",
+      "id": "p17-q4",
+      "level": 2,
+      "options": [
+        {
+          "text": "The figure is 3 times as credible as if only one account gave it.",
+          "why": "Credibility is not multiplied by the number of accounts, and here the copies add nothing, because the figure has a single origin."
+        },
+        {
+          "text": "The figure must be wrong.",
+          "why": "Copying does not make a figure wrong; the original account may still be right."
+        },
+        {
+          "text": "All 3 accounts must be set aside.",
+          "why": "The original account remains a source; only the extra weight from agreement is lost."
+        },
+        {
+          "correct": true,
+          "text": "The agreement gives the figure no more support than the one original account does.",
+          "why": "The figure rests on a single origin, as the last paragraph says."
+        }
+      ],
+      "stem": "Three accounts of a fire agree on the number of buildings destroyed. It turns out that two of them copied the figure from the third. What follows?",
+      "type": "S"
+    },
+    {
+      "explanation": "Both sources are primary and made at the time. The third paragraph adds the purpose and the author's interests: the owner had a reason to show the fire in a good light, while the hospital list was kept for a routine purpose by people with nothing to gain from distortion.",
+      "id": "p17-q5",
+      "level": 3,
+      "options": [
+        {
+          "text": "The owner's letter, because the owner knew the factory best.",
+          "why": "Knowing the factory does not remove the owner's reason to play down injuries in a public letter."
+        },
+        {
+          "text": "Both equally, because both are primary sources from the same time.",
+          "why": "Being primary and close in time is only part of the judgement; the purpose and the author's interests also count."
+        },
+        {
+          "correct": true,
+          "text": "The hospital list, because it was kept to record patients, not to persuade anyone.",
+          "why": "The owner had a reason to show the fire in a good light; the hospital staff did not."
+        },
+        {
+          "text": "Neither, because primary sources cannot be trusted.",
+          "why": "The text says primary sources are not always right, not that they can never be trusted."
+        }
+      ],
+      "stem": "After a fire at a factory, the owner writes a public letter saying that no workers were hurt. The local hospital's admissions list from the same night records 6 workers from the factory treated for burns. For the question of whether workers were hurt, which source is more credible, and why?",
+      "type": "T"
+    },
+    {
+      "explanation": "The third paragraph separates two questions: whether a source is genuine, and whether its content is credible. A diary written on paper made decades after its stated date was not made at the stated time, so the finding concerns whether it is genuine.",
+      "id": "p17-q6",
+      "level": 2,
+      "options": [
+        {
+          "correct": true,
+          "text": "Whether the source is genuine.",
+          "why": "Paper first made in 1960 cannot carry a diary written in 1923: this copy is either a forgery or a later copy, which is a question of whether it is genuine."
+        },
+        {
+          "text": "Whether its author had a reason to distort events.",
+          "why": "That is a question about the credibility of a genuine source's content."
+        },
+        {
+          "text": "Whether other independent sources agree with it.",
+          "why": "That is a comparison with other sources; the finding is about the diary itself."
+        },
+        {
+          "text": "Whether it is a primary or a secondary source.",
+          "why": "The finding shows the diary was not made in 1923, which first of all means it is not what it claims to be."
+        }
+      ],
+      "stem": "A diary dated 1923 turns out to be written on a kind of paper that was first made in 1960. Which question does this finding mainly concern?",
+      "type": "C"
+    }
+  ],
+  "title": "Source Criticism"
+}

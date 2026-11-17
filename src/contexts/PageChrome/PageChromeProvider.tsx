@@ -23,6 +23,14 @@ const withoutTrailingSlash = (path: string) => (path.length > 1 ? path.replace(/
 export default function PageChromeProvider({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
+  const [immersive, setImmersive] = useState(false);
+  // A page that asked for the bare screen and was then left must not leave the next page without its header.
+  const page = withoutTrailingSlash(pathname);
+  const [immersivePage, setImmersivePage] = useState(page);
+  if (immersivePage !== page) {
+    setImmersivePage(page);
+    setImmersive(false);
+  }
   const heroCta = useIntersection<HTMLElement>(VISIBILITY);
   const form = useIntersection<HTMLElement>(VISIBILITY);
 
@@ -30,8 +38,9 @@ export default function PageChromeProvider({ children }: { children: ReactNode }
     menuOpen,
     // Until the observer reports, assume the buttons are on screen on the pages
     // that open with them. Elsewhere the mobile action bar is available at once.
-    heroCtaInView: heroCta.entry?.isIntersecting ?? ABOVE_FOLD_ACTIONS.includes(withoutTrailingSlash(pathname)),
+    heroCtaInView: heroCta.entry?.isIntersecting ?? ABOVE_FOLD_ACTIONS.includes(page),
     formInView: form.entry?.isIntersecting ?? false,
+    immersive,
   };
 
   const actions: PageChromeActions = {
@@ -39,6 +48,7 @@ export default function PageChromeProvider({ children }: { children: ReactNode }
     closeMenu: () => setMenuOpen(false),
     heroCtaRef: heroCta.ref,
     formRef: form.ref,
+    setImmersive,
   };
 
   return (

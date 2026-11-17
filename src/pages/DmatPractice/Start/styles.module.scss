@@ -1,0 +1,255 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.start {
+  padding: clamp(32px, 5vw, 66px) clamp(16px, 4vw, 48px);
+  color: t.$navy;
+}
+
+.grid {
+  display: grid;
+  gap: clamp(28px, 5vw, 60px);
+  align-items: start;
+  margin-top: clamp(26px, 4vw, 46px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1.07fr) minmax(0, 0.93fr);
+  }
+}
+
+.paperWrap {
+  min-width: 0;
+  filter: drop-shadow(3px 4px 0 t.$hairline);
+
+  &::after {
+    display: block;
+    height: 10px;
+    background: conic-gradient(from 45deg at 50% 100%, transparent 0 270deg, t.$receipt 0) 0 0 / 20px 10px repeat-x;
+    content: '';
+  }
+}
+
+.slip {
+  display: grid;
+  gap: 16px;
+  padding: clamp(14px, 3vw, 30px);
+  background: t.$receipt;
+
+  fieldset {
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  legend {
+    @include m.label-font(700, 19px);
+    padding: 0;
+    margin-bottom: 6px;
+  }
+
+  input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: t.$navy;
+  }
+
+  p { margin: 0; }
+}
+
+.paperHeader {
+  padding-bottom: 13px;
+  border-bottom: 2px dashed t.$navy;
+
+  h2 {
+    @include m.display-heading(clamp(30px, 5vw, 53px));
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    @include m.label-font(600, 17px);
+    color: t.$slate;
+    margin-top: 4px;
+  }
+}
+
+.choice,
+.option,
+.reminder {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.choice {
+  align-items: flex-start;
+  padding: 9px 10px;
+  border: 1px solid t.$hairline;
+  border-radius: 7px;
+
+  + .choice { margin-top: 6px; }
+
+  input { margin-top: 3px; }
+  strong { @include m.label-font(700, 19px); }
+}
+
+.description {
+  display: block;
+  color: t.$ink-muted;
+  line-height: 1.35;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.option {
+  @include m.label-font(700);
+  padding: 6px 9px;
+  border: 1px solid t.$hairline;
+  border-radius: 7px;
+}
+
+.choice[data-selected='true'],
+.option[data-selected='true'] {
+  background: t.$cream-hover;
+  border-color: t.$navy;
+}
+
+.choice:focus-within,
+.option:focus-within,
+.reminder:focus-within {
+  outline: 2px solid t.$navy;
+  outline-offset: 2px;
+}
+
+.reminder {
+  @include m.label-font(600);
+  border-top: 1px solid t.$line;
+}
+
+.slipFooter,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+}
+
+.slipFooter {
+  min-height: 67px;
+  padding-top: 9px;
+  border-top: 2px dashed t.$navy;
+}
+
+.stamp {
+  @include m.sticker(t.$status-green-bg, t.$status-green-ink, -4deg);
+  display: inline-grid;
+  justify-items: center;
+  gap: 1px;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: land 420ms ease-out both;
+  }
+}
+
+@keyframes land {
+  from { opacity: 0; scale: 1.35; }
+  to { opacity: 1; scale: 1; }
+}
+
+.banner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 22px;
+  padding: 12px 16px;
+  border-inline-start: 4px solid t.$navy;
+  background: t.$highlight;
+
+  h2 { @include m.label-font(700, 21px); }
+  p { margin: 3px 0; }
+}
+
+.notes {
+  display: grid;
+  min-width: 0;
+  gap: 22px;
+
+  h2 {
+    @include m.sub-heading;
+    font-size: clamp(25px, 3vw, 35px);
+  }
+
+  p { margin: 9px 0 0; }
+}
+
+.facts {
+  margin: 12px 0;
+
+  div {
+    display: grid;
+    grid-template-columns: minmax(0, 5.5em) minmax(0, 1fr);
+    gap: 10px;
+    border-top: 1px solid t.$line;
+    padding-block: 8px;
+  }
+
+  dt { @include m.label-font(700, 19px); }
+  dd { margin: 0; }
+}
+
+.sources,
+.links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: t.$navy;
+    text-underline-offset: 3px;
+  }
+}
+
+.privacy {
+  margin: 18px 0 0;
+  color: t.$ink-muted;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: t.$navy;
+    text-underline-offset: 3px;
+  }
+}
+
+.dialog {
+  width: min(480px, calc(100% - 32px));
+  padding: clamp(14px, 4vw, 24px);
+  border: 2px solid t.$navy;
+  border-radius: 12px;
+  background: t.$receipt;
+  color: t.$navy;
+
+  &::backdrop { background: rgba(t.$navy, 0.56); }
+
+  h2 {
+    @include m.sub-heading;
+    font-size: clamp(24px, 4vw, 32px);
+  }
+
+  p { margin: 10px 0 16px; }
+}

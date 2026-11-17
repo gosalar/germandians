@@ -32,8 +32,13 @@ export default {
       // Remove the emptied basename folders, deepest first. rmdir refuses
       // non-empty folders, so nothing unexpected is ever deleted.
       const base = siteBase.split('/').filter(Boolean);
+      // A nested page (`/dmat/practice`) goes before its parent (`/dmat`).
+      const depth = (page: string) => page.split('/').filter(Boolean).length;
       const emptied = [
-        ...pages.filter((page) => page !== homePath).map((page) => path.join(client, ...base, page)),
+        ...pages
+          .filter((page) => page !== homePath)
+          .toSorted((a, b) => depth(b) - depth(a))
+          .map((page) => path.join(client, ...base, page)),
         ...base.map((_, i) => path.join(client, ...base.slice(0, base.length - i))),
       ];
       for (const dir of emptied) await rmdir(dir).catch(() => undefined);

@@ -1,0 +1,52 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.runner {
+  --task-font-size: 17px;
+  --motion-duration: 0s;
+  display: grid;
+  grid-template-rows: auto auto minmax(120px, 1fr) auto;
+  height: 100dvh;
+  min-height: 440px;
+  width: 100%;
+  background: t.$white;
+  color: t.$navy;
+  font-family: t.$font-body;
+  &[data-text-size='1'] { --task-font-size: 20px; }
+  &[data-text-size='2'] { --task-font-size: 23px; }
+  button { min-width: 44px; min-height: 44px; }
+}
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.topBar { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; background: t.$navy; color: t.$white; padding: 12px clamp(12px, 2vw, 28px); }
+.heading {
+  flex: 1 1 240px;
+  min-width: 0;
+  h1 { @include m.display-heading(clamp(22px, 2.2vw, 30px)); color: t.$white; line-height: 1.15; }
+  p { @include m.label-font(600, 15px); color: t.$mist; margin: 4px 0 0; }
+}
+.time { border: 2px solid t.$yellow; border-radius: 4px; padding: 6px 12px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; [role='timer'] { @include m.label-font(800, 28px); font-variant-numeric: tabular-nums; line-height: 1; } &[data-warning='true'] { background: t.$highlight; color: t.$navy; } }
+.timeWarning { @include m.label-font(700, 15px); }
+.topActions { display: flex; gap: 8px; flex-wrap: wrap; }
+.instructions { display: flex; align-items: center; gap: 8px 20px; flex-wrap: wrap; justify-content: space-between; padding: 10px clamp(12px, 2vw, 28px); border-bottom: 1px solid t.$line; background: t.$paper; p { margin: 0; font-size: 15px; line-height: 1.45; flex: 1 1 380px; } }
+.textSizes { display: flex; gap: 4px; flex: none; }
+.taskArea { overflow: auto; min-height: 0; padding: clamp(12px, 2vw, 28px); font-size: var(--task-font-size); scroll-padding: 16px; overscroll-behavior: contain; &[data-academic='true'] { overflow: hidden; padding: 10px clamp(8px, 2vw, 24px) 0; } }
+.coreTask { max-width: 1100px; margin-inline: auto; }
+.taskTitle { @include m.label-font(600, 1em); margin: 0 0 20px; color: t.$slate; }
+.accessNote { margin: 24px auto 0; max-width: 70ch; color: t.$slate; font-size: .875em; line-height: 1.5; }
+.practiceActions { max-width: 860px; margin: 24px auto 0; }
+.bottomBar { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 8px; align-items: center; border-top: 2px solid t.$navy; background: t.$paper; padding: 8px max(8px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); }
+.numbers { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: thin; padding: 4px; min-width: 0; button { flex: none; padding-inline: 10px; } }
+.numberContent { display: grid; gap: 1px; }
+.numberStates { font-size: 11px; line-height: 1; min-height: 11px; }
+.legend { @include m.label-font(600, 13px); grid-column: 1 / -1; margin: 0; color: t.$slate; }
+.practiceProgress { @include m.label-font(700, 16px); margin: 0; span { display: block; font-weight: 500; } }
+.dialog { max-width: min(540px, calc(100vw - 24px)); padding: 24px; border: 2px solid t.$navy; color: t.$navy; background: t.$white; h2 { @include m.display-heading(30px); line-height: 1.1; } p { margin: 20px 0; line-height: 1.5; } > div { display: flex; flex-wrap: wrap; gap: 12px; } &::backdrop { background: rgba(t.$navy, .7); } }
+@include m.below(t.$bp-dmat-figure-columns) {
+  .heading { flex-basis: 100%; order: -1; }
+  .topBar { gap: 8px; }
+  .topActions { margin-left: auto; button { padding-inline: 10px; } }
+  .time { padding-inline: 8px; }
+  .bottomBar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .numbers, .practiceProgress { grid-row: 1; grid-column: 1 / -1; }
+  .practiceProgress { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+}

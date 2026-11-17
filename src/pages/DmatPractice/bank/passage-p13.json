@@ -1,0 +1,230 @@
+{
+  "area": "engineering",
+  "blocks": [
+    {
+      "text": "A lever is a rigid bar that can turn about a fixed point, the pivot. A force applied at one point, the effort, makes the bar push or lift at another point, against the load. Many levers let people move heavy things with small forces. A crowbar, a wheelbarrow and a pair of tweezers are all levers, though not every lever reduces the force needed.",
+      "type": "p"
+    },
+    {
+      "text": "How strongly a force turns the bar is measured by its torque, also called its moment:",
+      "type": "p"
+    },
+    {
+      "text": "torque = force × distance from the pivot",
+      "type": "formula"
+    },
+    {
+      "text": "Here the distance is measured at right angles to the force, from the pivot to the line along which the force acts. Force is measured in newtons (N) and torque in newton metres (N·m). A force tends to turn the bar either clockwise or anticlockwise. The bar is balanced, and does not start to turn, when the clockwise torques add up to the same total as the anticlockwise ones. So a small force far from the pivot can balance a large force close to it.",
+      "type": "p"
+    },
+    {
+      "text": "The mechanical advantage of a lever is the load divided by the effort that balances it. For a balanced lever whose forces act at right angles to the bar, it equals the effort arm divided by the load arm, where each arm is the distance from the pivot to that force:",
+      "type": "p"
+    },
+    {
+      "text": "mechanical advantage = load ÷ effort = effort arm ÷ load arm",
+      "type": "formula"
+    },
+    {
+      "text": "Levers come in three classes. In a first-class lever the pivot lies between the effort and the load, as in a seesaw or a crowbar. In a second-class lever the load lies between the pivot and the effort, as in a wheelbarrow or a nutcracker. In a third-class lever the effort lies between the pivot and the load, as in tweezers; its mechanical advantage is less than 1, but the load end moves farther and faster than the hand.",
+      "type": "p"
+    },
+    {
+      "text": "A lever does not create energy. When a lever with a mechanical advantage greater than 1 turns, the effort end moves through a larger distance than the load end; for a straight bar the two distances are in the same ratio as the arms. Figure 1 shows a bar used to lift a heavy stone. Its own weight can be ignored, and both forces act straight down, at right angles to the bar.",
+      "type": "p"
+    },
+    {
+      "alt": "A horizontal bar on a pivot. At the left end the stone presses down with a load of 1,200 N, 0.4 m from the pivot. At the right end, 1.6 m from the pivot on the other side, a downward effort F is applied.",
+      "caption": "Figure 1. A bar resting on a pivot, used to lift a stone.",
+      "id": "p13-fig1",
+      "svg": "<svg viewBox=\"0 0 460 225\" role=\"img\" aria-labelledby=\"p13-fig1-alt\">\n  <rect class=\"part\" x=\"34\" y=\"96\" width=\"392\" height=\"10\"/>\n  <polygon class=\"part\" points=\"116,106 98,146 134,146\"/>\n  <line x1=\"76\" y1=\"146\" x2=\"156\" y2=\"146\"/>\n  <line x1=\"40\" y1=\"34\" x2=\"40\" y2=\"85\" style=\"stroke-width:3\"/><polygon class=\"dot\" points=\"33,83 47,83 40,95\"/>\n  <line x1=\"420\" y1=\"34\" x2=\"420\" y2=\"85\" style=\"stroke-width:3\"/><polygon class=\"dot\" points=\"413,83 427,83 420,95\"/>\n  <text class=\"big\" x=\"36\" y=\"24\">Load 1,200 N</text>\n  <text class=\"big\" x=\"424\" y=\"24\" text-anchor=\"end\">Effort F</text>\n  <text class=\"big\" x=\"142\" y=\"140\">Pivot</text>\n  <line x1=\"40\" y1=\"176\" x2=\"40\" y2=\"190\"/><line x1=\"116\" y1=\"176\" x2=\"116\" y2=\"190\"/><line x1=\"420\" y1=\"176\" x2=\"420\" y2=\"190\"/>\n  <line x1=\"40\" y1=\"183\" x2=\"420\" y2=\"183\"/>\n  <text class=\"big\" x=\"78\" y=\"214\" text-anchor=\"middle\">0.4 m</text>\n  <text class=\"big\" x=\"268\" y=\"214\" text-anchor=\"middle\">1.6 m</text>\n</svg>",
+      "type": "figure"
+    }
+  ],
+  "id": "p13",
+  "questions": [
+    {
+      "explanation": "The second and third paragraphs define torque as force × distance from the pivot, where the distance is measured at right angles to the force. Its unit is the newton metre.",
+      "id": "p13-q1",
+      "level": 1,
+      "options": [
+        {
+          "correct": true,
+          "text": "The force times its distance from the pivot, measured at right angles to the force.",
+          "why": "This is the formula and the definition of the distance in the second and third paragraphs."
+        },
+        {
+          "text": "The force divided by its distance from the pivot, measured along the bar.",
+          "why": "Torque grows with the distance: a force far from the pivot turns the bar more strongly."
+        },
+        {
+          "text": "The load divided by the effort that balances the bar.",
+          "why": "That is the mechanical advantage."
+        },
+        {
+          "text": "The distance through which the force moves the end of the bar.",
+          "why": "That is a distance, measured in metres. Torque is measured in newton metres."
+        }
+      ],
+      "stem": "According to the text, what is the torque of a force about the pivot?",
+      "type": "R"
+    },
+    {
+      "explanation": "In Figure 1 the order along the bar is load, pivot, effort: the pivot lies between the two forces, which the text calls a first-class lever, like a seesaw or a crowbar.",
+      "id": "p13-q2",
+      "level": 1,
+      "options": [
+        {
+          "text": "A second-class lever.",
+          "why": "In a second-class lever the load lies between the pivot and the effort. In Figure 1 the load is at one end."
+        },
+        {
+          "correct": true,
+          "text": "A first-class lever.",
+          "why": "The pivot lies between the load (left end) and the effort (right end)."
+        },
+        {
+          "text": "A third-class lever.",
+          "why": "In a third-class lever the effort lies between the pivot and the load. In Figure 1 the effort is at one end."
+        },
+        {
+          "text": "None of the three classes.",
+          "why": "The classes depend only on the order of pivot, effort and load along the bar, not on the direction of the forces."
+        }
+      ],
+      "stem": "What class of lever does Figure 1 show?",
+      "type": "F"
+    },
+    {
+      "explanation": "For balance the anticlockwise torque of the load equals the clockwise torque of the effort: 1,200 × 0.4 = F × 1.6, so F = 480 ÷ 1.6 = 300 N. The mechanical advantage is 1,200 ÷ 300 = 4, the same as 1.6 ÷ 0.4.",
+      "id": "p13-q3",
+      "level": 2,
+      "options": [
+        {
+          "correct": true,
+          "text": "300 N",
+          "why": "1,200 N × 0.4 m = F × 1.6 m."
+        },
+        {
+          "text": "480 N",
+          "why": "This is the torque of the load, 480 N·m, not a force. It still has to be divided by the effort arm."
+        },
+        {
+          "text": "1,200 N",
+          "why": "This would balance only if both arms were equal. The effort acts four times as far from the pivot."
+        },
+        {
+          "text": "4,800 N",
+          "why": "This swaps the arms: it multiplies the load by the long arm and divides by the short one."
+        }
+      ],
+      "stem": "What effort F balances the lever in Figure 1?",
+      "type": "A"
+    },
+    {
+      "explanation": "The effort must supply the load's torque, 480 N·m. Torque = force × distance, so at twice the distance half the force is enough: 480 ÷ 3.2 = 150 N.",
+      "id": "p13-q4",
+      "level": 2,
+      "options": [
+        {
+          "text": "It doubles.",
+          "why": "A longer effort arm gives the effort more torque, so less force is needed, not more."
+        },
+        {
+          "text": "It stays the same.",
+          "why": "The torque of the effort grows with its distance from the pivot, so the same torque needs less force."
+        },
+        {
+          "text": "It falls to a quarter.",
+          "why": "The torque is force × distance, both to the first power: doubling the distance halves the force needed."
+        },
+        {
+          "correct": true,
+          "text": "It halves.",
+          "why": "The load's torque stays the same; with twice the distance, half the force gives it: 150 N instead of 300 N."
+        }
+      ],
+      "stem": "The bar in Figure 1 is replaced by a longer one, so that the effort acts twice as far from the pivot as before. The load and its distance from the pivot stay the same. What happens to the effort needed to balance the stone?",
+      "type": "D"
+    },
+    {
+      "explanation": "In a second-class lever the load lies between the pivot and the effort. In a wheelbarrow the pivot is the wheel, the load is in the barrow, and the effort is applied at the handles, farther from the wheel than the load.",
+      "id": "p13-q5",
+      "level": 1,
+      "options": [
+        {
+          "text": "A seesaw.",
+          "why": "The pivot is in the middle, between the two forces: a first-class lever."
+        },
+        {
+          "text": "Tweezers.",
+          "why": "The fingers press between the joined end and the tips that grip: the effort is in the middle, a third-class lever."
+        },
+        {
+          "correct": true,
+          "text": "A wheelbarrow.",
+          "why": "The wheel is the pivot, the load sits in the middle, and the hands lift at the far end."
+        },
+        {
+          "text": "A crowbar.",
+          "why": "The bar rests on a point between the hands and the object it moves: a first-class lever."
+        }
+      ],
+      "stem": "Which of these is a second-class lever?",
+      "type": "C"
+    },
+    {
+      "explanation": "For a straight bar the distances moved are in the same ratio as the arms: 1.6 ÷ 0.4 = 4, so the effort end moves 4 × 5 cm = 20 cm. The effort is a quarter of the load but moves four times as far, so the work done is the same at both ends.",
+      "id": "p13-q6",
+      "level": 2,
+      "options": [
+        {
+          "text": "1.25 cm",
+          "why": "This divides by the ratio of the arms. The end with the longer arm moves farther, not less far."
+        },
+        {
+          "text": "5 cm",
+          "why": "Both ends would move equally only if the arms were equal."
+        },
+        {
+          "correct": true,
+          "text": "20 cm",
+          "why": "The effort arm is 4 times the load arm, so the effort end moves 4 times as far."
+        },
+        {
+          "text": "80 cm",
+          "why": "This applies the ratio of the arms twice. The distances are in the same ratio as the arms, once."
+        }
+      ],
+      "stem": "The stone in Figure 1 is to be lifted by 5 cm. How far must the effort end of the bar move down?",
+      "type": "T"
+    },
+    {
+      "explanation": "The torques must be equal: 360 × 1.5 = 540 N·m = 450 × d, so d = 540 ÷ 450 = 1.2 m. The heavier child sits closer to the pivot.",
+      "id": "p13-q7",
+      "level": 3,
+      "options": [
+        {
+          "text": "0.8 m",
+          "why": "This is the ratio of the weights, 360 ÷ 450, without the distance of 1.5 m."
+        },
+        {
+          "correct": true,
+          "text": "1.2 m",
+          "why": "360 × 1.5 = 450 × d."
+        },
+        {
+          "text": "1.5 m",
+          "why": "The same distance would balance only two equal weights."
+        },
+        {
+          "text": "1.88 m",
+          "why": "This puts the heavier child farther out, which would tip the seesaw towards that child."
+        }
+      ],
+      "stem": "On a seesaw, a child weighing 360 N sits 1.5 m from the pivot. How far from the pivot, on the other side, must a child weighing 450 N sit to balance the seesaw? Ignore the weight of the seesaw itself.",
+      "type": "A"
+    }
+  ],
+  "title": "Levers and Mechanical Advantage"
+}

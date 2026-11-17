@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "typecheck": "react-router typegen && tsc -b",
     "test:ux": "node tests/ux/build.mjs && playwright test --config playwright.ux.config.ts",
-    "test:recheck": "playwright test --config playwright.recheck.config.ts"
+    "test:recheck": "playwright test --config playwright.recheck.config.ts",
+    "check:bank": "node scripts/dmat/check-bank.ts"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

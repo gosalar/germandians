@@ -1,0 +1,1130 @@
+[
+  {
+    "answer": "B",
+    "band": "low",
+    "givens": [
+      [
+        null,
+        "C",
+        null,
+        null,
+        "D"
+      ],
+      [
+        null,
+        "E",
+        "B",
+        null,
+        "C"
+      ],
+      [
+        "D",
+        null,
+        "C",
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        "D",
+        null,
+        "A"
+      ],
+      [
+        null,
+        null,
+        null,
+        "B",
+        null
+      ]
+    ],
+    "id": "section-L-l1",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 4, column 2 already hold A, C, D, E, so it must be B. That is the field with the question mark."
+    ],
+    "tags": [
+      "read-the-cross",
+      "uses-cell"
+    ],
+    "target": [
+      3,
+      1
+    ]
+  },
+  {
+    "answer": "C",
+    "band": "low",
+    "givens": [
+      [
+        null,
+        "C",
+        null,
+        "E",
+        null
+      ],
+      [
+        "A",
+        null,
+        "E",
+        "C",
+        null
+      ],
+      [
+        null,
+        null,
+        "C",
+        null,
+        "E"
+      ],
+      [
+        null,
+        "E",
+        "A",
+        null,
+        "D"
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "id": "section-L-l2",
+    "kind": "latin",
+    "steps": [
+      "Row 4 still needs C. Its other free cells already have C in their column, so C goes in column 1. That is the field with the question mark."
+    ],
+    "tags": [
+      "read-the-cross",
+      "uses-row"
+    ],
+    "target": [
+      3,
+      0
+    ]
+  },
+  {
+    "answer": "E",
+    "band": "low",
+    "givens": [
+      [
+        null,
+        "A",
+        null,
+        null,
+        "B"
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "C",
+        "B",
+        "A",
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        "D",
+        null
+      ],
+      [
+        "E",
+        "C",
+        null,
+        "B",
+        "A"
+      ]
+    ],
+    "id": "section-L-l3",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 4, column 2 already hold A, B, C, D, so it must be E. That is the field with the question mark."
+    ],
+    "tags": [
+      "read-the-cross",
+      "uses-cell"
+    ],
+    "target": [
+      3,
+      1
+    ]
+  },
+  {
+    "answer": "D",
+    "band": "low",
+    "givens": [
+      [
+        "B",
+        null,
+        null,
+        null,
+        "A"
+      ],
+      [
+        null,
+        "B",
+        null,
+        "E",
+        null
+      ],
+      [
+        null,
+        "C",
+        "A",
+        "D",
+        null
+      ],
+      [
+        "C",
+        "D",
+        null,
+        null,
+        "E"
+      ],
+      [
+        "D",
+        null,
+        "E",
+        "B",
+        null
+      ]
+    ],
+    "id": "section-L-l5",
+    "kind": "latin",
+    "steps": [
+      "Column 5 still needs D. Its other free cells already have D in their row, so D goes in row 2. That is the field with the question mark."
+    ],
+    "tags": [
+      "read-the-cross",
+      "uses-column"
+    ],
+    "target": [
+      1,
+      4
+    ]
+  },
+  {
+    "answer": "B",
+    "band": "low",
+    "givens": [
+      [
+        "B",
+        "C",
+        null,
+        "D",
+        null
+      ],
+      [
+        "C",
+        null,
+        "D",
+        "A",
+        null
+      ],
+      [
+        "E",
+        null,
+        null,
+        null,
+        "A"
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "A",
+        "B",
+        "C",
+        "E",
+        null
+      ]
+    ],
+    "id": "section-L-l6",
+    "kind": "latin",
+    "steps": [
+      "Row 2 still needs B. Its other free cells already have B in their column, so B goes in column 5. That is the field with the question mark."
+    ],
+    "tags": [
+      "read-the-cross",
+      "uses-row"
+    ],
+    "target": [
+      1,
+      4
+    ]
+  },
+  {
+    "answer": "A",
+    "band": "low",
+    "givens": [
+      [
+        "C",
+        "A",
+        "B",
+        null,
+        "E"
+      ],
+      [
+        "E",
+        "C",
+        null,
+        null,
+        "B"
+      ],
+      [
+        null,
+        "E",
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        "B",
+        null,
+        "E",
+        null
+      ],
+      [
+        "B",
+        "D",
+        "E",
+        null,
+        null
+      ]
+    ],
+    "id": "section-L-l4",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 1, column 4 already hold A, B, C, E, so it must be D.",
+      "The row and column of row 2, column 4 already hold B, C, D, E, so it must be A. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-1",
+      "uses-cell",
+      "stretch"
+    ],
+    "target": [
+      1,
+      3
+    ]
+  },
+  {
+    "answer": "C",
+    "band": "medium",
+    "givens": [
+      [
+        "C",
+        null,
+        "D",
+        null,
+        null
+      ],
+      [
+        null,
+        "B",
+        "C",
+        null,
+        "E"
+      ],
+      [
+        null,
+        null,
+        "A",
+        "C",
+        "D"
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "D",
+        null,
+        null,
+        "B",
+        null
+      ]
+    ],
+    "id": "section-L-m21",
+    "kind": "latin",
+    "steps": [
+      "Column 2 still needs D. Its other free cells already have D in their row, so D goes in row 4.",
+      "Row 4 still needs C. Its other free cells already have C in their column, so C goes in column 5. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-1",
+      "uses-column",
+      "uses-row"
+    ],
+    "target": [
+      3,
+      4
+    ]
+  },
+  {
+    "answer": "D",
+    "band": "medium",
+    "givens": [
+      [
+        null,
+        "E",
+        "C",
+        null,
+        null
+      ],
+      [
+        "A",
+        null,
+        null,
+        null,
+        "B"
+      ],
+      [
+        null,
+        null,
+        "B",
+        "D",
+        "C"
+      ],
+      [
+        "B",
+        null,
+        null,
+        "C",
+        "E"
+      ],
+      [
+        null,
+        null,
+        null,
+        "A",
+        "D"
+      ]
+    ],
+    "id": "section-L-m22",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 2, column 4 already hold A, B, C, D, so it must be E.",
+      "The row and column of row 2, column 3 already hold A, B, C, E, so it must be D. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-1",
+      "uses-cell"
+    ],
+    "target": [
+      1,
+      2
+    ]
+  },
+  {
+    "answer": "A",
+    "band": "medium",
+    "givens": [
+      [
+        "C",
+        "D",
+        null,
+        "A",
+        null
+      ],
+      [
+        null,
+        null,
+        "D",
+        "C",
+        null
+      ],
+      [
+        null,
+        "C",
+        null,
+        "E",
+        "A"
+      ],
+      [
+        "E",
+        null,
+        null,
+        null,
+        "D"
+      ],
+      [
+        null,
+        "E",
+        null,
+        "D",
+        "C"
+      ]
+    ],
+    "id": "section-L-m23",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 4, column 4 already hold A, C, D, E, so it must be B.",
+      "The row and column of row 4, column 2 already hold B, C, D, E, so it must be A. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-1",
+      "uses-cell"
+    ],
+    "target": [
+      3,
+      1
+    ]
+  },
+  {
+    "answer": "E",
+    "band": "medium",
+    "givens": [
+      [
+        null,
+        null,
+        "C",
+        "E",
+        "B"
+      ],
+      [
+        null,
+        null,
+        null,
+        "A",
+        null
+      ],
+      [
+        null,
+        null,
+        "E",
+        null,
+        "A"
+      ],
+      [
+        null,
+        null,
+        "B",
+        "D",
+        "C"
+      ],
+      [
+        "B",
+        null,
+        "A",
+        "C",
+        null
+      ]
+    ],
+    "id": "section-L-m25",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 2, column 3 already hold A, B, C, E, so it must be D.",
+      "The row and column of row 2, column 5 already hold A, B, C, D, so it must be E. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-1",
+      "uses-cell"
+    ],
+    "target": [
+      1,
+      4
+    ]
+  },
+  {
+    "answer": "A",
+    "band": "medium",
+    "givens": [
+      [
+        null,
+        "A",
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        "D",
+        "B",
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        "B",
+        "D"
+      ],
+      [
+        "C",
+        "E",
+        null,
+        null,
+        null
+      ],
+      [
+        "D",
+        "B",
+        null,
+        "A",
+        null
+      ]
+    ],
+    "id": "section-L-m26",
+    "kind": "latin",
+    "steps": [
+      "Row 4 still needs B. Its other free cells already have B in their column, so B goes in column 5.",
+      "Column 5 still needs A. Its other free cells already have A in their row, so A goes in row 2. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-1",
+      "uses-row",
+      "uses-column"
+    ],
+    "target": [
+      1,
+      4
+    ]
+  },
+  {
+    "answer": "E",
+    "band": "medium",
+    "givens": [
+      [
+        null,
+        "D",
+        "A",
+        null,
+        null
+      ],
+      [
+        null,
+        "E",
+        "B",
+        null,
+        "A"
+      ],
+      [
+        null,
+        null,
+        "D",
+        null,
+        null
+      ],
+      [
+        "D",
+        null,
+        "E",
+        "A",
+        "C"
+      ],
+      [
+        null,
+        "A",
+        "C",
+        "B",
+        "D"
+      ]
+    ],
+    "id": "section-L-m27",
+    "kind": "latin",
+    "steps": [
+      "Column 2 still needs C. Its other free cells already have C in their row, so C goes in row 3.",
+      "The row and column of row 3, column 4 already hold A, B, C, D, so it must be E. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-1",
+      "uses-column",
+      "uses-cell"
+    ],
+    "target": [
+      2,
+      3
+    ]
+  },
+  {
+    "answer": "B",
+    "band": "medium",
+    "givens": [
+      [
+        null,
+        null,
+        "E",
+        "D",
+        "A"
+      ],
+      [
+        null,
+        null,
+        "D",
+        "C",
+        null
+      ],
+      [
+        null,
+        "A",
+        "C",
+        "B",
+        "E"
+      ],
+      [
+        null,
+        "D",
+        null,
+        "E",
+        null
+      ],
+      [
+        "E",
+        "C",
+        null,
+        null,
+        null
+      ]
+    ],
+    "id": "section-L-m24",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 1, column 2 already hold A, C, D, E, so it must be B.",
+      "The row and column of row 2, column 5 already hold A, C, D, E, so it must be B.",
+      "Column 1 still needs B. Its other free cells already have B in their row, so B goes in row 4. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-2",
+      "uses-cell",
+      "uses-column",
+      "stretch"
+    ],
+    "target": [
+      3,
+      0
+    ]
+  },
+  {
+    "answer": "C",
+    "band": "medium",
+    "givens": [
+      [
+        null,
+        null,
+        null,
+        null,
+        "D"
+      ],
+      [
+        "B",
+        null,
+        "E",
+        "C",
+        "A"
+      ],
+      [
+        null,
+        null,
+        null,
+        "E",
+        "B"
+      ],
+      [
+        "A",
+        "C",
+        "B",
+        "D",
+        "E"
+      ],
+      [
+        null,
+        "E",
+        null,
+        "B",
+        null
+      ]
+    ],
+    "id": "section-L-m28",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 1, column 4 already hold B, C, D, E, so it must be A.",
+      "The row and column of row 1, column 3 already hold A, B, D, E, so it must be C.",
+      "Row 3 still needs C. Its other free cells already have C in their column, so C goes in column 1. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-2",
+      "uses-cell",
+      "uses-row",
+      "stretch"
+    ],
+    "target": [
+      2,
+      0
+    ]
+  },
+  {
+    "answer": "D",
+    "band": "high",
+    "givens": [
+      [
+        "B",
+        "A",
+        null,
+        null,
+        "E"
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        "E",
+        null
+      ],
+      [
+        "E",
+        null,
+        "B",
+        "A",
+        "C"
+      ],
+      [
+        null,
+        "E",
+        "A",
+        "C",
+        null
+      ]
+    ],
+    "id": "section-L-h41",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 5, column 1 already hold A, B, C, E, so it must be D.",
+      "Row 1 still needs C. Its other free cells already have C in their column, so C goes in column 3.",
+      "The row and column of row 3, column 3 already hold A, B, C, E, so it must be D.",
+      "Column 5 still needs D. Its other free cells already have D in their row, so D goes in row 2. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-3",
+      "uses-cell",
+      "uses-row",
+      "uses-column"
+    ],
+    "target": [
+      1,
+      4
+    ]
+  },
+  {
+    "answer": "E",
+    "band": "high",
+    "givens": [
+      [
+        "A",
+        "C",
+        "E",
+        "D",
+        null
+      ],
+      [
+        null,
+        "A",
+        null,
+        null,
+        "D"
+      ],
+      [
+        null,
+        null,
+        null,
+        "A",
+        null
+      ],
+      [
+        "B",
+        null,
+        null,
+        null,
+        "E"
+      ],
+      [
+        "D",
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "id": "section-L-h42",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 1, column 5 already hold A, C, D, E, so it must be B.",
+      "The row and column of row 3, column 5 already hold A, B, D, E, so it must be C.",
+      "The row and column of row 3, column 1 already hold A, B, C, D, so it must be E.",
+      "Column 2 still needs E. Its other free cells already have E in their row, so E goes in row 5. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-3",
+      "uses-cell",
+      "uses-column"
+    ],
+    "target": [
+      4,
+      1
+    ]
+  },
+  {
+    "answer": "A",
+    "band": "high",
+    "givens": [
+      [
+        null,
+        "D",
+        null,
+        "E",
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "D",
+        "B",
+        null,
+        "C",
+        null
+      ],
+      [
+        null,
+        "C",
+        null,
+        "B",
+        "D"
+      ],
+      [
+        "C",
+        "A",
+        "B",
+        null,
+        null
+      ]
+    ],
+    "id": "section-L-h43",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 2, column 2 already hold A, B, C, D, so it must be E.",
+      "Column 1 still needs E. Its other free cells already have E in their row, so E goes in row 4.",
+      "Column 4 still needs A. Its other free cells already have A in their row, so A goes in row 2.",
+      "Column 1 still needs A. Its other free cells already have A in their row, so A goes in row 1. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-3",
+      "uses-cell",
+      "uses-column"
+    ],
+    "target": [
+      0,
+      0
+    ]
+  },
+  {
+    "answer": "B",
+    "band": "high",
+    "givens": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        "E",
+        "D",
+        "A",
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        "C",
+        null
+      ],
+      [
+        "C",
+        null,
+        "B",
+        "D",
+        "E"
+      ],
+      [
+        "D",
+        null,
+        "A",
+        null,
+        null
+      ]
+    ],
+    "id": "section-L-h45",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 2, column 1 already hold A, C, D, E, so it must be B.",
+      "The row and column of row 2, column 5 already hold A, B, D, E, so it must be C.",
+      "The row and column of row 5, column 5 already hold A, C, D, E, so it must be B.",
+      "Row 3 still needs B. Its other free cells already have B in their column, so B goes in column 2. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-3",
+      "uses-cell",
+      "uses-row"
+    ],
+    "target": [
+      2,
+      1
+    ]
+  },
+  {
+    "answer": "B",
+    "band": "high",
+    "givens": [
+      [
+        "D",
+        null,
+        null,
+        "B",
+        null
+      ],
+      [
+        "E",
+        null,
+        "C",
+        null,
+        "B"
+      ],
+      [
+        null,
+        null,
+        null,
+        "E",
+        null
+      ],
+      [
+        null,
+        null,
+        "E",
+        null,
+        "D"
+      ],
+      [
+        null,
+        "C",
+        null,
+        "D",
+        null
+      ]
+    ],
+    "id": "section-L-h46",
+    "kind": "latin",
+    "steps": [
+      "Row 1 still needs C. Its other free cells already have C in their column, so C goes in column 5.",
+      "The row and column of row 3, column 5 already hold B, C, D, E, so it must be A.",
+      "Row 2 still needs D. Its other free cells already have D in their column, so D goes in column 2.",
+      "The row and column of row 3, column 2 already hold A, C, D, E, so it must be B. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-3",
+      "uses-row",
+      "uses-cell"
+    ],
+    "target": [
+      2,
+      1
+    ]
+  },
+  {
+    "answer": "C",
+    "band": "high",
+    "givens": [
+      [
+        null,
+        "D",
+        "B",
+        null,
+        null
+      ],
+      [
+        "B",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        "B",
+        null,
+        "E",
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        "D",
+        null
+      ],
+      [
+        null,
+        "C",
+        "A",
+        "B",
+        "D"
+      ]
+    ],
+    "id": "section-L-h44",
+    "kind": "latin",
+    "steps": [
+      "The row and column of row 5, column 1 already hold A, B, C, D, so it must be E.",
+      "Row 1 still needs E. Its other free cells already have E in their column, so E goes in column 5.",
+      "Column 1 still needs D. Its other free cells already have D in their row, so D goes in row 3.",
+      "Row 3 still needs A. Its other free cells already have A in their column, so A goes in column 5.",
+      "The row and column of row 2, column 5 already hold A, B, D, E, so it must be C.",
+      "Column 4 still needs C. Its other free cells already have C in their row, so C goes in row 1. That is the field with the question mark."
+    ],
+    "tags": [
+      "chain-5",
+      "uses-cell",
+      "uses-row",
+      "uses-column",
+      "stretch"
+    ],
+    "target": [
+      0,
+      3
+    ]
+  }
+]

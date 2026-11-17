@@ -14,7 +14,8 @@ const minimalPages = PUBLIC_PAGES.filter((page) => page.shell === 'minimal');
 export default [
   layout(SHELL_FILES.site, [
     ...sitePages.map(routeEntry),
-    ...(process.argv.includes('dev') ? [route('_theme', 'routes/theme.tsx')] : []),
+    // Dev-only previews: the theme, and every screen of the dMAT practice page from fixed sample state.
+    ...(process.argv.includes('dev') ? [route('_theme', 'routes/theme.tsx'), route('_dmat', 'routes/dmat-preview.tsx')] : []),
   ]),
   ...minimalPages.map(routeEntry),
   route('*', 'routes/not-found.tsx'),
