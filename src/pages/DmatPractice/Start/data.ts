@@ -1,4 +1,5 @@
 import { DMAT_FORMAT, SOURCES } from '@/utils/applicationFacts';
+import { DMAT_PRACTICE } from '@/utils/constants';
 
 const {
   subtests, tasksPerSubtest, subtestMinutes, pauseMinutes, breakMinutes, academicMinutes, academicQuestions,
@@ -21,7 +22,7 @@ export const START_COPY = {
   guide: 'See the dMAT guide for registration and test day',
   preparation: 'Official preparation material and videos',
   about: 'About these questions',
-  independence: 'Independent practice material from Germandians. Not affiliated with or endorsed by g.a.s.t., which runs the dMAT.',
+  independence: DMAT_PRACTICE.independence,
   questions: 'We put these questions together ourselves, closely following the format and task rules g.a.s.t. publishes for the dMAT.',
   difficulty: 'The real test may be harder. Use this to get used to the format and the clock, not to predict your result.',
   academicSet: 'There is one full academic section. If you take the full mock, you will have seen it.',

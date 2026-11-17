@@ -2,6 +2,7 @@ import { useSettleHashScroll } from '@/hooks/useSettleHashScroll';
 
 import CommunityIntro from './CommunityIntro';
 import Contact from '@/components/Contact';
+import DmatIntro from './DmatIntro';
 import Faq from './Faq';
 import Fees from './Fees';
 import Hero from './Hero';
@@ -22,6 +23,7 @@ export default function Home() {
       <Fees />
       <Housing />
       <Journey />
+      <DmatIntro />
       <CommunityIntro />
       <LearnGermanIntro />
       <Sop />

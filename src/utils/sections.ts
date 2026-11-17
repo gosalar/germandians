@@ -5,6 +5,8 @@ export const SECTIONS = {
   fees: 'fees',
   housing: 'housing',
   journey: 'journey',
+  /** The home intro to the dMAT guide and dMAT practice. */
+  dmat: 'dmat',
   community: 'community',
   learnGerman: 'learn-german',
   /** The German lessons enquiry form, on the Learn German page. */

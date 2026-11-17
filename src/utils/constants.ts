@@ -94,6 +94,15 @@ export const GERMAN_LESSONS = {
 } as const;
 
 /**
+ * The dMAT practice offer. The home intro and the practice page read the same sentences, and both show the
+ * independence note wherever the practice is offered. What the dMAT is comes from `DMAT.about`.
+ */
+export const DMAT_PRACTICE = {
+  modes: 'Practise the dMAT task types: a full mock, one section, or practice without the clock.',
+  independence: 'Independent practice material from Germandians. Not affiliated with or endorsed by g.a.s.t., which runs the dMAT.',
+} as const;
+
+/**
  * Stated facts: team size and intake places.
  * Derived: students per mentor is intake places divided by team size.
  * Team size is held for that calculation only. The site publishes the cap per mentor and the intake places, not the size of the team.
@@ -194,17 +203,17 @@ export const PAGE_LINKS = {
  * Header order. The inline row starts at 1220px (`$bp-nav`), the narrowest width at which these entries
  * fit on one line with a group open; below it the menu button takes over. The row has no spare room for
  * another top-level link at 1220px, so related pages share a group: the requirements guide and the two
- * dMAT pages under Requirements, the people and the community under About. Measured on 17 November 2026
- * at 1219, 1220 and 1221px with each group open: one line, nothing clipped, 27px between the brand and
+ * dMAT pages under Admissions, the people and the community under About. Measured on 17 November 2026
+ * at 1219, 1220 and 1221px with each group open: one line, nothing clipped, 45px between the brand and
  * the row at 1220px. Re-measure at those widths before adding an entry.
  */
 const NAV_ENTRIES: readonly (NavigationLink | NavigationGroup)[] = [
   PAGE_LINKS.gradeCheck,
   {
     kind: 'group',
-    id: 'nav-requirements',
-    label: 'Requirements',
-    // Under the "Requirements" button the page needs its own name.
+    id: 'nav-admissions',
+    label: 'Admissions',
+    // Beside "dMAT guide" the requirements page is named as a guide too.
     links: [{ destination: DESTINATIONS.requirements, label: 'Requirements guide' }, PAGE_LINKS.dmat, PAGE_LINKS.dmatPractice],
   },
   { kind: 'group', id: 'nav-about', label: 'About', links: [PAGE_LINKS.about, PAGE_LINKS.community] },

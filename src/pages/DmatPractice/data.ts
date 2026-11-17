@@ -1,13 +1,15 @@
 import { DMAT } from '@/utils/applicationFacts';
+import { DMAT_PRACTICE } from '@/utils/constants';
 import type { Mode, SectionId } from '@/utils/dmat/types';
 
 /**
  * The labels the practice page's screens share. Copy that only one screen needs lives in that screen's
- * own `data.ts`. What the dMAT is comes from `DMAT.about`; it is not retyped here.
+ * own `data.ts`. What the dMAT is comes from `DMAT.about`, and the practice offer from `DMAT_PRACTICE`;
+ * neither is retyped here.
  */
 export const PAGE_COPY = {
   title: 'dMAT practice',
-  introduction: `${DMAT.about} Practise its task types here: a full mock, one section, or practice without the clock.`,
+  introduction: `${DMAT.about} ${DMAT_PRACTICE.modes}`,
   /** Shown while a section's tasks load, and when loading them fails. */
   loading: 'Loading the tasks.',
   loadFailed: 'The tasks did not load. Check your connection and try again.',

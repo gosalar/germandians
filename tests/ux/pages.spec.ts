@@ -7,11 +7,13 @@ async function ready(page: Page) {
   await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
 }
 
-test('home sections lead to the about, community and German pages', async ({ page }) => {
+test('home sections lead to the about, community, German and dMAT pages', async ({ page }) => {
   const visits = [
     { section: '#story', link: 'More about us', path: '/about', heading: 'About us' },
     { section: '#community', link: 'Explore the community', path: '/community', heading: 'Our community' },
     { section: '#learn-german', link: 'How German lessons work', path: '/learn-german', heading: 'Learn German' },
+    { section: '#dmat', link: 'Open dMAT practice', path: '/dmat/practice', heading: 'dMAT practice' },
+    { section: '#dmat', link: 'Read the dMAT guide', path: '/dmat', heading: 'dMAT guide' },
   ];
   for (const visit of visits) {
     await page.goto('/');
