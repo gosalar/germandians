@@ -38,8 +38,6 @@ jobs:
           # where the site lives under the repository's name.
           SITE_BASE_PATH: ${{ vars.SITE_BASE_PATH || format('/{0}/', github.event.repository.name) }}
           VITE_SITE_ORIGIN: ${{ vars.VITE_SITE_ORIGIN }}
-          # HTTPS receiver: 2xx JSON { received: true } only after durable receipt.
-          VITE_FORM_ENDPOINT: ${{ vars.VITE_FORM_ENDPOINT }}
           # 10–15 international digits; empty/invalid actions open the review form.
           VITE_WHATSAPP_NUMBER: ${{ vars.VITE_WHATSAPP_NUMBER }}
           # WhatsApp community invitation; empty/invalid shows no join link.
@@ -53,7 +51,6 @@ jobs:
           # Registered business name and address; shown in the privacy note and the footer.
           VITE_PRIVACY_NAMES: ${{ vars.VITE_PRIVACY_NAMES }}
           VITE_PRIVACY_ADDRESS: ${{ vars.VITE_PRIVACY_ADDRESS }}
-          VITE_PRIVACY_FORM_SERVICE: ${{ vars.VITE_PRIVACY_FORM_SERVICE }}
           VITE_PRIVACY_HOSTING_PROVIDER: ${{ vars.VITE_PRIVACY_HOSTING_PROVIDER }}
           VITE_PRIVACY_RETENTION: ${{ vars.VITE_PRIVACY_RETENTION }}
           VITE_PRIVACY_AUTHORITY: ${{ vars.VITE_PRIVACY_AUTHORITY }}

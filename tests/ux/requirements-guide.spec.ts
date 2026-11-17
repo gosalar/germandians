@@ -1,8 +1,9 @@
 import { expect, test } from '@playwright/test';
 
 import { FEE_POLICY, FEE_PROMISE } from '../../src/utils/constants.ts';
+import { UX_ENDPOINTS } from './endpoints';
 
-const endpoint = 'https://enquiries.example.test/profile';
+const endpoint = UX_ENDPOINTS.profileReview;
 
 /** The topic anchors, in reading order (`REQUIREMENT_TOPIC_IDS`), with the titles the route and the cards show. */
 const TOPICS = [

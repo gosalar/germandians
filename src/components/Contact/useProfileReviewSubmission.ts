@@ -54,7 +54,7 @@ export function useProfileReviewSubmission(summary?: EnquirySummary) {
       ...(values.german ? { germanLessons: true as const } : {}),
     };
     setSubmittedRequest(request);
-    if (siteConfig.formEndpoint) setStatus('sending');
+    if (siteConfig.profileReviewEndpoint) setStatus('sending');
     try {
       const result = await submitProfileReview(request);
       if (result === 'sent') setReceivedDate(new Date().toLocaleDateString('de-DE', { timeZone: 'Asia/Kolkata' }));

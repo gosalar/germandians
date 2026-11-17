@@ -34,8 +34,12 @@ export function buildGermanLessonsDraftUrl(request: GermanLessonsRequest): strin
   return emailDraftUrl(GERMAN_LESSONS.enquiry.subject, buildGermanLessonsDraft(request));
 }
 
-/** Sends the enquiry to the form endpoint, marked as German lessons, or opens it as an email draft. */
+/**
+ * Sends the enquiry, marked as German lessons, to the German lessons sheet, or opens it as an email
+ * draft when that sheet isn't configured. The mark lets the sheet's script turn away a profile review
+ * sent to the wrong address.
+ */
 export async function submitGermanLessons(request: GermanLessonsRequest): Promise<SubmitResult> {
-  if (!siteConfig.formEndpoint) return openEmailDraft(buildGermanLessonsDraftUrl(request));
-  return postEnquiry({ enquiry: 'german-lessons', ...request });
+  if (!siteConfig.germanLessonsEndpoint) return openEmailDraft(buildGermanLessonsDraftUrl(request));
+  return postEnquiry(siteConfig.germanLessonsEndpoint, { enquiry: 'german-lessons', ...request });
 }

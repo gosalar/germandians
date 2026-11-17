@@ -56,8 +56,8 @@ export function buildEmailDraftUrl(request: ProfileReviewRequest): string {
   return emailDraftUrl('Profile review request', buildEmailDraft(request));
 }
 
-/** Sends the request to the form endpoint, or opens it as an email draft when none is configured. */
+/** Sends the request to the admissions sheet, or opens it as an email draft when that sheet isn't configured. */
 export async function submitProfileReview(request: ProfileReviewRequest): Promise<SubmitResult> {
-  if (!siteConfig.formEndpoint) return openEmailDraft(buildEmailDraftUrl(request));
-  return postEnquiry(profileReviewPayload(request));
+  if (!siteConfig.profileReviewEndpoint) return openEmailDraft(buildEmailDraftUrl(request));
+  return postEnquiry(siteConfig.profileReviewEndpoint, profileReviewPayload(request));
 }

@@ -1,5 +1,7 @@
 import { spawn } from 'node:child_process';
 
+import { UX_ENDPOINTS } from './endpoints.ts';
+
 // Separate, sequential builds keep local settings and Pages artifacts out of UX tests.
 for (const variant of ['endpoint', 'email']) {
   await new Promise((resolve, reject) => {
@@ -17,7 +19,8 @@ for (const variant of ['endpoint', 'email']) {
         VITE_INTAKE_STATUS: 'Not confirmed',
         VITE_SHOW_SEAT_COUNT: 'false',
         VITE_SEATS_LEFT: '',
-        VITE_FORM_ENDPOINT: variant === 'endpoint' ? 'https://enquiries.example.test/profile' : '',
+        // Read by vite.config.ts in UX builds only: fictitious web apps, or none, never the real sheets.
+        UX_ENQUIRY_ENDPOINTS: JSON.stringify(variant === 'endpoint' ? UX_ENDPOINTS : {}),
         VITE_WHATSAPP_NUMBER: variant === 'endpoint' ? '4915123456789' : '',
         // Fictitious invitation; tests read the link and never open it.
         VITE_WHATSAPP_COMMUNITY_URL: variant === 'endpoint' ? 'https://chat.whatsapp.com/GermandiansTestInvite' : '',
@@ -27,7 +30,6 @@ for (const variant of ['endpoint', 'email']) {
         VITE_PRIVACY_HOSTING_PROVIDER: '',
         VITE_PRIVACY_RETENTION: '',
         VITE_PRIVACY_AUTHORITY: '',
-        VITE_PRIVACY_FORM_SERVICE: variant === 'endpoint' ? 'Test enquiry receiver' : '',
       },
     });
     child.on('error', reject);

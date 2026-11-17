@@ -27,7 +27,7 @@ for (const [width, height] of viewports) {
       if (message.type() === 'error' && !message.text().includes('404')) errors.push(message.text());
     });
     // Never let a form submission leave the test browser.
-    await page.route('https://enquiries.example.test/**', route => route.fulfill({ json: { received: true } }));
+    await page.route('https://script.google.com/**', route => route.fulfill({ json: { received: true } }));
     for (const path of paths) {
       const url = `${baseURL!.replace(/\/$/, '')}/${path}`;
       await page.goto(url);

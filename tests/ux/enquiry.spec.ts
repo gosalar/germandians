@@ -1,6 +1,8 @@
 import { expect, test, type Page } from '@playwright/test';
 
-const endpoint = 'https://enquiries.example.test/profile';
+import { UX_ENDPOINTS } from './endpoints';
+
+const endpoint = UX_ENDPOINTS.profileReview;
 async function fill(page: Page) {
   await page.locator('#f-name').fill('Test visitor');
   await page.locator('#f-wa').fill('+91 9876543210');
@@ -18,11 +20,13 @@ test.beforeEach(async ({ page }) => {
 test('sending is locked, one request includes the ticked summary, and receipt needs explicit acknowledgement', async ({ page }) => {
   let count = 0;
   let payload: Record<string, unknown> = {};
+  let contentType = '';
   let release!: () => void;
   const gate = new Promise<void>(resolve => { release = resolve; });
   await page.route(endpoint, async route => {
     count++;
     payload = route.request().postDataJSON();
+    contentType = route.request().headers()['content-type'] ?? '';
     await gate;
     await route.fulfill({ status: 200, contentType: 'application/json', body: '{"received":true}' });
   });
@@ -48,6 +52,8 @@ test('sending is locked, one request includes the ticked summary, and receipt ne
   release();
   await expect(page.locator('#contact-form [role="status"]')).toContainText('Received. An admin will message you on WhatsApp.');
   expect(count).toBe(1);
+  // Apps Script answers no CORS preflight, so the JSON must travel as plain text.
+  expect(contentType).toBe('text/plain;charset=utf-8');
   expect(payload).toMatchObject({ name: 'Test visitor', email: 'visitor@example.test', whatsapp: '+91 9876543210', consent: true, source: 'germandians-website', snapshot: 'German grade 2.3 (7.4 / 10, pass 4)' });
   expect(Number.isFinite(Date.parse(String(payload.consentAt)))).toBe(true);
   await expect(page.getByTestId('form-snapshot').getByRole('listitem')).toHaveText(['German grade 2.3 (7.4 / 10, pass 4)']);

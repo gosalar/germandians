@@ -26,7 +26,15 @@ export default function Privacy() {
   const showAddress = privacy.address || privacy.showPlaceholders;
   const showRetention = privacy.retention || privacy.showPlaceholders;
   const showAuthority = privacy.authority || privacy.showPlaceholders;
-  const emailForm = !siteConfig.formEndpoint;
+  // Each form sends to its own Google Sheet once that sheet is linked, and opens an email draft until then.
+  const reviewBySheet = Boolean(siteConfig.profileReviewEndpoint);
+  const lessonsBySheet = Boolean(siteConfig.germanLessonsEndpoint);
+  const sheetForms = reviewBySheet && lessonsBySheet
+    ? 'the forms you send on this site and keeps them'
+    : `the ${reviewBySheet ? 'profile-review' : 'German lessons'} form and keeps it`;
+  const draftForm = !reviewBySheet && !lessonsBySheet
+    ? 'The form'
+    : `The ${reviewBySheet ? 'German lessons' : 'profile-review'} form`;
   // Kept as elements so the sentences below can stay on short lines without
   // splitting a space into its own text node. That shift moves the highlight.
   const names = <Placeholder value={privacy.names}>[registered business name]</Placeholder>;
@@ -111,18 +119,16 @@ export default function Privacy() {
           <section className={styles.section}>
             <h2 className={styles.heading}>Who else handles it</h2>
             <ul className={styles.list}>
-              {emailForm ? (
+              {reviewBySheet || lessonsBySheet ? (
                 <li>
                   <span className={styles.bullet} data-color="green" />
-                  <span>The form opens an email draft addressed to us. Nothing is sent until you press send in your email app. Your email provider and our Gmail service then handle the message.</span>
+                  <span>Google receives {sheetForms} in our Google Sheets.</span>
                 </li>
-              ) : privacy.formService || privacy.showPlaceholders ? (
+              ) : null}
+              {!reviewBySheet || !lessonsBySheet ? (
                 <li>
                   <span className={styles.bullet} data-color="green" />
-                  <span>
-                    <Placeholder value={privacy.formService}>[form service]</Placeholder> receives the form on our
-                    behalf.
-                  </span>
+                  <span>{draftForm} opens an email draft addressed to us. Nothing is sent until you press send in your email app. Your email provider and our Gmail service then handle the message.</span>
                 </li>
               ) : null}
               {privacy.hostingProvider || privacy.showPlaceholders ? (

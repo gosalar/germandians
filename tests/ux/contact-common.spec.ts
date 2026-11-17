@@ -114,11 +114,11 @@ test('production privacy text follows the transport and has no placeholders', as
   await expect(page.locator('main')).toContainText('Unanswered questions are omitted');
   await expect(page.locator('main')).toContainText('Last updated 17 November 2026');
   if (testInfo.project.name === 'endpoint') {
-    await expect(page.locator('main')).toContainText('Test enquiry receiver receives the form on our behalf');
-    await expect(page.locator('main')).not.toContainText('The form opens an email draft');
+    await expect(page.locator('main')).toContainText('Google receives the forms you send on this site and keeps them in our Google Sheets.');
+    await expect(page.locator('main')).not.toContainText('opens an email draft');
   } else {
-    await expect(page.locator('main')).toContainText('Nothing is sent until you press send in your email app');
-    await expect(page.locator('main')).not.toContainText('receives the form on our behalf');
+    await expect(page.locator('main')).toContainText('The form opens an email draft addressed to us. Nothing is sent until you press send in your email app');
+    await expect(page.locator('main')).not.toContainText('Google Sheets');
   }
 });
 

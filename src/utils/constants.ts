@@ -68,6 +68,18 @@ export const CONTACT = {
 } as const;
 
 /**
+ * Where each enquiry form sends: the web app URL of the Apps Script in that form's Google Sheet, ending
+ * in /exec (README, "Google Sheets"). The visitor's browser posts to it, so it is public like the email
+ * address above. Empty, or anything but a web app URL, makes that form open an email draft instead.
+ */
+export const ENQUIRY_ENDPOINTS = {
+  /** The admissions sheet: profile reviews from Home, the grade check, requirements and the dMAT pages. */
+  profileReview: 'https://script.google.com/macros/s/AKfycbx5e7L37jxYCd5znCR6H8ft1xhiN6HZTBIZYFKybYGhSwkqNEjjArYMLiU5oByt7Ze-Nw/exec',
+  /** The German lessons sheet: the form on Learn German. */
+  germanLessons: 'https://script.google.com/macros/s/AKfycbyJhp7qIzTzR0gJE9SNxcwBmgO3Va6KE5hmw9SE3FIhTAnJG_wgOMWzSOIy_wwE1i0v/exec',
+} as const;
+
+/**
  * German lessons, as the owners describe them: help learning German, explained in the student's native
  * language. Separate from the admissions service and its fee promise, with its own enquiry form on the
  * Learn German page. The profile-review form can only note an interest ("Teach me German") and links to

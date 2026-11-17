@@ -3,6 +3,7 @@ import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 
 import { loadEnv } from 'vite';
+import { ENQUIRY_ENDPOINTS } from '../src/utils/constants.ts';
 import { toFormEndpoint, toWhatsAppCommunityUrl, toWhatsAppNumber } from '../src/utils/contactSettings.ts';
 import { DEFAULT_SITE_ORIGIN, parseSiteOrigin } from '../src/utils/publicSite.ts';
 
@@ -17,7 +18,6 @@ const read = (key) => (process.env[key] ?? fileEnv[key] ?? '').trim();
 const missing = ['NAMES', 'ADDRESS', 'HOSTING_PROVIDER', 'RETENTION', 'AUTHORITY'].filter(
   (name) => !read(`VITE_PRIVACY_${name}`),
 );
-if (toFormEndpoint(read('VITE_FORM_ENDPOINT')) && !read('VITE_PRIVACY_FORM_SERVICE')) missing.push('FORM_SERVICE');
 if (!toWhatsAppNumber(read('VITE_WHATSAPP_NUMBER'))) {
   console.warn('[contact] Missing or invalid VITE_WHATSAPP_NUMBER; contact actions open the review form.');
 }
@@ -32,8 +32,15 @@ if (standIns > 0) {
 if (read('VITE_SITE_ORIGIN') && !parseSiteOrigin(read('VITE_SITE_ORIGIN'))) {
   console.warn(`[site] Invalid VITE_SITE_ORIGIN; canonical, sharing and sitemap URLs use ${DEFAULT_SITE_ORIGIN}. Supply an HTTPS origin without a path.`);
 }
-if (read('VITE_FORM_ENDPOINT') && !toFormEndpoint(read('VITE_FORM_ENDPOINT'))) {
-  console.warn('[contact] Invalid VITE_FORM_ENDPOINT; using the email-app handoff. Supply a public HTTPS endpoint.');
+// The sheets' web app URLs are in the code, not settings (ENQUIRY_ENDPOINTS in src/utils/constants.ts).
+for (const [form, sheet] of [['profileReview', 'admissions'], ['germanLessons', 'German lessons']]) {
+  const value = ENQUIRY_ENDPOINTS[form].trim();
+  if (!toFormEndpoint(value)) {
+    console.warn(`[contact] ${value ? 'Invalid' : 'Missing'} ENQUIRY_ENDPOINTS.${form}; that form opens an email draft. Paste the ${sheet} sheet's web app URL, ending in /exec (README, "Google Sheets").`);
+  }
+}
+if (toFormEndpoint(ENQUIRY_ENDPOINTS.profileReview) && toFormEndpoint(ENQUIRY_ENDPOINTS.profileReview) === toFormEndpoint(ENQUIRY_ENDPOINTS.germanLessons)) {
+  console.warn('[contact] Both forms in ENQUIRY_ENDPOINTS have the same web app URL; each sheet rejects the other form, so one of them always fails.');
 }
 for (const name of missing) {
   console.warn(`[privacy] Missing VITE_PRIVACY_${name}; confirm this detail before publishing the privacy note.`);

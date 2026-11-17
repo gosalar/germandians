@@ -1,5 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 
+import { UX_ENDPOINTS } from './endpoints';
+
 const CHARGES = 'Additional charges may apply.';
 const CERTIFICATE = 'We do not provide a certificate for these lessons.';
 
@@ -105,9 +107,15 @@ test('German lessons have their own form, with the terms beside it, sent as a le
   for (const terms of [CHARGES, CERTIFICATE]) await expect(intro.getByText(terms, { exact: true })).toBeVisible();
   await expect(intro.getByRole('link', { name: 'How German lessons work' })).toHaveAttribute('href', '/learn-german');
 
+  // The lessons enquiry goes to the German lessons sheet; the admissions sheet never sees it.
   let count = 0;
+  let admissions = 0;
   let payload: Record<string, unknown> = {};
-  await page.route('https://enquiries.example.test/profile', async (route) => {
+  await page.route(UX_ENDPOINTS.profileReview, async (route) => {
+    admissions++;
+    await route.abort();
+  });
+  await page.route(UX_ENDPOINTS.germanLessons, async (route) => {
     count++;
     payload = route.request().postDataJSON();
     await route.fulfill({ status: 200, contentType: 'application/json', body: '{"received":true}' });
@@ -134,6 +142,7 @@ test('German lessons have their own form, with the terms beside it, sent as a le
   await send.click();
   await expect(form.getByRole('status')).toContainText('Received. An admin will message you on WhatsApp.');
   expect(count).toBe(1);
+  expect(admissions).toBe(0);
   expect(payload).toMatchObject({
     enquiry: 'german-lessons',
     name: 'Test visitor',

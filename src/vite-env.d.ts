@@ -11,12 +11,9 @@ interface ImportMetaEnv {
   readonly VITE_PRIVACY_NAMES?: string;
   /** Business postal address; shown with the name in both places. */
   readonly VITE_PRIVACY_ADDRESS?: string;
-  readonly VITE_PRIVACY_FORM_SERVICE?: string;
   readonly VITE_PRIVACY_HOSTING_PROVIDER?: string;
   readonly VITE_PRIVACY_RETENTION?: string;
   readonly VITE_PRIVACY_AUTHORITY?: string;
-  /** Public HTTPS endpoint: requires 2xx JSON { received: true }; invalid values use email. */
-  readonly VITE_FORM_ENDPOINT?: string;
   /** International number, 10–15 digits after formatting removal; invalid values open the form. */
   readonly VITE_WHATSAPP_NUMBER?: string;
   /** WhatsApp community invitation (chat.whatsapp.com or whatsapp.com/channel/); invalid values show no join link. */
@@ -34,3 +31,9 @@ interface ImportMeta {
 
 /** Four-digit year the site was built in, set in vite.config.ts. */
 declare const __BUILD_YEAR__: string;
+
+/**
+ * The UX suite's stand-ins for ENQUIRY_ENDPOINTS, set in vite.config.ts for its builds only
+ * (tests/ux/build.mjs). Null in every other build, which sends to the endpoints in constants.ts.
+ */
+declare const __UX_ENQUIRY_ENDPOINTS__: { readonly profileReview: string; readonly germanLessons: string } | null;

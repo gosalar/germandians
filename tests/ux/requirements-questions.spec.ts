@@ -1,6 +1,8 @@
 import { expect, test, type Locator, type Page } from '@playwright/test';
 
-const endpoint = 'https://enquiries.example.test/profile';
+import { UX_ENDPOINTS } from './endpoints';
+
+const endpoint = UX_ENDPOINTS.profileReview;
 
 const QUESTION = {
   stage: /Where are you in your bachelor’s\?/,

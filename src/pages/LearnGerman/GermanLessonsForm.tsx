@@ -137,7 +137,7 @@ export default function GermanLessonsForm() {
             <span aria-hidden="true" className={styles.noticeBullet} />
             <span>{ASK.separate}</span>
           </li>
-          {!siteConfig.formEndpoint ? (
+          {!siteConfig.germanLessonsEndpoint ? (
             <li>
               <span aria-hidden="true" className={styles.noticeBullet} />
               <span>
@@ -176,7 +176,7 @@ export default function GermanLessonsForm() {
 
       {canSubmit ? (
         <Button type="submit" variant="navy" size="submit" className={styles.actionButton}>
-          {siteConfig.formEndpoint ? LESSONS_FORM.submit : LESSONS_FORM.openDraft}
+          {siteConfig.germanLessonsEndpoint ? LESSONS_FORM.submit : LESSONS_FORM.openDraft}
         </Button>
       ) : null}
       {status === 'sending' ? (

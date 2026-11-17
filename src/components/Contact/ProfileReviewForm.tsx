@@ -182,7 +182,7 @@ export default function ProfileReviewForm({ summary }: { summary?: EnquirySummar
         <div>{FORM_COPY.hintReply}</div>
         <div>{FORM_COPY.hintUse}</div>
         <div>{FORM_COPY.hintReview}</div>
-        {!siteConfig.formEndpoint ? (
+        {!siteConfig.profileReviewEndpoint ? (
           <div>{emailAppHint()}</div>
         ) : null}
       </div>
@@ -207,7 +207,7 @@ export default function ProfileReviewForm({ summary }: { summary?: EnquirySummar
 
       {canSubmit ? (
         <Button type="submit" variant="navy" size="submit" className={styles.submit}>
-          {siteConfig.formEndpoint ? FORM_COPY.submit : FORM_COPY.openDraft}
+          {siteConfig.profileReviewEndpoint ? FORM_COPY.submit : FORM_COPY.openDraft}
         </Button>
       ) : null}
       {status === 'sending' ? (

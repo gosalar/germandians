@@ -3,8 +3,9 @@ import { expect, test, type Page } from '@playwright/test';
 import { createSession, endSection, startNext } from '../../src/utils/dmat/session';
 import type { Session } from '../../src/utils/dmat/session';
 import { STORAGE_KEY } from '../../src/utils/dmat/storage';
+import { UX_ENDPOINTS } from './endpoints';
 
-const endpoint = 'https://enquiries.example.test/profile';
+const endpoint = UX_ENDPOINTS.profileReview;
 const now = new Date('2026-11-17T10:00:00Z');
 const minute = 60_000;
 

@@ -1,4 +1,4 @@
-import { CONTACT, INTAKE_SEASONS, INTAKE_SEATS, INTAKE_STATUSES, SECTIONS, hashLink, type IntakeSeason, type IntakeStatus } from '@/utils/constants';
+import { CONTACT, ENQUIRY_ENDPOINTS, INTAKE_SEASONS, INTAKE_SEATS, INTAKE_STATUSES, SECTIONS, hashLink, type IntakeSeason, type IntakeStatus } from '@/utils/constants';
 import { toFormEndpoint, toWhatsAppCommunityUrl, toWhatsAppNumber } from './contactSettings';
 import { toSiteOrigin } from './publicSite';
 
@@ -19,6 +19,8 @@ const toSeats = (value: string) => {
 };
 
 const whatsappDigits = toWhatsAppNumber(env.VITE_WHATSAPP_NUMBER);
+// The UX suite's builds swap in fictitious web apps, or none, so a test can never write to the real sheets.
+const enquiryEndpoints = __UX_ENQUIRY_ENDPOINTS__ ?? ENQUIRY_ENDPOINTS;
 const season = text(env.VITE_INTAKE_SEASON);
 const intakeSeason: IntakeSeason = (INTAKE_SEASONS as readonly string[]).includes(season) ? season as IntakeSeason : 'Summer';
 const intakeYear = /^[1-9]\d{3}$/.test(text(env.VITE_INTAKE_YEAR)) ? text(env.VITE_INTAKE_YEAR) : '2027';
@@ -33,7 +35,6 @@ export const INTAKE_READINESS = `Readiness depends on your APS and dMAT position
 export const privacyConfig = {
   names: text(env.VITE_PRIVACY_NAMES),
   address: text(env.VITE_PRIVACY_ADDRESS),
-  formService: text(env.VITE_PRIVACY_FORM_SERVICE),
   hostingProvider: text(env.VITE_PRIVACY_HOSTING_PROVIDER),
   retention: text(env.VITE_PRIVACY_RETENTION),
   authority: text(env.VITE_PRIVACY_AUTHORITY),
@@ -50,7 +51,10 @@ export const buildYear = __BUILD_YEAR__;
 
 export const siteConfig = {
   publicOrigin: toSiteOrigin(env.VITE_SITE_ORIGIN),
-  formEndpoint: toFormEndpoint(env.VITE_FORM_ENDPOINT),
+  /** The web app in the admissions Google Sheet that receives profile reviews, or '' for an email draft. */
+  profileReviewEndpoint: toFormEndpoint(enquiryEndpoints.profileReview),
+  /** The web app in the German lessons Google Sheet that receives lessons enquiries, or '' for an email draft. */
+  germanLessonsEndpoint: toFormEndpoint(enquiryEndpoints.germanLessons),
   feeAfterAdmission: text(env.VITE_FEE_AFTER_ADMISSION),
   intakeStatus: toIntakeStatus(text(env.VITE_INTAKE_STATUS)),
   intake: intakeLabel,

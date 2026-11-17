@@ -40,7 +40,7 @@ export function useGermanLessonsSubmission() {
       ...optional('experience'),
     };
     setSubmittedRequest(request);
-    if (siteConfig.formEndpoint) setStatus('sending');
+    if (siteConfig.germanLessonsEndpoint) setStatus('sending');
     try {
       setStatus(await submitGermanLessons(request));
     } finally {

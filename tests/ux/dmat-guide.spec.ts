@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test';
 
+import { UX_ENDPOINTS } from './endpoints';
+
 const parts = [
   'Do I need it?',
   'What is in the test',
@@ -11,7 +13,7 @@ const parts = [
 ] as const;
 
 test.beforeEach(async ({ page }) => {
-  await page.route('https://enquiries.example.test/profile', (route) => route.abort());
+  await page.route(UX_ENDPOINTS.profileReview, (route) => route.abort());
   await page.goto('/dmat');
   await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
 });
