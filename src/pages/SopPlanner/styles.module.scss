@@ -1,0 +1,748 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.page {
+  background: t.$paper;
+}
+
+.topSection {
+  padding: clamp(24px, 3vw, 40px) clamp(20px, 5vw, 72px) clamp(48px, 7vw, 88px);
+
+  @include m.below(t.$bp-mobile) {
+    padding-top: 12px;
+    padding-bottom: 40px;
+  }
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  @include m.below(t.$bp-mobile) {
+    gap: 6px;
+  }
+}
+
+.badge {
+  @include m.label-font(700, 14px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: t.$sand;
+  color: t.$navy;
+  border: 1px solid t.$hairline;
+
+  @include m.below(t.$bp-mobile) {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+
+  &[data-tone='green'] {
+    background: t.$status-green-bg;
+    color: t.$status-green-ink;
+    border-color: t.$status-green-border;
+  }
+}
+
+.contextBar {
+  margin-top: clamp(16px, 2.2vw, 24px);
+  background: t.$note;
+  border: 1.5px solid t.$hairline;
+  border-radius: 14px;
+  padding: 14px clamp(14px, 2vw, 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contextText {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$ink-strong;
+}
+
+.contextLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  align-items: center;
+}
+
+.inlineLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: t.$font-body;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.35;
+  color: t.$navy;
+  text-decoration: underline;
+  text-decoration-color: t.$yellow;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 4px;
+  @include m.touch-area;
+
+  &:hover {
+    color: t.$red;
+  }
+}
+
+.printSummaryLine {
+  display: none;
+}
+
+.workbench {
+  margin-top: clamp(18px, 2.6vw, 28px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+
+  @include m.from(t.$bp-check-columns) {
+    grid-template-columns: minmax(0, 1.38fr) minmax(320px, 0.62fr);
+    gap: 28px;
+  }
+}
+
+.outlineColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.outlineHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid t.$navy;
+}
+
+.outlineHeading {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.05;
+  color: t.$navy;
+}
+
+.kickerDe {
+  @include m.label-font(800, 15px);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: t.$ink-muted;
+  margin-right: 8px;
+}
+
+.partsList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.partCard {
+  background: t.$form;
+  border: 1.5px solid t.$navy;
+  border-radius: 16px;
+  padding: clamp(16px, 2.2vw, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  scroll-margin-top: 88px;
+}
+
+.partHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 14px;
+}
+
+.partTitle {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(20px, 2vw, 25px);
+  line-height: 1.15;
+  color: t.$navy;
+  min-width: 0;
+  flex: 1 1 240px;
+}
+
+.partLabel {
+  cursor: pointer;
+  color: inherit;
+}
+
+.partNumber {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin-top: 1px;
+  border-radius: 5px;
+  background: t.$navy;
+  color: t.$yellow;
+  display: grid;
+  place-items: center;
+  @include m.label-font(800, 15px);
+  line-height: 1;
+}
+
+.partMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.wordPill {
+  @include m.label-font(700, 15px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: t.$sand;
+  color: t.$navy;
+  border: 1px solid t.$hairline;
+  white-space: nowrap;
+}
+
+.flagBadge {
+  background: t.$highlight;
+  color: t.$navy;
+  border: 1.5px solid t.$navy;
+  @include m.label-font(700, 14px);
+}
+
+.guidance {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink;
+}
+
+.fieldRoot {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldRoot .textarea {
+  width: 100%;
+  height: auto;
+  min-height: 148px;
+  padding: 12px 14px;
+  border: 1.5px solid t.$navy;
+  border-radius: 8px;
+  background: t.$white;
+  font-family: t.$font-body;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  color: t.$navy;
+  resize: vertical;
+  scroll-margin-top: 92px;
+  scroll-margin-bottom: 108px;
+
+  &::placeholder {
+    color: t.$placeholder;
+    opacity: 1;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px t.$yellow;
+  }
+}
+
+.flagsPanel {
+  background: t.$cream;
+  border: 1.5px solid t.$navy;
+  border-radius: 12px;
+  padding: 14px clamp(12px, 1.8vw, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flagsTitle {
+  margin: 0;
+  @include m.label-font(800, 15px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$navy;
+}
+
+.previewBox {
+  background: t.$white;
+  border: 1px solid t.$hairline;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.previewLabel {
+  @include m.label-font(700, 13px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$ink-muted;
+}
+
+.annotatedPreview {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 16px;
+  line-height: 1.65;
+  color: t.$ink-strong;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.matchedMark {
+  background: t.$highlight;
+  color: t.$navy;
+  padding: 1px 4px;
+  border-radius: 3px;
+  border-bottom: 2.5px solid t.$navy;
+  font-weight: 600;
+}
+
+.matchedRef {
+  @include m.label-font(800, 13px);
+  margin-left: 3px;
+  color: t.$navy;
+}
+
+.matchList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.matchItem {
+  background: t.$white;
+  border: 1px solid t.$line;
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.matchHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.matchNumber {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  background: t.$red;
+  color: t.$white;
+  display: grid;
+  place-items: center;
+  @include m.label-font(800, 14px);
+}
+
+.matchPhrase {
+  font-family: t.$font-body;
+  font-weight: 800;
+  font-size: 16px;
+  color: t.$navy;
+}
+
+.matchTag {
+  @include m.label-font(700, 13px);
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: t.$khaki;
+  color: t.$navy;
+  border: 1px solid t.$navy;
+}
+
+.matchDetail {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$ink-strong;
+}
+
+.printPartBody {
+  display: none;
+}
+
+// Summary card
+.summaryCard {
+  background: t.$navy;
+  color: t.$white;
+  border-radius: 20px;
+  padding: clamp(18px, 2.4vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  box-shadow: 0 24px 56px -32px rgba(16, 24, 46, 0.45);
+}
+
+.summaryHead {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid t.$navy-line;
+}
+
+.summaryTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(22px, 2vw, 26px);
+  line-height: 1.1;
+  color: t.$white;
+}
+
+.totalsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.totalLabel {
+  @include m.label-font(700, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: t.$mist;
+}
+
+.totalValue {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-size: clamp(42px, 4.5vw, 58px);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: t.$yellow;
+}
+
+.stockSummaryBox {
+  background: t.$navy-raised;
+  border: 1px solid t.$navy-line;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stockSummaryLabel {
+  @include m.label-font(700, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$yellow;
+}
+
+.stockSummaryText {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$mist-light;
+}
+
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.breakdownTitle {
+  margin: 0;
+  @include m.label-font(700, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$mist;
+}
+
+.breakdownList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.breakdownItem {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 4px 0;
+  border-bottom: 1px solid t.$navy-line-soft;
+}
+
+.breakdownLink {
+  font-family: t.$font-body;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.35;
+  color: t.$mist-light;
+  text-decoration: underline;
+  text-decoration-color: t.$navy-line;
+  text-underline-offset: 3px;
+  @include m.touch-area;
+
+  &:hover {
+    color: t.$yellow;
+    text-decoration-color: t.$yellow;
+  }
+}
+
+.breakdownCount {
+  @include m.label-font(700, 15px);
+  color: t.$yellow;
+  white-space: nowrap;
+}
+
+.browserNote {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 14px;
+  line-height: 1.45;
+  color: t.$mist;
+}
+
+.storageWarning {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: t.$cream;
+  color: t.$navy;
+  border: 1.5px solid t.$yellow;
+  font-family: t.$font-body;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.summaryActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.statusRegion {
+  min-height: 0;
+  font-family: t.$font-body;
+  font-size: 14px;
+  line-height: 1.4;
+  color: t.$yellow;
+}
+
+// Mentoring footer band
+.mentoringSection {
+  background: t.$sand;
+  border-top: 1.5px solid t.$line;
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 72px);
+}
+
+.mentoringCard {
+  background: t.$white;
+  border: 2px solid t.$navy;
+  border-radius: 20px;
+  padding: clamp(22px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+  @include m.pop-shadow(6px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 36px;
+    align-items: center;
+  }
+}
+
+.mentoringCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mentoringKicker {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  @include m.label-font(800, 15px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: t.$navy;
+}
+
+.mentoringKickerEn {
+  @include m.label-font(600, 15px);
+  text-transform: none;
+  letter-spacing: normal;
+  color: t.$ink-muted;
+}
+
+.mentoringTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.02;
+  color: t.$navy;
+}
+
+.mentoringBody {
+  @include m.body-copy;
+  color: t.$ink-strong;
+}
+
+.mentoringDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mentoringFacts {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: t.$font-body;
+    font-size: 16px;
+    line-height: 1.45;
+    color: t.$ink-strong;
+  }
+}
+
+.factBullet {
+  @include m.square-bullet(9px, 2px, 7px);
+  background: t.$navy;
+}
+
+.mentoringActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media print {
+  .page {
+    background: t.$white;
+    color: t.$black;
+  }
+
+  .topSection {
+    padding: 0;
+  }
+
+  .badges,
+  .contextBar,
+  .summaryCard,
+  .mentoringSection,
+  .fieldRoot,
+  .flagsPanel,
+  .flagBadge {
+    display: none;
+  }
+
+  .printSummaryLine {
+    display: block;
+    margin: 12px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid t.$black;
+    @include m.label-font(700, 15px);
+    color: t.$black;
+  }
+
+  .workbench {
+    display: block;
+    margin-top: 0;
+  }
+
+  .outlineHead {
+    border-bottom-color: t.$black;
+  }
+
+  .partsList {
+    gap: 16px;
+  }
+
+  .partCard {
+    background: t.$white;
+    border: 1px solid t.$black;
+    border-radius: 6px;
+    padding: 14px 16px;
+    break-inside: avoid;
+  }
+
+  .partNumber {
+    background: transparent;
+    color: t.$black;
+    border: 1px solid t.$black;
+  }
+
+  .wordPill {
+    background: transparent;
+    color: t.$black;
+    border-color: t.$black;
+  }
+
+  .guidance {
+    font-size: 13px;
+    color: t.$ink;
+  }
+
+  .printPartBody {
+    display: block;
+    margin: 4px 0 0;
+    padding-top: 8px;
+    border-top: 1px solid t.$line;
+    font-family: t.$font-body;
+    font-size: 14px;
+    line-height: 1.55;
+    color: t.$black;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+
+    &[data-empty='true'] {
+      color: t.$ink-muted;
+      font-style: italic;
+    }
+  }
+}
