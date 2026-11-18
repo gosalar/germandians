@@ -1,4 +1,7 @@
 import {
+  MAX_CUSTOM_ITEMS,
+  MAX_FIELD_LENGTH,
+  MAX_LABEL_LENGTH,
   MONTHLY_FIELD_IDS,
   OFFICIAL_FEE_IDS,
   ONE_OFF_FIELD_IDS,
@@ -17,13 +20,10 @@ import {
  */
 export const STORAGE_KEY = 'germandians:budget';
 
-const MAX_CUSTOM_ITEMS = 30;
-const MAX_FIELD_LENGTH = 30;
-const MAX_LABEL_LENGTH = 120;
-const MAX_ID_LENGTH = 60;
-
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
+
+const MAX_ID_LENGTH = 60;
 
 const isShortString = (value: unknown, max = MAX_FIELD_LENGTH): value is string =>
   typeof value === 'string' && value.length <= max;
@@ -34,7 +34,7 @@ function validCustomItem(value: unknown): value is CustomOneOffItem {
     isShortString(value.id, MAX_ID_LENGTH) &&
     value.id.trim().length > 0 &&
     isShortString(value.label, MAX_LABEL_LENGTH) &&
-    isShortString(value.amount, MAX_FIELD_LENGTH)
+    isShortString(value.amount)
   );
 }
 
@@ -132,10 +132,11 @@ export function writeBudget(state: BudgetState): boolean {
   }
 }
 
-export function clearBudget(): void {
+export function clearBudget(): boolean {
   try {
     window.localStorage.removeItem(STORAGE_KEY);
+    return true;
   } catch {
-    /* In-memory state still resets when browser storage is blocked. */
+    return false;
   }
 }

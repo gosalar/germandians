@@ -48,9 +48,13 @@ export const BUDGET_COPY = {
   storageNotice:
     'Entries stay in this browser on your device so they survive a reload. Nothing you type here is sent anywhere.',
   storageBlocked:
-    'Browser storage is unavailable right now. Your calculations still work on screen until you close or reload the page.',
+    'Browser storage is unavailable right now. Your latest changes may not be saved.',
   clearedStatus: 'All budget entries cleared.',
+  clearFailedStatus: 'The entries were cleared on screen, but saved budget entries could not be removed from this browser.',
   clearButton: 'Clear my entries',
+  clearConfirmQuestion: 'Clear all entries?',
+  clearConfirmYes: 'Yes, clear',
+  clearConfirmCancel: 'Cancel',
   printButton: 'Print budget',
 
   periodSectionTitle: 'Planning period and exchange rate',
@@ -83,6 +87,8 @@ export const BUDGET_COPY = {
     'Enter total one-off amounts for your chosen period, such as the semester contribution from your offer letter, any programme tuition, a housing deposit and travel.',
   customItemsTitle: 'Additional one-off items',
   addCustomButton: 'Add another one-off cost',
+  customLimitNote: (max: number) =>
+    `You can add up to ${max} extra items. Remove one to add another.`,
   customLabelField: (index: number) => `Item ${index} description`,
   customAmountField: (index: number) => `Item ${index} amount (€)`,
   removeCustomLabel: (index: number, label: string) =>

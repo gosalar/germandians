@@ -1,5 +1,5 @@
 import { Badge, Button, TextInput } from '@mantine/core';
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { Link } from 'react-router';
 
 import ContentContainer from '@/components/ContentContainer';
@@ -9,6 +9,9 @@ import SourceNote from '@/components/SourceNote';
 import { useSettleHashScroll } from '@/hooks/useSettleHashScroll';
 import {
   BLOCKED_ACCOUNT_REFERENCE,
+  MAX_CUSTOM_ITEMS,
+  MAX_FIELD_LENGTH,
+  MAX_LABEL_LENGTH,
   MONTHLY_FIELD_IDS,
   OFFICIAL_FEES,
   ONE_OFF_FIELD_IDS,
@@ -42,6 +45,7 @@ interface ReducerState {
   budget: BudgetState;
   storageFailed: boolean;
   clearedAnnouncement: boolean;
+  clearFailed: boolean;
 }
 
 type Action =
@@ -56,7 +60,7 @@ type Action =
   | { type: 'remove-custom'; id: string }
   | { type: 'toggle-official'; fee: OfficialFeeId }
   | { type: 'set-extra-courses'; value: string }
-  | { type: 'clear' };
+  | { type: 'clear'; failed: boolean };
 
 function createInitialReducerState(): ReducerState {
   return {
@@ -64,6 +68,7 @@ function createInitialReducerState(): ReducerState {
     budget: createEmptyBudgetState(),
     storageFailed: false,
     clearedAnnouncement: false,
+    clearFailed: false,
   };
 }
 
@@ -75,6 +80,7 @@ function reducer(state: ReducerState, action: Action): ReducerState {
         budget: action.stored ?? state.budget,
         storageFailed: state.storageFailed || action.failed,
         clearedAnnouncement: false,
+        clearFailed: false,
       };
     case 'storage-failed':
       return state.storageFailed ? state : { ...state, storageFailed: true };
@@ -162,6 +168,8 @@ function reducer(state: ReducerState, action: Action): ReducerState {
     case 'clear':
       return {
         ...state,
+        storageFailed: state.storageFailed || action.failed,
+        clearFailed: action.failed,
         clearedAnnouncement: true,
         budget: createEmptyBudgetState(),
       };
@@ -198,7 +206,10 @@ export default function Budget() {
   const { budget } = state;
   const calc = calculateBudget(budget);
 
+  const customLimitReached = budget.customOneOffs.length >= MAX_CUSTOM_ITEMS;
+
   const handleAddCustom = () => {
+    if (customLimitReached) return;
     const existingIds = new Set(budget.customOneOffs.map((item) => item.id));
     let counter = nextCustomCounter.current;
     while (existingIds.has(`custom-${counter}`)) {
@@ -208,9 +219,35 @@ export default function Budget() {
     dispatch({ type: 'add-custom', id: `custom-${counter}` });
   };
 
+  const [confirmingClear, setConfirmingClear] = useState(false);
+  const clearButtonRef = useRef<HTMLButtonElement>(null);
+  const confirmYesRef = useRef<HTMLButtonElement>(null);
+  const returnFocusToClear = useRef(false);
+
+  // Move focus into the question when it opens, and back to the Clear button when it closes.
+  useEffect(() => {
+    if (confirmingClear) {
+      confirmYesRef.current?.focus();
+    } else if (returnFocusToClear.current) {
+      returnFocusToClear.current = false;
+      clearButtonRef.current?.focus();
+    }
+  }, [confirmingClear]);
+
   const handleClear = () => {
-    clearBudget();
-    dispatch({ type: 'clear' });
+    setConfirmingClear(true);
+  };
+
+  const handleCancelClear = () => {
+    returnFocusToClear.current = true;
+    setConfirmingClear(false);
+  };
+
+  const handleConfirmClear = () => {
+    const cleared = clearBudget();
+    dispatch({ type: 'clear', failed: !cleared });
+    returnFocusToClear.current = true;
+    setConfirmingClear(false);
   };
 
   const handlePrint = () => {
@@ -261,15 +298,47 @@ export default function Budget() {
                       {BUDGET_COPY.printButton}
                     </Button>
                     <Button
+                      ref={clearButtonRef}
                       type="button"
                       variant="ring"
                       size="md"
+                      aria-expanded={confirmingClear}
+                      aria-controls="budget-clear-confirm"
                       onClick={handleClear}
                     >
                       {BUDGET_COPY.clearButton}
                     </Button>
                   </div>
                 </div>
+                {confirmingClear ? (
+                  <div
+                    id="budget-clear-confirm"
+                    role="group"
+                    aria-labelledby="budget-clear-question"
+                    className={styles.clearConfirm}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Escape') handleCancelClear();
+                    }}
+                  >
+                    <p id="budget-clear-question" className={styles.clearQuestion}>
+                      {BUDGET_COPY.clearConfirmQuestion}
+                    </p>
+                    <div className={styles.clearConfirmActions}>
+                      <Button
+                        ref={confirmYesRef}
+                        type="button"
+                        variant="navy"
+                        size="md"
+                        onClick={handleConfirmClear}
+                      >
+                        {BUDGET_COPY.clearConfirmYes}
+                      </Button>
+                      <Button type="button" variant="outline" size="md" onClick={handleCancelClear}>
+                        {BUDGET_COPY.clearConfirmCancel}
+                      </Button>
+                    </div>
+                  </div>
+                ) : null}
                 <p className={styles.storageNote}>{BUDGET_COPY.storageNotice}</p>
                 {state.storageFailed ? (
                   <p role="alert" className={styles.storageAlert}>
@@ -277,7 +346,9 @@ export default function Budget() {
                   </p>
                 ) : null}
                 <p role="status" aria-live="polite" className={styles.clearedStatus}>
-                  {state.clearedAnnouncement ? BUDGET_COPY.clearedStatus : ''}
+                  {state.clearedAnnouncement
+                    ? state.clearFailed ? BUDGET_COPY.clearFailedStatus : BUDGET_COPY.clearedStatus
+                    : ''}
                 </p>
               </div>
 
@@ -310,6 +381,7 @@ export default function Budget() {
                     <TextInput
                       id="budget-months"
                       type="text"
+                      maxLength={MAX_FIELD_LENGTH}
                       inputMode="numeric"
                       label={BUDGET_COPY.monthsLabel}
                       value={budget.months}
@@ -325,6 +397,7 @@ export default function Budget() {
                     <TextInput
                       id="budget-exchange-rate"
                       type="text"
+                      maxLength={MAX_FIELD_LENGTH}
                       inputMode="decimal"
                       label={BUDGET_COPY.exchangeRateLabel}
                       value={budget.exchangeRate}
@@ -355,6 +428,7 @@ export default function Budget() {
                         <TextInput
                           id={`budget-monthly-${fieldId}`}
                           type="text"
+                          maxLength={MAX_FIELD_LENGTH}
                           inputMode="decimal"
                           label={copy.label}
                           value={budget.monthly[fieldId]}
@@ -400,6 +474,7 @@ export default function Budget() {
                       <TextInput
                         id={`budget-oneoff-${fieldId}`}
                         type="text"
+                        maxLength={MAX_FIELD_LENGTH}
                         inputMode="decimal"
                         label={ONE_OFF_FIELD_COPY[fieldId].label}
                         value={budget.oneOff[fieldId]}
@@ -426,6 +501,7 @@ export default function Budget() {
                             <TextInput
                               id={`budget-custom-label-${item.id}`}
                               type="text"
+                              maxLength={MAX_LABEL_LENGTH}
                               label={BUDGET_COPY.customLabelField(index + 1)}
                               value={item.label}
                               onChange={(event) =>
@@ -440,6 +516,7 @@ export default function Budget() {
                             <TextInput
                               id={`budget-custom-amount-${item.id}`}
                               type="text"
+                              maxLength={MAX_FIELD_LENGTH}
                               inputMode="decimal"
                               label={BUDGET_COPY.customAmountField(index + 1)}
                               value={item.amount}
@@ -479,9 +556,15 @@ export default function Budget() {
                       variant="outline"
                       size="md"
                       onClick={handleAddCustom}
+                      aria-describedby={customLimitReached ? 'budget-custom-limit' : undefined}
                     >
                       {BUDGET_COPY.addCustomButton}
                     </Button>
+                    {customLimitReached ? (
+                      <p id="budget-custom-limit" className={styles.fieldHint}>
+                        {BUDGET_COPY.customLimitNote(MAX_CUSTOM_ITEMS)}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               </section>
@@ -528,6 +611,7 @@ export default function Budget() {
                             <TextInput
                               id="budget-extra-uniassist"
                               type="text"
+                              maxLength={MAX_FIELD_LENGTH}
                               inputMode="numeric"
                               label={BUDGET_COPY.extraUniAssistLabel}
                               value={budget.extraUniAssistCourses}
@@ -606,6 +690,9 @@ export default function Budget() {
                 <div className={styles.mobileTotalItem}>
                   <span className={styles.mobileTotalLabel}>{BUDGET_COPY.mobilePeriodLabel}</span>
                   <span className={styles.mobileTotalEur}>{periodEurDisplay}</span>
+                  {calc.periodTotalEur !== null && calc.unconvertedInrFee > 0 ? (
+                    <span>{BUDGET_COPY.plusInrFee(formatInr(calc.unconvertedInrFee))}</span>
+                  ) : null}
                 </div>
               </div>
             </div>

@@ -1,5 +1,13 @@
 import { DMAT, EXTERNAL_COSTS, type ExternalCost, type OfficialSource } from '@/utils/applicationFacts';
 
+/**
+ * Input limits. The budget page sets them as `maxLength`, and stored data is validated against the
+ * same numbers, so whatever a visitor can type is kept and oversized stored data is discarded.
+ */
+export const MAX_FIELD_LENGTH = 30;
+export const MAX_LABEL_LENGTH = 120;
+export const MAX_CUSTOM_ITEMS = 30;
+
 export const PERIOD_PRESETS = ['6', '12', '24'] as const;
 export type PeriodPreset = (typeof PERIOD_PRESETS)[number];
 

@@ -113,6 +113,30 @@
   gap: 8px;
 }
 
+.clearConfirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid t.$navy;
+  background: t.$white;
+}
+
+.clearQuestion {
+  margin: 0;
+  flex: 1 1 auto;
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+}
+
+.clearConfirmActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .storageNote {
   margin: 0;
   font-size: 14px;
@@ -238,6 +262,12 @@
   @include m.below(t.$bp-stages-2) {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  // Side by side, each cell takes four rows of the grid (label, input, error, hint) so a label that
+  // wraps onto two lines does not push its input out of line with its neighbour.
+  @include m.from(t.$bp-stages-2) {
+    row-gap: 0;
+  }
 }
 
 .fieldCell {
@@ -245,6 +275,28 @@
   flex-direction: column;
   gap: 6px;
   min-width: 0;
+
+  @include m.from(t.$bp-stages-2) {
+    display: grid;
+    grid-row: span 4;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+    padding-bottom: 14px;
+
+    // The Mantine field wrapper gives up its own box so its label, input and error join the rows.
+    > :first-child {
+      display: contents;
+    }
+
+    label {
+      align-self: start;
+      margin-bottom: 6px;
+    }
+
+    > p {
+      margin-top: 6px;
+    }
+  }
 }
 
 .fieldHint {
@@ -321,6 +373,8 @@
 .addCustomRow {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
 }
 
 .officialList {
@@ -875,6 +929,7 @@
   .removeButton,
   .mobileTotalsBar,
   .guidesCard,
+  .clearConfirm,
   .clearedStatus {
     display: none;
   }
@@ -894,7 +949,25 @@
     border-radius: 8px;
     padding: 16px;
     box-shadow: none;
+    // The summary may split between its cards, so the page fills from the first sheet. Each card
+    // below stays whole.
+    break-inside: auto;
+  }
+
+  .summaryHead,
+  .totalsGrid,
+  .totalCard,
+  .breakdownCard,
+  .blockedCard,
+  .formGroup,
+  .worksheetHead {
     break-inside: avoid;
+  }
+
+  .summaryHead,
+  .groupHeader,
+  .groupTitle {
+    break-after: avoid;
   }
 
   .liveSummary {

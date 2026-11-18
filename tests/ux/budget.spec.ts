@@ -72,7 +72,7 @@ test('starts blank with sourced official figures, calculates EUR and INR totals,
   await expect(
     blockedRef.getByRole('link', { name: 'German Missions: visa FAQs' }),
   ).toHaveAttribute('target', '_blank');
-  await expect(blockedRef).toContainText('Last reviewed 12 November 2026');
+  await expect(blockedRef).toContainText('Last reviewed 18 November 2026');
 
   // Guide topic cross-links use requirementsHref.
   await expect(page.getByRole('link', { name: 'Read the Costs guide' })).toHaveAttribute(
@@ -180,8 +180,19 @@ test('persists entries in localStorage across reload, clears cleanly, and discar
   await expect(page.getByTestId('budget-period-eur')).toHaveText('€3,075');
   await expect(page.getByTestId('budget-period-inr')).toHaveText('₹2,82,900');
 
-  // "Clear my entries" resets state and removes storage key.
-  await page.getByRole('button', { name: 'Clear my entries', exact: true }).click();
+  // "Clear my entries" asks first: Cancel keeps the entries and returns focus to the button.
+  const clearButton = page.getByRole('button', { name: 'Clear my entries', exact: true });
+  await clearButton.click();
+  await expect(page.getByText('Clear all entries?')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Yes, clear' })).toBeFocused();
+  await page.getByRole('button', { name: 'Cancel' }).click();
+  await expect(page.getByText('Clear all entries?')).toBeHidden();
+  await expect(clearButton).toBeFocused();
+  await expect(page.getByLabel('Number of months')).not.toHaveValue('');
+
+  // Confirming resets state and removes storage key.
+  await clearButton.click();
+  await page.getByRole('button', { name: 'Yes, clear' }).click();
   await expect(page.getByLabel('Number of months')).toHaveValue('');
   await expect(page.getByLabel('Monthly rent and utilities (€)')).toHaveValue('');
   await expect(page.getByLabel('Exchange rate to plan with (₹ per €1)')).toHaveValue('');
@@ -201,6 +212,83 @@ test('persists entries in localStorage across reload, clears cleanly, and discar
   await expect.poll(() => page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
 
   expect(issues).toEqual([]);
+});
+
+test('keeps every entry the inputs accept after reload, and stops adding at the item limit', async ({ page }) => {
+  await page.goto('/budget');
+  await ready(page);
+  const addButton = page.getByRole('button', { name: 'Add another one-off cost' });
+  for (let i = 0; i < 30; i += 1) {
+    await addButton.click();
+  }
+  await expect(page.getByText('You can add up to 30 extra items. Remove one to add another.')).toBeVisible();
+  await addButton.click();
+  await expect(page.getByLabel('Item 31 description')).toHaveCount(0);
+
+  // The inputs cap what can be typed, so whatever was typed is what gets saved.
+  await page.getByLabel('Item 1 description').fill('a'.repeat(130));
+  await expect(page.getByLabel('Item 1 description')).toHaveValue('a'.repeat(120));
+  await page.getByLabel('Item 30 amount (€)').fill('1'.repeat(40));
+  await expect(page.getByLabel('Item 30 amount (€)')).toHaveValue('1'.repeat(30));
+  await page.getByLabel('Number of months').fill('9'.repeat(40));
+  await expect(page.getByLabel('Number of months')).toHaveValue('9'.repeat(30));
+  await expect
+    .poll(() => page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY))
+    .toContain('a'.repeat(120));
+  await page.reload();
+  await ready(page);
+  await expect(page.getByLabel('Item 1 description')).toHaveValue('a'.repeat(120));
+  await expect(page.getByLabel('Item 30 amount (€)')).toHaveValue('1'.repeat(30));
+  await expect(page.getByLabel('Number of months')).toHaveValue('9'.repeat(30));
+});
+
+test('discards stored entries longer than the inputs allow', async ({ page }) => {
+  await page.goto('/budget');
+  await ready(page);
+  await page.evaluate(
+    (key) =>
+      localStorage.setItem(
+        key,
+        JSON.stringify({
+          version: 1,
+          months: '9'.repeat(31),
+          monthly: { rent: '', healthInsurance: '', otherMonthly: '' },
+          oneOff: { semesterContribution: '', tuition: '', deposit: '', flight: '' },
+          customOneOffs: [],
+          officialFees: { aps: false, dmat: false, uniAssist: false, visa: false },
+          extraUniAssistCourses: '',
+          exchangeRate: '',
+        }),
+      ),
+    STORAGE_KEY,
+  );
+  await page.reload();
+  await ready(page);
+  await expect(page.getByLabel('Number of months')).toHaveValue('');
+  await expect.poll(() => page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
+});
+
+test('warns when clearing saved budget entries fails', async ({ page }) => {
+  await page.goto('/budget');
+  await ready(page);
+  await page.getByLabel('Monthly rent and utilities (€)').fill('500');
+  await expect.poll(() => page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY)).not.toBeNull();
+  await page.evaluate(() => {
+    Storage.prototype.removeItem = () => { throw new Error('Storage removal blocked'); };
+  });
+  await page.getByRole('button', { name: 'Clear my entries', exact: true }).click();
+  await page.getByRole('button', { name: 'Yes, clear' }).click();
+  await expect(page.getByText('The entries were cleared on screen, but saved budget entries could not be removed from this browser.')).toBeVisible();
+  await expect(page.getByText('All budget entries cleared.')).toBeHidden();
+});
+
+test('compact total includes an unconverted APS fee', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/budget');
+  await ready(page);
+  await page.getByRole('button', { name: '6 months (1 semester)', exact: true }).click();
+  await page.getByRole('button', { name: /Include APS/ }).click();
+  await expect(page.locator('[class*="mobileTotalsBar"]')).toContainText('+ ₹18,000');
 });
 
 test('supports keyboard use, announces validation errors, and passes axe audit', async ({
