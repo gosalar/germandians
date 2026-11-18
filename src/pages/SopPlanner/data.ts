@@ -157,10 +157,14 @@ export const SOP_PLANNER_COPY = {
   browserNote:
     'Saved automatically in this browser on this device. Nothing you write here is sent to Germandians or anywhere else.',
   storageWarning:
-    'Browser storage is unavailable in this window. Your outline still works on screen and prints, but a reload will clear it.',
+    'Browser storage is unavailable right now. Your latest changes may not be saved.',
   printButton: 'Print outline',
   clearButton: 'Clear my entries',
+  clearConfirmPrompt: 'Clear all entries?',
+  clearConfirmYes: 'Yes, clear',
+  clearConfirmCancel: 'Cancel',
   clearedAnnouncement: 'Cleared all five parts and removed the saved outline from this browser.',
+  clearFailedAnnouncement: 'The notes were cleared on screen, but the saved outline could not be removed from this browser.',
   partFlagsHeading: 'Flagged stock phrases in this part',
   annotatedPreviewLabel: 'Highlighted in your notes',
   stockBadgeLabel: 'Stock phrase',

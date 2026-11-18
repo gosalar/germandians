@@ -553,6 +553,18 @@
   gap: 10px;
 }
 
+.confirmClear {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirmPrompt {
+  @include m.label-font(700, 16px);
+  color: t.$white;
+}
+
 .statusRegion {
   min-height: 0;
   font-family: t.$font-body;

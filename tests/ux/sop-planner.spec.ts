@@ -159,6 +159,7 @@ test('browser storage survives reload, discards invalid data, and clears on requ
 
   // Clear my entries wipes the outline and removes the localStorage key.
   await page.getByRole('button', { name: 'Clear my entries', exact: true }).click();
+  await page.getByRole('button', { name: 'Yes, clear', exact: true }).click();
   await expect(part1).toHaveValue('');
   await expect(part3).toHaveValue('');
   await expect(page.getByTestId('sop-total-words')).toHaveText('0 words');
@@ -178,6 +179,45 @@ test('browser storage survives reload, discards invalid data, and clears on requ
   expect(await page.evaluate((key) => window.localStorage.getItem(key), STORAGE_KEY)).toBeNull();
 
   expect(issues).toEqual([]);
+});
+
+test('warns when saved notes could not be removed', async ({ page }) => {
+  await page.goto('/sop-planner');
+  await waitForHydration(page);
+  await page.getByLabel('Why this subject', { exact: true }).fill('Private notes');
+  await page.evaluate(() => {
+    Storage.prototype.removeItem = () => { throw new Error('Storage removal blocked'); };
+  });
+  await page.getByRole('button', { name: 'Clear my entries', exact: true }).click();
+  await page.getByRole('button', { name: 'Yes, clear', exact: true }).click();
+  await expect(page.getByText('The notes were cleared on screen, but the saved outline could not be removed from this browser.')).toBeVisible();
+  await expect(page.getByText('Cleared all five parts and removed the saved outline from this browser.')).toBeHidden();
+});
+
+test('clearing asks first, moves focus to Yes and back to the button on Cancel, and leaves the notes alone', async ({ page }) => {
+  await page.goto('/sop-planner');
+  await waitForHydration(page);
+  const part1 = page.getByLabel('Why this subject', { exact: true });
+  await part1.fill('Keep these notes');
+
+  const clear = page.getByRole('button', { name: 'Clear my entries', exact: true });
+  await clear.click();
+  const group = page.getByRole('group', { name: 'Clear all entries?' });
+  await expect(group).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Yes, clear', exact: true })).toBeFocused();
+  await expect(part1).toHaveValue('Keep these notes');
+
+  await group.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(group).toHaveCount(0);
+  await expect(clear).toBeFocused();
+  await expect(part1).toHaveValue('Keep these notes');
+  expect(await page.evaluate((key) => window.localStorage.getItem(key), STORAGE_KEY)).not.toBeNull();
+
+  // Escape also cancels.
+  await clear.click();
+  await page.keyboard.press('Escape');
+  await expect(group).toHaveCount(0);
+  await expect(clear).toBeFocused();
 });
 
 test('keyboard navigation, skip link, and print layout work cleanly', async ({ page }) => {
@@ -207,7 +247,10 @@ test('keyboard navigation, skip link, and print layout work cleanly', async ({ p
   const clearButton = page.getByRole('button', { name: 'Clear my entries', exact: true });
   await clearButton.focus();
   await page.keyboard.press('Enter');
+  await expect(page.getByRole('button', { name: 'Yes, clear', exact: true })).toBeFocused();
+  await page.keyboard.press('Enter');
   await expect(part1).toHaveValue('');
+  await expect(clearButton).toBeFocused();
 
   expect(issues).toEqual([]);
 });

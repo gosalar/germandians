@@ -1,5 +1,5 @@
 import { Badge, Button, Textarea } from '@mantine/core';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useId, useReducer, useRef, useState } from 'react';
 import { Link } from 'react-router';
 
 import ContentContainer from '@/components/ContentContainer';
@@ -66,7 +66,9 @@ function reducer(state: PlannerState, action: PlannerAction): PlannerState {
       return {
         entries: EMPTY_ENTRIES,
         storageFailed: state.storageFailed || action.failed,
-        statusAnnouncement: SOP_PLANNER_COPY.clearedAnnouncement,
+        statusAnnouncement: action.failed
+          ? SOP_PLANNER_COPY.clearFailedAnnouncement
+          : SOP_PLANNER_COPY.clearedAnnouncement,
       };
   }
 }
@@ -74,6 +76,21 @@ function reducer(state: PlannerState, action: PlannerAction): PlannerState {
 export default function SopPlanner() {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const { entries, storageFailed, statusAnnouncement } = state;
+  const [confirmingClear, setConfirmingClear] = useState(false);
+  const clearButtonRef = useRef<HTMLButtonElement>(null);
+  const confirmClearRef = useRef<HTMLButtonElement>(null);
+  const restoreClearFocus = useRef(false);
+  const clearPromptId = useId();
+
+  // Focus moves to "Yes, clear" when the question opens and back to the first button when it closes.
+  useEffect(() => {
+    if (confirmingClear) {
+      confirmClearRef.current?.focus();
+    } else if (restoreClearFocus.current) {
+      restoreClearFocus.current = false;
+      clearButtonRef.current?.focus();
+    }
+  }, [confirmingClear]);
 
   useEffect(() => {
     const loaded = readEntries();
@@ -90,7 +107,13 @@ export default function SopPlanner() {
     dispatch({ type: 'update', entries: nextEntries, failed: !saved });
   };
 
+  const closeClearConfirm = () => {
+    restoreClearFocus.current = true;
+    setConfirmingClear(false);
+  };
+
   const handleClear = () => {
+    closeClearConfirm();
     const cleared = clearEntries();
     dispatch({ type: 'clear', failed: !cleared });
   };
@@ -215,6 +238,7 @@ export default function SopPlanner() {
                       <Textarea
                         id={inputId}
                         rows={5}
+                        maxLength={MAX_PART_LENGTH}
                         value={rawValue}
                         onFocus={(event) => ensureVisibleOnFocus(event.currentTarget)}
                         onChange={(event) => updatePart(part.id, event.currentTarget.value)}
@@ -351,9 +375,42 @@ export default function SopPlanner() {
                 <Button type="button" variant="yellow-dark" size="lg" onClick={handlePrint}>
                   {SOP_PLANNER_COPY.printButton}
                 </Button>
-                <Button type="button" variant="ring-dark" size="md" onClick={handleClear}>
-                  {SOP_PLANNER_COPY.clearButton}
-                </Button>
+                {confirmingClear ? (
+                  <div
+                    role="group"
+                    aria-labelledby={clearPromptId}
+                    className={styles.confirmClear}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Escape') closeClearConfirm();
+                    }}
+                  >
+                    <span id={clearPromptId} className={styles.confirmPrompt}>
+                      {SOP_PLANNER_COPY.clearConfirmPrompt}
+                    </span>
+                    <Button
+                      ref={confirmClearRef}
+                      type="button"
+                      variant="yellow-dark"
+                      size="md"
+                      onClick={handleClear}
+                    >
+                      {SOP_PLANNER_COPY.clearConfirmYes}
+                    </Button>
+                    <Button type="button" variant="ring-dark" size="md" onClick={closeClearConfirm}>
+                      {SOP_PLANNER_COPY.clearConfirmCancel}
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    ref={clearButtonRef}
+                    type="button"
+                    variant="ring-dark"
+                    size="md"
+                    onClick={() => setConfirmingClear(true)}
+                  >
+                    {SOP_PLANNER_COPY.clearButton}
+                  </Button>
+                )}
               </div>
 
               <div role="status" aria-live="polite" aria-atomic="true" className={styles.statusRegion}>
