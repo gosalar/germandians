@@ -195,6 +195,11 @@ export const DESTINATIONS = {
   budget: { kind: 'page', page: 'budget' },
   sopPlanner: { kind: 'page', page: 'sopPlanner' },
   germanWords: { kind: 'page', page: 'germanWords' },
+  applicationPlan: { kind: 'page', page: 'applicationPlan' },
+  creditMatch: { kind: 'page', page: 'creditMatch' },
+  arrival: { kind: 'page', page: 'arrival' },
+  parents: { kind: 'page', page: 'parents' },
+  choosingHelp: { kind: 'page', page: 'choosingHelp' },
 } as const satisfies Record<string, NavigationDestination>;
 
 /** A destination with the words that link to it. The header, the phone menu and the footer share these. */
@@ -215,6 +220,11 @@ export const PAGE_LINKS = {
   budget: { destination: DESTINATIONS.budget, label: 'Budget planner' },
   sopPlanner: { destination: DESTINATIONS.sopPlanner, label: 'SOP planner' },
   germanWords: { destination: DESTINATIONS.germanWords, label: 'German words' },
+  applicationPlan: { destination: DESTINATIONS.applicationPlan, label: 'Application plan' },
+  creditMatch: { destination: DESTINATIONS.creditMatch, label: 'Credit matching' },
+  arrival: { destination: DESTINATIONS.arrival, label: 'Arrival checklist' },
+  parents: { destination: DESTINATIONS.parents, label: 'For parents' },
+  choosingHelp: { destination: DESTINATIONS.choosingHelp, label: 'Before you pay anyone' },
 } as const satisfies Record<string, NavigationLink>;
 
 /**
@@ -250,3 +260,46 @@ const toMenuLink = (link: NavigationLink): NavMenuLink => ({ kind: 'link', href:
 export const NAV_MENU: readonly NavMenuEntry[] = NAV_ENTRIES.map((entry) =>
   'kind' in entry ? { kind: 'group', id: entry.id, label: entry.label, links: entry.links.map(toMenuLink) } : toMenuLink(entry),
 );
+
+export const QUOTE_TOPIC = {
+  partial: 'what partial support includes',
+  cancellation: 'cancellation and deferral',
+  setbacks: 'an unsuccessful intake, a visa refusal or a funding failure',
+} as const;
+
+export const QUOTE_TOPICS = {
+  lead: 'Before work starts, your written quote states:',
+  items: [
+    'what changes the price',
+    'what counts as admission, including conditional, private and backup offers, and whether only your approved shortlist counts',
+    'whether there is one fee or a fee per admission',
+    'how many applications are covered',
+    QUOTE_TOPIC.partial,
+    QUOTE_TOPIC.cancellation,
+    QUOTE_TOPIC.setbacks,
+    'the payment currency and taxes',
+  ],
+} as const;
+
+export const feeQuoteText = (fee: string) =>
+  `${fee ? `Our service fee is ${fee}. ` : 'The fee depends on your profile and the universities you apply to. '}After your profile review, you receive the amount, scope and terms in writing. Work starts only after you agree.`;
+
+export const ADMISSION_DECISION = 'Universities make every admission decision themselves.';
+export const SETBACKS_POLICY = `Your written quote states what happens after ${QUOTE_TOPIC.setbacks}, and its terms for ${QUOTE_TOPIC.cancellation}. You receive it before any work starts.`;
+export const EXTERNAL_COSTS_GUIDE_LEAD = 'The costs you pay to other organisations are listed, with their official sources, under';
+export const EXTERNAL_COSTS_SEPARATE = 'These costs are separate from the Germandians service fee. They are planning figures, not a quote. Check the current charge and refund terms with each provider.';
+export const MENTOR_BACKGROUND = 'Our mentors are Indian students at German universities who went through this process themselves.';
+export const MENTOR_INTRO = `${MENTOR_BACKGROUND} Each works with up to ${STUDENTS_PER_MENTOR.word} students at a time, so there is time to check your programme requirements, review your documents and work on your SOP with you.`;
+export const SOP_INTRO = [
+  'Your Statement of Purpose is the one place in the application where you explain your record in your own words, including the semesters that went badly.',
+  'It stays your statement. Your mentor helps you draft and revise it over several weeks. Nothing is submitted until you’ve approved the final version.',
+] as const;
+export const FUNDING_VISA_HELP = 'Help with your loan, blocked account and visa.';
+export const UNIVERSITY_INDEPENDENCE = "We study at German universities, but we don't represent any of them and none of them pay us.";
+/** The housing offer in its parts. The home housing section and the parents page read them. */
+export const HOUSING_SUPPORT = {
+  explore: 'We help you explore your options, from student residences to private rooms.',
+  apply: 'We help you prepare, send and follow up your applications.',
+  temporary: 'If no longer-term place is confirmed before you travel, we help you find a temporary stay.',
+  costs: 'Rent and deposits go to your landlord or residence, separately from our service fee.',
+} as const;

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import DmatNote from '@/components/DmatNote';
 import { FEES_COPY, QUOTE_TOPIC, QUOTE_TOPICS, feeCopy } from '@/pages/Home/Fees/data';
 import { DMAT } from '@/utils/applicationFacts';
-import { ARRIVAL_SUPPORT, FEE_POLICY, ROUTES, SECTIONS } from '@/utils/constants';
+import { ADMISSION_DECISION, ARRIVAL_SUPPORT, EXTERNAL_COSTS_GUIDE_LEAD, FEE_POLICY, ROUTES, SECTIONS, SETBACKS_POLICY, UNIVERSITY_INDEPENDENCE } from '@/utils/constants';
 import { REQUIREMENT_TOPIC_TITLES, requirementsHref } from '@/utils/requirements/topics';
 import { REVIEW_OUTCOME, siteConfig } from '@/utils/siteConfig';
 
@@ -36,7 +36,7 @@ export const FAQ_GROUPS: QuestionGroup[] = [
     questions: [
       {
         q: 'Can you guarantee admission?',
-        a: `No. Universities make every admission decision themselves. Our standard payment model is ${FEE_POLICY.amount} ${FEE_POLICY.timing}. ${FEE_POLICY.exception}`,
+        a: `No. ${ADMISSION_DECISION} Our standard payment model is ${FEE_POLICY.amount} ${FEE_POLICY.timing}. ${FEE_POLICY.exception}`,
       },
       {
         q: 'Is the service right for my degree and stage?',
@@ -52,7 +52,7 @@ export const FAQ_GROUPS: QuestionGroup[] = [
       },
       {
         q: 'Are you connected to any university?',
-        a: "No. We study at German universities, but we don't represent any of them and none of them pay us. We recommend universities only on how well they fit your profile.",
+        a: `No. ${UNIVERSITY_INDEPENDENCE} We recommend universities only on how well they fit your profile.`,
       },
     ],
   },
@@ -80,15 +80,15 @@ export const FAQ_GROUPS: QuestionGroup[] = [
       },
       {
         q: 'What if I’m not admitted, or my visa is refused?',
-        a: `Your written quote states what happens after ${QUOTE_TOPIC.setbacks}, and its terms for ${QUOTE_TOPIC.cancellation}. You receive it before any work starts.`,
+        a: SETBACKS_POLICY,
       },
       {
         q: 'Do you help with funding?',
         a: (
           <p>
             Yes. Help with your education loan and with opening your blocked account is part of the full service.
-            Your lender decides on the loan. The costs you pay to other organisations are listed, with their official
-            sources, under <Link to={requirementsHref('costs')}>{REQUIREMENT_TOPIC_TITLES.costs} in the requirements guide</Link>.{' '}
+            Your lender decides on the loan. {EXTERNAL_COSTS_GUIDE_LEAD}{' '}
+            <Link to={requirementsHref('costs')}>{REQUIREMENT_TOPIC_TITLES.costs} in the requirements guide</Link>.{' '}
             {FEES_COPY.separate}
           </p>
         ),

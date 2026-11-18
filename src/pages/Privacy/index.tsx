@@ -54,7 +54,7 @@ export default function Privacy() {
             variant="regular"
             title="Privacy note"
             introduction="This page explains what stays in your browser and what happens to the details you send us."
-            meta={<p className={styles.updated}>Last updated 17 November 2026</p>}
+            meta={<p className={styles.updated}>Last updated 18 November 2026</p>}
           />
 
           <section className={styles.section}>
@@ -92,15 +92,35 @@ export default function Privacy() {
               days, the page removes the saved test.
             </p>
             <p className={styles.text}>
+              Your dMAT practice history also stays in this browser. It records up to 50 finished attempts, each with
+              its date and the number of tasks you got right out of those you answered, by section. Choosing “Clear my
+              practice history” removes the saved history.
+              The site never sends it.
+            </p>
+            <p className={styles.text}>
               Your budget planner entries stay in your browser on your device. This includes the number of months, your
               monthly and one-off cost figures, any official fees you select, and the exchange rate you enter, so you can
               reload without losing your plan. The site never sends this data. Choosing “Clear my entries” removes the
               saved figures immediately.
             </p>
             <p className={styles.text}>
-              Your SOP planner notes stay in your browser on your device under the key germandians:sop-planner, so you
-              can reload the page or print your outline without losing what you typed. The site never sends these notes
-              to us or anywhere else. Using “Clear my entries” removes them from your browser.
+              Your SOP planner notes stay in your browser on your device, so you can reload the page or print your
+              outline without losing what you typed. The site never sends these notes. Choosing “Clear my entries”
+              removes them from your browser.
+            </p>
+            <p className={styles.text}>
+              The application plan saves the programmes, dates and document lists you enter in this browser. The
+              credit-matching worksheet saves your subject requirements, courses and mappings here too. The site never
+              sends these entries. Each tool has a control to clear its own saved entries.
+            </p>
+            <p className={styles.text}>
+              The arrival checklist saves the steps you tick in this browser, so they are there when you return. The
+              site never sends them anywhere or attaches them to an enquiry. Choosing “Clear my entries” on that page
+              removes them, or you can clear this site’s data in your browser.
+            </p>
+            <p className={styles.text}>
+              The German word decks save your selected deck and which cards you mark in this browser. The site never
+              sends this progress. Choosing “Clear my entries” resets the decks and clears the saved progress.
             </p>
             <p className={styles.text}>
               If you ask about German lessons, through their form or the “Teach me German” box on the profile-review

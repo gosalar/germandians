@@ -1,4 +1,5 @@
 import { SOURCES, UNI_ASSIST } from '@/utils/applicationFacts';
+import { ROUTES } from '@/utils/constants';
 import { REQUIREMENT_TOPIC_TITLES } from '@/utils/requirements/topics';
 
 import type { StandardTopic } from '../types';
@@ -29,6 +30,11 @@ export const applying = {
     SOURCES.tumAdmissionProcedures,
   ],
   detail: [
+    {
+      heading: 'Application plan',
+      body: 'Keep the programmes, dates and documents you find in one place.',
+      link: { label: 'Open the application plan', to: ROUTES.applicationPlan },
+    },
     {
       heading: 'Applying directly',
       body: 'Some programmes take applications in the university’s own online portal. Example: RWTH Aachen’s Software Systems Engineering master’s asks you to apply through RWTHonline, its application portal. Its page does not mention uni-assist or a VPD.',

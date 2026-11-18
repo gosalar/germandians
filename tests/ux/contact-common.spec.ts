@@ -112,7 +112,7 @@ test('production privacy text follows the transport and has no placeholders', as
   await expect(page.locator('main')).not.toContainText(/\[|\]/);
   await expect(page.locator('main')).toContainText('any email address you choose to provide');
   await expect(page.locator('main')).toContainText('Unanswered questions are omitted');
-  await expect(page.locator('main')).toContainText('Last updated 17 November 2026');
+  await expect(page.locator('main')).toContainText('Last updated 18 November 2026');
   if (testInfo.project.name === 'endpoint') {
     await expect(page.locator('main')).toContainText('Google receives the forms you send on this site and keeps them in our Google Sheets.');
     await expect(page.locator('main')).not.toContainText('opens an email draft');

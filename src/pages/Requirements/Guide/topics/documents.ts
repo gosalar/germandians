@@ -28,6 +28,11 @@ export const documents = {
   ],
   detail: [
     {
+      heading: 'German words on forms',
+      body: 'Look up German words you may see on forms, transcripts and university portals.',
+      link: { label: 'Open the German words glossary', to: ROUTES.germanWords },
+    },
+    {
       heading: 'Degree and mark sheets',
       body: 'Your degree certificate and your mark sheets for every semester show what you studied and your results. uni-assist asks for every certificate in full, with no pages left out, and for an official document on your university’s grading system, such as the examination regulations, if your transcript does not show it. It uses the grading system to calculate your grade.',
       source: SOURCES.uniAssistCertificates,

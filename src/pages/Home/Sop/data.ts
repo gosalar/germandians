@@ -1,12 +1,11 @@
+import { SOP_INTRO } from '@/utils/constants';
+
 export const CASE_CYCLE = 'Winter 2025 cycle';
 
 export const SOP_COPY = {
   replay: 'Replay stamp animation',
   title: 'How we work on your SOP with you',
-  intro: [
-    'Your Statement of Purpose is the one place in the application where you explain your record in your own words, including the semesters that went badly.',
-    'It stays your statement. Your mentor helps you draft and revise it over several weeks. Nothing is submitted until you’ve approved the final version.',
-  ],
+  intro: SOP_INTRO,
   exampleTitle: 'What a revision looks like',
   exampleLabel: 'Illustrative example. The student and details are invented.',
   genericLabel: 'Generic draft',

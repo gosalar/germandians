@@ -1,4 +1,5 @@
 import { SOURCES } from '@/utils/applicationFacts';
+import { ROUTES } from '@/utils/constants';
 import { REQUIREMENT_TOPIC_TITLES } from '@/utils/requirements/topics';
 
 import { DEGREE_LENGTH_CREDITS } from '../../NextSteps/data';
@@ -20,6 +21,11 @@ export const subjectCredits = {
   ],
   sources: [SOURCES.masters, SOURCES.rwthSse, SOURCES.tumInformatics],
   detail: [
+    {
+      heading: 'Credit-matching worksheet',
+      body: 'Map your courses to the subject areas a programme lists.',
+      link: { label: 'Open the credit-matching worksheet', to: ROUTES.creditMatch },
+    },
     {
       heading: 'What ECTS credits are',
       body: 'ECTS (the European Credit Transfer and Accumulation System) is the European credit system, used to make studies and courses easier to compare. ECTS credits measure what a course sets out to teach and the work it takes. Programme pages often state their subject requirements in ECTS credits, as the RWTH Aachen example below does.',

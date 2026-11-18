@@ -64,7 +64,7 @@ test('the FAQ gives the one-line dMAT rule with its source and links to the guid
   await page.getByRole('button', { name: 'Do I need dMAT for APS?' }).click();
   const answer = page.locator('#faq').getByRole('region', { name: 'Do I need dMAT for APS?' });
   await expect(answer).toContainText('Exemptions apply.');
-  await expect(answer).toContainText('Last reviewed 16 November 2026');
+  await expect(answer).toContainText('Last reviewed 18 November 2026');
   await expect(answer.getByRole('link', { name: 'APS India: dMAT rules' })).toBeVisible();
   // The full rule, its dates and the fee are in the guide topic, not in the answer.
   for (const detail of ['16 January 2027', '13 March 2027', '€150', 'officially confirmed exchange']) {

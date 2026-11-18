@@ -1,6 +1,12 @@
 @use '@/utils/styles/tokens' as t;
 @use '@/utils/styles/mixins' as m;
 
+@media print {
+  .nav {
+    display: none;
+  }
+}
+
 .nav {
   position: sticky;
   top: 0;

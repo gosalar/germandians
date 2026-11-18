@@ -1,6 +1,13 @@
 @use '@/utils/styles/tokens' as t;
 @use '@/utils/styles/mixins' as m;
 
+@media print {
+  .flagBand,
+  .footer {
+    display: none;
+  }
+}
+
 .flagBand {
   height: clamp(70px, 10vw, 140px);
   background: url('../../assets/images/flag-painting.jpg') center 12% / cover;
@@ -35,6 +42,9 @@
 }
 
 .links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   gap: 12px 24px;
   flex-wrap: wrap;

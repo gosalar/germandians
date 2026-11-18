@@ -1,9 +1,9 @@
-import { APPLICANT_CONTROL, ARRIVAL_SUPPORT, FEE_PROMISE, INTAKE_SEATS, STUDENTS_PER_MENTOR } from '@/utils/constants';
+import { APPLICANT_CONTROL, ARRIVAL_SUPPORT, FEE_PROMISE, FUNDING_VISA_HELP, INTAKE_SEATS, MENTOR_INTRO, STUDENTS_PER_MENTOR } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
 export const MENTOR_COPY = {
   title: 'How our mentors work',
-  intro: `Our mentors are Indian students at German universities who went through this process themselves. Each works with up to ${STUDENTS_PER_MENTOR.word} students at a time, so there is time to check your programme requirements, review your documents and work on your SOP with you.`,
+  intro: MENTOR_INTRO,
   ratio: `One mentor, up to ${STUDENTS_PER_MENTOR.word} students.`,
   commitmentsTitle: 'What we commit to',
   topicHeader: 'Part of the service',
@@ -50,7 +50,7 @@ export const COMMITMENTS = [
   { topic: 'Your SOP', commitment: 'Your statement in your own words, drafted and revised with your mentor' },
   { topic: 'Your applications', commitment: APPLICANT_CONTROL },
   { topic: 'When payment is due', commitment: FEE_PROMISE },
-  { topic: 'Help after admission', commitment: 'Help with your loan, blocked account and visa.' },
+  { topic: 'Help after admission', commitment: FUNDING_VISA_HELP },
   {
     topic: 'Housing and settling in',
     commitment: `Help finding housing or a temporary stay before you travel, and help settling in after you arrive. ${ARRIVAL_SUPPORT.availability} ${ARRIVAL_SUPPORT.complimentary} ${ARRIVAL_SUPPORT.quote}`,

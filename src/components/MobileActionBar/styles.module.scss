@@ -60,3 +60,9 @@
     color: t.$yellow;
   }
 }
+
+@media print {
+  .bar {
+    display: none;
+  }
+}

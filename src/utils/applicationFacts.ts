@@ -11,7 +11,7 @@ export interface OfficialSource {
 const reviewed = '12 November 2026';
 
 export const SOURCES = {
-  dmat: { label: 'APS India: dMAT rules', url: 'https://aps-india.de/dmat/', reviewed: '16 November 2026' },
+  dmat: { label: 'APS India: dMAT rules', url: 'https://aps-india.de/dmat/', reviewed: '18 November 2026' },
   test: { label: 'g.a.s.t.: dMAT schedule', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed },
   // Read for the dMAT guide and the practice page; each keeps the date it was read.
   dmatFaq: { label: 'g.a.s.t.: dMAT questions and answers for graduates in India', url: 'https://www.d-mat.de/en/faq-graduate-students-india/', reviewed: '17 November 2026' },
@@ -21,15 +21,15 @@ export const SOURCES = {
   dmatVideos: { label: 'g.a.s.t.: videos on how the dMAT works on screen (linked from this page)', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed: '16 November 2026' },
   dmatTerms: { label: 'g.a.s.t.: dMAT terms and exam-day rules', url: 'https://www.d-mat.de/en/terms-conditions/', reviewed: '17 November 2026' },
   // The fee is in the graduate leaflet linked from this page; the leaflet's own URL changes with each edition.
-  aps: { label: 'APS India: checklists and graduate leaflet', url: 'https://aps-india.de/checklists/', reviewed },
+  aps: { label: 'APS India: checklists and graduate leaflet', url: 'https://aps-india.de/checklists/', reviewed: '18 November 2026' },
   // The checklists page and the APS FAQs both point applicants who are unsure which APS procedure applies to this quiz.
   apsQuiz: { label: 'APS India: requirements quiz', url: 'https://aps-india.de/new-quiz/', reviewed: '16 November 2026' },
-  vpd: { label: 'uni-assist: VPD', url: 'https://www.uni-assist.de/en/how-to-apply/plan-your-application/vpd/', reviewed },
-  applications: { label: 'uni-assist: handling fees', url: 'https://www.uni-assist.de/en/how-to-apply/apply-online/pay-submit/', reviewed },
-  visa: { label: 'German Missions: visa FAQs', url: 'https://india.diplo.de/in-en/service/2546328-2546328', reviewed },
-  visaFee: { label: 'German Missions: national visa', url: 'https://india.diplo.de/in-en/service/2755482-2755482', reviewed },
-  daad: { label: 'DAAD: costs', url: 'https://www.daad.de/en/studying-in-germany/living-in-germany/finances/', reviewed: '16 November 2026' },
-  tum: { label: 'TUM: tuition fees', url: 'https://www.tum.de/en/studies/fees/tuition', reviewed },
+  vpd: { label: 'uni-assist: VPD', url: 'https://www.uni-assist.de/en/how-to-apply/plan-your-application/vpd/', reviewed: '18 November 2026' },
+  applications: { label: 'uni-assist: handling fees', url: 'https://www.uni-assist.de/en/how-to-apply/apply-online/pay-submit/', reviewed: '18 November 2026' },
+  visa: { label: 'German Missions: visa FAQs', url: 'https://india.diplo.de/in-en/service/2546328-2546328', reviewed: '18 November 2026' },
+  visaFee: { label: 'German Missions: national visa', url: 'https://india.diplo.de/in-en/service/2755482-2755482', reviewed: '18 November 2026' },
+  daad: { label: 'DAAD: costs', url: 'https://www.daad.de/en/studying-in-germany/living-in-germany/finances/', reviewed: '18 November 2026' },
+  tum: { label: 'TUM: tuition fees', url: 'https://www.tum.de/en/studies/fees/tuition', reviewed: '18 November 2026' },
   housing: {
     label: 'Studierendenwerk München Oberbayern: housing FAQs',
     url: 'https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/',
@@ -40,7 +40,7 @@ export const SOURCES = {
   anabinAbout: { label: 'anabin: about the database (in German)', url: 'https://anabin.kmk.org/ueber-anabin', reviewed: '14 November 2026' },
   anabinInstitutions: { label: 'anabin: institution statuses (in German)', url: 'https://anabin.kmk.org/db/institutionen-information', reviewed: '14 November 2026' },
   anabinDegrees: { label: 'anabin: degree classifications (in German)', url: 'https://anabin.kmk.org/db/hochschulabschluesse-information', reviewed: '14 November 2026' },
-  uniAssist: { label: 'uni-assist: profile', url: 'https://www.uni-assist.de/en/about-us/profile/', reviewed: '15 November 2026' },
+  uniAssist: { label: 'uni-assist: profile', url: 'https://www.uni-assist.de/en/about-us/profile/', reviewed: '18 November 2026' },
   masters: { label: 'uni-assist: master’s admission criteria', url: 'https://www.uni-assist.de/en/how-to-apply/get-information/master/', reviewed: '14 November 2026' },
   india: { label: 'uni-assist: documents from India', url: 'https://www.uni-assist.de/en/tools/info-country-by-country/details-country/country/in/', reviewed: '14 November 2026' },
   gradeFormula: {
@@ -51,7 +51,7 @@ export const SOURCES = {
   gradeConversion: {
     label: 'TUM: grade conversion for grades earned outside Germany',
     url: 'https://www.tum.de/en/studies/application/application-info-portal/grade-conversion-formula-for-grades-earned-outside-germany',
-    reviewed: '14 November 2026',
+    reviewed: '18 November 2026',
   },
   ects: {
     label: 'European Commission: ECTS',
@@ -68,11 +68,11 @@ export const SOURCES = {
     url: 'https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/',
     reviewed: '14 November 2026',
   },
-  apsFaqs: { label: 'APS India: FAQs', url: 'https://aps-india.de/faqs/', reviewed: '15 November 2026' },
+  apsFaqs: { label: 'APS India: FAQs', url: 'https://aps-india.de/faqs/', reviewed: '18 November 2026' },
   visaChecklist: {
     label: 'German Missions: student visa checklist',
     url: 'https://india.diplo.de/in-en/service/2756350-2756350',
-    reviewed: '14 November 2026',
+    reviewed: '18 November 2026',
   },
   uniAssistLanguage: {
     label: 'uni-assist: language certificates',
@@ -138,6 +138,87 @@ export const SOURCES = {
     label: 'DAAD: ways to your PhD',
     url: 'https://www.daad.de/en/studying-in-germany/phd-studies-research/ways-to-your-phd/',
     reviewed: '14 November 2026',
+  },
+  // Read for the /arrival checklist; each keeps the date it was read.
+  bmgLandlord: {
+    label: 'Federal Registration Act (BMG), sections 17 and 19 (in German)',
+    url: 'https://www.gesetze-im-internet.de/bmg/BJNR108410013.html',
+    reviewed: '18 November 2026',
+  },
+  bmgRegistrationExceptions: {
+    label: 'Federal Registration Act (BMG), section 27 on exceptions (in German)',
+    url: 'https://www.gesetze-im-internet.de/bmg/__27.html',
+    reviewed: '18 November 2026',
+  },
+  daadRegistering: {
+    label: 'DAAD: residence permit and address registration',
+    url: 'https://www.daad.de/en/studying-in-germany/living-in-germany/registering/',
+    reviewed: '18 November 2026',
+  },
+  berlinAnmeldung: {
+    label: 'ServicePortal Berlin: registering a main residence (in German, example)',
+    url: 'https://service.berlin.de/dienstleistung/120686/',
+    reviewed: '18 November 2026',
+  },
+  bzstTaxId: {
+    label: 'Federal Central Tax Office (BZSt), tax identification number (in German)',
+    url: 'https://bzst.de/DE/Privatpersonen/SteuerlicheIdentifikationsnummer/steuerlicheidentifikationsnummer.html',
+    reviewed: '18 November 2026',
+  },
+  bzstTaxIdFirstRegistration: {
+    label: 'BZSt online portal, receiving your tax identification number (in German)',
+    url: 'https://online.portal.bzst.de/SharedDocs/Leistungsbeschreibung/DE/erneute_mitteilung_der_ID-Nr.html?nn=23996',
+    reviewed: '18 November 2026',
+  },
+  tumEnrolment: {
+    label: 'TUM: enrolment through TUMonline (example)',
+    url: 'https://www.tum.de/en/studies/application/enrollment-info-portal/enrollment',
+    reviewed: '18 November 2026',
+  },
+  foreignOfficeBlockedAccount: {
+    label: 'Federal Foreign Office: opening and closing a blocked account',
+    url: 'https://www.auswaertiges-amt.de/en/sperrkonto/388600',
+    reviewed: '18 November 2026',
+  },
+  muensterBankAccount: {
+    label: 'University of Münster: opening a bank account (example)',
+    url: 'https://www.uni-muenster.de/international/en/studierende/general-information/bank-account.html',
+    reviewed: '18 November 2026',
+  },
+  tumStudentCard: {
+    label: 'TUM: StudentCard (example)',
+    url: 'https://www.tum.de/en/studies/application/enrollment-info-portal/studentcard',
+    reviewed: '18 November 2026',
+  },
+  tumFirstSteps: {
+    label: 'TUM: First Steps for international students (example)',
+    url: 'https://www.tum.de/en/studies/during-your-studies/starting-your-studies/tum-first-steps',
+    reviewed: '18 November 2026',
+  },
+  rundfunkbeitragWelcome: {
+    label: 'Rundfunkbeitrag: general information in English',
+    url: 'https://www.rundfunkbeitrag.de/welcome/english',
+    reviewed: '18 November 2026',
+  },
+  rundfunkbeitragStudents: {
+    label: 'Rundfunkbeitrag: information for students and apprentices',
+    url: 'https://www.rundfunkbeitrag.de/welcome/english/students-and-apprentices',
+    reviewed: '18 November 2026',
+  },
+  berlinResidencePermit: {
+    label: 'ServicePortal Berlin: residence permit for full-time studies (example)',
+    url: 'https://service.berlin.de/dienstleistung/305244/en/',
+    reviewed: '18 November 2026',
+  },
+  residenceActStudy: {
+    label: 'Residence Act, section 16b on studying and working (in German)',
+    url: 'https://www.gesetze-im-internet.de/aufenthg_2004/__16b.html',
+    reviewed: '18 November 2026',
+  },
+  residenceActApplications: {
+    label: 'Residence Act, section 81 on applying for a residence title (in German)',
+    url: 'https://www.gesetze-im-internet.de/aufenthg_2004/__81.html',
+    reviewed: '18 November 2026',
   },
 } satisfies Record<string, OfficialSource>;
 
@@ -322,7 +403,7 @@ export const EXTERNAL_COSTS: { group: string; items: ExternalCost[] }[] = [
   {
     group: 'Provider charges',
     items: [
-      { label: 'uni-assist', amount: '€75 / €30', detail: 'First course / each additional course in the same semester, including VPD. Universities you apply to directly may charge their own fee.', source: SOURCES.applications },
+      { label: 'uni-assist', amount: '€75 / €30', detail: 'First course / each additional course in the same semester, including VPD.', source: SOURCES.applications },
       { label: 'APS', amount: '₹18,000', detail: 'Individual graduate verification procedure.', source: SOURCES.aps },
       { label: 'dMAT, where required', amount: DMAT.fee, detail: 'Paid to g.a.s.t. during registration; check the exemptions.', source: SOURCES.dmat },
       { label: 'IELTS, health insurance and flights', detail: 'Check the current test, policy and travel prices with your chosen providers.' },

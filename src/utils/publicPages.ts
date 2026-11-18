@@ -107,6 +107,46 @@ const METADATA = {
     imageSubtitle: 'Study, paperwork and daily-life German',
     imageAlt: 'Germandians: glossary of everyday study, paperwork and daily-life German',
   },
+  applicationPlan: {
+    title: 'Application plan | Germandians',
+    description: 'Track your German master’s programmes, their application routes, the dates published on each programme’s page, and your document checklists in your browser.',
+    image: 'social/application-plan.png',
+    imageTitle: 'Application plan',
+    imageSubtitle: 'Your programmes, routes, dates and documents',
+    imageAlt: 'Germandians: application plan for tracking your programmes, routes, dates and documents',
+  },
+  creditMatch: {
+    title: 'Credit matching (Modulabgleich) | Germandians',
+    description: 'List a programme’s required subject areas and credits, map the courses and credits on your transcript, and export or print your own Modulabgleich worksheet. The programme assesses your credits.',
+    image: 'social/credit-match.png',
+    imageTitle: 'Credit matching',
+    imageSubtitle: 'Map your courses to required subject areas',
+    imageAlt: 'Germandians: map your completed courses to a programme’s required subject areas',
+  },
+  arrival: {
+    title: 'Arrival checklist | Germandians',
+    description: 'Interactive arrival checklist for Indian master’s students settling in Germany: landlord confirmation, city registration, tax ID, enrolment, bank accounts, campus setup, broadcasting fee, residence permit and student work rules, each with official sources.',
+    image: 'social/arrival.png',
+    imageTitle: 'Arrival checklist',
+    imageSubtitle: 'Steps after you land in Germany',
+    imageAlt: 'Germandians: arrival checklist for steps after you land in Germany',
+  },
+  parents: {
+    title: 'For parents | Germandians',
+    description: 'Plain answers for parents on public university and visa costs in Germany, how a blocked account works, what Germandians helps with, when our service fee is due, and how student details are handled.',
+    image: 'social/parents.png',
+    imageTitle: 'For parents',
+    imageSubtitle: 'Costs, the blocked account and how our mentoring works',
+    imageAlt: 'Germandians: plain guide for parents on study costs, the blocked account and mentoring',
+  },
+  choosingHelp: {
+    title: 'Before you pay anyone | Germandians',
+    description: 'Six questions to ask any admissions adviser before paying for help with German university applications, with what to check and how Germandians answers each one.',
+    image: 'social/choosing-help.png',
+    imageTitle: 'Before you pay anyone',
+    imageSubtitle: 'Six questions to ask an admissions adviser',
+    imageAlt: 'Germandians: six questions to ask any admissions adviser before paying',
+  },
 } as const satisfies Record<PageKey, Sharing>;
 
 /** Prerendering, metadata, the sitemap and social labels read this registry. */

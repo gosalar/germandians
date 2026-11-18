@@ -48,11 +48,15 @@ export default function SiteFooter() {
         <div className={styles.inner}>
           <div className={styles.top}>
             <p className={styles.tagline}>{FOOTER_COPY.tagline}</p>
-            <div className={styles.links}>
-              {FOOTER_LINKS.map((link) => (
-                <FooterLink key={link.label} destination={link.destination} label={link.label} />
-              ))}
-            </div>
+            <nav aria-label={FOOTER_COPY.linksLabel}>
+              <ul className={styles.links}>
+                {FOOTER_LINKS.map((link) => (
+                  <li key={link.label}>
+                    <FooterLink destination={link.destination} label={link.label} />
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
           <div className={styles.bottom}>
             <span>{FOOTER_COPY.copyright(buildYear)}</span>

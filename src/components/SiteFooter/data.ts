@@ -1,6 +1,7 @@
 import { CONTACT, DESTINATIONS, PAGE_LINKS } from '@/utils/constants';
 
 export const FOOTER_COPY = {
+  linksLabel: 'Footer',
   tagline: 'Guidance for Indian students heading to Germany, from students who are already there.',
   copyright: (year: string) => `© ${year} Germandians`,
   operatedBy: (operator: string) => `Operated by ${operator}`,
@@ -20,6 +21,12 @@ export const FOOTER_LINKS = [
   PAGE_LINKS.learnGerman,
   PAGE_LINKS.budget,
   PAGE_LINKS.sopPlanner,
+  PAGE_LINKS.germanWords,
+  PAGE_LINKS.applicationPlan,
+  PAGE_LINKS.creditMatch,
+  PAGE_LINKS.arrival,
+  PAGE_LINKS.choosingHelp,
+  PAGE_LINKS.parents,
   PAGE_LINKS.privacy,
   { destination: DESTINATIONS.backToTop, label: 'Back to top' },
 ] as const;

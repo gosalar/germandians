@@ -39,7 +39,11 @@ for (const route of ROUTES) {
 test('sitemap and robots list only public pages and unknown routes stay noindex', async ({ page, request }, testInfo) => {
   const origin = testInfo.project.name === 'endpoint' ? 'https://germandians.example.test' : 'https://gosalar.github.io';
   const sitemap = await (await request.get('/sitemap.xml')).text();
-  const expected = ['/', '/check/', '/requirements/', '/dmat/', '/dmat/practice/', '/about/', '/community/', '/learn-german/', '/privacy/', '/budget/', '/sop-planner/'];
+  const expected = [
+    '/', '/check/', '/requirements/', '/dmat/', '/dmat/practice/', '/about/', '/community/', '/learn-german/',
+    '/privacy/', '/budget/', '/sop-planner/', '/german-words/', '/application-plan/', '/credit-match/',
+    '/arrival/', '/choosing-help/', '/parents/',
+  ];
   for (const path of expected) expect(sitemap).toContain(`<loc>${origin}${path}</loc>`);
   expect(sitemap.match(/<loc>/g)).toHaveLength(expected.length);
   expect(sitemap).not.toMatch(/_theme|_dmat|404/);

@@ -1,3 +1,5 @@
+import { HOUSING_SUPPORT } from '@/utils/constants';
+
 export const HOUSING_COPY = {
   title: 'Housing and settling in',
   lede: 'We help you look for somewhere to live before you travel, and help you settle in once you arrive.',
@@ -8,12 +10,12 @@ export const HOUSING_HELP = {
   when: 'Before you travel',
   title: 'Somewhere to live',
   points: [
-    'We help you explore your options, from student residences to private rooms.',
-    'We help you prepare, send and follow up your applications.',
-    'If no longer-term place is confirmed before you travel, we help you find a temporary stay.',
+    HOUSING_SUPPORT.explore,
+    HOUSING_SUPPORT.apply,
+    HOUSING_SUPPORT.temporary,
   ],
   effort: 'We make a strong effort to find you options.',
-  costs: 'Rent and deposits go to your landlord or residence, separately from our service fee.',
+  costs: HOUSING_SUPPORT.costs,
 } as const;
 
 export const SETTLING_HELP = {

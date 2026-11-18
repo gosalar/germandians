@@ -61,5 +61,10 @@ export const visaEnrolment = {
       body: ARRIVAL_SUPPORT.availability,
       link: { label: 'Read about housing help', to: `${ROUTES.home}#${SECTIONS.housing}` },
     },
+    {
+      heading: 'Arrival checklist',
+      body: 'Once you arrive, the arrival checklist takes you through registering your address, the tax ID, enrolment, a bank account and the residence permit.',
+      link: { label: 'Arrival checklist', to: ROUTES.arrival },
+    },
   ],
 } satisfies StandardTopic;
