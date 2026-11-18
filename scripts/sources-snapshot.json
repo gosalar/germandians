@@ -1,0 +1,215 @@
+{
+  "generatedAt": "2026-11-18T06:49:36.386Z",
+  "sources": {
+    "dmat": {
+      "url": "https://aps-india.de/dmat/",
+      "status": 200,
+      "sha256": "f8fdb9b528549f0323ab8e608771171c9b8e6c050ee960d0551a77c61662aeee"
+    },
+    "test": {
+      "url": "https://www.d-mat.de/en/dmat-in-india/",
+      "status": 200,
+      "sha256": "67b856b26736c24968d5e8bf7a1bd9ff37ea629b621f5b8510a7c5d28f1f2e83"
+    },
+    "dmatFaq": {
+      "url": "https://www.d-mat.de/en/faq-graduate-students-india/",
+      "status": 200,
+      "sha256": "bad57f1df601ada8d7e3f30d698c20e2a390145d4102414cb6fb01efda8afd02"
+    },
+    "dmatPreparation": {
+      "url": "https://www.d-mat.de/en/dmat-in-india/",
+      "status": 200,
+      "sha256": "67b856b26736c24968d5e8bf7a1bd9ff37ea629b621f5b8510a7c5d28f1f2e83"
+    },
+    "dmatVideos": {
+      "url": "https://www.d-mat.de/en/dmat-in-india/",
+      "status": 200,
+      "sha256": "67b856b26736c24968d5e8bf7a1bd9ff37ea629b621f5b8510a7c5d28f1f2e83"
+    },
+    "dmatTerms": {
+      "url": "https://www.d-mat.de/en/terms-conditions/",
+      "status": 200,
+      "sha256": "1de24d28d11d2cb295c80e889ab011f80f89db9d1e5e11a79b9483df6229346e"
+    },
+    "aps": {
+      "url": "https://aps-india.de/checklists/",
+      "status": 200,
+      "sha256": "e1920f1c55085f35c3ce67ef6f7b2749641dbc94b164fd80a034b643082291ab"
+    },
+    "apsQuiz": {
+      "url": "https://aps-india.de/new-quiz/",
+      "status": 200,
+      "sha256": "5ab10e9402688c7fba29fccec10f78ece52b6e8f1ea6dc6356c0c0859e080fc4"
+    },
+    "vpd": {
+      "url": "https://www.uni-assist.de/en/how-to-apply/plan-your-application/vpd/",
+      "status": 200,
+      "sha256": "424667059a4b4ca3aedbf9ffbf21d92c885932408dd0b4bb7d7c43880a8c51f6"
+    },
+    "applications": {
+      "url": "https://www.uni-assist.de/en/how-to-apply/apply-online/pay-submit/",
+      "status": 200,
+      "sha256": "8be88b2cbf8fa6a27e200948dd740e147b1d195d24e5ca0fe9f0425002190b0f"
+    },
+    "visa": {
+      "url": "https://india.diplo.de/in-en/service/2546328-2546328",
+      "status": 200,
+      "sha256": "0a0fe878df3b0399138abe3ca56dbca92370c60f955b05990ad026ee4ecf6b3a"
+    },
+    "visaFee": {
+      "url": "https://india.diplo.de/in-en/service/2755482-2755482",
+      "status": 200,
+      "sha256": "08bcb0f58d5a18d5c38e3fe2b148576f4814b69880b70490776ec5f372203e5b"
+    },
+    "daad": {
+      "url": "https://www.daad.de/en/studying-in-germany/living-in-germany/finances/",
+      "status": 200,
+      "sha256": "84399cf5eb94823b0ce33c48556090bb24112a699f9929cc98b0c41a6fd38f45"
+    },
+    "tum": {
+      "url": "https://www.tum.de/en/studies/fees/tuition",
+      "status": 200,
+      "sha256": "904742b75cbdfd4315924d1fe0664b688d6efd2d417ff4970d4666b6e8f7e046"
+    },
+    "housing": {
+      "url": "https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/",
+      "status": 200,
+      "sha256": "877d80830dba69c7bb947ec4338935ad0bf8048e9f65b4f6e5720e069448cb1f"
+    },
+    "anabin": {
+      "url": "https://anabin.kmk.org/",
+      "status": 200,
+      "sha256": "4dffb120ba8bf0dfdb898bdc16edf2ec4d23104a6d01b25ba648e37afc8d5871"
+    },
+    "anabinAbout": {
+      "url": "https://anabin.kmk.org/ueber-anabin",
+      "status": 200,
+      "sha256": "76c98d40ea349d7b8fd6f893e3f3127edcaa136d3b3e6973b6f0bb29d236c8e0"
+    },
+    "anabinInstitutions": {
+      "url": "https://anabin.kmk.org/db/institutionen-information",
+      "status": 200,
+      "sha256": "a21de553b1f4b0fd647d6832d14645c2dc5e189f0684ef92d3d781b144313bd4"
+    },
+    "anabinDegrees": {
+      "url": "https://anabin.kmk.org/db/hochschulabschluesse-information",
+      "status": 200,
+      "sha256": "427a9f50b9bf6f45ab5a57c3eccd39e37a30b8ef9b0e6e77dcbc59ea5b4a495c"
+    },
+    "uniAssist": {
+      "url": "https://www.uni-assist.de/en/about-us/profile/",
+      "status": 200,
+      "sha256": "0e1dc2cb2ac49f82ec602722c0d6980b4d2b6653413700959bec21a508a43266"
+    },
+    "masters": {
+      "url": "https://www.uni-assist.de/en/how-to-apply/get-information/master/",
+      "status": 200,
+      "sha256": "9efccfb123cf39b06f03470bf11e9c187a16159f7456611557574b54a28c87af"
+    },
+    "india": {
+      "url": "https://www.uni-assist.de/en/tools/info-country-by-country/details-country/country/in/",
+      "status": 200,
+      "sha256": "f796dbf5796e944d96195f3657268f818095b6cd3a794bc71dbf3cd637ac1329"
+    },
+    "gradeFormula": {
+      "url": "https://www.kmk.org/fileadmin/Dateien/pdf/ZAB/Hochschulzugang_Beschluesse_der_KMK/GesNot05.pdf",
+      "status": 200,
+      "sha256": "5e6b872f8ef817b9767a2b53449703b67e861d7ac07432e785ebcf5d2f7e3806"
+    },
+    "gradeConversion": {
+      "url": "https://www.tum.de/en/studies/application/application-info-portal/grade-conversion-formula-for-grades-earned-outside-germany",
+      "status": 200,
+      "sha256": "e65608c5ac04f5beb8f62a667d409d850224b908d5e7410988fc6601284c6f2c"
+    },
+    "ects": {
+      "url": "https://education.ec.europa.eu/education-levels/higher-education/inclusive-and-connected-higher-education/european-credit-transfer-and-accumulation-system",
+      "status": 200,
+      "sha256": "80f7c417f1c49a99f58b86df81164074247d53bc05d5ab6f9cd8991eaed3923f"
+    },
+    "rwthSse": {
+      "url": "https://sc.informatik.rwth-aachen.de/en/studium/master/sse/application-for-admission/",
+      "status": 200,
+      "sha256": "d699d1ec60222963fdc0f5349da747d2e15874fbfb5a7a912305c27d2e52e2c7"
+    },
+    "tumInformatics": {
+      "url": "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/",
+      "status": 200,
+      "sha256": "a220a9ce31b0d86dab6df038db8e0739324a21179f715134435e5902cd04a41f"
+    },
+    "apsFaqs": {
+      "url": "https://aps-india.de/faqs/",
+      "status": 200,
+      "sha256": "e70a8b423e252e5a80cb2149a8a0379eec2319490b259e3a904c54bd5f61bd66"
+    },
+    "visaChecklist": {
+      "url": "https://india.diplo.de/in-en/service/2756350-2756350",
+      "status": 200,
+      "sha256": "5d03922cbc2f4fa9800594063becea1b2c36573b76ccd264dab6155832c002a1"
+    },
+    "uniAssistLanguage": {
+      "url": "https://www.uni-assist.de/en/how-to-apply/plan-your-application/language-certificates/",
+      "status": 200,
+      "sha256": "0980b686de3be5802415b496a775b12fcd44ddf872c634ee40130d8499abb938"
+    },
+    "uniAssistCertificates": {
+      "url": "https://www.uni-assist.de/en/how-to-apply/plan-your-application/educational-certificates-translations/",
+      "status": 200,
+      "sha256": "c453c5ecc574526413ed955752e70b6ccfb3bd6aa7ca1c434636740b5fe7f854"
+    },
+    "uniAssistOtherDocuments": {
+      "url": "https://www.uni-assist.de/en/how-to-apply/plan-your-application/other-documents/",
+      "status": 200,
+      "sha256": "9a7dc525e37745778b6e912cb3f229c7c6c2e2b41e2620e70ab62a48d294c673"
+    },
+    "uniAssistFaqs": {
+      "url": "https://www.uni-assist.de/en/faqs/plan-your-application/",
+      "status": 200,
+      "sha256": "86bce914c85d98805c9d6437de915f344a62fbba9fcfbe0f0e52c3822d297817"
+    },
+    "uniAssistUniversities": {
+      "url": "https://www.uni-assist.de/en/tools/uni-assist-universities/",
+      "status": 200,
+      "sha256": "f9952e85e87a9e0cd823f727ecb1ce7fee0abc510495cf2f38c61eed2b377c96"
+    },
+    "uniAssistBachelors": {
+      "url": "https://www.uni-assist.de/en/how-to-apply/get-information/bachelor-staatsexamen/",
+      "status": 200,
+      "sha256": "17171f27f20e3a910794002912043876201edd9c81338e1fcd3e1736ff49fa40"
+    },
+    "tumManagement": {
+      "url": "https://www.mgt.tum.de/programs/master-in-management/munich/how-to-apply",
+      "status": 200,
+      "sha256": "fdec2f333256ea667f8343ed09e246d4705405cd19b12e706ba52624c4b55c45"
+    },
+    "tumAdmissionProcedures": {
+      "url": "https://www.tum.de/en/studies/application/application-info-portal/admission-procedures",
+      "status": 200,
+      "sha256": "a64546da330ea4268b80a5716f00fae5f955da080dd4973002d9177e6cfc0806"
+    },
+    "tumAps": {
+      "url": "https://www.tum.de/en/studies/application/application-info-portal/aps",
+      "status": 200,
+      "sha256": "0b36783b03b859eaece77b7b8a406fee7aab5defc819be682b3c5a79841ecfe8"
+    },
+    "semesters": {
+      "url": "https://www.uni-assist.de/en/tools/glossary-of-terms/description/term/semester/",
+      "status": 200,
+      "sha256": "1cd6c54bfdcb910e38a463c1950836a2b77a1aaff433d5e94731c99252c98c3e"
+    },
+    "daadEnrolling": {
+      "url": "https://www.daad.de/en/studying-in-germany/requirements/enrolling/",
+      "status": 200,
+      "sha256": "8e5f4587bf4eef8a7c1c27969c2a96894d7b6818dee66ee80abc943d389b8678"
+    },
+    "daadHealthInsurance": {
+      "url": "https://www.daad.de/en/studying-in-germany/living-in-germany/health-insurance/",
+      "status": 200,
+      "sha256": "3cdbc857b346a49c16e668b8c81ff1f5260397a9c4bfbbbf7845a7ae936df361"
+    },
+    "daadPhd": {
+      "url": "https://www.daad.de/en/studying-in-germany/phd-studies-research/ways-to-your-phd/",
+      "status": 200,
+      "sha256": "4c30d153d8a5ae3f0c0bbb972a34f3a918ef35b4c218da600b85da4886015e23"
+    }
+  }
+}

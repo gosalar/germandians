@@ -1,0 +1,35 @@
+name: Check official sources
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sources-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check-sources:
+    name: Check official sources
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Compare live sources against snapshot
+        run: |
+          set +e
+          node scripts/check-sources.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+          status=${PIPESTATUS[0]}
+          set -e
+          exit "$status"
