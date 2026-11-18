@@ -91,6 +91,14 @@ const METADATA = {
     imageSubtitle: 'Your own living and one-off study costs',
     imageAlt: 'Germandians: plan your monthly living and one-off study costs in Germany',
   },
+  sopPlanner: {
+    title: 'SOP planner | Germandians',
+    description: 'Plan a Statement of Purpose in five parts in your own words, with word counts and a check for common stock phrases. Stored in your browser only.',
+    image: 'social/sop-planner.png',
+    imageTitle: 'SOP planner',
+    imageSubtitle: 'Five parts in your own words',
+    imageAlt: 'Germandians: plan your Statement of Purpose in five parts in your own words',
+  },
 } as const satisfies Record<PageKey, Sharing>;
 
 /** Prerendering, metadata, the sitemap and social labels read this registry. */

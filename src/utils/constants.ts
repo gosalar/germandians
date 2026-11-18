@@ -193,6 +193,7 @@ export const DESTINATIONS = {
   email: { kind: 'external', href: `mailto:${CONTACT.email}`, target: undefined, rel: undefined },
   backToTop: { kind: 'scroll-top' },
   budget: { kind: 'page', page: 'budget' },
+  sopPlanner: { kind: 'page', page: 'sopPlanner' },
 } as const satisfies Record<string, NavigationDestination>;
 
 /** A destination with the words that link to it. The header, the phone menu and the footer share these. */
@@ -211,6 +212,7 @@ export const PAGE_LINKS = {
   learnGerman: { destination: DESTINATIONS.learnGerman, label: 'Learn German' },
   privacy: { destination: DESTINATIONS.privacy, label: 'Privacy' },
   budget: { destination: DESTINATIONS.budget, label: 'Budget planner' },
+  sopPlanner: { destination: DESTINATIONS.sopPlanner, label: 'SOP planner' },
 } as const satisfies Record<string, NavigationLink>;
 
 /**

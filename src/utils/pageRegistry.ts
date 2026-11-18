@@ -97,6 +97,15 @@ export const PAGE_REGISTRY = [
     sitemap: true,
     sections: [SECTIONS.top],
   },
+  {
+    key: 'sopPlanner',
+    path: '/sop-planner',
+    file: 'routes/sop-planner.tsx',
+    shell: 'site',
+    prerender: true,
+    sitemap: true,
+    sections: [SECTIONS.top],
+  },
 ] as const;
 
 type RegistryPage = (typeof PAGE_REGISTRY)[number];
