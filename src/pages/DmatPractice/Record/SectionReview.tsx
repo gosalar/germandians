@@ -73,12 +73,17 @@ function Tasks({ content, session, onPractise }: SectionReviewProps) {
 }
 
 export default function SectionReview(props: SectionReviewProps) {
-  const [open, setOpen] = useState(false);
+  const [rendered, setRendered] = useState(false);
 
   return (
-    <details className={styles.disclosure} onToggle={(event) => setOpen(event.currentTarget.open)}>
+    <details
+      className={styles.disclosure}
+      onToggle={(event) => {
+        if (event.currentTarget.open && !rendered) setRendered(true);
+      }}
+    >
       <summary>{SECTION_LABELS[props.content.section].name}</summary>
-      {open && <Tasks {...props} />}
+      {rendered && <Tasks {...props} />}
     </details>
   );
 }

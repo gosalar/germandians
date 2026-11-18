@@ -1,9 +1,9 @@
 import { Button } from '@mantine/core';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type RefObject } from 'react';
 
 import { markTask } from '@/utils/dmat/marking';
-import type { Phase, Session } from '@/utils/dmat/session';
-import { TEXT_SIZES, type Answer, type CoreTask, type Passage, type SectionContent, type TextSize } from '@/utils/dmat/types';
+import type { Phase, SectionRun, Session } from '@/utils/dmat/session';
+import { TEXT_SIZES, type Answer, type CoreTask, type Passage, type SectionContent, type SectionId, type TextSize } from '@/utils/dmat/types';
 
 import { SECTION_LABELS } from '../data';
 import { INSTRUCTIONS, RUNNER_COPY } from './data';
@@ -56,40 +56,89 @@ function isAnswered(item: CoreTask | Passage, answers: Record<string, Answer>): 
   return answer?.kind === 'latin';
 }
 
-export default function Runner({ session, phase, content, onAnswer, onCheck, onMark, onGoTo, onTextSize, onEndSection, onStopEarly }: RunnerProps) {
-  const endDialog = useRef<HTMLDialogElement>(null);
-  const leaveDialog = useRef<HTMLDialogElement>(null);
+interface TopBarContentProps {
+  sections: SectionRun[];
+  section: SectionId;
+  practice: boolean;
+  academic: boolean;
+  onOpenEnd(): void;
+  onOpenLeave(): void;
+  onStopEarly(): void;
+}
+
+function TopBarContent({ sections, section, practice, academic, onOpenEnd, onOpenLeave, onStopEarly }: TopBarContentProps) {
+  const labels = SECTION_LABELS[section];
+  const moduleSections = sections.filter((entry) => SECTION_LABELS[entry.id].module === labels.module);
+  const part = moduleSections.findIndex((entry) => entry.id === section) + 1;
+  const endLabel = academic ? RUNNER_COPY.endModule : RUNNER_COPY.endSection;
+
+  return (
+    <>
+      <div className={styles.heading}><h1 tabIndex={-1}>{labels.name}</h1><p>{RUNNER_COPY.part(labels.module, part, moduleSections.length)}</p></div>
+      <div className={styles.topActions}>
+        {!practice && <Button variant="ring-dark" size="nav" onClick={onOpenEnd}>{endLabel}</Button>}
+        <Button variant="ring-dark" size="nav" onClick={() => practice ? onStopEarly() : onOpenLeave()}>{practice ? RUNNER_COPY.finish : RUNNER_COPY.leave}</Button>
+      </div>
+    </>
+  );
+}
+
+interface RunnerBodyProps {
+  session: Session;
+  section: SectionId;
+  practice: boolean;
+  content: SectionContent;
+  onAnswer(id: string, answer: Answer): void;
+  onCheck(id: string): void;
+  onMark(id: string): void;
+  onGoTo(index: number): void;
+  onTextSize(size: TextSize): void;
+}
+
+function RunnerBody({ session, section, practice, content, onAnswer, onCheck, onMark, onGoTo, onTextSize }: RunnerBodyProps) {
   const taskArea = useRef<HTMLDivElement>(null);
-  const practice = phase.msLeft === null;
+  const numbers = useRef<HTMLDivElement>(null);
   const academic = content.section === 'academic';
   const items = academic ? content.passages : content.tasks;
-  const position = Math.max(0, Math.min(session.position[phase.section] ?? 0, items.length - 1));
+  const position = Math.max(0, Math.min(session.position[section] ?? 0, items.length - 1));
   const item = items[position];
-  const checked = item && session.checked.includes(item.id);
-  const marked = item ? session.marked.includes(item.id) : false;
-  const labels = SECTION_LABELS[phase.section];
-  const moduleSections = session.sections.filter((section) => SECTION_LABELS[section.id].module === labels.module);
-  const part = moduleSections.findIndex((section) => section.id === phase.section) + 1;
-  const endLabel = academic ? RUNNER_COPY.endModule : RUNNER_COPY.endSection;
-  const allTasks = content.section === 'academic' ? content.passages.flatMap((passage) => passage.questions) : content.tasks;
-  const right = practice ? allTasks.filter((task) => session.checked.includes(task.id) && markTask(task, session.answers[task.id]).verdict === 'right').length : 0;
+  const checkedSet = new Set(session.checked);
+  const markedSet = new Set(session.marked);
+  const checked = item ? checkedSet.has(item.id) : false;
+  const marked = item ? markedSet.has(item.id) : false;
+
+  let right = 0;
+  if (practice && checkedSet.size > 0) {
+    const allTasks = content.section === 'academic'
+      ? content.passages.flatMap((passage) => passage.questions)
+      : content.tasks;
+    for (const task of allTasks) {
+      if (checkedSet.has(task.id) && markTask(task, session.answers[task.id]).verdict === 'right') {
+        right += 1;
+      }
+    }
+  }
 
   useEffect(() => {
     taskArea.current?.scrollTo({ top: 0, behavior: 'instant' });
   }, [item?.id]);
 
+  // Keeps the current number in view in the scrolling strip, with half a number of its neighbours showing.
+  useEffect(() => {
+    const bar = numbers.current;
+    const active = bar?.querySelector<HTMLElement>('[aria-current="step"]');
+    if (!bar || !active) return;
+    const view = bar.getBoundingClientRect();
+    const box = active.getBoundingClientRect();
+    const margin = box.width / 2;
+    if (box.left < view.left) bar.scrollLeft -= view.left - box.left + margin;
+    else if (box.right > view.right) bar.scrollLeft += box.right - view.right + margin;
+  }, [position]);
+
   return (
-    <section className={styles.runner} data-text-size={session.textSize}>
-      <header className={styles.topBar}>
-        {phase.msLeft !== null && <Timer key={`${session.createdAt}-${phase.section}`} msLeft={phase.msLeft} />}
-        <div className={styles.heading}><h1 tabIndex={-1}>{labels.name}</h1><p>{RUNNER_COPY.part(labels.module, part, moduleSections.length)}</p></div>
-        <div className={styles.topActions}>
-          {!practice && <Button variant="ring-dark" size="nav" onClick={() => endDialog.current?.showModal()}>{endLabel}</Button>}
-          <Button variant="ring-dark" size="nav" onClick={() => practice ? onStopEarly() : leaveDialog.current?.showModal()}>{practice ? RUNNER_COPY.finish : RUNNER_COPY.leave}</Button>
-        </div>
-      </header>
+    <>
       <div className={styles.instructions}>
-        <p>{INSTRUCTIONS[phase.section]}</p>
+        <p>{INSTRUCTIONS[section]}</p>
         <div className={styles.textSizes} role="group" aria-label={RUNNER_COPY.textSize}>
           {TEXT_SIZES.map((size) => <Button key={size} variant={session.textSize === size ? 'navy' : 'ring'} size="nav" aria-label={RUNNER_COPY.textSizes[size]} aria-pressed={session.textSize === size} onClick={() => onTextSize(size)}>A{size > 0 ? '+'.repeat(size) : ''}</Button>)}
         </div>
@@ -101,7 +150,7 @@ export default function Runner({ session, phase, content, onAnswer, onCheck, onM
           <div className={styles.coreTask}>
             <h2 className={practice ? styles.srOnly : styles.taskTitle}>{RUNNER_COPY.position(false, position + 1, items.length)}</h2>
             <TaskView key={item.id} task={item} answer={session.answers[item.id]} mode={practice && checked ? 'review' : 'answer'} onAnswer={(answer) => onAnswer(item.id, answer)} />
-            {phase.section === 'figures' && <p className={styles.accessNote}>{RUNNER_COPY.figuresAccess}</p>}
+            {section === 'figures' && <p className={styles.accessNote}>{RUNNER_COPY.figuresAccess}</p>}
             {practice && <div className={styles.practiceActions}>
               {checked && <Explanation task={item} answer={session.answers[item.id]} />}
               <Button variant="navy" size="md" disabled={checked && position === items.length - 1} onClick={() => checked ? onGoTo(position + 1) : onCheck(item.id)}>{checked ? RUNNER_COPY.nextTask : RUNNER_COPY.check}</Button>
@@ -111,14 +160,14 @@ export default function Runner({ session, phase, content, onAnswer, onCheck, onM
       </div>
       <div className={styles.bottomBar}>
         <Button variant="ring" size="nav" disabled={position === 0} onClick={() => onGoTo(position - 1)}>{RUNNER_COPY.back}</Button>
-        {practice ? <p className={styles.practiceProgress}>{RUNNER_COPY.position(academic, position + 1, items.length)}<span>{RUNNER_COPY.rightCount(right)}</span></p> : <div className={styles.numbers} role="group" aria-label={RUNNER_COPY.tasks}>
+        {practice ? <p className={styles.practiceProgress}>{RUNNER_COPY.position(academic, position + 1, items.length)}<span>{RUNNER_COPY.rightCount(right)}</span></p> : <div ref={numbers} className={styles.numbers} role="group" aria-label={RUNNER_COPY.tasks}>
           {items.map((screen, index) => {
             const answered = isAnswered(screen, session.answers);
-            const marked = session.marked.includes(screen.id);
+            const screenMarked = markedSet.has(screen.id);
             const current = index === position;
-            const name = [RUNNER_COPY.screen(academic, index + 1), current && RUNNER_COPY.current, answered && RUNNER_COPY.answered, marked && RUNNER_COPY.marked].filter(Boolean).join(', ');
+            const name = [RUNNER_COPY.screen(academic, index + 1), current && RUNNER_COPY.current, answered && RUNNER_COPY.answered, screenMarked && RUNNER_COPY.marked].filter(Boolean).join(', ');
             return <Button key={screen.id} variant={current ? 'navy' : 'ring'} size="nav" aria-label={name} aria-current={current ? 'step' : undefined} onClick={() => onGoTo(index)}>
-              <span className={styles.numberContent}><span>{index + 1}</span><span className={styles.numberStates} aria-hidden="true">{current ? '→' : ''}{answered ? '✓' : ''}{marked ? '◆' : ''}</span></span>
+              <span className={styles.numberContent}><span>{index + 1}</span><span className={styles.numberStates} aria-hidden="true">{current ? '→' : ''}{answered ? '✓' : ''}{screenMarked ? '◆' : ''}</span></span>
             </Button>;
           })}
         </div>}
@@ -126,6 +175,22 @@ export default function Runner({ session, phase, content, onAnswer, onCheck, onM
         <Button variant="navy" size="nav" disabled={position >= items.length - 1} onClick={() => onGoTo(position + 1)}>{RUNNER_COPY.next}</Button>
         {!practice && <p className={styles.legend}>{RUNNER_COPY.legend}</p>}
       </div>
+    </>
+  );
+}
+
+interface RunnerDialogsProps {
+  academic: boolean;
+  endDialog: RefObject<HTMLDialogElement | null>;
+  leaveDialog: RefObject<HTMLDialogElement | null>;
+  onEndSection(): void;
+  onStopEarly(): void;
+}
+
+function RunnerDialogs({ academic, endDialog, leaveDialog, onEndSection, onStopEarly }: RunnerDialogsProps) {
+  const endLabel = academic ? RUNNER_COPY.endModule : RUNNER_COPY.endSection;
+  return (
+    <>
       <dialog ref={endDialog} className={styles.dialog} aria-labelledby="dmat-end-title" aria-describedby="dmat-end-warning">
         <h2 id="dmat-end-title">{endLabel}</h2><p id="dmat-end-warning">{RUNNER_COPY.endWarning}</p>
         <div><Button variant="ring" size="md" onClick={() => endDialog.current?.close()}>{RUNNER_COPY.keepWorking}</Button><Button variant="navy" size="md" onClick={() => { endDialog.current?.close(); onEndSection(); }}>{endLabel}</Button></div>
@@ -134,6 +199,49 @@ export default function Runner({ session, phase, content, onAnswer, onCheck, onM
         <h2 id="dmat-leave-title">{RUNNER_COPY.leave}</h2><p id="dmat-leave-warning">{RUNNER_COPY.leaveWarning}</p>
         <div><Button variant="ring" size="md" onClick={() => leaveDialog.current?.close()}>{RUNNER_COPY.keepWorking}</Button><Button variant="navy" size="md" onClick={() => { leaveDialog.current?.close(); onStopEarly(); }}>{RUNNER_COPY.leaveConfirm}</Button></div>
       </dialog>
+    </>
+  );
+}
+
+export default function Runner({ session, phase, content, onAnswer, onCheck, onMark, onGoTo, onTextSize, onEndSection, onStopEarly }: RunnerProps) {
+  const endDialog = useRef<HTMLDialogElement>(null);
+  const leaveDialog = useRef<HTMLDialogElement>(null);
+  const practice = phase.msLeft === null;
+  const section = phase.section;
+  const academic = content.section === 'academic';
+
+  return (
+    <section className={styles.runner} data-text-size={session.textSize}>
+      <header className={styles.topBar}>
+        {phase.msLeft !== null && <Timer key={`${session.createdAt}-${section}`} msLeft={phase.msLeft} />}
+        <TopBarContent
+          sections={session.sections}
+          section={section}
+          practice={practice}
+          academic={academic}
+          onOpenEnd={() => endDialog.current?.showModal()}
+          onOpenLeave={() => leaveDialog.current?.showModal()}
+          onStopEarly={onStopEarly}
+        />
+      </header>
+      <RunnerBody
+        session={session}
+        section={section}
+        practice={practice}
+        content={content}
+        onAnswer={onAnswer}
+        onCheck={onCheck}
+        onMark={onMark}
+        onGoTo={onGoTo}
+        onTextSize={onTextSize}
+      />
+      <RunnerDialogs
+        academic={academic}
+        endDialog={endDialog}
+        leaveDialog={leaveDialog}
+        onEndSection={onEndSection}
+        onStopEarly={onStopEarly}
+      />
     </section>
   );
 }

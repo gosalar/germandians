@@ -7,20 +7,16 @@ import MentoringOffer from '@/components/MentoringOffer';
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
 import { SECTIONS } from '@/utils/constants';
 import { markSection } from '@/utils/dmat/marking';
-import type { SectionRun } from '@/utils/dmat/session';
+import { sectionIdsFor, setIdFor, type SectionRun } from '@/utils/dmat/session';
 import { earnedStamps } from '@/utils/dmat/stamps';
 import type { Mode, SectionContent, SectionId, StartChoice } from '@/utils/dmat/types';
 
-import { loadSection } from './bank';
 import Between from './Between';
 import { PAGE_COPY } from './data';
-import Record from './Record';
-import Runner from './Runner';
+import { fetchRun, fetchScreen, NOTHING_LOADED, quietly, runKey, type LazyScreen } from './screens';
 import Start from './Start';
 import styles from './styles.module.scss';
 import { useSession } from './useSession';
-
-const runKey = (run: SectionRun) => `${run.id}:${run.setId}`;
 
 /** Practising one kind of Core task shows only the tasks that carry its tag. */
 const withTag = (content: SectionContent, tag: string | null): SectionContent =>
@@ -34,18 +30,42 @@ const withTag = (content: SectionContent, tag: string | null): SectionContent =>
  * nothing here reads storage, the clock or the bank before mount.
  */
 export default function DmatPractice() {
-  const api = useSession();
-  const { ready, session, phase } = api;
+  const {
+    ready,
+    session,
+    phase,
+    waiting,
+    storageFailed,
+    start: startSession,
+    resume,
+    discard,
+    close,
+    answer,
+    check,
+    mark,
+    goTo,
+    setTextSize,
+    endSection,
+    startNext,
+    stopEarly,
+  } = useSession();
   const { setImmersive } = usePageChromeActions();
   const [preset, setPreset] = useState<{ mode: Mode; choice: StartChoice }>();
-  const [loaded, setLoaded] = useState<{ key: string; contents: SectionContent[] } | null>(null);
+  const [loaded, setLoaded] = useState(NOTHING_LOADED);
   const [failedKey, setFailedKey] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const main = useRef<HTMLElement>(null);
   const firstScreen = useRef(true);
 
-  const active = ready && session && phase ? { session, phase } : null;
-  const screen = !active ? 'start' : active.phase.kind === 'section' ? 'runner' : active.phase.kind === 'finished' ? 'record' : 'between';
+  const phaseKind = ready && session && phase ? phase.kind : null;
+  const screen = !phaseKind
+    ? 'start'
+    : phaseKind === 'section'
+      ? 'runner'
+      : phaseKind === 'finished'
+        ? 'record'
+        : 'between';
+  const lazyScreen: LazyScreen | null = screen === 'runner' || screen === 'record' ? screen : null;
 
   // The site's header, footer and phone action bar step aside while a test, a pause or the break shows.
   const immersive = screen === 'runner' || screen === 'between';
@@ -55,32 +75,53 @@ export default function DmatPractice() {
   }, [immersive, setImmersive]);
 
   // The test screen needs the section on screen; the record needs every section of the test.
-  const onScreen = active?.phase.kind === 'section' ? active.phase.section : null;
-  const wanted = !active ? [] : screen === 'record' ? active.session.sections : active.session.sections.filter((run) => run.id === onScreen);
+  const onScreen = ready && session && phase?.kind === 'section' ? phase.section : null;
+  const wanted: SectionRun[] = !ready || !session || !phaseKind
+    ? []
+    : screen === 'record'
+      ? session.sections
+      : session.sections.filter((run) => run.id === onScreen);
   const wantedKey = wanted.map(runKey).join('|');
-  const attemptKey = `${wantedKey}#${attempt}`;
+  const attemptKey = `${lazyScreen}:${wantedKey}#${attempt}`;
+  const practiceTag = session?.practiceTag ?? null;
+  const contents = wanted.every((run) => loaded.sections[runKey(run)])
+    ? wanted.map((run) => withTag(loaded.sections[runKey(run)], practiceTag))
+    : null;
+  const needsLoad = lazyScreen !== null && (!loaded.screens[lazyScreen] || contents === null);
+
   useEffect(() => {
-    if (!wantedKey) return;
+    if (!needsLoad || !lazyScreen) return;
     let current = true;
-    const runs = wantedKey.split('|').map((key) => key.split(':') as [SectionId, string]);
-    Promise.all(runs.map(([section, setId]) => loadSection(section, setId))).then(
-      (contents) => {
-        if (current) setLoaded({ key: wantedKey, contents });
-      },
-      () => {
-        if (current) setFailedKey(attemptKey);
-      },
-    );
+    const runs = wantedKey ? wantedKey.split('|') : [];
+    Promise.all([fetchScreen(setLoaded, lazyScreen), ...runs.map((key) => fetchRun(setLoaded, key))]).catch(() => {
+      if (current) setFailedKey(attemptKey);
+    });
     return () => {
       current = false;
     };
-  }, [wantedKey, attemptKey]);
-  const contents = active && wantedKey && loaded?.key === wantedKey
-    ? loaded.contents.map((content) => withTag(content, active.session.practiceTag))
-    : null;
+  }, [needsLoad, lazyScreen, wantedKey, attemptKey]);
+
+  // Fetched ahead so the next screen shows at once: what a stored test resumes on, the record while a test
+  // runs, and the section after a pause or the break.
+  const resumable = ready && screen === 'start' ? waiting : null;
+  const upcoming: SectionId | null = phase?.kind === 'pause' ? phase.next : phase?.kind === 'break' ? 'academic' : null;
+  const aheadRuns: SectionRun[] = resumable
+    ? resumable.finishedAt !== null
+      ? resumable.sections
+      : resumable.sections.filter((run) => run.startedAt !== null && run.endedAt === null)
+    : session?.sections.filter((run) => run.id === upcoming) ?? [];
+  const aheadScreen: LazyScreen | null = resumable
+    ? resumable.finishedAt !== null ? 'record' : aheadRuns.length > 0 ? 'runner' : null
+    : screen === 'runner' ? 'record' : upcoming ? 'runner' : null;
+  const aheadKey = [aheadScreen ?? '', ...aheadRuns.map(runKey)].join('|');
+  useEffect(() => {
+    const [name, ...runs] = aheadKey.split('|');
+    if (name) quietly(fetchScreen(setLoaded, name as LazyScreen));
+    for (const key of runs) quietly(fetchRun(setLoaded, key));
+  }, [aheadKey]);
 
   // A new screen starts at its top, with focus on its heading.
-  const screenKey = [screen, onScreen, active?.phase.kind, contents !== null].join(':');
+  const screenKey = [screen, onScreen, phaseKind, !needsLoad].join(':');
   useEffect(() => {
     if (firstScreen.current) {
       firstScreen.current = false;
@@ -94,16 +135,23 @@ export default function DmatPractice() {
     heading.focus({ preventScroll: true });
   }, [screenKey]);
 
+  /** The slip's stamp gives the first section a head start. */
+  const prepare = (mode: Mode, choice: StartChoice) => {
+    const [section] = sectionIdsFor(mode, choice);
+    quietly(fetchScreen(setLoaded, 'runner'));
+    quietly(fetchRun(setLoaded, runKey({ id: section, setId: setIdFor(mode, section, choice) })));
+  };
+
   const start = (mode: Mode, choice: StartChoice) => {
     setPreset(undefined);
-    api.start(mode, choice);
+    startSession(mode, choice);
   };
 
   /** "Practise these" on the record. A passage mixes question types, so an academic type opens the slip instead. */
   const practise = (section: SectionId, tag: string) => {
     if (section === 'academic') {
       setPreset({ mode: 'practice', choice: { section } });
-      api.close();
+      close();
       return;
     }
     start('practice', { section, tag });
@@ -122,16 +170,20 @@ export default function DmatPractice() {
     </div>
   );
 
+  const RunnerView = loaded.screens.runner;
+  const RecordView = loaded.screens.record;
+
   let body = (
     <>
       <div id={SECTIONS.top}>
         <Start
-          waiting={api.waiting}
-          storageFailed={api.storageFailed}
+          waiting={waiting}
+          storageFailed={storageFailed}
           preset={preset}
+          onPrepare={prepare}
           onStart={start}
-          onResume={api.resume}
-          onDiscard={api.discard}
+          onResume={resume}
+          onDiscard={discard}
         />
       </div>
       <CommunityBand />
@@ -140,49 +192,51 @@ export default function DmatPractice() {
     </>
   );
 
-  if (active && active.phase.kind === 'section') {
-    body = (
-      <div id={SECTIONS.top}>
-        {contents ? (
-          <Runner
-            session={active.session}
-            phase={active.phase}
-            content={contents[0]}
-            onAnswer={api.answer}
-            onCheck={api.check}
-            onMark={api.mark}
-            onGoTo={api.goTo}
-            onTextSize={api.setTextSize}
-            onEndSection={api.endSection}
-            onStopEarly={api.stopEarly}
-          />
-        ) : pending}
-      </div>
-    );
-  } else if (active && (active.phase.kind === 'pause' || active.phase.kind === 'break')) {
-    body = (
-      <div id={SECTIONS.top}>
-        <Between phase={active.phase} onStartNext={api.startNext} onStopEarly={api.stopEarly} />
-      </div>
-    );
-  } else if (active) {
-    body = (
-      <>
+  if (ready && session && phase) {
+    if (phase.kind === 'section') {
+      body = (
         <div id={SECTIONS.top}>
-          {contents ? (
-            <Record
-              session={active.session}
-              contents={contents}
-              results={contents.map((content, index) => markSection(active.session.sections[index], content, active.session.answers))}
-              stamps={earnedStamps(active.session)}
-              onPractise={practise}
-              onStartAnother={api.discard}
+          {RunnerView && contents ? (
+            <RunnerView
+              session={session}
+              phase={phase}
+              content={contents[0]}
+              onAnswer={answer}
+              onCheck={check}
+              onMark={mark}
+              onGoTo={goTo}
+              onTextSize={setTextSize}
+              onEndSection={endSection}
+              onStopEarly={stopEarly}
             />
           ) : pending}
         </div>
-        <Contact />
-      </>
-    );
+      );
+    } else if (phase.kind === 'pause' || phase.kind === 'break') {
+      body = (
+        <div id={SECTIONS.top}>
+          <Between phase={phase} onStartNext={startNext} onStopEarly={stopEarly} />
+        </div>
+      );
+    } else {
+      body = (
+        <>
+          <div id={SECTIONS.top}>
+            {RecordView && contents ? (
+              <RecordView
+                session={session}
+                contents={contents}
+                results={contents.map((content, index) => markSection(session.sections[index], content, session.answers))}
+                stamps={earnedStamps(session)}
+                onPractise={practise}
+                onStartAnother={discard}
+              />
+            ) : pending}
+          </div>
+          <Contact />
+        </>
+      );
+    }
   }
 
   return (

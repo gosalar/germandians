@@ -33,7 +33,6 @@ export default function FigureTask({ task, answer, onAnswer, mode }: { task: Fig
             const descriptionId = `${id}-${part}-${index}`;
             const selected = picks[part] === index;
             const correct = task.answer[part] === index;
-            const matrix = <Matrix frame={option.frame} shapes={task.shapes} label={label} />;
             return mode === 'answer' ? (
               <label key={index} className={styles.figureOption} data-selected={selected}>
                 <input
@@ -45,13 +44,13 @@ export default function FigureTask({ task, answer, onAnswer, mode }: { task: Fig
                   onChange={() => onAnswer?.({ kind: 'figures', picks: part === 0 ? [index, picks[1]] : [picks[0], index] })}
                 />
                 <span className={styles.optionNumber}>{label}</span>
-                <span aria-hidden="true">{matrix}</span>
+                <span aria-hidden="true"><Matrix frame={option.frame} shapes={task.shapes} label={label} decorative /></span>
                 <span id={descriptionId} hidden>{describeMatrix(option.frame, task.shapes)}</span>
               </label>
             ) : (
               <div key={index} className={styles.figureOption} data-selected={selected} data-correct={correct}>
                 <span className={styles.optionNumber}>{label}</span>
-                {matrix}
+                <Matrix frame={option.frame} shapes={task.shapes} label={label} />
                 {selected && <span className={styles.optionStatus}>{TASK_COPY.selected}</span>}
                 {correct && <span className={styles.optionStatus}>{TASK_COPY.correctOption}</span>}
               </div>

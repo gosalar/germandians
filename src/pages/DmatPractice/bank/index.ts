@@ -43,13 +43,17 @@ export const BANK = {
 /** The practice passages by subject, for the slip, without loading a passage. */
 export const PRACTICE_PASSAGES = practiceIndex as readonly { id: string; area: string; title: string }[];
 
+const loadedSections = new Map<string, SectionContent>();
+const inFlightSections = new Map<string, Promise<SectionContent>>();
+
+const sectionKey = (section: SectionId, setId: string) => `${section}:${setId}`;
+
 const loaderFor = (group: Record<string, Loader>, setId: string, what: string): Loader => {
   if (!Object.hasOwn(group, setId)) throw new Error(`Unknown ${what}: ${setId}`);
   return group[setId];
 };
 
-/** Loads what a section shows. The only function the page calls. */
-export async function loadSection(section: SectionId, setId: string): Promise<SectionContent> {
+async function fetchSection(section: SectionId, setId: string): Promise<SectionContent> {
   if (section !== 'academic') {
     const tasks = (await loaderFor(BANK[section], setId, `${section} set`)()).default as CoreTask[];
     return { section, tasks };
@@ -58,4 +62,27 @@ export async function loadSection(section: SectionId, setId: string): Promise<Se
     return { section, passages: (await BANK.academic.mock()).default as Passage[] };
   }
   return { section, passages: [(await loaderFor(BANK.passages, setId, 'practice passage')()).default as Passage] };
+}
+
+/** Loads what a section shows, reusing any cached or in-flight request. */
+export function loadSection(section: SectionId, setId: string): Promise<SectionContent> {
+  const key = sectionKey(section, setId);
+  const cached = loadedSections.get(key);
+  if (cached) return Promise.resolve(cached);
+  const inFlight = inFlightSections.get(key);
+  if (inFlight) return inFlight;
+
+  const request = fetchSection(section, setId).then(
+    (content) => {
+      loadedSections.set(key, content);
+      inFlightSections.delete(key);
+      return content;
+    },
+    (error: unknown) => {
+      inFlightSections.delete(key);
+      throw error;
+    },
+  );
+  inFlightSections.set(key, request);
+  return request;
 }

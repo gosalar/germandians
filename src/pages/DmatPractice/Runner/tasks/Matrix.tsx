@@ -22,18 +22,14 @@ const SHAPES = {
   flag: <polygon points="-0.55,-0.8 0.7,-0.4 -0.3,0 -0.3,0.8 -0.55,0.8" />,
 } satisfies Record<Shape, React.ReactNode>;
 
-export default function Matrix({ frame, shapes, label }: { frame: Frame | null; shapes: Shape[]; label: string }) {
+export default function Matrix({ frame, shapes, label, decorative = false }: { frame: Frame | null; shapes: Shape[]; label: string; decorative?: boolean }) {
+  const ariaLabel = decorative ? undefined : frame ? `${label}: ${describeMatrix(frame, shapes)}` : label;
   return (
-    <svg className={styles.matrix} viewBox="0 0 100 100" role="img" aria-label={frame ? `${label}: ${describeMatrix(frame, shapes)}` : label}>
+    <svg className={styles.matrix} viewBox="0 0 100 100" role={decorative ? undefined : 'img'} aria-label={ariaLabel}>
       <rect className={styles.matrixFrame} x="1.25" y="1.25" width="97.5" height="97.5" />
       {frame ? (
         <>
-          {[25, 50, 75].map((position) => (
-            <g key={position} className={styles.matrixGrid}>
-              <line x1={position} y1="2" x2={position} y2="98" />
-              <line x1="2" y1={position} x2="98" y2={position} />
-            </g>
-          ))}
+          <path className={styles.matrixGrid} d="M25 2V98M50 2V98M75 2V98M2 25H98M2 50H98M2 75H98" />
           {frame.map((figure, index) => (
             <g key={index} transform={`translate(${figure.pos[1] * 25 + 12.5} ${figure.pos[0] * 25 + 12.5}) scale(10) rotate(${figure.orient * 90})`} fill={COLOURS[figure.colour]} stroke="#222222" strokeWidth="0.12" strokeLinejoin="round">
               {SHAPES[shapes[index]]}

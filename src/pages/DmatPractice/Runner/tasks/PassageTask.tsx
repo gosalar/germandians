@@ -12,6 +12,8 @@ type FigureBlock = Extract<PassageBlock, { type: 'figure' }>;
 
 function PassageFigure({ block }: { block: FigureBlock }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const opener = useRef<HTMLButtonElement>(null);
+  const [enlarged, setEnlarged] = useState(false);
   const title = useId();
   // Only authored, build-checked SVG reaches this component. Text is always rendered as text.
   const graphic = <div className={styles.passageFigure} role="img" aria-label={block.alt} dangerouslySetInnerHTML={{ __html: block.svg }} />;
@@ -19,14 +21,26 @@ function PassageFigure({ block }: { block: FigureBlock }) {
     <figure className={styles.figureBlock}>
       {graphic}
       <figcaption>{block.caption}</figcaption>
-      <Button variant="ring" size="nav" onClick={() => dialog.current?.showModal()}>{TASK_COPY.enlarge}</Button>
-      <dialog ref={dialog} className={styles.figureDialog} aria-labelledby={title} onClick={(event) => {
-        if (event.target !== event.currentTarget) return;
-        const bounds = event.currentTarget.getBoundingClientRect();
-        if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.current?.close();
-      }}>
+      <Button ref={opener} variant="ring" size="nav" onClick={() => {
+        setEnlarged(true);
+        dialog.current?.showModal();
+      }}>{TASK_COPY.enlarge}</Button>
+      <dialog
+        ref={dialog}
+        className={styles.figureDialog}
+        aria-labelledby={title}
+        onClose={() => {
+          setEnlarged(false);
+          opener.current?.focus();
+        }}
+        onClick={(event) => {
+          if (event.target !== event.currentTarget) return;
+          const bounds = event.currentTarget.getBoundingClientRect();
+          if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.current?.close();
+        }}
+      >
         <div className={styles.figureDialogBar}><h3 id={title}>{TASK_COPY.enlarged(block.caption)}</h3><Button variant="navy" size="nav" onClick={() => dialog.current?.close()}>{TASK_COPY.close}</Button></div>
-        {graphic}
+        {enlarged && graphic}
       </dialog>
     </figure>
   );
@@ -126,13 +140,14 @@ export default function PassageTask({ passage, answers, onAnswer, mode, reviewAc
   const questionsPanel = useRef<HTMLElement>(null);
   const positions = useRef({ passage: 0, questions: 0 });
   const [showing, setShowing] = useState<'passage' | 'questions'>('passage');
+  const checkedSet = checked ? new Set(checked) : null;
 
   const jump = () => {
     const scroller = viewport.current;
     const questions = questionsPanel.current;
     const text = passagePanel.current;
     if (!scroller || !questions || !text) return;
-    const questionsTop = questions.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop;
+    const questionsTop = questions.offsetTop - text.offsetTop;
     const inQuestions = scroller.scrollTop >= questionsTop - 20;
     const destination = inQuestions ? 'passage' : 'questions';
     positions.current[inQuestions ? 'questions' : 'passage'] = scroller.scrollTop - (inQuestions ? questionsTop : 0);
@@ -146,8 +161,9 @@ export default function PassageTask({ passage, answers, onAnswer, mode, reviewAc
       <div ref={viewport} className={styles.academicScroll} onScroll={() => {
         const scroller = viewport.current;
         const questions = questionsPanel.current;
-        if (!scroller || !questions) return;
-        setShowing(questions.getBoundingClientRect().top - scroller.getBoundingClientRect().top <= 20 ? 'questions' : 'passage');
+        const text = passagePanel.current;
+        if (!scroller || !questions || !text) return;
+        setShowing(scroller.scrollTop >= questions.offsetTop - text.offsetTop - 20 ? 'questions' : 'passage');
       }}>
         <article ref={passagePanel} className={styles.passage} aria-label={TASK_COPY.passage} tabIndex={-1}>
           <h2>{passage.title}</h2>
@@ -161,7 +177,7 @@ export default function PassageTask({ passage, answers, onAnswer, mode, reviewAc
               question={question}
               number={index + 1}
               answer={answers[question.id]}
-              review={mode === 'review' || checked?.includes(question.id) === true}
+              review={mode === 'review' || checkedSet?.has(question.id) === true}
               onAnswer={onAnswer}
               onCheck={onCheck}
               reviewActions={mode === 'review' ? reviewActions?.(question) : undefined}

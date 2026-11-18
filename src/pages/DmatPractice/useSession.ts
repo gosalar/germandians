@@ -1,5 +1,5 @@
-import { useDocumentVisibility, useInterval } from '@mantine/hooks';
-import { useEffect, useReducer } from 'react';
+import { useDocumentVisibility } from '@mantine/hooks';
+import { useEffect, useReducer, useRef } from 'react';
 
 import * as sessionLogic from '@/utils/dmat/session';
 import type { Phase, Session } from '@/utils/dmat/session';
@@ -67,10 +67,11 @@ function reducer(state: State, action: Action): State {
       return { ...state, ready: true, now: action.now, session: running ? stored : null,
         waiting: running ? null : stored, storageFailed: state.storageFailed || action.failed };
     }
-    case 'tick':
-      return state.session && state.session.mode !== 'practice' && !finished(state.session)
-        ? { ...state, now: action.now, session: sessionLogic.reconcile(state.session, action.now) }
-        : state;
+    case 'tick': {
+      if (!state.session || state.session.mode === 'practice' || finished(state.session)) return state;
+      const next = sessionLogic.reconcile(state.session, action.now);
+      return next === state.session && state.now === action.now ? state : { ...state, now: action.now, session: next };
+    }
     case 'start':
       return { ...state, now: action.now, waiting: null, returning: false,
         session: sessionLogic.createSession(action.mode, action.choice, action.now,
@@ -91,7 +92,11 @@ function reducer(state: State, action: Action): State {
       const after = current.sections.find((run) => run.startedAt !== null && run.endedAt === null);
       // A click queued before a deadline cannot answer or end the next section after catch-up.
       const stale = action.currentSectionOnly && (before !== after || current.finishedAt !== null);
-      return { ...state, now: action.now, session: stale ? current : action.apply(current, action.now) };
+      const next = stale ? current : action.apply(current, action.now);
+      if (next === state.session && (state.session.mode === 'practice' || finished(state.session) || state.now === action.now)) {
+        return state;
+      }
+      return { ...state, now: action.now, session: next };
     }
   }
 }
@@ -99,29 +104,50 @@ function reducer(state: State, action: Action): State {
 export function useSession(): SessionApi {
   const [state, dispatch] = useReducer(reducer, initialState);
   const visibility = useDocumentVisibility();
+  const loadedFromStorage = useRef<Session | null>(null);
+  const prevVisibility = useRef(visibility);
 
   useEffect(() => {
     const now = Date.now();
     const stored = readSession(now);
+    loadedFromStorage.current = stored.session;
     dispatch({ type: 'load', stored: stored.session, failed: stored.failed, now });
   }, []);
 
   const stored = state.session ?? state.waiting;
   useEffect(() => {
-    if (stored && !writeSession(stored)) dispatch({ type: 'storage-failed' });
+    if (!stored) return;
+    if (loadedFromStorage.current === stored) {
+      loadedFromStorage.current = null;
+      return;
+    }
+    loadedFromStorage.current = null;
+    if (!writeSession(stored)) dispatch({ type: 'storage-failed' });
   }, [stored]);
 
   const phase = state.session ? sessionLogic.phaseAt(state.session, state.now) : null;
-  const ticking = phase !== null && phase.kind !== 'finished' && phase.msLeft !== null && phase.msLeft > 0;
-  const { start: startInterval, stop: stopInterval } = useInterval(() => dispatch({ type: 'tick', now: Date.now() }), 1000);
+  // When the phase on screen next changes; nothing counts down in practice, once finished or at a break's zero.
+  const deadline = phase && phase.kind !== 'finished' && phase.msLeft ? state.now + phase.msLeft : null;
   useEffect(() => {
-    if (ticking) startInterval();
-    else stopInterval();
-    return stopInterval;
-  }, [ticking, startInterval, stopInterval]);
+    if (deadline === null) return;
+    let timer: number | undefined;
+    const schedule = () => {
+      const left = deadline - Date.now();
+      const delay = left > 0 ? (left % 1000) || 1000 : 0;
+      timer = window.setTimeout(() => {
+        const currentNow = Date.now();
+        dispatch({ type: 'tick', now: currentNow });
+        if (currentNow < deadline) schedule();
+      }, delay);
+    };
+    schedule();
+    return () => window.clearTimeout(timer);
+  }, [deadline]);
 
   useEffect(() => {
-    dispatch({ type: 'tick', now: Date.now() });
+    const becameVisible = prevVisibility.current !== visibility && visibility === 'visible';
+    prevVisibility.current = visibility;
+    if (becameVisible) dispatch({ type: 'tick', now: Date.now() });
   }, [visibility]);
 
   const change = (apply: Extract<Action, { type: 'change' }>['apply'], currentSectionOnly = false) => {

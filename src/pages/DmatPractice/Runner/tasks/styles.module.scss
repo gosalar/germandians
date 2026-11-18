@@ -31,7 +31,7 @@
 
 .matrix { width: 100%; height: auto; display: block; background: t.$white; }
 .matrixFrame { fill: t.$white; stroke: t.$navy; stroke-width: 2.5; }
-.matrixGrid { stroke: t.$hairline; stroke-width: 1; }
+.matrixGrid { fill: none; stroke: t.$hairline; stroke-width: 1; }
 .questionMark { @include m.label-font(800, 44px); fill: t.$navy; }
 .figures {
   display: grid;
@@ -117,7 +117,7 @@
 }
 
 .academic { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
-.academicScroll { display: grid; gap: 28px; min-width: 0; }
+.academicScroll { position: relative; display: grid; gap: 28px; min-width: 0; }
 .passage, .questions { min-width: 0; padding: 6px; }
 .passage p { margin: 0 0 16px; }
 .passage, .questions, .tableScroll { scroll-padding: 12px; }

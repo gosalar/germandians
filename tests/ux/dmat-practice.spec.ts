@@ -139,3 +139,13 @@ test('untimed practice checks an answer and advances to a different task', async
   await button(page, 'Next task').click();
   await expect(button(page, 'Check answer')).toBeVisible();
 });
+
+test('a test screen that fails to load offers Try again, which loads it', async ({ page }) => {
+  let offline = true;
+  await page.route('**/assets/Runner-*.js', (route) => offline ? route.abort() : route.fallback());
+  await button(page, 'Start the full mock').click();
+  await expect(page.getByRole('alert')).toHaveText('The tasks did not load. Check your connection and try again.');
+  offline = false;
+  await button(page, 'Try again').click();
+  await expect(page.getByRole('heading', { level: 1, name: 'Figure Sequences' })).toBeVisible();
+});

@@ -87,16 +87,24 @@ function beginRun(session: Session, id: SectionId, now: number): Session {
   };
 }
 
+/** The sections a test runs, in order: all four in a full mock, otherwise the one chosen. */
+export const sectionIdsFor = (mode: Mode, choice: StartChoice): readonly SectionId[] =>
+  mode === 'full' ? SECTION_IDS : [choice.section ?? 'figures'];
+
+/** The set a section of this test draws from; see `SectionRun.setId`. */
+export const setIdFor = (mode: Mode, section: SectionId, choice: StartChoice): string =>
+  section === 'academic'
+    ? mode === 'practice' ? choice.passage ?? 'p10' : 'mock'
+    : mode === 'full' ? 'mock' : mode;
+
 export function createSession(mode: Mode, choice: StartChoice, now: number, returning: boolean): Session {
-  const ids = mode === 'full' ? SECTION_IDS : [choice.section ?? 'figures'];
+  const ids = sectionIdsFor(mode, choice);
   return {
     version: 1,
     mode,
     sections: ids.map((id, index) => ({
       id,
-      setId: id === 'academic'
-        ? mode === 'practice' ? choice.passage ?? 'p10' : 'mock'
-        : mode === 'full' ? 'mock' : mode,
+      setId: setIdFor(mode, id, choice),
       startedAt: index === 0 ? now : null,
       endedAt: null,
       endedBy: null,
@@ -162,9 +170,29 @@ export function phaseAt(session: Session, now: number): Phase {
   return { kind: 'finished' };
 }
 
-/** Ignored for an id in `checked`. */
+function equalAnswer(prev: Answer | undefined, next: Answer): boolean {
+  if (!prev || prev.kind !== next.kind) return false;
+  switch (next.kind) {
+    case 'figures':
+      return prev.kind === 'figures' && prev.picks[0] === next.picks[0] && prev.picks[1] === next.picks[1];
+    case 'equations': {
+      if (prev.kind !== 'equations') return false;
+      const prevKeys = Object.keys(prev.values);
+      const nextKeys = Object.keys(next.values);
+      return prevKeys.length === nextKeys.length &&
+        nextKeys.every((key) => Object.hasOwn(prev.values, key) && prev.values[key] === next.values[key]);
+    }
+    case 'latin':
+      return prev.kind === 'latin' && prev.letter === next.letter;
+    case 'question':
+      return prev.kind === 'question' && prev.option === next.option;
+  }
+}
+
+/** Ignored for an id in `checked` or when the answer is unchanged. */
 export function setAnswer(session: Session, id: string, answer: Answer): Session {
   if (session.finishedAt !== null || !activeRun(session) || session.checked.includes(id)) return session;
+  if (equalAnswer(session.answers[id], answer)) return session;
   return { ...session, answers: { ...session.answers, [id]: answer } };
 }
 

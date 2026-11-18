@@ -23,6 +23,7 @@ export interface StartProps {
   storageFailed: boolean;
   /** The slip opens with this chosen (from a "Practise these" link). */
   preset?: { mode: Mode; choice: StartChoice };
+  onPrepare?(mode: Mode, choice: StartChoice): void;
   onStart(mode: Mode, choice: StartChoice): void;
   onResume(): void;
   onDiscard(): void;
@@ -49,7 +50,7 @@ function ResumeBanner({ session, onResume, onDiscard }: { session: Session; onRe
   );
 }
 
-function Slip({ preset, storageFailed, onStart }: Pick<StartProps, 'preset' | 'storageFailed' | 'onStart'>) {
+function Slip({ preset, storageFailed, onPrepare, onStart }: Pick<StartProps, 'preset' | 'storageFailed' | 'onPrepare' | 'onStart'>) {
   const [mode, setMode] = useState<Mode>(preset?.mode ?? 'full');
   const [section, setSection] = useState<SectionId>(preset?.choice.section ?? SECTION_IDS[0]);
   const [passage, setPassage] = useState(preset?.choice.passage ?? PRACTICE_PASSAGES[0]?.id);
@@ -72,6 +73,7 @@ function Slip({ preset, storageFailed, onStart }: Pick<StartProps, 'preset' | 's
     if (mode === 'practice' && section === preset?.choice.section && preset.choice.tag) {
       choice.tag = preset.choice.tag;
     }
+    onPrepare?.(mode, choice);
 
     if (reducedMotion) {
       onStart(mode, choice);
@@ -196,7 +198,7 @@ function TestNotes() {
   );
 }
 
-export default function Start({ waiting, storageFailed, preset, onStart, onResume, onDiscard }: StartProps) {
+export default function Start({ waiting, storageFailed, preset, onPrepare, onStart, onResume, onDiscard }: StartProps) {
   const presetKey = [preset?.mode, preset?.choice.section, preset?.choice.passage, preset?.choice.tag].join(':');
 
   return (
@@ -205,7 +207,7 @@ export default function Start({ waiting, storageFailed, preset, onStart, onResum
         <PageHeader variant="regular" title={PAGE_COPY.title} introduction={PAGE_COPY.introduction} />
         {waiting && <ResumeBanner session={waiting} onResume={onResume} onDiscard={onDiscard} />}
         <div className={styles.grid}>
-          <Slip key={presetKey} preset={preset} storageFailed={storageFailed} onStart={onStart} />
+          <Slip key={presetKey} preset={preset} storageFailed={storageFailed} onPrepare={onPrepare} onStart={onStart} />
           <TestNotes />
         </div>
         <p className={styles.privacy}>{START_COPY.privacy}{' '}<Link to={ROUTES.privacy}>{START_COPY.privacyLink}</Link></p>
