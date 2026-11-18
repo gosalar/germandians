@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Locator, type Page } from '@playwright/test';
 
 import { STORAGE_KEY } from '../../src/utils/applicationPlan/storage.ts';
 import { UX_ENDPOINTS } from './endpoints.ts';
@@ -18,6 +18,19 @@ function attachErrorCollector(page: Page) {
     }
   });
   return issues;
+}
+
+// The page returns focus to a form on the next animation frame after an add. Typing before that
+// frame lands sends the text to whichever field gets focus, so wait for focus to settle first.
+async function addDate(card: Locator, date: string, label: string) {
+  await card.getByLabel('Date (YYYY-MM-DD)', { exact: true }).fill(date);
+  await card.getByLabel('Date label', { exact: true }).fill(label);
+  await card.getByRole('button', { name: 'Add date', exact: true }).click();
+  await expect(card.getByLabel('Date (YYYY-MM-DD)', { exact: true })).toBeFocused();
+}
+
+async function expectProgrammeNameFocused(page: Page) {
+  await expect(page.getByLabel('Programme name', { exact: true })).toBeFocused();
 }
 
 test.beforeEach(async ({ page }) => {
@@ -70,30 +83,22 @@ test('adds programmes with routes, validates URLs and dates, sorts by next upcom
   await page.getByLabel('Link to the programme’s own page (optional)', { exact: true }).fill('http://example.org/tub-distributed');
   await page.getByRole('radio', { name: 'Through uni-assist', exact: true }).check();
   await page.getByRole('button', { name: 'Add programme', exact: true }).click();
+  await expectProgrammeNameFocused(page);
 
   const cards = page.getByTestId('programme-card');
   await expect(cards).toHaveCount(3);
 
   // Validate date input format on RWTH card, then add 2027-05-31.
   const rwthCard = cards.filter({ hasText: 'MSc Software Systems Engineering' });
-  await rwthCard.getByLabel('Date (YYYY-MM-DD)', { exact: true }).fill('2027-02-30');
-  await rwthCard.getByLabel('Date label', { exact: true }).fill('Invalid calendar day');
-  await rwthCard.getByRole('button', { name: 'Add date', exact: true }).click();
+  await addDate(rwthCard, '2027-02-30', 'Invalid calendar day');
   await expect(rwthCard.getByText('Enter a real calendar date written as YYYY-MM-DD.')).toBeVisible();
 
-  await rwthCard.getByLabel('Date (YYYY-MM-DD)', { exact: true }).fill('2027-05-31');
-  await rwthCard.getByLabel('Date label', { exact: true }).fill('Application deadline, "strict"');
-  await rwthCard.getByRole('button', { name: 'Add date', exact: true }).click();
+  await addDate(rwthCard, '2027-05-31', 'Application deadline, "strict"');
 
   // On TUM card, add a past date (2026-10-01) and an upcoming date (2027-01-15) plus documents.
   const tumCard = page.getByTestId('programme-card').filter({ hasText: 'MSc Informatics, Data and Systems' });
-  await tumCard.getByLabel('Date (YYYY-MM-DD)', { exact: true }).fill('2026-10-01');
-  await tumCard.getByLabel('Date label', { exact: true }).fill('Earlier info webinar');
-  await tumCard.getByRole('button', { name: 'Add date', exact: true }).click();
-
-  await tumCard.getByLabel('Date (YYYY-MM-DD)', { exact: true }).fill('2027-01-15');
-  await tumCard.getByLabel('Date label', { exact: true }).fill('VPD request; upload documents');
-  await tumCard.getByRole('button', { name: 'Add date', exact: true }).click();
+  await addDate(tumCard, '2026-10-01', 'Earlier info webinar');
+  await addDate(tumCard, '2027-01-15', 'VPD request; upload documents');
 
   await tumCard.getByLabel('Document', { exact: true }).fill('Degree transcript');
   await tumCard.getByRole('radio', { name: 'Ready', exact: true }).check();
@@ -117,9 +122,7 @@ test('adds programmes with routes, validates URLs and dates, sorts by next upcom
 
   // On TU Berlin card, add an upcoming date 2027-03-01 between TUM (2027-01-15) and RWTH (2027-05-31).
   const tubCard = page.getByTestId('programme-card').filter({ hasText: 'MSc Distributed Computing' });
-  await tubCard.getByLabel('Date (YYYY-MM-DD)', { exact: true }).fill('2027-03-01');
-  await tubCard.getByLabel('Date label', { exact: true }).fill('uni-assist deadline');
-  await tubCard.getByRole('button', { name: 'Add date', exact: true }).click();
+  await addDate(tubCard, '2027-03-01', 'uni-assist deadline');
 
   // Verify sort order by next upcoming date (>= 2026-11-18): TUM (2027-01-15), TU Berlin (2027-03-01), RWTH (2027-05-31).
   await expect(page.getByTestId('programme-card-name')).toHaveText([
@@ -249,6 +252,7 @@ test('discards invalid stored shapes safely and works end-to-end by keyboard wit
 
   const card = page.getByTestId('programme-card');
   await expect(card).toHaveCount(1);
+  await expectProgrammeNameFocused(page);
 
   await card.getByLabel('Date (YYYY-MM-DD)', { exact: true }).focus();
   await page.keyboard.type('2027-02-15');
@@ -257,6 +261,7 @@ test('discards invalid stored shapes safely and works end-to-end by keyboard wit
   await page.keyboard.press('Tab');
   await page.keyboard.press('Enter');
   await expect(card.getByText('2027-02-15', { exact: true })).toBeVisible();
+  await expect(card.getByLabel('Date (YYYY-MM-DD)', { exact: true })).toBeFocused();
 
   await card.getByLabel('Document', { exact: true }).focus();
   await page.keyboard.type('Language certificate');
@@ -298,11 +303,10 @@ for (const width of [320, 390, 768, 1024, 1440]) {
       })
       .check();
     await page.getByRole('button', { name: 'Add programme', exact: true }).click();
+    await expectProgrammeNameFocused(page);
 
     const card = page.getByTestId('programme-card');
-    await card.getByLabel('Date (YYYY-MM-DD)', { exact: true }).fill('2027-04-01');
-    await card.getByLabel('Date label', { exact: true }).fill('Application deadline');
-    await card.getByRole('button', { name: 'Add date', exact: true }).click();
+    await addDate(card, '2027-04-01', 'Application deadline');
 
     await card.getByLabel('Document', { exact: true }).fill('Module catalogue extract');
     await card.getByRole('button', { name: 'Add document', exact: true }).click();
