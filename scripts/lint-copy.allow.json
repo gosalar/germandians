@@ -1,0 +1,86 @@
+[
+  {
+    "file": "src/pages/About/data.ts",
+    "rule": "exclamation",
+    "text": "Hallo, wir sind Germandians!",
+    "reason": "German speech-bubble greeting above the About us heading (lang=\"de\"); German greetings take an exclamation mark."
+  },
+  {
+    "file": "src/pages/About/data.ts",
+    "rule": "exclamation",
+    "text": "Hello, we’re Germandians!",
+    "reason": "Paired English translation beside the German speech-bubble greeting on About us."
+  },
+  {
+    "file": "src/pages/Community/data.ts",
+    "rule": "exclamation",
+    "text": "!",
+    "reason": "Single-character decorative speech-bubble mark (aria-hidden=\"true\") paired with '?' and '→' in the Community origin steps, not prose punctuation."
+  },
+  {
+    "file": "src/pages/Community/index.tsx",
+    "rule": "exclamation",
+    "text": "!",
+    "reason": "Single-character decorative speech-bubble badge glyph (aria-hidden=\"true\") paired with '?' and a heart icon, not prose punctuation."
+  },
+  {
+    "file": "src/pages/Home/Faq/data.tsx",
+    "rule": "guarantee",
+    "text": "Can you guarantee admission?",
+    "reason": "Visitor question in the Home FAQ, answered immediately with 'No. Universities make every admission decision themselves.'"
+  },
+  {
+    "file": "src/pages/Home/Journey/data.ts",
+    "rule": "guarantee",
+    "text": "Student housing is allocated from a waiting list, and a place is not guaranteed.",
+    "reason": "States the student-housing availability limit (SOURCES.housing) by disclaiming a guarantee."
+  },
+  {
+    "file": "src/pages/LearnGerman/data.ts",
+    "rule": "exclamation",
+    "text": "Hallo!",
+    "reason": "German spoken greeting example (lang=\"de\") in the Learn German header bubbles."
+  },
+  {
+    "file": "src/pages/LearnGerman/data.ts",
+    "rule": "exclamation",
+    "text": "Guten Tag!",
+    "reason": "German spoken greeting example (lang=\"de\") in the Learn German header bubbles."
+  },
+  {
+    "file": "src/pages/LearnGerman/data.ts",
+    "rule": "exclamation",
+    "text": "Moin!",
+    "reason": "German spoken greeting example (lang=\"de\") in the Learn German header bubbles."
+  },
+  {
+    "file": "src/pages/LearnGerman/data.ts",
+    "rule": "exclamation",
+    "text": "Servus!",
+    "reason": "German spoken greeting example (lang=\"de\") in the Learn German header bubbles."
+  },
+  {
+    "file": "src/pages/Requirements/Guide/topics/aps-dmat.ts",
+    "rule": "american-spelling",
+    "text": "APS India (Academic Evaluation Center, part of the German Embassy in New Delhi)",
+    "reason": "Official English proper name of APS India (Academic Evaluation Center)."
+  },
+  {
+    "file": "src/pages/Requirements/Guide/topics/deadlines.ts",
+    "rule": "american-spelling",
+    "text": "APS (Akademische Prüfstelle, the Academic Evaluation Center)",
+    "reason": "Official English proper name of APS India (Academic Evaluation Center)."
+  },
+  {
+    "file": "src/pages/Requirements/Guide/topics/visa-enrolment.ts",
+    "rule": "guarantee",
+    "text": "handing in every document does not guarantee a visa.",
+    "reason": "Disclaims a visa guarantee when summarising the German Missions' study-visa checklist (SOURCES.visaChecklist)."
+  },
+  {
+    "file": "src/utils/constants.ts",
+    "rule": "guarantee",
+    "text": "Housing depends on availability, so a room is not guaranteed.",
+    "reason": "Shared ARRIVAL_SUPPORT.availability disclaimer stating the housing availability limit."
+  }
+]
