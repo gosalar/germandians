@@ -1,0 +1,936 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.section {
+  padding: clamp(24px, 3vw, 40px) clamp(20px, 5vw, 72px) clamp(56px, 8vw, 104px);
+
+  @include m.below(t.$bp-mobile) {
+    padding-top: 12px;
+    padding-bottom: 48px;
+  }
+}
+
+.headerLead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-width: 0;
+}
+
+.word {
+  @include m.sticker(t.$cream, t.$navy, -1.5deg);
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+  max-width: 100%;
+  margin: 0;
+  padding: 5px 12px;
+  font-size: 15px;
+}
+
+.wordGerman {
+  @include m.label-font(700, 15px);
+}
+
+.wordMeaning {
+  @include m.label-font(600, 14px);
+  color: t.$slate;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+
+  @include m.below(t.$bp-mobile) {
+    gap: 6px;
+  }
+}
+
+.badge {
+  @include m.label-font(700, 14px);
+  background: t.$sand;
+  color: t.$navy;
+  border: 1px solid t.$hairline;
+  white-space: normal;
+
+  @include m.below(t.$bp-mobile) {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+
+  &[data-tone='green'] {
+    background: t.$status-green-bg;
+    color: t.$status-green-ink;
+    border-color: t.$status-green-border;
+  }
+}
+
+.stack {
+  margin-top: clamp(18px, 2.5vw, 28px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(18px, 2.4vw, 26px);
+}
+
+.toolbar {
+  background: t.$receipt;
+  border: 1.5px solid t.$navy;
+  border-radius: 16px;
+  padding: clamp(14px, 2vw, 20px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  min-width: 0;
+}
+
+.toolbarActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+
+  @include m.below(t.$bp-short-labels) {
+    width: 100%;
+
+    > * {
+      width: 100%;
+    }
+  }
+}
+
+.toolbarMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1 1 240px;
+}
+
+.storageNote {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$ink-soft;
+}
+
+.liveAnnouncement {
+  margin: 0;
+  @include m.label-font(700, 15px);
+  color: t.$green;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.storageAlert {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1.5px solid t.$orange-ink;
+  background: t.$cream;
+  color: t.$ink-strong;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.rulesCard {
+  background: t.$note;
+  border: 1px solid t.$hairline;
+  border-radius: 16px;
+  padding: 4px clamp(16px, 2.2vw, 22px);
+  min-width: 0;
+
+  &[open] {
+    padding-bottom: clamp(16px, 2.2vw, 22px);
+  }
+}
+
+.rulesTitle {
+  margin: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  @include m.label-font(700, 16px);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: t.$navy;
+  list-style: none;
+  justify-content: space-between;
+  gap: 12px;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::after {
+    content: '+';
+    flex: none;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .rulesCard[open] > &::after {
+    content: '−';
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+}
+
+.confirmClear {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirmPrompt {
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+}
+
+.rulesList {
+  margin: 6px 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 6px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$ink-strong;
+}
+
+.panel {
+  background: t.$white;
+  border-radius: 20px;
+  padding: clamp(16px, 2.4vw, 28px);
+  box-shadow:
+    inset 0 0 0 1.5px t.$navy,
+    0 20px 48px -32px rgba(16, 24, 46, 0.24);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+
+  @include m.below(t.$bp-mobile) {
+    border-radius: 16px;
+    gap: 14px;
+  }
+}
+
+.panelHead {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid t.$navy;
+}
+
+.panelTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.08;
+  color: t.$navy;
+  text-wrap: balance;
+}
+
+.panelDescription {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink-soft;
+}
+
+.contextGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    > :last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    > :last-child {
+      grid-column: auto;
+    }
+  }
+}
+
+.addForm {
+  background: t.$form;
+  border: 1px solid t.$hairline;
+  border-radius: 14px;
+  padding: clamp(14px, 1.8vw, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.formHeading {
+  margin: 0;
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+}
+
+.addAreaGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.85fr) auto;
+  }
+}
+
+.addButtonWrap {
+  @include m.from(t.$bp-mobile) {
+    padding-top: 28px;
+  }
+}
+
+.addCourseFields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.7fr);
+
+    > :last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.65fr) minmax(0, 1.2fr);
+
+    > :last-child {
+      grid-column: auto;
+    }
+  }
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.entryList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+
+.areaItem {
+  background: t.$paper;
+  border: 1px solid t.$hairline;
+  border-radius: 12px;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  min-width: 0;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.85fr) auto;
+  }
+}
+
+.removeWrap {
+  display: flex;
+  justify-content: flex-start;
+
+  @include m.from(t.$bp-mobile) {
+    padding-top: 28px;
+    justify-content: flex-end;
+  }
+}
+
+.removeButton {
+  min-height: 44px;
+}
+
+.courseItem {
+  background: t.$paper;
+  border: 1.5px solid t.$line;
+  border-radius: 14px;
+  padding: clamp(14px, 2vw, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.courseItemHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.courseNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: t.$navy;
+  color: t.$yellow;
+  @include m.label-font(700, 15px);
+}
+
+.mappingFieldset {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid t.$hairline;
+  border-radius: 10px;
+  background: t.$white;
+  min-width: 0;
+}
+
+.mappingLegend {
+  padding: 0 6px;
+  @include m.label-font(700, 15px);
+  color: t.$navy;
+}
+
+.draftAreaChecks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  min-width: 0;
+}
+
+.checkboxOption {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.allocationRows {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+}
+
+.allocationRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px 16px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: t.$form;
+  border: 1px solid t.$line;
+  min-width: 0;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: minmax(0, 1fr) minmax(190px, 240px);
+  }
+}
+
+.shareInput {
+  min-width: 0;
+}
+
+.courseFoot {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.courseMappedNote {
+  margin: 0;
+  @include m.label-font(600, 15px);
+  color: t.$ink-soft;
+}
+
+.warningNote {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid t.$red;
+  background: t.$cream;
+  color: t.$red;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.emptyHint {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$slate;
+}
+
+// Worksheet Summary & Print Sheet
+.summaryPanel {
+  background: t.$receipt;
+  border-radius: 20px;
+  padding: clamp(18px, 2.6vw, 32px);
+  box-shadow:
+    inset 0 0 0 2px t.$navy,
+    0 24px 56px -32px rgba(16, 24, 46, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+
+  @include m.below(t.$bp-mobile) {
+    border-radius: 16px;
+    padding: 18px 16px;
+  }
+}
+
+.summaryHead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid t.$navy;
+}
+
+.totalsLine {
+  margin: 0;
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+}
+
+.disclaimer {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border-inline-start: 4px solid t.$yellow;
+  background: t.$paper;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$ink-strong;
+}
+
+.contextSummary {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid t.$hairline;
+  border-radius: 10px;
+  background: t.$white;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px 20px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+.contextPair {
+  min-width: 0;
+
+  dt {
+    @include m.label-font(700, 13px);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: t.$slate;
+  }
+
+  dd {
+    margin: 2px 0 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: t.$navy;
+    overflow-wrap: anywhere;
+
+    a {
+      @include m.touch-area;
+      display: inline-block;
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
+.summaryTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: t.$white;
+  border: 1.5px solid t.$navy;
+  min-width: 0;
+
+  th,
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid t.$hairline;
+    text-align: left;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+  }
+
+  thead th {
+    background: t.$sand;
+    @include m.label-font(700, 16px);
+    color: t.$navy;
+    border-bottom: 1.5px solid t.$navy;
+    overflow-wrap: normal;
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+}
+
+.areaCell {
+  font-weight: 700;
+  color: t.$navy;
+  width: 22%;
+}
+
+.numberCell {
+  @include m.label-font(700, 18px);
+  color: t.$navy;
+  width: 19%;
+}
+
+.coursesCell {
+  width: 40%;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$ink-strong;
+}
+
+.mobileCellLabel {
+  display: none;
+}
+
+@media screen {
+  @include m.below(t.$bp-mobile) {
+    .summaryTable,
+    .summaryTable tbody {
+      display: block;
+      border: 0;
+      background: transparent;
+    }
+
+    .summaryTable thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .summaryTable tbody {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .summaryRow {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 12px;
+      padding: 14px;
+      border: 1.5px solid t.$navy;
+      border-radius: 12px;
+      background: t.$white;
+
+      th,
+      td {
+        padding: 0;
+        border: 0;
+        width: auto;
+      }
+    }
+
+    .areaCell {
+      grid-column: 1 / -1;
+      font-size: 18px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid t.$line;
+    }
+
+    .coursesCell {
+      grid-column: 1 / -1;
+      padding-top: 6px;
+      border-top: 1px solid t.$line;
+    }
+
+    .mobileCellLabel {
+      display: block;
+      @include m.label-font(700, 13px);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: t.$slate;
+    }
+  }
+}
+
+.mappedCourseList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.mappedCourseItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mappedCourseLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+}
+
+.courseSharePill {
+  @include m.label-font(700, 14px);
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: t.$sand;
+  color: t.$navy;
+}
+
+.moduleRefLine {
+  font-size: 14px;
+  color: t.$ink-soft;
+  overflow-wrap: anywhere;
+
+  a {
+    @include m.touch-area;
+    display: inline-block;
+    overflow-wrap: anywhere;
+  }
+}
+
+.unmappedNote {
+  @include m.label-font(600, 15px);
+  color: t.$slate;
+}
+
+.unmappedGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.unmappedCard {
+  background: t.$white;
+  border: 1.5px solid t.$hairline;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.unmappedHeading {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: 20px;
+  line-height: 1.15;
+  color: t.$navy;
+}
+
+.unmappedLead {
+  margin: 0;
+  font-size: 14px;
+  color: t.$slate;
+}
+
+.unmappedList {
+  margin: 4px 0 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$ink-strong;
+  overflow-wrap: anywhere;
+}
+
+.unmappedCredits {
+  @include m.label-font(600, 14px);
+  color: t.$slate;
+}
+
+// Official examples & guide link
+.sourcesSection {
+  background: t.$white;
+  border: 1px solid t.$hairline;
+  border-radius: 20px;
+  padding: clamp(18px, 2.5vw, 28px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  min-width: 0;
+}
+
+.examplesGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.sourceCard {
+  background: t.$paper;
+  border: 1px solid t.$line;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+
+  h3 {
+    margin: 0;
+    font-family: t.$font-body;
+    font-weight: 800;
+    font-size: 17px;
+    line-height: 1.3;
+    color: t.$navy;
+  }
+
+  p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: t.$ink-strong;
+  }
+}
+
+.guideCallout {
+  padding-top: 16px;
+  border-top: 1.5px solid t.$hairline;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.guideCalloutCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 60ch;
+  min-width: 0;
+
+  h3 {
+    margin: 0;
+    @include m.label-font(700, 15px);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: t.$green;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.45;
+    color: t.$ink-strong;
+  }
+}
+
+@media print {
+  .noPrint {
+    display: none;
+  }
+
+  .section {
+    padding: 0;
+  }
+
+  .stack {
+    margin-top: 12px;
+    gap: 14px;
+  }
+
+  .word {
+    transform: none;
+    box-shadow: none;
+    border-width: 1px;
+  }
+
+  .summaryPanel {
+    background: t.$white;
+    box-shadow: none;
+    border: 1.5px solid t.$black;
+    border-radius: 0;
+    padding: 16px;
+  }
+
+  .disclaimer {
+    background: t.$white;
+    border: 1px solid t.$black;
+    border-inline-start-width: 4px;
+    border-radius: 0;
+  }
+
+  .summaryTable {
+    border-color: t.$black;
+
+    thead th {
+      background: t.$white;
+      border-bottom-color: t.$black;
+    }
+
+    tr {
+      break-inside: avoid;
+    }
+  }
+
+  .unmappedCard {
+    border-color: t.$black;
+    border-radius: 0;
+    break-inside: avoid;
+  }
+}
