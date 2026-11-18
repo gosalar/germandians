@@ -37,7 +37,7 @@ To run one spec against those freshly built variants, build them and pass the sp
 node tests/ux/build.mjs && npx playwright test --config playwright.ux.config.ts tests/ux/enquiry.spec.ts
 ```
 
-A focused spec is enough while a change stays inside one flow. Run the full `npm run test:ux` when a change spans shared behaviour, or when one spec cannot cover the risk.
+A focused spec is enough while a change stays inside one flow. Run the full `npm run test:ux` when a change spans shared behaviour, or when one spec cannot cover the risk. Playwright serves the two variants on ports 5603 and 5604 by default, or on `UX_PORT_BASE` and `UX_PORT_BASE + 1` when `UX_PORT_BASE` is set.
 
 The suite has 241 cases across its two variants. The dMAT specs cover guide navigation, all three practice modes, keyboard answers, the clock, local storage, the practice record and a test screen that fails to load.
 
