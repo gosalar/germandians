@@ -194,6 +194,7 @@ export const DESTINATIONS = {
   backToTop: { kind: 'scroll-top' },
   budget: { kind: 'page', page: 'budget' },
   sopPlanner: { kind: 'page', page: 'sopPlanner' },
+  germanWords: { kind: 'page', page: 'germanWords' },
 } as const satisfies Record<string, NavigationDestination>;
 
 /** A destination with the words that link to it. The header, the phone menu and the footer share these. */
@@ -213,6 +214,7 @@ export const PAGE_LINKS = {
   privacy: { destination: DESTINATIONS.privacy, label: 'Privacy' },
   budget: { destination: DESTINATIONS.budget, label: 'Budget planner' },
   sopPlanner: { destination: DESTINATIONS.sopPlanner, label: 'SOP planner' },
+  germanWords: { destination: DESTINATIONS.germanWords, label: 'German words' },
 } as const satisfies Record<string, NavigationLink>;
 
 /**
