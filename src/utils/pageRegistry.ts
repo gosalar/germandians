@@ -88,6 +88,15 @@ export const PAGE_REGISTRY = [
     sitemap: true,
     sections: [],
   },
+  {
+    key: 'budget',
+    path: '/budget',
+    file: 'routes/budget.tsx',
+    shell: 'site',
+    prerender: true,
+    sitemap: true,
+    sections: [SECTIONS.top],
+  },
 ] as const;
 
 type RegistryPage = (typeof PAGE_REGISTRY)[number];

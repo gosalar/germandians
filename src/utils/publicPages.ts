@@ -83,6 +83,14 @@ const METADATA = {
     imageSubtitle: 'Your details and how we use them',
     imageAlt: 'Germandians: privacy note about your details and how we use them',
   },
+  budget: {
+    title: 'Study budget planner | Germandians',
+    description: 'Plan your own monthly living costs and one-off study expenses in euros and convert them to rupees at an exchange rate you enter, alongside official visa and application figures.',
+    image: 'social/budget.png',
+    imageTitle: 'Budget planner',
+    imageSubtitle: 'Your own living and one-off study costs',
+    imageAlt: 'Germandians: plan your monthly living and one-off study costs in Germany',
+  },
 } as const satisfies Record<PageKey, Sharing>;
 
 /** Prerendering, metadata, the sitemap and social labels read this registry. */
