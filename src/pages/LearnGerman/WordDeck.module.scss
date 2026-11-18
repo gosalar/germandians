@@ -1,0 +1,345 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+// Deck chooser bar: five themed pills with German + English names.
+.chooser {
+  margin-top: clamp(24px, 3vw, 36px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.allWords {
+  margin: 0;
+}
+
+.allWordsLink {
+  display: inline-block;
+  padding: 4px 0;
+  color: t.$yellow;
+  @include m.body-copy;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  @include m.touch-area;
+
+  &:hover {
+    color: t.$yellow-bright;
+  }
+}
+
+.deckChoice {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  min-width: 44px;
+  margin: 0;
+  padding: 10px 16px;
+  border: 2px solid t.$mist;
+  border-radius: 999px;
+  background: t.$navy-raised;
+  color: t.$white;
+  @include m.label-font(700, 16px);
+  line-height: 1.2;
+  cursor: pointer;
+
+  &:hover {
+    background: t.$navy-raised-hover;
+    border-color: t.$yellow;
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+
+  &[aria-pressed='true'] {
+    background: t.$yellow;
+    border-color: t.$yellow;
+    color: t.$navy;
+    box-shadow: 3px 3px 0 t.$white;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  }
+
+  @include m.below(t.$bp-short-labels) {
+    flex: 1 1 auto;
+    padding: 10px 14px;
+    font-size: 15px;
+  }
+}
+
+.deckSep {
+  opacity: 0.72;
+}
+
+.deckEn {
+  font-weight: 600;
+}
+
+// Active deck summary, progress counts and Clear my entries action.
+.toolbar {
+  margin-top: 18px;
+  padding: 14px 18px;
+  border: 1.5px solid t.$navy-line;
+  border-radius: 14px;
+  background: t.$navy-raised;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+
+  @include m.below(t.$bp-mobile) {
+    padding: 14px 16px;
+  }
+}
+
+.toolbarCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.deckDescription {
+  margin: 0;
+  font-family: t.$font-body;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.45;
+  color: t.$white;
+  text-wrap: pretty;
+}
+
+.progressLine {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  @include m.label-font(600, 15px);
+  line-height: 1.4;
+  color: t.$mist-light;
+}
+
+.progressDeckCount {
+  font-weight: 700;
+  color: t.$yellow;
+}
+
+.progressSep {
+  color: t.$mist;
+}
+
+.clearButton {
+  flex: none;
+  min-height: 46px;
+  min-width: 44px;
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+}
+
+.storageWarning {
+  margin: 14px 0 0;
+  padding: 12px 16px;
+  border: 2px solid t.$yellow;
+  border-radius: 10px;
+  background: t.$highlight;
+  color: t.$navy;
+  font-family: t.$font-body;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+// Responsive grid override: 1 column on phones so compound German words and the
+// two 44px progress controls never crowd each other; 2 columns on tablets; 3 on desktop.
+.deckGrid {
+  margin: clamp(24px, 3.4vw, 40px) 0 0;
+  grid-template-columns: minmax(0, 1fr);
+
+  @include m.from(t.$bp-stages-2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.cardSlot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  perspective: 1200px;
+}
+
+.cardFlipButton {
+  flex: 1;
+  min-height: clamp(210px, 22vw, 248px);
+}
+
+.wordHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cardTerm {
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.04;
+}
+
+.wordForms {
+  @include m.label-font(600, 14px);
+  line-height: 1.3;
+  color: t.$ink-muted;
+}
+
+// Per-card "Again" / "Got it" controls underneath each flip card.
+.cardActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.markButton {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 44px;
+  margin: 0;
+  padding: 8px 12px;
+  border: 2px solid t.$mist;
+  border-radius: 12px;
+  background: t.$navy-raised;
+  color: t.$white;
+  @include m.label-font(700, 15px);
+  line-height: 1.15;
+  cursor: pointer;
+
+  &:hover {
+    background: t.$navy-raised-hover;
+    border-color: t.$white;
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+
+  &[data-mark='again'][aria-pressed='true'] {
+    background: t.$highlight;
+    border-color: t.$yellow;
+    color: t.$navy;
+  }
+
+  &[data-mark='got-it'][aria-pressed='true'] {
+    background: t.$status-green-bg;
+    border-color: t.$status-green-border;
+    color: t.$navy;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+  }
+}
+
+.markIndicator {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+
+  .markButton[aria-pressed='true'] & {
+    background: currentColor;
+  }
+
+  .markButton[data-mark='again'] & {
+    border-radius: 2px;
+  }
+}
+
+@media print {
+  .wordsSection {
+    background: transparent;
+    color: t.$navy;
+    padding: 24px 0;
+  }
+
+  .printDarkText {
+    color: t.$navy;
+  }
+
+  .printMutedText {
+    color: t.$ink-muted;
+  }
+
+  .chooser,
+  .allWords,
+  .clearButton,
+  .storageWarning,
+  .cardActions,
+  .printHide {
+    display: none;
+  }
+
+  .toolbar {
+    background: transparent;
+    border-color: t.$navy;
+    padding: 10px 12px;
+  }
+
+  .deckGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .cardSlot {
+    break-inside: avoid;
+    perspective: none;
+  }
+
+  .cardFlipButton {
+    min-height: 0;
+    cursor: default;
+  }
+
+  .printInner {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    border: 1.5px solid t.$navy;
+    border-radius: 10px;
+    background: t.$white;
+    transform: none;
+  }
+
+  .wordsSection .cardSlot .cardFlipButton .printFace {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: t.$navy;
+    box-shadow: none;
+    transform: none;
+    opacity: 1;
+    backface-visibility: visible;
+  }
+}
