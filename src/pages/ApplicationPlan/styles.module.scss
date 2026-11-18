@@ -1,0 +1,875 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.section {
+  padding: clamp(24px, 3vw, 40px) clamp(16px, 5vw, 72px) clamp(56px, 8vw, 104px);
+
+  @include m.below(t.$bp-mobile) {
+    padding-top: 12px;
+    padding-bottom: 48px;
+  }
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  @include m.below(t.$bp-mobile) {
+    gap: 6px;
+  }
+}
+
+.badge {
+  @include m.label-font(700, 14px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: t.$sand;
+  color: t.$navy;
+  border: 1px solid t.$hairline;
+
+  @include m.below(t.$bp-mobile) {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+
+  &[data-tone='green'] {
+    background: t.$status-green-bg;
+    color: t.$status-green-ink;
+    border-color: t.$status-green-border;
+  }
+}
+
+.guidanceCard {
+  margin-top: clamp(16px, 2vw, 24px);
+  background: t.$note;
+  border-left: 4px solid t.$navy;
+  border-radius: 10px;
+  padding: 4px clamp(14px, 2.2vw, 22px);
+
+  &[open] {
+    padding-bottom: clamp(14px, 2vw, 18px);
+  }
+
+}
+
+.guidanceBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guidanceSummary {
+  margin: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  @include m.label-font(700, 17px);
+  color: t.$navy;
+  list-style: none;
+  justify-content: space-between;
+  gap: 12px;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::after {
+    content: '+';
+    flex: none;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .guidanceCard[open] > &::after {
+    content: '−';
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+}
+
+.confirmClear {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirmPrompt {
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+}
+
+.guidanceText {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: t.$ink-strong;
+}
+
+.guidanceLinks {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  @include m.label-font(700, 15px);
+  color: t.$navy;
+}
+
+.inlineGuideLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  @include m.label-font(700, 15px);
+  color: t.$navy;
+  text-underline-offset: 3px;
+  @include m.touch-area;
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+}
+
+.toolbar {
+  margin-top: clamp(16px, 2vw, 24px);
+  background: t.$white;
+  border: 1.5px solid t.$navy;
+  border-radius: 14px;
+  padding: clamp(14px, 2vw, 18px) clamp(14px, 2.2vw, 22px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.toolbarTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+}
+
+.storageNotes {
+  flex: 1 1 260px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.storageNote {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: t.$ink-soft;
+}
+
+.storageWarning {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: t.$red;
+}
+
+.toolbarActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  @include m.below(t.$bp-short-labels) {
+    width: 100%;
+
+    > * {
+      flex: 1 1 100%;
+    }
+  }
+}
+
+.liveStatus {
+  margin: 0;
+  @include m.label-font(600, 15px);
+  color: t.$ink-strong;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.workbench {
+  margin-top: clamp(18px, 2.5vw, 28px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+
+  @include m.from(t.$bp-check-columns) {
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    gap: 28px;
+  }
+}
+
+.formPaper {
+  min-width: 0;
+  background: t.$form;
+  color: t.$navy;
+  border: 1.5px solid t.$navy;
+  border-radius: 8px;
+  padding: clamp(16px, 2.4vw, 28px);
+  @include m.pop-shadow(6px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.paperHead {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid t.$navy;
+}
+
+.germanBanner {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+
+.germanWord {
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.05;
+  color: t.$navy;
+}
+
+.germanMeaning {
+  @include m.label-font(600, 15px);
+  color: t.$ink-muted;
+}
+
+.sectionHeading {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(22px, 2.1vw, 28px);
+  line-height: 1.08;
+  color: t.$navy;
+}
+
+.paperSub {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$ink-muted;
+}
+
+.programmeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend {
+  padding: 0;
+  margin-bottom: 4px;
+  font-family: t.$font-body;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: t.$navy;
+}
+
+.fieldHint {
+  margin: 0 0 4px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: t.$ink-soft;
+}
+
+.routeList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.routeRow {
+  background: t.$white;
+  border: 1.5px solid t.$hairline;
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 12px;
+
+  &[data-selected] {
+    border-color: t.$navy;
+    background: t.$cream;
+  }
+}
+
+.routeLabel {
+  flex: 1 1 200px;
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: t.$font-body;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.4;
+  color: t.$navy;
+}
+
+.radioInput {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: t.$navy;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+}
+
+.routeGuideLink {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 4px;
+  @include m.label-font(700, 14px);
+  color: t.$navy;
+  text-underline-offset: 3px;
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+}
+
+.planColumn {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.planHead {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.printNote {
+  display: none;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: t.$ink-soft;
+}
+
+.emptyCard {
+  background: t.$receipt;
+  border: 1.5px dashed t.$navy;
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.emptyTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: 22px;
+  line-height: 1.1;
+  color: t.$navy;
+}
+
+.emptyBody {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink-soft;
+}
+
+.programmeList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.programmeCard {
+  background: t.$white;
+  border: 1.5px solid t.$navy;
+  border-radius: 16px;
+  padding: clamp(16px, 2.4vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  box-shadow: 0 18px 42px -30px rgba(16, 24, 46, 0.25);
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid t.$navy;
+}
+
+.cardTitleGroup {
+  flex: 1 1 220px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
+.orderBadge {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: t.$navy;
+  color: t.$yellow;
+  display: inline-grid;
+  place-items: center;
+  @include m.label-font(700, 15px);
+}
+
+.programmeName {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.1;
+  color: t.$navy;
+  overflow-wrap: anywhere;
+}
+
+.universityName {
+  margin: 0;
+  @include m.label-font(700, 17px);
+  color: t.$ink-soft;
+  overflow-wrap: anywhere;
+}
+
+.nextDatePill {
+  @include m.label-font(700, 14px);
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1.5px solid t.$navy;
+  background: t.$sand;
+  color: t.$navy;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+
+  &[data-tone='upcoming'] {
+    background: t.$navy;
+    color: t.$yellow;
+  }
+
+  &[data-tone='past'] {
+    background: t.$note;
+    border-color: t.$hairline;
+    color: t.$ink-muted;
+  }
+
+  &[data-tone='empty'] {
+    background: t.$paper;
+    border-style: dashed;
+    color: t.$ink-muted;
+  }
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metaRow {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$ink-strong;
+  min-width: 0;
+}
+
+.metaLabel {
+  @include m.label-font(700, 15px);
+  color: t.$navy;
+}
+
+.metaValue {
+  overflow-wrap: anywhere;
+}
+
+.externalLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  @include m.label-font(700, 15px);
+  color: t.$navy;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+}
+
+.printUrl {
+  display: none;
+  font-size: 13px;
+  color: t.$ink-soft;
+  overflow-wrap: anywhere;
+}
+
+.subSection {
+  background: t.$paper;
+  border: 1px solid t.$hairline;
+  border-radius: 12px;
+  padding: clamp(12px, 2vw, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.subSectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+}
+
+.subSectionTitle {
+  margin: 0;
+  @include m.label-font(700, 17px);
+  color: t.$navy;
+}
+
+.docSummary {
+  @include m.label-font(700, 14px);
+  color: t.$ink-muted;
+}
+
+.subEmpty {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$ink-muted;
+}
+
+.entryList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.entryRow {
+  background: t.$white;
+  border: 1px solid t.$hairline;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  min-width: 0;
+}
+
+.dateInfo {
+  flex: 1 1 180px;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+}
+
+.dateCode {
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+}
+
+.dateText {
+  font-size: 15px;
+  line-height: 1.4;
+  color: t.$ink-strong;
+  overflow-wrap: anywhere;
+}
+
+.docInfo {
+  flex: 1 1 160px;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.docLabel {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: t.$navy;
+  overflow-wrap: anywhere;
+}
+
+.docStatusBadge {
+  @include m.label-font(700, 13px);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid t.$navy;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+
+  &[data-status='ready'] {
+    background: t.$status-green-bg;
+    border-color: t.$status-green-border;
+    color: t.$status-green-ink;
+  }
+
+  &[data-status='missing'] {
+    background: t.$highlight;
+    border-color: t.$navy;
+    color: t.$navy;
+  }
+}
+
+.entryControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusToggleGroup {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.statusToggle {
+  @include m.label-font(700, 14px);
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1.5px solid t.$navy;
+  background: t.$paper;
+  color: t.$navy;
+  cursor: pointer;
+
+  &:hover {
+    background: t.$sand;
+  }
+
+  &[aria-pressed='true'] {
+    background: t.$navy;
+    color: t.$yellow;
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$yellow;
+    outline-offset: 3px;
+  }
+}
+
+.compactButton {
+  min-height: 44px;
+}
+
+.inlineForm {
+  padding-top: 8px;
+  border-top: 1px dashed t.$hairline;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+
+  @include m.from(t.$bp-stages-2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.inlineFormFull {
+  grid-column: 1 / -1;
+}
+
+.docStatusRadios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.docRadioLabel {
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1.5px solid t.$hairline;
+  background: t.$white;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  @include m.label-font(700, 15px);
+  color: t.$navy;
+
+  &[data-selected] {
+    border-color: t.$navy;
+    background: t.$cream;
+  }
+}
+
+.cardActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 8px;
+  border-top: 1px solid t.$hairline;
+}
+
+.editBox {
+  background: t.$form;
+  border: 1.5px solid t.$navy;
+  border-radius: 12px;
+  padding: clamp(14px, 2vw, 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.editActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media print {
+  .section {
+    padding: 0;
+  }
+
+  .badges,
+  .guidanceCard,
+  .toolbar,
+  .formPaper,
+  .inlineForm,
+  .entryControls,
+  .cardActions,
+  .editBox,
+  .routeGuideLink,
+  .inlineGuideLink {
+    display: none;
+  }
+
+  .workbench {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .printNote {
+    display: block;
+    margin-top: 6px;
+  }
+
+  .printUrl {
+    display: inline;
+  }
+
+  .programmeList {
+    gap: 14px;
+  }
+
+  .programmeCard {
+    box-shadow: none;
+    border: 1.5px solid t.$black;
+    border-radius: 8px;
+    padding: 14px 16px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .subSection {
+    background: t.$white;
+    border-color: t.$line;
+    padding: 10px 12px;
+  }
+
+  .entryRow {
+    padding: 4px 8px;
+    border-color: t.$line;
+  }
+
+  .nextDatePill {
+    background: t.$white;
+    color: t.$black;
+    border-color: t.$black;
+
+    &[data-tone='upcoming'] {
+      background: t.$white;
+      color: t.$black;
+    }
+  }
+}
