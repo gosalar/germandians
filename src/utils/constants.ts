@@ -192,6 +192,7 @@ export const DESTINATIONS = {
   instagram: { kind: 'external', href: CONTACT.instagramUrl, target: '_blank' as const, rel: 'noopener' as const },
   email: { kind: 'external', href: `mailto:${CONTACT.email}`, target: undefined, rel: undefined },
   backToTop: { kind: 'scroll-top' },
+  budget: { kind: 'page', page: 'budget' },
 } as const satisfies Record<string, NavigationDestination>;
 
 /** A destination with the words that link to it. The header, the phone menu and the footer share these. */
@@ -209,6 +210,7 @@ export const PAGE_LINKS = {
   community: { destination: DESTINATIONS.community, label: 'Community' },
   learnGerman: { destination: DESTINATIONS.learnGerman, label: 'Learn German' },
   privacy: { destination: DESTINATIONS.privacy, label: 'Privacy' },
+  budget: { destination: DESTINATIONS.budget, label: 'Budget planner' },
 } as const satisfies Record<string, NavigationLink>;
 
 /**
