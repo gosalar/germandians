@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T06:49:36.386Z",
+  "generatedAt": "2026-11-18T12:32:45.829Z",
   "sources": {
     "dmat": {
       "url": "https://aps-india.de/dmat/",
@@ -9,22 +9,22 @@
     "test": {
       "url": "https://www.d-mat.de/en/dmat-in-india/",
       "status": 200,
-      "sha256": "67b856b26736c24968d5e8bf7a1bd9ff37ea629b621f5b8510a7c5d28f1f2e83"
+      "sha256": "332521aaab930efe123d6818d9f7654f4a275f665dde1ae2827722f50c34638a"
     },
     "dmatFaq": {
       "url": "https://www.d-mat.de/en/faq-graduate-students-india/",
       "status": 200,
-      "sha256": "bad57f1df601ada8d7e3f30d698c20e2a390145d4102414cb6fb01efda8afd02"
+      "sha256": "4b77306a0811a9a0b0af663b6685d6674892499f441380a1d4ae3d693593b42b"
     },
     "dmatPreparation": {
       "url": "https://www.d-mat.de/en/dmat-in-india/",
       "status": 200,
-      "sha256": "67b856b26736c24968d5e8bf7a1bd9ff37ea629b621f5b8510a7c5d28f1f2e83"
+      "sha256": "332521aaab930efe123d6818d9f7654f4a275f665dde1ae2827722f50c34638a"
     },
     "dmatVideos": {
       "url": "https://www.d-mat.de/en/dmat-in-india/",
       "status": 200,
-      "sha256": "67b856b26736c24968d5e8bf7a1bd9ff37ea629b621f5b8510a7c5d28f1f2e83"
+      "sha256": "332521aaab930efe123d6818d9f7654f4a275f665dde1ae2827722f50c34638a"
     },
     "dmatTerms": {
       "url": "https://www.d-mat.de/en/terms-conditions/",
@@ -69,7 +69,7 @@
     "tum": {
       "url": "https://www.tum.de/en/studies/fees/tuition",
       "status": 200,
-      "sha256": "904742b75cbdfd4315924d1fe0664b688d6efd2d417ff4970d4666b6e8f7e046"
+      "sha256": "7c4656cb28c9013e3f497d4e5afbb3a249fac4bfadb1c2425daf5276759a4aad"
     },
     "housing": {
       "url": "https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/",
@@ -119,7 +119,7 @@
     "gradeConversion": {
       "url": "https://www.tum.de/en/studies/application/application-info-portal/grade-conversion-formula-for-grades-earned-outside-germany",
       "status": 200,
-      "sha256": "e65608c5ac04f5beb8f62a667d409d850224b908d5e7410988fc6601284c6f2c"
+      "sha256": "373c4646fea5e55fd71bd5cf91c466cdeda201d70d32add9ccc15805c8a78cef"
     },
     "ects": {
       "url": "https://education.ec.europa.eu/education-levels/higher-education/inclusive-and-connected-higher-education/european-credit-transfer-and-accumulation-system",
@@ -210,6 +210,86 @@
       "url": "https://www.daad.de/en/studying-in-germany/phd-studies-research/ways-to-your-phd/",
       "status": 200,
       "sha256": "4c30d153d8a5ae3f0c0bbb972a34f3a918ef35b4c218da600b85da4886015e23"
+    },
+    "bmgLandlord": {
+      "url": "https://www.gesetze-im-internet.de/bmg/BJNR108410013.html",
+      "status": 200,
+      "sha256": "cbddadbc2517d3708b3ea25ea90679f46090f59498f83594ee48dada84425c8d"
+    },
+    "bmgRegistrationExceptions": {
+      "url": "https://www.gesetze-im-internet.de/bmg/__27.html",
+      "status": 200,
+      "sha256": "108350c3e26686dd8fef551aa741a10be2ae2f02516ab4cb3240d45eb31c047d"
+    },
+    "daadRegistering": {
+      "url": "https://www.daad.de/en/studying-in-germany/living-in-germany/registering/",
+      "status": 200,
+      "sha256": "3fbaa2d0d2af23bade67333d888e6ac9fa8cba79878750a353db60c715ff1128"
+    },
+    "berlinAnmeldung": {
+      "url": "https://service.berlin.de/dienstleistung/120686/",
+      "status": 200,
+      "sha256": "ded512039a4b4b2585f17c01807da90463bba6e790f76511a5a9d28fa0f305ca"
+    },
+    "bzstTaxId": {
+      "url": "https://bzst.de/DE/Privatpersonen/SteuerlicheIdentifikationsnummer/steuerlicheidentifikationsnummer.html",
+      "status": 200,
+      "sha256": "c6dc6d702b0f277765e81e15f7ab04063031a178278c5e66d16a3e50ff6acdf3"
+    },
+    "bzstTaxIdFirstRegistration": {
+      "url": "https://online.portal.bzst.de/SharedDocs/Leistungsbeschreibung/DE/erneute_mitteilung_der_ID-Nr.html?nn=23996",
+      "status": 200,
+      "sha256": "9eadd02793fac60e5140e5fae8ff343bdedb700950e5fe7e4dc87909a2a7e516"
+    },
+    "tumEnrolment": {
+      "url": "https://www.tum.de/en/studies/application/enrollment-info-portal/enrollment",
+      "status": 200,
+      "sha256": "8ddb6b948f5646b9f9863f3cffeb5bb700e30aaf09e46a585555ee3b0aee0931"
+    },
+    "foreignOfficeBlockedAccount": {
+      "url": "https://www.auswaertiges-amt.de/en/sperrkonto/388600",
+      "status": 200,
+      "sha256": "f338772acc340b38cdec905fbab513489f28845c9937c5768cad66fd1982102c"
+    },
+    "muensterBankAccount": {
+      "url": "https://www.uni-muenster.de/international/en/studierende/general-information/bank-account.html",
+      "status": 200,
+      "sha256": "9a838ad09842f97c17f19858c8af5ad0632a78859f4c5c5d36aeea493ec770ad"
+    },
+    "tumStudentCard": {
+      "url": "https://www.tum.de/en/studies/application/enrollment-info-portal/studentcard",
+      "status": 200,
+      "sha256": "6b354b3826a9580522e6441763336d10427b3cd8bee99690c6d3c7f0ad737b7e"
+    },
+    "tumFirstSteps": {
+      "url": "https://www.tum.de/en/studies/during-your-studies/starting-your-studies/tum-first-steps",
+      "status": 200,
+      "sha256": "34e6236c716ec0b462fbb242621c062f2fd860560b01ad72e613e0f93263228e"
+    },
+    "rundfunkbeitragWelcome": {
+      "url": "https://www.rundfunkbeitrag.de/welcome/english",
+      "status": 200,
+      "sha256": "78e2f1cc983b329edf34c39b11490be340487a1539041bae8b0e6f4adb723f1d"
+    },
+    "rundfunkbeitragStudents": {
+      "url": "https://www.rundfunkbeitrag.de/welcome/english/students-and-apprentices",
+      "status": 200,
+      "sha256": "061b43873a98ce7be7e1ddf635b78198c8a60ebb77ca60a824ef2ab4f8ed97c0"
+    },
+    "berlinResidencePermit": {
+      "url": "https://service.berlin.de/dienstleistung/305244/en/",
+      "status": 200,
+      "sha256": "f509b2dc6835ee7c9d6631f2759fbacacd1c1a31599b6d448bb9cf49cf0dec02"
+    },
+    "residenceActStudy": {
+      "url": "https://www.gesetze-im-internet.de/aufenthg_2004/__16b.html",
+      "status": 200,
+      "sha256": "659020403e7656776e8e055ce8555f58c5241b20ca4407732daa8396888f226f"
+    },
+    "residenceActApplications": {
+      "url": "https://www.gesetze-im-internet.de/aufenthg_2004/__81.html",
+      "status": 200,
+      "sha256": "fcbfec90f0af933f29aa1baff26cdc3c66ef8d478bfb9c2ff021e0417ccafcb5"
     }
   }
 }

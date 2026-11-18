@@ -1,6 +1,6 @@
 # Germandians development
 
-Public site for Germandians, a student-led consultancy that helps Indian students apply to German universities: a landing page (`/`), a grade check that converts grades only (`/check`), a beginner's guide to master's requirements (`/requirements`), the dMAT guide (`/dmat`) and practice tests (`/dmat/practice`), a study budget planner (`/budget`), an SOP planner (`/sop-planner`), About us (`/about`), Community (`/community`), Learn German (`/learn-german`), a privacy note (`/privacy`) and a 404 page. Read `README.md` first for scripts, settings and structure. This file holds the rules and conventions that aren't obvious from the code.
+Public site for Germandians, a student-led consultancy that helps Indian students apply to German universities. The site has a landing page (`/`), a grade check that converts grades only (`/check`), a master's requirements guide (`/requirements`), a dMAT guide (`/dmat`) and practice tests (`/dmat/practice`). Student tools include an application plan (`/application-plan`), credit-matching worksheet (`/credit-match`), budget planner (`/budget`), SOP planner (`/sop-planner`) and German words glossary (`/german-words`) and arrival checklist (`/arrival`). Other pages cover the team (`/about`), community (`/community`), German lessons (`/learn-german`), questions to ask an adviser before paying (`/choosing-help`), a guide for parents (`/parents`) and privacy (`/privacy`). Read `README.md` first for scripts, settings and structure. This file holds the rules and conventions that aren't obvious from the code.
 
 ## Hard rules
 
@@ -23,6 +23,8 @@ npm ci
 npm run dev                  # http://localhost:5173
 npm run lint
 npm run check:bank           # validate the dMAT question bank
+npm run lint:copy            # check site copy against the writing rules
+npm run check:sources        # compare official pages with the local snapshot
 npm run typecheck            # route types, then TypeScript
 npm run build                # typecheck, production build, prerender into build/client/
 npm run preview              # serves build/client at http://localhost:4173
@@ -47,7 +49,7 @@ React 19, React Router 8 in framework mode with build-time prerendering, Vite 8,
 - **Each enquiry has its own form.** The profile-review form (`src/components/Contact/`) is about a profile review: its labels, consent and receipt say so. German lessons have their own form on `/learn-german` (`GermanLessonsForm`, section `german-lessons-form`) with its own questions, consent and email subject. The owners asked for one link between them: a "Teach me German" tick box in the profile-review form, which adds `germanLessons: true` to the review, names German lessons in its consent, shows the lesson terms and links ("Know more", new tab) to the lessons form. Don't merge the two forms or relabel one for the other. Both send through `src/services/enquiry.ts`, each to its own Google Sheet: the admissions sheet for profile reviews, the German lessons sheet for lessons enquiries. A form sends to its sheet when its web app URL is in `ENQUIRY_ENDPOINTS` (`constants.ts`) and opens an email draft otherwise. Those URLs are constants, not settings: the site is static and the browser posts to them, so they are public. Each sheet's Apps Script is in `scripts/google-sheets/`; a payload field added or renamed changes that script, its columns and the README "Google Sheets" section together, and the owner pastes the new script and publishes a new version of the same deployment.
 - Shared components, services and fact modules never import from a page folder.
 - **Section links** that can appear on another page go through `HomeSectionLink`. Navigation destinations are defined once for the nav, the phone menu and the footer. A section link scrolls locally when the page's registry entry lists that section, and routes to Home otherwise. On `/requirements`, links to the page's own topic anchors are plain `<a href="#…">` (`hashLink`), because `HomeSectionLink` sends a hash the entry doesn't list to Home; topic anchors are not in `SECTIONS`. Links to a topic from other pages use `requirementsHref`. Header entries are `NAV_ENTRIES` in `constants.ts`; a group (`NavigationGroup`) renders as a disclosure button in the header (`NavGroup`: opens on click, Enter or Space; closes on Escape with focus returned, an outside click, focus leaving, choosing a link and a page change; no hover-only opening and no menu roles) and as a labelled list in the phone menu. The inline row starts at 1220px (`$bp-nav`); check it at 1219, 1220 and 1221px before adding a top-level entry: it has about 14px spare there with the About group open.
-- **The site shell** (`src/routes/site-layout.tsx`) wraps `/`, `/check`, `/requirements`, `/dmat`, `/dmat/practice`, `/budget`, `/sop-planner`, `/about`, `/community` and `/learn-german` with the header, footer, phone action bar and `PageChromeProvider`. Its immersive flag hides that chrome during a dMAT section or break and clears on navigation. The shell also mounts `VisitAnswersProvider`, which keeps the marks typed on `/check` and the answers given on `/requirements` in memory across pages. They clear on reload and are never stored or put in the URL. `/privacy` and the 404 page use the shared minimal navigation, and utility pages use the shared page header and container. The error page's pieces must render without providers.
+- **The site shell** (`src/routes/site-layout.tsx`) wraps pages using the `site` shell in the page registry with the header, footer, phone action bar and `PageChromeProvider`. Its immersive flag hides that chrome during a dMAT section or break and clears on navigation. Its print styles hide the header, footer and phone action bar. The shell also mounts `VisitAnswersProvider`, which keeps the marks typed on `/check` and the answers given on `/requirements` in memory across pages. They clear on reload and are never stored or put in the URL. `/privacy` and the 404 page use the shared minimal navigation, and utility pages use the shared page header and container. The error page's pieces must render without providers.
 - **Shared controls come from Mantine** with a brand theme in `src/themes/`. See "Mantine" below.
 
 ## Mantine
@@ -71,6 +73,7 @@ Mantine 9 is used with its own styles: not in unstyled mode, and not through a C
 - **No new runtime dependencies** unless the task is impossible without one. Say why if you add one. Don't add a test framework; extend `tests/ux/`.
 - **External links** open in a new tab with `rel="noopener"`.
 - **Facts from outside organisations** (APS, dMAT, uni-assist, visas, tuition) come from the official source, are re-read when you change them, and are shown with a source link and a "last reviewed" date kept in data.
+- **Saved work stays in the browser.** The dMAT practice, application plan, credit-matching worksheet, budget planner, SOP planner, arrival checklist and German word decks save only to the visitor's `localStorage`, through a `storage.ts` (or `history.ts`) beside their logic, and send nothing anywhere. A tool that saves something new is added to the privacy note in the same change.
 - **Keep the README true.** Update the pages list, the Settings table, the Structure tree, the test counts and the Notes when your change affects them.
 - **Logic and state:** keep substantial pure logic, interaction state and network calls apart where it helps; keep shared context narrow.
 - **Documentation upkeep:** a change that alters one of these conventions updates `AGENTS.md` in the same change; a one-off exception is recorded with its scope.
@@ -142,7 +145,9 @@ Three self-hosted brand fonts, used by role:
 | `npm run check:bank` | Generated dMAT bank and question checks | Runs in CI before the build |
 | `npm run test:ux` | Grade check, requirements guide and questions, form states and delivery, contact labels, journey playback, typography roles, console and hydration errors | Builds two pinned variants into `test-results/ux-builds/`: `endpoint` (number set, and fictitious sheet web apps from `tests/ux/endpoints.ts` in place of `ENQUIRY_ENDPOINTS`, port 5603) and `email` (neither, port 5604). Local settings and the real sheet URLs never affect it |
 
-CI runs lint, the build and the UX suite on every pull request and push to `main`. A failure blocks deployment.
+`npm run lint:copy` scans the copy modules for American spellings, exclamation marks, guarantee wording, hype words and, on the dMAT pages, "AI" and "generated". It reports only; a reviewed exception goes in `scripts/lint-copy.allow.json` with a reason. `npm run check:sources` compares the official pages in `SOURCES` with `scripts/sources-snapshot.json` and never edits a fact; after re-reading a changed page and updating its review date, refresh the snapshot with `node scripts/check-sources.mjs --update`. It makes live requests, so tests never call it; `.github/workflows/sources.yml` runs it weekly and on manual dispatch, apart from deployment.
+
+CI runs lint, the build and the UX suite on every pull request and push to `main`, and `npm run lint:copy` on pull requests. A failure blocks deployment.
 
 - **Keep automated tests proportional to the risk.** Add or update a focused Playwright test when a change affects an important user flow or prevents a meaningful regression: navigation, enquiry validation/submission, calculations, mock-test completion and timing when implemented, or keyboard access. Reuse existing coverage; do not add tests simply because a file changed.
 - **Routine edits should stay lightweight.** Copy, spacing, colour and static-content edits do not automatically need new tests. Use browser review for their visual impact. Add an automated check only when there is a specific behaviour or defect worth protecting.
@@ -162,7 +167,7 @@ The reference HTML was an independent target for porting the original design int
 
 - **Builds force production mode** (`vite.config.ts`, `scripts/build.mjs`) because a machine-wide `NODE_ENV` would otherwise ship React's development build. Don't remove the guards; use `npm run build`.
 - **Windows with PowerShell and Git Bash.** Write files with editing tools, not shell heredocs. In Git Bash, set `MSYS_NO_PATHCONV=1` when passing a path that starts with `/`, such as `SITE_BASE_PATH=/germandians/`.
-- **Ports in use by tooling:** 5173 dev, 4173 preview, 5603 and 5604 UX suite. Don't start your own server on one a suite is about to use. Node runs through shims here, so freeing a port means ending both the parent and child process.
+- **Ports in use by tooling:** 5173 dev, 4173 preview, 5603 and 5604 UX suite (`UX_PORT_BASE` moves the pair to that port and the next). Don't start your own server on one a suite is about to use. Node runs through shims here, so freeing a port means ending both the parent and child process.
 - **Node 24 in CI, newer locally.** `scripts/build.mjs` imports a `.ts` file directly, so it needs a Node version that runs TypeScript natively.
 - **Git-ignored output:** `build/`, `test-results/`, `playwright-report/`. Save measurements and other scratch output under `test-results/`.
 - **Sass prints `map-get` deprecation warnings** from `fonts.scss` during builds. Known noise.
@@ -175,7 +180,7 @@ Larger pieces of work arrive as a plan: a Markdown file the owner points you to.
 
 ## Before you report
 
-1. For code or configuration changes affecting the application, run `npm run lint`, `npm run typecheck` and `npm run build`. Documentation-only changes need a diff/consistency check, not an application build or browser run.
+1. For code or configuration changes affecting the application, run `npm run lint`, `npm run typecheck` and `npm run build`; when you changed copy, run `npm run lint:copy` too. Documentation-only changes need a diff/consistency check, not an application build or browser run.
 2. Run the relevant behaviour checks as described above and report their results. New tests are justified by risk, not required for every edit.
 3. For UI changes, review the rendered result at the representative widths above and exercise affected interactions, with zero console or hydration errors.
 

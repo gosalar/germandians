@@ -1,6 +1,6 @@
 # Germandians website
 
-Landing page, German grade conversion, a beginner's guide to master's requirements, a dMAT guide and practice tests, a study budget planner, an SOP planner, About us, Community and Learn German pages, and privacy note for Germandians. The grade check and the requirements questions start empty and do not predict admission or recommend universities.
+Landing page, German grade conversion, a beginner's guide to master's requirements, a dMAT guide and practice tests, an application plan, a credit-matching worksheet, a study budget planner, an SOP planner, a German words glossary, an arrival checklist, a guide for parents, questions to ask an adviser before paying, About us, Community and Learn German pages, and a privacy note for Germandians. The grade check and the requirements questions start empty and do not predict admission or recommend universities.
 
 ## Stack
 
@@ -16,6 +16,8 @@ npm run build      # type-check, build, and prerender into build/client/
 npm run preview    # serve the default build at http://localhost:4173
 npm run lint
 npm run check:bank # validate the dMAT question bank
+npm run lint:copy  # check site copy against the writing rules
+npm run check:sources # compare official pages with the local snapshot
 ```
 
 `build/client/` contains ready-to-serve HTML for every page in the page registry, including `/dmat/` and `/dmat/practice/`. Configure your static host to serve directory indexes and to answer missing pages with `404.html` (a copy of the SPA fallback that the build writes). GitHub Pages and the preview server do both.
@@ -39,7 +41,7 @@ node tests/ux/build.mjs && npx playwright test --config playwright.ux.config.ts 
 
 A focused spec is enough while a change stays inside one flow. Run the full `npm run test:ux` when a change spans shared behaviour, or when one spec cannot cover the risk. Playwright serves the two variants on ports 5603 and 5604 by default, or on `UX_PORT_BASE` and `UX_PORT_BASE + 1` when `UX_PORT_BASE` is set.
 
-The suite has 276 cases across its two variants. The dMAT specs cover guide navigation, all three practice modes, keyboard answers, the clock, local storage, the practice record and a test screen that fails to load.
+The suite has 407 cases across its two variants. The dMAT specs cover guide navigation, all three practice modes, the four mocks, keyboard answers, the clock, local storage, the practice record, attempt history and a test screen that fails to load. The application plan and credit-matching specs include blocked saves and blocked clears. The arrival checklist, choosing-help and parents specs cover those pages.
 
 `npm run test:recheck` runs the same viewport sweep against a build you serve yourself, by default at `http://localhost:5611/germandians` (set `RECHECK_BASE_URL` for another address). Use it for the Pages subpath: build with `SITE_BASE_PATH=/germandians/`, copy `build/client/` into a `germandians` folder, copy its `404.html` into the parent as well (GitHub Pages answers a project site's missing paths with that site's `404.html`), and serve the parent with `node scripts/serve.mjs <parent> 5611`.
 
@@ -47,7 +49,7 @@ The suite has 276 cases across its two variants. The dMAT specs cover guide navi
 
 In the repository's **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. To override the public site settings listed below, add repository variables under **Settings → Secrets and variables → Actions → Variables** before building.
 
-Pull requests targeting `main` run lint, the dMAT bank check, TypeScript checks, a production build and Playwright tests. A successful push to `main` publishes `build/client/` at [gosalar.github.io/germandians](https://gosalar.github.io/germandians/). The workflow builds with `SITE_BASE_PATH` (default `/germandians/`) for both Vite assets and router links. The build places the prerendered pages at their artifact-relative paths, writes the SPA fallback as `404.html`, and writes `sitemap.xml` and `robots.txt`. To redeploy after changing a variable, run **Site CI and Pages deployment** manually on `main` from the Actions tab.
+Pull requests targeting `main` run lint, the copy check, the dMAT bank check, TypeScript checks, a production build and Playwright tests. A successful push to `main` publishes `build/client/` at [gosalar.github.io/germandians](https://gosalar.github.io/germandians/). The workflow builds with `SITE_BASE_PATH` (default `/germandians/`) for both Vite assets and router links. The build places the prerendered pages at their artifact-relative paths, writes the SPA fallback as `404.html`, and writes `sitemap.xml` and `robots.txt`. To redeploy after changing a variable, run **Site CI and Pages deployment** manually on `main` from the Actions tab.
 
 **Moving to a custom domain.** After the domain is bought and its DNS points at GitHub Pages (see GitHub's custom-domain documentation), set the domain under **Settings → Pages → Custom domain** and turn on **Enforce HTTPS**. Then set two repository variables: `SITE_BASE_PATH` to `/` and `VITE_SITE_ORIGIN` to the domain's HTTPS origin, for example `https://example.com`. A workflow deployment needs no `CNAME` file. Canonical URLs, sharing tags, the sitemap and `robots.txt` follow these two settings. A new business mailbox replaces `CONTACT.email` in `src/utils/constants.ts`; update the privacy note's description of the email provider at the same time.
 
@@ -123,12 +125,19 @@ src/
 │   │                               # Opening, Questions (the Fragebogen), NextSteps (the Laufzettel), Guide, CommonQuestions, OtherApplicants;
 │   │                               # Guide holds TopicCard, CostsTable, Stamp and one file per topic in topics/
 │   ├── Dmat/                       # official format, registration and test-day guide
-│   ├── DmatPractice/               # start and breaks; the runner, record and question files load on demand (screens.ts, bank/)
+│   ├── DmatPractice/               # start and breaks; the runner, record and question files load on demand (screens.ts, bank/);
+│   │                               # History lists past attempts as task counts, saved in this browser only
+│   ├── ApplicationPlan/            # programme list with dates, document lists and export
+│   ├── CreditMatch/                # subject credits and course mappings
+│   ├── GermanWords/                # searchable glossary, grouped by topic
 │   ├── Budget/                     # study budget planner in euros and rupees; copy in data.ts
+│   ├── Arrival/                    # arrival checklist: steps after landing, ticked in this browser only; copy and sources in data.ts
 │   ├── SopPlanner/                 # five-part Statement of Purpose outline and stock-phrase check; copy in data.ts
 │   ├── About/                      # data.ts holds the copy and TEAM; TeamGallery (portraits and profile dialog), Portraits (stand-in animals), ExperienceRecord
 │   ├── Community/                  # community page; channels and copy in data.ts
-│   ├── LearnGerman/                # German lessons page; GermanLessonsForm is its enquiry form, WordDeck the flip cards
+│   ├── LearnGerman/                # German lessons page, enquiry form and themed word decks
+│   ├── ChoosingHelp/               # six questions to ask any adviser, with Germandians' answers read from shared constants
+│   ├── Parents/                    # guide for parents: costs, blocked account, scope of help, fee timing
 │   ├── Privacy/                    # standalone privacy note
 │   └── ErrorPage/                  # 404 and route errors; copy in data.ts
 ├── components/
@@ -147,14 +156,15 @@ src/
                                     # publicPages (titles and descriptions); siteConfig (env); applicationFacts
                                     # (dated sources and costs); gradeConversion (marks to German grade, shared by
                                     # /check and /requirements); requirements/ (topics, questions, logic);
-                                    # dmat/ (session timing, marking and storage); budget/ (budget totals and storage);
+                                    # dmat/ (session timing, marking, history and storage); budget/ (budget totals and storage);
+                                    # applicationPlan/ (programme planning and export); creditMatch/ (course mappings and export);
                                     # sopPlanner/ (word counts, stock-phrase check and storage);
                                     # metadata, publicSite, contactSettings, styles
 ```
 
 ## Notes
 
-- **dMAT question bank.** The Core questions are generated with seeded runs and the academic passages are maintained in `scripts/dmat/`. Both follow the task formats published by g.a.s.t. Regenerate the bank with `node scripts/dmat/build-bank.ts`, then run `npm run check:bank`. Change the generators or passages when updating the content. The practice route loads each section when it is needed, and the homepage never fetches the bank.
+- **dMAT question bank.** The Core questions are generated with seeded runs and the academic passages are maintained in `scripts/dmat/`. Both follow the task formats published by g.a.s.t. Regenerate the bank with `node scripts/dmat/build-bank.ts`, then run `npm run check:bank`. Change the generators or passages when updating the content. The practice route loads the selected mock's sections when needed, and the homepage never fetches the bank. Finished attempts stay in the browser and support an untimed review of missed questions.
 
 - **Process and costs.** Shared fee wording lives in `constants.ts`; intake labels and readiness in `siteConfig.ts`; dMAT, housing, tuition and external costs with dated official sources in `applicationFacts.ts`. Re-read the official page before changing a figure there, and update its review date. The seven-month journey is an overlapping example, not a duration promise. The fee promise is the standard arrangement; the written quote defines exceptions and payment terms.
 - **Official source checks.** `.github/workflows/sources.yml` runs `node scripts/check-sources.mjs` each week and on manual dispatch against `scripts/sources-snapshot.json`, writing changed or unreachable `SOURCES` URLs to the workflow summary without running on pushes or pull requests. Run `node scripts/check-sources.mjs --update` after re-reading a changed official page and updating its review date in `applicationFacts.ts`.

@@ -29,6 +29,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      - run: npm run lint:copy
+        if: github.event_name == 'pull_request'
       - run: npm run check:bank
       - name: Type-check and build for Pages
         run: npm run build
