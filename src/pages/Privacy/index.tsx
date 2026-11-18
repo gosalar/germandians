@@ -98,6 +98,11 @@ export default function Privacy() {
               saved figures immediately.
             </p>
             <p className={styles.text}>
+              Your SOP planner notes stay in your browser on your device under the key germandians:sop-planner, so you
+              can reload the page or print your outline without losing what you typed. The site never sends these notes
+              to us or anywhere else. Using “Clear my entries” removes them from your browser.
+            </p>
+            <p className={styles.text}>
               If you ask about German lessons, through their form or the “Teach me German” box on the profile-review
               form, we also receive that interest and any answers you give: the language you’d like explanations in,
               what you need German for and any German you already have.

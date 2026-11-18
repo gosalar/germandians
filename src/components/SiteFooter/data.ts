@@ -19,6 +19,7 @@ export const FOOTER_LINKS = [
   PAGE_LINKS.community,
   PAGE_LINKS.learnGerman,
   PAGE_LINKS.budget,
+  PAGE_LINKS.sopPlanner,
   PAGE_LINKS.privacy,
   { destination: DESTINATIONS.backToTop, label: 'Back to top' },
 ] as const;

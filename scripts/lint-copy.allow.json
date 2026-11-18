@@ -78,6 +78,18 @@
     "reason": "Disclaims a visa guarantee when summarising the German Missions' study-visa checklist (SOURCES.visaChecklist)."
   },
   {
+    "file": "src/pages/SopPlanner/data.ts",
+    "rule": "hype",
+    "text": "cutting-edge-research",
+    "reason": "Stable id for the 'cutting-edge research' negative stock-phrase entry in STOCK_PHRASES."
+  },
+  {
+    "file": "src/pages/SopPlanner/data.ts",
+    "rule": "hype",
+    "text": "cutting-edge research",
+    "reason": "Intentional negative stock-phrase pattern detected and flagged by the SOP planner in STOCK_PHRASES."
+  },
+  {
     "file": "src/utils/constants.ts",
     "rule": "guarantee",
     "text": "Housing depends on availability, so a room is not guaranteed.",

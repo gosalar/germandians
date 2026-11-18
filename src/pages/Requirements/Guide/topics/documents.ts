@@ -1,4 +1,5 @@
 import { SOURCES, UNI_ASSIST } from '@/utils/applicationFacts';
+import { ROUTES } from '@/utils/constants';
 import { REQUIREMENT_TOPIC_TITLES } from '@/utils/requirements/topics';
 
 import type { StandardTopic } from '../types';
@@ -40,6 +41,11 @@ export const documents = {
       heading: 'CV, motivation letter and references',
       body: 'uni-assist says the documents needed depend on the university and course. Some ask for a CV with no gaps, a letter of motivation explaining why you are applying, letters of recommendation from your professors, or proof of internships; portfolios are usually asked for in art or architecture. Put the university and programme in bold at the top of a motivation letter so it reaches the right application.',
       source: SOURCES.uniAssistOtherDocuments,
+    },
+    {
+      heading: 'SOP planner',
+      body: 'If a programme asks for a motivation letter or Statement of Purpose, you can structure your notes in your own words in the SOP planner.',
+      link: { label: 'Open the SOP planner', to: ROUTES.sopPlanner },
     },
     {
       heading: 'For APS',
