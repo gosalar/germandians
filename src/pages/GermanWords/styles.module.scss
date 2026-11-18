@@ -1,0 +1,618 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Header band: page title and lead beside the article key card.
+.top {
+  padding: clamp(36px, 6vw, 84px) clamp(18px, 5vw, 72px) clamp(40px, 5vw, 64px);
+}
+
+.topGrid {
+  @include m.container;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 48px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    gap: clamp(40px, 5vw, 80px);
+    align-items: center;
+  }
+}
+
+.kickerSticker {
+  align-self: flex-start;
+  margin: 0 0 6px;
+  @include m.sticker(t.$yellow, t.$navy, -1.5deg);
+}
+
+.kickerEn {
+  font-weight: 600;
+  color: t.$ink-strong;
+}
+
+.guideCard {
+  min-width: 0;
+  background: t.$navy;
+  color: t.$white;
+  border-radius: 22px;
+  padding: clamp(22px, 3vw, 34px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @include m.pop-shadow(8px, t.$yellow);
+
+  @include m.from(t.$bp-content-columns) {
+    transform: rotate(0.8deg);
+  }
+
+  @include m.below(t.$bp-mobile) {
+    border-radius: 16px;
+    padding: 20px;
+    gap: 14px;
+    @include m.pop-shadow(5px, t.$yellow);
+  }
+}
+
+.guideTitle {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.05;
+  color: t.$yellow;
+}
+
+.guideTitleEn {
+  @include m.label-font(600, 16px);
+  color: t.$mist;
+}
+
+.guideBody {
+  @include m.body-copy;
+  font-size: clamp(16px, 1.25vw, 17px);
+  color: t.$mist-light;
+}
+
+.articleLegend {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.articleLegendRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  line-height: 1.4;
+  color: t.$mist-light;
+}
+
+.guideDisclaimer {
+  margin: 2px 0 0;
+  padding: 12px 14px;
+  border: 2px dashed t.$yellow;
+  border-radius: 12px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$white;
+  text-wrap: pretty;
+}
+
+// Shared article pill styling used in both the key card and each entry card.
+.articleBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  @include m.label-font(800, 15px);
+  line-height: 1.2;
+  border: 2px solid t.$navy;
+
+  &[data-article='der'] {
+    background: t.$navy;
+    color: t.$yellow;
+    border-color: t.$yellow;
+  }
+
+  &[data-article='die'] {
+    background: t.$red;
+    color: t.$white;
+    border-color: t.$navy;
+  }
+
+  &[data-article='das'] {
+    background: t.$yellow;
+    color: t.$navy;
+    border-color: t.$navy;
+  }
+
+  &[data-article='particle'] {
+    background: t.$sand;
+    color: t.$navy;
+    border-color: t.$navy;
+  }
+}
+
+.entryCard .articleBadge[data-article='der'] {
+  border-color: t.$navy;
+}
+
+// Filter & area controls band.
+.controlsBand {
+  padding: 0 clamp(18px, 5vw, 72px) clamp(28px, 4vw, 44px);
+}
+
+.controlsInner {
+  @include m.container;
+}
+
+.controlsCard {
+  background: t.$white;
+  border: 2.5px solid t.$navy;
+  border-radius: 20px;
+  padding: clamp(18px, 2.6vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  @include m.pop-shadow(6px, t.$navy);
+
+  @include m.below(t.$bp-mobile) {
+    border-radius: 16px;
+    padding: 16px;
+    gap: 14px;
+    @include m.pop-shadow(4px, t.$navy);
+  }
+}
+
+.controlsHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.controlsTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.05;
+  color: t.$navy;
+}
+
+.resultStatus {
+  margin: 0;
+  @include m.label-font(700, 16px);
+  color: t.$ink-muted;
+}
+
+.searchRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.searchInput {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.clearButton {
+  flex: none;
+  min-height: 54px;
+}
+
+.areaChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.areaChip {
+  appearance: none;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 2px solid t.$navy;
+  border-radius: 999px;
+  background: t.$paper;
+  color: t.$navy;
+  @include m.label-font(700, 15px);
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background var(--motion-duration, 0.18s),
+    color var(--motion-duration, 0.18s);
+
+  &:hover {
+    background: t.$cream-hover;
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$navy;
+    outline-offset: 3px;
+  }
+
+  &[aria-pressed='true'] {
+    background: t.$navy;
+    color: t.$yellow;
+  }
+}
+
+// Glossary cards band.
+.glossaryBand {
+  background: t.$sand;
+  padding: clamp(40px, 6vw, 76px) clamp(18px, 5vw, 72px);
+  border-top: 2px solid t.$line;
+  border-bottom: 2px solid t.$line;
+}
+
+.glossaryInner {
+  @include m.container;
+}
+
+.grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(18px, 2.4vw, 26px);
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include m.from(t.$bp-check-columns) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.entryCard {
+  min-width: 0;
+  background: t.$white;
+  color: t.$navy;
+  border: 2.5px solid t.$navy;
+  border-radius: 18px;
+  padding: clamp(18px, 2.2vw, 24px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  @include m.pop-shadow(5px, t.$navy);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.18s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.entryTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.areaTag {
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: t.$note;
+  color: t.$ink-strong;
+  border: 1px solid t.$hairline;
+  @include m.label-font(700, 14px);
+  line-height: 1.25;
+}
+
+.entryWordBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.entryHeading {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(22px, 2.3vw, 28px);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: t.$navy;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.entryForms {
+  margin: 0;
+  @include m.label-font(600, 15px);
+  line-height: 1.35;
+  color: t.$ink-muted;
+}
+
+.entryMeaning {
+  margin: 0;
+  font-family: t.$font-body;
+  font-weight: 700;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.4;
+  color: t.$ink-strong;
+  text-wrap: pretty;
+}
+
+.exampleBox {
+  margin-top: 2px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: t.$cream;
+  border: 1.5px solid t.$line;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exampleDe {
+  margin: 0;
+  font-family: t.$font-body;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+  color: t.$red;
+  text-wrap: pretty;
+}
+
+.exampleEn {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 15px;
+  line-height: 1.4;
+  color: t.$ink-muted;
+  text-wrap: pretty;
+}
+
+.whereBlock {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1.5px dashed t.$line;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.whereLabel {
+  margin: 0;
+  @include m.label-font(700, 13px);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: t.$ink-muted;
+}
+
+.whereText {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 15px;
+  line-height: 1.45;
+  color: t.$ink;
+  text-wrap: pretty;
+}
+
+.topicLink {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 0;
+  @include m.label-font(700, 15px);
+  line-height: 1.3;
+  color: t.$navy;
+  text-decoration: underline;
+  text-decoration-color: t.$yellow;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 3px;
+  @include m.touch-area;
+
+  &:hover {
+    color: t.$red;
+  }
+
+  &:focus-visible {
+    outline: 3px solid t.$navy;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+// Empty filter state.
+.emptyState {
+  background: t.$white;
+  border: 2.5px solid t.$navy;
+  border-radius: 18px;
+  padding: clamp(24px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  @include m.pop-shadow(6px, t.$navy);
+}
+
+.emptyTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(24px, 2.6vw, 32px);
+  line-height: 1.05;
+  color: t.$navy;
+}
+
+.emptyBody {
+  @include m.body-copy;
+  max-width: 54ch;
+  color: t.$ink;
+}
+
+// Next steps band at the bottom of the page.
+.nextBand {
+  padding: clamp(48px, 6vw, 84px) clamp(18px, 5vw, 72px);
+}
+
+.nextInner {
+  @include m.container;
+}
+
+.nextCard {
+  padding: clamp(24px, 3.2vw, 40px);
+  border-radius: 22px;
+  background: t.$navy;
+  color: t.$white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  @include m.pop-shadow(8px, t.$red);
+
+  @include m.below(t.$bp-mobile) {
+    border-radius: 16px;
+    padding: 20px;
+    @include m.pop-shadow(5px, t.$red);
+  }
+}
+
+.nextCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 64ch;
+}
+
+.nextTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(26px, 2.8vw, 38px);
+  line-height: 1.05;
+  color: t.$yellow;
+  text-wrap: balance;
+}
+
+.nextBody {
+  @include m.body-copy;
+  color: t.$mist-light;
+}
+
+.nextActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+// Printable glossary view: clean two-column cards without interactive chrome or shadows.
+@media print {
+  .top {
+    padding: 0 0 16px;
+  }
+
+  .kickerSticker {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .guideCard {
+    background: t.$white;
+    color: t.$black;
+    border: 1.5px solid t.$black;
+    box-shadow: none;
+    transform: none;
+    padding: 12px 16px;
+  }
+
+  .guideTitle,
+  .guideTitleEn,
+  .guideBody,
+  .articleLegendRow,
+  .guideDisclaimer {
+    color: t.$black;
+    border-color: t.$black;
+  }
+
+  .controlsBand,
+  .nextBand {
+    display: none;
+  }
+
+  .glossaryBand {
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .entryCard {
+    box-shadow: none;
+    border: 1px solid t.$black;
+    border-radius: 8px;
+    padding: 10px 12px;
+    gap: 6px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .articleBadge {
+    background: none;
+    color: t.$black;
+    border: 1px solid t.$black;
+  }
+
+  .exampleBox {
+    background: none;
+    border: 1px solid t.$hairline;
+    padding: 6px 8px;
+  }
+
+  .exampleDe,
+  .exampleEn,
+  .entryForms,
+  .whereLabel,
+  .whereText,
+  .topicLink {
+    color: t.$black;
+  }
+
+  .topicLink {
+    text-decoration: none;
+  }
+}
