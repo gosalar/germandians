@@ -9,11 +9,13 @@ import SourceNote from '@/components/SourceNote';
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
 import { SOURCES } from '@/utils/applicationFacts';
 import { ROUTES } from '@/utils/constants';
+import type { HistoryAttempt } from '@/utils/dmat/history';
 import type { Session } from '@/utils/dmat/session';
 import { MODES, SECTION_IDS, type Mode, type SectionId, type StartChoice } from '@/utils/dmat/types';
 
-import { PRACTICE_PASSAGES } from '../bank';
+import { MOCK_COUNT, MOCK_NUMBERS, PRACTICE_PASSAGES } from '../bank';
 import { MODE_LABELS, PAGE_COPY, SECTION_LABELS } from '../data';
+import PracticeHistory from '../History';
 import Confirmation from './Confirmation';
 import { FORMAT_ROWS, FORMAT_SOURCES, MODE_DESCRIPTIONS, START_COPY, TIMED_MINUTES } from './data';
 import styles from './styles.module.scss';
@@ -21,20 +23,27 @@ import styles from './styles.module.scss';
 export interface StartProps {
   waiting: Session | null;
   storageFailed: boolean;
+  history?: readonly HistoryAttempt[];
+  historySaveFailed?: boolean;
   /** The slip opens with this chosen (from a "Practise these" link). */
   preset?: { mode: Mode; choice: StartChoice };
   onPrepare?(mode: Mode, choice: StartChoice): void;
   onStart(mode: Mode, choice: StartChoice): void;
   onResume(): void;
   onDiscard(): void;
+  onClearHistory?(): boolean;
 }
 
 function ResumeBanner({ session, onResume, onDiscard }: { session: Session; onResume(): void; onDiscard(): void }) {
   const title = useId();
   const copy = START_COPY.backup;
-  let message: string = copy[session.mode];
-  if (session.finishedAt !== null) message = copy.record;
-  else if (session.mode === 'full' && session.breakStartedAt !== null) message = copy.break;
+  const mock = session.mode === 'practice' ? undefined : session.mock ?? 1;
+  let message: string;
+  if (session.finishedAt !== null) message = copy.record(mock);
+  else if (session.mode === 'practice') message = copy.practice;
+  else if (session.mode === 'full' && session.breakStartedAt !== null) message = copy.break(mock ?? 1);
+  else if (session.mode === 'full') message = copy.full(mock ?? 1);
+  else message = copy.section(mock ?? 1);
 
   return (
     <section className={styles.banner} aria-labelledby={title}>
@@ -52,6 +61,7 @@ function ResumeBanner({ session, onResume, onDiscard }: { session: Session; onRe
 
 function Slip({ preset, storageFailed, onPrepare, onStart }: Pick<StartProps, 'preset' | 'storageFailed' | 'onPrepare' | 'onStart'>) {
   const [mode, setMode] = useState<Mode>(preset?.mode ?? 'full');
+  const [mock, setMock] = useState<number>(preset?.choice.mock ?? MOCK_NUMBERS[0] ?? 1);
   const [section, setSection] = useState<SectionId>(preset?.choice.section ?? SECTION_IDS[0]);
   const [passage, setPassage] = useState(preset?.choice.passage ?? PRACTICE_PASSAGES[0]?.id);
   const [stamped, setStamped] = useState(false);
@@ -59,6 +69,7 @@ function Slip({ preset, storageFailed, onPrepare, onStart }: Pick<StartProps, 'p
   const reducedMotion = useReducedMotion();
   const { heroCtaRef } = usePageChromeActions();
   const prefix = useId();
+  const chooseMock = mode !== 'practice';
   const choosePassage = mode === 'practice' && section === 'academic';
 
   useEffect(() => () => {
@@ -68,7 +79,7 @@ function Slip({ preset, storageFailed, onPrepare, onStart }: Pick<StartProps, 'p
   const start = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (stamped || (choosePassage && !passage)) return;
-    const choice: StartChoice = mode === 'full' ? {} : { section };
+    const choice: StartChoice = mode === 'full' ? { mock } : mode === 'section' ? { mock, section } : { section };
     if (choosePassage) choice.passage = passage;
     if (mode === 'practice' && section === preset?.choice.section && preset.choice.tag) {
       choice.tag = preset.choice.tag;
@@ -110,6 +121,19 @@ function Slip({ preset, storageFailed, onPrepare, onStart }: Pick<StartProps, 'p
             </label>
           ))}
         </fieldset>
+        {chooseMock && (
+          <fieldset disabled={stamped}>
+            <legend>{START_COPY.mocks}</legend>
+            <div className={styles.options}>
+              {MOCK_NUMBERS.map((value) => (
+                <label key={value} className={styles.option} data-selected={mock === value}>
+                  <input type="radio" name={`${prefix}-mock`} value={value} checked={mock === value} onChange={() => setMock(value)} />
+                  {START_COPY.mockLabel(value)}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        )}
         {mode !== 'full' && (
           <fieldset disabled={stamped}>
             <legend>{START_COPY.sections}</legend>
@@ -191,15 +215,26 @@ function TestNotes() {
         <p>{START_COPY.independence}</p>
         <p>{START_COPY.questions}</p>
         <p>{START_COPY.difficulty}</p>
-        <p>{START_COPY.academicSet}</p>
+        <p>{START_COPY.academicSet(MOCK_COUNT)}</p>
         <p>{START_COPY.figures}</p>
       </section>
     </div>
   );
 }
 
-export default function Start({ waiting, storageFailed, preset, onPrepare, onStart, onResume, onDiscard }: StartProps) {
-  const presetKey = [preset?.mode, preset?.choice.section, preset?.choice.passage, preset?.choice.tag].join(':');
+export default function Start({
+  waiting,
+  storageFailed,
+  history,
+  historySaveFailed,
+  preset,
+  onPrepare,
+  onStart,
+  onResume,
+  onDiscard,
+  onClearHistory,
+}: StartProps) {
+  const presetKey = [preset?.mode, preset?.choice.mock, preset?.choice.section, preset?.choice.passage, preset?.choice.tag].join(':');
 
   return (
     <section className={styles.start}>
@@ -207,7 +242,17 @@ export default function Start({ waiting, storageFailed, preset, onPrepare, onSta
         <PageHeader variant="regular" title={PAGE_COPY.title} introduction={PAGE_COPY.introduction} />
         {waiting && <ResumeBanner session={waiting} onResume={onResume} onDiscard={onDiscard} />}
         <div className={styles.grid}>
-          <Slip key={presetKey} preset={preset} storageFailed={storageFailed} onPrepare={onPrepare} onStart={onStart} />
+          <div className={styles.mainColumn}>
+            <Slip key={presetKey} preset={preset} storageFailed={storageFailed} onPrepare={onPrepare} onStart={onStart} />
+            {history && onClearHistory && (
+              <PracticeHistory
+                className={styles.historyWrap}
+                history={history}
+                saveFailed={historySaveFailed}
+                onClear={onClearHistory}
+              />
+            )}
+          </div>
           <TestNotes />
         </div>
         <p className={styles.privacy}>{START_COPY.privacy}{' '}<Link to={ROUTES.privacy}>{START_COPY.privacyLink}</Link></p>

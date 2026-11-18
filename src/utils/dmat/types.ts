@@ -101,9 +101,21 @@ export type Answer =
   | { kind: 'latin'; letter: Letter }
   | { kind: 'question'; option: number };
 
-/** What the slip hands over. `section` for One section and Practice; `passage` for academic practice; `tag` to practise one kind of Core task. */
+/** One section source for an untimed mistakes run. */
+export interface MistakeSection {
+  id: SectionId;
+  setId: string;
+  mock?: number;
+}
+
+/** What the slip hands over. `mock` for Full mock and One section; `section` for One section and Practice; `passage` for academic practice; `tag` to practise one kind of Core task; `mistakes` for "Practise my mistakes". */
 export interface StartChoice {
+  mock?: number;
   section?: SectionId;
   passage?: string;
   tag?: string;
+  mistakes?: {
+    sections: MistakeSection[];
+    taskIds: string[];
+  };
 }

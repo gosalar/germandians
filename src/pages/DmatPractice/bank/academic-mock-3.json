@@ -1,0 +1,2045 @@
+[
+  {
+    "area": "mathematics",
+    "blocks": [
+      {
+        "text": "Counting possibilities without listing every one rests on the multiplication principle: if a first step can be carried out in m ways and, after each of them, a second step can be carried out in n ways, the two steps together can be carried out in m × n ways. The same rule extends to any number of steps in sequence. When n distinct items are placed in a row with no item repeated, there are n choices for the first place, n − 1 remaining choices for the second, and so on down to 1 for the last. That product of all whole numbers from n down to 1 is called the factorial of n and written n!; by definition, 0! = 1.",
+        "type": "p"
+      },
+      {
+        "text": "Often only r items are selected from n distinct items, again without repeating any item. Whether two selections count as different then depends on whether the order of the chosen items matters. An ordered selection of r items from n distinct items is called a permutation, and its count is written P(n, r). Filling r places in order multiplies r descending factors starting at n, which factorials write compactly as",
+        "type": "p"
+      },
+      {
+        "text": "P(n, r) = n! ÷ (n − r)!",
+        "type": "formula"
+      },
+      {
+        "text": "Dividing n! by (n − r)! cancels the factors for the n − r items left out. When all n items are arranged in order, r equals n and P(n, n) = n! ÷ 0! = n!. For 4 distinct items taken 2 at a time, P(4, 2) = 4! ÷ 2! = 4 × 3 = 12.",
+        "type": "p"
+      },
+      {
+        "text": "An unordered selection of r items from n distinct items is called a combination, and its count is written C(n, r). Here rearranging the same r chosen items does not create a new outcome: a committee of three members with equal duties is the same committee whichever member is named first. Each combination of r items yields r! different permutations once those r items are placed in every possible order, so P(n, r) = C(n, r) × r!, giving",
+        "type": "p"
+      },
+      {
+        "text": "C(n, r) = P(n, r) ÷ r! = n! ÷ (r! × (n − r)!)",
+        "type": "formula"
+      },
+      {
+        "text": "For 4 items taken 2 at a time, C(4, 2) = 12 ÷ 2! = 6. Every choice of r items to take is also a choice of n − r items to leave behind, so C(n, r) always equals C(n, n − r). Table 1 compares P(n, 3) and C(n, 3) for pools of 5 to 8 distinct items.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Ordered and unordered selections of r = 3 items from n distinct items.",
+        "head": [
+          "Items in pool (n)",
+          "Permutations P(n, 3)",
+          "Combinations C(n, 3)"
+        ],
+        "rows": [
+          [
+            "5",
+            "60",
+            "10"
+          ],
+          [
+            "6",
+            "120",
+            "20"
+          ],
+          [
+            "7",
+            "210",
+            "35"
+          ],
+          [
+            "8",
+            "336",
+            "56"
+          ]
+        ],
+        "type": "table"
+      }
+    ],
+    "id": "p27",
+    "questions": [
+      {
+        "explanation": "A permutation counts ordered selections and a combination counts unordered selections. When changing the order of the chosen items leaves the outcome unchanged, the selection is a combination.",
+        "id": "p27-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "When rearranging the chosen items does not count as a different outcome.",
+            "why": "The fourth paragraph defines a combination as an unordered selection, where the same r items in another order form the same selection."
+          },
+          {
+            "text": "When the same item from the pool may be chosen more than once.",
+            "why": "Neither permutations nor combinations in the text allow repetition: both draw from n distinct items without repeating any item."
+          },
+          {
+            "text": "When every item in the pool of n items is included in the selection.",
+            "why": "Selecting all n items is still a permutation when order matters, giving P(n, n) = n! ordered arrangements."
+          },
+          {
+            "text": "When selections are made in two steps rather than in a single step.",
+            "why": "Both permutations and multi-step combinations can be built in stages; what separates combinations from permutations is whether order matters."
+          }
+        ],
+        "stem": "According to the text, when is a selection of r items from n distinct items counted as a combination rather than a permutation?",
+        "type": "R"
+      },
+      {
+        "explanation": "P(12, 3) counts ordered selections without repetition. Awarding first, second and third prize distinguishes the order of the 3 chosen entrants, whereas the other three choices form unordered groups of 3.",
+        "id": "p27-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "Picking 3 novels from a shelf of 12 distinct novels to take on a train journey.",
+            "why": "Taking the same 3 novels in a different order puts the exact same set of books in the bag, so order does not matter: C(12, 3)."
+          },
+          {
+            "text": "Choosing 3 delegates with identical duties from a department of 12 staff members.",
+            "why": "Because the duties are identical, naming the same 3 people in another order gives the same delegation: C(12, 3)."
+          },
+          {
+            "text": "Selecting 3 soup flavours from 12 distinct options to serve together at a buffet.",
+            "why": "Choosing the same 3 flavours in another sequence places the same 3 soups on the buffet: C(12, 3)."
+          },
+          {
+            "correct": true,
+            "text": "Assigning first, second and third prize to 3 finalists in a contest of 12 entrants.",
+            "why": "First, second and third prize are distinct places, so swapping two winners produces a different result: P(12, 3)."
+          }
+        ],
+        "stem": "In which of these situations is the number of possible outcomes given by P(12, 3) rather than C(12, 3)?",
+        "type": "C"
+      },
+      {
+        "explanation": "Choosing 5 sensors to calibrate leaves 8 − 5 = 3 sensors unchosen, so C(8, 5) = C(8, 3). In Table 1, the row for n = 8 gives C(8, 3) = 56.",
+        "id": "p27-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "10",
+            "why": "This reads C(5, 3) from the row n = 5, confusing the selection size 5 with the pool size 8."
+          },
+          {
+            "text": "40",
+            "why": "This multiplies 8 by 5 instead of counting unordered selections of 5 sensors from 8."
+          },
+          {
+            "correct": true,
+            "text": "56",
+            "why": "By symmetry, C(8, 5) = C(8, 8 − 5) = C(8, 3), which Table 1 gives as 56."
+          },
+          {
+            "text": "336",
+            "why": "This reads P(8, 3) = 336 from Table 1, which counts ordered selections of 3 rather than combinations."
+          }
+        ],
+        "stem": "A laboratory has 8 distinct sensors and chooses 5 of them to calibrate together, with order playing no part. Using Table 1, how many different groups of 5 sensors can be chosen?",
+        "type": "F"
+      },
+      {
+        "explanation": "In a lock code the order of the digits matters and repetition is forbidden, so the count is P(9, 4) = 9! ÷ (9 − 4)! = 9! ÷ 5! = 9 × 8 × 7 × 6 = 3,024.",
+        "id": "p27-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "126",
+            "why": "This is C(9, 4), which treats the same 4 digits in different orders as the same code."
+          },
+          {
+            "correct": true,
+            "text": "3,024",
+            "why": "Order matters in a code and digits cannot repeat: P(9, 4) = 9 × 8 × 7 × 6 = 3,024."
+          },
+          {
+            "text": "6,561",
+            "why": "This is 9^4 = 6,561, which allows digits to be repeated."
+          },
+          {
+            "text": "15,120",
+            "why": "This divides 9! by 4! instead of (9 − 4)!, multiplying one factor too many."
+          }
+        ],
+        "stem": "A keypad lock uses 4-digit codes formed from the 9 digits 1 to 9, with no digit used more than once. How many different 4-digit codes are possible?",
+        "type": "A"
+      },
+      {
+        "explanation": "Unordered groups are counted by C(10, 4), while ordered assignments to 4 distinct slots are counted by P(10, 4). Because P(n, r) = C(n, r) × r!, the count multiplies by 4! = 24.",
+        "id": "p27-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "It becomes 24 times as large, because each group of 4 can fill the 4 slots in 4! ways.",
+            "why": "P(10, 4) = C(10, 4) × 4!, and 4! = 4 × 3 × 2 × 1 = 24."
+          },
+          {
+            "text": "It becomes 4 times as large, because there are 4 distinct speaking slots to assign.",
+            "why": "Assigning 4 people to 4 distinct slots gives 4! = 24 orders per group, not 4."
+          },
+          {
+            "text": "It becomes 10 times as large, because any of the 10 applicants can take the first slot.",
+            "why": "The ratio of P(10, 4) to C(10, 4) is 4!, which depends on 4, not on the pool size 10."
+          },
+          {
+            "text": "It becomes 24 times smaller, because fixing the speaking order restricts the choices.",
+            "why": "Distinguishing the order splits each unordered group into many distinct outcomes, so the count grows rather than shrinks."
+          }
+        ],
+        "stem": "From 10 distinct applicants, an organiser first counts the unordered groups of 4 panellists. She then decides instead to assign the 4 chosen panellists to 4 distinct speaking slots: first, second, third and fourth. How does the number of possible outcomes change?",
+        "type": "D"
+      },
+      {
+        "explanation": "All members share the same role, so each discipline is an unordered selection: C(6, 2) = (6 × 5) ÷ 2 = 15 ways for the physicists, and C(5, 2) = (5 × 4) ÷ 2 = 10 ways for the chemists. Every pair of physicists can be combined with every pair of chemists, so by the multiplication principle there are 15 × 10 = 150 committees.",
+        "id": "p27-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "25",
+            "why": "This adds C(6, 2) = 15 and C(5, 2) = 10 instead of multiplying them by the multiplication principle."
+          },
+          {
+            "correct": true,
+            "text": "150",
+            "why": "Choose the physicists in C(6, 2) = 15 ways and the chemists in C(5, 2) = 10 ways, then multiply: 15 × 10 = 150."
+          },
+          {
+            "text": "330",
+            "why": "This is C(11, 4) = 330, which counts all 4-person committees including those without 2 from each group."
+          },
+          {
+            "text": "600",
+            "why": "This multiplies P(6, 2) = 30 by P(5, 2) = 20, as if the members held distinct offices."
+          }
+        ],
+        "stem": "A research institute has 6 physicists and 5 chemists. It forms a 4-person safety committee consisting of 2 physicists and 2 chemists, all serving in the same role. How many different committees can be formed?",
+        "type": "T"
+      },
+      {
+        "explanation": "Combine the two rules in the text: first, C(n, r) = C(n, n − r); second, P(n, k) = C(n, k) × k! for any selection size k. Setting k = n − r gives P(n, n − r) = C(n, n − r) × (n − r)! = C(n, r) × (n − r)!, so dividing P(n, n − r) by C(n, r) always leaves (n − r)!.",
+        "id": "p27-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "C(n, r) is greater than P(n, r).",
+            "why": "Since P(n, r) = C(n, r) × r! and r! is at least 2! = 2, P(n, r) is always larger than C(n, r): for n = 5, r = 2, C(5, 2) = 10 while P(5, 2) = 20."
+          },
+          {
+            "text": "P(n, r) equals P(n, n − r).",
+            "why": "Symmetry holds for combinations, not permutations in general: for n = 5, r = 2, P(5, 2) = 20 whereas P(5, 3) = 60."
+          },
+          {
+            "correct": true,
+            "text": "P(n, n − r) divided by C(n, r) equals (n − r)!.",
+            "why": "By symmetry C(n, r) = C(n, n − r), and P(n, n − r) = C(n, n − r) × (n − r)!, so their quotient is (n − r)!."
+          },
+          {
+            "text": "Doubling n while keeping r fixed doubles C(n, r).",
+            "why": "C(n, r) grows faster than n: for n = 5, r = 2, C(5, 2) = 10, whereas C(10, 2) = 45, more than four times as large."
+          }
+        ],
+        "stem": "Let n and r be whole numbers with 2 ≤ r ≤ n − 2. Which statement must be true for every such pair of n and r?",
+        "type": "S"
+      }
+    ],
+    "title": "Permutations and Combinations"
+  },
+  {
+    "area": "computational sciences",
+    "blocks": [
+      {
+        "text": "Software often needs to check whether a sequence of characters, called a string, follows a pattern: whether an input holds only digits, or whether brackets open in the expected order. A deterministic finite state machine, also called a deterministic finite automaton, is a simple model that performs such checks using a fixed, finite set of states. The symbols allowed in the input form a finite set called the input alphabet.",
+        "type": "p"
+      },
+      {
+        "text": "Before reading any input, the machine sits in one designated start state. It then reads the input string one symbol at a time from left to right without changing the string. A rule called the transition function tells the machine which state to enter next from its current state and the symbol just read. The machine is called deterministic because for every state and every symbol in the alphabet, the transition function specifies one and only one next state: no step is missing and no step offers a choice.",
+        "type": "p"
+      },
+      {
+        "text": "Zero, one or more of the states are marked as accepting states, also called final states. Once the last symbol of the string has been read, the string is accepted if the machine finishes in an accepting state, and rejected otherwise. Passing through an accepting state earlier in the string is not enough: only the state at the very end counts. If the input is the empty string, which contains zero symbols, the machine makes no transitions at all and finishes in the start state, so the empty string is accepted if and only if the start state itself is accepting.",
+        "type": "p"
+      },
+      {
+        "text": "A machine can be shown either as a transition diagram or as a transition table. In a diagram each state is a circle, an arrow entering from outside marks the start state, a double circle marks each accepting state, and labelled arrows show the transitions. A non-accepting state whose transitions for every symbol loop back to itself is called a trap state: once the machine enters it, no later symbols can lead out. Figure 1 and Table 1 show the same machine M over the alphabet {0, 1}. On 100 it moves q₀ → q₁ → q₂ → q₂ and accepts; on 101 it moves q₀ → q₁ → q₂ → q₁ and rejects.",
+        "type": "p"
+      },
+      {
+        "alt": "A state diagram with four states q₀, q₁, q₂ and q₃. Start arrow enters q₀. State q₂ has a double circle marking it as the only accepting state. Transitions: from q₀, 0 loops to q₀ and 1 goes to q₁; from q₁, 0 goes to q₂ and 1 goes to q₃; from q₂, 0 loops to q₂ and 1 goes to q₁; from q₃, both 0 and 1 loop to q₃.",
+        "caption": "Figure 1. Transition diagram of machine M over the input alphabet {0, 1}.",
+        "id": "p28-fig1",
+        "svg": "<svg viewBox=\"0 0 480 248\" role=\"img\" aria-labelledby=\"p28-fig1-alt\">\n  <line x1=\"22\" y1=\"96\" x2=\"62\" y2=\"96\"/>\n  <polygon class=\"dot\" points=\"64,96 55,100.5 55,91.5\"/>\n  <path class=\"wire\" d=\"M 77 73 C 65 30, 115 30, 103 73\"/>\n  <polygon class=\"dot\" points=\"103,73 101.1,63.1 109.8,65.5\"/>\n  <text class=\"prob\" x=\"90\" y=\"30\" text-anchor=\"middle\">0</text>\n  <line x1=\"116\" y1=\"96\" x2=\"212\" y2=\"96\"/>\n  <polygon class=\"dot\" points=\"214,96 205,100.5 205,91.5\"/>\n  <text class=\"prob\" x=\"165\" y=\"86\" text-anchor=\"middle\">1</text>\n  <path class=\"wire\" d=\"M 263 83 Q 315 54, 367 83\"/>\n  <polygon class=\"dot\" points=\"367,83 356.9,82.5 361.3,74.7\"/>\n  <text class=\"prob\" x=\"315\" y=\"61\" text-anchor=\"middle\">0</text>\n  <path class=\"wire\" d=\"M 367 109 Q 315 138, 263 109\"/>\n  <polygon class=\"dot\" points=\"263,109 273.1,109.5 268.7,117.3\"/>\n  <text class=\"prob\" x=\"315\" y=\"142\" text-anchor=\"middle\">1</text>\n  <line x1=\"240\" y1=\"122\" x2=\"240\" y2=\"177\"/>\n  <polygon class=\"dot\" points=\"240,179 235.5,170 244.5,170\"/>\n  <text class=\"prob\" x=\"254\" y=\"156\">1</text>\n  <path class=\"wire\" d=\"M 377 73 C 365 30, 415 30, 403 73\"/>\n  <polygon class=\"dot\" points=\"403,73 401.1,63.1 409.8,65.5\"/>\n  <text class=\"prob\" x=\"390\" y=\"30\" text-anchor=\"middle\">0</text>\n  <path class=\"wire\" d=\"M 263 194 C 314 176, 314 234, 263 216\"/>\n  <polygon class=\"dot\" points=\"263,216 273,214.8 270,223.2\"/>\n  <text class=\"prob\" x=\"308\" y=\"211\">0, 1</text>\n  <circle class=\"part\" cx=\"90\" cy=\"96\" r=\"26\"/>\n  <text x=\"90\" y=\"102\" text-anchor=\"middle\">q₀</text>\n  <circle class=\"part\" cx=\"240\" cy=\"96\" r=\"26\"/>\n  <text x=\"240\" y=\"102\" text-anchor=\"middle\">q₁</text>\n  <circle class=\"part\" cx=\"390\" cy=\"96\" r=\"26\"/>\n  <circle class=\"wire\" cx=\"390\" cy=\"96\" r=\"20\"/>\n  <text x=\"390\" y=\"102\" text-anchor=\"middle\">q₂</text>\n  <circle class=\"part\" cx=\"240\" cy=\"205\" r=\"26\"/>\n  <text x=\"240\" y=\"211\" text-anchor=\"middle\">q₃</text>\n</svg>",
+        "type": "figure"
+      },
+      {
+        "caption": "Table 1. Transition table of machine M.",
+        "head": [
+          "Current state",
+          "Input 0",
+          "Input 1"
+        ],
+        "rows": [
+          [
+            "q₀ (start)",
+            "q₀",
+            "q₁"
+          ],
+          [
+            "q₁",
+            "q₂",
+            "q₃"
+          ],
+          [
+            "q₂ (accepting)",
+            "q₂",
+            "q₁"
+          ],
+          [
+            "q₃",
+            "q₃",
+            "q₃"
+          ]
+        ],
+        "type": "table"
+      }
+    ],
+    "id": "p28",
+    "questions": [
+      {
+        "explanation": "The second paragraph states that a finite state machine is deterministic because for every state and every symbol in its alphabet, the transition function specifies one and only one next state.",
+        "id": "p28-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Every input string eventually brings the machine into an accepting state.",
+            "why": "Strings that finish in a non-accepting state are rejected, as the example 101 in the text shows."
+          },
+          {
+            "correct": true,
+            "text": "Each state and each symbol in the alphabet determine one and only one next state.",
+            "why": "The second paragraph defines determinism: no state-symbol pair lacks a transition or allows more than one move."
+          },
+          {
+            "text": "Once the machine leaves a state, no later transition can return to that state.",
+            "why": "Transitions may loop to the same state or return to an earlier state, as q₂ returning to q₁ on input 1 shows."
+          },
+          {
+            "text": "The machine has exactly one accepting state and exactly one trap state.",
+            "why": "Any number of states (including zero or several) may be accepting, and a machine need not contain a trap state."
+          }
+        ],
+        "stem": "According to the text, what makes a finite state machine deterministic?",
+        "type": "R"
+      },
+      {
+        "explanation": "Follow the transitions from left to right on 010110: q₀ → q₀ → q₁ → q₂ → q₁ → q₃ → q₃. Once the second of the two consecutive 1s puts M into q₃, the final 0 loops back to q₃.",
+        "id": "p28-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "State q₀.",
+            "why": "Only the first 0 keeps M in q₀; the next symbol is 1, which moves M out of q₀, and no arrow returns to q₀."
+          },
+          {
+            "text": "State q₁.",
+            "why": "M is in q₁ after reading 0101, before the final two symbols 10 are processed."
+          },
+          {
+            "text": "State q₂.",
+            "why": "M visits q₂ after 010, and the final symbol is 0, but the pair 11 has already trapped M in q₃ before that final 0 arrives."
+          },
+          {
+            "correct": true,
+            "text": "State q₃.",
+            "why": "The path is q₀ → q₀ → q₁ → q₂ → q₁ → q₃ → q₃: the consecutive 1s send M from q₁ to the trap state q₃, where the final 0 keeps it."
+          }
+        ],
+        "stem": "Machine M in Figure 1 starts in q₀ and reads the input string 010110. In which state does it finish?",
+        "type": "F"
+      },
+      {
+        "explanation": "Trace each string from q₀. Only 010100 finishes in q₂ (q₀ → q₀ → q₁ → q₂ → q₁ → q₂ → q₂). String 010011 enters q₃ at the end, 101001 leaves q₂ for q₁ on its last symbol, and 110010 enters the trap state q₃ on its second symbol.",
+        "id": "p28-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "010011",
+            "why": "Its path is q₀ → q₀ → q₁ → q₂ → q₂ → q₁ → q₃: it visits q₂ earlier, then ends in the non-accepting trap state q₃."
+          },
+          {
+            "text": "101001",
+            "why": "Its path is q₀ → q₁ → q₂ → q₁ → q₂ → q₂ → q₁: it visits q₂, then the final 1 moves it to the non-accepting state q₁."
+          },
+          {
+            "correct": true,
+            "text": "010100",
+            "why": "Its path is q₀ → q₀ → q₁ → q₂ → q₁ → q₂ → q₂, finishing in the accepting state q₂."
+          },
+          {
+            "text": "110010",
+            "why": "Its path is q₀ → q₁ → q₃ → q₃ → q₃ → q₃ → q₃: the opening 11 sends M into the trap state q₃, so the ending 010 cannot reach q₂."
+          }
+        ],
+        "stem": "Which of the following 6-symbol input strings is accepted by machine M?",
+        "type": "A"
+      },
+      {
+        "explanation": "To leave q₀ the string must contain at least one 1. Once a 1 has been seen, reading two 1s in a row is the only way to enter the trap state q₃; otherwise every 1 puts M in q₁ and every 0 puts M in q₂. Thus M finishes in q₂ if and only if the string has at least one 1, has no 11, and ends with 0.",
+        "id": "p28-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "Every string that contains the pair 10 at least once.",
+            "why": "The string 101 contains 10 yet finishes in q₁, and 110 contains 10 yet is trapped in q₃; M rejects both."
+          },
+          {
+            "correct": true,
+            "text": "Every string that contains at least one 1, ends with 0 and never contains 11.",
+            "why": "Leaving q₀ needs a 1, avoiding the trap state q₃ forbids 11, and finishing in q₂ rather than q₁ requires the final symbol to be 0."
+          },
+          {
+            "text": "Every string that ends with 0 and never contains 11.",
+            "why": "Strings of 0s alone, such as 0 or 00, end with 0 and never contain 11, yet they never leave q₀ and are rejected."
+          },
+          {
+            "text": "Every string in which every 1 is followed somewhere later by at least one 0.",
+            "why": "The string 110 has a 0 after both 1s, yet the consecutive 1s move M from q₁ into the trap state q₃."
+          }
+        ],
+        "stem": "Which description matches the exact set of all strings over {0, 1} accepted by machine M?",
+        "type": "C"
+      },
+      {
+        "explanation": "With transitions unchanged, every string reaches the same final state as before, so the newly accepted strings are precisely those that finish in q₀. In Table 1, q₀ loops to itself on 0 and moves to q₁ on 1, while no transition from q₁, q₂ or q₃ leads back to q₀. Hence a string finishes in q₀ if and only if it contains no 1s at all: the empty string and strings of 0s only.",
+        "id": "p28-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Only the empty string, containing zero symbols.",
+            "why": "The empty string finishes in q₀, and so does every string of 0s such as 0, 00 and 000 because 0 loops from q₀ to q₀."
+          },
+          {
+            "text": "Every string that starts with 0 and never contains 11.",
+            "why": "The string 01 starts with 0 and has no 11, yet its 1 moves the machine to q₁, which remains non-accepting."
+          },
+          {
+            "text": "Every string that contains no 11, even if it ends with 1.",
+            "why": "Any 1 moves the machine out of q₀, so a string ending with 1 still finishes in q₁ or q₃ and is rejected."
+          },
+          {
+            "correct": true,
+            "text": "The empty string and every string made up solely of 0s.",
+            "why": "Only strings that finish in q₀ gain acceptance, and because no transition from q₁, q₂ or q₃ returns to q₀, those are exactly the strings with no 1s."
+          }
+        ],
+        "stem": "Suppose machine M is altered only by marking q₀ as a second accepting state alongside q₂, keeping q₀ as the start state and keeping every transition in Table 1 unchanged. Which strings become newly accepted?",
+        "type": "D"
+      },
+      {
+        "explanation": "An accepted string of length 5 must end with 0, so its last symbol is fixed: _ _ _ _ 0. Its first 4 symbols must contain at least one 1 and cannot contain 11 (nor can the 4th symbol create 11 with the 5th, since the 5th is 0). Among the 16 prefixes of length 4, the 8 without 11 are 0000, 0001, 0010, 0100, 0101, 1000, 1001 and 1010. Excluding 0000 (which leaves M in q₀) leaves 7 accepted strings.",
+        "id": "p28-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "7",
+            "why": "The 7 accepted strings are 00010, 00100, 01000, 01010, 10000, 10010 and 10100."
+          },
+          {
+            "text": "8",
+            "why": "This also counts 00000, which has no 11 and ends with 0, forgetting that without any 1 it remains in the non-accepting start state q₀."
+          },
+          {
+            "text": "12",
+            "why": "This counts all 12 strings of length 5 that contain a 1 and avoid 11, including the 5 strings ending with 1 that finish in q₁."
+          },
+          {
+            "text": "15",
+            "why": "This counts all 15 strings of length 5 that contain a 1 and end with 0, overlooking the 8 strings with 11 that get trapped in q₃."
+          }
+        ],
+        "stem": "There are 32 binary strings of length 5 over the alphabet {0, 1}. How many of those 32 strings are accepted by the unmodified machine M in Figure 1?",
+        "type": "T"
+      },
+      {
+        "explanation": "In a deterministic finite state machine, every input string over the alphabet follows a single determined path from the start state to one final state. The string is accepted if that final state is accepting and rejected if that final state is non-accepting. Swapping the accepting and non-accepting status of every state leaves every string ending in the same final state while reversing the verdict for every string.",
+        "id": "p28-q7",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "Reversing which states are accepting and which are non-accepting, without changing the start state or transitions, makes the machine accept exactly the strings it previously rejected.",
+            "why": "Determinism gives each string one unique final state; flipping whether each state is accepting flips the verdict on every string."
+          },
+          {
+            "text": "Reversing the direction of every arrow in the transition diagram always produces another deterministic finite state machine.",
+            "why": "After reversing arrows, a state may have two outgoing arrows or none for the same symbol: in M, q₂ has two incoming 0-arrows and q₀ has no incoming 1-arrow."
+          },
+          {
+            "text": "Adding a new symbol to the input alphabet while leaving the transitions unchanged leaves the machine deterministic.",
+            "why": "A deterministic machine must define a next state for every state and every symbol in its alphabet; without transitions for the new symbol it is incomplete."
+          },
+          {
+            "text": "If the machine contains a trap state, it rejects every input string that has more symbols than the machine has states.",
+            "why": "Machine M has 4 states and a trap state q₃, yet accepts 6-symbol strings such as 010100 that never take the transition into q₃."
+          }
+        ],
+        "stem": "Consider any deterministic finite state machine over a fixed input alphabet. Which statement must always be true?",
+        "type": "S"
+      }
+    ],
+    "title": "Deterministic Finite State Machines"
+  },
+  {
+    "area": "natural sciences",
+    "blocks": [
+      {
+        "text": "Ecologists track how a population of size N changes over time by comparing births and deaths. The population growth rate is the net number of individuals added per unit of time, and the per-capita growth rate is that rate divided by N, the average net contribution per individual. When food, space and other resources are abundant, each individual reproduces and survives at a constant net per-capita rate r, called the intrinsic rate of increase. Under this exponential growth model, the population growth rate is",
+        "type": "p"
+      },
+      {
+        "text": "exponential growth rate = r × N",
+        "type": "formula"
+      },
+      {
+        "text": "Because r stays constant while N rises, a positive r makes the population add more individuals in each successive time interval than in the one before. Plotted against time, N follows a steepening J-shaped curve that grows without bound.",
+        "type": "p"
+      },
+      {
+        "text": "No natural environment supplies unlimited resources forever. The carrying capacity K is the maximum population size that a particular environment can sustain indefinitely. The logistic growth model accounts for limited resources by multiplying the exponential rate by (K − N) ÷ K, the fraction of the carrying capacity still unused:",
+        "type": "p"
+      },
+      {
+        "text": "logistic growth rate = r × N × (K − N) ÷ K",
+        "type": "formula"
+      },
+      {
+        "text": "Dividing this expression by N shows that the logistic per-capita growth rate is r × (K − N) ÷ K. When N is very small compared with K, (K − N) ÷ K is close to 1 and logistic growth is nearly exponential. As N grows, competition for scarce resources lowers the per-capita rate. Total individuals added per unit of time rise at first because N is growing, reach a maximum at N = K ÷ 2 (half the carrying capacity), and then fall as (K − N) ÷ K shrinks towards zero.",
+        "type": "p"
+      },
+      {
+        "text": "At N = K, births and deaths balance, the growth rate is zero, and the curve levels off, forming an S-shaped curve from a small start. If a population ever starts or is pushed above K, then K − N is negative, making the growth rate negative so that N declines towards K. Figure 1 compares exponential and logistic trajectories starting from the same initial size with the same positive r.",
+        "type": "p"
+      },
+      {
+        "alt": "Population size N from 0 to 1,400 against time from 0 to 12 days. Both curves start at N = 200 at day 0. The exponential curve climbs steeply past 1,400 after day 3.9. The logistic curve forms an S-shape and levels off below the dashed horizontal carrying-capacity line at K = 1,000.",
+        "caption": "Figure 1. Exponential and logistic population curves with the same starting size and intrinsic rate r = 0.5 per day.",
+        "id": "p29-fig1",
+        "svg": "<svg viewBox=\"0 0 480 300\" role=\"img\" aria-labelledby=\"p29-fig1-alt\">\n  <g class=\"grid\"><line x1=\"68\" y1=\"248\" x2=\"68\" y2=\"34\"/><line x1=\"133\" y1=\"248\" x2=\"133\" y2=\"34\"/><line x1=\"198\" y1=\"248\" x2=\"198\" y2=\"34\"/><line x1=\"263\" y1=\"248\" x2=\"263\" y2=\"34\"/><line x1=\"328\" y1=\"248\" x2=\"328\" y2=\"34\"/><line x1=\"393\" y1=\"248\" x2=\"393\" y2=\"34\"/><line x1=\"458\" y1=\"248\" x2=\"458\" y2=\"34\"/><line x1=\"68\" y1=\"248\" x2=\"458\" y2=\"248\"/><line x1=\"68\" y1=\"217.4\" x2=\"458\" y2=\"217.4\"/><line x1=\"68\" y1=\"186.9\" x2=\"458\" y2=\"186.9\"/><line x1=\"68\" y1=\"156.3\" x2=\"458\" y2=\"156.3\"/><line x1=\"68\" y1=\"125.7\" x2=\"458\" y2=\"125.7\"/><line x1=\"68\" y1=\"95.1\" x2=\"458\" y2=\"95.1\"/><line x1=\"68\" y1=\"64.6\" x2=\"458\" y2=\"64.6\"/><line x1=\"68\" y1=\"34\" x2=\"458\" y2=\"34\"/></g>\n  <g class=\"axis\"><line x1=\"68\" y1=\"248\" x2=\"458\" y2=\"248\"/><line x1=\"68\" y1=\"248\" x2=\"68\" y2=\"34\"/></g>\n  <g class=\"ticks\"><text x=\"68\" y=\"269\" text-anchor=\"middle\">0</text><text x=\"133\" y=\"269\" text-anchor=\"middle\">2</text><text x=\"198\" y=\"269\" text-anchor=\"middle\">4</text><text x=\"263\" y=\"269\" text-anchor=\"middle\">6</text><text x=\"328\" y=\"269\" text-anchor=\"middle\">8</text><text x=\"393\" y=\"269\" text-anchor=\"middle\">10</text><text x=\"458\" y=\"269\" text-anchor=\"middle\">12</text><text x=\"60\" y=\"253\" text-anchor=\"end\">0</text><text x=\"60\" y=\"222.4\" text-anchor=\"end\">200</text><text x=\"60\" y=\"191.9\" text-anchor=\"end\">400</text><text x=\"60\" y=\"161.3\" text-anchor=\"end\">600</text><text x=\"60\" y=\"130.7\" text-anchor=\"end\">800</text><text x=\"60\" y=\"100.1\" text-anchor=\"end\">1,000</text><text x=\"60\" y=\"69.6\" text-anchor=\"end\">1,200</text><text x=\"60\" y=\"39\" text-anchor=\"end\">1,400</text></g>\n  <text class=\"title\" x=\"263\" y=\"292\" text-anchor=\"middle\">Time in days</text>\n  <text class=\"title\" x=\"6\" y=\"18\">Population size N</text>\n  \n  <line class=\"curve curve-3\" x1=\"68\" y1=\"95.1\" x2=\"458\" y2=\"95.1\"/>\n  <polyline class=\"curve curve-2\" points=\"68,217.4 70.6,216.2 73.3,214.8 75.9,213.5 78.5,212 81.2,210.6 83.8,209 86.4,207.4 89.1,205.7 91.7,204 94.4,202.1 97,200.2 99.6,198.3 102.3,196.2 104.9,194.1 107.5,191.8 110.2,189.5 112.8,187.1 115.4,184.6 118.1,182 120.7,179.2 123.3,176.4 126,173.4 128.6,170.3 131.2,167.1 133.9,163.8 136.5,160.3 139.1,156.7 141.8,152.9 144.4,148.9 147.1,144.8 149.7,140.6 152.3,136.1 155,131.5 157.6,126.7 160.2,121.7 162.9,116.4 165.5,111 168.1,105.3 170.8,99.4 173.4,93.3 176,86.9 178.7,80.2 181.3,73.3 183.9,66 186.6,58.5 189.2,50.7 191.8,42.5 194.5,34\"/>\n  <polyline class=\"curve\" points=\"68,217.4 72.1,215.9 76.1,214.3 80.2,212.6 84.3,210.9 88.3,209.1 92.4,207.2 96.4,205.3 100.5,203.4 104.6,201.4 108.6,199.3 112.7,197.2 116.8,195.1 120.8,192.9 124.9,190.7 128.9,188.4 133,186.2 137.1,183.8 141.1,181.5 145.2,179.1 149.3,176.8 153.3,174.4 157.4,172 161.4,169.6 165.5,167.2 169.6,164.9 173.6,162.5 177.7,160.1 181.8,157.8 185.8,155.5 189.9,153.3 193.9,151 198,148.8 202.1,146.7 206.1,144.6 210.2,142.5 214.3,140.5 218.3,138.5 222.4,136.6 226.4,134.7 230.5,132.9 234.6,131.2 238.6,129.5 242.7,127.8 246.8,126.3 250.8,124.7 254.9,123.3 258.9,121.9 263,120.5 267.1,119.2 271.1,118 275.2,116.8 279.3,115.7 283.3,114.6 287.4,113.5 291.4,112.6 295.5,111.6 299.6,110.7 303.6,109.9 307.7,109.1 311.8,108.3 315.8,107.6 319.9,106.9 323.9,106.2 328,105.6 332.1,105 336.1,104.4 340.2,103.9 344.3,103.4 348.3,102.9 352.4,102.5 356.4,102 360.5,101.6 364.6,101.3 368.6,100.9 372.7,100.6 376.8,100.3 380.8,100 384.9,99.7 388.9,99.4 393,99.2 397.1,98.9 401.1,98.7 405.2,98.5 409.3,98.3 413.3,98.1 417.4,97.9 421.4,97.8 425.5,97.6 429.6,97.5 433.6,97.3 437.7,97.2 441.8,97.1 445.8,96.9 449.9,96.8 453.9,96.7 458,96.6\"/>\n  <text class=\"label-2\" x=\"200.5\" y=\"52\">Exponential</text>\n  <text class=\"label-1\" x=\"458\" y=\"118.6\" text-anchor=\"end\">Logistic</text>\n  <text class=\"label-3\" x=\"458\" y=\"86.1\" text-anchor=\"end\">Carrying capacity K</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p29",
+    "questions": [
+      {
+        "explanation": "The third paragraph defines the carrying capacity K as the maximum population size that a particular environment can sustain indefinitely.",
+        "id": "p29-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "The maximum population size that a given environment can sustain indefinitely.",
+            "why": "This is the definition of carrying capacity K in the third paragraph."
+          },
+          {
+            "text": "The constant per-capita growth rate achieved when resources are unlimited.",
+            "why": "That quantity is the intrinsic rate of increase r, not the carrying capacity K."
+          },
+          {
+            "text": "The largest number of individuals added per day at the steepest part of the curve.",
+            "why": "That is the peak population growth rate, reached at N = K ÷ 2, whereas K is a population size."
+          },
+          {
+            "text": "The minimum starting population required before positive growth can begin.",
+            "why": "In the logistic model any population with 0 < N < K and positive r has a positive growth rate."
+          }
+        ],
+        "stem": "According to the text, what does the carrying capacity K represent in the logistic growth model?",
+        "type": "R"
+      },
+      {
+        "explanation": "At day 0 both curves start at N = 200, and the dashed line marks K = 1,000. The unused fraction is (1,000 − 200) ÷ 1,000 = 800 ÷ 1,000 = 0.80.",
+        "id": "p29-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "0.20",
+            "why": "This is N ÷ K = 200 ÷ 1,000, the fraction already occupied at day 0 rather than the unused fraction."
+          },
+          {
+            "text": "0.25",
+            "why": "This divides 200 by 800, comparing N with K − N instead of dividing K − N by K."
+          },
+          {
+            "correct": true,
+            "text": "0.80",
+            "why": "Figure 1 shows N = 200 at day 0 and the carrying-capacity line at K = 1,000, so (1,000 − 200) ÷ 1,000 = 0.80."
+          },
+          {
+            "text": "0.86",
+            "why": "This takes the top of the vertical axis, 1,400, as K instead of the dashed carrying-capacity line at 1,000."
+          }
+        ],
+        "stem": "According to Figure 1, what fraction of the carrying capacity K is still unused, (K − N) ÷ K, at day 0?",
+        "type": "F"
+      },
+      {
+        "explanation": "Figure 1 shows K = 1,000. Substituting r = 0.5, N = 800 and K = 1,000 into r × N × (K − N) ÷ K gives 0.5 × 800 × (200 ÷ 1,000) = 400 × 0.2 = 80 per day.",
+        "id": "p29-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "80 per day",
+            "why": "0.5 × 800 × (1,000 − 800) ÷ 1,000 = 400 × 0.2 = 80."
+          },
+          {
+            "text": "100 per day",
+            "why": "This computes r × (K − N) = 0.5 × 200, leaving out the factor N ÷ K."
+          },
+          {
+            "text": "320 per day",
+            "why": "This multiplies 0.5 × 800 by the occupied fraction N ÷ K = 0.8 instead of the unused fraction (K − N) ÷ K."
+          },
+          {
+            "text": "400 per day",
+            "why": "This computes the unrestricted exponential rate r × N = 0.5 × 800, ignoring the carrying capacity."
+          }
+        ],
+        "stem": "In Figure 1 both curves share the intrinsic rate r = 0.5 per day. Under the logistic model, at what rate (in individuals per day) is the logistic population growing when it reaches N = 800?",
+        "type": "A"
+      },
+      {
+        "explanation": "Substitute into the logistic formula: 0.25 × 900 × (750 − 900) ÷ 750 = 225 × (−150 ÷ 750) = −45 trout per year. Because N exceeds K, the rate is negative and the population declines towards K.",
+        "id": "p29-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "The population remains steady at 900 trout because it has already passed K.",
+            "why": "Growth is zero only at N = K = 750; above K the factor (K − N) ÷ K is negative."
+          },
+          {
+            "correct": true,
+            "text": "The population begins to shrink towards 750, losing at an initial rate of 45 trout per year.",
+            "why": "With N > K, 0.25 × 900 × (750 − 900) ÷ 750 = −45 trout per year."
+          },
+          {
+            "text": "The population grows at an initial rate of 45 trout per year because r and N are positive.",
+            "why": "Although r and N are positive, K − N = 750 − 900 = −150 is negative, reversing the sign of the rate."
+          },
+          {
+            "text": "The population falls straight to zero because exceeding K exhausts all resources permanently.",
+            "why": "In the logistic model a population above K declines towards K, where the growth rate returns towards zero."
+          }
+        ],
+        "stem": "A lake has a carrying capacity of K = 750 trout for a population with r = 0.25 per year. Fish are released into the lake until N = 900 trout are present. According to the logistic model, what happens immediately after release?",
+        "type": "C"
+      },
+      {
+        "explanation": "Logistic growth is fastest at N = K ÷ 2, where (K − N) ÷ K = 1/2. In Pond X, N = 150 gives 0.4 × 150 × 0.5 = 30 per day. In Pond Y, N = 300 gives 0.4 × 300 × 0.5 = 60 per day, twice as large.",
+        "id": "p29-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "It is the same in both ponds, because both share the same intrinsic rate r.",
+            "why": "Peak growth occurs at N = K ÷ 2 and equals r × (K ÷ 2) × (1 ÷ 2), which scales with K: 30 per day in X and 60 per day in Y."
+          },
+          {
+            "text": "It is half as large in Pond Y, because K sits in the denominator of the logistic formula.",
+            "why": "At each pond’s own peak N = K ÷ 2, the fraction (K − N) ÷ K is 1/2 in both ponds while N is twice as large in Pond Y."
+          },
+          {
+            "text": "It is four times as large in Pond Y, because both N and K − N double at the peak.",
+            "why": "Both N and K − N double, giving four times their product, which is then divided by twice K, leaving a factor of two overall."
+          },
+          {
+            "correct": true,
+            "text": "It is twice as large in Pond Y, rising from 30 to 60 individuals per day.",
+            "why": "At N = K ÷ 2 the rate is r × (K ÷ 2) × (1 ÷ 2) = r × K ÷ 4, which doubles from 30 to 60 when K doubles."
+          }
+        ],
+        "stem": "Two isolated ponds hold the same species of microalgae with intrinsic rate r = 0.4 per day. Pond X has carrying capacity K = 300 and Pond Y has carrying capacity K = 600. How does the maximum logistic population growth rate in Pond Y compare with that in Pond X?",
+        "type": "D"
+      },
+      {
+        "explanation": "At N = 1,200, the exponential factor r × N is 0.5 × 1,200 = 600 cells per hour. Since the logistic rate is 150 cells per hour, the unused fraction (K − N) ÷ K equals 150 ÷ 600 = 0.25. Therefore N ÷ K = 1 − 0.25 = 0.75, giving K = 1,200 ÷ 0.75 = 1,600 cells.",
+        "id": "p29-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "600 cells",
+            "why": "This is r × N = 0.5 × 1,200 = 600, the unrestricted exponential rate in cells per hour, not K."
+          },
+          {
+            "text": "1,500 cells",
+            "why": "This solves 0.5 × (K − 1,200) = 150, leaving out the factor N ÷ K from the logistic equation."
+          },
+          {
+            "correct": true,
+            "text": "1,600 cells",
+            "why": "Here r × N = 600, so (K − 1,200) ÷ K = 150 ÷ 600 = 0.25, meaning 1,200 is 0.75 of K and K = 1,600."
+          },
+          {
+            "text": "4,800 cells",
+            "why": "This sets 1,200 ÷ K = 0.25 instead of (K − 1,200) ÷ K = 0.25, swapping the used and unused shares."
+          }
+        ],
+        "stem": "A culture of cells follows the logistic model with intrinsic rate r = 0.5 per hour. When the culture reaches N = 1,200 cells, its logistic growth rate is 150 cells per hour. What is the carrying capacity K of the culture?",
+        "type": "T"
+      },
+      {
+        "explanation": "In the logistic model, the per-capita growth rate is r × (K − N) ÷ K, which decreases linearly over the whole interval from N = 0 to N = K. The total population growth rate multiplies that falling per-capita rate by the rising population size N, rising until N = K ÷ 2 and falling thereafter towards zero at N = K.",
+        "id": "p29-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "Both the per-capita growth rate and the population growth rate decrease steadily across the entire range.",
+            "why": "The population growth rate increases while N is below K ÷ 2 and decreases only after N passes K ÷ 2."
+          },
+          {
+            "text": "The per-capita growth rate stays fixed at r until N reaches K ÷ 2 and begins to fall only above K ÷ 2.",
+            "why": "The logistic per-capita rate is r × (K − N) ÷ K, which decreases continuously with every increase in N."
+          },
+          {
+            "text": "No two different population sizes between 0 and K can produce the same population growth rate.",
+            "why": "Sizes equally far below and above K ÷ 2, such as 200 and 800 when K = 1,000, give the same product N × (K − N) and thus the same rate."
+          },
+          {
+            "correct": true,
+            "text": "The per-capita growth rate falls steadily throughout, whereas the population growth rate rises until K ÷ 2 and then falls.",
+            "why": "Per-capita growth is r × (K − N) ÷ K, which drops continuously as N grows, while multiplying by N creates a peak at K ÷ 2."
+          }
+        ],
+        "stem": "A population with positive r follows the logistic model as N rises from a small value below K ÷ 2 towards K. Which statement holds across the entire range 0 < N < K?",
+        "type": "S"
+      }
+    ],
+    "title": "Exponential and Logistic Population Growth"
+  },
+  {
+    "area": "engineering",
+    "blocks": [
+      {
+        "text": "Toothed wheels, or gears, transmit rotation from a driving (input) shaft to a driven (output) shaft without slipping. For two external gears to mesh smoothly, their teeth must have the same spacing around the rim, so each gear’s effective radius is proportional to its number of teeth N. Where the two rims meet they push each other in the same tangential direction, which makes external gears in direct contact turn in opposite senses: if the input gear turns clockwise, the gear meshing with it turns anticlockwise.",
+        "type": "p"
+      },
+      {
+        "text": "Because teeth pass the point of contact one for one, a gear with more teeth completes fewer revolutions in a given time. With N_in and N_out for the tooth counts of the input and output gears, and ω_in and ω_out for their rotational speeds (measured in revolutions per minute, rev/min, or radians per second, rad/s), the gear ratio R is",
+        "type": "p"
+      },
+      {
+        "text": "R = N_out ÷ N_in = ω_in ÷ ω_out",
+        "type": "formula"
+      },
+      {
+        "text": "Rearranging gives ω_out = ω_in ÷ R: when a small gear drives a larger gear, R is greater than 1 and rotational speed drops. Turning effort on a shaft is measured by torque τ, in newton metres (N·m). Rotational power, in watts (W), is torque times angular speed in rad/s. In an ideal gear train with negligible friction, all input power reaches the output, so slowing the shaft multiplies its torque by the same ratio R:",
+        "type": "p"
+      },
+      {
+        "text": "τ_out ÷ τ_in = ω_in ÷ ω_out = N_out ÷ N_in",
+        "type": "formula"
+      },
+      {
+        "text": "When an intermediate gear on its own shaft sits between the input and output gears and meshes with both, without delivering power to its own shaft, it is called an idler gear. Across the two meshes, R = (N_idler ÷ N_in) × (N_out ÷ N_idler) = N_out ÷ N_in: the idler’s tooth count cancels out, leaving output speed and torque unchanged while reversing the direction a second time so input and output turn the same way. To multiply ratios instead, a compound gear train fixes two gears of different tooth counts rigidly onto the same intermediate shaft so both turn together; the overall gear ratio is then the product of the stage ratios, R_total = R₁ × R₂. Figure 1 shows a three-gear train drawn on its effective circles.",
+        "type": "p"
+      },
+      {
+        "alt": "Three tangent circles from left to right. Gear A has 15 teeth, turns clockwise at 360 rev/min, and receives an input torque of 18 N·m. Gear B in the middle meshes with A and C and has 30 teeth. Gear C on the right meshes with B and has 45 teeth.",
+        "caption": "Figure 1. Three meshing external gears on separate parallel shafts.",
+        "id": "p30-fig1",
+        "svg": "<svg viewBox=\"0 0 460 226\" role=\"img\" aria-labelledby=\"p30-fig1-alt\">\n  <circle class=\"part\" cx=\"74\" cy=\"108\" r=\"24.8\"/>\n  <circle class=\"part\" cx=\"148.3\" cy=\"108\" r=\"49.5\"/>\n  <circle class=\"part\" cx=\"272\" cy=\"108\" r=\"74.3\"/>\n  <circle class=\"dot\" cx=\"74\" cy=\"108\" r=\"4\"/>\n  <circle class=\"dot\" cx=\"148.3\" cy=\"108\" r=\"4\"/>\n  <circle class=\"dot\" cx=\"272\" cy=\"108\" r=\"4\"/>\n  <path class=\"wire\" d=\"M 56 69.3 Q 74 57.3, 92 69.3\"/>\n  <polygon class=\"dot\" points=\"95,72.3 85,71.3 91,63.3\"/>\n  <text x=\"74\" y=\"26\" text-anchor=\"middle\">Clockwise</text>\n  <text class=\"prob\" x=\"74\" y=\"156.8\" text-anchor=\"middle\">Gear A</text>\n  <text x=\"74\" y=\"177.8\" text-anchor=\"middle\">15 teeth</text>\n  <text x=\"74\" y=\"198.8\" text-anchor=\"middle\">360 rev/min, 18 N·m</text>\n  <text class=\"prob\" x=\"148.3\" y=\"46.5\" text-anchor=\"middle\">Gear B (30 teeth)</text>\n  <text class=\"prob\" x=\"272\" y=\"23.8\" text-anchor=\"middle\">Gear C (45 teeth)</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p30",
+    "questions": [
+      {
+        "explanation": "When N_out is greater than N_in, the gear ratio R = N_out ÷ N_in is greater than 1. The output rotational speed ω_in ÷ R decreases, the output torque τ_in × R increases, and the direct external mesh reverses the direction of rotation.",
+        "id": "p30-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Both rotational speed and transmitted torque increase at the output gear.",
+            "why": "With power conserved, speed and torque change in opposite proportions, never both upward."
+          },
+          {
+            "text": "Rotational speed increases, transmitted torque decreases, and both gears turn the same way.",
+            "why": "Driving a larger gear reduces speed, increases torque, and reverses the direction of rotation."
+          },
+          {
+            "correct": true,
+            "text": "Rotational speed decreases, transmitted torque increases, and the direction of rotation reverses.",
+            "why": "With N_out > N_in, R exceeds 1, dividing speed by R, multiplying torque by R, and reversing the sense of rotation."
+          },
+          {
+            "text": "Rotational speed and transmitted torque stay unchanged while only the direction reverses.",
+            "why": "Speed and torque stay equal only when both gears have the same tooth count (R = 1)."
+          }
+        ],
+        "stem": "According to the text, what happens when a smaller input gear meshes directly with a larger output gear in an ideal two-gear pair?",
+        "type": "R"
+      },
+      {
+        "explanation": "Every direct mesh between two external gears reverses the sense of rotation. Clockwise Gear A drives Gear B anticlockwise, and anticlockwise Gear B drives Gear C clockwise.",
+        "id": "p30-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "Gear B turns clockwise and Gear C turns anticlockwise.",
+            "why": "Gear B meshes directly with clockwise Gear A, so Gear B must turn anticlockwise."
+          },
+          {
+            "correct": true,
+            "text": "Gear B turns anticlockwise and Gear C turns clockwise.",
+            "why": "Each external mesh reverses direction once: clockwise at A becomes anticlockwise at B and clockwise again at C."
+          },
+          {
+            "text": "Both Gear B and Gear C turn anticlockwise.",
+            "why": "Gear C meshes externally with anticlockwise Gear B, reversing the rotation back to clockwise."
+          },
+          {
+            "text": "Both Gear B and Gear C turn clockwise.",
+            "why": "Two external gears that mesh directly always turn in opposite directions."
+          }
+        ],
+        "stem": "In Figure 1, Gear A turns clockwise. In which directions do Gear B and Gear C turn?",
+        "type": "F"
+      },
+      {
+        "explanation": "Across the two meshes, ω_B = 360 × (15 ÷ 30) = 180 rev/min and ω_C = 180 × (30 ÷ 45) = 120 rev/min. Equivalently, Gear B's 30 teeth cancel out, giving 360 × (15 ÷ 45) = 120 rev/min.",
+        "id": "p30-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "120 rev/min",
+            "why": "Gear B is an idler, so R = 45 ÷ 15 = 3 and ω_C = 360 ÷ 3 = 120 rev/min."
+          },
+          {
+            "text": "180 rev/min",
+            "why": "This is the speed of Gear B, 360 × (15 ÷ 30) = 180 rev/min, stopping after the first mesh."
+          },
+          {
+            "text": "240 rev/min",
+            "why": "This applies only the second mesh ratio (30 ÷ 45) directly to 360 rev/min, as if Gear B turned at 360 rev/min."
+          },
+          {
+            "text": "1,080 rev/min",
+            "why": "This multiplies 360 rev/min by the gear ratio 3 instead of dividing by it."
+          }
+        ],
+        "stem": "What is the rotational speed of Gear C in Figure 1?",
+        "type": "A"
+      },
+      {
+        "explanation": "With no friction and no power drawn from Gear B, Gear B acts as an idler and the overall gear ratio is N_C ÷ N_A = 45 ÷ 15 = 3. Transmitted torque scales with the gear ratio: τ_C = 18 × 3 = 54 N·m.",
+        "id": "p30-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "6 N·m",
+            "why": "This divides 18 N·m by 3, treating torque as if it fell with tooth count like rotational speed."
+          },
+          {
+            "text": "36 N·m",
+            "why": "This computes 18 × (30 ÷ 15) = 36 N·m, the torque at Gear B rather than at Gear C."
+          },
+          {
+            "correct": true,
+            "text": "54 N·m",
+            "why": "The overall gear ratio from A to C is 45 ÷ 15 = 3, so τ_C = 18 × 3 = 54 N·m."
+          },
+          {
+            "text": "90 N·m",
+            "why": "This adds the tooth counts of B and C, computing 18 × ((30 + 45) ÷ 15) instead of cancelling the idler."
+          }
+        ],
+        "stem": "Assuming negligible friction and that no power is taken from Gear B’s shaft, what torque is delivered to Gear C’s shaft in Figure 1?",
+        "type": "A"
+      },
+      {
+        "explanation": "Replacing one idler gear with another of 60 teeth changes Gear B's speed, while (60 ÷ 15) × (45 ÷ 60) = 45 ÷ 15 = 3 leaves Gear C's speed, torque and clockwise direction unchanged.",
+        "id": "p30-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Gear C’s rotational speed halves and its transmitted torque doubles.",
+            "why": "Gear B is an idler: (60 ÷ 15) × (45 ÷ 60) still equals 45 ÷ 15 = 3."
+          },
+          {
+            "text": "Gear C’s rotational speed doubles and its transmitted torque halves.",
+            "why": "Only Gear B’s own rotational speed changes; the ratio between A and C stays 45 ÷ 15."
+          },
+          {
+            "text": "Gear C keeps the same speed and torque, and reverses its direction of rotation.",
+            "why": "There are still two external meshes between A and C, so Gear C still turns clockwise."
+          },
+          {
+            "correct": true,
+            "text": "Neither Gear C’s rotational speed, nor its torque, nor its direction of rotation changes.",
+            "why": "The idler’s tooth count 60 cancels out of the overall ratio 45 ÷ 15, and one idler still gives two reversals."
+          }
+        ],
+        "stem": "Suppose Gear B (30 teeth) in Figure 1 is replaced by a 60-tooth gear on a repositioned middle shaft so that A still meshes with B and B still meshes with C, while Gear A keeps the same speed and torque. What changes at Gear C?",
+        "type": "D"
+      },
+      {
+        "explanation": "Stage 1 slows the intermediate shaft to 1,344 ÷ (48 ÷ 16) = 1,344 ÷ 3 = 448 rev/min. Because the 24-tooth gear is fixed to that same shaft, it also turns at 448 rev/min and drives the 96-tooth output gear at 448 ÷ (96 ÷ 24) = 448 ÷ 4 = 112 rev/min.",
+        "id": "p30-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "28 rev/min",
+            "why": "This divides 1,344 by the tooth count 48 instead of the stage tooth ratio."
+          },
+          {
+            "correct": true,
+            "text": "112 rev/min",
+            "why": "Stage 1 has ratio 48 ÷ 16 = 3 and stage 2 has ratio 96 ÷ 24 = 4; R_total = 3 × 4 = 12, giving 1,344 ÷ 12 = 112 rev/min."
+          },
+          {
+            "text": "192 rev/min",
+            "why": "This adds the two stage ratios (3 + 4 = 7) instead of multiplying them."
+          },
+          {
+            "text": "224 rev/min",
+            "why": "This computes 1,344 ÷ (96 ÷ 16), treating the two-gear intermediate shaft as if it were a single idler gear."
+          }
+        ],
+        "stem": "In a two-stage compound gearbox, a motor drives a 16-tooth input gear at 1,344 rev/min. That gear meshes with a 48-tooth gear fixed to an intermediate shaft. A second gear of 24 teeth fixed rigidly to that same intermediate shaft meshes with a 96-tooth gear on the output shaft. What is the rotational speed of the output shaft?",
+        "type": "T"
+      },
+      {
+        "explanation": "Between k gears in a single line there are k − 1 external meshes, each reversing the direction once. An even number of reversals restores the original direction, which happens when k − 1 is even, that is, when k is odd (such as k = 3 in Figure 1). Multiplying the mesh ratios telescopes every intermediate tooth count, leaving R = Nₖ ÷ N₁ for both speed and torque.",
+        "id": "p30-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "Gₖ turns in the same direction as G₁ whenever the total number of gears k is even.",
+            "why": "A chain of k gears has k − 1 meshes; when k is even, k − 1 is odd, so Gₖ turns opposite to G₁ (as for k = 2)."
+          },
+          {
+            "text": "The output torque on Gₖ equals the input torque on G₁ whenever every gear in the chain has a different tooth count.",
+            "why": "Output torque equals τ₁ × (Nₖ ÷ N₁), which equals τ₁ only when G₁ and Gₖ have the same tooth count."
+          },
+          {
+            "text": "Putting the gear with the most teeth in the middle of the chain increases the torque on Gₖ without changing Gₖ’s speed.",
+            "why": "Every intermediate gear G₂ to Gₖ₋₁ is an idler whose tooth count cancels out of both the speed ratio and the torque ratio."
+          },
+          {
+            "correct": true,
+            "text": "Gₖ turns in the same direction as G₁ when k is odd, and the torque ratio τₖ ÷ τ₁ depends only on the tooth counts of G₁ and Gₖ.",
+            "why": "With k odd there are an even number k − 1 of direction reversals, and every intermediate tooth count cancels in the product of ratios."
+          }
+        ],
+        "stem": "An ideal simple gear train consists of k external gears G₁, G₂, …, Gₖ (with k ≥ 2), each on its own shaft and meshing directly with the next gear in line. Power enters only at G₁ and leaves only at Gₖ. Which statement must be true?",
+        "type": "S"
+      }
+    ],
+    "title": "Gear Ratios, Speed and Torque"
+  },
+  {
+    "area": "business administration",
+    "blocks": [
+      {
+        "text": "Projects such as fitting out a laboratory or launching a product consist of separate activities, some of which can run in parallel while others depend on earlier work. In a finish-to-start dependency, an activity cannot begin until every one of its immediate predecessors has finished. The critical path method (CPM) maps these dependencies in an activity network — boxes for activities and arrows from predecessors to successors — to find the shortest time in which the whole project can finish and where the schedule has room for delay.",
+        "type": "p"
+      },
+      {
+        "text": "With d for an activity’s duration, a forward pass works from start to finish to find each activity’s earliest start (ES) and earliest finish (EF). Activities with no predecessors start at time 0, so ES = 0. Where one or more predecessors lead into an activity, all of them must finish first, so ES equals the largest EF among its immediate predecessors. Adding the duration gives",
+        "type": "p"
+      },
+      {
+        "text": "EF = ES + d",
+        "type": "formula"
+      },
+      {
+        "text": "The largest EF among the ending activities is the minimum completion time of the entire project. A backward pass then works from finish back to start to find each activity’s latest finish (LF) and latest start (LS) — the latest times it can finish and start without delaying that project completion time. An activity with no successors has LF equal to the project completion time; an activity followed by one or more immediate successors has LF equal to the smallest LS among those successors, and",
+        "type": "p"
+      },
+      {
+        "text": "LS = LF − d",
+        "type": "formula"
+      },
+      {
+        "text": "The scheduling leeway of an activity is called its slack, or float:",
+        "type": "p"
+      },
+      {
+        "text": "slack = LS − ES = LF − EF",
+        "type": "formula"
+      },
+      {
+        "text": "A path from start to finish with the longest total duration is called a critical path; a project may have one critical path or more than one tied for the longest duration. When LF at the end is set to the minimum project completion time, every activity on a critical path has zero slack: delaying it delays the whole project. Shortening the project requires shortening activities on the critical path, and cutting a critical activity far enough can make another path take over as critical. Table 1 and Figure 1 show a six-activity project whose durations are in days.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Predecessors and durations of a six-activity project.",
+        "head": [
+          "Activity",
+          "Immediate predecessors",
+          "Duration (days)"
+        ],
+        "rows": [
+          [
+            "A",
+            "None",
+            "3"
+          ],
+          [
+            "B",
+            "None",
+            "5"
+          ],
+          [
+            "C",
+            "A",
+            "7"
+          ],
+          [
+            "D",
+            "A, B",
+            "9"
+          ],
+          [
+            "E",
+            "B",
+            "6"
+          ],
+          [
+            "F",
+            "C, D, E",
+            "4"
+          ]
+        ],
+        "type": "table"
+      },
+      {
+        "alt": "Six activity boxes with arrows from left to right: A (3 days) points to C (7 days) and D (9 days); B (5 days) points to D (9 days) and E (6 days); C, D and E all point to F (4 days).",
+        "caption": "Figure 1. Activity network for the project in Table 1 (durations in days).",
+        "id": "p31-fig1",
+        "svg": "<svg viewBox=\"0 0 468 236\" role=\"img\" aria-labelledby=\"p31-fig1-alt\">\n  <line x1=\"120\" y1=\"57\" x2=\"183.1\" y2=\"39.8\"/>\n  <polygon class=\"dot\" points=\"186,39 178.5,45.7 176.1,37\"/>\n  <line x1=\"120\" y1=\"72\" x2=\"183.4\" y2=\"108.5\"/>\n  <polygon class=\"dot\" points=\"186,110 176,109.4 180.4,101.6\"/>\n  <line x1=\"120\" y1=\"164\" x2=\"183.4\" y2=\"127.5\"/>\n  <polygon class=\"dot\" points=\"186,126 180.4,134.4 176,126.6\"/>\n  <line x1=\"120\" y1=\"179\" x2=\"183.1\" y2=\"196.2\"/>\n  <polygon class=\"dot\" points=\"186,197 176.1,199 178.5,190.3\"/>\n  <line x1=\"282\" y1=\"39\" x2=\"345.9\" y2=\"104.8\"/>\n  <polygon class=\"dot\" points=\"348,107 338.5,103.7 345,97.4\"/>\n  <line x1=\"282\" y1=\"118\" x2=\"345\" y2=\"118\"/>\n  <polygon class=\"dot\" points=\"348,118 339,122.5 339,113.5\"/>\n  <line x1=\"282\" y1=\"197\" x2=\"345.9\" y2=\"131.2\"/>\n  <polygon class=\"dot\" points=\"348,129 345,138.6 338.5,132.3\"/>\n  <rect class=\"part\" x=\"24\" y=\"42\" width=\"96\" height=\"42\" rx=\"4\"/>\n  <text class=\"prob\" x=\"72\" y=\"69\" text-anchor=\"middle\">A (3 d)</text>\n  <rect class=\"part\" x=\"24\" y=\"152\" width=\"96\" height=\"42\" rx=\"4\"/>\n  <text class=\"prob\" x=\"72\" y=\"179\" text-anchor=\"middle\">B (5 d)</text>\n  <rect class=\"part\" x=\"186\" y=\"18\" width=\"96\" height=\"42\" rx=\"4\"/>\n  <text class=\"prob\" x=\"234\" y=\"45\" text-anchor=\"middle\">C (7 d)</text>\n  <rect class=\"part\" x=\"186\" y=\"97\" width=\"96\" height=\"42\" rx=\"4\"/>\n  <text class=\"prob\" x=\"234\" y=\"124\" text-anchor=\"middle\">D (9 d)</text>\n  <rect class=\"part\" x=\"186\" y=\"176\" width=\"96\" height=\"42\" rx=\"4\"/>\n  <text class=\"prob\" x=\"234\" y=\"203\" text-anchor=\"middle\">E (6 d)</text>\n  <rect class=\"part\" x=\"348\" y=\"97\" width=\"96\" height=\"42\" rx=\"4\"/>\n  <text class=\"prob\" x=\"396\" y=\"124\" text-anchor=\"middle\">F (4 d)</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p31",
+    "questions": [
+      {
+        "explanation": "Under finish-to-start dependencies, an activity cannot begin until every immediate predecessor has finished. Its earliest start ES is therefore the largest earliest finish EF among its immediate predecessors.",
+        "id": "p31-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "It equals the smallest earliest finish among its immediate predecessors.",
+            "why": "Starting at the smallest EF would begin the activity before its slower predecessors have finished."
+          },
+          {
+            "correct": true,
+            "text": "It equals the largest earliest finish among its immediate predecessors.",
+            "why": "All immediate predecessors must finish before the activity can start, so the last one to finish sets ES."
+          },
+          {
+            "text": "It equals the sum of the earliest finishes of all its immediate predecessors.",
+            "why": "Predecessors run on separate incoming branches; their finish times are compared by taking the maximum, not added."
+          },
+          {
+            "text": "It equals the smallest latest start among its immediate successors.",
+            "why": "Taking the smallest LS of successors is the backward-pass rule for latest finish (LF), not ES."
+          }
+        ],
+        "stem": "According to the text, how is the earliest start (ES) of an activity determined during the forward pass when the activity has two or more immediate predecessors?",
+        "type": "R"
+      },
+      {
+        "explanation": "Activities A and B both start at day 0, so EF_A = 3 and EF_B = 5. Activity D depends on both, giving ES_D = max(3, 5) = 5 and EF_D = 5 + 9 = 14 days.",
+        "id": "p31-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "9 days",
+            "why": "This is Activity D's own duration of 9 days, omitting the time needed for predecessors A and B."
+          },
+          {
+            "text": "12 days",
+            "why": "This uses Activity A's finish (3 days) instead of waiting for slower predecessor B (5 days)."
+          },
+          {
+            "correct": true,
+            "text": "14 days",
+            "why": "Activity D waits for both A (EF = 3) and B (EF = 5), so ES = 5 and EF = 5 + 9 = 14 days."
+          },
+          {
+            "text": "17 days",
+            "why": "This adds the durations of A and B (3 + 5) as if A and B ran one after the other instead of in parallel."
+          }
+        ],
+        "stem": "In the project shown in Table 1 and Figure 1, what is the earliest finish (EF) of Activity D?",
+        "type": "F"
+      },
+      {
+        "explanation": "Check the four paths from start to finish: A → C → F takes 3 + 7 + 4 = 14 days; B → E → F takes 5 + 6 + 4 = 15 days; A → D → F takes 3 + 9 + 4 = 16 days; and B → D → F takes 5 + 9 + 4 = 18 days. The longest path sets the earliest completion of the whole project: 18 days.",
+        "id": "p31-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "15 days",
+            "why": "This is the duration of path B → E → F (5 + 6 + 4), while F must also wait for D."
+          },
+          {
+            "text": "16 days",
+            "why": "This is the duration of path A → D → F (3 + 9 + 4), overlooking that D must wait for B."
+          },
+          {
+            "correct": true,
+            "text": "18 days",
+            "why": "The longest path is B → D → F: 5 + 9 + 4 = 18 days."
+          },
+          {
+            "text": "34 days",
+            "why": "This adds all six durations together, ignoring that parallel branches run at the same time."
+          }
+        ],
+        "stem": "What is the minimum completion time of the entire project in Table 1?",
+        "type": "A"
+      },
+      {
+        "explanation": "From the backward pass, F has LF = 18 and LS = 14. Thus C has LF = 14 and LS = 14 − 7 = 7, while D has LF = 14 and LS = 14 − 9 = 5. Because A precedes both C and D, LF_A = min(7, 5) = 5. Subtracting EF_A = 3 gives LF_A − EF_A = 5 − 3 = 2 days.",
+        "id": "p31-q4",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "2 days",
+            "why": "Activity A precedes both C (LS = 7) and D (LS = 5), so LF_A = min(7, 5) = 5, LS_A = 5 − 3 = 2, and slack = 2 days."
+          },
+          {
+            "text": "3 days",
+            "why": "This is Activity A's duration (3 days), not its slack LS − ES."
+          },
+          {
+            "text": "4 days",
+            "why": "This considers only successor C (LS = 7), overlooking that A also precedes D (LS = 5)."
+          },
+          {
+            "text": "5 days",
+            "why": "This takes LF_A = 5 days as the slack without subtracting EF_A = 3 days."
+          }
+        ],
+        "stem": "Assuming the project in Table 1 is scheduled to finish in its minimum completion time, what is the slack (float) of Activity A?",
+        "type": "A"
+      },
+      {
+        "explanation": "Activity E starts after B at ES_E = 5, so its planned EF_E is 11 while Activity F starts at ES_F = 14 (waiting for D). That gives E a planned slack of 14 − 11 = 3 days. Taking 8 days moves EF_E to 13, which leaves the project completion time unchanged and reduces E's slack by 2 days to 1 day.",
+        "id": "p31-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "The project completion time does not change, while Activity E’s slack falls by 2 days.",
+            "why": "Activity E had 3 days of slack (EF = 11, LF = 14); taking 2 extra days finishes on day 13, still ahead of LF = 14."
+          },
+          {
+            "text": "The project completion time increases by 2 days, because Activity E feeds directly into Activity F.",
+            "why": "Activity F already waits until day 14 for Activity D, so Activity E finishing on day 13 does not delay F."
+          },
+          {
+            "text": "The project completion time increases by 1 day, because Activity E exceeds its slack by 1 day.",
+            "why": "Activity E starts on day 5 and has LF = 14, giving 3 days of slack, which absorbs a 2-day extension with 1 day to spare."
+          },
+          {
+            "text": "The project completion time does not change, and Activity E’s slack stays the same as planned.",
+            "why": "Increasing Activity E’s duration by 2 days raises EF_E by 2 days while LF_E stays at 14, reducing its slack by 2 days."
+          }
+        ],
+        "stem": "While the project in Table 1 is running, Activity E begins at its earliest start time and takes 8 days instead of its planned 6 days. Every other activity runs as planned. What is the effect on the schedule?",
+        "type": "D"
+      },
+      {
+        "explanation": "Originally P → Q → S took 4 + 10 + 5 = 19 days and P → R → S took 4 + 7 + 5 = 16 days. Cutting Q by 5 days lowers P → Q → S to 4 + 5 + 5 = 14 days, which is now shorter than P → R → S. Path P → R → S therefore becomes critical, setting the new minimum completion time to 16 days.",
+        "id": "p31-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "14 days",
+            "why": "This subtracts all 5 saved days from 19 days, overlooking that S must still wait for R to finish on day 11."
+          },
+          {
+            "correct": true,
+            "text": "16 days",
+            "why": "Path P → Q → S drops from 19 to 14 days, so path P → R → S (4 + 7 + 5 = 16 days) becomes the new critical path."
+          },
+          {
+            "text": "19 days",
+            "why": "This is the original completion time before Activity Q on the critical path was shortened."
+          },
+          {
+            "text": "21 days",
+            "why": "This adds the durations of all four activities together, ignoring that Q and R run in parallel after P."
+          }
+        ],
+        "stem": "In a separate four-activity project with finish-to-start dependencies, Activity P (4 days) has no predecessors and precedes both Activity Q (10 days) and Activity R (7 days). Activity S (5 days) depends on both Q and R. If extra staff cut Activity Q’s duration by 5 days while P, R and S keep their durations, what is the new minimum completion time of this project?",
+        "type": "T"
+      },
+      {
+        "explanation": "For every activity of duration d, EF = ES + d and LS = LF − d (so LF = LS + d). Subtracting EF from LF cancels d and yields LS − ES, which is why slack can be computed either from start times or from finish times.",
+        "id": "p31-q7",
+        "level": 2,
+        "options": [
+          {
+            "text": "Every project network has one and only one critical path from start to finish.",
+            "why": "Two or more paths can tie for the longest total duration, giving the project multiple critical paths."
+          },
+          {
+            "text": "Shortening the duration of any single activity always reduces the minimum completion time of the project.",
+            "why": "Shortening an activity that is not on a critical path only increases its slack without shortening the longest path."
+          },
+          {
+            "text": "The single activity with the largest duration in the project must lie on a critical path.",
+            "why": "An 8-day activity running from start to finish in parallel with two sequential 5-day activities (10 days total) is not on the critical path and has 2 days of slack."
+          },
+          {
+            "correct": true,
+            "text": "For every activity in the project, latest finish minus earliest finish equals latest start minus earliest start.",
+            "why": "Because EF = ES + d and LF = LS + d, the difference LF − EF equals (LS + d) − (ES + d) = LS − ES."
+          }
+        ],
+        "stem": "In any project network scheduled by the critical path method with finish-to-start dependencies, which statement is always true?",
+        "type": "S"
+      }
+    ],
+    "title": "Project Networks, Critical Path and Slack"
+  },
+  {
+    "area": "economics",
+    "blocks": [
+      {
+        "text": "In many markets, the buyers and sellers bear all the costs and receive all the benefits of their trade. Sometimes, however, producing or consuming a good affects a third party, someone who neither buys nor sells it, without compensation. Economists call such a spillover effect an externality. A negative externality imposes a cost on third parties, as when a dye factory releases waste into a river used by downstream fisheries. A positive externality gives third parties an unpaid benefit, as when a vaccinated resident makes neighbours less likely to catch an illness.",
+        "type": "p"
+      },
+      {
+        "text": "To compare what a market does on its own with what is best for everyone together, costs and benefits are measured for one additional unit, that is, on the margin. The marginal private cost (MPC) is what producers pay to make one more unit, such as wages and materials. The marginal external cost (MEC) is the damage that extra unit causes to third parties. Their sum is the marginal social cost (MSC), the full cost to society of one more unit:",
+        "type": "p"
+      },
+      {
+        "text": "MSC = MPC + MEC",
+        "type": "formula"
+      },
+      {
+        "text": "On the demand side, the marginal private benefit (MPB) is the most buyers are willing to pay for one more unit, and the marginal external benefit (MEB) is the gain to third parties. Their sum is the marginal social benefit (MSB):",
+        "type": "p"
+      },
+      {
+        "text": "MSB = MPB + MEB",
+        "type": "formula"
+      },
+      {
+        "text": "Left to itself, a competitive market settles where MPB equals MPC, because buyers and sellers weigh only their own gains and expenses. Society as a whole does best at the socially efficient quantity, where MSB equals MSC. When MEC is positive and MEB is zero, MSC lies above MPC while MSB equals MPB, so an unregulated market produces more than the socially efficient quantity. When MEB is positive and MEC is zero, MSB lies above MPB while MSC equals MPC, so an unregulated market produces too little.",
+        "type": "p"
+      },
+      {
+        "text": "The economist Arthur Pigou proposed correcting an externality with a tax or subsidy per unit. For a negative externality, this Pigouvian (or corrective) tax is set equal to the marginal external cost at the socially efficient quantity:",
+        "type": "p"
+      },
+      {
+        "text": "corrective tax per unit = MEC at the socially efficient quantity",
+        "type": "formula"
+      },
+      {
+        "text": "Because producers must pay this tax on every unit, their private marginal cost rises by the tax, so they internalise the external cost at the margin and the market settles where MSB equals MSC. Even when MEC grows with output, as in Figure 1, a constant per-unit tax equal to MEC at the socially efficient quantity brings the market to that quantity. For a positive externality, a corrective subsidy per unit equal to MEB at the socially efficient quantity raises output to where MSB equals MSC.",
+        "type": "p"
+      },
+      {
+        "alt": "A graph with tonnes per week from 0 to 800 on the horizontal axis and euros per tonne from 0 to 120 on the vertical axis. MPC rises linearly from €20 at 0 tonnes to €60 at 800 tonnes. MSC rises linearly from €30 at 0 tonnes to €110 at 800 tonnes. MSB = MPB falls linearly from €110 at 0 tonnes to €30 at 800 tonnes. MSB = MPB crosses MPC at 600 tonnes and €50, and crosses MSC at 400 tonnes and €70, where MPC is €40.",
+        "caption": "Figure 1. Weekly market for an industrial dye with a negative production externality and no external benefit (MSB = MPB).",
+        "id": "p32-fig1",
+        "svg": "<svg viewBox=\"0 0 480 300\" role=\"img\" aria-labelledby=\"p32-fig1-alt\">\n  <g class=\"grid\"><line x1=\"68\" y1=\"248\" x2=\"68\" y2=\"34\"/><line x1=\"116.8\" y1=\"248\" x2=\"116.8\" y2=\"34\"/><line x1=\"165.5\" y1=\"248\" x2=\"165.5\" y2=\"34\"/><line x1=\"214.3\" y1=\"248\" x2=\"214.3\" y2=\"34\"/><line x1=\"263\" y1=\"248\" x2=\"263\" y2=\"34\"/><line x1=\"311.8\" y1=\"248\" x2=\"311.8\" y2=\"34\"/><line x1=\"360.5\" y1=\"248\" x2=\"360.5\" y2=\"34\"/><line x1=\"409.3\" y1=\"248\" x2=\"409.3\" y2=\"34\"/><line x1=\"458\" y1=\"248\" x2=\"458\" y2=\"34\"/><line x1=\"68\" y1=\"248\" x2=\"458\" y2=\"248\"/><line x1=\"68\" y1=\"230.2\" x2=\"458\" y2=\"230.2\"/><line x1=\"68\" y1=\"212.3\" x2=\"458\" y2=\"212.3\"/><line x1=\"68\" y1=\"194.5\" x2=\"458\" y2=\"194.5\"/><line x1=\"68\" y1=\"176.7\" x2=\"458\" y2=\"176.7\"/><line x1=\"68\" y1=\"158.8\" x2=\"458\" y2=\"158.8\"/><line x1=\"68\" y1=\"141\" x2=\"458\" y2=\"141\"/><line x1=\"68\" y1=\"123.2\" x2=\"458\" y2=\"123.2\"/><line x1=\"68\" y1=\"105.3\" x2=\"458\" y2=\"105.3\"/><line x1=\"68\" y1=\"87.5\" x2=\"458\" y2=\"87.5\"/><line x1=\"68\" y1=\"69.7\" x2=\"458\" y2=\"69.7\"/><line x1=\"68\" y1=\"51.8\" x2=\"458\" y2=\"51.8\"/><line x1=\"68\" y1=\"34\" x2=\"458\" y2=\"34\"/></g>\n  <g class=\"axis\"><line x1=\"68\" y1=\"248\" x2=\"458\" y2=\"248\"/><line x1=\"68\" y1=\"248\" x2=\"68\" y2=\"34\"/></g>\n  <g class=\"ticks\"><text x=\"68\" y=\"269\" text-anchor=\"middle\">0</text><text x=\"165.5\" y=\"269\" text-anchor=\"middle\">200</text><text x=\"263\" y=\"269\" text-anchor=\"middle\">400</text><text x=\"360.5\" y=\"269\" text-anchor=\"middle\">600</text><text x=\"458\" y=\"269\" text-anchor=\"middle\">800</text><text x=\"60\" y=\"253\" text-anchor=\"end\">0</text><text x=\"60\" y=\"217.3\" text-anchor=\"end\">20</text><text x=\"60\" y=\"181.7\" text-anchor=\"end\">40</text><text x=\"60\" y=\"146\" text-anchor=\"end\">60</text><text x=\"60\" y=\"110.3\" text-anchor=\"end\">80</text><text x=\"60\" y=\"74.7\" text-anchor=\"end\">100</text><text x=\"60\" y=\"39\" text-anchor=\"end\">120</text></g>\n  <text class=\"title\" x=\"263\" y=\"292\" text-anchor=\"middle\">Tonnes per week</text>\n  <text class=\"title\" x=\"6\" y=\"18\">Euros per tonne</text>\n  \n  <line class=\"curve curve-2\" x1=\"68\" y1=\"194.5\" x2=\"458\" y2=\"51.8\"/>\n  <line class=\"curve curve-3\" x1=\"68\" y1=\"212.3\" x2=\"458\" y2=\"141\"/>\n  <line class=\"curve\" x1=\"68\" y1=\"51.8\" x2=\"458\" y2=\"194.5\"/>\n  <text class=\"label-2\" x=\"450.7\" y=\"44.5\" text-anchor=\"end\">MSC</text>\n  <text class=\"label-3\" x=\"450.7\" y=\"132.3\" text-anchor=\"end\">MPC</text>\n  <text class=\"label-1\" x=\"450.7\" y=\"213.8\" text-anchor=\"end\">MSB = MPB</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p32",
+    "questions": [
+      {
+        "explanation": "The first paragraph defines an externality as an uncompensated spillover effect on a third party outside the trade, and calls it negative when it imposes a cost on those third parties.",
+        "id": "p32-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "When it imposes an uncompensated cost on someone who is neither the buyer nor the seller.",
+            "why": "This matches the definition of an externality that imposes a cost on third parties in the first paragraph."
+          },
+          {
+            "text": "When the market price buyers pay per unit is higher than the seller's marginal private cost.",
+            "why": "A price above marginal private cost on earlier units is part of ordinary trade and need not harm any third party."
+          },
+          {
+            "text": "When third parties receive a benefit from the transaction without paying the buyer or seller.",
+            "why": "An unpaid benefit to third parties is a positive externality, not a negative one."
+          },
+          {
+            "text": "When producers pay higher wages or material prices to produce an additional unit of output.",
+            "why": "Wages and materials paid by producers are part of marginal private cost, not an external cost on third parties."
+          }
+        ],
+        "stem": "According to the text, when does a market transaction create a negative externality?",
+        "type": "R"
+      },
+      {
+        "explanation": "An unregulated competitive market settles where MPB equals MPC. In Figure 1 the MSB = MPB line crosses the MPC line at 600 tonnes per week (and a price of €50 per tonne).",
+        "id": "p32-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "50 tonnes",
+            "why": "50 is the unregulated price in euros per tonne on the vertical axis, not the quantity in tonnes."
+          },
+          {
+            "text": "200 tonnes",
+            "why": "This is the 200-tonne excess of unregulated output over the socially efficient quantity, not total output."
+          },
+          {
+            "text": "400 tonnes",
+            "why": "At 400 tonnes MSB crosses MSC; that is the socially efficient quantity, not the unregulated market outcome."
+          },
+          {
+            "correct": true,
+            "text": "600 tonnes",
+            "why": "Without regulation the market settles where MPB crosses MPC, at 600 tonnes per week."
+          }
+        ],
+        "stem": "According to Figure 1, what quantity of dye per week does the market produce when there is no tax or regulation?",
+        "type": "F"
+      },
+      {
+        "explanation": "The socially efficient quantity is where MSB crosses MSC, at 400 tonnes per week. At 400 tonnes, MSC = €70 and MPC = €40, so MEC = €70 − €40 = €30 per tonne. Setting the per-unit tax to €30 raises producers' marginal cost at 400 tonnes from €40 to €70, matching MPB.",
+        "id": "p32-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "€10",
+            "why": "This is MSC minus MPC at 0 tonnes (€30 − €20). Because MEC grows with output, the tax must match MEC at the socially efficient quantity."
+          },
+          {
+            "text": "€20",
+            "why": "This is the €20 rise in the price buyers pay (from €50 to €70). Because MPC slopes up, MPC falls by €10 as output drops, so the tax is larger than the price rise."
+          },
+          {
+            "correct": true,
+            "text": "€30",
+            "why": "At the socially efficient quantity (400 tonnes), MSC is €70 and MPC is €40, so MEC is €30."
+          },
+          {
+            "text": "€40",
+            "why": "This is MSC minus MPC at the unregulated quantity of 600 tonnes (€90 − €50), rather than at the socially efficient quantity."
+          }
+        ],
+        "stem": "What corrective tax per tonne moves the dye market in Figure 1 to the socially efficient quantity?",
+        "type": "A"
+      },
+      {
+        "explanation": "Cleaner air for neighbours is a positive externality (MEB > 0) with no external cost (MEC = 0). MSB therefore lies above MPB while MSC equals MPC, so an unregulated market produces fewer insulated lofts than the socially efficient number. A corrective subsidy per loft equal to MEB at the socially efficient quantity raises output to where MSB equals MSC.",
+        "id": "p32-q4",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "The socially efficient number is larger, and a subsidy per loft equal to the marginal external benefit there can reach it.",
+            "why": "Positive MEB puts MSB above MPB while MSC equals MPC, so the market underproduces and a subsidy equal to MEB at the efficient quantity closes the gap."
+          },
+          {
+            "text": "The socially efficient number is smaller, and a tax per loft equal to the marginal external benefit there can reach it.",
+            "why": "Smaller efficient output and a corrective tax apply to a negative externality, whereas cleaner neighbourhood air is a positive externality."
+          },
+          {
+            "text": "The socially efficient number is larger, and a tax per loft equal to the marginal private cost there can reach it.",
+            "why": "Taxing loft insulation would raise its cost and reduce the number installed, moving the market even further below the efficient quantity."
+          },
+          {
+            "text": "The socially efficient number is the same, because homeowners already count their own heating savings when deciding.",
+            "why": "Homeowners count MPB (their own bill savings) but omit MEB (cleaner air for neighbours), so MPB = MPC stops short of MSB = MSC."
+          }
+        ],
+        "stem": "Homeowners who insulate their lofts lower their own heating bills and also reduce winter air pollution for people living nearby, while causing no external cost. Compared with an unregulated market, what is true of the socially efficient number of insulated lofts, and which policy can reach it?",
+        "type": "D"
+      },
+      {
+        "explanation": "At 250 tanks, MSB = €120 + €36 = €156 while MSC = MPC = €120, a gap of €36. Each step of 50 extra tanks lowers MSB by €6 (since MEB is constant) and raises MSC by €3, closing the gap by €9 per step. It takes 36 ÷ 9 = 4 steps, or 200 extra tanks, giving 450 tanks (where MPB = €96, MSB = €132, and MSC = €132).",
+        "id": "p32-q5",
+        "level": 3,
+        "options": [
+          {
+            "text": "250 tanks",
+            "why": "This is the unregulated quantity where MPB = MPC = €120, which leaves out the €36 marginal external benefit."
+          },
+          {
+            "correct": true,
+            "text": "450 tanks",
+            "why": "At 250 tanks MSB exceeds MSC by €36. Every 50 extra tanks narrows that gap by €6 + €3 = €9, taking 4 steps (200 more tanks)."
+          },
+          {
+            "text": "550 tanks",
+            "why": "This divides €36 only by the €6 fall in MPB (6 steps of 50), ignoring that MPC also rises by €3 per step."
+          },
+          {
+            "text": "850 tanks",
+            "why": "This divides €36 by €3 (12 steps of 50), either ignoring the fall in MPB or subtracting 6 − 3 instead of adding them."
+          }
+        ],
+        "stem": "In a flood-prone town, an unregulated market installs 250 household rainwater tanks, where MPB and MPC both equal €120. Each tank also reduces street runoff, giving neighbours a constant marginal external benefit of €36, with no external cost. For every 50 additional tanks above 250, MPB falls by €6 and MPC rises by €3. What is the socially efficient number of rainwater tanks?",
+        "type": "T"
+      },
+      {
+        "explanation": "At the unregulated market quantity, MPB equals MPC. Because there is no external benefit, MSB equals MPB; because there is a negative production externality (MEC > 0), MSC = MPC + MEC is strictly greater than MPC. On that last unit, therefore, MSC exceeds MSB — in Figure 1 at 600 tonnes, €90 exceeds €50.",
+        "id": "p32-q6",
+        "level": 2,
+        "options": [
+          {
+            "text": "Its marginal private benefit is greater than its marginal social cost.",
+            "why": "At the unregulated quantity MPB equals MPC, and with MEC > 0, MSC is higher than MPC. In Figure 1 at 600 tonnes, MPB is €50 while MSC is €90."
+          },
+          {
+            "text": "Its marginal private cost is greater than its marginal private benefit.",
+            "why": "Producers would lose money on a unit whose private cost exceeded the market price; at the unregulated equilibrium MPC equals MPB."
+          },
+          {
+            "text": "Its marginal external cost equals its marginal private benefit.",
+            "why": "No market rule equates MEC with MPB; in Figure 1 at 600 tonnes MEC is €40 while MPB is €50."
+          },
+          {
+            "correct": true,
+            "text": "Its marginal social cost is greater than its marginal social benefit.",
+            "why": "At the unregulated quantity MSB = MPB = MPC, while MSC = MPC + MEC > MPC, so MSC exceeds MSB (in Figure 1, €90 against €50)."
+          }
+        ],
+        "stem": "In a market with a negative externality in production and no external benefit, such as the one in Figure 1, which statement must be true of the last unit produced in the unregulated market?",
+        "type": "S"
+      },
+      {
+        "explanation": "Weekly tax revenue equals the corrective tax per tonne multiplied by the quantity sold once the tax is in place. The tax moves output to the socially efficient quantity of 400 tonnes per week, where MEC is €70 − €40 = €30 per tonne, so tax revenue is 400 × €30 = €12,000 per week.",
+        "id": "p32-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "€8,000",
+            "why": "This multiplies 400 tonnes by the €20 rise in the buyer price (€70 − €50) rather than by the full tax per tonne."
+          },
+          {
+            "correct": true,
+            "text": "€12,000",
+            "why": "At the socially efficient quantity of 400 tonnes, the corrective tax is €30 per tonne, giving 400 × €30 = €12,000."
+          },
+          {
+            "text": "€16,000",
+            "why": "This multiplies 400 tonnes by €40, which is MEC at the unregulated quantity (600 tonnes) instead of at 400 tonnes."
+          },
+          {
+            "text": "€24,000",
+            "why": "This multiplies the unregulated quantity (600 tonnes) by €40, ignoring both that output falls to 400 tonnes and that the tax equals MEC there."
+          }
+        ],
+        "stem": "Once the government introduces the corrective tax per tonne that moves the dye market in Figure 1 to the socially efficient quantity, how much tax revenue per week does it collect?",
+        "type": "A"
+      }
+    ],
+    "title": "Externalities and Corrective Taxes"
+  },
+  {
+    "area": "engineering",
+    "blocks": [
+      {
+        "text": "In reliability engineering, the reliability R of a component over a stated operating period, such as one year of continuous service, is the probability that it performs its function throughout that period without failing. As a probability, R lies from 0 to 1, and the probability that the component fails during the period is F = 1 − R. Throughout this passage, component failures are statistically independent: whether one part fails does not alter the probability that any other part fails.",
+        "type": "p"
+      },
+      {
+        "text": "Engineers represent how parts depend on one another with a reliability block diagram. The diagram shows logical dependence rather than physical wiring: the system succeeds whenever at least one unbroken path of working blocks connects the input (In) to the output (Out).",
+        "type": "p"
+      },
+      {
+        "text": "Components stand in series when every one of them must work for the system to work, so the first component failure stops the system. For n independent components with reliabilities R1, R2, …, Rn in series, the system reliability is their product:",
+        "type": "p"
+      },
+      {
+        "text": "R_series = R1 × R2 × … × Rn",
+        "type": "formula"
+      },
+      {
+        "text": "Because multiplying by a number below 1 makes a positive value smaller, adding an imperfect part in series always lowers reliability below that of the weakest part in the chain.",
+        "type": "p"
+      },
+      {
+        "text": "To guard against failure, engineers add redundancy by placing components in parallel. In active parallel redundancy, all branches operate and the group succeeds as long as at least one branch works; it fails only when every branch fails during the period. For independent branches, the failure probability of the parallel group is the product of the individual failure probabilities:",
+        "type": "p"
+      },
+      {
+        "text": "F_parallel = (1 − R1) × (1 − R2) × … × (1 − Rn)",
+        "type": "formula"
+      },
+      {
+        "text": "Subtracting this combined failure probability from 1 gives the reliability of the parallel group:",
+        "type": "p"
+      },
+      {
+        "text": "R_parallel = 1 − (1 − R1) × (1 − R2) × … × (1 − Rn)",
+        "type": "formula"
+      },
+      {
+        "text": "Adding a parallel branch always raises reliability above that of the single most reliable branch in the group. A diagram that mixes series and parallel sections is solved in stages: replace each parallel group with one equivalent block carrying its R_parallel, then multiply along the series chain. Figure 1 shows the block diagram of a furnace cooling-water line over one year: water must pass through Filter A and be driven by at least one of the two pumps, B or C.",
+        "type": "p"
+      },
+      {
+        "alt": "A reliability block diagram from In on the left to Out on the right. From In, a single path passes through Filter A (R = 0.90) and then divides into two parallel branches: an upper branch with Pump B (R = 0.70) and a lower branch with Pump C (R = 0.50). The two branches join again before Out.",
+        "caption": "Figure 1. Reliability block diagram of a cooling-water line over one year of service.",
+        "id": "p33-fig1",
+        "svg": "<svg viewBox=\"0 0 490 230\" role=\"img\" aria-labelledby=\"p33-fig1-alt\">\n  <line class=\"wire\" x1=\"44\" y1=\"115\" x2=\"78\" y2=\"115\"/>\n  <rect class=\"part\" x=\"78\" y=\"85\" width=\"112\" height=\"60\" rx=\"4\"/>\n  <text x=\"134\" y=\"110\" text-anchor=\"middle\">Filter A</text>\n  <text class=\"prob\" x=\"134\" y=\"133\" text-anchor=\"middle\">R = 0.90</text>\n  <line class=\"wire\" x1=\"190\" y1=\"115\" x2=\"226\" y2=\"115\"/>\n  <polyline class=\"wire\" points=\"226,115 226,56 262,56\"/>\n  <polyline class=\"wire\" points=\"226,115 226,174 262,174\"/>\n  <rect class=\"part\" x=\"262\" y=\"26\" width=\"116\" height=\"60\" rx=\"4\"/>\n  <text x=\"320\" y=\"51\" text-anchor=\"middle\">Pump B</text>\n  <text class=\"prob\" x=\"320\" y=\"74\" text-anchor=\"middle\">R = 0.70</text>\n  <rect class=\"part\" x=\"262\" y=\"144\" width=\"116\" height=\"60\" rx=\"4\"/>\n  <text x=\"320\" y=\"169\" text-anchor=\"middle\">Pump C</text>\n  <text class=\"prob\" x=\"320\" y=\"192\" text-anchor=\"middle\">R = 0.50</text>\n  <polyline class=\"wire\" points=\"378,56 414,56 414,115\"/>\n  <polyline class=\"wire\" points=\"378,174 414,174 414,115\"/>\n  <line class=\"wire\" x1=\"414\" y1=\"115\" x2=\"442\" y2=\"115\"/>\n  <polygon class=\"dot\" points=\"436,109 436,121 448,115\"/>\n  <circle class=\"dot\" cx=\"226\" cy=\"115\" r=\"4\"/>\n  <circle class=\"dot\" cx=\"414\" cy=\"115\" r=\"4\"/>\n  <text x=\"38\" y=\"121\" text-anchor=\"end\">In</text>\n  <text x=\"454\" y=\"121\">Out</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p33",
+    "questions": [
+      {
+        "explanation": "The fourth paragraph explains that multiplying by a number below 1 makes a positive product smaller, so adding an imperfect component in series always lowers system reliability below the weakest component in the chain.",
+        "id": "p33-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "It rises above the reliability of the strongest component in the chain.",
+            "why": "Reliability rises above the strongest component when a redundant branch is added in parallel, not in series."
+          },
+          {
+            "correct": true,
+            "text": "It falls, ending up below the reliability of the weakest component in the chain.",
+            "why": "In series R_series multiplies all component reliabilities; multiplying by another number below 1 reduces the product below the smallest factor."
+          },
+          {
+            "text": "It settles at the average of the existing system reliability and the new component.",
+            "why": "Series reliabilities are multiplied, not averaged; an average would lie between the two values rather than below both."
+          },
+          {
+            "text": "It stays unchanged, because the failures of the components are independent.",
+            "why": "Independence justifies multiplying the probabilities; it does not keep the product from shrinking when another factor below 1 is included."
+          }
+        ],
+        "stem": "According to the text, what happens to system reliability when one more independent component with reliability strictly between 0 and 1 is added in series?",
+        "type": "R"
+      },
+      {
+        "explanation": "A system in a reliability block diagram works whenever an unbroken path of working blocks links In to Out. Filter A sits alone in series with the pump pair, so its failure breaks every path; either pump can fail alone while the other keeps the path open.",
+        "id": "p33-q2",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "Failure of Filter A alone.",
+            "why": "Every path from In to Out passes through Filter A, so if Filter A fails no unbroken path of working blocks remains."
+          },
+          {
+            "text": "Failure of Pump B alone.",
+            "why": "When Pump B fails while Filter A and Pump C work, the lower branch through Filter A and Pump C still connects In to Out."
+          },
+          {
+            "text": "Failure of Pump C alone.",
+            "why": "When Pump C fails while Filter A and Pump B work, the upper branch through Filter A and Pump B still connects In to Out."
+          },
+          {
+            "text": "Filter A and Pump B together, because no single part can stop the line.",
+            "why": "Redundancy covers only the pump stage; Filter A has no parallel backup, so its failure alone stops the line."
+          }
+        ],
+        "stem": "In Figure 1, which single-component failure stops cooling water from reaching Out when the other two components keep working?",
+        "type": "F"
+      },
+      {
+        "explanation": "Pump B fails with probability 1 − 0.70 = 0.30, and Pump C fails with probability 1 − 0.50 = 0.50. Because both must fail for the parallel stage to fail, F_parallel = 0.30 × 0.50 = 0.15, giving R_parallel = 1 − 0.15 = 0.85.",
+        "id": "p33-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "0.15",
+            "why": "This is 0.30 × 0.50, the probability that both pumps fail. It still has to be subtracted from 1."
+          },
+          {
+            "text": "0.35",
+            "why": "This multiplies 0.70 × 0.50 as if both pumps stood in series and both had to work."
+          },
+          {
+            "text": "0.60",
+            "why": "This averages 0.70 and 0.50. Parallel redundancy must give a reliability above 0.70."
+          },
+          {
+            "correct": true,
+            "text": "0.85",
+            "why": "F_parallel = (1 − 0.70) × (1 − 0.50) = 0.30 × 0.50 = 0.15, so R_parallel = 1 − 0.15 = 0.85."
+          }
+        ],
+        "stem": "What is the combined reliability of the parallel pump pair (Pump B and Pump C) in Figure 1 over the one-year period?",
+        "type": "A"
+      },
+      {
+        "explanation": "Reduce the diagram in two steps. First, the parallel pump pair has reliability 1 − (1 − 0.70) × (1 − 0.50) = 0.85. Second, that equivalent block stands in series with Filter A (0.90), so R_system = 0.90 × 0.85 = 0.765.",
+        "id": "p33-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "0.315",
+            "why": "This multiplies 0.90 × 0.70 × 0.50, treating all three components as a single series chain."
+          },
+          {
+            "text": "0.540",
+            "why": "This multiplies Filter A (0.90) by 0.60, the average of the two pump reliabilities rather than their parallel reliability."
+          },
+          {
+            "correct": true,
+            "text": "0.765",
+            "why": "Replace the parallel pumps with an equivalent block of reliability 0.85, then multiply in series with Filter A: 0.90 × 0.85 = 0.765."
+          },
+          {
+            "text": "0.985",
+            "why": "This computes 1 − 0.10 × 0.30 × 0.50, treating Filter A as if it also stood in parallel with the pumps."
+          }
+        ],
+        "stem": "What is the reliability of the whole cooling-water line in Figure 1 over the one-year period?",
+        "type": "A"
+      },
+      {
+        "explanation": "For two independent valves in parallel, F_parallel = (1 − R1) × (1 − R2). Here F_parallel = 1 − 0.96 = 0.04 and 1 − R1 = 1 − 0.84 = 0.16. Dividing gives 1 − R2 = 0.04 ÷ 0.16 = 0.25, so R2 = 1 − 0.25 = 0.75.",
+        "id": "p33-q5",
+        "level": 3,
+        "options": [
+          {
+            "text": "0.25",
+            "why": "This is F2 = 0.04 ÷ 0.16, Valve 2's failure probability rather than its reliability 1 − F2."
+          },
+          {
+            "correct": true,
+            "text": "0.75",
+            "why": "The pair's allowed failure probability is 1 − 0.96 = 0.04. Valve 1 fails with probability 0.16, so F2 = 0.04 ÷ 0.16 = 0.25 and R2 = 1 − 0.25 = 0.75."
+          },
+          {
+            "text": "0.80",
+            "why": "This solves (1 − R)² = 0.04, which assumes both valves have the same reliability instead of using 0.84 for Valve 1."
+          },
+          {
+            "text": "0.88",
+            "why": "This subtracts 0.04 from 0.16 (0.12) and takes 1 − 0.12, treating parallel failure probabilities as subtracted rather than multiplied."
+          }
+        ],
+        "stem": "A satellite fuel line uses Valve 1, whose mission reliability is 0.84, and engineers place an independent backup Valve 2 in parallel with it so the pair fails only if both valves fail. What mission reliability must Valve 2 have for the parallel pair to achieve a combined reliability of 0.96?",
+        "type": "T"
+      },
+      {
+        "explanation": "Two Sensor X units in parallel have reliability 1 − (1 − 0.60)² = 0.84, giving a series system reliability of 0.84 × 0.80 = 0.672. Two Recorder Y units in parallel reach 1 − (1 − 0.80)² = 0.96, but in series with the single Sensor X that gives only 0.60 × 0.96 = 0.576. Reinforcing the weaker series stage removes the tighter bottleneck.",
+        "id": "p33-q6",
+        "level": 2,
+        "options": [
+          {
+            "text": "Backing up Recorder Y, because two 0.80 units in parallel reach 0.96, higher than two 0.60 units at 0.84.",
+            "why": "Although 0.96 exceeds 0.84, leaving Sensor X unbacked keeps a 0.60 bottleneck in series, giving 0.60 × 0.96 = 0.576."
+          },
+          {
+            "text": "Both options produce the same overall reliability, because series multiplication does not depend on stage order.",
+            "why": "Stage order does not change a fixed product, but the two choices form different products: 0.84 × 0.80 = 0.672 versus 0.60 × 0.96 = 0.576."
+          },
+          {
+            "correct": true,
+            "text": "Backing up Sensor X, because raising the weaker 0.60 stage to 0.84 lifts the series product more than raising 0.80 to 0.96.",
+            "why": "With X backed up, system reliability is 0.84 × 0.80 = 0.672, higher than 0.60 × 0.96 = 0.576 when Y is backed up."
+          },
+          {
+            "text": "Neither option raises overall reliability, because adding a third part introduces an extra failure chance.",
+            "why": "A parallel backup adds an alternative working path rather than a series bottleneck, so either backup raises system reliability above 0.480."
+          }
+        ],
+        "stem": "A monitoring chain consists of Sensor X (reliability 0.60) in series with Recorder Y (reliability 0.80), with independent failures. An engineer can add either one identical backup sensor in parallel with X, or one identical backup recorder in parallel with Y, but not both. Which option produces the higher overall reliability, and why?",
+        "type": "D"
+      }
+    ],
+    "title": "Series and Parallel System Reliability"
+  },
+  {
+    "area": "social sciences",
+    "blocks": [
+      {
+        "text": "Social scientists classify goods and shared resources along two dimensions. A good is excludable if it is practical to stop people who have not paid, or who lack permission, from using it; it is non-excludable if, once supplied, nobody nearby can reasonably be kept from benefiting. A good is rivalrous if one person's use leaves less of it for others, and non-rivalrous if one person's use does not diminish anyone else's ability to use it at the same time.",
+        "type": "p"
+      },
+      {
+        "text": "Crossing these two criteria produces the four categories in Table 1. A loaf of bread is a private good: a shop can withhold it until paid, and eating it leaves none for anyone else. An encrypted weather-data feed is a club good: a password keeps non-subscribers out, yet one subscriber reading the forecast takes nothing from another. Wild fish in open coastal waters are a common-pool resource: boats are hard to keep out, while every fish landed leaves one fewer in the water. Flood defences protecting a valley and street lighting are public goods: they protect or light the way for everyone there at once, payers and non-payers alike.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Four categories of goods classified by excludability and rivalry.",
+        "head": [
+          "Access \\ Consumption",
+          "Rivalrous",
+          "Non-rivalrous"
+        ],
+        "rows": [
+          [
+            "Excludable",
+            "Private goods",
+            "Club goods"
+          ],
+          [
+            "Non-excludable",
+            "Common-pool resources",
+            "Public goods"
+          ]
+        ],
+        "type": "table"
+      },
+      {
+        "text": "In this framework, calling something a public good describes how it is consumed, not who pays for it. A city council may hand out rivalrous, excludable items such as school meals, which remain private goods, whereas a private broadcaster may supply free-to-air radio — non-excludable and non-rivalrous — by selling advertisements alongside it. Conditions also matter: an untolled highway is non-excludable and non-rivalrous late at night, when extra cars slow nobody down, whereas during a traffic jam road space becomes rivalrous, turning the same road into a common-pool resource.",
+        "type": "p"
+      },
+      {
+        "text": "Providing a public good or conserving a common-pool resource requires collective action, in which group members contribute money, effort or restraint toward a shared benefit. Because a public good is non-excludable, an individual can hope to free ride: enjoy what others pay for while contributing nothing. When one member's contribution costs more than the extra benefit that contribution alone brings back to that member, self-interest pushes each member to hold back, even though all members would be better off if everyone contributed. This free-rider problem can end in under-provision, where some contribute and others free ride, or in non-production, where everyone holds back so the good is never produced at all and nobody has anything to free ride on. Common-pool resources face a parallel trap of overuse, because each user keeps the full gain of taking an extra unit while sharing the depletion cost with the whole group. Groups and governments address both problems through compulsory taxes, enforceable quotas, community monitoring with penalties, or tying excludable member benefits to contributions.",
+        "type": "p"
+      }
+    ],
+    "id": "p34",
+    "questions": [
+      {
+        "explanation": "The first paragraph defines a good as non-rivalrous when one person's use does not diminish anyone else's ability to use it at the same time.",
+        "id": "p34-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Once the good is provided, it is impossible or too costly to stop non-payers from benefiting.",
+            "why": "That defines non-excludability, the access dimension, rather than non-rivalry in consumption."
+          },
+          {
+            "text": "The good is funded through public taxation and supplied by a local or national government.",
+            "why": "Government funding does not define non-rivalry; governments also supply rivalrous private goods such as school meals."
+          },
+          {
+            "text": "Every person in the community places the same monetary value on using the good.",
+            "why": "Non-rivalry concerns whether one person's use reduces availability for others, not whether everyone values it equally."
+          },
+          {
+            "correct": true,
+            "text": "One person using the good does not diminish other people's ability to use it at the same time.",
+            "why": "This is the definition of non-rivalrous consumption in the first paragraph."
+          }
+        ],
+        "stem": "According to the text, what makes a good non-rivalrous?",
+        "type": "R"
+      },
+      {
+        "explanation": "Reading the \"Non-excludable\" row and the \"Rivalrous\" column of Table 1 gives common-pool resources, such as wild fish in open coastal waters.",
+        "id": "p34-q2",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "Common-pool resources.",
+            "why": "In Table 1, the \"Non-excludable\" row and \"Rivalrous\" column intersect at common-pool resources."
+          },
+          {
+            "text": "Club goods.",
+            "why": "Table 1 places club goods in the excludable and non-rivalrous cell."
+          },
+          {
+            "text": "Public goods.",
+            "why": "Table 1 places public goods in the non-excludable and non-rivalrous cell."
+          },
+          {
+            "text": "Private goods.",
+            "why": "Table 1 places private goods in the excludable and rivalrous cell."
+          }
+        ],
+        "stem": "According to Table 1, which category of goods is both non-excludable and rivalrous?",
+        "type": "F"
+      },
+      {
+        "explanation": "A club good is excludable and non-rivalrous. A paid subscriber login excludes non-payers, while one subscriber reading a digital paper does not reduce availability for other subscribers.",
+        "id": "p34-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "Wild shellfish on an open shoreline where anyone may gather them, and every basket gathered leaves less for others.",
+            "why": "Open access makes it non-excludable and depletion makes it rivalrous: a common-pool resource."
+          },
+          {
+            "text": "A coastal lighthouse beam visible to every passing ship regardless of payment, without growing dimmer as more ships look.",
+            "why": "Ships cannot be excluded from seeing the beam and viewing is non-rivalrous: a public good."
+          },
+          {
+            "correct": true,
+            "text": "An online journal archive behind a paid subscriber login, where one reader downloading a paper never blocks other subscribers.",
+            "why": "The login makes access excludable, while digital reading is non-rivalrous across subscribers: a club good."
+          },
+          {
+            "text": "Fresh sandwiches sold at a campus café, where only paying customers receive one and eating a sandwich leaves none for others.",
+            "why": "Payment makes it excludable and consumption is rivalrous: a private good."
+          }
+        ],
+        "stem": "Using the definitions in the text and Table 1, which of the following is an example of a club good?",
+        "type": "C"
+      },
+      {
+        "explanation": "Without tolls or barriers the ring road is non-excludable at both times. Late at night one driver does not delay others (non-rivalrous: a public good); at rush hour each additional car reduces speed and space for others (rivalrous: a common-pool resource).",
+        "id": "p34-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "From a club good at night to a private good at rush hour, as congestion creates exclusion.",
+            "why": "No toll or barrier is added at rush hour, so the road is non-excludable at both times."
+          },
+          {
+            "correct": true,
+            "text": "From a public good at night to a common-pool resource at rush hour, as use turns rivalrous.",
+            "why": "Without tolls the road stays non-excludable, while congestion changes consumption from non-rivalrous to rivalrous."
+          },
+          {
+            "text": "From a private good at night to a club good at rush hour, as more drivers share the lanes.",
+            "why": "An untolled road is non-excludable, and rush-hour crowding makes use more rivalrous rather than less."
+          },
+          {
+            "text": "From a common-pool resource at night to a public good at rush hour, as commuters travel together.",
+            "why": "This reverses rivalry: road space is non-rivalrous in light night traffic and rivalrous during a rush-hour jam."
+          }
+        ],
+        "stem": "A city ring road has no tolls or entry barriers. Late at night traffic is light and extra cars do not slow anyone down; at morning rush hour no tolls are added, yet every extra car slows the traffic behind it. In the terms of Table 1, how does the road shift between late night and rush hour?",
+        "type": "D"
+      },
+      {
+        "explanation": "The third paragraph stresses that whether something is a public good depends on non-excludability and non-rivalry rather than on who funds it, giving free-to-air commercial radio as a privately supplied public good. Meanwhile, free meals remain rivalrous private goods, non-production leaves nothing to free ride on, and common-pool resources risk overuse.",
+        "id": "p34-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "A broadcast service provided by a private company and funded by advertisements can still be a public good.",
+            "why": "Public-good status depends on non-excludability and non-rivalry, not on state provision; the third paragraph gives free-to-air commercial radio as an example."
+          },
+          {
+            "text": "Every item a local council provides free of charge to residents, such as a packed meal, is a public good.",
+            "why": "A packed meal is rivalrous and excludable, so it remains a private good even when a government pays for it."
+          },
+          {
+            "text": "When the free-rider problem causes non-production, every member of the group successfully free rides on others.",
+            "why": "Under non-production nobody contributes and the good is not produced at all, so there is nothing on which anyone can free ride."
+          },
+          {
+            "text": "Common-pool resources avoid collective-action problems because rivalrous use keeps extra users out on its own.",
+            "why": "Common-pool resources are non-excludable; rivalry causes depletion rather than exclusion, creating an overuse problem."
+          }
+        ],
+        "stem": "Which statement follows from the text's analysis of public goods and the free-rider problem?",
+        "type": "S"
+      },
+      {
+        "explanation": "Suppose k of the other 9 households fund a lamp. If a household pays €0, its net payoff is €15 × k. If it pays €80 for a lamp, total lamps rise to k + 1, raising its own benefit by €15 while costing €80 — a net change of €15 − €80 = −€65 for every possible k. Acting alone on self-interest, every household pays €0 and 0 lamps are installed (the non-production form of the free-rider problem), leaving each with €0 instead of the €70 net gain all 10 would enjoy under a binding shared agreement.",
+        "id": "p34-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "All 10 lamps are installed, because 10 lamps yield €150 of benefit per household against €80 paid, a €70 net gain.",
+            "why": "Every household would indeed be €70 better off if all 10 were bound to pay, but without a binding agreement each household gains a further €65 by holding back."
+          },
+          {
+            "text": "Six lamps are installed, because 6 lamps bring each household €90 in benefit, which first exceeds the €80 lamp cost.",
+            "why": "The €15 benefit from the other 5 lamps arrives whether or not the sixth household pays; that sixth lamp still adds only €15 to its payer while costing €80."
+          },
+          {
+            "text": "Five lamps are installed, because half the group contributes once total group benefit per lamp (€150) beats the €80 cost.",
+            "why": "Although €150 across the group exceeds €80, each individual household captures only €15 of its own lamp's benefit and faces the same incentive to pay €0."
+          },
+          {
+            "correct": true,
+            "text": "Zero lamps are installed, because paying €80 adds only €15 to that household's own benefit, cutting its payoff by €65 whatever others do.",
+            "why": "If k other households pay, paying €0 gives 15k whereas paying €80 gives 15(k + 1) − 80 = 15k − 65; every household therefore pays €0 (non-production)."
+          }
+        ],
+        "stem": "Ten households live along an unlit shared lane with no gate. Installing a street lamp costs €80 per lamp, and each lamp installed gives every one of the 10 households a benefit worth €15, whether that household paid or not. Each household independently chooses either to pay €80 for one lamp or to pay €0, aiming solely to maximise its own net payoff (its total benefit from all lamps installed minus what it pays itself). What happens, and why?",
+        "type": "T"
+      }
+    ],
+    "title": "Public Goods and Collective Action"
+  },
+  {
+    "area": "humanities",
+    "blocks": [
+      {
+        "text": "In linguistics, morphology studies the internal structure of words and how words are built. Although a word can stand on its own as an utterance, many words contain smaller meaningful parts. A morpheme is the smallest systematic pairing of a form (a spoken sound or sign) with a meaning or grammatical function. The English word \"cats\" contains two morphemes: \"cat\", naming the animal, and \"-s\", marking plural number.",
+        "type": "p"
+      },
+      {
+        "text": "A free morpheme can stand alone as a word, such as \"cat\", \"kind\" or \"teach\", whereas a bound morpheme appears only when attached to another morpheme. The indivisible core morpheme of a word is its root, while any unit to which another morpheme attaches — a bare root or one already carrying other pieces — is a base. Bound morphemes that attach to a base are affixes: a prefix precedes its base (\"un-\" in \"unkind\"), a suffix follows it (\"-ness\" in \"kindness\"), and an infix is inserted inside a root. A suffix sitting between a root and a later suffix, like \"-y\" in \"unluckiness\", remains a suffix rather than an infix. Every affix is bound, though not every bound morpheme is an affix: English has bound roots such as \"-whelm\" in \"overwhelm\", and in several languages most verb roots are bound.",
+        "type": "p"
+      },
+      {
+        "text": "Derivational affixes build new words and select the word category (such as noun, verb or adjective) of their base. Derivational suffixes often change category — \"-ness\" turns adjectives into nouns, and \"-ly\" turns adjectives into adverbs — whereas English derivational prefixes alter meaning without changing category. Because each affix attaches to the outer edge of a base of the category it selects, order is fixed: in \"foolishly\", \"-ish\" first turns the noun \"fool\" into an adjective so \"-ly\" has an adjective base. Inflectional affixes, by contrast, never change the word category of their base or coin a new word; they mark grammatical properties required by a sentence, such as plural \"-s\" or past-tense \"-ed\".",
+        "type": "p"
+      },
+      {
+        "text": "Compounding joins two or more roots rather than a root and an affix. English spells compounds solid (\"sunflower\"), hyphenated (\"kind-hearted\") or with a space (\"bus stop\"), so linguists identify them by stress and syntax rather than spaces. Most English compounds are endocentric: their rightmost member is the head, fixing both word category and the kind of thing meant, so a \"bluebird\" is a kind of bird. Exocentric compounds lack this internal semantic head: a \"spoilsport\" is a person who ruins fun, not a kind of sport.",
+        "type": "p"
+      }
+    ],
+    "id": "p35",
+    "questions": [
+      {
+        "explanation": "The third paragraph states that inflectional affixes express grammatical properties required by a sentence (such as plural number or past tense) and never change the word category of their base or coin a new word.",
+        "id": "p35-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "An inflectional affix can stand alone as a word, whereas a derivational affix is always bound.",
+            "why": "All affixes attach to a base and are bound morphemes; neither inflectional nor derivational affixes stand alone."
+          },
+          {
+            "text": "An inflectional affix always precedes its base, whereas a derivational affix always follows it.",
+            "why": "Preceding or following a base distinguishes prefixes from suffixes; English inflectional affixes such as \"-s\" and \"-ed\" are suffixes."
+          },
+          {
+            "correct": true,
+            "text": "An inflectional affix expresses grammatical information and never changes the word category of its base.",
+            "why": "This is the contrast stated at the end of the third paragraph."
+          },
+          {
+            "text": "An inflectional affix joins two roots together, whereas a derivational affix attaches to one root.",
+            "why": "Joining two or more roots together is compounding, not inflection."
+          }
+        ],
+        "stem": "According to the text, what distinguishes an inflectional affix from a derivational affix?",
+        "type": "R"
+      },
+      {
+        "explanation": "Inflectional affixes mark grammatical properties without changing word category. Past-tense \"-ed\" keeps the verb \"paint\" a verb, whereas \"-ness\", \"-ish\" and agentive \"-er\" each create a word of a new category.",
+        "id": "p35-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "The suffix \"-ness\" in \"sharpness\", formed from the adjective \"sharp\".",
+            "why": "\"-ness\" turns the adjective \"sharp\" into a noun, changing word category: a derivational suffix."
+          },
+          {
+            "text": "The suffix \"-ish\" in \"childish\", formed from the noun \"child\".",
+            "why": "\"-ish\" turns the noun \"child\" into an adjective, coining a new word of a different category: a derivational suffix."
+          },
+          {
+            "text": "The suffix \"-er\" in \"teacher\", formed from the verb \"teach\" to name a person.",
+            "why": "\"-er\" turns the verb \"teach\" into an agent noun, changing category and core meaning: a derivational suffix."
+          },
+          {
+            "correct": true,
+            "text": "The suffix \"-ed\" in \"painted\", formed from the verb \"paint\" to mark past tense.",
+            "why": "Past-tense \"-ed\" adds grammatical tense while leaving \"paint\" a verb: an inflectional suffix."
+          }
+        ],
+        "stem": "In which of the following English words is the named suffix an inflectional affix rather than a derivational affix?",
+        "type": "C"
+      },
+      {
+        "explanation": "A compound combines two or more roots, and it is exocentric when it lacks an internal semantic head — that is, when it does not name a subtype of its right-hand member. \"Pickpocket\" names a thief, not a pocket; \"bookshelf\" and \"greenhouse\" are endocentric, and \"helpfulness\" is formed by derivation, not compounding.",
+        "id": "p35-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "\"Pickpocket\", naming a thief who steals valuables from people's pockets, built from \"pick\" and \"pocket\".",
+            "why": "It joins two roots (\"pick\" and \"pocket\"), yet the whole word denotes a person rather than a subtype of its right-hand member \"pocket\"."
+          },
+          {
+            "text": "\"Bookshelf\", naming a wooden or metal shelf made for holding books, built from \"book\" and \"shelf\".",
+            "why": "A bookshelf is a kind of shelf, so its right-hand member serves as its semantic and category head: an endocentric compound."
+          },
+          {
+            "text": "\"Greenhouse\", naming a heated glass house used for growing plants, built from \"green\" and \"house\".",
+            "why": "Although not green in colour, a greenhouse is still a kind of house (structure), so its right-hand member heads an endocentric compound."
+          },
+          {
+            "text": "\"Helpfulness\", naming the personal quality of being helpful, built from \"help\", \"-ful\" and \"-ness\".",
+            "why": "\"Helpfulness\" contains one root (\"help\") and two derivational suffixes, so it is a derived word rather than a compound."
+          }
+        ],
+        "stem": "Following the text's account of compounding, which of these English words is an exocentric compound?",
+        "type": "C"
+      },
+      {
+        "explanation": "The second paragraph explicitly distinguishes bound roots from affixes: every affix is bound because it must attach to a base, whereas bound roots (like \"-whelm\" in \"overwhelm\") are bound morphemes that are roots rather than affixes.",
+        "id": "p35-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "Any affix standing between a root and a later suffix inside a word, like \"-ful\" in \"carefulness\", is an infix.",
+            "why": "\"-ful\" attaches after the root \"care\" and is followed by \"-ness\", so it remains a suffix; an infix must be inserted inside a single root."
+          },
+          {
+            "correct": true,
+            "text": "Every affix is a bound morpheme, whereas not every bound morpheme in a language is an affix.",
+            "why": "All affixes must attach to a base, while bound roots (such as \"-whelm\" in \"overwhelm\") are also bound without being affixes."
+          },
+          {
+            "text": "Two roots separated by a space in English spelling, such as \"bus stop\", cannot form a compound word.",
+            "why": "The fourth paragraph notes that English spells some compounds with spaces, so spaces alone do not rule out compounding."
+          },
+          {
+            "text": "Derivational prefixes in English regularly change the word category of the base they attach to.",
+            "why": "The third paragraph states the opposite: derivational prefixes in English alter meaning without changing the base's word category."
+          }
+        ],
+        "stem": "Which statement follows from the principles of morphological structure described in the text?",
+        "type": "S"
+      },
+      {
+        "explanation": "In English endocentric compounds the head stands on the right and determines both word category and the kind of thing meant. Both \"boat\" and \"house\" are nouns, so both compounds are nouns, while reversing their order shifts the head — and thus the kind of object named — from a kind of boat (\"houseboat\") to a kind of house (\"boathouse\").",
+        "id": "p35-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "The word category shifts from a noun to an adjective, while the word still refers to a kind of boat.",
+            "why": "Both roots are nouns, so the right-hand member remains a noun in both orders, and the head shifts from \"boat\" to \"house\"."
+          },
+          {
+            "text": "Neither category nor core meaning changes, because an endocentric compound weights both roots equally.",
+            "why": "In English endocentric compounds only the rightmost member is the head; the left member modifies it."
+          },
+          {
+            "text": "The word ceases to be a compound and becomes an inflected plural or tense form of the root \"boat\".",
+            "why": "Reversing two roots still combines two roots, which is compounding rather than inflection."
+          },
+          {
+            "correct": true,
+            "text": "The word category stays a noun, while the core meaning shifts from a kind of boat to a kind of house.",
+            "why": "The rightmost root is the head in English: \"boat\" heads \"houseboat\" (a boat for living in), whereas \"house\" heads \"boathouse\" (a shelter for boats)."
+          }
+        ],
+        "stem": "The two English noun roots \"boat\" and \"house\" form two endocentric compounds: \"houseboat\" and \"boathouse\". Under the headedness rule in the text, what changes when the order of the roots is reversed from \"houseboat\" to \"boathouse\"?",
+        "type": "D"
+      },
+      {
+        "explanation": "Each derivational affix attaches to a base of the category it selects. Starting from the verb \"build\", attaching \"re-\" first produces the verb \"rebuild\", and \"-able\" can then select that verb base to produce the adjective \"rebuildable\". In the reverse order, \"-able\" would first turn \"build\" into the adjective \"buildable\", leaving an adjective base to which verb-selecting \"re-\" cannot attach.",
+        "id": "p35-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "\"-able\" attaches to \"build\" first to form the adjective \"buildable\", and \"re-\" then attaches to that adjective.",
+            "why": "Once \"-able\" turns \"build\" into the adjective \"buildable\", \"re-\" can no longer attach because \"re-\" selects only verbs."
+          },
+          {
+            "text": "Either order works, because a prefix and a suffix attach to opposite edges of the root without interacting.",
+            "why": "Each affix selects the category of the entire base it attaches to, so changing the base from a verb to an adjective blocks \"re-\"."
+          },
+          {
+            "correct": true,
+            "text": "\"re-\" attaches to \"build\" first to form the verb \"rebuild\", since \"-able\" first would yield an adjective \"re-\" cannot take.",
+            "why": "Attaching \"re-\" to the verb \"build\" yields the verb base \"rebuild\", which still satisfies \"-able\"'s requirement for a verb base."
+          },
+          {
+            "text": "\"re-\" and \"-able\" first join each other into a single affix, which then attaches to the verb root \"build\" at once.",
+            "why": "\"re-\" and \"-able\" are independent derivational affixes that occur separately (as in \"rebuild\" and \"buildable\"), each attaching step by step."
+          }
+        ],
+        "stem": "In English, the derivational prefix \"re-\" (\"again\") selects only verbs and forms verbs, while the derivational suffix \"-able\" selects only verbs and forms adjectives. Starting from the verb root \"build\", in what order must the pieces combine to build the adjective \"rebuildable\", and why?",
+        "type": "T"
+      }
+    ],
+    "title": "Morphology and Word Formation"
+  }
+]

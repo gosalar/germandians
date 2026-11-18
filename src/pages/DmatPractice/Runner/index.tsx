@@ -59,14 +59,28 @@ function isAnswered(item: CoreTask | Passage, answers: Record<string, Answer>): 
 interface TopBarContentProps {
   sections: SectionRun[];
   section: SectionId;
+  mock?: number;
   practice: boolean;
+  hasNextPracticeSection: boolean;
   academic: boolean;
   onOpenEnd(): void;
   onOpenLeave(): void;
+  onEndSection(): void;
   onStopEarly(): void;
 }
 
-function TopBarContent({ sections, section, practice, academic, onOpenEnd, onOpenLeave, onStopEarly }: TopBarContentProps) {
+function TopBarContent({
+  sections,
+  section,
+  mock,
+  practice,
+  hasNextPracticeSection,
+  academic,
+  onOpenEnd,
+  onOpenLeave,
+  onEndSection,
+  onStopEarly,
+}: TopBarContentProps) {
   const labels = SECTION_LABELS[section];
   const moduleSections = sections.filter((entry) => SECTION_LABELS[entry.id].module === labels.module);
   const part = moduleSections.findIndex((entry) => entry.id === section) + 1;
@@ -74,9 +88,10 @@ function TopBarContent({ sections, section, practice, academic, onOpenEnd, onOpe
 
   return (
     <>
-      <div className={styles.heading}><h1 tabIndex={-1}>{labels.name}</h1><p>{RUNNER_COPY.part(labels.module, part, moduleSections.length)}</p></div>
+      <div className={styles.heading}><h1 tabIndex={-1}>{labels.name}</h1><p>{RUNNER_COPY.part(labels.module, part, moduleSections.length, practice ? undefined : mock)}</p></div>
       <div className={styles.topActions}>
         {!practice && <Button variant="ring-dark" size="nav" onClick={onOpenEnd}>{endLabel}</Button>}
+        {hasNextPracticeSection && <Button variant="ring-dark" size="nav" onClick={onEndSection}>{RUNNER_COPY.nextSection}</Button>}
         <Button variant="ring-dark" size="nav" onClick={() => practice ? onStopEarly() : onOpenLeave()}>{practice ? RUNNER_COPY.finish : RUNNER_COPY.leave}</Button>
       </div>
     </>
@@ -87,15 +102,29 @@ interface RunnerBodyProps {
   session: Session;
   section: SectionId;
   practice: boolean;
+  hasNextPracticeSection: boolean;
   content: SectionContent;
   onAnswer(id: string, answer: Answer): void;
   onCheck(id: string): void;
   onMark(id: string): void;
   onGoTo(index: number): void;
   onTextSize(size: TextSize): void;
+  onEndSection(): void;
 }
 
-function RunnerBody({ session, section, practice, content, onAnswer, onCheck, onMark, onGoTo, onTextSize }: RunnerBodyProps) {
+function RunnerBody({
+  session,
+  section,
+  practice,
+  hasNextPracticeSection,
+  content,
+  onAnswer,
+  onCheck,
+  onMark,
+  onGoTo,
+  onTextSize,
+  onEndSection,
+}: RunnerBodyProps) {
   const taskArea = useRef<HTMLDivElement>(null);
   const numbers = useRef<HTMLDivElement>(null);
   const academic = content.section === 'academic';
@@ -153,7 +182,18 @@ function RunnerBody({ session, section, practice, content, onAnswer, onCheck, on
             {section === 'figures' && <p className={styles.accessNote}>{RUNNER_COPY.figuresAccess}</p>}
             {practice && <div className={styles.practiceActions}>
               {checked && <Explanation task={item} answer={session.answers[item.id]} />}
-              <Button variant="navy" size="md" disabled={checked && position === items.length - 1} onClick={() => checked ? onGoTo(position + 1) : onCheck(item.id)}>{checked ? RUNNER_COPY.nextTask : RUNNER_COPY.check}</Button>
+              <Button
+                variant="navy"
+                size="md"
+                disabled={checked && position === items.length - 1 && !hasNextPracticeSection}
+                onClick={() => {
+                  if (!checked) onCheck(item.id);
+                  else if (position < items.length - 1) onGoTo(position + 1);
+                  else onEndSection();
+                }}
+              >
+                {!checked ? RUNNER_COPY.check : position < items.length - 1 ? RUNNER_COPY.nextTask : hasNextPracticeSection ? RUNNER_COPY.nextSection : RUNNER_COPY.nextTask}
+              </Button>
             </div>}
           </div>
         ))}
@@ -207,6 +247,7 @@ export default function Runner({ session, phase, content, onAnswer, onCheck, onM
   const endDialog = useRef<HTMLDialogElement>(null);
   const leaveDialog = useRef<HTMLDialogElement>(null);
   const practice = phase.msLeft === null;
+  const hasNextPracticeSection = practice && session.sections.some((entry) => entry.startedAt === null);
   const section = phase.section;
   const academic = content.section === 'academic';
 
@@ -217,10 +258,13 @@ export default function Runner({ session, phase, content, onAnswer, onCheck, onM
         <TopBarContent
           sections={session.sections}
           section={section}
+          mock={session.mock}
           practice={practice}
+          hasNextPracticeSection={hasNextPracticeSection}
           academic={academic}
           onOpenEnd={() => endDialog.current?.showModal()}
           onOpenLeave={() => leaveDialog.current?.showModal()}
+          onEndSection={onEndSection}
           onStopEarly={onStopEarly}
         />
       </header>
@@ -228,12 +272,14 @@ export default function Runner({ session, phase, content, onAnswer, onCheck, onM
         session={session}
         section={section}
         practice={practice}
+        hasNextPracticeSection={hasNextPracticeSection}
         content={content}
         onAnswer={onAnswer}
         onCheck={onCheck}
         onMark={onMark}
         onGoTo={onGoTo}
         onTextSize={onTextSize}
+        onEndSection={onEndSection}
       />
       <RunnerDialogs
         academic={academic}

@@ -3,13 +3,15 @@ import { Button } from '@mantine/core';
 import CommunityBand from '@/components/CommunityBand';
 import ContentContainer from '@/components/ContentContainer';
 import MentoringOffer from '@/components/MentoringOffer';
+import type { HistoryAttempt } from '@/utils/dmat/history';
 import type { SectionResult } from '@/utils/dmat/marking';
 import type { Session } from '@/utils/dmat/session';
 import type { StampId } from '@/utils/dmat/stamps';
 import type { SectionContent, SectionId } from '@/utils/dmat/types';
 
 import { minutesAndSeconds } from '../Between/time';
-import { MODE_LABELS, SECTION_LABELS } from '../data';
+import { mockName, MODE_LABELS, SECTION_LABELS } from '../data';
+import PracticeHistory from '../History';
 import Confirmation from '../Start/Confirmation';
 import { RECORD_COPY as copy, STAMP_COPY, TAG_LABELS } from './data';
 import { getMissedTags } from './logic';
@@ -23,18 +25,26 @@ export interface RecordProps {
   /** From `markSection`, in the same order. */
   results: SectionResult[];
   stamps: StampId[];
+  history?: readonly HistoryAttempt[];
+  historySaveFailed?: boolean;
   onPractise(section: SectionId, tag: string): void;
+  onPractiseMistakes?(): void;
+  onClearHistory?(): boolean;
   onStartAnother(): void;
 }
 
 function Receipt({ session, results, stamps }: Pick<RecordProps, 'session' | 'results' | 'stamps'>) {
+  const subtitle = session.mock !== undefined && session.mode !== 'practice'
+    ? `${MODE_LABELS[session.mode].name} · ${mockName(session.mock)}`
+    : MODE_LABELS[session.mode].name;
+
   return (
     <div className={styles.paperWrap}>
       <div className={styles.paper}>
         <header className={styles.paperHeader}>
           <p className={styles.paperName} lang="de">{copy.paper}</p>
           <h1 tabIndex={-1}>{copy.title}</h1>
-          <p>{MODE_LABELS[session.mode].name}</p>
+          <p>{subtitle}</p>
         </header>
         <h2 className={styles.right}>{copy.right}</h2>
         <dl className={styles.counts}>
@@ -70,17 +80,34 @@ function Receipt({ session, results, stamps }: Pick<RecordProps, 'session' | 're
   );
 }
 
-function PracticeNext({ contents, results, onPractise }: Pick<RecordProps, 'contents' | 'results' | 'onPractise'>) {
+function PracticeNext({
+  contents,
+  results,
+  onPractise,
+  onPractiseMistakes,
+}: Pick<RecordProps, 'contents' | 'results' | 'onPractise' | 'onPractiseMistakes'>) {
+  const wrongCount = results.reduce((sum, result) => sum + result.wrong, 0);
   const groups = contents.map((content, index) => ({
     section: content.section,
     tags: getMissedTags(content, results[index]),
   })).filter(({ tags }) => tags.length > 0);
 
-  if (groups.length === 0) return null;
+  if (wrongCount === 0 && groups.length === 0) return null;
 
   return (
     <section className={styles.next}>
       <h2>{copy.next}</h2>
+      {wrongCount > 0 && onPractiseMistakes && (
+        <div className={styles.mistakes}>
+          <div>
+            <strong>{copy.mistakesSummary(wrongCount)}</strong>
+            <span>{copy.mistakesNote}</span>
+          </div>
+          <Button type="button" variant="navy" size="md" onClick={onPractiseMistakes}>
+            {copy.practiseMistakes}
+          </Button>
+        </div>
+      )}
       {groups.map(({ section, tags }) => (
         <div className={styles.group} key={section}>
           <h3>{SECTION_LABELS[section].name}</h3>
@@ -98,13 +125,29 @@ function PracticeNext({ contents, results, onPractise }: Pick<RecordProps, 'cont
   );
 }
 
-export default function Record({ session, contents, results, stamps, onPractise, onStartAnother }: RecordProps) {
+export default function Record({
+  session,
+  contents,
+  results,
+  stamps,
+  history,
+  historySaveFailed,
+  onPractise,
+  onPractiseMistakes,
+  onClearHistory,
+  onStartAnother,
+}: RecordProps) {
   return (
     <section className={styles.record}>
       <ContentContainer width="wide">
         <div className={styles.overview}>
           <Receipt session={session} results={results} stamps={stamps} />
-          <PracticeNext contents={contents} results={results} onPractise={onPractise} />
+          <PracticeNext
+            contents={contents}
+            results={results}
+            onPractise={onPractise}
+            onPractiseMistakes={onPractiseMistakes}
+          />
         </div>
         <section className={styles.review}>
           <h2>{copy.review}</h2>
@@ -113,6 +156,14 @@ export default function Record({ session, contents, results, stamps, onPractise,
             <SectionReview key={content.section} content={content} session={session} onPractise={onPractise} />
           ))}
         </section>
+        {history && onClearHistory && (
+          <PracticeHistory
+            className={styles.historyWrap}
+            history={history}
+            saveFailed={historySaveFailed}
+            onClear={onClearHistory}
+          />
+        )}
       </ContentContainer>
       <MentoringOffer />
       <CommunityBand />

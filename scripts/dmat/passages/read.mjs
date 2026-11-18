@@ -22,6 +22,9 @@ for (const x of passages) {
   const count = words(x.blocks.filter((b) => b.type === 'p').map((b) => b.text).join(' ')).length;
   if (!AREAS.includes(x.area)) bad(`unknown area "${x.area}"`);
   if (!['mock', 'practice'].includes(x.set)) bad(`unknown set "${x.set}"`);
+  if (x.mock !== undefined && (x.set !== 'mock' || !Number.isInteger(x.mock) || x.mock < 2)) {
+    bad('mock must be an integer ≥ 2 on a mock passage');
+  }
   if (count < 250 || count > 500) bad(`${count} words of text (250–500 expected)`);
   if (OFFICIAL_SUBJECTS.some((re) => re.test(x.title))) bad('title matches a subject of the official samples');
   if (x.blocks.filter((b) => b.type === 'figure').length > 2) bad('more than 2 figures');
@@ -51,23 +54,59 @@ for (const x of passages) {
   });
   if (/undefined|NaN/.test(passageText(x))) bad('a computed value is missing in the passage');
   const tally = (f) => { const m = {}; for (const q of x.questions) m[f(q)] = (m[f(q)] ?? 0) + 1; return Object.entries(m).sort().map(([k, v]) => `${k} ${v}`).join(' · '); };
-  report.push(`${x.id} ${x.title} (${x.area}, ${x.set}): ${count} words, ${x.questions.length} questions · types: ${tally((q) => q.type)} · levels: ${tally((q) => q.level)} · right option: ${tally((q) => LETTERS[q.options.findIndex((o) => o.correct)])}`);
+  const setLabel = x.set === 'mock' && x.mock !== undefined ? `mock ${x.mock}` : x.set;
+  report.push(`${x.id} ${x.title} (${x.area}, ${setLabel}): ${count} words, ${x.questions.length} questions · types: ${tally((q) => q.type)} · levels: ${tally((q) => q.level)} · right option: ${tally((q) => LETTERS[q.options.findIndex((o) => o.correct)])}`);
 }
 if (new Set(passages.map((x) => x.id)).size !== passages.length) problems.push('two passages share an id');
 
-// Set-level balance: the full mock has exactly 60 questions; the right answer sits in each position
-// about equally often; levels sit near 30% / 45% / 25%.
+// Set-level balance: each full mock has 9 passages and 60 questions; the right answer sits in each
+// position about equally often; levels sit near 30% / 45% / 25%; mock numbers run without gaps.
+const MOCK_PASSAGES = 9;
 const MOCK_QUESTIONS = 60;
-for (const set of ['mock', 'practice']) {
-  const qs = passages.filter((x) => x.set === set).flatMap((x) => x.questions);
-  if (!qs.length) continue;
+const LEVEL_TARGETS = { 1: 0.3, 2: 0.45, 3: 0.25 };
+const BALANCE_TOLERANCE = 0.06;
+
+const mockPassages = passages.filter((x) => x.set === 'mock');
+const mockNumbers = [...new Set(mockPassages.map((x) => x.mock ?? 1))].sort((a, b) => a - b);
+for (let i = 0; i < mockNumbers.length; i++) {
+  if (mockNumbers[i] !== i + 1) {
+    problems.push(`mock numbers must run 1..${mockNumbers.length} without gaps (found ${mockNumbers.join(', ')})`);
+    break;
+  }
+}
+
+function checkSetBalance(label, ps, isMock) {
+  const qs = ps.flatMap((x) => x.questions);
+  if (!qs.length) return;
   const pos = Object.fromEntries(LETTERS.map((l) => [l, 0]));
   const lev = { 1: 0, 2: 0, 3: 0 };
-  for (const q of qs) { pos[LETTERS[q.options.findIndex((o) => o.correct)]]++; lev[q.level]++; }
+  for (const q of qs) {
+    const rightIndex = q.options.findIndex((o) => o.correct);
+    if (rightIndex >= 0 && rightIndex < LETTERS.length) pos[LETTERS[rightIndex]]++;
+    if (lev[q.level] !== undefined) lev[q.level]++;
+  }
   const share = (n) => `${Math.round((100 * n) / qs.length)}%`;
-  report.push(`\n${set}: ${passages.filter((x) => x.set === set).length} passages, ${qs.length} questions · right option: ${LETTERS.map((l) => `${l} ${pos[l]}`).join(' · ')} · levels: ${[1, 2, 3].map((k) => `${k} ${lev[k]} (${share(lev[k])})`).join(' · ')}`);
-  if (set === 'mock' && passages.filter((x) => x.set === 'mock').length === 9 && qs.length !== MOCK_QUESTIONS) problems.push(`the mock has ${qs.length} questions, not ${MOCK_QUESTIONS}`);
+  report.push(`\n${label}: ${ps.length} passages, ${qs.length} questions · right option: ${LETTERS.map((l) => `${l} ${pos[l]}`).join(' · ')} · levels: ${[1, 2, 3].map((k) => `${k} ${lev[k]} (${share(lev[k])})`).join(' · ')}`);
+  if (isMock && ps.length > MOCK_PASSAGES) {
+    problems.push(`${label} has ${ps.length} passages, not ${MOCK_PASSAGES}`);
+  }
+  if (isMock ? ps.length === MOCK_PASSAGES : ps.length >= 8) {
+    if (isMock && qs.length !== MOCK_QUESTIONS) {
+      problems.push(`${label} has ${qs.length} questions, not ${MOCK_QUESTIONS}`);
+    }
+    if (LETTERS.some((l) => Math.abs(pos[l] / qs.length - 0.25) > BALANCE_TOLERANCE)) {
+      problems.push(`${label}: right answers are not spread across a to d (${LETTERS.map((l) => `${l} ${pos[l]}`).join(', ')})`);
+    }
+    if ([1, 2, 3].some((k) => Math.abs(lev[k] / qs.length - LEVEL_TARGETS[k]) > BALANCE_TOLERANCE)) {
+      problems.push(`${label}: levels must sit near 30%, 45% and 25% (${[1, 2, 3].map((k) => `${k} ${share(lev[k])}`).join(', ')})`);
+    }
+  }
 }
+
+for (const mockNumber of mockNumbers) {
+  checkSetBalance(`mock ${mockNumber}`, mockPassages.filter((x) => (x.mock ?? 1) === mockNumber), true);
+}
+checkSetBalance('practice', passages.filter((x) => x.set === 'practice'), false);
 
 if (problems.length) throw new Error(problems.join('\n'));
 export const passageReport = report;

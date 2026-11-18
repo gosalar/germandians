@@ -68,30 +68,50 @@ function checkTask(task: CoreTask): string {
   return latinSignature(givens, target);
 }
 
-function checkPassage(passage: Passage, id: string, addId: (id: string) => void) {
-  assert.equal(passage.id, id);
-  addId(id);
-  assert(isText(passage.area) && isText(passage.title), `${id}: missing area or title`);
-  assert(passage.blocks.length, `${id}: missing passage blocks`);
+function passageBodySignature(passage: Passage): string {
+  return passage.blocks
+    .map((block) => (block.type === 'p' || block.type === 'formula' ? block.text : block.caption))
+    .join('\n')
+    .trim()
+    .toLowerCase();
+}
+
+function checkPassage(
+  passage: Passage,
+  expectedId: string | null,
+  addId: (id: string) => void,
+  seenPassages: Map<string, string>,
+) {
+  if (expectedId !== null) assert.equal(passage.id, expectedId);
+  assert(/^p\d{2,}$/.test(passage.id), `Invalid passage id: ${passage.id}`);
+  addId(passage.id);
+  assert(isText(passage.area) && isText(passage.title), `${passage.id}: missing area or title`);
+  assert(passage.blocks.length, `${passage.id}: missing passage blocks`);
+  const titleKey = `title:${passage.title.trim().toLowerCase()}`;
+  const bodyKey = `body:${passageBodySignature(passage)}`;
+  assert(!seenPassages.has(titleKey), `${passage.id}: shares a title with ${seenPassages.get(titleKey)}`);
+  assert(!seenPassages.has(bodyKey), `${passage.id}: shares passage text with ${seenPassages.get(bodyKey)}`);
+  seenPassages.set(titleKey, passage.id);
+  seenPassages.set(bodyKey, passage.id);
   for (const block of passage.blocks) {
     switch (block.type) {
       case 'p':
       case 'formula':
-        assert(isText(block.text), `${id}: empty ${block.type} block`);
+        assert(isText(block.text), `${passage.id}: empty ${block.type} block`);
         break;
       case 'figure':
         addId(block.id);
-        assert([block.caption, block.alt, block.svg].every(isText), `${id}: invalid figure block`);
+        assert([block.caption, block.alt, block.svg].every(isText), `${passage.id}: invalid figure block`);
         break;
       case 'table':
         assert(isText(block.caption) && isTextList(block.head) && block.rows.length &&
-          block.rows.every((row) => isTextList(row) && row.length === block.head.length), `${id}: invalid table block`);
+          block.rows.every((row) => isTextList(row) && row.length === block.head.length), `${passage.id}: invalid table block`);
         break;
       default:
-        assert.fail(`${id}: unknown passage block`);
+        assert.fail(`${passage.id}: unknown passage block`);
     }
   }
-  assert(integerIn(passage.questions.length, 6, 8), `${id}: invalid question count`);
+  assert(integerIn(passage.questions.length, 6, 8), `${passage.id}: invalid question count`);
   for (const question of passage.questions) {
     addId(question.id);
     assert(/^[RADFCST]$/.test(question.type) && integerIn(question.level, 1, 3), `${question.id}: invalid type or level`);
@@ -105,7 +125,30 @@ function checkPassage(passage: Passage, id: string, addId: (id: string) => void)
   }
 }
 
-const { files, coreBanks } = generateBank();
+const { files, coreBanks, completeMocks, allMockNumbers } = generateBank();
+assert.ok(allMockNumbers.length >= 1, 'Expected at least one mock');
+assert.deepEqual(
+  allMockNumbers,
+  Array.from({ length: allMockNumbers.length }, (_item, index) => index + 1),
+  `Mock numbers must run without gaps: ${allMockNumbers.join(', ')}`,
+);
+assert.deepEqual(
+  completeMocks,
+  allMockNumbers,
+  `Every mock must be complete (incomplete: ${allMockNumbers.filter((n) => !completeMocks.includes(n)).join(', ')})`,
+);
+
+const bankIndexSource = readFileSync(new URL('index.ts', bankDir), 'utf8');
+const namedJsonFiles = new Set(
+  Array.from(bankIndexSource.matchAll(/['"]\.\/([^'"]+\.json)['"]/g), (match) => match[1]),
+);
+for (const name of files.keys()) {
+  assert(namedJsonFiles.has(name), `bank/index.ts must name ${name}`);
+}
+for (const name of namedJsonFiles) {
+  assert(files.has(name), `bank/index.ts names unknown bank file ${name}`);
+}
+
 const differences: string[] = [];
 for (const [name, data] of files) {
   try {
@@ -125,12 +168,14 @@ const addId = (id: string) => {
   ids.add(id);
 };
 const prompts = new Map<string, string>();
+const seenPassages = new Map<string, string>();
 let coreCount = 0;
 for (const { set } of coreBanks) {
   const mix = set === 'practice' ? [20, 20, 20] : [6, 8, 6];
   for (const kind of CORE_SUBTESTS) {
     const name = `${kind}-${set}.json`;
     const tasks = files.get(name) as CoreTask[];
+    assert(Array.isArray(tasks), `Missing Core bank file: ${name}`);
     assert.deepEqual(BANDS.map((band) => tasks.filter((task) => task.band === band).length), mix, `${name}: invalid difficulty mix`);
     for (const task of tasks) {
       assert.equal(task.kind, kind, `${task.id}: invalid task kind`);
@@ -143,23 +188,36 @@ for (const { set } of coreBanks) {
   }
 }
 
-const mock = files.get('academic-mock.json') as Passage[];
-assert.equal(mock.length, 9, 'Expected nine academic mock passages');
-mock.forEach((passage, index) => checkPassage(passage, `p0${index + 1}`, addId));
-const mockQuestions = mock.flatMap(({ questions }) => questions);
-assert.equal(mockQuestions.length, 60, 'Expected 60 academic mock questions');
-const positions = [0, 0, 0, 0];
-for (const { options } of mockQuestions) positions[options.findIndex(({ correct }) => correct)]++;
-assert.deepEqual(positions, [15, 15, 15, 15], 'Academic mock answers must be balanced across positions');
+let mockPassageTotal = 0;
+for (const mockNumber of completeMocks) {
+  const academicFile = mockNumber === 1 ? 'academic-mock.json' : `academic-mock-${mockNumber}.json`;
+  const mock = files.get(academicFile) as Passage[];
+  assert(Array.isArray(mock), `Missing academic mock file: ${academicFile}`);
+  assert.equal(mock.length, 9, `${academicFile}: expected nine academic mock passages`);
+  mock.forEach((passage, index) => {
+    const expectedId = mockNumber === 1 ? `p0${index + 1}` : null;
+    checkPassage(passage, expectedId, addId, seenPassages);
+  });
+  const mockQuestions = mock.flatMap(({ questions }) => questions);
+  assert.equal(mockQuestions.length, 60, `${academicFile}: expected 60 academic mock questions`);
+  const positions = [0, 0, 0, 0];
+  for (const { options } of mockQuestions) positions[options.findIndex(({ correct }) => correct)]++;
+  assert(
+    positions.every((count) => count >= 12 && count <= 18),
+    `${academicFile}: academic mock answers must be balanced across positions (${positions.join(', ')})`,
+  );
+  mockPassageTotal += mock.length;
+}
 
 const practice = Array.from({ length: 8 }, (_item, index) => {
   const id = `p${index + 10}`;
   const passage = files.get(`passage-${id}.json`) as Passage;
-  checkPassage(passage, id, addId);
+  checkPassage(passage, id, addId, seenPassages);
   return passage;
 });
 assert.deepEqual(files.get('practice-index.json'), practice.map(({ id, area, title }) => ({ id, area, title })));
-assert.equal(files.size, 19, 'Expected nine Core files, nine academic files and the practice index');
+const expectedFileCount = (completeMocks.length + 2) * CORE_SUBTESTS.length + completeMocks.length + practice.length + 1;
+assert.equal(files.size, expectedFileCount, `Expected ${expectedFileCount} bank files for ${completeMocks.length} mock(s)`);
 
 const auditBank = { figures: [], equations: [], latin: [] } as Pick<
   (typeof coreBanks)[number]['raw'], 'figures' | 'equations' | 'latin'
@@ -182,4 +240,4 @@ for (const name of ['latin', 'equations', 'figures', 'explanations']) {
 }
 assert.equal(failedAudits.length, 0, `Independent audits failed: ${failedAudits.join(', ')}`);
 console.log(passageReport.join('\n'));
-console.log(`Bank verified: ${files.size} files, ${coreCount} Core tasks, ${mock.length + practice.length} passages, ${generatorChecks} generator checks and four independent audits.`);
+console.log(`Bank verified: ${files.size} files, ${coreCount} Core tasks, ${mockPassageTotal + practice.length} passages, ${generatorChecks} generator checks and four independent audits.`);

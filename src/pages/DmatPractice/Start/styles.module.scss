@@ -17,6 +17,14 @@
   }
 }
 
+// The slip and the practice history share one column, so the history follows the picker on a phone
+// and sits under it on a wide screen, in the same order in the source.
+.mainColumn {
+  display: grid;
+  min-width: 0;
+  gap: clamp(28px, 4vw, 44px);
+}
+
 .paperWrap {
   min-width: 0;
   filter: drop-shadow(3px 4px 0 t.$hairline);
@@ -221,6 +229,10 @@
     color: t.$navy;
     text-underline-offset: 3px;
   }
+}
+
+.historyWrap {
+  min-width: 0;
 }
 
 .privacy {

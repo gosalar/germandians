@@ -1,0 +1,2000 @@
+[
+  {
+    "area": "mathematics",
+    "blocks": [
+      {
+        "text": "A set is a well-defined collection of distinct objects, called its elements. In a counting problem, all objects under consideration form the universal set, written U. For any finite set A, its size (or cardinality), written n(A), is the number of elements in A. A Venn diagram shows U as a rectangle and each set inside U as a circle. When two circles A and B cross, they split the rectangle into four separate regions: elements in A only, elements in both A and B, elements in B only, and elements in neither set.",
+        "type": "p"
+      },
+      {
+        "text": "Three operations build new sets from existing ones. The intersection, written A ∩ B, contains the elements that belong to both A and B. Two sets with no elements in common have n(A ∩ B) = 0 and are called disjoint. The union, written A ∪ B, contains every element that belongs to A, to B, or to both. The complement of A, written A′, contains every element of U that is not in A, so n(A) + n(A′) = n(U). If every element of A also belongs to B, then A is called a subset of B, and the circle for A lies wholly inside the circle for B.",
+        "type": "p"
+      },
+      {
+        "alt": "A Venn diagram inside a rectangle U representing 120 members. Two overlapping circles are labelled Pool (P) and Gym (G). Pool only: 34. Overlap of Pool and Gym: 22. Gym only: 46. Outside both circles: 18.",
+        "caption": "Figure 1. How 120 leisure-centre members used the pool (P) and the gym (G) last month.",
+        "id": "p18-fig1",
+        "svg": "<svg viewBox=\"0 0 460 270\" role=\"img\" aria-labelledby=\"p18-fig1-alt\">\n  <rect class=\"part\" x=\"18\" y=\"18\" width=\"424\" height=\"234\" rx=\"6\"/>\n  <text class=\"title\" x=\"34\" y=\"46\">U</text>\n  <circle class=\"curve\" cx=\"185\" cy=\"146\" r=\"82\"/>\n  <circle class=\"curve curve-2\" cx=\"275\" cy=\"146\" r=\"82\"/>\n  <text class=\"label-1\" x=\"148\" y=\"50\" text-anchor=\"middle\">Pool (P)</text>\n  <text class=\"label-2\" x=\"312\" y=\"50\" text-anchor=\"middle\">Gym (G)</text>\n  <text class=\"big\" x=\"148\" y=\"154\" text-anchor=\"middle\">34</text>\n  <text class=\"big\" x=\"230\" y=\"154\" text-anchor=\"middle\">22</text>\n  <text class=\"big\" x=\"312\" y=\"154\" text-anchor=\"middle\">46</text>\n  <text class=\"big\" x=\"404\" y=\"232\" text-anchor=\"middle\">18</text>\n</svg>",
+        "type": "figure"
+      },
+      {
+        "text": "Figure 1 records how 120 members of a leisure centre used the pool (P) and the gym (G) last month. Each number counts a single region, so 34 used the pool only and 22 used both facilities, giving n(P) = 34 + 22 = 56. When two sets overlap, adding n(A) and n(B) counts every element of A ∩ B twice, once in each circle. Subtracting the overlap once gives the inclusion–exclusion rule for two sets:",
+        "type": "p"
+      },
+      {
+        "text": "n(A ∪ B) = n(A) + n(B) − n(A ∩ B)",
+        "type": "formula"
+      },
+      {
+        "text": "For three sets A, B and C, adding n(A), n(B) and n(C) counts elements in two sets twice and elements in all three sets (A ∩ B ∩ C) three times. Subtracting the three pairwise overlaps removes those three-set elements three times as well, leaving them uncounted, so they are added back once:",
+        "type": "p"
+      },
+      {
+        "text": "n(A ∪ B ∪ C) = n(A) + n(B) + n(C) − n(A ∩ B) − n(A ∩ C) − n(B ∩ C) + n(A ∩ B ∩ C)",
+        "type": "formula"
+      }
+    ],
+    "id": "p18",
+    "questions": [
+      {
+        "explanation": "The union A ∪ B includes elements in A, in B, or in both. Summing n(A) and n(B) counts every element of the overlap A ∩ B twice, so n(A ∩ B) is subtracted once.",
+        "id": "p18-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "Because adding n(A) and n(B) counts every element in both sets twice.",
+            "why": "Every element in A ∩ B is counted once in n(A) and a second time in n(B), as the third paragraph states."
+          },
+          {
+            "text": "Because elements in A ∩ B do not belong to the union A ∪ B.",
+            "why": "Elements in both sets do belong to A ∪ B; one copy of them stays after the second copy is removed."
+          },
+          {
+            "text": "Because n(A) and n(B) also count the elements outside both circles.",
+            "why": "Elements outside both circles belong to neither A nor B, so neither n(A) nor n(B) counts them."
+          },
+          {
+            "text": "Because two sets in a Venn diagram cannot have the same size.",
+            "why": "Two sets can have the same size whether or not they overlap; subtraction corrects double counting."
+          }
+        ],
+        "stem": "According to the text, why is n(A ∩ B) subtracted in the formula for n(A ∪ B)?",
+        "type": "R"
+      },
+      {
+        "explanation": "Each number in Figure 1 gives the count of one region. Circle G consists of two regions, gym only (46) and both pool and gym (22), so n(G) = 46 + 22 = 68.",
+        "id": "p18-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "22",
+            "why": "This is n(P ∩ G), the members who used both facilities, leaving out those who used the gym only."
+          },
+          {
+            "text": "46",
+            "why": "This is only the part of circle G outside circle P. Circle G also holds the 22 members in the overlap."
+          },
+          {
+            "correct": true,
+            "text": "68",
+            "why": "Circle G combines \"gym only\" and \"both\": 46 + 22 = 68."
+          },
+          {
+            "text": "102",
+            "why": "This is n(P ∪ G), all members who used the pool, the gym, or both."
+          }
+        ],
+        "stem": "According to Figure 1, how many members used the gym last month, that is, what is n(G)?",
+        "type": "F"
+      },
+      {
+        "explanation": "The overlap region increases by 8 and the region outside both circles drops by 8. Since P ∩ G is part of P and part of P ∪ G, both n(P) and n(P ∪ G) increase by 8. By the formula, (8 + 8) − 8 = 8.",
+        "id": "p18-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "Both n(P) and n(P ∪ G) rise by 16.",
+            "why": "Only 8 members changed their habits; n(P) + n(G) rises by 16, not n(P) or the union."
+          },
+          {
+            "correct": true,
+            "text": "Both n(P) and n(P ∪ G) rise by 8.",
+            "why": "Each of the 8 members enters circle P and enters P ∪ G once; in the formula, +8 in n(G) cancels −8 from the overlap."
+          },
+          {
+            "text": "n(P) rises by 8, and n(P ∪ G) rises by 16.",
+            "why": "This adds +8 in n(P) and +8 in n(G) without subtracting the +8 increase in n(P ∩ G)."
+          },
+          {
+            "text": "n(P) stays the same, and n(P ∪ G) rises by 8.",
+            "why": "The overlap P ∩ G lies inside circle P, so joining both facilities also adds 8 members to P."
+          }
+        ],
+        "stem": "Suppose 8 of the members in Figure 1 who used neither facility start using both the pool and the gym, while every other member's usage stays the same. What happens to n(P) and to n(P ∪ G)?",
+        "type": "D"
+      },
+      {
+        "explanation": "Of the 150 readers, 15 borrowed neither kind, so n(F ∪ N) = 150 − 15 = 135. Rearranging n(F ∪ N) = n(F) + n(N) − n(F ∩ N) gives n(F ∩ N) = 95 + 80 − 135 = 40.",
+        "id": "p18-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "25",
+            "why": "This computes 95 + 80 − 150, forgetting that 15 of the 150 readers borrowed neither."
+          },
+          {
+            "correct": true,
+            "text": "40",
+            "why": "n(F ∪ N) = 150 − 15 = 135, so n(F ∩ N) = 95 + 80 − 135 = 40."
+          },
+          {
+            "text": "55",
+            "why": "This is the number who borrowed fiction only (95 − 40), not those who borrowed both."
+          },
+          {
+            "text": "135",
+            "why": "This is n(F ∪ N) = 150 − 15, the number who borrowed at least one kind of book."
+          }
+        ],
+        "stem": "A library surveys 150 readers about books borrowed in a month: 95 borrowed fiction, 80 borrowed non-fiction, and 15 borrowed neither. How many readers borrowed both fiction and non-fiction?",
+        "type": "A"
+      },
+      {
+        "explanation": "Substitute n(A ∪ B) = n(B) into n(A ∪ B) = n(A) + n(B) − n(A ∩ B). Cancelling n(B) leaves n(A) = n(A ∩ B): every element of A belongs to both A and B, which means A is a subset of B.",
+        "id": "p18-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "Every element of A is also an element of B, so A is a subset of B.",
+            "why": "From n(A ∪ B) = n(A) + n(B) − n(A ∩ B), setting n(A ∪ B) = n(B) gives n(A) = n(A ∩ B), so all of A lies in B."
+          },
+          {
+            "text": "A and B are disjoint sets with no elements in common.",
+            "why": "For disjoint sets n(A ∩ B) = 0, giving n(A ∪ B) = n(A) + n(B), which is larger than n(B) when A is non-empty."
+          },
+          {
+            "text": "A and B contain the same number of elements.",
+            "why": "Set A can be smaller than B; if a set of 10 elements lies wholly inside a set of 30, n(A ∪ B) is still 30."
+          },
+          {
+            "text": "Every element of B is also an element of A, so B is a subset of A.",
+            "why": "That would give n(A ∪ B) = n(A), which equals n(B) only in the special case where n(A) = n(B)."
+          }
+        ],
+        "stem": "For two non-empty finite sets A and B, it is found that n(A ∪ B) = n(B). What must be true about A and B?",
+        "type": "C"
+      },
+      {
+        "explanation": "Because S ∪ F lies inside the group of 100, n(S ∪ F) = 65 + 55 − n(S ∩ F) ≤ 100, so n(S ∩ F) ≥ 20 (reached when every applicant speaks at least one of the two languages). Every person in S ∩ F also belongs to F, so n(S ∩ F) ≤ 55 (reached when every French speaker also speaks Spanish).",
+        "id": "p18-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "Smallest 0, largest 55.",
+            "why": "An overlap of 0 would make n(S ∪ F) = 65 + 55 = 120, which exceeds the 100 applicants in the group."
+          },
+          {
+            "text": "Smallest 10, largest 65.",
+            "why": "10 is the difference 65 − 55, and 65 exceeds n(F) = 55, though an intersection cannot exceed the smaller set."
+          },
+          {
+            "text": "Smallest 20, largest 65.",
+            "why": "The smallest value 20 is right, but n(S ∩ F) cannot exceed n(F) = 55, the size of the smaller set."
+          },
+          {
+            "correct": true,
+            "text": "Smallest 20, largest 55.",
+            "why": "n(S ∪ F) ≤ 100 forces n(S ∩ F) ≥ 65 + 55 − 100 = 20, and n(S ∩ F) ≤ n(F) caps it at 55 when F is a subset of S."
+          }
+        ],
+        "stem": "In a group of 100 applicants, 65 speak Spanish (S) and 55 speak French (F). No other information is given. Which pair gives the smallest and largest values that n(S ∩ F) can take?",
+        "type": "S"
+      },
+      {
+        "explanation": "Apply the three-set inclusion–exclusion formula: n(A ∪ B ∪ C) = (45 + 38 + 32) − (16 + 12 + 10) + 5 = 115 − 38 + 5 = 82.",
+        "id": "p18-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "72",
+            "why": "This subtracts the 5 who took all three at the end (115 − 38 − 5) instead of adding them back."
+          },
+          {
+            "text": "77",
+            "why": "This stops at 115 − 38 and forgets to add back the 5 participants removed three times with the pairwise overlaps."
+          },
+          {
+            "correct": true,
+            "text": "82",
+            "why": "45 + 38 + 32 − 16 − 12 − 10 + 5 = 82."
+          },
+          {
+            "text": "115",
+            "why": "This adds 45 + 38 + 32 without removing any of the overlaps between the modules."
+          }
+        ],
+        "stem": "At a training workshop, 45 participants took module A, 38 took module B, and 32 took module C. Exactly 16 took both A and B, 12 took both A and C, 10 took both B and C, and 5 took all three modules. How many participants took at least one of the three modules?",
+        "type": "T"
+      }
+    ],
+    "title": "Sets and Venn Diagrams"
+  },
+  {
+    "area": "computational sciences",
+    "blocks": [
+      {
+        "text": "Many computing tasks hold items in sequence and restrict which item may be taken out next. Two standard data structures enforce opposite rules: the stack and the queue. Both store items in the order they arrive, yet they differ in where items leave.",
+        "type": "p"
+      },
+      {
+        "text": "A stack allows additions and removals at one end only, called the top, like a pile of trays. The operation push(x) places item x on the top, pop() removes and returns the item currently at the top, and peek() reads that top item without removing it. Because the most recently added item is always the first to leave, a stack follows the rule last in, first out (LIFO). If several items are pushed onto an empty stack and then all popped, they come out in exact reverse order. Editors use a stack for \"undo\" steps, where the latest action must be undone first.",
+        "type": "p"
+      },
+      {
+        "text": "A queue separates the two ends, like people waiting at a ticket window. The operation enqueue(x) adds item x at the back, dequeue() removes and returns the item at the front, and front() reads that front item without removing it. Because the earliest item still waiting is the first to leave, a queue follows first in, first out (FIFO) and keeps arrival order intact. Print jobs and incoming network requests wait in queues so each is handled in turn.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Six steps applied to an initially empty stack S and an initially empty queue Q.",
+        "head": [
+          "Step",
+          "Action",
+          "Returned (S / Q)",
+          "Stack S (bottom to top)",
+          "Queue Q (front to back)"
+        ],
+        "rows": [
+          [
+            "1",
+            "Add K",
+            "— / —",
+            "K",
+            "K"
+          ],
+          [
+            "2",
+            "Add M",
+            "— / —",
+            "K, M",
+            "K, M"
+          ],
+          [
+            "3",
+            "Add P",
+            "— / —",
+            "K, M, P",
+            "K, M, P"
+          ],
+          [
+            "4",
+            "Remove one",
+            "P / K",
+            "K, M",
+            "M, P"
+          ],
+          [
+            "5",
+            "Add R",
+            "— / —",
+            "K, M, R",
+            "M, P, R"
+          ],
+          [
+            "6",
+            "Remove one",
+            "R / M",
+            "K, M",
+            "P, R"
+          ]
+        ],
+        "type": "table"
+      },
+      {
+        "text": "Table 1 traces the same six arrivals and removals on an empty stack S and an empty queue Q. Notice that in Stack S the rightmost item listed is the top, whereas in Queue Q the leftmost item listed is the front. Attempting to remove an item when a stack or queue is empty is an error called underflow. Whenever no underflow occurs, starting with s₀ items and carrying out a additions and r removals leaves a predictable count in either structure:",
+        "type": "p"
+      },
+      {
+        "text": "items held = s₀ + a − r",
+        "type": "formula"
+      }
+    ],
+    "id": "p19",
+    "questions": [
+      {
+        "explanation": "The second paragraph states that pop() removes and returns the top item, whereas peek() reads that top item without removing it.",
+        "id": "p19-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "It removes and returns the item at the bottom of the stack.",
+            "why": "A stack allows access only at the top, and peek() removes nothing."
+          },
+          {
+            "text": "It removes and returns the item at the top of the stack.",
+            "why": "Removing and returning the top item is pop(); peek() leaves the stack unchanged."
+          },
+          {
+            "text": "It places a duplicate of the top item onto the top of the stack.",
+            "why": "Adding an item to the top is push(); peek() only inspects the top item."
+          },
+          {
+            "correct": true,
+            "text": "It reads the item at the top of the stack without removing it.",
+            "why": "The second paragraph defines peek() as reading the top item without removing it."
+          }
+        ],
+        "stem": "According to the text, what does the peek() operation do on a non-empty stack?",
+        "type": "R"
+      },
+      {
+        "explanation": "In Table 1, Step 6 leaves Stack S as K, M from bottom to top, so its top item is M. It leaves Queue Q as P, R from front to back, so its front item is P.",
+        "id": "p19-q2",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "M from S, and P from Q.",
+            "why": "After Step 6, S holds K, M (top M) and Q holds P, R (front P)."
+          },
+          {
+            "text": "K from S, and P from Q.",
+            "why": "P is at the front of Q, but K sits at the bottom of S; pop() removes M from the top."
+          },
+          {
+            "text": "M from S, and R from Q.",
+            "why": "M is at the top of S, but R sits at the back of Q; dequeue() removes P from the front."
+          },
+          {
+            "text": "K from S, and R from Q.",
+            "why": "This reads the wrong end of both structures: the bottom of S and the back of Q."
+          }
+        ],
+        "stem": "Immediately after Step 6 of Table 1, one further removal is carried out on Stack S (pop) and one on Queue Q (dequeue). Which items are returned?",
+        "type": "F"
+      },
+      {
+        "explanation": "After push(4), push(7), push(2), the stack from bottom to top is 4, 7, 2, so the first pop returns 2. Pushing 9 gives 4, 7, 9; the second pop returns 9 and the third returns 7, before push(5) leaves 4, 5.",
+        "id": "p19-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "4, 7, 2",
+            "why": "This removes items in arrival order (FIFO), as a queue would, instead of from the top of the stack."
+          },
+          {
+            "correct": true,
+            "text": "2, 9, 7",
+            "why": "First pop removes 2 (leaving 4, 7); push(9) makes the stack 4, 7, 9; the next two pops remove 9 and then 7."
+          },
+          {
+            "text": "9, 2, 7",
+            "why": "This pushes 4, 7, 2 and 9 before performing any pop, ignoring that 2 is popped before 9 is pushed."
+          },
+          {
+            "text": "2, 9, 4",
+            "why": "The first two pops (2, then 9) are right, but the third pop takes 4 from the bottom instead of 7 from the top."
+          }
+        ],
+        "stem": "An empty stack S executes these eight operations in order: push(4), push(7), push(2), pop(), push(9), pop(), pop(), push(5). Which three numbers do the pop() operations return, in the order they are popped?",
+        "type": "A"
+      },
+      {
+        "explanation": "Stepping backwards through visited pages reverses the order in which they were left (LIFO), which is a stack. Each \"Back\" press must also remove that top address with pop() so the next press reaches the page beneath it.",
+        "id": "p19-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "A queue: enqueue each page left, and dequeue when \"Back\" is pressed.",
+            "why": "A queue is FIFO, so pressing \"Back\" would jump to the oldest page from the start of the session."
+          },
+          {
+            "text": "A queue: enqueue each page left, and call front() when \"Back\" is pressed.",
+            "why": "front() both reads the oldest page rather than the latest and leaves it in place on repeated presses."
+          },
+          {
+            "text": "A stack: push each page left, and call peek() when \"Back\" is pressed.",
+            "why": "peek() does not remove the top address, so pressing \"Back\" again would stay on the same page."
+          },
+          {
+            "correct": true,
+            "text": "A stack: push each page left, and pop when \"Back\" is pressed.",
+            "why": "Returning to the most recently left page requires LIFO, and popping exposes the earlier page underneath for the next press."
+          }
+        ],
+        "stem": "A web browser has a \"Back\" button: whenever the user opens a new page, the address of the page just left is saved, and pressing \"Back\" returns to the page left most recently, then to the one before that on the next press. Which structure and operations match this behaviour?",
+        "type": "C"
+      },
+      {
+        "explanation": "Doubling the normal arrivals gives 2 × 12 = 24 tasks enqueued. Using items held = s₀ + a − r gives 8 + 24 − 15 = 17 tasks.",
+        "id": "p19-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "5",
+            "why": "This uses the normal 12 arrivals (8 + 12 − 15) without doubling them."
+          },
+          {
+            "text": "9",
+            "why": "This calculates 24 − 15 and forgets the 8 tasks already waiting at the start."
+          },
+          {
+            "correct": true,
+            "text": "17",
+            "why": "8 + 2 × 12 − 15 = 8 + 24 − 15 = 17."
+          },
+          {
+            "text": "32",
+            "why": "This adds 8 + 24 without subtracting the 15 tasks dequeued."
+          }
+        ],
+        "stem": "A server's task queue begins a minute holding 8 tasks. In a normal minute, 12 tasks are enqueued and 15 are dequeued. In a busy minute starting from the same 8 tasks, twice as many tasks are enqueued as in a normal minute while 15 are still dequeued, and the queue never becomes empty. How many tasks are in the queue at the end of the busy minute?",
+        "type": "D"
+      },
+      {
+        "explanation": "Trace both structures step by step (writing S bottom to top and Q front to back). Start: Q = 1, 2, 3, 4; S = empty. Step 1: S = 1, 2; Q = 3, 4. Step 2: pop 2 from S and enqueue onto Q, giving S = 1; Q = 3, 4, 2. Step 3: dequeue 3 then 4 onto S, giving S = 1, 3, 4; Q = 2. Step 4: pop 4, then 3, then 1 onto Q, giving Q = 2, 4, 3, 1.",
+        "id": "p19-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "2, 4, 3, 1",
+            "why": "After step 1: S = 1, 2 and Q = 3, 4. Step 2 moves 2 to Q (3, 4, 2). Step 3 pushes 3, 4 onto S (1, 3, 4), leaving Q = 2. Step 4 pops 4, 3, 1 onto Q."
+          },
+          {
+            "text": "2, 1, 4, 3",
+            "why": "This pops both 2 and 1 in the second step instead of popping only one item."
+          },
+          {
+            "text": "2, 1, 3, 4",
+            "why": "In the final step this drains S = 1, 3, 4 from bottom to top instead of popping 4, 3, 1 from the top."
+          },
+          {
+            "text": "1, 2, 3, 4",
+            "why": "This treats S as a second FIFO queue rather than a LIFO stack."
+          }
+        ],
+        "stem": "Queue Q initially holds 1, 2, 3, 4 from front to back, and Stack S is empty. First, two items are dequeued from Q one by one and pushed onto S. Second, one item is popped from S and enqueued onto Q. Third, two items are dequeued from Q one by one and pushed onto S. Finally, all items in S are popped one by one and enqueued onto Q. In what order do the four items now sit in Q from front to back?",
+        "type": "T"
+      },
+      {
+        "explanation": "For 3 to be the first number popped from a stack, 1, 2 and 3 must all be pushed before any pop occurs. At that moment the stack from bottom to top is 1, 2, 3, so after 3 is popped, 2 sits on top of 1 and must leave before 1, giving 3, 2, 1 and ruling out 3, 1, 2. Every other order (1, 2, 3; 1, 3, 2; 2, 1, 3; 2, 3, 1; 3, 2, 1) can be achieved.",
+        "id": "p19-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "With a stack, all six orders of 1, 2, 3 can be produced by choosing when to pop.",
+            "why": "The order 3, 1, 2 is impossible: outputting 3 first requires pushing 1, 2 and 3 first, leaving 2 above 1."
+          },
+          {
+            "correct": true,
+            "text": "With a stack, five of the six orders of 1, 2, 3 can be produced, and only 3, 1, 2 is impossible.",
+            "why": "Popping 3 first forces 1, 2, 3 onto the stack before any pop, trapping 1 under 2 so 2 must leave before 1; the other five orders work."
+          },
+          {
+            "text": "With a queue, choosing when to dequeue can produce both 1, 2, 3 and 3, 2, 1.",
+            "why": "A queue is always FIFO: changing when dequeue runs never alters the output order 1, 2, 3."
+          },
+          {
+            "text": "With a stack, only 1, 2, 3 and 3, 2, 1 can be produced.",
+            "why": "Interleaving pushes and pops produces five orders; for instance, push 1, pop 1, push 2, push 3, pop 3, pop 2 outputs 1, 3, 2."
+          }
+        ],
+        "stem": "The numbers 1, 2, 3 arrive in that fixed order at an initially empty structure. Removals may be carried out at any point between arrivals and after the last arrival until all three numbers have left. Which statement about the possible output orders of the three removed numbers is correct?",
+        "type": "S"
+      }
+    ],
+    "title": "Stacks and Queues"
+  },
+  {
+    "area": "natural sciences",
+    "blocks": [
+      {
+        "text": "Adding the same thermal energy to equal masses of water and copper warms the copper far more than the water. This difference is captured by the specific heat capacity c of a substance: the thermal energy, in joules (J), needed to raise the temperature of 1 kilogram (kg) of that substance by 1 kelvin (K), provided no change of state such as melting or boiling occurs. Because a temperature step of 1 degree Celsius (°C) equals a step of 1 K, specific heat capacity has the same numerical value in J/(kg·K) and in J/(kg·°C). For an object of mass m whose temperature changes by ΔT = T_final − T_initial without changing state, the thermal energy Q absorbed (or released, as a magnitude) is",
+        "type": "p"
+      },
+      {
+        "text": "Q = m × c × ΔT",
+        "type": "formula"
+      },
+      {
+        "text": "One kilojoule (kJ) is 1,000 J. While c belongs to the material, the product C = m × c (measured in J/K) is called the heat capacity of that particular object: how many joules are needed to warm the whole object by 1 K. Table 1 lists specific heat capacities of four substances at room temperature. Water has a remarkably high value, more than four times that of aluminium and more than ten times that of copper.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Specific heat capacity c at room temperature, in J/(kg·K).",
+        "head": [
+          "Substance",
+          "Specific heat capacity c in J/(kg·K)"
+        ],
+        "rows": [
+          [
+            "Water (liquid)",
+            "4,186"
+          ],
+          [
+            "Ethanol (liquid)",
+            "2,450"
+          ],
+          [
+            "Aluminium (solid)",
+            "900"
+          ],
+          [
+            "Copper (solid)",
+            "387"
+          ]
+        ],
+        "type": "table"
+      },
+      {
+        "text": "When a hotter object at initial temperature T₁ and a cooler object at initial temperature T₂ are placed together inside a thermally insulated container, called a calorimeter, thermal energy flows from the hotter object to the cooler one until both reach the same final equilibrium temperature T_f. If no change of state occurs and negligible heat is exchanged with the container or outside air, conservation of energy requires that the thermal energy lost by the hotter object equals the thermal energy gained by the cooler object:",
+        "type": "p"
+      },
+      {
+        "text": "m₁ × c₁ × (T₁ − T_f) = m₂ × c₂ × (T_f − T₂)",
+        "type": "formula"
+      },
+      {
+        "text": "Solving this balance shows that T_f always lies between T₂ and T₁, closer to the starting temperature of whichever object has the larger heat capacity m × c.",
+        "type": "p"
+      }
+    ],
+    "id": "p20",
+    "questions": [
+      {
+        "explanation": "The first paragraph defines specific heat capacity c as the thermal energy in joules required to raise the temperature of 1 kg of the substance by 1 K (or 1 °C) without a change of state.",
+        "id": "p20-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "The thermal energy required to raise the temperature of 1 kg of the substance by 1 K.",
+            "why": "This is the definition in the first paragraph, giving the unit J/(kg·K)."
+          },
+          {
+            "text": "The thermal energy required to raise the temperature of the entire object by 1 K, regardless of its mass.",
+            "why": "That is the object’s heat capacity C = m × c, in J/K, which grows with mass."
+          },
+          {
+            "text": "The highest temperature that 1 kg of the substance can reach before melting or boiling.",
+            "why": "Melting and boiling points are temperatures in °C or K, not energies per kilogram per kelvin."
+          },
+          {
+            "text": "The thermal energy transferred through the substance in 1 second.",
+            "why": "Energy transferred per second is a rate of heat flow (power), whereas specific heat capacity contains no unit of time."
+          }
+        ],
+        "stem": "According to the text, what does the specific heat capacity c of a substance measure when no change of state occurs?",
+        "type": "R"
+      },
+      {
+        "explanation": "Rearranging Q = m × c × ΔT gives ΔT = Q ÷ (m × c). With equal Q and equal m, the temperature rise is inversely proportional to c: ΔT_Cu ÷ ΔT_Al = 900 ÷ 387 = 2.33.",
+        "id": "p20-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "0.43",
+            "why": "This inverts the ratio (387 ÷ 900), treating ΔT as proportional to c rather than inversely proportional."
+          },
+          {
+            "text": "1.00",
+            "why": "Equal masses absorbing equal heat have the same ΔT only when their specific heat capacities are equal."
+          },
+          {
+            "text": "1.33",
+            "why": "This computes (900 − 387) ÷ 387, the fractional excess rather than how many times as large ΔT_Cu is."
+          },
+          {
+            "correct": true,
+            "text": "2.33",
+            "why": "From Q = m × c × ΔT with equal Q and m, ΔT_Cu ÷ ΔT_Al = c_Al ÷ c_Cu = 900 ÷ 387 = 2.33."
+          }
+        ],
+        "stem": "Equal masses of the substances in Table 1 each absorb the same amount of thermal energy without changing state. How many times as large is the temperature rise of the copper sample as that of the aluminium sample?",
+        "type": "F"
+      },
+      {
+        "explanation": "The temperature rise is ΔT = 36 − 16 = 20 °C (or 20 K). From Table 1, ethanol has c = 2,450 J/(kg·K), so Q = 1.5 × 2,450 × 20 = 73,500 J = 73.5 kJ.",
+        "id": "p20-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "49.0 kJ",
+            "why": "This calculates 2,450 × 20 ÷ 1,000 and leaves out the mass of 1.5 kg."
+          },
+          {
+            "text": "58.8 kJ",
+            "why": "This multiplies by the starting temperature 16 °C instead of the temperature change ΔT = 20 °C."
+          },
+          {
+            "correct": true,
+            "text": "73.5 kJ",
+            "why": "1.5 × 2,450 × (36 − 16) = 73,500 J = 73.5 kJ."
+          },
+          {
+            "text": "132.3 kJ",
+            "why": "This multiplies by the final temperature 36 °C instead of the temperature change ΔT = 20 °C."
+          }
+        ],
+        "stem": "Using Table 1, how much thermal energy (in kJ) is needed to warm 1.5 kg of liquid ethanol from 16 °C to 36 °C?",
+        "type": "A"
+      },
+      {
+        "explanation": "For aluminium, m₁ × c₁ = 1.5 × 900 = 1,350 J/K. For water, m₂ × c₂ = 0.50 × 4,186 = 2,093 J/K. Setting 1,350 × (85 − T_f) = 2,093 × (T_f − 15) gives 3,443 × T_f = 146,145, so T_f = 42.4 °C.",
+        "id": "p20-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "27.4 °C",
+            "why": "This weights the temperatures by specific heat c alone and ignores that there is three times as much aluminium by mass as water."
+          },
+          {
+            "correct": true,
+            "text": "42.4 °C",
+            "why": "Heat capacities are 1,350 J/K (Al) and 2,093 J/K (water), giving (1,350 × 85 + 2,093 × 15) ÷ 3,443 = 42.4 °C."
+          },
+          {
+            "text": "50.0 °C",
+            "why": "This takes the unweighted average (85 + 15) ÷ 2, ignoring both mass and specific heat."
+          },
+          {
+            "text": "67.5 °C",
+            "why": "This weights the temperatures by mass m alone, ignoring that water has a much higher specific heat than aluminium."
+          }
+        ],
+        "stem": "Inside an insulated calorimeter with negligible heat loss, a 1.5 kg block of aluminium at 85 °C is placed into 0.50 kg of liquid water at 15 °C. Using Table 1, what final equilibrium temperature do they reach?",
+        "type": "A"
+      },
+      {
+        "explanation": "Rearranging the energy balance gives T_f − 20 = C_Cu × (90 − 20) ÷ (C_Cu + C_water). Doubling the copper mass replaces C_Cu with 2 C_Cu: the numerator doubles and the denominator grows by less than a factor of 2, so T_f rises, yet the water's temperature rise above 20 °C less than doubles.",
+        "id": "p20-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "It is higher than T_f, and the rise above 20 °C is less than twice as large as before.",
+            "why": "Doubling the copper mass doubles C₁ in C₁ × (90 − 20) ÷ (C₁ + C₂), raising T_f, while C₁ + C₂ in the denominator also grows so the rise less than doubles."
+          },
+          {
+            "text": "It is higher than T_f, and the rise above 20 °C is twice as large as before.",
+            "why": "From m₁ c₁ (90 − T_f) = m₂ c₂ (T_f − 20), T_f − 20 = C₁ × 70 ÷ (C₁ + C₂); doubling C₁ increases the denominator as well."
+          },
+          {
+            "text": "It is lower than T_f, because a heavier copper block changes temperature more slowly.",
+            "why": "A heavier hot block at 90 °C brings more thermal energy, pulling the common final temperature closer to 90 °C, not lower."
+          },
+          {
+            "text": "It equals T_f, because the specific heat capacity of copper does not depend on mass.",
+            "why": "Specific heat c stays at 387 J/(kg·K), but the energy balance depends on the heat capacity m × c of each object."
+          }
+        ],
+        "stem": "In an insulated calorimeter, a hot copper block at 90 °C and cool liquid water at 20 °C reach an equilibrium temperature T_f. The experiment is repeated from the same starting temperatures (90 °C and 20 °C) with the same mass of water, but with a copper block of twice the mass. How does the new equilibrium temperature compare with T_f?",
+        "type": "D"
+      },
+      {
+        "explanation": "Ethanol warms by 35 − 20 = 15 K and gains Q = 0.40 × 2,450 × 15 = 14,700 J. The alloy cools by 95 − 35 = 60 K and loses the same 14,700 J, so c_alloy = 14,700 ÷ (0.50 × 60) = 14,700 ÷ 30 = 490 J/(kg·K).",
+        "id": "p20-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "245 J/(kg·K)",
+            "why": "This computes 14,700 ÷ 60 = 245 J/K, the sample's heat capacity C, without dividing by its 0.50 kg mass."
+          },
+          {
+            "text": "309 J/(kg·K)",
+            "why": "This divides 14,700 J by 0.50 × 95, using the starting temperature 95 °C instead of the drop 95 − 35 = 60 °C."
+          },
+          {
+            "correct": true,
+            "text": "490 J/(kg·K)",
+            "why": "Ethanol gains 0.40 × 2,450 × 15 = 14,700 J; dividing by (0.50 × 60) gives 490 J/(kg·K)."
+          },
+          {
+            "text": "613 J/(kg·K)",
+            "why": "This computes 2,450 × 15 ÷ 60, omitting the different masses 0.40 kg and 0.50 kg."
+          }
+        ],
+        "stem": "To measure the specific heat capacity of a metal alloy, a 0.50 kg sample of the alloy at 95 °C is placed into 0.40 kg of liquid ethanol at 20 °C inside an insulated calorimeter. Using Table 1 for ethanol, if they reach thermal equilibrium at 35 °C with negligible heat loss and no change of state, what is the specific heat capacity of the alloy?",
+        "type": "T"
+      },
+      {
+        "explanation": "If T_f = (T₁ + T₂) ÷ 2, then T₁ − T_f and T_f − T₂ are both equal to (T₁ − T₂) ÷ 2. Since T₁ ≠ T₂, dividing both sides of m₁ × c₁ × (T₁ − T_f) = m₂ × c₂ × (T_f − T₂) by (T₁ − T₂) ÷ 2 leaves m₁ × c₁ = m₂ × c₂.",
+        "id": "p20-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "Whenever the two objects have the same mass, m₁ = m₂.",
+            "why": "Different materials have different specific heat capacities c, so equal masses give unequal m × c and pull T_f toward the higher-c object."
+          },
+          {
+            "text": "Whenever m₁ ÷ c₁ equals m₂ ÷ c₂.",
+            "why": "Equal temperature changes require equal products m × c in the energy balance, not equal quotients m ÷ c."
+          },
+          {
+            "text": "Never, because different materials have different specific heat capacities.",
+            "why": "Choosing the masses in inverse proportion to the specific heat capacities makes m₁ × c₁ = m₂ × c₂ and places T_f at the midpoint."
+          },
+          {
+            "correct": true,
+            "text": "Whenever the two objects have equal heat capacities, m₁ × c₁ = m₂ × c₂.",
+            "why": "At T_f = (T₁ + T₂) ÷ 2 both objects change temperature by |T₁ − T₂| ÷ 2, so m₁ c₁ (T₁ − T_f) = m₂ c₂ (T_f − T₂) reduces to m₁ × c₁ = m₂ × c₂."
+          }
+        ],
+        "stem": "Two objects made of different materials, at different initial temperatures T₁ and T₂, are placed together inside an insulated calorimeter with negligible heat loss and no change of state. Under what condition is their final equilibrium temperature halfway between T₁ and T₂, that is, (T₁ + T₂) ÷ 2?",
+        "type": "S"
+      }
+    ],
+    "title": "Specific Heat Capacity and Thermal Equilibrium"
+  },
+  {
+    "area": "engineering",
+    "blocks": [
+      {
+        "text": "How much a structural bar stretches under a pull depends on the force, on the bar’s length and thickness, and on the material. To separate geometry from material properties, engineers work with axial stress and axial strain instead of force and extension alone.",
+        "type": "p"
+      },
+      {
+        "text": "When equal and opposite forces of magnitude F pull outward along the axis of a straight bar (tension) or push inward (compression), at right angles to its cross-sectional area A, the axial stress σ is the force per unit area:",
+        "type": "p"
+      },
+      {
+        "text": "σ = F ÷ A",
+        "type": "formula"
+      },
+      {
+        "text": "With F in newtons (N) and A in square metres (m²), stress is measured in pascals (Pa), where 1 Pa = 1 N/m². One megapascal (MPa) is 10⁶ Pa; because 1 m² = 10⁶ square millimetres (mm²), 1 MPa is also 1 N/mm². For a solid circular rod of radius r, the cross-sectional area is A = π × r², so doubling the radius multiplies A by four. If a bar of unloaded length L₀ changes length by ΔL, its axial strain ε is the fractional change in length:",
+        "type": "p"
+      },
+      {
+        "text": "ε = ΔL ÷ L₀",
+        "type": "formula"
+      },
+      {
+        "text": "Because ΔL and L₀ carry the same length unit, those units cancel and ε has no unit. At moderate loads a material behaves elastically: it returns to L₀ when unloaded, and up to its proportional limit axial stress is proportional to axial strain (Hooke’s law, σ = E × ε). Beyond the elastic limit, unloading leaves permanent deformation. The constant E is Young’s modulus, measured in pascals or gigapascals (1 GPa = 10⁹ Pa = 1,000 MPa):",
+        "type": "p"
+      },
+      {
+        "text": "E = σ ÷ ε = (F × L₀) ÷ (A × ΔL)",
+        "type": "formula"
+      },
+      {
+        "text": "Young’s modulus belongs to the material itself, not to the size or shape of the bar. Figure 1 plots σ against ε in the linear elastic region for steel and aluminium; the slope of each line is E.",
+        "type": "p"
+      },
+      {
+        "alt": "A graph with axial strain ε from 0 to 0.0020 on the horizontal axis (grid every 0.0005) and axial stress σ from 0 to 320 MPa on the vertical axis (grid every 20 MPa, labelled every 40 MPa). Steel is a straight line from 0 MPa at 0 strain through 200 MPa at 0.0010 strain to 300 MPa at 0.0015 strain. Aluminium is a straight line from 0 MPa at 0 strain to 140 MPa at 0.0020 strain.",
+        "caption": "Figure 1. Axial stress against axial strain in the linear elastic region for steel and aluminium.",
+        "id": "p21-fig1",
+        "svg": "<svg viewBox=\"0 0 480 310\" role=\"img\" aria-labelledby=\"p21-fig1-alt\">\n  <g class=\"grid\"><line x1=\"64\" y1=\"258\" x2=\"64\" y2=\"34\"/><line x1=\"161\" y1=\"258\" x2=\"161\" y2=\"34\"/><line x1=\"258\" y1=\"258\" x2=\"258\" y2=\"34\"/><line x1=\"355\" y1=\"258\" x2=\"355\" y2=\"34\"/><line x1=\"452\" y1=\"258\" x2=\"452\" y2=\"34\"/><line x1=\"64\" y1=\"258\" x2=\"452\" y2=\"258\"/><line x1=\"64\" y1=\"244\" x2=\"452\" y2=\"244\"/><line x1=\"64\" y1=\"230\" x2=\"452\" y2=\"230\"/><line x1=\"64\" y1=\"216\" x2=\"452\" y2=\"216\"/><line x1=\"64\" y1=\"202\" x2=\"452\" y2=\"202\"/><line x1=\"64\" y1=\"188\" x2=\"452\" y2=\"188\"/><line x1=\"64\" y1=\"174\" x2=\"452\" y2=\"174\"/><line x1=\"64\" y1=\"160\" x2=\"452\" y2=\"160\"/><line x1=\"64\" y1=\"146\" x2=\"452\" y2=\"146\"/><line x1=\"64\" y1=\"132\" x2=\"452\" y2=\"132\"/><line x1=\"64\" y1=\"118\" x2=\"452\" y2=\"118\"/><line x1=\"64\" y1=\"104\" x2=\"452\" y2=\"104\"/><line x1=\"64\" y1=\"90\" x2=\"452\" y2=\"90\"/><line x1=\"64\" y1=\"76\" x2=\"452\" y2=\"76\"/><line x1=\"64\" y1=\"62\" x2=\"452\" y2=\"62\"/><line x1=\"64\" y1=\"48\" x2=\"452\" y2=\"48\"/><line x1=\"64\" y1=\"34\" x2=\"452\" y2=\"34\"/></g>\n  <g class=\"axis\"><line x1=\"64\" y1=\"258\" x2=\"452\" y2=\"258\"/><line x1=\"64\" y1=\"258\" x2=\"64\" y2=\"34\"/></g>\n  <g class=\"ticks\"><text x=\"64\" y=\"279\" text-anchor=\"middle\">0</text><text x=\"161\" y=\"279\" text-anchor=\"middle\">0.0005</text><text x=\"258\" y=\"279\" text-anchor=\"middle\">0.0010</text><text x=\"355\" y=\"279\" text-anchor=\"middle\">0.0015</text><text x=\"452\" y=\"279\" text-anchor=\"middle\">0.0020</text><text x=\"56\" y=\"263\" text-anchor=\"end\">0</text><text x=\"56\" y=\"235\" text-anchor=\"end\">40</text><text x=\"56\" y=\"207\" text-anchor=\"end\">80</text><text x=\"56\" y=\"179\" text-anchor=\"end\">120</text><text x=\"56\" y=\"151\" text-anchor=\"end\">160</text><text x=\"56\" y=\"123\" text-anchor=\"end\">200</text><text x=\"56\" y=\"95\" text-anchor=\"end\">240</text><text x=\"56\" y=\"67\" text-anchor=\"end\">280</text><text x=\"56\" y=\"39\" text-anchor=\"end\">320</text></g>\n  <text class=\"title\" x=\"258\" y=\"302\" text-anchor=\"middle\">Axial strain ε</text>\n  <text class=\"title\" x=\"6\" y=\"18\">Axial stress σ in MPa</text>\n  \n  <line class=\"curve\" x1=\"64\" y1=\"258\" x2=\"355\" y2=\"48\"/>\n  <line class=\"curve curve-2\" x1=\"64\" y1=\"258\" x2=\"452\" y2=\"160\"/>\n  <text class=\"label-1\" x=\"361\" y=\"53\">Steel</text>\n  <text class=\"label-2\" x=\"446\" y=\"150\" text-anchor=\"end\">Aluminium</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p21",
+    "questions": [
+      {
+        "explanation": "Axial strain is ε = ΔL ÷ L₀. Because both numerator and denominator are lengths measured in the same unit, the units cancel out.",
+        "id": "p21-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Because the force F and the cross-sectional area A cancel out.",
+            "why": "Dividing force by area defines stress σ in pascals (N/m²), which does carry a unit."
+          },
+          {
+            "text": "Because strain is defined only while the extension ΔL is zero.",
+            "why": "When ΔL is non-zero under load, ε = ΔL ÷ L₀ is non-zero and remains dimensionless."
+          },
+          {
+            "correct": true,
+            "text": "Because it divides a change in length ΔL by an original length L₀, so the length units cancel.",
+            "why": "Dividing two lengths expressed in the same unit leaves a pure number, as stated below the second formula."
+          },
+          {
+            "text": "Because Young’s modulus E and axial stress σ have different units.",
+            "why": "Since ε is dimensionless, E = σ ÷ ε carries the same pressure unit (Pa) as stress."
+          }
+        ],
+        "stem": "According to the text, why has axial strain ε no unit?",
+        "type": "R"
+      },
+      {
+        "explanation": "On Figure 1, the aluminium line passes from (0, 0) to ε = 0.0020 and σ = 140 MPa (one 20 MPa grid step above 120 MPa). Thus E = 140 MPa ÷ 0.0020 = 70,000 MPa = 70 GPa.",
+        "id": "p21-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "7 GPa",
+            "why": "This divides 140 MPa by 0.020 instead of 0.0020, losing a factor of 10."
+          },
+          {
+            "correct": true,
+            "text": "70 GPa",
+            "why": "At ε = 0.0020 the aluminium line reaches 140 MPa: 140 ÷ 0.0020 = 70,000 MPa = 70 GPa."
+          },
+          {
+            "text": "140 GPa",
+            "why": "140 is the stress in MPa at ε = 0.0020, not the slope σ ÷ ε in GPa."
+          },
+          {
+            "text": "200 GPa",
+            "why": "This is the slope of the steel line (300 MPa ÷ 0.0015 = 200 GPa), not aluminium."
+          }
+        ],
+        "stem": "According to Figure 1, what is Young’s modulus E of aluminium, in GPa?",
+        "type": "F"
+      },
+      {
+        "explanation": "Convert the force to newtons: 45 kN = 45,000 N. Since 1 N/mm² = 1 MPa, σ = F ÷ A = 45,000 ÷ 250 = 180 MPa.",
+        "id": "p21-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "0.18 MPa",
+            "why": "This divides 45 by 250 without converting 45 kN into 45,000 N."
+          },
+          {
+            "text": "18 MPa",
+            "why": "This drops a factor of 10 when dividing 45,000 N by 250 mm²."
+          },
+          {
+            "correct": true,
+            "text": "180 MPa",
+            "why": "45,000 N ÷ 250 mm² = 180 N/mm² = 180 MPa."
+          },
+          {
+            "text": "11,250 MPa",
+            "why": "This multiplies 45 by 250 instead of dividing force by area."
+          }
+        ],
+        "stem": "A straight tie rod with cross-sectional area 250 mm² carries an axial tensile force of 45 kN (1 kN = 1,000 N). What is the axial stress in the rod?",
+        "type": "A"
+      },
+      {
+        "explanation": "First find the stress: σ = 880 N ÷ 4.0 mm² = 220 N/mm² = 220 MPa. With E = 110 GPa = 110,000 MPa, strain is ε = 220 ÷ 110,000 = 0.002. Over L₀ = 2.2 m = 2,200 mm, ΔL = 0.002 × 2,200 = 4.4 mm.",
+        "id": "p21-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "2.0 mm",
+            "why": "This multiplies the strain 0.002 by 1,000 mm as if L₀ were 1.0 m, omitting the 2.2 m length."
+          },
+          {
+            "correct": true,
+            "text": "4.4 mm",
+            "why": "σ = 880 ÷ 4.0 = 220 MPa, ε = 220 ÷ 110,000 = 0.002, and ΔL = 0.002 × 2,200 mm = 4.4 mm."
+          },
+          {
+            "text": "17.6 mm",
+            "why": "This omits dividing the 880 N force by the 4.0 mm² cross-sectional area."
+          },
+          {
+            "text": "70.4 mm",
+            "why": "This multiplies by the 4.0 mm² cross-sectional area instead of dividing by it."
+          }
+        ],
+        "stem": "A copper wire of unloaded length 2.2 m and cross-sectional area 4.0 mm² is pulled by an axial force of 880 N within its linear elastic region. Copper has Young’s modulus E = 110 GPa. By how many millimetres does the wire stretch?",
+        "type": "A"
+      },
+      {
+        "explanation": "Young’s modulus E depends only on the material, so both steel rods have the same E. From ΔL = (F × L₀) ÷ (E × A), doubling L₀ multiplies ΔL by 2 while doubling r multiplies A = π × r² by 4, giving 2 ÷ 4 = 1/2.",
+        "id": "p21-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "E is twice as large, and ΔL is half as large.",
+            "why": "ΔL is half as large, but Young’s modulus E is a property of steel and does not change with bar size."
+          },
+          {
+            "text": "E is the same, and ΔL is the same.",
+            "why": "Doubling the radius multiplies A = π × r² by four rather than two, so the length and area changes do not cancel."
+          },
+          {
+            "text": "E is the same, and ΔL is twice as large.",
+            "why": "Rearranging E = (F × L₀) ÷ (A × ΔL) gives ΔL = (F × L₀) ÷ (E × A), so 2 × L₀ divided by 4 × A gives 1/2, not 2."
+          },
+          {
+            "correct": true,
+            "text": "E is the same, and ΔL is half as large.",
+            "why": "Same steel means identical E; L₀ doubles while A = π × r² quadruples, multiplying ΔL = (F × L₀) ÷ (E × A) by 2 ÷ 4 = 1/2."
+          }
+        ],
+        "stem": "Solid circular rods X and Y are made of the same steel and stay within the linear elastic region under the same axial pulling force F. Rod Y has twice the unloaded length of Rod X and twice the radius of Rod X. How do Young’s modulus E and the extension ΔL of Rod Y compare with those of Rod X?",
+        "type": "D"
+      },
+      {
+        "explanation": "With equal L₀, equal extensions ΔL mean equal strains ε = ΔL ÷ L₀. In Figure 1 the steel line lies above the aluminium line at every non-zero strain, so steel develops a higher stress σ and, with equal area A, requires a larger force F = σ × A.",
+        "id": "p21-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "When stretched by the same extension ΔL, both bars have the same strain, and the steel bar carries the larger axial force.",
+            "why": "Equal ΔL and L₀ give equal strain ε = ΔL ÷ L₀; at any strain in Figure 1, steel has higher stress σ = E × ε and thus larger F = σ × A."
+          },
+          {
+            "text": "When pulled by the same axial force F, the steel bar experiences a larger axial stress than the aluminium bar.",
+            "why": "Axial stress is σ = F ÷ A, which depends only on F and A, so equal F and equal A produce identical stress in both bars."
+          },
+          {
+            "text": "When pulled by the same axial force F, the steel bar stretches more than the aluminium bar because its line in Figure 1 is steeper.",
+            "why": "A steeper slope means larger E, so at the same stress σ the steel bar has smaller strain ε = σ ÷ E and stretches less."
+          },
+          {
+            "text": "To reach the same axial stress, the aluminium bar requires a smaller axial force than the steel bar.",
+            "why": "Because both bars have the same cross-sectional area A, reaching the same stress σ = F ÷ A requires the same force F."
+          }
+        ],
+        "stem": "A steel bar and an aluminium bar have the same unloaded length L₀ and the same cross-sectional area A, and both remain within the linear elastic region shown in Figure 1. Which statement is correct?",
+        "type": "S"
+      },
+      {
+        "explanation": "Work out each segment separately with E = 90 GPa = 90,000 N/mm². Segment 1: σ₁ = 18,000 ÷ 100 = 180 MPa, ε₁ = 180 ÷ 90,000 = 0.002, ΔL₁ = 1.80 mm. Segment 2: σ₂ = 18,000 ÷ 200 = 90 MPa, ε₂ = 0.001, ΔL₂ = 0.60 mm. Total extension: 1.80 mm + 0.60 mm = 2.40 mm.",
+        "id": "p21-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "1.00 mm",
+            "why": "This adds the two areas (100 + 200 = 300 mm²) across the combined 1.50 m length."
+          },
+          {
+            "text": "1.20 mm",
+            "why": "This assigns half the load (9 kN) to each segment instead of the full 18 kN."
+          },
+          {
+            "text": "2.00 mm",
+            "why": "This uses the unweighted average area (150 mm²) across the combined 1.50 m length."
+          },
+          {
+            "correct": true,
+            "text": "2.40 mm",
+            "why": "Segment 1 stretches 1.80 mm and Segment 2 stretches 0.60 mm, giving 1.80 mm + 0.60 mm = 2.40 mm."
+          }
+        ],
+        "stem": "A stepped brass bar consists of two straight segments joined end to end: Segment 1 has length 0.90 m and cross-sectional area 100 mm², and Segment 2 has length 0.60 m and cross-sectional area 200 mm². Brass has E = 90 GPa. When the bar is pulled within its elastic region, each segment carries the full 18 kN (18,000 N) axial force. What is the total extension of the bar?",
+        "type": "T"
+      }
+    ],
+    "title": "Axial Stress, Strain and Young’s Modulus"
+  },
+  {
+    "area": "business administration",
+    "blocks": [
+      {
+        "text": "When a firm buys a long-lived asset such as a machine or a delivery van, it does not record the whole purchase cost C as an expense in the year of purchase. Instead, accounting depreciation spreads that cost across the asset’s useful life of n years, the period over which the firm expects to use it. Depreciation allocates historical cost across accounting periods; it is not an annual cash payment and does not track day-to-day resale prices.",
+        "type": "p"
+      },
+      {
+        "text": "At the end of the n years, the firm expects to sell or scrap the asset for an estimated residual value (also called salvage value), S. The total cost to be written off over the asset’s life is its depreciable base, C − S. At any date, accumulated depreciation is the sum of all depreciation expenses recorded for the asset so far, and the asset’s book value (carrying value) is",
+        "type": "p"
+      },
+      {
+        "text": "book value = C − accumulated depreciation",
+        "type": "formula"
+      },
+      {
+        "text": "Two common methods allocate the same total C − S on different schedules. The straight-line method records an equal expense in every year of useful life:",
+        "type": "p"
+      },
+      {
+        "text": "annual straight-line expense = (C − S) ÷ n",
+        "type": "formula"
+      },
+      {
+        "text": "The declining-balance method is an accelerated method: it multiplies the asset’s opening book value at the start of each year by a fixed annual rate r. In the double-declining-balance version, r = 2 ÷ n, twice the straight-line rate of 1 ÷ n:",
+        "type": "p"
+      },
+      {
+        "text": "year-t expense = r × opening book value of year t (not below book value S)",
+        "type": "formula"
+      },
+      {
+        "text": "Notice that S is not subtracted before multiplying by r. Instead, S serves as a floor: book value may never be reduced below S. In whichever year r × opening book value would push closing book value below S, that year’s expense is capped at opening book value − S, and any remaining years record €0. Figure 1 compares both methods for a machine with C = €80,000, S = €16,000 and n = 4 years.",
+        "type": "p"
+      },
+      {
+        "alt": "Book value in euros from 0 to 80,000 (grid every €4,000, labelled every €16,000) at the end of years 0 to 4. Straight-line falls linearly through €80,000 at year 0, €64,000 at year 1, €48,000 at year 2, €32,000 at year 3, €16,000 at year 4. Double-declining-balance passes through €80,000 at year 0, €40,000 at year 1, €20,000 at year 2, €16,000 at year 3, €16,000 at year 4. A dashed horizontal line marks residual value at €16,000.",
+        "caption": "Figure 1. End-of-year book value of a machine (€80,000 cost, €16,000 residual value, 4-year useful life).",
+        "id": "p22-fig1",
+        "svg": "<svg viewBox=\"0 0 480 320\" role=\"img\" aria-labelledby=\"p22-fig1-alt\">\n  <g class=\"grid\"><line x1=\"74\" y1=\"268\" x2=\"74\" y2=\"34\"/><line x1=\"169.5\" y1=\"268\" x2=\"169.5\" y2=\"34\"/><line x1=\"265\" y1=\"268\" x2=\"265\" y2=\"34\"/><line x1=\"360.5\" y1=\"268\" x2=\"360.5\" y2=\"34\"/><line x1=\"456\" y1=\"268\" x2=\"456\" y2=\"34\"/><line x1=\"74\" y1=\"268\" x2=\"456\" y2=\"268\"/><line x1=\"74\" y1=\"256.3\" x2=\"456\" y2=\"256.3\"/><line x1=\"74\" y1=\"244.6\" x2=\"456\" y2=\"244.6\"/><line x1=\"74\" y1=\"232.9\" x2=\"456\" y2=\"232.9\"/><line x1=\"74\" y1=\"221.2\" x2=\"456\" y2=\"221.2\"/><line x1=\"74\" y1=\"209.5\" x2=\"456\" y2=\"209.5\"/><line x1=\"74\" y1=\"197.8\" x2=\"456\" y2=\"197.8\"/><line x1=\"74\" y1=\"186.1\" x2=\"456\" y2=\"186.1\"/><line x1=\"74\" y1=\"174.4\" x2=\"456\" y2=\"174.4\"/><line x1=\"74\" y1=\"162.7\" x2=\"456\" y2=\"162.7\"/><line x1=\"74\" y1=\"151\" x2=\"456\" y2=\"151\"/><line x1=\"74\" y1=\"139.3\" x2=\"456\" y2=\"139.3\"/><line x1=\"74\" y1=\"127.6\" x2=\"456\" y2=\"127.6\"/><line x1=\"74\" y1=\"115.9\" x2=\"456\" y2=\"115.9\"/><line x1=\"74\" y1=\"104.2\" x2=\"456\" y2=\"104.2\"/><line x1=\"74\" y1=\"92.5\" x2=\"456\" y2=\"92.5\"/><line x1=\"74\" y1=\"80.8\" x2=\"456\" y2=\"80.8\"/><line x1=\"74\" y1=\"69.1\" x2=\"456\" y2=\"69.1\"/><line x1=\"74\" y1=\"57.4\" x2=\"456\" y2=\"57.4\"/><line x1=\"74\" y1=\"45.7\" x2=\"456\" y2=\"45.7\"/><line x1=\"74\" y1=\"34\" x2=\"456\" y2=\"34\"/></g>\n  <g class=\"axis\"><line x1=\"74\" y1=\"268\" x2=\"456\" y2=\"268\"/><line x1=\"74\" y1=\"268\" x2=\"74\" y2=\"34\"/></g>\n  <g class=\"ticks\"><text x=\"74\" y=\"289\" text-anchor=\"middle\">0</text><text x=\"169.5\" y=\"289\" text-anchor=\"middle\">1</text><text x=\"265\" y=\"289\" text-anchor=\"middle\">2</text><text x=\"360.5\" y=\"289\" text-anchor=\"middle\">3</text><text x=\"456\" y=\"289\" text-anchor=\"middle\">4</text><text x=\"66\" y=\"273\" text-anchor=\"end\">0</text><text x=\"66\" y=\"226.2\" text-anchor=\"end\">16,000</text><text x=\"66\" y=\"179.4\" text-anchor=\"end\">32,000</text><text x=\"66\" y=\"132.6\" text-anchor=\"end\">48,000</text><text x=\"66\" y=\"85.8\" text-anchor=\"end\">64,000</text><text x=\"66\" y=\"39\" text-anchor=\"end\">80,000</text></g>\n  <text class=\"title\" x=\"265\" y=\"312\" text-anchor=\"middle\">End of year</text>\n  <text class=\"title\" x=\"6\" y=\"18\">Book value in euros</text>\n  \n  <line class=\"curve curve-3\" x1=\"74\" y1=\"221.2\" x2=\"456\" y2=\"221.2\"/>\n  <polyline class=\"curve\" points=\"74,34 169.5,80.8 265,127.6 360.5,174.4 456,221.2\"/>\n  <polyline class=\"curve curve-2\" points=\"74,34 169.5,151 265,209.5 360.5,221.2 456,221.2\"/>\n  <circle class=\"dot\" cx=\"74\" cy=\"34\" r=\"3.5\"/><circle class=\"dot\" cx=\"169.5\" cy=\"80.8\" r=\"3.5\"/><circle class=\"dot\" cx=\"265\" cy=\"127.6\" r=\"3.5\"/><circle class=\"dot\" cx=\"360.5\" cy=\"174.4\" r=\"3.5\"/><circle class=\"dot\" cx=\"456\" cy=\"221.2\" r=\"3.5\"/>\n  <circle class=\"dot\" cx=\"74\" cy=\"34\" r=\"3.5\"/><circle class=\"dot\" cx=\"169.5\" cy=\"151\" r=\"3.5\"/><circle class=\"dot\" cx=\"265\" cy=\"209.5\" r=\"3.5\"/><circle class=\"dot\" cx=\"360.5\" cy=\"221.2\" r=\"3.5\"/><circle class=\"dot\" cx=\"456\" cy=\"221.2\" r=\"3.5\"/>\n  <text class=\"label-1\" x=\"279.3\" y=\"121.8\">Straight-line</text>\n  <text class=\"label-2\" x=\"81.6\" y=\"203.6\">Double-declining</text>\n  <text class=\"label-3\" x=\"81.6\" y=\"240.2\">Residual value</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p22",
+    "questions": [
+      {
+        "explanation": "Under declining-balance, each year’s expense starts from r × opening book value without subtracting S upfront, and S serves as the lower limit below which book value is never reduced.",
+        "id": "p22-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "It is subtracted from the purchase cost C before applying the rate r in Year 1.",
+            "why": "Subtracting S upfront belongs to the straight-line formula; declining-balance multiplies the full opening book value by r."
+          },
+          {
+            "correct": true,
+            "text": "It is not subtracted at the start, and instead acts as a floor below which book value cannot fall.",
+            "why": "The last paragraph states that S is not subtracted before multiplying by r, and instead caps depreciation once book value reaches S."
+          },
+          {
+            "text": "It is added to accumulated depreciation in the final year of useful life.",
+            "why": "Total accumulated depreciation over the life equals C − S, leaving S as the closing book value."
+          },
+          {
+            "text": "It is divided by n and subtracted in equal instalments after multiplying by r.",
+            "why": "Declining-balance applies r to opening book value without deducting S ÷ n."
+          }
+        ],
+        "stem": "According to the text, how is the residual value S treated under the declining-balance method?",
+        "type": "R"
+      },
+      {
+        "explanation": "At the end of Year 2 in Figure 1, the straight-line point sits on the €48,000 grid line and the double-declining-balance point sits one €4,000 grid step above €16,000 at €20,000. Their difference is €48,000 − €20,000 = €28,000.",
+        "id": "p22-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "€16,000",
+            "why": "This is the gap at the end of Year 3 (€32,000 − €16,000), not Year 2."
+          },
+          {
+            "text": "€20,000",
+            "why": "This is the Year 2 book value on the double-declining-balance curve alone (€20,000), not the difference between the two curves."
+          },
+          {
+            "correct": true,
+            "text": "€28,000",
+            "why": "At Year 2, straight-line is €48,000 and double-declining-balance is €20,000: €48,000 − €20,000 = €28,000."
+          },
+          {
+            "text": "€48,000",
+            "why": "This is the Year 2 book value on the straight-line line alone (€48,000), without subtracting €20,000."
+          }
+        ],
+        "stem": "According to Figure 1, by how much does the machine’s book value at the end of Year 2 under the straight-line method exceed its book value at the end of Year 2 under the double-declining-balance method?",
+        "type": "F"
+      },
+      {
+        "explanation": "Annual straight-line expense = (39,000 − 3,000) ÷ 6 = €6,000. Over 4 years accumulated depreciation is 4 × 6,000 = €24,000, leaving book value = €39,000 − €24,000 = €15,000.",
+        "id": "p22-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "€12,000",
+            "why": "This subtracts €24,000 from the depreciable base (€36,000) instead of from the purchase cost €39,000."
+          },
+          {
+            "correct": true,
+            "text": "€15,000",
+            "why": "Annual expense is (€39,000 − €3,000) ÷ 6 = €6,000; after 4 years book value is €39,000 − 4 × €6,000 = €15,000."
+          },
+          {
+            "text": "€24,000",
+            "why": "This is the accumulated depreciation after 4 years (4 × €6,000), not the remaining book value."
+          },
+          {
+            "text": "€33,000",
+            "why": "This subtracts only one year of depreciation (€6,000) instead of 4 years."
+          }
+        ],
+        "stem": "A bakery buys an oven for €39,000 with an estimated useful life of 6 years and a residual value of €3,000. Using the straight-line method, what is the oven’s book value at the end of Year 4?",
+        "type": "A"
+      },
+      {
+        "explanation": "With n = 5 years, the double-declining-balance rate is r = 2 ÷ 5 = 40%. Year 1 expense is 40% × €45,000 = €18,000, so Year 2 opens at €27,000. Year 2 expense is 40% × €27,000 = €10,800, leaving €16,200, which is well above the €5,000 floor.",
+        "id": "p22-q4",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "€10,800",
+            "why": "Rate r = 2 ÷ 5 = 40%. Year 1 expense is 40% × €45,000 = €18,000, leaving €27,000, and 40% × €27,000 = €10,800."
+          },
+          {
+            "text": "€16,200",
+            "why": "This is the closing book value at the end of Year 2 (€27,000 − €10,800), not Year 2’s depreciation expense."
+          },
+          {
+            "text": "€18,000",
+            "why": "This applies 40% to the original cost €45,000 a second time instead of to Year 2’s opening book value of €27,000."
+          },
+          {
+            "text": "€28,800",
+            "why": "This sums Year 1 and Year 2 expenses (€18,000 + €10,800), giving accumulated depreciation rather than Year 2 alone."
+          }
+        ],
+        "stem": "A warehouse buys a forklift for €45,000 with an estimated useful life of 5 years and a residual value of €5,000. Under the double-declining-balance method, what is the depreciation expense for Year 2 alone?",
+        "type": "A"
+      },
+      {
+        "explanation": "Under straight-line, annual expense is (C − S) ÷ 5, so increasing S decreases Year 1 expense. Under 5-year double-declining-balance (r = 40%), Year 1 expense is 40% × C, leaving a book value of 60% × C; since S < 50% × C, the floor does not bind in Year 1 and Year 1 expense is unchanged.",
+        "id": "p22-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "Straight-line Year 1 expense falls; double-declining-balance Year 1 expense stays the same.",
+            "why": "Higher S reduces (C − S) ÷ 5, whereas Year 1 double-declining-balance is 40% × C and leaves 60% × C > S, so the floor is not hit."
+          },
+          {
+            "text": "Both Year 1 expenses fall by the same euro amount.",
+            "why": "Double-declining-balance multiplies the full cost C by 40% in Year 1 without subtracting S."
+          },
+          {
+            "text": "Straight-line Year 1 expense rises; double-declining-balance Year 1 expense stays the same.",
+            "why": "Because S is subtracted in (C − S) ÷ 5, raising S lowers the straight-line expense rather than raising it."
+          },
+          {
+            "text": "Both Year 1 expenses stay the same, because residual value affects only the final year.",
+            "why": "Straight-line deducts S before dividing by 5, so a change in S changes every year’s straight-line expense."
+          }
+        ],
+        "stem": "Before putting a new van into service, a firm raises its estimate of the van’s residual value S (while S remains below half of the purchase cost C) and keeps C and the 5-year useful life unchanged. How does this higher residual value affect the Year 1 depreciation expense under straight-line and under double-declining-balance?",
+        "type": "D"
+      },
+      {
+        "explanation": "With n = 4, r = 2 ÷ 4 = 50%. Year 1 reduces book value from €36,000 to €18,000; Year 2 reduces it by 50% to €9,000. In Year 3, 50% × €9,000 = €4,500 would leave €4,500, below S = €5,200, so Year 3 expense is capped at €9,000 − €5,200 = €3,800.",
+        "id": "p22-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "€1,900",
+            "why": "This takes 50% of (€9,000 − €5,200) instead of depreciating down to the €5,200 floor."
+          },
+          {
+            "text": "€2,250",
+            "why": "This halves one time too many (€4,500 × 50%), and also ignores the €5,200 residual-value floor."
+          },
+          {
+            "correct": true,
+            "text": "€3,800",
+            "why": "Book value goes €36,000 → €18,000 → €9,000. Since 50% × €9,000 = €4,500 would breach the €5,200 floor, Year 3 is capped at €9,000 − €5,200 = €3,800."
+          },
+          {
+            "text": "€4,500",
+            "why": "This computes 50% × €9,000 = €4,500, which would reduce book value to €4,500, below the €5,200 floor."
+          }
+        ],
+        "stem": "A workshop buys a lathe for €36,000 with an estimated useful life of 4 years and a residual value of €5,200. Under the double-declining-balance method, what is the depreciation expense recorded in Year 3?",
+        "type": "T"
+      },
+      {
+        "explanation": "Because both schedules start at book value C and end at book value S, their total depreciation over the n years is identical: C − S. In Year 1, (2 ÷ n) × C > C ÷ n > (C − S) ÷ n (and C − S > (C − S) ÷ n for n ≥ 3 even if the floor binds in Year 1), so double-declining-balance is always larger in Year 1 and therefore smaller in at least one later year.",
+        "id": "p22-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "Double-declining-balance records a larger total depreciation than straight-line, and is higher in Year 1.",
+            "why": "Both methods start at C and finish at book value S, so total depreciation across all n years equals C − S under both."
+          },
+          {
+            "text": "Both methods record the same total depreciation C − S, with double-declining-balance higher in every year.",
+            "why": "Since both sum to C − S over n years and double-declining-balance is higher in Year 1, it must be lower in at least one later year."
+          },
+          {
+            "text": "Double-declining-balance gives a higher book value at the end of Year 1, and reaches S by Year n.",
+            "why": "Larger Year 1 depreciation means lower, not higher, closing book value at the end of Year 1, as Figure 1 illustrates."
+          },
+          {
+            "correct": true,
+            "text": "Both methods record the same total depreciation C − S, with double-declining-balance higher in Year 1 and lower in at least one later year.",
+            "why": "Both reduce book value from C to S (total C − S); in Year 1, (2 ÷ n) × C (capped at C − S if needed) exceeds (C − S) ÷ n since n ≥ 3, forcing at least one later year to be lower."
+          }
+        ],
+        "stem": "An asset with purchase cost C, residual value S (where 0 < S < C) and useful life n (at least 3 years) is depreciated down to book value S by the end of Year n (under double-declining-balance, the final year’s expense is whatever brings book value down to S). Comparing straight-line and double-declining-balance across all n years, which statement is always true?",
+        "type": "S"
+      }
+    ],
+    "title": "Depreciation and Book Value"
+  },
+  {
+    "area": "economics",
+    "blocks": [
+      {
+        "text": "In a market for a good, the quantity demanded, written Qd, is the amount buyers are willing and able to purchase at a given price. By the law of demand, when other influences stay the same, a higher price lowers Qd, so the demand curve slopes downwards from left to right. The quantity supplied, written Qs, is the amount sellers are willing and able to offer at a given price. By the law of supply, when other influences stay the same, a higher price raises Qs, so the supply curve slopes upwards.",
+        "type": "p"
+      },
+      {
+        "text": "Left to itself, the market settles at equilibrium, the point where the demand and supply curves cross and Qd equals Qs. The price and quantity at that crossing are the equilibrium price and the equilibrium quantity. At any price below equilibrium, buyers want more than sellers offer, creating excess demand, or a shortage:",
+        "type": "p"
+      },
+      {
+        "text": "shortage = Qd − Qs (when Qd > Qs)",
+        "type": "formula"
+      },
+      {
+        "text": "At any price above equilibrium, sellers offer more than buyers want, creating excess supply, or a surplus:",
+        "type": "p"
+      },
+      {
+        "text": "surplus = Qs − Qd (when Qs > Qd)",
+        "type": "formula"
+      },
+      {
+        "text": "Because neither buyers nor sellers can be forced to trade, the quantity actually bought and sold at any price, when the government itself neither buys nor sells the good, is the smaller of Qd and Qs.",
+        "type": "p"
+      },
+      {
+        "text": "Governments sometimes enact price controls, legal limits on what may be charged. A price ceiling is a legal maximum price, such as a cap on housing rents. If a ceiling is set above the equilibrium price, it is non-binding: the market reaches equilibrium without breaking the law, so the ceiling has no effect unless rising demand later pushes the equilibrium price past it. If a ceiling is set below the equilibrium price, it is binding: the price cannot rise to equilibrium, so it stays at the ceiling, only Qs units are sold, and a shortage persists.",
+        "type": "p"
+      },
+      {
+        "text": "A price floor is a legal minimum price, such as a support price for farm produce. A floor set below the equilibrium price is non-binding, because the market already trades above it. A floor set above the equilibrium price is binding: the price stays at the floor, private buyers purchase only Qd units, and a surplus persists. Figure 1 shows the weekly demand and supply for boxes of apples in a wholesale market.",
+        "type": "p"
+      },
+      {
+        "alt": "Two straight lines plotting price in euros per box from €0 to €50 against boxes per week from 0 to 1,000. Demand runs from €50 at 0 boxes to €0 at 1,000 boxes. Supply runs from €5 at 0 boxes to €30 at 1,000 boxes. The two lines cross at 600 boxes and €20 per box. Grid lines appear every 100 boxes and every €5.",
+        "caption": "Figure 1. Weekly demand and supply for boxes of apples in one wholesale market.",
+        "id": "p23-fig1",
+        "svg": "<svg viewBox=\"0 0 480 300\" role=\"img\" aria-labelledby=\"p23-fig1-alt\">\n  <g class=\"grid\"><line x1=\"68\" y1=\"248\" x2=\"68\" y2=\"34\"/><line x1=\"107\" y1=\"248\" x2=\"107\" y2=\"34\"/><line x1=\"146\" y1=\"248\" x2=\"146\" y2=\"34\"/><line x1=\"185\" y1=\"248\" x2=\"185\" y2=\"34\"/><line x1=\"224\" y1=\"248\" x2=\"224\" y2=\"34\"/><line x1=\"263\" y1=\"248\" x2=\"263\" y2=\"34\"/><line x1=\"302\" y1=\"248\" x2=\"302\" y2=\"34\"/><line x1=\"341\" y1=\"248\" x2=\"341\" y2=\"34\"/><line x1=\"380\" y1=\"248\" x2=\"380\" y2=\"34\"/><line x1=\"419\" y1=\"248\" x2=\"419\" y2=\"34\"/><line x1=\"458\" y1=\"248\" x2=\"458\" y2=\"34\"/><line x1=\"68\" y1=\"248\" x2=\"458\" y2=\"248\"/><line x1=\"68\" y1=\"226.6\" x2=\"458\" y2=\"226.6\"/><line x1=\"68\" y1=\"205.2\" x2=\"458\" y2=\"205.2\"/><line x1=\"68\" y1=\"183.8\" x2=\"458\" y2=\"183.8\"/><line x1=\"68\" y1=\"162.4\" x2=\"458\" y2=\"162.4\"/><line x1=\"68\" y1=\"141\" x2=\"458\" y2=\"141\"/><line x1=\"68\" y1=\"119.6\" x2=\"458\" y2=\"119.6\"/><line x1=\"68\" y1=\"98.2\" x2=\"458\" y2=\"98.2\"/><line x1=\"68\" y1=\"76.8\" x2=\"458\" y2=\"76.8\"/><line x1=\"68\" y1=\"55.4\" x2=\"458\" y2=\"55.4\"/><line x1=\"68\" y1=\"34\" x2=\"458\" y2=\"34\"/></g>\n  <g class=\"axis\"><line x1=\"68\" y1=\"248\" x2=\"458\" y2=\"248\"/><line x1=\"68\" y1=\"248\" x2=\"68\" y2=\"34\"/></g>\n  <g class=\"ticks\"><text x=\"68\" y=\"269\" text-anchor=\"middle\">0</text><text x=\"146\" y=\"269\" text-anchor=\"middle\">200</text><text x=\"224\" y=\"269\" text-anchor=\"middle\">400</text><text x=\"302\" y=\"269\" text-anchor=\"middle\">600</text><text x=\"380\" y=\"269\" text-anchor=\"middle\">800</text><text x=\"458\" y=\"269\" text-anchor=\"middle\">1,000</text><text x=\"60\" y=\"253\" text-anchor=\"end\">€0</text><text x=\"60\" y=\"210.2\" text-anchor=\"end\">€10</text><text x=\"60\" y=\"167.4\" text-anchor=\"end\">€20</text><text x=\"60\" y=\"124.6\" text-anchor=\"end\">€30</text><text x=\"60\" y=\"81.8\" text-anchor=\"end\">€40</text><text x=\"60\" y=\"39\" text-anchor=\"end\">€50</text></g>\n  <text class=\"title\" x=\"263\" y=\"292\" text-anchor=\"middle\">Boxes of apples per week</text>\n  <text class=\"title\" x=\"6\" y=\"18\">Price in € per box</text>\n  \n  <line class=\"curve\" x1=\"68\" y1=\"34\" x2=\"458\" y2=\"248\"/>\n  <line class=\"curve curve-2\" x1=\"68\" y1=\"226.6\" x2=\"458\" y2=\"119.6\"/>\n  <text class=\"label-1\" x=\"387.8\" y=\"199.5\" text-anchor=\"middle\">Demand</text>\n  <text class=\"label-2\" x=\"387.8\" y=\"128.9\" text-anchor=\"middle\">Supply</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p23",
+    "questions": [
+      {
+        "explanation": "The fifth paragraph states that a price ceiling is a legal maximum price: it is binding when set below the equilibrium price, where it holds the price down so Qd exceeds Qs and a shortage persists.",
+        "id": "p23-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "When it is set below the equilibrium price, producing a shortage.",
+            "why": "A legal maximum below the equilibrium price stops the price rising to clear the market, so Qd exceeds Qs."
+          },
+          {
+            "text": "When it is set above the equilibrium price, producing a shortage.",
+            "why": "A ceiling set above the equilibrium price is non-binding, so the market reaches equilibrium without a shortage."
+          },
+          {
+            "text": "When it is set below the equilibrium price, producing a surplus.",
+            "why": "Below the equilibrium price, buyers want more than sellers offer, which is a shortage rather than a surplus."
+          },
+          {
+            "text": "When it is set above the equilibrium price, producing a surplus.",
+            "why": "That describes a binding price floor, a legal minimum above equilibrium, not a price ceiling."
+          }
+        ],
+        "stem": "According to the text, when is a price ceiling binding, and what imbalance does it produce?",
+        "type": "R"
+      },
+      {
+        "explanation": "Equilibrium is where the demand and supply lines cross. In Figure 1 they cross at €20 per box on the vertical axis and 600 boxes per week on the horizontal axis.",
+        "id": "p23-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "20 boxes",
+            "why": "20 is the equilibrium price in euros per box on the vertical axis, not the number of boxes."
+          },
+          {
+            "text": "500 boxes",
+            "why": "At 500 boxes demand is at €25 and supply at €18, so the lines have not crossed yet."
+          },
+          {
+            "correct": true,
+            "text": "600 boxes",
+            "why": "The demand and supply lines cross at 600 boxes per week and €20 per box."
+          },
+          {
+            "text": "1,000 boxes",
+            "why": "1,000 boxes is where the demand line meets a price of €0, not where it crosses the supply line."
+          }
+        ],
+        "stem": "According to Figure 1, what is the equilibrium quantity of apples when there are no price controls?",
+        "type": "F"
+      },
+      {
+        "explanation": "At €15 per box, which is below the equilibrium price, the price ceiling is binding. Reading across at €15 on Figure 1 gives Qs = 400 boxes on the supply line and Qd = 700 boxes on the demand line. The shortage is Qd − Qs = 700 − 400 = 300 boxes per week.",
+        "id": "p23-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "200 boxes",
+            "why": "This counts only how far supply falls below the equilibrium quantity, ignoring that Qd also rises as the price is held down."
+          },
+          {
+            "correct": true,
+            "text": "300 boxes",
+            "why": "At €15, Qd is 700 boxes and Qs is 400 boxes, so Qd − Qs = 300 boxes."
+          },
+          {
+            "text": "400 boxes",
+            "why": "This is Qs at €15, the number of boxes supplied and sold, not the excess of Qd over Qs."
+          },
+          {
+            "text": "700 boxes",
+            "why": "This is Qd at €15 alone, before subtracting the 400 boxes that sellers supply."
+          }
+        ],
+        "stem": "In the market shown in Figure 1, the government sets a price ceiling of €15 per box. By how many boxes per week does the quantity demanded then exceed the quantity supplied?",
+        "type": "A"
+      },
+      {
+        "explanation": "In Figure 1 the equilibrium price is €20 per box. A price ceiling forbids prices above the limit, so a ceiling of €25 allows the equilibrium price of €20 and is non-binding. A ceiling of €15 is below €20, and floors of €25 and €30 are above €20, so all three of those limits bind.",
+        "id": "p23-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "A price ceiling of €15 per box.",
+            "why": "€15 is below the equilibrium price of €20, so this ceiling binds and pushes the price down to €15."
+          },
+          {
+            "text": "A price floor of €25 per box.",
+            "why": "€25 is above the equilibrium price of €20, so a legal minimum at €25 binds and creates a surplus."
+          },
+          {
+            "text": "A price floor of €30 per box.",
+            "why": "€30 is above the equilibrium price of €20, so this legal minimum binds even more strongly."
+          },
+          {
+            "correct": true,
+            "text": "A price ceiling of €25 per box.",
+            "why": "€25 is above the equilibrium price of €20, so trading at €20 already obeys the legal maximum."
+          }
+        ],
+        "stem": "In the market shown in Figure 1, the government considers four separate laws, one at a time. Which law is non-binding and leaves the market price and the quantity traded unchanged?",
+        "type": "C"
+      },
+      {
+        "explanation": "At first €560 is above the equilibrium rent of €520, so the ceiling is non-binding. After demand rises, the equilibrium rent of €620 lies above €560, making the ceiling binding: the rent rises until it hits €560 and stops there, leaving Qd greater than Qs, a shortage.",
+        "id": "p23-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "The monthly rent stays at €520, and a shortage of flats appears.",
+            "why": "Nothing stops rents rising from €520 up to the legal maximum of €560."
+          },
+          {
+            "correct": true,
+            "text": "The monthly rent rises to €560 and stops there, and a shortage of flats appears.",
+            "why": "Once the new equilibrium rent of €620 exceeds €560, the ceiling binds at €560, where Qd exceeds Qs."
+          },
+          {
+            "text": "The monthly rent rises to €620, because the ceiling was non-binding before demand shifted.",
+            "why": "A non-binding ceiling remains in law and becomes binding as soon as the equilibrium price rises past €560."
+          },
+          {
+            "text": "The monthly rent rises to €560 and stops there, and a surplus of flats appears.",
+            "why": "At €560, below the new equilibrium of €620, tenants seek more flats than landlords offer, which is a shortage."
+          }
+        ],
+        "stem": "In a town's housing market, the equilibrium rent is €520 a month, and a law sets a rent ceiling of €560 a month. New employers then draw more residents to the town, shifting demand so that the rent where Qd equals Qs becomes €620 a month; the supply curve and the law stay unchanged. What happens in this market?",
+        "type": "D"
+      },
+      {
+        "explanation": "First check whether the floor binds: Qd = Qs gives 950 − 30p = 50p − 170, so 80p = 1120 and p = €14. Because €22 is above €14, the price floor binds and the price is €22. At €22, Qd = 950 − 660 = 290 crates and Qs = 1100 − 170 = 930 crates. With no government purchases, the quantity traded is the smaller of Qd and Qs, which is 290 crates.",
+        "id": "p23-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "290 crates",
+            "why": "Equilibrium is at €14, so the €22 floor binds. At €22, Qd = 290 and Qs = 930, and buyers purchase only Qd = 290."
+          },
+          {
+            "text": "530 crates",
+            "why": "This is the equilibrium quantity at €14, which would apply only if the price floor were non-binding."
+          },
+          {
+            "text": "640 crates",
+            "why": "This is Qs − Qd = 930 − 290, the unsold surplus rather than the crates bought and sold."
+          },
+          {
+            "text": "930 crates",
+            "why": "This is Qs at €22. Sellers offer 930 crates, but private buyers take only 290."
+          }
+        ],
+        "stem": "In a wholesale market for pears, at price p (in euros per crate) the weekly quantity demanded is Qd = 950 − 30p and the weekly quantity supplied is Qs = 50p − 170. The government sets a price floor of €22 per crate and buys none of the fruit itself. How many crates are bought and sold per week?",
+        "type": "T"
+      },
+      {
+        "explanation": "At any price, voluntary trade equals the smaller of Qd and Qs. A binding ceiling pushes the price below equilibrium, which lowers Qs below the equilibrium quantity, so fewer units are sold. A binding floor pushes the price above equilibrium, which lowers Qd below the equilibrium quantity, so again fewer units are sold.",
+        "id": "p23-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "Both raise the quantity demanded above the equilibrium quantity.",
+            "why": "A binding ceiling lowers the price and raises Qd, whereas a binding floor raises the price and lowers Qd."
+          },
+          {
+            "text": "Both raise the quantity supplied above the equilibrium quantity.",
+            "why": "A binding floor raises the price and raises Qs, whereas a binding ceiling lowers the price and lowers Qs."
+          },
+          {
+            "text": "Both leave sellers with unsold stock at the controlled price.",
+            "why": "Unsold stock is a surplus, which occurs under a binding floor; under a binding ceiling sellers sell all Qs units and buyers queue."
+          },
+          {
+            "correct": true,
+            "text": "Both reduce the quantity actually bought and sold below the equilibrium quantity.",
+            "why": "Under a binding ceiling Qs falls below equilibrium and limits sales; under a binding floor Qd falls below equilibrium and limits sales."
+          }
+        ],
+        "stem": "Consider a market with a downward-sloping demand curve and an upward-sloping supply curve, in which the government itself neither buys nor sells the good. Compared with the unregulated equilibrium, what do a binding price ceiling and a binding price floor have in common?",
+        "type": "S"
+      }
+    ],
+    "title": "Price Ceilings and Price Floors"
+  },
+  {
+    "area": "social sciences",
+    "blocks": [
+      {
+        "text": "An observational study watches people as they already live and records what goes with what; an experiment intervenes. In an experiment, researchers deliberately vary one factor, the independent variable (also called the explanatory variable), and measure what happens to an outcome, the dependent variable (the response variable). In a basic two-group design, the experimental group receives the active treatment being tested, while the control group is handled in the same way in every other respect except that it does not receive that active treatment. Without a control group, a change over time could come from practice, normal recovery or outside events rather than from the treatment.",
+        "type": "p"
+      },
+      {
+        "text": "Who enters each group matters just as much. If participants choose their own group, or a clinician steers keener people into the experimental group, the groups differ from the start, a flaw called selection bias. Random assignment prevents this by using a chance procedure, such as drawing lots or a random-number generator, to place each participant into a group. In large enough groups, chance spreads pre-existing differences in age, baseline skill or motivation roughly evenly between them. Random assignment is distinct from random sampling: random sampling draws participants by chance from a wider population so the sample represents that population, whereas random assignment divides whichever participants are already in the study between the groups.",
+        "type": "p"
+      },
+      {
+        "text": "Even balanced groups can diverge if people know what they are getting. When participants improve or behave differently simply because they expect a treatment to have an effect, researchers speak of the placebo effect. To match expectations across groups, the control group is often given a placebo, an inactive look-alike such as a plain starch tablet, under blinding (also called masking). In a single-blind experiment, participants do not know whether they are in the experimental or the control group, while the researchers dealing with them do. Yet researchers have expectations too: experimenter bias arises when staff unintentionally give subtle encouragement or score borderline cases more generously in one group. In a double-blind experiment, neither the participants nor the staff who deal with them or rate their outcomes know each participant's group until measurement is finished.",
+        "type": "p"
+      },
+      {
+        "text": "Together, a control group, random assignment and blinding protect internal validity: the degree to which differences in the dependent variable within the study can be attributed to the independent variable rather than to confounders, outside factors that vary alongside the treatment. High internal validity is not the same as external validity, which asks how far the result generalises to other people and everyday settings outside the trial. Nor does random assignment settle internal validity once and for all: if groups are tested under unequal conditions, or if differential attrition occurs because participants drop out of one group far more often or for different reasons than the other, the groups that finish are no longer comparable.",
+        "type": "p"
+      }
+    ],
+    "id": "p24",
+    "questions": [
+      {
+        "explanation": "The third paragraph defines a single-blind study as one in which participants do not know their group while the researchers dealing with them do, and a double-blind study as one in which both the participants and the staff interacting with them or scoring their outcomes are kept unaware of group membership.",
+        "id": "p24-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "It uses two separate control groups instead of one, so that one control group receives a placebo and the other receives nothing at all.",
+            "why": "The distinction between single-blind and double-blind concerns who knows the group assignments, not the number of control groups."
+          },
+          {
+            "correct": true,
+            "text": "Neither the participants nor the staff who interact with them or rate their outcomes know which group each participant belongs to.",
+            "why": "This matches the third paragraph: single-blind hides group membership from participants alone, whereas double-blind hides it from those researchers too."
+          },
+          {
+            "text": "It combines random sampling from the wider population with random assignment of the chosen participants into the experimental and control groups.",
+            "why": "Random sampling and random assignment concern how people enter the study and the groups, not who knows the group labels afterwards."
+          },
+          {
+            "text": "It withholds the hypothesis of the study from participants until the end, while allowing the staff scoring outcomes to see the group list.",
+            "why": "Allowing the staff who score outcomes to see the group list leaves experimenter bias open and describes at most a single-blind arrangement."
+          }
+        ],
+        "stem": "According to the text, how does a double-blind experiment differ from a single-blind experiment?",
+        "type": "R"
+      },
+      {
+        "explanation": "The first paragraph defines the independent variable as the factor the researcher deliberately varies (here, music versus quiet) and the dependent variable as the outcome measured in response to it (here, the count of missed spelling mistakes).",
+        "id": "p24-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "Whether a volunteer proof-reads the page in the quiet room or in the room playing instrumental music.",
+            "why": "That is the factor the researcher deliberately varies between the two groups, which makes it the independent variable."
+          },
+          {
+            "text": "The chance procedure used to place each volunteer into one of the two rooms before the task begins.",
+            "why": "That procedure is random assignment, a design step used to balance the groups rather than a measured outcome."
+          },
+          {
+            "correct": true,
+            "text": "The number of spelling mistakes a volunteer misses while proof-reading the page.",
+            "why": "This is the outcome measured by the researcher to see what effect the room condition had."
+          },
+          {
+            "text": "Each volunteer's prior proof-reading skill and reading speed before entering the study.",
+            "why": "Those are pre-existing participant traits that random assignment aims to spread across the groups, not the outcome measured after the task."
+          }
+        ],
+        "stem": "To test whether background music affects proof-reading, a researcher assigns 80 volunteers by lot either to a quiet room or to an identical room playing soft instrumental music, asks everyone to proof-read the same page, and counts how many spelling mistakes each volunteer misses. What is the dependent variable?",
+        "type": "C"
+      },
+      {
+        "explanation": "The second and fourth paragraphs separate random assignment from random sampling and internal validity from external validity. Assigning the clinic volunteers by lot and blinding the assessors gives strong internal validity for comparing the two routines in those patients, while recruiting from a single specialist clinic rather than sampling a wider population limits external validity.",
+        "id": "p24-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "It supports a strong causal comparison among the 120 clinic volunteers, but its convenience sample from one clinic limits how confidently the result generalises to wider patient populations.",
+            "why": "Random assignment and blinded measurement protect internal validity inside the study, while recruiting from a single clinic limits external validity."
+          },
+          {
+            "text": "It supports confident generalisation to knee patients across the country, but lacks internal validity because the volunteers were not drawn by random sampling.",
+            "why": "This swaps random sampling and random assignment: recruiting at one clinic limits generalisation, whereas random assignment supports internal validity."
+          },
+          {
+            "text": "It eliminates the placebo effect in both groups, because keeping the physiotherapists unaware of group membership makes the study double-blind.",
+            "why": "Patients exercising or stretching can tell what routine they are doing, so participants are not blinded even though the assessors are."
+          },
+          {
+            "text": "It suffers from selection bias between the two routines, because patients who attend a specialist sports clinic tend to be keener than average patients.",
+            "why": "High keenness across the whole clinic affects external validity; random assignment spreads that keenness across both routines within the trial."
+          }
+        ],
+        "stem": "A researcher recruits 120 volunteers attending one specialist sports clinic and assigns them by computer-drawn lot either to a new knee-exercise programme or to the clinic's standard stretching routine. After 6 weeks, physiotherapists who do not know any patient's group measure knee flexion. Following the text, what is the main strength and the main limitation of this study?",
+        "type": "C"
+      },
+      {
+        "explanation": "Because participants are unaware of their tablet while the examining clinicians hold the group list, the trial is single-blind rather than double-blind. As the third paragraph explains, clinicians' expectations can then produce experimenter bias through subtle cues during interviews or more generous scoring of borderline cases.",
+        "id": "p24-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "Selection bias at baseline, because knowing the group list while rating stiffness changes which patients entered the active group at the start.",
+            "why": "Baseline group membership was fixed before treatment began; unblinded end-of-trial ratings occur later and cannot retroactively alter assignment."
+          },
+          {
+            "text": "Complete loss of the control group's baseline, because a starch tablet only controls for normal recovery over time when the clinicians are blinded.",
+            "why": "Time and normal recovery still pass in both groups; what unblinded clinicians introduce is biased interaction or scoring, not the disappearance of time."
+          },
+          {
+            "text": "Participants in the starch-tablet group cannot experience a placebo effect once clinicians know which capsules contain only starch.",
+            "why": "Participants remain unaware of their group, so their own expectations stay intact unless the clinicians' behaviour gives the group away or skews ratings."
+          },
+          {
+            "correct": true,
+            "text": "Experimenter bias, because clinicians who know the group list may unintentionally prompt patients differently or score borderline stiffness in line with their expectations.",
+            "why": "The study is only single-blind; the third paragraph notes that unblinded staff can skew outcomes through subtle cues or subjective scoring."
+          }
+        ],
+        "stem": "In a trial of a tablet intended to ease joint stiffness, participants receive identical-looking active or starch tablets without knowing which they have been given, while the clinicians who interview patients and rate their stiffness at the end have the group list on their clipboards. According to the text, what risk remains?",
+        "type": "D"
+      },
+      {
+        "explanation": "The fourth paragraph defines internal validity as confidence that the independent variable, rather than confounders, caused the observed difference within the study, and warns that unequal testing conditions or differential attrition after random assignment can still destroy group comparability.",
+        "id": "p24-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Once participants have been placed into groups by random assignment, internal validity is secure regardless of what happens during the rest of the trial.",
+            "why": "The fourth paragraph explicitly states that unequal testing conditions or differential drop-out after assignment can still undermine internal validity."
+          },
+          {
+            "text": "Increasing internal validity through tight laboratory controls automatically ensures that the findings apply to everyday settings outside the laboratory.",
+            "why": "Applying findings to everyday settings is external validity, which the fourth paragraph distinguishes from internal validity."
+          },
+          {
+            "correct": true,
+            "text": "A randomised experiment can still lose internal validity if an unintended factor varies between the groups or drop-out removes different kinds of participants from each group.",
+            "why": "Post-assignment confounders and differential attrition break the comparability that random assignment created at the start."
+          },
+          {
+            "text": "Drawing a large random sample from a national register gives a study high internal validity even when participants choose for themselves whether to take the treatment.",
+            "why": "Letting participants choose the treatment creates selection bias; random sampling from a register addresses population representation, not group comparability."
+          }
+        ],
+        "stem": "Which statement about internal validity is supported by the text?",
+        "type": "S"
+      },
+      {
+        "explanation": "Random assignment balanced the two groups of 100 at the start, but 42 less persistent learners left the demanding drill group against only 3 in the control group. As the fourth paragraph explains, such differential attrition makes the remaining groups (58 keen finishers versus 97 mixed finishers) systematically different, confounding the effect of the drills with baseline persistence.",
+        "id": "p24-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "Because 100 learners per group is too small for random assignment to work at the start, so the drill group must already have held stronger learners on day one.",
+            "why": "The flaw described is not a chance imbalance on day one, but the selective loss of 42 less persistent learners from one group during the 10 weeks."
+          },
+          {
+            "correct": true,
+            "text": "Because differential attrition stripped 42 less persistent learners from the drill group while almost everyone finished the control task, leaving two finisher groups that differed in persistence apart from the drills.",
+            "why": "Selective drop-out removed weaker, less persistent participants mainly from the drill group, inflating its finishers' average even if the drills added nothing."
+          },
+          {
+            "text": "Because the learners were not drawn as a random sample of all adult learners in the country, which prevents any causal comparison between the two groups inside the trial.",
+            "why": "Lack of random sampling limits external generalisation to all adults, whereas the question asks why the causal comparison inside this trial breaks down."
+          },
+          {
+            "text": "Because learners in the light-reading control group experienced a placebo boost from taking part, which pushed the control average artificially close to the drill average.",
+            "why": "A boost in the control group would shrink the gap rather than produce a falsely high advantage for the drill finishers."
+          }
+        ],
+        "stem": "To test an intensive vocabulary course, researchers assign 200 adult learners by lot into two groups of 100: an experimental group given tough daily drills for 10 weeks and a control group given light weekly reading. Over the 10 weeks, 42 of the least persistent learners quit the drill group, leaving 58, whereas only 3 quit the control group, leaving 97. On the week-10 vocabulary test, the 58 drill finishers have a much higher average score than the 97 control finishers. Why cannot the researchers safely attribute that gap to the drills?",
+        "type": "T"
+      }
+    ],
+    "title": "Experimental Design and Internal Validity"
+  },
+  {
+    "area": "humanities",
+    "blocks": [
+      {
+        "text": "In the philosophy of science, the problem of demarcation asks what separates empirical science from non-scientific or pseudoscientific claims. An early answer held that scientific statements are those that observation can verify, meaning prove true. The philosopher Karl Popper objected that verification fails for universal statements, claims that cover every instance of a kind, such as \"All swans are white.\" However many white swans observers record, the next swan might still be black, so finite observations never prove a universal statement true. Between verification and refutation there is a logical asymmetry: one genuine black swan is enough to refute the universal claim.",
+        "type": "p"
+      },
+      {
+        "text": "Popper therefore proposed falsifiability as the mark of empirical science. A statement or theory is falsifiable if it is capable of conflicting with possible, conceivable observations. To be falsifiable, a theory must rule out specific observable outcomes and make risky predictions, definite forecasts that could turn out false when checked. Falsifiable does not mean false: a well-established physical law is falsifiable because we can state clearly what observation would refute it if that observation ever occurred, even if every test so far agrees with the law. By contrast, a statement that allows every conceivable outcome — whether by covering both sides (\"It will rain or it will not\"), by using wording so vague that almost anything can be read as a hit, or by appealing to undetectable forces compatible with opposite behaviours — forbids nothing and is unfalsifiable.",
+        "type": "p"
+      },
+      {
+        "text": "When a theory survives severe attempts to refute its risky predictions, Popper says it is corroborated, not proved forever true: it has stood up to testing so far, while remaining open to future refutation. Fitting observations carries scientific weight only when those observations could conceivably have gone against the theory.",
+        "type": "p"
+      },
+      {
+        "text": "In practice, testing a theory also relies on auxiliary hypotheses, background assumptions such as that a measuring instrument is working properly or that no unknown body is disturbing the system. When an observation clashes with a prediction, the fault may lie in the main theory or in an auxiliary hypothesis. Modifying an auxiliary hypothesis stays scientific if the revised package yields new, independently testable predictions that could themselves fail. An ad hoc hypothesis, however, is an extra assumption brought in solely to explain away a failed prediction without generating any new testable consequence. Repeatedly rescuing a theory with untestable ad hoc adjustments shields it from contrary evidence and turns an initially scientific theory into unfalsifiable dogma.",
+        "type": "p"
+      }
+    ],
+    "id": "p25",
+    "questions": [
+      {
+        "explanation": "The second paragraph defines Popper's demarcation criterion: a theory counts as scientific if it is falsifiable, meaning it rules out specific observable states of affairs so that conceivable observations could conflict with it.",
+        "id": "p25-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "It has been conclusively verified by a large enough collection of careful observations across different settings.",
+            "why": "The first paragraph explains that no finite collection of observations can conclusively verify a universal scientific claim."
+          },
+          {
+            "text": "It has already been shown to be false by at least one controlled experiment or counter-instance.",
+            "why": "The second paragraph distinguishes \"falsifiable\" from \"false\": a law can be falsifiable while passing every test so far."
+          },
+          {
+            "text": "It is broad enough to explain every possible outcome in its field without ever clashing with observation.",
+            "why": "Accommodating every possible outcome means forbidding nothing, which makes a claim unfalsifiable rather than scientific."
+          },
+          {
+            "correct": true,
+            "text": "It forbids specific observable outcomes, so that conceivable observations could conflict with it and refute it.",
+            "why": "This states Popper's criterion of falsifiability in the second paragraph."
+          }
+        ],
+        "stem": "According to Popper's criterion as explained in the text, what makes a theory scientific?",
+        "type": "R"
+      },
+      {
+        "explanation": "A falsifiable claim must rule out definite observable outcomes. The claim about solid metals heated from 20 °C to 80 °C forbids any solid metal failing to expand under those stated conditions. The other three claims forbid nothing: one covers every logical case, one posits an undetectable cause compatible with opposite actions, and one is too vague to fail.",
+        "id": "p25-q2",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "\"Every solid metal increases in volume when heated from 20 °C to 80 °C at standard atmospheric pressure.\"",
+            "why": "Finding one solid metal whose volume stays the same or shrinks between 20 °C and 80 °C at standard pressure would conflict with this claim."
+          },
+          {
+            "text": "\"Tomorrow's midday ferry will either dock at the harbour on schedule or dock at some other time, if it docks at all.\"",
+            "why": "This statement covers every conceivable outcome for the ferry and rules nothing out, so no observation can conflict with it."
+          },
+          {
+            "text": "\"Every person's decisions are guided by an undetectable inner current that leaves no trace and can prompt either caution or boldness.\"",
+            "why": "An undetectable cause compatible with opposite behaviours forbids no observable action and takes no empirical risk."
+          },
+          {
+            "text": "\"Something noteworthy will happen to someone in this city during the coming month, though its form cannot be specified in advance.\"",
+            "why": "Wording this vague allows almost any event in a city over a month to be counted as a match, so nothing definite is ruled out."
+          }
+        ],
+        "stem": "Four speakers put forward general claims. Using the criteria in the text, which claim is falsifiable?",
+        "type": "C"
+      },
+      {
+        "explanation": "The fourth paragraph defines an ad hoc hypothesis as an adjustment added solely to explain away a failed prediction without producing any new, independently testable consequence. Claiming that the hormone stops working whenever people or instruments look at the flowers prevents any independent check. Testing a temperature threshold or checking instruments creates fresh tests, and giving up the universal wording accepts refutation.",
+        "id": "p25-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "Revising the hypothesis to state that the hormone acts only above 8 °C, and warming shaded gentians to 12 °C before sunrise to see whether they open within 10 minutes.",
+            "why": "This revision generates a new, independently testable prediction at 12 °C that observation could refute."
+          },
+          {
+            "text": "Checking whether the valley light meter and stopwatch malfunctioned, and repeating the valley observation the next morning with calibrated instruments.",
+            "why": "Instrument reliability is a testable auxiliary assumption that can be checked independently on the next run."
+          },
+          {
+            "correct": true,
+            "text": "Adding the rule that the hormone always works except whenever human observers or recording devices are present in the valley to check the petals.",
+            "why": "This excuse is tailored solely to explain away the valley failure while ruling out any independent way to test the exception."
+          },
+          {
+            "text": "Concluding that the valley observation refutes the universal claim as stated, and setting that universal wording aside in favour of a narrower claim.",
+            "why": "Accepting that the universal statement has been refuted is the opposite of shielding it with an ad hoc excuse."
+          }
+        ],
+        "stem": "A botanist proposes that a plant hormone causes all alpine gentians to open their petals within 10 minutes of sunrise. In a shaded valley, the gentians stay closed for 2 hours after sunrise. Which response introduces an ad hoc hypothesis in the sense of the text?",
+        "type": "C"
+      },
+      {
+        "explanation": "The second and third paragraphs stress two points: a law that passes every test remains falsifiable because we can still specify what observation would refute it, and passing severe, risky tests corroborates a theory rather than proving it true once and for all.",
+        "id": "p25-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "Once a theory has survived many severe experimental tests without failing, it stops being falsifiable and becomes a verified certainty.",
+            "why": "Surviving tests never removes falsifiability or proves a universal law beyond future refutation; it corroborates the theory."
+          },
+          {
+            "correct": true,
+            "text": "A theory that repeatedly survives risky predictions remains falsifiable and is corroborated so far, yet future observations could still refute it.",
+            "why": "This matches the second and third paragraphs: corroboration records survival under genuine risk while leaving future refutation open."
+          },
+          {
+            "text": "Calling a scientific law falsifiable means that researchers have already recorded at least one observation that contradicts its predictions.",
+            "why": "That confuses \"falsifiable\" (capable of being refuted by conceivable observations) with \"falsified\" (actually refuted)."
+          },
+          {
+            "text": "A theory is strongly corroborated whenever everyday events can be interpreted to fit it, even if no conceivable event could count against it.",
+            "why": "The third paragraph states that fitting observations counts as corroboration only when those observations could conceivably have gone against the theory."
+          }
+        ],
+        "stem": "Which statement accurately expresses what the text says about falsifiability and corroboration?",
+        "type": "S"
+      },
+      {
+        "explanation": "By the logical asymmetry in the first paragraph, 5,000 black ravens cannot prove that every raven is black, though surviving checks corroborates the claim so far. Once auxiliary assumptions hold, 1 genuine white raven contradicts \"All ravens have black feathers\" and refutes that universal statement.",
+        "id": "p25-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "X's 5,000 observations verify the universal statement beyond doubt, so Y's single white raven cannot overturn the general rule.",
+            "why": "No finite number of matching cases verifies a universal statement, because unexamined cases can still differ."
+          },
+          {
+            "text": "Neither observation settles the universal statement logically, because refuting it would require at least 5,000 white ravens to outweigh X's count.",
+            "why": "Logical refutation of an \"all\" claim does not weigh counts against counts; a single genuine counter-instance conflicts with \"all\"."
+          },
+          {
+            "text": "X's observations and Y's observation have symmetrical weight, each moving the universal statement partway towards truth or falsehood.",
+            "why": "The first paragraph highlights logical asymmetry, not symmetry, between confirming instances and a refuting counter-instance."
+          },
+          {
+            "correct": true,
+            "text": "X's 5,000 observations cannot prove the statement true of every raven, whereas Y's 1 genuine white raven refutes the statement as stated.",
+            "why": "This directly applies the logical asymmetry between finite confirming observations and a single counter-instance."
+          }
+        ],
+        "stem": "Consider the universal statement \"All ravens have black feathers.\" Suppose all auxiliary assumptions about species identification and lighting hold. Biologist X observes 5,000 ravens across several regions, all with black feathers; later, Biologist Y observes 1 raven with naturally white feathers. Following the logic in the text, what do X's and Y's observations establish?",
+        "type": "D"
+      },
+      {
+        "explanation": "The fourth paragraph contrasts two ways of revising an auxiliary hypothesis after a failed prediction. Astronomer M specifies a moon whose predicted sky coordinates create a new, independent test that could fail next month, keeping the theory scientific. Astronomer N invents untestable surges tailored solely to match the discrepancy, a textbook ad hoc hypothesis that immunises the theory against refutation.",
+        "id": "p25-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "Both M and N make ad hoc moves that render the gravitational theory unscientific, because modifying any assumption after a failed prediction is illegitimate.",
+            "why": "The fourth paragraph explicitly allows modifying an auxiliary hypothesis when the revised system generates new, independently testable predictions."
+          },
+          {
+            "text": "N's proposal is scientifically stronger because it accounts for the orbital deviation without risking a failed telescope search next month.",
+            "why": "Eliminating the risk of contrary evidence is what turns a claim into unfalsifiable dogma, not a scientific strength."
+          },
+          {
+            "correct": true,
+            "text": "M's proposal keeps the revision scientific because telescope observations can independently test the predicted moon, whereas N's proposal is an ad hoc adjustment that shields the theory from any independent test.",
+            "why": "M's auxiliary hypothesis yields a fresh, falsifiable forecast at stated coordinates; N's untestable surges exist only to absorb the discrepancy."
+          },
+          {
+            "text": "If a telescope spots the moon at M's coordinates, the gravitational theory is verified forever, whereas N's proposal corroborates the theory without needing a telescope.",
+            "why": "Spotting the moon corroborates rather than permanently verifies the theory, and N's untestable adjustment provides no corroboration."
+          }
+        ],
+        "stem": "A planet's measured path deviates slightly from the orbit predicted by a gravitational theory. Astronomer M proposes that an uncharted outer moon of a specified mass and orbit pulls on the planet, and calculates the exact coordinates where a telescope should spot that moon next month. Astronomer N proposes instead that gravity undergoes brief, unpredictable surges that affect no other object, leave no optical or radio trace, and always match the exact size of whatever deviation has just been measured. How does the framework in the text evaluate M's and N's proposals?",
+        "type": "T"
+      }
+    ],
+    "title": "Falsifiability and Ad Hoc Hypotheses"
+  },
+  {
+    "area": "natural sciences",
+    "blocks": [
+      {
+        "text": "Many chemical reactions are reversible: while reactants combine to form products (the forward reaction), products also react back to form reactants (the reverse reaction), shown by a double arrow, ⇌. In a closed vessel at constant temperature, a reversible reaction reaches chemical equilibrium when the rate of the forward reaction equals the rate of the reverse reaction. Equilibrium is dynamic, meaning both reactions keep running at equal speeds; concentrations stop changing over time, though reactant and product concentrations need not be equal to each other.",
+        "type": "p"
+      },
+      {
+        "text": "Concentrations of gases and dissolved substances are measured in moles per litre (mol/L) and written in square brackets, such as [A]. For a balanced equation aA + bB ⇌ cC + dD involving gases or dissolved species, the equilibrium concentrations satisfy the equilibrium constant expression:",
+        "type": "p"
+      },
+      {
+        "text": "Kc = ([C]^c × [D]^d) ÷ ([A]^a × [B]^b)",
+        "type": "formula"
+      },
+      {
+        "text": "Each concentration is raised to its coefficient in the balanced equation. Pure solids, marked (s), and pure liquids, marked (l), are left out of the expression; only gases, (g), and dissolved species, (aq), enter it. At a given temperature, Kc has a single fixed value whatever starting mixture is placed in the vessel: a large value (Kc > 1) means products predominate at equilibrium, whereas a small value (Kc < 1) means reactants predominate. Substituting the concentrations of any mixture not yet known to be at equilibrium into the same fraction gives the reaction quotient, Qc:",
+        "type": "p"
+      },
+      {
+        "text": "Qc < Kc: net forward shift · Qc = Kc: at equilibrium · Qc > Kc: net reverse shift",
+        "type": "formula"
+      },
+      {
+        "text": "Le Châtelier's principle describes how an equilibrium mixture responds when disturbed: it shifts in the direction that partly counteracts the disturbance until Qc equals Kc again. Adding a reactant (or removing a product) at constant temperature lowers Qc below Kc, driving a net forward reaction that forms more product without changing Kc. Adding a catalyst speeds up the forward and reverse reactions equally, so equilibrium is reached sooner without shifting equilibrium concentrations or Kc.",
+        "type": "p"
+      },
+      {
+        "text": "Temperature is the disturbance that changes Kc itself. In an endothermic reaction, which absorbs heat, heat acts like a reactant: raising the temperature shifts equilibrium towards products and increases Kc. In an exothermic reaction, which releases heat, heat acts like a product: raising the temperature shifts equilibrium towards reactants and decreases Kc. Table 1 gives measured equilibrium concentrations in two separate closed vessels for the synthesis of methanol, CO(g) + 2 H₂(g) ⇌ CH₃OH(g).",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Equilibrium concentrations for CO(g) + 2 H₂(g) ⇌ CH₃OH(g) at two temperatures.",
+        "head": [
+          "Temperature (K)",
+          "[CO] (mol/L)",
+          "[H₂] (mol/L)",
+          "[CH₃OH] (mol/L)"
+        ],
+        "rows": [
+          [
+            "500",
+            "0.20",
+            "0.50",
+            "0.60"
+          ],
+          [
+            "600",
+            "0.40",
+            "1.00",
+            "0.80"
+          ]
+        ],
+        "type": "table"
+      }
+    ],
+    "id": "p26",
+    "questions": [
+      {
+        "explanation": "The first paragraph explains that chemical equilibrium is dynamic: the forward and reverse reactions continue at equal rates, keeping the concentrations of reactants and products constant over time without requiring them to be equal to one another.",
+        "id": "p26-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Both the forward reaction and the reverse reaction have stopped completely.",
+            "why": "Equilibrium is dynamic: both reactions keep occurring, at equal rates."
+          },
+          {
+            "correct": true,
+            "text": "The forward and reverse reactions continue at equal rates, so concentrations remain constant.",
+            "why": "This is the definition of dynamic chemical equilibrium in the first paragraph."
+          },
+          {
+            "text": "The concentration of every reactant equals the concentration of every product.",
+            "why": "The first paragraph notes that concentrations stay constant over time, not that reactant and product concentrations must be equal."
+          },
+          {
+            "text": "All reactants have been converted into products, leaving Qc equal to zero.",
+            "why": "In a reversible reaction both reactants and products remain present at equilibrium, with Qc equal to Kc."
+          }
+        ],
+        "stem": "According to the text, what is true of a reversible reaction in a closed vessel once it has reached chemical equilibrium?",
+        "type": "R"
+      },
+      {
+        "explanation": "For CO(g) + 2 H₂(g) ⇌ CH₃OH(g), the coefficient 2 in front of H₂ becomes an exponent of 2 on [H₂]: Kc = [CH₃OH] ÷ ([CO] × [H₂]²). At 500 K, Kc = 0.60 ÷ (0.20 × 0.50²) = 0.60 ÷ (0.20 × 0.25) = 0.60 ÷ 0.05 = 12.00.",
+        "id": "p26-q2",
+        "level": 2,
+        "options": [
+          {
+            "text": "0.08",
+            "why": "This divides the reactants by the product, turning the Kc expression upside down."
+          },
+          {
+            "text": "3.00",
+            "why": "This multiplies [H₂] by 2 instead of squaring [H₂]: 0.60 ÷ (0.20 × 2 × 0.50)."
+          },
+          {
+            "text": "6.00",
+            "why": "This omits the exponent 2 on [H₂]: 0.60 ÷ (0.20 × 0.50)."
+          },
+          {
+            "correct": true,
+            "text": "12.00",
+            "why": "[CH₃OH] ÷ ([CO] × [H₂]²) = 0.60 ÷ (0.20 × 0.50²) = 0.60 ÷ 0.05 = 12.00."
+          }
+        ],
+        "stem": "Using Table 1, what is the numerical value of the equilibrium constant Kc for CO(g) + 2 H₂(g) ⇌ CH₃OH(g) at 500 K?",
+        "type": "A"
+      },
+      {
+        "explanation": "By the third paragraph, products go in the numerator, reactants in the denominator, each raised to its coefficient, and pure solids marked (s) are left out. Omitting C(s) and squaring [CO] leaves Kc = [CO]² ÷ [CO₂].",
+        "id": "p26-q3",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "[CO]² ÷ [CO₂]",
+            "why": "Pure solid C(s) is omitted, gaseous CO has coefficient 2 so [CO] is squared, and gaseous CO₂ goes in the denominator."
+          },
+          {
+            "text": "[CO]² ÷ ([C] × [CO₂])",
+            "why": "C(s) is a pure solid, and pure solids are left out of the Kc expression."
+          },
+          {
+            "text": "(2 × [CO]) ÷ [CO₂]",
+            "why": "A stoichiometric coefficient of 2 becomes a power of 2 on [CO], not multiplication by 2."
+          },
+          {
+            "text": "[CO₂] ÷ [CO]²",
+            "why": "Products belong in the numerator and reactants in the denominator; this fraction is upside down."
+          }
+        ],
+        "stem": "Solid carbon reacts with carbon dioxide gas in a closed vessel according to C(s) + CO₂(g) ⇌ 2 CO(g). Following the rules in the text, which expression gives Kc?",
+        "type": "C"
+      },
+      {
+        "explanation": "Adding CO(g) increases a reactant concentration in the denominator of Qc, making Qc < Kc. At constant temperature (500 K), Kc does not change, so the reaction undergoes a net forward shift that consumes part of the added CO(g) with H₂(g) and forms more CH₃OH(g) until Qc equals Kc again.",
+        "id": "p26-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "More CH₃OH(g) is present, and Kc has increased.",
+            "why": "Kc depends on temperature; adding a reactant at constant temperature shifts the mixture without changing Kc."
+          },
+          {
+            "text": "Less CH₃OH(g) is present, and Kc is unchanged.",
+            "why": "Adding a reactant lowers Qc below Kc, which drives a net forward reaction to form more product, not less."
+          },
+          {
+            "correct": true,
+            "text": "More CH₃OH(g) is present, and Kc is unchanged.",
+            "why": "Injecting CO(g) makes Qc < Kc, so a net forward shift produces more CH₃OH(g) while constant temperature keeps Kc fixed."
+          },
+          {
+            "text": "Neither the amount of CH₃OH(g) nor Kc has changed.",
+            "why": "Leaving equilibrium amounts unchanged is the effect of adding a catalyst, not of injecting extra reactant."
+          }
+        ],
+        "stem": "A closed rigid vessel holds CO(g), H₂(g) and CH₃OH(g) at equilibrium at 500 K. Extra CO(g) is injected while the temperature is held at 500 K. Once equilibrium is restored, how have the amount of CH₃OH(g) in the vessel and the value of Kc changed compared with before the injection?",
+        "type": "D"
+      },
+      {
+        "explanation": "Whether heating favours reactants or products is told from Kc, not from a single concentration in two separate vessels. At 600 K, Kc = 0.80 ÷ (0.40 × 1.00²) = 2.00, smaller than Kc at 500 K. By the fifth paragraph, a decrease in Kc when temperature rises means the forward reaction is exothermic.",
+        "id": "p26-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Endothermic, because [CH₃OH] is higher in the 600 K vessel than in the 500 K vessel.",
+            "why": "The two vessels need not contain the same total amount of material; comparing [CH₃OH] alone ignores the larger rise in [CO] and [H₂]."
+          },
+          {
+            "text": "Endothermic, because Kc is larger at 600 K than at 500 K.",
+            "why": "At 600 K, [CH₃OH] ÷ ([CO] × [H₂]²) = 2.00, which is smaller than Kc at 500 K, not larger."
+          },
+          {
+            "text": "Neither can be told from Table 1, because Kc does not change with temperature.",
+            "why": "The fifth paragraph states that temperature is the disturbance that changes Kc itself."
+          },
+          {
+            "correct": true,
+            "text": "Exothermic, because Kc is smaller at 600 K than at 500 K.",
+            "why": "Raising the temperature from 500 K to 600 K lowers Kc (to 2.00), which is the mark of an exothermic forward reaction."
+          }
+        ],
+        "stem": "What do the two equilibrium mixtures in Table 1 show about whether the forward reaction CO(g) + 2 H₂(g) → CH₃OH(g) is exothermic or endothermic?",
+        "type": "F"
+      },
+      {
+        "explanation": "For H₂(g) + I₂(g) ⇌ 2 HI(g), Kc = [HI]² ÷ ([H₂] × [I₂]). Rearranging gives [HI]² = Kc × [H₂] × [I₂] = 64 × (0.30 × 1.20) = 64 × 0.36. Taking square roots of both factors gives [HI] = √64 × √0.36 = 8 × 0.60 = 4.80 mol/L.",
+        "id": "p26-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "4.80 mol/L",
+            "why": "[HI]² = Kc × [H₂] × [I₂] = 64 × 0.30 × 1.20 = 23.04, and √23.04 = 4.80 mol/L."
+          },
+          {
+            "text": "11.52 mol/L",
+            "why": "This writes 2 × [HI] = 23.04 and divides by 2 instead of taking the square root of [HI]²."
+          },
+          {
+            "text": "23.04 mol/L",
+            "why": "This is [HI]² = 64 × 0.30 × 1.20, before taking the square root."
+          },
+          {
+            "text": "38.40 mol/L",
+            "why": "This takes √([H₂] × [I₂]) = 0.60 but multiplies by 64 instead of √64 = 8."
+          }
+        ],
+        "stem": "For the reversible reaction H₂(g) + I₂(g) ⇌ 2 HI(g), the equilibrium constant at 700 K is Kc = 64. In an equilibrium mixture at 700 K, the reactant concentrations are [H₂] = 0.30 mol/L and [I₂] = 1.20 mol/L. What is the equilibrium concentration [HI]?",
+        "type": "T"
+      }
+    ],
+    "title": "Chemical Equilibrium"
+  }
+]

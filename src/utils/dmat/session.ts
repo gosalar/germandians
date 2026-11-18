@@ -14,6 +14,8 @@ export interface SectionRun {
   id: SectionId;
   /** Core: 'mock' | 'section' | 'practice'. Academic: 'mock' or a practice passage id. */
   setId: string;
+  /** 1..n when drawing from a mock; omitted in untimed practice. */
+  mock?: number;
   startedAt: number | null;
   endedAt: number | null;
   endedBy: (typeof ENDED_BY)[number] | null;
@@ -22,12 +24,16 @@ export interface SectionRun {
 export interface Session {
   version: 1;
   mode: Mode;
+  /** 1..n for a full mock or timed section; omitted in untimed practice. */
+  mock?: number;
   /** Full mock: four. One section: one. Practice: one, never timed. */
   sections: SectionRun[];
   /** Full mock only. */
   breakStartedAt: number | null;
   /** Practice only: show only Core tasks that carry this tag. */
   practiceTag: string | null;
+  /** Practice only: show only these specific task or question ids ("Practise my mistakes"). */
+  practiceIds?: string[] | null;
   answers: Record<string, Answer>;
   marked: string[];
   /** Practice only: tasks whose explanation has been shown; their answers are locked. */
@@ -41,6 +47,8 @@ export interface Session {
   textSize: TextSize;
   createdAt: number;
   finishedAt: number | null;
+  /** History was cleared while this finished record was still saved. */
+  historyCleared?: boolean;
   /** A finished session was in storage when this one began. */
   returning: boolean;
 }
@@ -93,24 +101,43 @@ export const sectionIdsFor = (mode: Mode, choice: StartChoice): readonly Section
 
 /** The set a section of this test draws from; see `SectionRun.setId`. */
 export const setIdFor = (mode: Mode, section: SectionId, choice: StartChoice): string =>
-  section === 'academic'
-    ? mode === 'practice' ? choice.passage ?? 'p10' : 'mock'
-    : mode === 'full' ? 'mock' : mode;
+  mode === 'practice'
+    ? section === 'academic' ? choice.passage ?? 'p10' : 'practice'
+    : 'mock';
+
+/** The mock number a timed run draws from (1 by default), or `choice.mock` in a mistakes run. */
+export const mockFor = (mode: Mode, choice: StartChoice): number | undefined =>
+  mode === 'practice' ? choice.mistakes ? choice.mock : undefined : choice.mock ?? 1;
 
 export function createSession(mode: Mode, choice: StartChoice, now: number, returning: boolean): Session {
+  const mistakes = mode === 'practice' ? choice.mistakes : undefined;
   const ids = sectionIdsFor(mode, choice);
+  const mock = mockFor(mode, choice);
+  const sections: SectionRun[] = mistakes && mistakes.sections.length > 0
+    ? mistakes.sections.map((entry, index) => ({
+        id: entry.id,
+        setId: entry.setId,
+        ...(entry.mock !== undefined ? { mock: entry.mock } : {}),
+        startedAt: index === 0 ? now : null,
+        endedAt: null,
+        endedBy: null,
+      }))
+    : ids.map((id, index) => ({
+        id,
+        setId: setIdFor(mode, id, choice),
+        ...(mock !== undefined ? { mock } : {}),
+        startedAt: index === 0 ? now : null,
+        endedAt: null,
+        endedBy: null,
+      }));
   return {
     version: 1,
     mode,
-    sections: ids.map((id, index) => ({
-      id,
-      setId: setIdFor(mode, id, choice),
-      startedAt: index === 0 ? now : null,
-      endedAt: null,
-      endedBy: null,
-    })),
+    ...(mock !== undefined ? { mock } : {}),
+    sections,
     breakStartedAt: null,
-    practiceTag: mode === 'practice' && ids[0] !== 'academic' ? choice.tag ?? null : null,
+    practiceTag: mode === 'practice' && !mistakes && ids[0] !== 'academic' ? choice.tag ?? null : null,
+    practiceIds: mistakes ? [...mistakes.taskIds] : null,
     answers: {},
     marked: [],
     checked: [],
@@ -220,11 +247,21 @@ export function setTextSize(session: Session, size: TextSize): Session {
   return session.textSize === size ? session : { ...session, textSize: size };
 }
 
-/** The visitor's own "End section". */
+/** The visitor's own "End section" (or advancing to the next section in a multi-section mistakes run). */
 export function endSection(session: Session, now: number): Session {
   const current = reconcile(session, now);
   const run = activeRun(current);
-  if (current.mode === 'practice' || current.finishedAt !== null || !run || run !== activeRun(session)) return current;
+  if (current.finishedAt !== null || !run || run !== activeRun(session)) return current;
+  if (current.mode === 'practice') {
+    const nextRun = current.sections.find((entry) => entry.startedAt === null);
+    if (!nextRun) return finishRun(current, run, now, 'visitor');
+    const booked = bookTime(current, run, now);
+    const closed: Session = {
+      ...booked,
+      sections: booked.sections.map((entry) => (entry === run ? { ...entry, endedAt: now, endedBy: 'visitor' } : entry)),
+    };
+    return beginRun(closed, nextRun.id, now);
+  }
   return finishRun(current, run, now, 'visitor');
 }
 

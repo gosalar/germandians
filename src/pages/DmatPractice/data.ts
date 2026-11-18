@@ -29,3 +29,5 @@ export const MODE_LABELS = {
   section: { name: 'One section', start: 'Start the section' },
   practice: { name: 'Practice', start: 'Start practising' },
 } as const satisfies Record<Mode, { name: string; start: string }>;
+
+export const mockName = (mock: number) => `Mock ${mock}`;

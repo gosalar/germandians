@@ -1,0 +1,86 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.history {
+  color: t.$navy;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 16px;
+
+  h2 {
+    @include m.sub-heading;
+    font-size: clamp(25px, 3.5vw, 36px);
+  }
+}
+
+.cleared {
+  margin: 0;
+  color: t.$ink-muted;
+}
+
+.subtitle {
+  margin: 6px 0 16px;
+  color: t.$ink-muted;
+}
+
+.buckets {
+  display: grid;
+  gap: 16px;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+.bucket {
+  min-width: 0;
+  padding: clamp(14px, 2.5vw, 22px);
+  border: 1px solid t.$hairline;
+  border-radius: 10px;
+  background: t.$receipt;
+
+  h3 {
+    @include m.label-font(700, 20px);
+    margin: 0 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px dashed t.$navy;
+  }
+}
+
+.sectionGroup {
+  + .sectionGroup {
+    margin-top: 12px;
+  }
+
+  h4 {
+    @include m.label-font(700, 17px);
+    margin: 0 0 4px;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  // The date line and the count always stack, so every card reads the same.
+  li {
+    @include m.label-font(600, 16px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding-block: 5px;
+    border-top: 1px solid t.$line;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.meta {
+  color: t.$slate;
+}

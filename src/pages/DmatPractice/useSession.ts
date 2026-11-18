@@ -1,10 +1,19 @@
 import { useDocumentVisibility } from '@mantine/hooks';
 import { useEffect, useReducer, useRef } from 'react';
 
+import {
+  appendHistoryAttempt,
+  clearHistory,
+  readHistory,
+  writeHistory,
+  type HistoryAttempt,
+} from '@/utils/dmat/history';
 import * as sessionLogic from '@/utils/dmat/session';
 import type { Phase, Session } from '@/utils/dmat/session';
 import { clearSession, readSession, writeSession } from '@/utils/dmat/storage';
 import type { Answer, Mode, StartChoice, TextSize } from '@/utils/dmat/types';
+
+import { MOCK_COUNT } from './bank';
 
 /** What the practice page reads and does. The page file and the screens never touch storage or the clock. */
 export interface SessionApi {
@@ -16,15 +25,23 @@ export interface SessionApi {
   phase: Phase | null;
   /** A stored test the start page offers to continue. */
   waiting: Session | null;
+  /** Past finished attempts read from `germandians:dmat-history` after mount. */
+  history: readonly HistoryAttempt[];
+  /** The latest attempt could not be written to `germandians:dmat-history`. */
+  historySaveFailed: boolean;
   /** Storage threw; said once on the page. */
   storageFailed: boolean;
   start(mode: Mode, choice: StartChoice): void;
   /** `waiting` becomes `session`. */
   resume(): void;
-  /** Deletes the stored entry and returns to the start page. */
+  /** Deletes the stored session entry and returns to the start page (keeps history). */
   discard(): void;
   /** The record steps aside without being deleted: `session` becomes `waiting` and the start page shows. */
   close(): void;
+  /** Records a finished attempt in `germandians:dmat-history` (capped at 50, deduplicated). */
+  recordHistory(attempt: HistoryAttempt): void;
+  /** Removes `germandians:dmat-history` and clears in-memory history. */
+  clearPracticeHistory(): boolean;
   answer(id: string, answer: Answer): void;
   check(id: string): void;
   mark(id: string): void;
@@ -39,22 +56,35 @@ interface State {
   ready: boolean;
   session: Session | null;
   waiting: Session | null;
+  history: HistoryAttempt[];
+  historySaveFailed: boolean;
   storageFailed: boolean;
   now: number;
   returning: boolean;
 }
 
 type Action =
-  | { type: 'load'; stored: Session | null; failed: boolean; now: number }
+  | { type: 'load'; stored: Session | null; history: HistoryAttempt[]; failed: boolean; now: number }
   | { type: 'tick'; now: number }
   | { type: 'start'; mode: Mode; choice: StartChoice; now: number }
   | { type: 'resume'; now: number }
   | { type: 'discard'; failed: boolean }
   | { type: 'close' }
+  | { type: 'record-history'; attempt: HistoryAttempt; saved: boolean }
+  | { type: 'clear-history'; failed: boolean }
   | { type: 'storage-failed' }
   | { type: 'change'; now: number; apply(session: Session, now: number): Session; currentSectionOnly?: boolean };
 
-const initialState: State = { ready: false, session: null, waiting: null, storageFailed: false, now: 0, returning: false };
+const initialState: State = {
+  ready: false,
+  session: null,
+  waiting: null,
+  history: [],
+  historySaveFailed: false,
+  storageFailed: false,
+  now: 0,
+  returning: false,
+};
 const finished = (session: Session | null) => session !== null && session.finishedAt !== null;
 
 function reducer(state: State, action: Action): State {
@@ -64,8 +94,15 @@ function reducer(state: State, action: Action): State {
       const phase = stored ? sessionLogic.phaseAt(stored, action.now) : null;
       // A running Core pause also keeps its clock: it must not wait for a Continue click.
       const running = phase?.kind === 'pause' || (phase?.kind === 'section' && phase.msLeft !== null);
-      return { ...state, ready: true, now: action.now, session: running ? stored : null,
-        waiting: running ? null : stored, storageFailed: state.storageFailed || action.failed };
+      return {
+        ...state,
+        ready: true,
+        now: action.now,
+        session: running ? stored : null,
+        waiting: running ? null : stored,
+        history: action.history,
+        storageFailed: state.storageFailed || action.failed,
+      };
     }
     case 'tick': {
       if (!state.session || state.session.mode === 'practice' || finished(state.session)) return state;
@@ -73,16 +110,50 @@ function reducer(state: State, action: Action): State {
       return next === state.session && state.now === action.now ? state : { ...state, now: action.now, session: next };
     }
     case 'start':
-      return { ...state, now: action.now, waiting: null, returning: false,
-        session: sessionLogic.createSession(action.mode, action.choice, action.now,
-          state.returning || finished(state.session) || finished(state.waiting)) };
+      return {
+        ...state,
+        now: action.now,
+        waiting: null,
+        returning: false,
+        session: sessionLogic.createSession(
+          action.mode,
+          action.choice,
+          action.now,
+          state.returning || finished(state.session) || finished(state.waiting) || state.history.length > 0,
+        ),
+      };
     case 'resume':
       return state.waiting ? { ...state, now: action.now, session: sessionLogic.reconcile(state.waiting, action.now), waiting: null } : state;
     case 'discard':
-      return { ...state, session: null, waiting: null, storageFailed: state.storageFailed || action.failed,
-        returning: state.returning || finished(state.session) || finished(state.waiting) };
+      return {
+        ...state,
+        session: null,
+        waiting: null,
+        storageFailed: state.storageFailed || action.failed,
+        returning: state.returning || finished(state.session) || finished(state.waiting),
+      };
     case 'close':
       return state.session ? { ...state, waiting: state.session, session: null } : state;
+    case 'record-history': {
+      if (state.history.some((entry) => entry.id === action.attempt.id)) return state;
+      return {
+        ...state,
+        history: appendHistoryAttempt(state.history, action.attempt),
+        historySaveFailed: !action.saved,
+      };
+    }
+    case 'clear-history': {
+      const mark = (session: Session | null) =>
+        session && finished(session) ? { ...session, historyCleared: true } : session;
+      return {
+        ...state,
+        history: [],
+        historySaveFailed: false,
+        session: mark(state.session),
+        waiting: mark(state.waiting),
+        storageFailed: state.storageFailed || action.failed,
+      };
+    }
     case 'storage-failed':
       return state.storageFailed ? state : { ...state, storageFailed: true };
     case 'change': {
@@ -109,9 +180,10 @@ export function useSession(): SessionApi {
 
   useEffect(() => {
     const now = Date.now();
-    const stored = readSession(now);
+    const stored = readSession(now, MOCK_COUNT);
+    const history = readHistory(MOCK_COUNT);
     loadedFromStorage.current = stored.session;
-    dispatch({ type: 'load', stored: stored.session, failed: stored.failed, now });
+    dispatch({ type: 'load', stored: stored.session, history, failed: stored.failed, now });
   }, []);
 
   const stored = state.session ?? state.waiting;
@@ -159,6 +231,8 @@ export function useSession(): SessionApi {
     session: state.session,
     phase,
     waiting: state.waiting,
+    history: state.history,
+    historySaveFailed: state.historySaveFailed,
     storageFailed: state.storageFailed,
     start: (mode, choice) => {
       clearSession();
@@ -167,10 +241,22 @@ export function useSession(): SessionApi {
     resume: () => dispatch({ type: 'resume', now: Date.now() }),
     discard: () => {
       clearSession();
-      const remaining = readSession(Date.now());
+      const remaining = readSession(Date.now(), MOCK_COUNT);
       dispatch({ type: 'discard', failed: remaining.failed || remaining.session !== null });
     },
     close: () => dispatch({ type: 'close' }),
+    recordHistory: (attempt) => {
+      if (state.history.some((entry) => entry.id === attempt.id)) return;
+      const next = appendHistoryAttempt(state.history, attempt);
+      dispatch({ type: 'record-history', attempt, saved: writeHistory(next) });
+    },
+    clearPracticeHistory: () => {
+      if (!clearHistory()) return false;
+      const saved = state.session ?? state.waiting;
+      const failed = finished(saved) && saved !== null && !writeSession({ ...saved, historyCleared: true });
+      dispatch({ type: 'clear-history', failed });
+      return true;
+    },
     answer: (id, answer) => change((session) => sessionLogic.setAnswer(session, id, answer), true),
     check: (id) => change((session) => sessionLogic.checkAnswer(session, id), true),
     mark: (id) => change((session) => sessionLogic.toggleMark(session, id), true),

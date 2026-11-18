@@ -9,6 +9,10 @@ export const RECORD_COPY = {
   stamps: 'Stamps earned',
   notice: 'Practice record. Not a dMAT result.',
   next: 'What to practise next',
+  mistakesSummary: (count: number) =>
+    count === 1 ? '1 task answered wrongly in this attempt' : `${count} tasks answered wrongly in this attempt`,
+  mistakesNote: 'Work through them again with no clock and check each explanation.',
+  practiseMistakes: 'Practise my mistakes',
   missed: (count: number) => count === 1 ? '1 missed' : `${count} missed`,
   practise: 'Practise these',
   review: 'Every task again',

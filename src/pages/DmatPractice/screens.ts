@@ -27,7 +27,10 @@ export const NOTHING_LOADED: Loaded = { screens: {}, sections: {} };
 
 type Keep = Dispatch<SetStateAction<Loaded>>;
 
-export const runKey = (run: Pick<SectionRun, 'id' | 'setId'>) => `${run.id}:${run.setId}`;
+export const runKey = (run: Pick<SectionRun, 'id' | 'setId' | 'mock'>) => {
+  const mock = run.mock ?? (run.setId === 'mock' ? 1 : undefined);
+  return mock !== undefined ? `${run.id}:${run.setId}:${mock}` : `${run.id}:${run.setId}`;
+};
 
 export async function fetchScreen(keep: Keep, name: LazyScreen): Promise<void> {
   const { default: view } = await SCREENS[name]();
@@ -36,8 +39,9 @@ export async function fetchScreen(keep: Keep, name: LazyScreen): Promise<void> {
 
 /** `key` is a `runKey`. */
 export async function fetchRun(keep: Keep, key: string): Promise<void> {
-  const [section, setId] = key.split(':') as [SectionId, string];
-  const content = await loadSection(section, setId);
+  const [section, setId, mockPart] = key.split(':') as [SectionId, string, string | undefined];
+  const mock = mockPart !== undefined ? Number(mockPart) : undefined;
+  const content = await loadSection(section, setId, mock);
   keep((current) => current.sections[key] === content ? current : { ...current, sections: { ...current.sections, [key]: content } });
 }
 

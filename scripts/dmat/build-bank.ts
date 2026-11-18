@@ -6,10 +6,15 @@ import { passages } from './passages/read.mjs';
 
 export const bankDir = new URL('../../src/pages/DmatPractice/bank/', import.meta.url);
 
-// Use the reviewed prototype seed for the full mock and separate fixed seeds for each other mode.
-const seeds = { mock: 2026, section: 2027, practice: 2028 } as const;
+// Keep the existing seeds for mock 1, section and practice so existing bank files stay byte-identical;
+// give each additional mock its own fixed Core seed.
+const BASE_SEEDS = { mock: 2026, section: 2027, practice: 2028 } as const;
+const mockCoreSeed = (mockNumber: number) => (mockNumber === 1 ? BASE_SEEDS.mock : 2027 + mockNumber);
+const MOCK_PASSAGES = 9;
 const timedMix = { low: 6, medium: 8, high: 6 } as const;
 const practiceMix = { low: 20, medium: 20, high: 20 } as const;
+
+type PassageWithMock = (typeof passages)[number] & { mock?: number };
 
 function select<T extends { id: string; band: Band }>(
   tasks: T[],
@@ -55,7 +60,20 @@ export function stableJson(value: unknown): string {
 
 export function generateBank() {
   const files = new Map<string, unknown>();
-  const coreBanks = Object.entries(seeds).map(([set, seed]) => {
+  const mockPassages = (passages as PassageWithMock[]).filter(({ set }) => set === 'mock');
+  const allMockNumbers = [...new Set(mockPassages.map((passage) => passage.mock ?? 1))].sort((a, b) => a - b);
+  const completeMocks = allMockNumbers.filter(
+    (mockNumber) => mockPassages.filter((passage) => (passage.mock ?? 1) === mockNumber).length === MOCK_PASSAGES,
+  );
+
+  const coreEntries: [string, number][] = [
+    ['mock', BASE_SEEDS.mock],
+    ['section', BASE_SEEDS.section],
+    ['practice', BASE_SEEDS.practice],
+    ...completeMocks.filter((n) => n >= 2).map((n): [string, number] => [`mock-${n}`, mockCoreSeed(n)]),
+  ];
+
+  const coreBanks = coreEntries.map(([set, seed]) => {
     const raw = generateCore(seed, 20);
     const mix = set === 'practice' ? practiceMix : timedMix;
     const figures = select(raw.figures, mix, (task) => task.score);
@@ -82,12 +100,17 @@ export function generateBank() {
     return { set, raw, figures, equations, latin };
   });
 
-  const mock = passages.filter(({ set }) => set === 'mock').map(bankPassage);
+  for (const mockNumber of completeMocks) {
+    const academic = mockPassages
+      .filter((passage) => (passage.mock ?? 1) === mockNumber)
+      .map(bankPassage);
+    files.set(mockNumber === 1 ? 'academic-mock.json' : `academic-mock-${mockNumber}.json`, academic);
+  }
+
   const practice = passages.filter(({ set }) => set === 'practice').map(bankPassage);
-  files.set('academic-mock.json', mock);
   for (const passage of practice) files.set(`passage-${passage.id}.json`, passage);
   files.set('practice-index.json', practice.map(({ id, area, title }) => ({ id, area, title })));
-  return { files, coreBanks };
+  return { files, coreBanks, completeMocks, allMockNumbers };
 }
 
 if (import.meta.main) {

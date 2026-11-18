@@ -6,10 +6,11 @@ import Contact from '@/components/Contact';
 import MentoringOffer from '@/components/MentoringOffer';
 import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
 import { SECTIONS } from '@/utils/constants';
+import { buildHistoryAttempt } from '@/utils/dmat/history';
 import { markSection } from '@/utils/dmat/marking';
-import { sectionIdsFor, setIdFor, type SectionRun } from '@/utils/dmat/session';
+import { mockFor, sectionIdsFor, setIdFor, type SectionRun } from '@/utils/dmat/session';
 import { earnedStamps } from '@/utils/dmat/stamps';
-import type { Mode, SectionContent, SectionId, StartChoice } from '@/utils/dmat/types';
+import type { MistakeSection, Mode, SectionContent, SectionId, StartChoice } from '@/utils/dmat/types';
 
 import Between from './Between';
 import { PAGE_COPY } from './data';
@@ -18,11 +19,29 @@ import Start from './Start';
 import styles from './styles.module.scss';
 import { useSession } from './useSession';
 
-/** Practising one kind of Core task shows only the tasks that carry its tag. */
-const withTag = (content: SectionContent, tag: string | null): SectionContent =>
-  tag && content.section !== 'academic'
-    ? { section: content.section, tasks: content.tasks.filter((task) => task.tags.includes(tag)) }
-    : content;
+/** Filters a section's tasks or questions when practising a specific Core tag or an attempt's mistakes. */
+function filterContent(
+  content: SectionContent,
+  tag: string | null,
+  practiceIds: readonly string[] | null,
+): SectionContent {
+  if (practiceIds) {
+    const allowed = new Set(practiceIds);
+    if (content.section === 'academic') {
+      return {
+        section: 'academic',
+        passages: content.passages
+          .map((passage) => ({ ...passage, questions: passage.questions.filter((question) => allowed.has(question.id)) }))
+          .filter((passage) => passage.questions.length > 0),
+      };
+    }
+    return { section: content.section, tasks: content.tasks.filter((task) => allowed.has(task.id)) };
+  }
+  if (tag && content.section !== 'academic') {
+    return { section: content.section, tasks: content.tasks.filter((task) => task.tags.includes(tag)) };
+  }
+  return content;
+}
 
 /**
  * /dmat/practice: composition only. The session hook holds the test and its clock; this file picks the
@@ -35,11 +54,15 @@ export default function DmatPractice() {
     session,
     phase,
     waiting,
+    history,
+    historySaveFailed,
     storageFailed,
     start: startSession,
     resume,
     discard,
     close,
+    recordHistory,
+    clearPracticeHistory,
     answer,
     check,
     mark,
@@ -56,6 +79,7 @@ export default function DmatPractice() {
   const [attempt, setAttempt] = useState(0);
   const main = useRef<HTMLElement>(null);
   const firstScreen = useRef(true);
+  const recordedAttempts = useRef(new Set<string>());
 
   const phaseKind = ready && session && phase ? phase.kind : null;
   const screen = !phaseKind
@@ -84,10 +108,22 @@ export default function DmatPractice() {
   const wantedKey = wanted.map(runKey).join('|');
   const attemptKey = `${lazyScreen}:${wantedKey}#${attempt}`;
   const practiceTag = session?.practiceTag ?? null;
+  const practiceIds = session?.practiceIds ?? null;
   const contents = wanted.every((run) => loaded.sections[runKey(run)])
-    ? wanted.map((run) => withTag(loaded.sections[runKey(run)], practiceTag))
+    ? wanted.map((run) => filterContent(loaded.sections[runKey(run)], practiceTag, practiceIds))
+    : null;
+  const results = screen === 'record' && session && contents
+    ? contents.map((content, index) => markSection(session.sections[index], content, session.answers))
     : null;
   const needsLoad = lazyScreen !== null && (!loaded.screens[lazyScreen] || contents === null);
+
+  useEffect(() => {
+    if (!session || !results || session.historyCleared) return;
+    const entry = buildHistoryAttempt(session, results);
+    if (!entry || recordedAttempts.current.has(entry.id)) return;
+    recordedAttempts.current.add(entry.id);
+    recordHistory(entry);
+  }, [session, results, recordHistory]);
 
   useEffect(() => {
     if (!needsLoad || !lazyScreen) return;
@@ -139,7 +175,7 @@ export default function DmatPractice() {
   const prepare = (mode: Mode, choice: StartChoice) => {
     const [section] = sectionIdsFor(mode, choice);
     quietly(fetchScreen(setLoaded, 'runner'));
-    quietly(fetchRun(setLoaded, runKey({ id: section, setId: setIdFor(mode, section, choice) })));
+    quietly(fetchRun(setLoaded, runKey({ id: section, setId: setIdFor(mode, section, choice), mock: mockFor(mode, choice) })));
   };
 
   const start = (mode: Mode, choice: StartChoice) => {
@@ -155,6 +191,25 @@ export default function DmatPractice() {
       return;
     }
     start('practice', { section, tag });
+  };
+
+  /** "Practise my mistakes": an untimed run of the tasks answered wrongly in this attempt, with explanations. */
+  const practiseMistakes = () => {
+    if (!session || !results) return;
+    const mistakeSections: MistakeSection[] = [];
+    const taskIds: string[] = [];
+    results.forEach((result, index) => {
+      const wrongIds = result.tasks.filter((task) => task.verdict === 'wrong').map((task) => task.id);
+      if (wrongIds.length === 0) return;
+      const run = session.sections[index];
+      mistakeSections.push({ id: run.id, setId: run.setId, mock: run.mock });
+      taskIds.push(...wrongIds);
+    });
+    if (taskIds.length === 0) return;
+    start('practice', {
+      mock: session.mock,
+      mistakes: { sections: mistakeSections, taskIds },
+    });
   };
 
   const pending = failedKey === attemptKey ? (
@@ -179,11 +234,14 @@ export default function DmatPractice() {
         <Start
           waiting={waiting}
           storageFailed={storageFailed}
+          history={history}
+          historySaveFailed={historySaveFailed}
           preset={preset}
           onPrepare={prepare}
           onStart={start}
           onResume={resume}
           onDiscard={discard}
+          onClearHistory={clearPracticeHistory}
         />
       </div>
       <CommunityBand />
@@ -222,13 +280,17 @@ export default function DmatPractice() {
       body = (
         <>
           <div id={SECTIONS.top}>
-            {RecordView && contents ? (
+            {RecordView && contents && results ? (
               <RecordView
                 session={session}
                 contents={contents}
-                results={contents.map((content, index) => markSection(session.sections[index], content, session.answers))}
+                results={results}
                 stamps={earnedStamps(session)}
+                history={history}
+                historySaveFailed={historySaveFailed}
                 onPractise={practise}
+                onPractiseMistakes={practiseMistakes}
+                onClearHistory={clearPracticeHistory}
                 onStartAnother={discard}
               />
             ) : pending}

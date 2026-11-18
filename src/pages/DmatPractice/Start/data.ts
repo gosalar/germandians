@@ -1,15 +1,22 @@
 import { DMAT_FORMAT, SOURCES } from '@/utils/applicationFacts';
 import { DMAT_PRACTICE } from '@/utils/constants';
 
+import { mockName } from '../data';
+
 const {
   subtests, tasksPerSubtest, subtestMinutes, pauseMinutes, breakMinutes, academicMinutes, academicQuestions,
 } = DMAT_FORMAT;
 
 const fullMinutes = subtests * subtestMinutes + (subtests - 1) * pauseMinutes + breakMinutes + academicMinutes;
 
+const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'] as const;
+const countWord = (count: number) => NUMBER_WORDS[count] ?? String(count);
+
 export const START_COPY = {
   paper: { de: 'Übungsschein', en: 'Practice slip' },
   mode: 'What would you like to practise?',
+  mocks: 'Which mock?',
+  mockLabel: mockName,
   sections: 'Which part?',
   subjects: 'Which subject?',
   reminders: 'Before you start',
@@ -25,17 +32,21 @@ export const START_COPY = {
   independence: DMAT_PRACTICE.independence,
   questions: 'We put these questions together ourselves, closely following the format and task rules g.a.s.t. publishes for the dMAT.',
   difficulty: 'The real test may be harder. Use this to get used to the format and the clock, not to predict your result.',
-  academicSet: 'There is one full academic section. If you take the full mock, you will have seen it.',
+  academicSet: (mockCount: number) =>
+    mockCount === 1
+      ? 'There is one full academic section. If you take the full mock, you will have seen it.'
+      : `There are ${countWord(mockCount)} full academic sections, one per mock. If you take a full mock, you will have seen its academic section.`,
   figures: 'Each matrix has a text description. You can use a screen reader to work through Figure Sequences, though the tasks may be harder to follow.',
   privacy: 'Your answers are saved in this browser only, so a reload does not lose your test. They are never sent to us.',
   privacyLink: 'Privacy note',
   backup: {
     title: 'Unfinished practice',
-    record: 'A practice record is saved in this browser.',
+    record: (mock?: number) =>
+      mock !== undefined ? `A practice record for ${mockName(mock)} is saved in this browser.` : 'A practice record is saved in this browser.',
     practice: 'An untimed practice run is waiting.',
-    break: 'Your full mock is waiting at the break.',
-    full: 'A full mock is waiting.',
-    section: 'A timed section is waiting.',
+    break: (mock: number) => `${mockName(mock)} is waiting at the break.`,
+    full: (mock: number) => `${mockName(mock)} (full mock) is waiting.`,
+    section: (mock: number) => `A timed section from ${mockName(mock)} is waiting.`,
     resume: 'Continue',
     discard: 'Discard',
     confirm: {

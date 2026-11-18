@@ -1,0 +1,2072 @@
+[
+  {
+    "area": "mathematics",
+    "blocks": [
+      {
+        "text": "On a 24-hour clock, 5 hours after 22:00 is 03:00 rather than 27:00, because the count wraps back to 0 every 24 hours. Modular arithmetic applies the same wrap-around rule to any positive integer n, called the modulus. Dividing any integer a by n produces a unique integer quotient q and an integer remainder r satisfying a = q × n + r with 0 ≤ r < n. That remainder r is written a mod n. Even when a is negative, r stays between 0 and n − 1: for example, −3 = (−1) × 7 + 4, so (−3) mod 7 = 4. Figure 1 shows the remainders 0 to 6 arranged in a clockwise cycle for modulus 7: adding 1 steps one place clockwise, so 6 wraps around to 0.",
+        "type": "p"
+      },
+      {
+        "alt": "Seven numbered circles 0, 1, 2, 3, 4, 5, 6 arranged clockwise around a ring labelled mod 7, with arrows from 0 to 1, 1 to 2, up to 6 back to 0.",
+        "caption": "Figure 1. The modulo-7 remainder cycle; each clockwise step adds 1 and wraps from 6 to 0.",
+        "id": "p36-fig1",
+        "svg": "<svg viewBox=\"0 0 440 280\" role=\"img\" aria-labelledby=\"p36-fig1-alt\">\n  <line x1=\"242.8\" y1=\"50.9\" x2=\"269.1\" y2=\"61.8\"/><polygon class=\"dot\" points=\"275.5,66.6 266.4,65.4 271.8,58.2\"/><line x1=\"303.9\" y1=\"102.2\" x2=\"311.8\" y2=\"129.6\"/><polygon class=\"dot\" points=\"312,137.6 307.3,129.7 316.3,129.5\"/><line x1=\"301.8\" y1=\"182\" x2=\"285.3\" y2=\"205.3\"/><polygon class=\"dot\" points=\"279.2,210.4 282.4,201.8 288.2,208.7\"/><line x1=\"238.2\" y1=\"230.2\" x2=\"209.6\" y2=\"231.8\"/><polygon class=\"dot\" points=\"201.8,230.2 210.5,227.4 208.8,236.2\"/><line x1=\"160.8\" y1=\"210.4\" x2=\"141.9\" y2=\"189.1\"/><polygon class=\"dot\" points=\"138.2,182 145.9,187.1 137.9,191.2\"/><line x1=\"128\" y1=\"137.6\" x2=\"132.8\" y2=\"109.5\"/><polygon class=\"dot\" points=\"136.1,102.2 136.9,111.3 128.7,107.6\"/><line x1=\"164.5\" y1=\"66.6\" x2=\"189.4\" y2=\"52.9\"/><polygon class=\"dot\" points=\"197.2,50.9 190.6,57.2 188.3,48.5\"/>\n  <circle class=\"part\" cx=\"220\" cy=\"48\" r=\"20\"/><text class=\"big\" x=\"220\" y=\"55\" text-anchor=\"middle\">0</text><circle class=\"part\" cx=\"291.9\" cy=\"82.6\" r=\"20\"/><text class=\"big\" x=\"291.9\" y=\"89.6\" text-anchor=\"middle\">1</text><circle class=\"part\" cx=\"309.7\" cy=\"160.5\" r=\"20\"/><text class=\"big\" x=\"309.7\" y=\"167.5\" text-anchor=\"middle\">2</text><circle class=\"part\" cx=\"259.9\" cy=\"222.9\" r=\"20\"/><text class=\"big\" x=\"259.9\" y=\"229.9\" text-anchor=\"middle\">3</text><circle class=\"part\" cx=\"180.1\" cy=\"222.9\" r=\"20\"/><text class=\"big\" x=\"180.1\" y=\"229.9\" text-anchor=\"middle\">4</text><circle class=\"part\" cx=\"130.3\" cy=\"160.5\" r=\"20\"/><text class=\"big\" x=\"130.3\" y=\"167.5\" text-anchor=\"middle\">5</text><circle class=\"part\" cx=\"148.1\" cy=\"82.6\" r=\"20\"/><text class=\"big\" x=\"148.1\" y=\"89.6\" text-anchor=\"middle\">6</text>\n  <text class=\"title\" x=\"220\" y=\"146\" text-anchor=\"middle\">mod 7</text>\n</svg>",
+        "type": "figure"
+      },
+      {
+        "text": "Two integers a and b are called congruent modulo n, written a ≡ b (mod n), when they leave the same remainder on division by n. Equivalently, their difference is an integer multiple of n:",
+        "type": "p"
+      },
+      {
+        "text": "a ≡ b (mod n)   means   a − b = k × n   for some integer k",
+        "type": "formula"
+      },
+      {
+        "text": "A major shortcut of modular arithmetic is that numbers can be replaced by their remainders before adding, subtracting or multiplying. If a ≡ c (mod n) and b ≡ d (mod n), then:",
+        "type": "p"
+      },
+      {
+        "text": "a + b ≡ c + d (mod n)   and   a × b ≡ c × d (mod n)",
+        "type": "formula"
+      },
+      {
+        "text": "Applying the multiplication rule repeatedly also simplifies powers: if a^m ≡ 1 (mod n), every block of m factors of a contributes 1. Division, however, needs care: cancelling a factor that shares a common divisor greater than 1 with n does not keep the same modulus n. For instance, 2 × 4 = 8 and 2 × 1 = 2 both leave remainder 2 modulo 6, so 2 × 4 ≡ 2 × 1 (mod 6), yet 4 is not congruent to 1 modulo 6.",
+        "type": "p"
+      }
+    ],
+    "id": "p36",
+    "questions": [
+      {
+        "explanation": "The second paragraph defines a ≡ b (mod n) as leaving the same remainder on division by n, which is equivalent to a − b = k × n for some integer k.",
+        "id": "p36-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "When a + b is an integer multiple of n.",
+            "why": "Congruence requires the difference a − b, not the sum a + b, to be a multiple of n; 5 + 2 = 7, yet 5 and 2 have different remainders modulo 7."
+          },
+          {
+            "correct": true,
+            "text": "When a − b is an integer multiple of n, so both leave the same remainder on division by n.",
+            "why": "This is the definition and first formula in the second paragraph."
+          },
+          {
+            "text": "When n divided by a − b is an integer.",
+            "why": "a − b must be a multiple of n (such as 14 when n = 7), not a divisor of n."
+          },
+          {
+            "text": "When a and b have the same integer quotient q upon division by n.",
+            "why": "Numbers with the same quotient (such as 8 and 9 for n = 7) have consecutive remainders rather than equal remainders."
+          }
+        ],
+        "stem": "According to the text, when are two integers a and b congruent modulo n?",
+        "type": "R"
+      },
+      {
+        "explanation": "Every 7 clockwise steps complete one full turn around Figure 1. Adding the steps gives 3 + 43 = 46 = 6 × 7 + 4, landing on 4.",
+        "id": "p36-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "1",
+            "why": "This computes 43 mod 7 = 1 as if starting from 0 rather than from 3."
+          },
+          {
+            "text": "2",
+            "why": "This moves 43 steps anticlockwise ((3 − 43) mod 7 = 2) instead of clockwise."
+          },
+          {
+            "correct": true,
+            "text": "4",
+            "why": "(3 + 43) mod 7 = 46 mod 7 = 4, since 46 = 6 × 7 + 4."
+          },
+          {
+            "text": "6",
+            "why": "This is the integer quotient 6 of 46 ÷ 7, counting full turns rather than the remainder."
+          }
+        ],
+        "stem": "Starting at 3 on the modulo-7 cycle in Figure 1 and advancing 43 steps clockwise, on which number do you land?",
+        "type": "F"
+      },
+      {
+        "explanation": "Reduce each number modulo 9 first: 904 = 100 × 9 + 4, 718 = 79 × 9 + 7, and 451 = 50 × 9 + 1. Then (4 × 7 + 1) = 29 = 3 × 9 + 2, so the remainder is 2.",
+        "id": "p36-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "1",
+            "why": "This computes (4 × 7) mod 9 = 28 mod 9 = 1 and forgets to add 451 ≡ 1."
+          },
+          {
+            "correct": true,
+            "text": "2",
+            "why": "Modulo 9, 904 ≡ 4, 718 ≡ 7 and 451 ≡ 1, so 4 × 7 + 1 = 29 ≡ 2 (mod 9)."
+          },
+          {
+            "text": "3",
+            "why": "This adds 4 + 7 + 1 = 12 ≡ 3 instead of multiplying 4 and 7."
+          },
+          {
+            "text": "5",
+            "why": "This adds before multiplying: 4 × (7 + 1) = 32 ≡ 5 (mod 9)."
+          }
+        ],
+        "stem": "What is (904 × 718 + 451) mod 9?",
+        "type": "A"
+      },
+      {
+        "explanation": "Write −29 = (−4) × 8 + 3, so (−29) mod 8 = 3. Checking the options modulo 8 gives 19 = 2 × 8 + 3 (difference 19 − (−29) = 48 = 6 × 8), whereas 20, 21 and 29 leave remainders 4, 5 and 5.",
+        "id": "p36-q4",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "19",
+            "why": "19 − (−29) = 48 = 6 × 8, so both leave remainder 3 when divided by 8 (−29 = −4 × 8 + 3)."
+          },
+          {
+            "text": "20",
+            "why": "20 − (−29) = 49, which is a multiple of 7 rather than 8."
+          },
+          {
+            "text": "21",
+            "why": "21 leaves remainder 5 modulo 8 (the remainder of +29, ignoring the minus sign on −29)."
+          },
+          {
+            "text": "29",
+            "why": "29 − (−29) = 58, which is not divisible by 8; −29 ≡ 3 whereas +29 ≡ 5 (mod 8)."
+          }
+        ],
+        "stem": "Which of the following integers is congruent to −29 modulo 8?",
+        "type": "C"
+      },
+      {
+        "explanation": "Initially, a × b ≡ 5 × 7 = 35 = 2 × 12 + 11, so the remainder is 11. Since 26 ≡ 2 (mod 12) and 12 ≡ 0 (mod 12), the new remainders are a ≡ 7 and b ≡ 7, giving 7 × 7 = 49 = 4 × 12 + 1.",
+        "id": "p36-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "It falls from 11 to 1.",
+            "why": "Before: 5 × 7 = 35 ≡ 11 (mod 12). Adding 26 ≡ 2 makes a ≡ 7 while subtracting 12 leaves b ≡ 7, and 7 × 7 = 49 ≡ 1 (mod 12)."
+          },
+          {
+            "text": "It rises from 11 to 13.",
+            "why": "A remainder modulo 12 must lie between 0 and 11; 13 is outside that range."
+          },
+          {
+            "text": "It falls from 11 to 9.",
+            "why": "Increasing a by 2 adds 2 × b ≡ 14 ≡ 2 (mod 12) to 11, wrapping to 1 rather than subtracting 2."
+          },
+          {
+            "text": "It stays at 11.",
+            "why": "Subtracting 12 leaves b unchanged modulo 12, but 26 = 2 × 12 + 2 changes a modulo 12."
+          }
+        ],
+        "stem": "Two integers a and b satisfy a ≡ 5 (mod 12) and b ≡ 7 (mod 12). Next, a is increased by 26 and b is decreased by 12. How does the remainder (a × b) mod 12 change?",
+        "type": "D"
+      },
+      {
+        "explanation": "By the first formula, 3 × x ≡ 3 × y (mod 12) means 3 × (x − y) = 12 × k for some integer k. Dividing this integer equation by 3 gives x − y = 4 × k, which is exact equivalence to x ≡ y (mod 4). Taking k = 1 (for instance x = 5, y = 1) shows x and y need not be congruent modulo 12.",
+        "id": "p36-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "x ≡ y (mod 12) must hold, because the common factor 3 cancels on both sides.",
+            "why": "3 shares the factor 3 with 12; for x = 1 and y = 5, 3 × 1 = 3 and 3 × 5 = 15 ≡ 3 (mod 12), yet 1 and 5 are not congruent modulo 12."
+          },
+          {
+            "text": "x ≡ y (mod 3) must hold, because both sides contain a factor of 3.",
+            "why": "3 × (x − y) = 12 × k divides by 3 to give x − y = 4 × k; for x = 1 and y = 5, 5 − 1 = 4 is not a multiple of 3."
+          },
+          {
+            "text": "x ≡ 0 (mod 4) and y ≡ 0 (mod 4) must both hold.",
+            "why": "Only the difference x − y must be a multiple of 4; x = 1 and y = 5 satisfy the congruence without either being a multiple of 4."
+          },
+          {
+            "correct": true,
+            "text": "x ≡ y (mod 4) must hold, though x and y need not be congruent modulo 12.",
+            "why": "By definition 3 × x − 3 × y = 12 × k for some integer k; dividing both sides by 3 gives x − y = 4 × k, which means x ≡ y (mod 4)."
+          }
+        ],
+        "stem": "For two integers x and y, it is given that 3 × x ≡ 3 × y (mod 12). Which statement about x and y must be true?",
+        "type": "S"
+      },
+      {
+        "explanation": "Compute the first few powers of 3 modulo 10: 3^1 ≡ 3, 3^2 ≡ 9, 3^3 = 27 ≡ 7, and 3^4 = 81 ≡ 1 (mod 10). Since 27 = 4 × 6 + 3, 3^27 = (3^4)^6 × 3^3 ≡ 1^6 × 7 = 7 (mod 10).",
+        "id": "p36-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "1",
+            "why": "This stops at 3^4 ≡ 1 (mod 10) and leaves out the remaining three factors (3^3 = 27 ≡ 7)."
+          },
+          {
+            "text": "3",
+            "why": "This treats the leftover exponent 27 mod 4 as 1 instead of 3 (or reports the exponent remainder 3 directly)."
+          },
+          {
+            "correct": true,
+            "text": "7",
+            "why": "3^4 = 81 ≡ 1 (mod 10) and 27 = 4 × 6 + 3, so 3^27 = (3^4)^6 × 3^3 ≡ 1^6 × 27 ≡ 7 (mod 10)."
+          },
+          {
+            "text": "9",
+            "why": "This stops one step early in the 4-step cycle (3^2 = 9 instead of 3^3 = 27 ≡ 7)."
+          }
+        ],
+        "stem": "What is 3^27 mod 10?",
+        "type": "T"
+      }
+    ],
+    "title": "Modular Arithmetic and Congruences"
+  },
+  {
+    "area": "computational sciences",
+    "blocks": [
+      {
+        "text": "Electrical noise in cables and memory chips can flip a binary digit (bit), turning a 0 into a 1 or a 1 into a 0. The simplest safeguard attaches one extra check bit, called a parity bit, to every block of d data bits, sending a codeword of d + 1 bits. Under even parity, the sender chooses the parity bit (0 or 1) so that the total count of 1s across all d + 1 bits, including the parity bit itself, is even. Under odd parity, the parity bit makes the total count of 1s across all d + 1 bits odd.",
+        "type": "p"
+      },
+      {
+        "text": "When the receiver checks a codeword, any single-bit flip (whether in a data bit or in the parity bit) changes the count of 1s by +1 or −1, switching it between even and odd, so the error is detected. More generally, a single parity bit detects every odd number of bit flips, yet misses every even number of flips: flipping two bits changes the count of 1s by −2, 0 or +2, leaving its evenness or oddness intact. Even when an error is detected, a single parity bit cannot tell which bit flipped, so the receiver cannot correct the block on its own.",
+        "type": "p"
+      },
+      {
+        "text": "Arranging r × c data bits into r rows and c columns overcomes this limit. In a two-dimensional parity grid, one parity bit is appended to each of the r rows, one parity bit is placed at the foot of each of the c columns, and one corner parity bit at the bottom right checks the parity row and parity column:",
+        "type": "p"
+      },
+      {
+        "text": "transmitted bits = (r + 1) × (c + 1) = r × c + (r + c + 1)",
+        "type": "formula"
+      },
+      {
+        "text": "If a single bit anywhere in the (r + 1) × (c + 1) grid flips, both its row and its column fail their parity checks, and their intersection pinpoints the exact bit to flip back. Any two-bit error also makes at least two row or column checks fail, so every two-bit error is detected, though not uniquely fixable; four flips sitting at the four corners of a rectangle, however, put two flips in each affected row and column and slip past unnoticed. Table 1 shows a 3 × 4 data block received under even parity after one bit flipped in transit.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. A received block under two-dimensional even parity containing one flipped bit.",
+        "head": [
+          "Row",
+          "Column 1",
+          "Column 2",
+          "Column 3",
+          "Column 4",
+          "Row parity"
+        ],
+        "rows": [
+          [
+            "Row 1",
+            "1",
+            "0",
+            "1",
+            "1",
+            "1"
+          ],
+          [
+            "Row 2",
+            "0",
+            "1",
+            "1",
+            "1",
+            "0"
+          ],
+          [
+            "Row 3",
+            "1",
+            "1",
+            "0",
+            "1",
+            "1"
+          ],
+          [
+            "Column parity",
+            "0",
+            "0",
+            "1",
+            "1",
+            "0"
+          ]
+        ],
+        "type": "table"
+      }
+    ],
+    "id": "p37",
+    "questions": [
+      {
+        "explanation": "Flipping two 1s to 0s changes the number of 1s by −2; flipping one 0 and one 1 changes it by 0; flipping two 0s to 1s changes it by +2. In all three cases an even count stays even and an odd count stays odd.",
+        "id": "p37-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Because two flipped bits always cancel out and leave the original block unchanged.",
+            "why": "Flipping two different positions alters both positions rather than restoring the original bits."
+          },
+          {
+            "text": "Because the parity check counts only the data bits and ignores the parity bit.",
+            "why": "Parity is checked across all d + 1 bits, including the parity bit."
+          },
+          {
+            "text": "Because flipping two data bits automatically flips the parity bit as well.",
+            "why": "Noise on the channel does not recompute the parity bit; two bit flips mean two flips in total."
+          },
+          {
+            "correct": true,
+            "text": "Because flipping any two bits changes the count of 1s by −2, 0 or +2, keeping its parity the same.",
+            "why": "Changing a count by an even amount preserves whether it is even or odd, as the second paragraph states."
+          }
+        ],
+        "stem": "According to the text, why does a single parity bit attached to a data block miss every two-bit error in that block?",
+        "type": "R"
+      },
+      {
+        "explanation": "Count the 1s in each row of Table 1: Row 1 has 4, Row 2 has 3 (odd), Row 3 has 4, Column parity has 2. Count the 1s in each column: Column 1 has 2, Column 2 has 2, Column 3 has 3 (odd), Column 4 has 4, Row parity has 2. The failing row and column cross at Row 2, Column 3.",
+        "id": "p37-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "Row 2, Column 4",
+            "why": "Row 2 has three 1s (odd), but Column 4 has four 1s (even), so Column 4 passes its check."
+          },
+          {
+            "correct": true,
+            "text": "Row 2, Column 3",
+            "why": "Row 2 has three 1s (0, 1, 1, 1, 0) and Column 3 has three 1s (1, 1, 0, 1); every other row and column is even."
+          },
+          {
+            "text": "Row 3, Column 2",
+            "why": "This swaps the row and column numbers; Row 3 has four 1s and Column 2 has two 1s, both even."
+          },
+          {
+            "text": "Row 2, Row parity",
+            "why": "Row 2 fails, but the Row parity column contains two 1s (1, 0, 1, 0), which is even."
+          }
+        ],
+        "stem": "Table 1 was sent using even parity on every row and column and suffered one single-bit flip during transmission. Which cell in Table 1 holds the flipped bit?",
+        "type": "F"
+      },
+      {
+        "explanation": "Under odd parity, the total number of 1s across all 8 bits must be odd. Counting 1s gives 5 for 10110110 (odd), against 4, 4 and 6 (all even) for the other three words.",
+        "id": "p37-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "10110110",
+            "why": "10110110 contains 5 ones, which is odd, so it satisfies odd parity."
+          },
+          {
+            "text": "10110010",
+            "why": "10110010 contains 4 ones, which is even, so it fails odd parity."
+          },
+          {
+            "text": "01101001",
+            "why": "01101001 contains 4 ones, which is even, so it fails odd parity."
+          },
+          {
+            "text": "11011011",
+            "why": "11011011 contains 6 ones, which is even, so it fails odd parity."
+          }
+        ],
+        "stem": "A sensor sends 7-bit readings with 1 odd-parity bit appended, forming 8-bit codewords. Which of these received 8-bit codewords passes the odd-parity check?",
+        "type": "C"
+      },
+      {
+        "explanation": "By the formula, r × c data bits require r + c + 1 parity bits: 6 row-parity bits, 8 column-parity bits, and 1 corner parity bit, giving 6 + 8 + 1 = 15 (or 63 − 48 = 15).",
+        "id": "p37-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "13",
+            "why": "This calculates 6 + 8 − 1, subtracting 1 for the bottom-right corner instead of adding 1."
+          },
+          {
+            "text": "14",
+            "why": "This adds 6 row bits and 8 column bits (6 + 8) and forgets the bottom-right corner parity bit."
+          },
+          {
+            "correct": true,
+            "text": "15",
+            "why": "(6 + 1) × (8 + 1) − 48 = 63 − 48 = 6 + 8 + 1 = 15."
+          },
+          {
+            "text": "63",
+            "why": "This is the total number of transmitted bits (6 + 1) × (8 + 1), including the 48 data bits."
+          }
+        ],
+        "stem": "A block of 48 data bits is arranged in 6 rows and 8 columns and sent with two-dimensional parity (row parity bits, column parity bits, and the bottom-right corner parity bit). How many parity bits are added to the 48 data bits?",
+        "type": "A"
+      },
+      {
+        "explanation": "For 4 × 16, r + c + 1 = 4 + 16 + 1 = 21 parity bits. For 8 × 8, r + c + 1 = 8 + 8 + 1 = 17 parity bits. Switching to the square grid reduces the parity overhead by 21 − 17 = 4 bits.",
+        "id": "p37-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "It stays the same, because both grids hold 64 data bits.",
+            "why": "The product r × c stays at 64, whereas the parity count r + c + 1 shrinks when r + c shrinks."
+          },
+          {
+            "correct": true,
+            "text": "It falls by 4 bits, from 21 to 17.",
+            "why": "4 × 16 uses 4 + 16 + 1 = 21 parity bits, whereas 8 × 8 uses 8 + 8 + 1 = 17 parity bits, saving 4."
+          },
+          {
+            "text": "It rises by 4 bits, from 17 to 21.",
+            "why": "This reverses the two layouts: 21 is for 4 × 16 and 17 is for 8 × 8."
+          },
+          {
+            "text": "It falls by 8 bits, from 24 to 16.",
+            "why": "Parity bits equal r + c + 1 (21 and 17), not 24 and 16."
+          }
+        ],
+        "stem": "A transmitter sends 64 data bits per block with a two-dimensional parity grid (including the corner parity bit). If the grid layout for those 64 data bits is changed from 4 rows by 16 columns to 8 rows by 8 columns, what happens to the number of parity bits sent per block?",
+        "type": "D"
+      },
+      {
+        "explanation": "Because no column failed, every column must have suffered an even number of flips (0, 2, …). Because Rows 1 and 3 each failed, each suffered an odd number of flips. Two flips placed in Row 1 and Row 3 of the same column give 1 flip in Row 1, 1 flip in Row 3, and 2 flips in that column.",
+        "id": "p37-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "Two bits flipped, one in Row 1 and one in Row 3, in the same column.",
+            "why": "Row 1 and Row 3 each suffer one flip (failing), while their shared column suffers two flips so its parity stays even."
+          },
+          {
+            "text": "One bit flipped, in the Row parity column of either Row 1 or Row 3.",
+            "why": "A single flip in the Row parity column would fail only one row and would also make the Row parity column fail."
+          },
+          {
+            "text": "Two bits flipped, both in Row 1, in two different columns.",
+            "why": "Two flips in Row 1 would keep Row 1 even, leave Row 3 even, and cause those two columns to fail instead."
+          },
+          {
+            "text": "Four bits flipped, at the intersections of Rows 1 and 3 with two different columns.",
+            "why": "Four flips at the corners of a rectangle put two flips in Row 1 and two in Row 3, so all row and column checks pass."
+          }
+        ],
+        "stem": "A block like Table 1 is sent using two-dimensional even parity. At the receiver, Row 1 and Row 3 both have an odd number of 1s (failing their checks), while every other row and every single column (including the Row parity column) has an even number of 1s. Which of these error patterns explains what happened?",
+        "type": "T"
+      },
+      {
+        "explanation": "Every cell of the (r + 1) × (c + 1) grid belongs to one checked row and one checked column, so any single flip uniquely flags its row and column. Any two distinct cells differ in row, column, or both, causing two rows, two columns, or two rows and two columns to fail.",
+        "id": "p37-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "A two-dimensional parity grid detects every pattern of four bit flips in the grid.",
+            "why": "Four flips sitting at the corners of a rectangle leave two flips in each affected row and column, going undetected."
+          },
+          {
+            "text": "A single parity bit detects every two-bit error, and a two-dimensional grid corrects every two-bit error.",
+            "why": "A single parity bit misses every two-bit error, and a two-dimensional grid detects two-bit errors without uniquely locating them."
+          },
+          {
+            "text": "A two-dimensional parity grid corrects a single-bit flip in a data cell, and fails if a parity cell flips.",
+            "why": "Because the corner bit checks both parity edges, flipping any single parity cell still flags its unique row and column."
+          },
+          {
+            "correct": true,
+            "text": "A two-dimensional parity grid detects every two-bit error and corrects every single-bit error, including in a parity cell.",
+            "why": "Any single flip uniquely flags one row and one column across the whole (r + 1) × (c + 1) grid, and any two distinct flips fail at least two line checks."
+          }
+        ],
+        "stem": "Comparing a single parity bit per block with a two-dimensional parity grid (including row, column and corner parity bits), which statement is always true?",
+        "type": "S"
+      }
+    ],
+    "title": "Parity Bits and Error Detection"
+  },
+  {
+    "area": "natural sciences",
+    "blocks": [
+      {
+        "text": "Light travels fastest in a vacuum, at c = 3.00 × 10⁸ metres per second (m/s). In any transparent substance it travels at a slower speed v. The refractive index n of that substance is the dimensionless ratio of the two speeds, so n is at least 1:",
+        "type": "p"
+      },
+      {
+        "text": "n = c ÷ v",
+        "type": "formula"
+      },
+      {
+        "text": "When a ray of light crosses a flat boundary between medium 1 (index n₁) and medium 2 (index n₂), this speed change usually bends the ray, an effect called refraction. In optics, angles are always measured between each ray and the normal, the dashed line drawn at 90° to the boundary in Figure 1, never to the boundary surface itself; a ray making angle α with the boundary therefore has angle 90° − α to the normal. Snell’s law links the angle of incidence θ₁ and the angle of refraction θ₂:",
+        "type": "p"
+      },
+      {
+        "text": "n₁ × sin θ₁ = n₂ × sin θ₂",
+        "type": "formula"
+      },
+      {
+        "alt": "A horizontal boundary between Medium 1 above (lower n₁) and Medium 2 below (higher n₂), crossed at 90 degrees by a vertical dashed Normal. An incident ray in Medium 1 meets the boundary at angle θ₁ to the normal, and the refracted ray in Medium 2 bends closer to the normal at smaller angle θ₂.",
+        "caption": "Figure 1. Refraction from a lower-index medium into a higher-index medium (n₂ > n₁), with angles measured from the normal.",
+        "id": "p38-fig1",
+        "svg": "<svg viewBox=\"0 0 440 260\" role=\"img\" aria-labelledby=\"p38-fig1-alt\">\n  <line class=\"wire\" x1=\"36\" y1=\"130\" x2=\"404\" y2=\"130\"/>\n  <line class=\"curve curve-3\" x1=\"220\" y1=\"18\" x2=\"220\" y2=\"242\"/>\n  <line class=\"curve\" x1=\"140.3\" y1=\"63.2\" x2=\"220\" y2=\"130\"/>\n  <line class=\"curve curve-2\" x1=\"220\" y1=\"130\" x2=\"268.8\" y2=\"221.8\"/>\n  <text class=\"label-3\" x=\"228\" y=\"34\">Normal</text>\n  <text class=\"label-1\" x=\"134.3\" y=\"57.2\">Incident ray</text>\n  <text class=\"label-2\" x=\"276.8\" y=\"225.8\">Refracted ray</text>\n  <text class=\"prob\" x=\"196\" y=\"88\" text-anchor=\"middle\">θ₁</text>\n  <text class=\"prob\" x=\"238\" y=\"188\" text-anchor=\"middle\">θ₂</text>\n  <text x=\"44\" y=\"116\">Medium 1 (lower n₁)</text>\n  <text x=\"44\" y=\"154\">Medium 2 (higher n₂)</text>\n</svg>",
+        "type": "figure"
+      },
+      {
+        "text": "Recall that sin 0° = 0, sin 30° = 0.50 and sin 90° = 1.00, and that sin θ increases steadily from 0 to 1 as θ grows from 0° to 90°. Entering a higher-index medium (n₂ > n₁) makes sin θ₂ < sin θ₁, bending the ray towards the normal (θ₂ < θ₁); entering a lower-index medium (n₂ < n₁) bends it away from the normal (θ₂ > θ₁). Table 1 lists refractive indices of four media, rounded to two decimal places.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Refractive index n of selected media, rounded to two decimal places.",
+        "head": [
+          "Medium",
+          "Refractive index n"
+        ],
+        "rows": [
+          [
+            "Air (0 °C, 1 atm)",
+            "1.00"
+          ],
+          [
+            "Fresh water",
+            "1.33"
+          ],
+          [
+            "Benzene",
+            "1.50"
+          ],
+          [
+            "Diamond",
+            "2.42"
+          ]
+        ],
+        "type": "table"
+      },
+      {
+        "text": "When light travels from a higher-index medium toward a lower-index one (n₁ > n₂), raising θ₁ eventually brings θ₂ to 90° (sin 90° = 1.00), so the refracted ray skims the boundary. That incident angle is the critical angle θ_c:",
+        "type": "p"
+      },
+      {
+        "text": "sin θ_c = n₂ ÷ n₁   (only when n₁ > n₂)",
+        "type": "formula"
+      },
+      {
+        "text": "For any incident angle θ₁ > θ_c, Snell’s law would require sin θ₂ > 1, which is impossible: no light refracts across, and all of it reflects back into medium 1 (total internal reflection), the principle that keeps light inside the higher-index core of optical fibres.",
+        "type": "p"
+      }
+    ],
+    "id": "p38",
+    "questions": [
+      {
+        "explanation": "Total internal reflection happens only when light approaches a lower-index medium from a higher-index medium (n₁ > n₂) at an angle of incidence strictly above the critical angle (θ₁ > θ_c).",
+        "id": "p38-q1",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "Medium 1 has a higher refractive index than medium 2 (n₁ > n₂), and the angle of incidence exceeds the critical angle (θ₁ > θ_c).",
+            "why": "Both conditions are given at the end of the passage: n₁ > n₂ creates a critical angle, and θ₁ > θ_c prevents any refracted ray."
+          },
+          {
+            "text": "Medium 1 has a lower refractive index than medium 2 (n₁ < n₂), and the angle of incidence exceeds the critical angle (θ₁ > θ_c).",
+            "why": "When n₁ < n₂, the ray bends towards the normal (θ₂ < θ₁ < 90°), so total internal reflection cannot happen."
+          },
+          {
+            "text": "Medium 1 has a higher refractive index than medium 2 (n₁ > n₂), and the angle of incidence is below the critical angle (θ₁ < θ_c).",
+            "why": "When θ₁ < θ_c, sin θ₂ remains below 1 and a refracted ray still passes into medium 2."
+          },
+          {
+            "text": "The incident ray travels along the normal (θ₁ = 0°), and medium 1 has a higher refractive index than medium 2.",
+            "why": "At θ₁ = 0°, sin θ₂ = 0, so the ray passes straight into medium 2 rather than undergoing total internal reflection."
+          }
+        ],
+        "stem": "According to the text, what two conditions are both required for total internal reflection at a flat boundary from medium 1 toward medium 2?",
+        "type": "R"
+      },
+      {
+        "explanation": "From Table 1, benzene has n = 1.50. Rearranging n = c ÷ v gives v = c ÷ n = 3.00 × 10⁸ ÷ 1.50 = 2.00 × 10⁸ m/s.",
+        "id": "p38-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "0.50 × 10⁸ m/s",
+            "why": "This divides n by c (1.50 ÷ 3.00) instead of dividing c by n."
+          },
+          {
+            "correct": true,
+            "text": "2.00 × 10⁸ m/s",
+            "why": "Rearranging n = c ÷ v gives v = c ÷ n = 3.00 × 10⁸ ÷ 1.50 = 2.00 × 10⁸ m/s."
+          },
+          {
+            "text": "2.26 × 10⁸ m/s",
+            "why": "This divides by 1.33, the refractive index of fresh water from the row above."
+          },
+          {
+            "text": "4.50 × 10⁸ m/s",
+            "why": "This multiplies c by n (3.00 × 1.50), giving a speed above the vacuum speed of light."
+          }
+        ],
+        "stem": "Using Table 1 and c = 3.00 × 10⁸ m/s, what is the speed of light in benzene?",
+        "type": "F"
+      },
+      {
+        "explanation": "Because angles in Snell’s law are measured from the normal, a 30° angle to the boundary gives θ₁ = 90° − 30° = 60°. Then sin θ₂ = (n₁ × sin θ₁) ÷ n₂ = (1.50 × 0.87) ÷ 2.42 = 0.54.",
+        "id": "p38-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "0.31",
+            "why": "This uses the 30° angle to the boundary surface directly instead of θ₁ = 90° − 30° = 60° to the normal."
+          },
+          {
+            "text": "0.36",
+            "why": "This uses n₁ = 1.00 (air) instead of n₁ = 1.50 (benzene) with θ₁ = 60°."
+          },
+          {
+            "correct": true,
+            "text": "0.54",
+            "why": "θ₁ = 90° − 30° = 60° to the normal, so sin θ₂ = (1.50 × 0.87) ÷ 2.42 = 0.54."
+          },
+          {
+            "text": "0.81",
+            "why": "This both swaps n₁ and n₂ and uses 30° instead of 60°."
+          }
+        ],
+        "stem": "A light ray in benzene strikes a flat boundary with diamond along a path making an angle of 30° with the boundary surface itself. Using Table 1 and taking sin 30° = 0.50 and sin 60° = 0.87, what is sin θ₂ for the refracted ray in the diamond?",
+        "type": "A"
+      },
+      {
+        "explanation": "Apply sin θ_c = n₂ ÷ n₁ = 1.20 ÷ 2.40 = 0.50. Since sin 30° = 0.50, the critical angle measured from the normal is 30°.",
+        "id": "p38-q4",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "30°",
+            "why": "sin θ_c = n₂ ÷ n₁ = 1.20 ÷ 2.40 = 0.50, which corresponds to θ_c = 30°."
+          },
+          {
+            "text": "45°",
+            "why": "45° has sin 45° = 0.71, not 0.50; the critical angle is not automatically halfway to 90°."
+          },
+          {
+            "text": "60°",
+            "why": "60° = 90° − 30° measures the angle to the boundary surface rather than to the normal."
+          },
+          {
+            "text": "90°",
+            "why": "90° is the angle of refraction θ₂ along the boundary at the threshold, not the incident critical angle θ_c."
+          }
+        ],
+        "stem": "A transparent ceramic block with refractive index n₁ = 2.40 sits inside a clear oil with refractive index n₂ = 1.20. Given sin 30° = 0.50, sin 45° = 0.71, sin 60° = 0.87 and sin 90° = 1.00, what is the critical angle θ_c for light heading from the ceramic toward the oil?",
+        "type": "A"
+      },
+      {
+        "explanation": "In air, sin θ_c = 1.00 ÷ 2.42; in water, sin θ_c = 1.33 ÷ 2.42. Because sin θ increases with θ, θ_c is larger in water, leaving fewer angles between θ_c and 90° that undergo total internal reflection.",
+        "id": "p38-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "θ_c decreases, so total internal reflection occurs over a wider range of incident angles.",
+            "why": "Replacing air (1.00) with water (1.33) raises n₂, which increases sin θ_c = n₂ ÷ n₁ rather than decreasing it."
+          },
+          {
+            "text": "θ_c decreases, so total internal reflection occurs over a narrower range of incident angles.",
+            "why": "sin θ_c rises from 1.00 ÷ 2.42 to 1.33 ÷ 2.42, so θ_c increases rather than decreases."
+          },
+          {
+            "text": "θ_c increases, so total internal reflection occurs over a wider range of incident angles.",
+            "why": "θ_c increases, and because total internal reflection requires θ₁ > θ_c, a higher threshold leaves a narrower interval up to 90°."
+          },
+          {
+            "correct": true,
+            "text": "θ_c increases, so total internal reflection occurs over a narrower range of incident angles.",
+            "why": "sin θ_c = n₂ ÷ n₁ rises from 1.00 ÷ 2.42 to 1.33 ÷ 2.42, raising θ_c and narrowing the range θ_c < θ₁ < 90°."
+          }
+        ],
+        "stem": "A cut diamond is moved from air into fresh water (Table 1). How does the critical angle θ_c at the diamond’s surface change, and what does this do to the range of incident angles (between 0° and 90°) that undergo total internal reflection?",
+        "type": "D"
+      },
+      {
+        "explanation": "At the first boundary, 1.60 × sin 30° = 1.33 × sin θ₂. Because the two boundaries are parallel, their normals are parallel, so the ray meets the water–air boundary at the same angle θ₂, giving 1.33 × sin θ₂ = 1.00 × sin θ₃. Thus 1.33 × sin θ₂ cancels out: sin θ₃ = (1.60 × 0.50) ÷ 1.00 = 0.80.",
+        "id": "p38-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "0.60",
+            "why": "This is sin θ₂ = (1.60 × 0.50) ÷ 1.33 inside the water layer, before crossing into air."
+          },
+          {
+            "text": "0.67",
+            "why": "This computes 1.33 × 0.50 ÷ 1.00 as if the ray in the water were still at 30° to the normal."
+          },
+          {
+            "correct": true,
+            "text": "0.80",
+            "why": "Parallel boundaries share parallel normals, so n₁ × sin θ₁ = n₂ × sin θ₂ = n₃ × sin θ₃, giving sin θ₃ = (1.60 × 0.50) ÷ 1.00 = 0.80."
+          },
+          {
+            "text": "0.96",
+            "why": "At the water–air boundary this multiplies sin θ₂ ≈ 0.60 by 1.60 instead of 1.33."
+          }
+        ],
+        "stem": "A flat, uniform film of fresh water (n₂ = 1.33, Table 1) with parallel top and bottom surfaces lies between a flat glass block below (n₁ = 1.60) and air above (n₃ = 1.00). A ray in the glass hits the glass–water boundary at θ₁ = 30° to the normal (sin 30° = 0.50) and passes through the water into the air. What is sin θ₃ for the ray in the air?",
+        "type": "T"
+      },
+      {
+        "explanation": "At normal incidence (θ₁ = 0°), sin θ₁ = 0, so Snell’s law gives sin θ₂ = 0 and the ray enters undeviated (θ₂ = 0°). Its speed, however, is v = c ÷ n in each medium, so it changes from c ÷ n₁ to c ÷ n₂.",
+        "id": "p38-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "At θ₁ = 0° the ray continues straight without bending, so its speed in medium 2 equals its speed in medium 1.",
+            "why": "Wave speed v = c ÷ n is set by the refractive index, so v changes whenever n₁ ≠ n₂ even though the path stays straight."
+          },
+          {
+            "text": "Whenever n₁ < n₂, rays with sufficiently large angles of incidence undergo total internal reflection.",
+            "why": "When n₁ < n₂, sin θ₂ = (n₁ ÷ n₂) × sin θ₁ < 1 for every θ₁, so a refracted ray always enters medium 2."
+          },
+          {
+            "text": "Doubling the angle of incidence θ₁ (for 0° < θ₁ < 40°) doubles the angle of refraction θ₂.",
+            "why": "Snell’s law makes sin θ₂ proportional to sin θ₁, not θ₂ proportional to θ₁, because sin θ is not proportional to θ."
+          },
+          {
+            "correct": true,
+            "text": "At θ₁ = 0° the ray continues straight without bending (θ₂ = 0°), yet its speed still changes from c ÷ n₁ to c ÷ n₂.",
+            "why": "sin 0° = 0 gives n₂ × sin θ₂ = 0 and hence θ₂ = 0°, while v = c ÷ n changes because n₁ ≠ n₂."
+          }
+        ],
+        "stem": "Which statement about light meeting a flat boundary between two transparent media of different refractive indices (n₁ ≠ n₂) is always true?",
+        "type": "S"
+      }
+    ],
+    "title": "Refraction and Total Internal Reflection"
+  },
+  {
+    "area": "engineering",
+    "blocks": [
+      {
+        "text": "When one face of a flat wall is kept at a warm temperature T_hot and the opposite face at a cooler temperature T_cold, thermal energy conducts through the solid from the warm face to the cool face. Once temperatures at every depth stop changing with time, conduction is in steady state: thermal energy enters the warm face and leaves the cool face at the same constant rate P, measured in watts (1 W = 1 joule per second; 1 kW = 1,000 W).",
+        "type": "p"
+      },
+      {
+        "text": "For one-dimensional steady conduction across a uniform slab of face area A (in m²) and thickness L (in m), Fourier’s law gives:",
+        "type": "p"
+      },
+      {
+        "text": "P = (k × A × (T_hot − T_cold)) ÷ L",
+        "type": "formula"
+      },
+      {
+        "text": "Here k is the material’s thermal conductivity, in W/(m·K). Because a temperature difference of 1 °C equals 1 K, T_hot − T_cold gives the same number in °C and in K. Table 1 gives k for four building and engineering materials; metals conduct readily, whereas porous materials such as cork have tiny values of k and act as insulators.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Thermal conductivity k, in W/(m·K).",
+        "head": [
+          "Material",
+          "Thermal conductivity k in W/(m·K)"
+        ],
+        "rows": [
+          [
+            "Stainless steel",
+            "14"
+          ],
+          [
+            "Concrete brick",
+            "0.84"
+          ],
+          [
+            "Plasterboard",
+            "0.16"
+          ],
+          [
+            "Cork",
+            "0.042"
+          ]
+        ],
+        "type": "table"
+      },
+      {
+        "text": "To analyse insulated walls, engineers define a layer’s unit-area thermal resistance R, measured in (m²·K)/W:",
+        "type": "p"
+      },
+      {
+        "text": "R = L ÷ k   so that   P = (A × (T_hot − T_cold)) ÷ R",
+        "type": "formula"
+      },
+      {
+        "text": "When flat layers of equal area A sit side by side in series (with negligible resistance at the joint), steady state requires the exact same heat-transfer rate P to pass through every layer, while their temperature drops add up to T_hot − T_cold. Consequently, their unit-area thermal resistances add:",
+        "type": "p"
+      },
+      {
+        "text": "R_total = R₁ + R₂ + … = (L₁ ÷ k₁) + (L₂ ÷ k₂) + …",
+        "type": "formula"
+      },
+      {
+        "text": "Because ΔT_i = (P ÷ A) × R_i across layer i, each layer takes a share of the total temperature drop proportional to its own R_i. Figure 1 shows a two-layer exterior wall.",
+        "type": "p"
+      },
+      {
+        "alt": "A two-layer wall of area 5.0 m². Left indoor face at 22 °C, concrete brick layer 0.42 m thick, joined in series to a cork layer 0.084 m thick, right outdoor face at −3 °C, with steady heat flow P from left to right.",
+        "caption": "Figure 1. Steady-state conduction through a 5.0 m² wall of concrete brick and cork.",
+        "id": "p39-fig1",
+        "svg": "<svg viewBox=\"0 0 460 245\" role=\"img\" aria-labelledby=\"p39-fig1-alt\">\n  <rect class=\"part\" x=\"120\" y=\"36\" width=\"130\" height=\"144\"/>\n  <rect class=\"part\" x=\"250\" y=\"36\" width=\"56\" height=\"144\"/>\n  <line class=\"curve\" x1=\"42\" y1=\"108\" x2=\"108\" y2=\"108\"/>\n  <polygon class=\"dot\" points=\"116,108 104,102 104,114\"/>\n  <line class=\"curve\" x1=\"316\" y1=\"108\" x2=\"382\" y2=\"108\"/>\n  <polygon class=\"dot\" points=\"390,108 378,102 378,114\"/>\n  <text class=\"title\" x=\"185\" y=\"96\" text-anchor=\"middle\">Concrete brick</text>\n  <text x=\"185\" y=\"122\" text-anchor=\"middle\">Area 5.0 m²</text>\n  <text class=\"title\" x=\"278\" y=\"24\" text-anchor=\"middle\">Cork</text>\n  <text class=\"big\" x=\"64\" y=\"78\" text-anchor=\"middle\">22 °C</text>\n  <text x=\"64\" y=\"142\" text-anchor=\"middle\">Heat flow P</text>\n  <text class=\"big\" x=\"398\" y=\"78\" text-anchor=\"middle\">−3 °C</text>\n  <line x1=\"120\" y1=\"194\" x2=\"120\" y2=\"208\"/><line x1=\"250\" y1=\"194\" x2=\"250\" y2=\"208\"/><line x1=\"306\" y1=\"194\" x2=\"306\" y2=\"208\"/>\n  <line x1=\"120\" y1=\"201\" x2=\"306\" y2=\"201\"/>\n  <text class=\"prob\" x=\"185\" y=\"226\" text-anchor=\"middle\">0.42 m</text>\n  <text class=\"prob\" x=\"292\" y=\"226\" text-anchor=\"start\">0.084 m</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p39",
+    "questions": [
+      {
+        "explanation": "In steady state, temperatures inside the wall do not change with time, so thermal energy cannot accumulate at the boundary between layers; the same heat-transfer rate P (in W) flows through every layer.",
+        "id": "p39-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "The temperature drop ΔT across each layer.",
+            "why": "Each layer’s temperature drop is proportional to its own thermal resistance R_i, so high-R layers drop more temperature."
+          },
+          {
+            "text": "The unit-area thermal resistance R of each layer.",
+            "why": "Each layer has its own R = L ÷ k determined by its thickness and conductivity."
+          },
+          {
+            "correct": true,
+            "text": "The rate of heat transfer P passing through each layer.",
+            "why": "In steady state no energy builds up inside the wall, so every watt entering Layer 1 passes on through Layer 2."
+          },
+          {
+            "text": "The thermal conductivity k of each layer.",
+            "why": "Composite walls combine materials of very different conductivities, such as brick and cork."
+          }
+        ],
+        "stem": "According to the text, which quantity is equal across every layer of a flat multi-layer wall in one-dimensional steady-state conduction?",
+        "type": "R"
+      },
+      {
+        "explanation": "Setting L_brick ÷ k_brick = L_plaster ÷ k_plaster gives L_brick = (0.040 ÷ 0.16) × 0.84 = 0.25 × 0.84 = 0.21 m. Better conductors need proportionally greater thickness for the same insulation.",
+        "id": "p39-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "0.01 m",
+            "why": "This multiplies 0.040 m by 0.16 ÷ 0.84, inverting the conductivity ratio."
+          },
+          {
+            "correct": true,
+            "text": "0.21 m",
+            "why": "Plasterboard has R = 0.040 ÷ 0.16 = 0.25 (m²·K)/W, requiring L_brick = 0.25 × 0.84 = 0.21 m."
+          },
+          {
+            "text": "0.25 m",
+            "why": "This is the unit-area thermal resistance R = 0.25 (m²·K)/W itself, before multiplying by k_brick = 0.84."
+          },
+          {
+            "text": "3.50 m",
+            "why": "This multiplies R = 0.25 by 14 (stainless steel) instead of 0.84 (concrete brick)."
+          }
+        ],
+        "stem": "Using Table 1, what thickness of concrete brick has the same unit-area thermal resistance R as a 0.040 m layer of plasterboard?",
+        "type": "F"
+      },
+      {
+        "explanation": "From Table 1, R_brick = 0.42 ÷ 0.84 = 0.50 (m²·K)/W and R_cork = 0.084 ÷ 0.042 = 2.00 (m²·K)/W, giving R_total = 2.50 (m²·K)/W. Across T_hot − T_cold = 22 − (−3) = 25 K and area 5.0 m², P = (5.0 × 25) ÷ 2.50 = 50 W.",
+        "id": "p39-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "10 W",
+            "why": "This computes ΔT ÷ R_total = 25 ÷ 2.50 = 10 W/m² and omits multiplying by the 5.0 m² area."
+          },
+          {
+            "text": "38 W",
+            "why": "This uses 22 − 3 = 19 K instead of 22 − (−3) = 25 K, dropping the minus sign on −3 °C."
+          },
+          {
+            "correct": true,
+            "text": "50 W",
+            "why": "R₁ = 0.42 ÷ 0.84 = 0.50, R₂ = 0.084 ÷ 0.042 = 2.00, ΔT = 22 − (−3) = 25 K, so P = (5.0 × 25) ÷ 2.50 = 50 W."
+          },
+          {
+            "text": "250 W",
+            "why": "This divides by the brick resistance R₁ = 0.50 alone and leaves out the cork insulation."
+          }
+        ],
+        "stem": "Using Figure 1 and Table 1, what is the steady-state rate of heat transfer P through the 5.0 m² wall?",
+        "type": "A"
+      },
+      {
+        "explanation": "With k = 14 W/(m·K) and ΔT = 85 − 45 = 40 K, Fourier’s law gives P = (14 × 0.60 × 40) ÷ 0.035 = 336 ÷ 0.035 = 9,600 W = 9.60 kW.",
+        "id": "p39-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "0.34 kW",
+            "why": "This calculates 14 × 0.60 × 40 ÷ 1,000 without dividing by the 0.035 m thickness."
+          },
+          {
+            "correct": true,
+            "text": "9.60 kW",
+            "why": "P = (14 × 0.60 × (85 − 45)) ÷ 0.035 = 9,600 W = 9.60 kW."
+          },
+          {
+            "text": "16.00 kW",
+            "why": "This omits multiplying by the 0.60 m² face area."
+          },
+          {
+            "text": "20.40 kW",
+            "why": "This multiplies by 85 °C instead of the temperature difference 85 − 45 = 40 K."
+          }
+        ],
+        "stem": "A flat stainless-steel plate of face area 0.60 m² and thickness 0.035 m separates water kept at 85 °C on one face from water kept at 45 °C on the other face. Using Table 1, what is the steady-state rate of heat conduction through the plate, in kW?",
+        "type": "A"
+      },
+      {
+        "explanation": "Unit-area thermal resistance is R = L ÷ k, which depends on L and k alone, so doubling L gives 2R. Substituting 3A and 2R into P = (A × ΔT) ÷ R multiplies P by 3 ÷ 2.",
+        "id": "p39-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Unit-area thermal resistance is 2/3 × R, and heat-transfer rate is 3/2 × P.",
+            "why": "P is 3/2 × P, whereas unit-area thermal resistance R = L ÷ k does not depend on A and doubles to 2R."
+          },
+          {
+            "text": "Unit-area thermal resistance is 2R, and heat-transfer rate is 2/3 × P.",
+            "why": "R doubles to 2R, and P = (A × ΔT) ÷ R changes by 3 ÷ 2 = 3/2 rather than 2 ÷ 3."
+          },
+          {
+            "text": "Unit-area thermal resistance is 6R, and heat-transfer rate is 1/6 × P.",
+            "why": "Tripling area A increases P rather than increasing unit-area thermal resistance R."
+          },
+          {
+            "correct": true,
+            "text": "Unit-area thermal resistance is 2R, and heat-transfer rate is 3/2 × P.",
+            "why": "R = L ÷ k doubles when L becomes 2L, and P = (A × ΔT) ÷ R changes by 3A ÷ (2R) = 3/2 × P."
+          }
+        ],
+        "stem": "A single-layer insulating panel of thickness L and face area A has unit-area thermal resistance R and steady heat-transfer rate P under a fixed temperature difference ΔT. A second panel of the same material under the same ΔT has thickness 2L and face area 3A. What are its unit-area thermal resistance and heat-transfer rate?",
+        "type": "D"
+      },
+      {
+        "explanation": "Series resistances add in either order (R_brick + R_cork = R_cork + R_brick), so R_total and P = (A × ΔT) ÷ R_total stay the same. At equal thickness L, Table 1 gives R_cork = L ÷ 0.042, which is twenty times R_brick = L ÷ 0.84; moving cork to the warm indoor side puts twenty-twenty-firsts of the temperature drop ahead of the joint, pulling T_mid down close to T_cold.",
+        "id": "p39-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "P stays the same, and T_mid falls closer to T_cold.",
+            "why": "At equal thickness, k_cork < k_brick gives R_cork > R_brick; R_brick + R_cork is unchanged so P stays the same, while placing cork on the hot side drops most of ΔT before the interface."
+          },
+          {
+            "text": "P stays the same, and T_mid stays the same.",
+            "why": "P stays the same, but at equal thickness cork has twenty times the thermal resistance of brick (0.84 ÷ 0.042), so swapping them shifts T_mid strongly."
+          },
+          {
+            "text": "P decreases, and T_mid falls closer to T_cold.",
+            "why": "T_mid does fall closer to T_cold, yet R_total = R₁ + R₂ does not depend on layer order, so P is unchanged."
+          },
+          {
+            "text": "P increases, and T_mid rises closer to T_hot.",
+            "why": "Swapping series resistances leaves R_total and P unchanged, and putting higher-resistance cork next to T_hot lowers T_mid rather than raising it."
+          }
+        ],
+        "stem": "A two-layer wall made of equal-thickness layers of concrete brick and cork (Table 1) has the brick on the warm indoor side (held at T_hot) and the cork on the cold outdoor side (held at T_cold). If the two layers are swapped so the cork sits on the warm indoor side and the brick on the cold outdoor side, with T_hot and T_cold unchanged, what happens in steady state to the heat-transfer rate P and to the interface temperature T_mid between the two layers?",
+        "type": "S"
+      },
+      {
+        "explanation": "Find each unit-area thermal resistance: R_plaster = 0.080 ÷ 0.16 = 0.50 (m²·K)/W and R_cork = 0.063 ÷ 0.042 = 1.50 (m²·K)/W, so R_total = 2.00 (m²·K)/W. Of the total drop 26 − 6 = 20 K, the plasterboard on the warm side drops (0.50 ÷ 2.00) × 20 = 5.0 K, putting the interface at 26 − 5.0 = 21.0 °C.",
+        "id": "p39-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "5.0 °C",
+            "why": "This is the 5.0 K temperature drop across the plasterboard, before subtracting it from 26 °C."
+          },
+          {
+            "text": "11.0 °C",
+            "why": "This subtracts the cork’s 15.0 K temperature drop from 26 °C instead of the plasterboard’s 5.0 K drop."
+          },
+          {
+            "text": "16.0 °C",
+            "why": "This takes the unweighted midpoint (26 + 6) ÷ 2, ignoring that cork has three times the thermal resistance of the plasterboard."
+          },
+          {
+            "correct": true,
+            "text": "21.0 °C",
+            "why": "R₁ = 0.080 ÷ 0.16 = 0.50, R₂ = 0.063 ÷ 0.042 = 1.50; plasterboard drops (0.50 ÷ 2.00) × 20 = 5.0 K from 26 °C to 21.0 °C."
+          }
+        ],
+        "stem": "An interior wall joins a 0.080 m layer of plasterboard on the warm side (face held at 26 °C) directly to a 0.063 m layer of cork on the cool side (outer face held at 6 °C). Using Table 1, what is the steady-state temperature at the interface between the plasterboard and the cork?",
+        "type": "T"
+      }
+    ],
+    "title": "Steady-State Heat Conduction Through Walls"
+  },
+  {
+    "area": "business administration",
+    "blocks": [
+      {
+        "text": "Manufacturers often have to decide whether to produce a part in-house (make) or purchase it from an outside supplier (buy, or outsource). Accounting reports usually group all factory costs together, yet not every cost in those reports changes when production stops. To compare making with buying accurately, management isolates relevant costs: future costs and benefits that differ between the two choices.",
+        "type": "p"
+      },
+      {
+        "text": "Two categories of cost do not differ between the choices and must be left out of the comparison. First, a sunk cost is money already spent in the past that cannot be recovered, such as the historical purchase price of specialised equipment with zero scrap or resale value. Second, an unavoidable fixed cost, such as an allocated share of factory-wide building rent or head-office salaries, continues in full even if the component is outsourced. By contrast, unit variable costs v (direct materials, direct labour and variable overhead) and avoidable fixed costs F_a (such as a dedicated tooling lease or supervisor contract cancelled upon outsourcing) stop when buying outside, so both are relevant.",
+        "type": "p"
+      },
+      {
+        "text": "For an annual requirement of q units, when the workshop space has no alternative use and an outside supplier quotes unit price p_b, the relevant annual outlays are:",
+        "type": "p"
+      },
+      {
+        "text": "relevant cost of making = F_a + v × q   versus   relevant cost of buying = p_b × q",
+        "type": "formula"
+      },
+      {
+        "text": "When p_b > v, each unit made in-house saves p_b − v in variable outlay towards covering F_a, so the two options cost the same at the indifference volume q*:",
+        "type": "p"
+      },
+      {
+        "text": "q* = F_a ÷ (p_b − v)",
+        "type": "formula"
+      },
+      {
+        "text": "Below q* units buying is cheaper; above q* units making is cheaper. If outsourcing also frees workshop space that can be rented out or used to earn net income R_alt, that opportunity benefit reduces the net cost of buying to p_b × q − R_alt:",
+        "type": "p"
+      },
+      {
+        "text": "net cost of buying with alternative space income = p_b × q − R_alt",
+        "type": "formula"
+      },
+      {
+        "text": "Table 1 lists the recorded figures for Component M.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Recorded cost items for in-house production of Component M.",
+        "head": [
+          "Cost item for Component M",
+          "Recorded figure"
+        ],
+        "rows": [
+          [
+            "Direct materials",
+            "€14 per unit"
+          ],
+          [
+            "Direct labour",
+            "€9 per unit"
+          ],
+          [
+            "Variable workshop overhead",
+            "€5 per unit"
+          ],
+          [
+            "Dedicated tooling lease (cancelled if outsourced)",
+            "€18,000 per year"
+          ],
+          [
+            "Allocated factory rent (continues if outsourced)",
+            "€24,000 per year"
+          ],
+          [
+            "Purchase price of jig 3 years ago (€0 resale value)",
+            "€30,000 once"
+          ]
+        ],
+        "type": "table"
+      }
+    ],
+    "id": "p40",
+    "questions": [
+      {
+        "explanation": "Relevant costs are future costs that differ between alternatives. An unavoidable fixed cost continues in full under both Make and Buy, so it does not affect which option costs less.",
+        "id": "p40-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Because fixed costs never involve future cash outlays.",
+            "why": "Factory rent is a future cash outlay; it is excluded only because the same outlay occurs under both options."
+          },
+          {
+            "correct": true,
+            "text": "Because the firm pays that same cost whether it makes the part in-house or buys it outside.",
+            "why": "A cost that continues unchanged under both choices cancels out of the difference between them."
+          },
+          {
+            "text": "Because every fixed cost was paid in the past and is therefore a sunk cost.",
+            "why": "Future leases and salaries are future fixed costs, not past sunk costs; avoidable future fixed costs are included."
+          },
+          {
+            "text": "Because the external supplier deducts the buyer’s factory rent from its quoted price.",
+            "why": "Suppliers quote their own price p_b and do not reimburse the buyer’s factory rent."
+          }
+        ],
+        "stem": "According to the text, why is an unavoidable allocated fixed cost left out when comparing the cost of making a part with the cost of buying it?",
+        "type": "R"
+      },
+      {
+        "explanation": "Only future costs that differ between making and buying are relevant. Ending the dedicated inspector’s contract avoids that salary when outsourcing, whereas the past die cost is sunk and the property tax and director’s salary are unavoidable.",
+        "id": "p40-q2",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "The salary of a dedicated line inspector whose contract ends if tray production is outsourced.",
+            "why": "This is a future cost incurred under Make and avoided under Buy, making it an avoidable fixed cost."
+          },
+          {
+            "text": "The €50,000 paid four years ago for a moulding die that now has zero resale or scrap value.",
+            "why": "Money spent four years ago with zero resale value cannot be recovered under either option: a sunk cost."
+          },
+          {
+            "text": "A €15,000 allocated share of head-office property tax, which remains unchanged if trays are outsourced.",
+            "why": "Because the property tax continues unchanged under both options, it is an unavoidable fixed cost."
+          },
+          {
+            "text": "The managing director’s fixed annual salary, which stays the same whether trays are made or bought.",
+            "why": "A salary that does not differ between Make and Buy is irrelevant to the choice."
+          }
+        ],
+        "stem": "A printer manufacturer considers outsourcing a paper tray instead of producing it in-house. Which of these costs is relevant to the make-or-buy decision?",
+        "type": "C"
+      },
+      {
+        "explanation": "Unit variable cost is v = 14 + 9 + 5 = €28. Relevant cost of making 2,000 units = F_a + v × q = €18,000 + €28 × 2,000 = €18,000 + €56,000 = €74,000. Allocated factory rent (€24,000) and the past jig purchase (€30,000) are excluded.",
+        "id": "p40-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "€56,000",
+            "why": "This includes only the variable costs (€28 × 2,000) and leaves out the €18,000 avoidable tooling lease."
+          },
+          {
+            "correct": true,
+            "text": "€74,000",
+            "why": "Variable cost is (14 + 9 + 5) × 2,000 = €56,000, plus avoidable lease €18,000 = €74,000."
+          },
+          {
+            "text": "€98,000",
+            "why": "This includes the €24,000 unavoidable allocated factory rent on top of €74,000."
+          },
+          {
+            "text": "€128,000",
+            "why": "This adds both the €24,000 unavoidable rent and the €30,000 past sunk jig price."
+          }
+        ],
+        "stem": "Using Table 1, what is the total relevant annual cost of making 2,000 units of Component M in-house, assuming the workshop space has no alternative use?",
+        "type": "F"
+      },
+      {
+        "explanation": "Unavoidable fixed costs (€15,000) stay on the books under both options. Setting F_a + v × q* = p_b × q* gives q* = 36,000 ÷ (34 − 22) = 36,000 ÷ 12 = 3,000 units.",
+        "id": "p40-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "1,250 units",
+            "why": "This divides the unavoidable fixed cost €15,000 by 12 instead of the avoidable fixed cost €36,000."
+          },
+          {
+            "text": "1,750 units",
+            "why": "This subtracts €15,000 from €36,000 before dividing by 12."
+          },
+          {
+            "correct": true,
+            "text": "3,000 units",
+            "why": "q* = F_a ÷ (p_b − v) = €36,000 ÷ (€34 − €22) = 36,000 ÷ 12 = 3,000 units."
+          },
+          {
+            "text": "4,250 units",
+            "why": "This adds the unavoidable fixed cost (€36,000 + €15,000) before dividing by 12."
+          }
+        ],
+        "stem": "For Component N, in-house production incurs €22 per unit in variable costs, €36,000 per year in avoidable fixed costs, and €15,000 per year in unavoidable allocated fixed costs, with no alternative use for the space. An external supplier quotes €34 per unit. At what annual volume q* do making and buying have the same cost?",
+        "type": "A"
+      },
+      {
+        "explanation": "In q* = F_a ÷ (p_b − v), unavoidable rent F_u does not appear because it is paid under both options. A lower supplier price p_b reduces the per-unit saving p_b − v of making in-house, so more units are needed to cover F_a: q* increases.",
+        "id": "p40-q5",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "q* increases, solely because the lower supplier price shrinks p_b − v; the higher unavoidable rent has no effect.",
+            "why": "F_u does not enter q* = F_a ÷ (p_b − v), whereas lowering p_b shrinks p_b − v in the denominator, raising q*."
+          },
+          {
+            "text": "q* decreases, solely because the lower supplier price shrinks p_b − v; the higher unavoidable rent has no effect.",
+            "why": "F_u has no effect, yet making the denominator p_b − v smaller increases F_a ÷ (p_b − v) rather than decreasing it."
+          },
+          {
+            "text": "q* increases because both the higher unavoidable rent and the lower supplier price push q* upward.",
+            "why": "Unavoidable rent F_u continues under both Make and Buy, so changing F_u leaves q* unchanged."
+          },
+          {
+            "text": "q* may rise or fall depending on whether the rent increase outweighs the supplier price cut.",
+            "why": "Because F_u cancels out completely, the direction depends on the supplier price cut alone."
+          }
+        ],
+        "stem": "For a component with p_b > v and no alternative use for the space, the landlord raises the factory’s unavoidable building rent F_u while the external supplier lowers its quoted unit price p_b (still keeping p_b > v). Variable cost v and avoidable fixed cost F_a stay the same. What happens to the indifference volume q*?",
+        "type": "D"
+      },
+      {
+        "explanation": "Relevant cost of making = 1,500 × 18 + 20,000 = €47,000. Net cost of buying = 1,500 × 30 − 7,000 = €45,000 − €7,000 = €38,000. Buying externally therefore saves €47,000 − €38,000 = €9,000 per year.",
+        "id": "p40-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "€2,000",
+            "why": "This compares €47,000 with €45,000 and leaves out the €7,000 rental income earned when buying."
+          },
+          {
+            "text": "€5,000",
+            "why": "This uses the €16,000 unavoidable depreciation in place of the €20,000 avoidable supervision."
+          },
+          {
+            "correct": true,
+            "text": "€9,000",
+            "why": "Relevant make cost is 1,500 × €18 + €20,000 = €47,000; net buy cost is 1,500 × €30 − €7,000 = €38,000; buying saves €47,000 − €38,000 = €9,000."
+          },
+          {
+            "text": "€25,000",
+            "why": "This assumes the €16,000 unavoidable building depreciation is also saved when outsourcing."
+          }
+        ],
+        "stem": "A firm needs 1,500 units per year of Component K. Making it in-house requires €18 per unit in variable costs, €20,000 per year in avoidable supervision, and €16,000 per year in unavoidable building depreciation. An external supplier quotes €30 per unit. Outsourcing would also allow the firm to rent the freed workshop bay to another business, earning net income of €7,000 per year. Compared with making in-house, how much does buying externally save per year?",
+        "type": "T"
+      },
+      {
+        "explanation": "Compare p_b × q (buying) with F_a + v × q (making). Whenever p_b ≤ v and q > 0, p_b × q ≤ v × q, and since F_a > 0 it follows that p_b × q < F_a + v × q at every positive volume q.",
+        "id": "p40-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "Whenever p_b is below the full in-house cost per unit v + (F_a + F_u) ÷ q, buying is cheaper than making.",
+            "why": "Full cost per unit includes F_u ÷ q, which is not saved by buying; buying is cheaper only when p_b < v + F_a ÷ q."
+          },
+          {
+            "text": "Whenever p_b > v, making in-house is cheaper than buying at every positive volume q.",
+            "why": "For volumes below q* = F_a ÷ (p_b − v), the avoidable fixed cost F_a exceeds (p_b − v) × q, so buying is cheaper."
+          },
+          {
+            "text": "Whenever F_u > F_a, making in-house is cheaper than buying because F_u is spread across the q units.",
+            "why": "F_u is owed in full under both Make and Buy, so dividing it by q does not reduce the firm’s total expenditure."
+          },
+          {
+            "correct": true,
+            "text": "Whenever p_b ≤ v, buying is cheaper than making at every positive volume q, because F_a > 0.",
+            "why": "When p_b ≤ v, p_b × q ≤ v × q < F_a + v × q for every q > 0, so in-house production can never recover F_a."
+          }
+        ],
+        "stem": "A firm compares making q > 0 units of a part in-house (variable cost v > 0 per unit, avoidable fixed cost F_a > 0, unavoidable fixed cost F_u > 0, no alternative use for the space) with buying them at unit price p_b. On cost grounds alone, which statement is always true?",
+        "type": "S"
+      }
+    ],
+    "title": "Make-or-Buy Decisions and Relevant Costs"
+  },
+  {
+    "area": "economics",
+    "blocks": [
+      {
+        "text": "Average income tells how much an economy earns per household, not how that total is shared. To picture the distribution of income, economists rank all households from lowest to highest income and often group them into equal slices, such as quarters (25% each) or quintiles (five groups of 20% each). Adding each group's share of total income from the bottom upwards gives the cumulative income share.",
+        "type": "p"
+      },
+      {
+        "text": "A Lorenz curve plots the cumulative percentage of total income on the vertical axis against the cumulative percentage of households on the horizontal axis. It always starts at (0%, 0%) and ends at (100%, 100%). If every household had the exact same income, the lowest-earning x% of households would always receive x% of total income, tracing the straight 45-degree diagonal called the line of equality. When incomes differ, lower-income groups receive smaller shares than higher-income groups, so the Lorenz curve bows below the line of equality and grows steeper from left to right. The further it sags below the diagonal, the more unequal the distribution.",
+        "type": "p"
+      },
+      {
+        "text": "To summarise the diagram in one number, write both axes as proportions from 0 to 1 instead of percentages, so the whole square has area 1 and the triangle beneath the line of equality has area 0.5. Let A be the area between the line of equality and the Lorenz curve, and let B be the area beneath the Lorenz curve. Since A + B = 0.5, the Gini coefficient G is defined as",
+        "type": "p"
+      },
+      {
+        "text": "G = A ÷ (A + B) = 2A = 1 − 2B",
+        "type": "formula"
+      },
+      {
+        "text": "When everyone earns the same, A = 0 and G = 0. At the opposite extreme, in a large population where a single household receives all income and every other household receives nothing, B shrinks towards 0 and G approaches 1. When a Lorenz curve is drawn with straight segments between group boundaries, B is the sum of the areas under those segments, where a strip of width w rising from height h₁ to h₂ has area",
+        "type": "p"
+      },
+      {
+        "text": "strip area = w × (h₁ + h₂) ÷ 2",
+        "type": "formula"
+      },
+      {
+        "text": "Because both axes measure shares of totals, multiplying every household's income by the same positive factor leaves the Lorenz curve and G unchanged, and neither tells how high average income is. Moreover, two distributions whose Lorenz curves cross can enclose the same total area A and therefore share the same Gini coefficient. Figure 1 shows the piecewise-linear Lorenz curve of one region.",
+        "type": "p"
+      },
+      {
+        "alt": "A graph of cumulative percentage of income from 0% to 100% against cumulative percentage of households from 0% to 100%, with grid lines every 10%. A dashed line of equality runs straight from (0%, 0%) to (100%, 100%). A solid Lorenz curve connects the marked points (0%, 0%), (40%, 20%), (80%, 60%) and (100%, 100%).",
+        "caption": "Figure 1. Line of equality and piecewise-linear Lorenz curve for households in one region.",
+        "id": "p41-fig1",
+        "svg": "<svg viewBox=\"0 0 460 320\" role=\"img\" aria-labelledby=\"p41-fig1-alt\">\n  <g class=\"grid\"><line x1=\"68\" y1=\"268\" x2=\"68\" y2=\"34\"/><line x1=\"105\" y1=\"268\" x2=\"105\" y2=\"34\"/><line x1=\"142\" y1=\"268\" x2=\"142\" y2=\"34\"/><line x1=\"179\" y1=\"268\" x2=\"179\" y2=\"34\"/><line x1=\"216\" y1=\"268\" x2=\"216\" y2=\"34\"/><line x1=\"253\" y1=\"268\" x2=\"253\" y2=\"34\"/><line x1=\"290\" y1=\"268\" x2=\"290\" y2=\"34\"/><line x1=\"327\" y1=\"268\" x2=\"327\" y2=\"34\"/><line x1=\"364\" y1=\"268\" x2=\"364\" y2=\"34\"/><line x1=\"401\" y1=\"268\" x2=\"401\" y2=\"34\"/><line x1=\"438\" y1=\"268\" x2=\"438\" y2=\"34\"/><line x1=\"68\" y1=\"268\" x2=\"438\" y2=\"268\"/><line x1=\"68\" y1=\"244.6\" x2=\"438\" y2=\"244.6\"/><line x1=\"68\" y1=\"221.2\" x2=\"438\" y2=\"221.2\"/><line x1=\"68\" y1=\"197.8\" x2=\"438\" y2=\"197.8\"/><line x1=\"68\" y1=\"174.4\" x2=\"438\" y2=\"174.4\"/><line x1=\"68\" y1=\"151\" x2=\"438\" y2=\"151\"/><line x1=\"68\" y1=\"127.6\" x2=\"438\" y2=\"127.6\"/><line x1=\"68\" y1=\"104.2\" x2=\"438\" y2=\"104.2\"/><line x1=\"68\" y1=\"80.8\" x2=\"438\" y2=\"80.8\"/><line x1=\"68\" y1=\"57.4\" x2=\"438\" y2=\"57.4\"/><line x1=\"68\" y1=\"34\" x2=\"438\" y2=\"34\"/></g>\n  <g class=\"axis\"><line x1=\"68\" y1=\"268\" x2=\"438\" y2=\"268\"/><line x1=\"68\" y1=\"268\" x2=\"68\" y2=\"34\"/></g>\n  <g class=\"ticks\"><text x=\"68\" y=\"289\" text-anchor=\"middle\">0%</text><text x=\"142\" y=\"289\" text-anchor=\"middle\">20%</text><text x=\"216\" y=\"289\" text-anchor=\"middle\">40%</text><text x=\"290\" y=\"289\" text-anchor=\"middle\">60%</text><text x=\"364\" y=\"289\" text-anchor=\"middle\">80%</text><text x=\"438\" y=\"289\" text-anchor=\"middle\">100%</text><text x=\"60\" y=\"273\" text-anchor=\"end\">0%</text><text x=\"60\" y=\"226.2\" text-anchor=\"end\">20%</text><text x=\"60\" y=\"179.4\" text-anchor=\"end\">40%</text><text x=\"60\" y=\"132.6\" text-anchor=\"end\">60%</text><text x=\"60\" y=\"85.8\" text-anchor=\"end\">80%</text><text x=\"60\" y=\"39\" text-anchor=\"end\">100%</text></g>\n  <text class=\"title\" x=\"253\" y=\"312\" text-anchor=\"middle\">Cumulative % of households</text>\n  <text class=\"title\" x=\"6\" y=\"18\">Cumulative % of income</text>\n  \n  <line class=\"curve curve-3\" x1=\"68\" y1=\"268\" x2=\"438\" y2=\"34\"/>\n  <polyline class=\"curve\" points=\"68,268 216,221.2 364,127.6 438,34\"/>\n  <circle class=\"dot\" cx=\"68\" cy=\"268\" r=\"3.5\"/><circle class=\"dot\" cx=\"216\" cy=\"221.2\" r=\"3.5\"/><circle class=\"dot\" cx=\"364\" cy=\"127.6\" r=\"3.5\"/><circle class=\"dot\" cx=\"438\" cy=\"34\" r=\"3.5\"/>\n  <text class=\"label-3\" x=\"238.2\" y=\"137\" text-anchor=\"end\">Line of equality</text>\n  <text class=\"label-1\" x=\"312.2\" y=\"183.8\" text-anchor=\"start\">Lorenz curve</text>\n</svg>",
+        "type": "figure"
+      }
+    ],
+    "id": "p41",
+    "questions": [
+      {
+        "explanation": "The fourth paragraph states that when every household earns the same income, A = 0 and G = 0 (complete equality), whereas in a large population where one household receives all income and others receive zero, B shrinks towards 0 and G approaches 1.",
+        "id": "p41-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "0 means every household has zero income; values near 1 mean every household earns the average.",
+            "why": "G measures how total income is shared, not the level of income; equal incomes give G = 0, not a value near 1."
+          },
+          {
+            "text": "0 means one household receives all income; values near 1 mean every household receives the same income.",
+            "why": "This reverses the scale: complete equality gives A = 0 and G = 0, while extreme concentration approaches 1."
+          },
+          {
+            "text": "0 means the Lorenz curve lies along the bottom axis; values near 1 mean it lies on the 45-degree line.",
+            "why": "Lying on the 45-degree line makes A = 0, which gives G = 0 rather than a value near 1."
+          },
+          {
+            "correct": true,
+            "text": "0 means complete equality of incomes; values near 1 mean one household receives almost all income.",
+            "why": "When all incomes are equal, A = 0 so G = 0; when one household in a large population holds all income, B approaches 0 so G approaches 1."
+          }
+        ],
+        "stem": "According to the text, what do a Gini coefficient of 0 and a Gini coefficient approaching 1 represent?",
+        "type": "R"
+      },
+      {
+        "explanation": "The Lorenz curve passes through (80%, 60%), meaning the lowest-earning 80% of households together receive 60% of total income. The remaining 20% of households at the top receive the rest: 100% − 60% = 40%.",
+        "id": "p41-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "20%",
+            "why": "20% is that group's share of households (from 80% to 100%), or what it would earn under complete equality."
+          },
+          {
+            "correct": true,
+            "text": "40%",
+            "why": "At 80% of households cumulative income is 60%, leaving 100% − 60% = 40% for the top 20%."
+          },
+          {
+            "text": "60%",
+            "why": "60% is the cumulative income received by the bottom 80% of households, before subtracting from 100%."
+          },
+          {
+            "text": "80%",
+            "why": "80% is the horizontal coordinate where the top 20% begins, not an income share."
+          }
+        ],
+        "stem": "According to Figure 1, what percentage of the region's total income is received by the highest-earning 20% of households?",
+        "type": "F"
+      },
+      {
+        "explanation": "At 60% of households (the first three quintiles together), the cumulative share of income on the Lorenz curve is 5% + 9% + 14% = 28%. On the line of equality, 60% of households corresponds to 60% of income, so the vertical gap between them is 60 − 28 = 32 percentage points.",
+        "id": "p41-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "14 percentage points",
+            "why": "This is only the third quintile's own share (14%), neither cumulative nor subtracted from 60%."
+          },
+          {
+            "text": "28 percentage points",
+            "why": "This is the cumulative income share (28%) of the bottom 60% of households, before subtracting from the 60% on the line of equality."
+          },
+          {
+            "correct": true,
+            "text": "32 percentage points",
+            "why": "The first three quintiles earn 5% + 9% + 14% = 28%, which is 60 − 28 = 32 percentage points below 60%."
+          },
+          {
+            "text": "46 percentage points",
+            "why": "This subtracts only the third quintile's share (14%) from 60%, leaving out the first two quintiles."
+          }
+        ],
+        "stem": "In Country K, households are ranked from lowest to highest income and split into five equal quintiles of 20% each. Their individual shares of total income are 5%, 9%, 14%, 24%, 48%. At 60% of households on the horizontal axis, by how many percentage points does Country K's Lorenz curve lie below the line of equality?",
+        "type": "A"
+      },
+      {
+        "explanation": "The fifth paragraph states that multiplying every household's income by the same positive factor (1.15 for a 15% rise) leaves every group's share of total income unchanged. Consequently, the Lorenz curve stays in exactly the same place and G does not change.",
+        "id": "p41-q4",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "Neither the Lorenz curve nor the Gini coefficient changes.",
+            "why": "Multiplying every income by 1.15 multiplies total income by the same factor, leaving every household's percentage share unchanged."
+          },
+          {
+            "text": "The Lorenz curve shifts closer to the line of equality, and the Gini coefficient falls by 15%.",
+            "why": "Higher incomes in equal proportion do not narrow the relative ratios between poorer and richer households."
+          },
+          {
+            "text": "The Lorenz curve bows further below the line of equality, because higher earners gain more euros than lower earners.",
+            "why": "Higher earners gain more euros, but total income grows by the same proportion, so every group's percentage share of total income stays identical."
+          },
+          {
+            "text": "The Lorenz curve stays in place, while the Gini coefficient rises by a factor of 1.15.",
+            "why": "G is calculated entirely from the areas on the Lorenz diagram; if the curve does not move, G cannot change."
+          }
+        ],
+        "stem": "Every household in an economy receives an exact 15% rise in income, while the number of households stays the same. What happens to the economy's Lorenz curve and Gini coefficient?",
+        "type": "D"
+      },
+      {
+        "explanation": "Because G = 2A and the two curves do not cross, Country M's smaller Gini coefficient (0.25 < 0.42) means its Lorenz curve encloses a smaller area A and lies closer to the line of equality. Nothing follows about which country has higher average or total income.",
+        "id": "p41-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Average household income is higher in Country M than in Country N.",
+            "why": "The fifth paragraph notes that neither the Lorenz curve nor G tells how high average income is."
+          },
+          {
+            "text": "The lowest-earning 20% of households receive more money per household in Country M than in Country N.",
+            "why": "A larger percentage share of a much smaller national income can still amount to less money per household."
+          },
+          {
+            "text": "Total national income is larger in Country N than in Country M.",
+            "why": "A higher Gini coefficient reflects greater inequality of shares, not a larger total income."
+          },
+          {
+            "correct": true,
+            "text": "Country M's Lorenz curve lies closer to the line of equality than Country N's.",
+            "why": "With non-crossing curves, the lower Gini (0.25 versus 0.42) means a smaller area A between the curve and the diagonal."
+          }
+        ],
+        "stem": "Country M has a Gini coefficient of 0.25 and Country N has a Gini coefficient of 0.42, and their two Lorenz curves do not cross. Which statement must be true?",
+        "type": "S"
+      },
+      {
+        "explanation": "Write the knot coordinates in Figure 1 as proportions: (0, 0), (0.4, 0.2), (0.8, 0.6) and (1, 1). Using strip area = w × (h₁ + h₂) ÷ 2 across the three strips gives B = 0.4 × 0.1 + 0.4 × 0.4 + 0.2 × 0.8 = 0.04 + 0.16 + 0.16 = 0.36. Then G = 1 − 2B = 1 − 0.72 = 0.28 (equivalently, A = 0.5 − 0.36 = 0.14 and G = 2A = 0.28).",
+        "id": "p41-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "0.28",
+            "why": "B = 0.4 × (0 + 0.2) ÷ 2 + 0.4 × (0.2 + 0.6) ÷ 2 + 0.2 × (0.6 + 1.0) ÷ 2 = 0.04 + 0.16 + 0.16 = 0.36, so G = 1 − 2B = 0.28."
+          },
+          {
+            "text": "0.36",
+            "why": "This is B (0.36), the area beneath the Lorenz curve, rather than G = 1 − 2B."
+          },
+          {
+            "text": "0.56",
+            "why": "This doubles G (or omits the ÷ 2 in each strip's area): A is 0.14, so G = 2A = 0.28, not 4A."
+          },
+          {
+            "text": "0.72",
+            "why": "This divides B by A + B (giving 2B = 0.72) instead of dividing A by A + B."
+          }
+        ],
+        "stem": "What is the Gini coefficient G of the income distribution shown by the piecewise-linear Lorenz curve in Figure 1?",
+        "type": "T"
+      },
+      {
+        "explanation": "Work out the cumulative income shares at 25%, 50%, 75% and 100% of households. Region U: 10%, 25%, 50%, 100%. Region V: 6%, 28%, 51%, 100%. At 25% U lies above V (10% > 6%), while at 50% and 75% V lies above U (28% > 25% and 51% > 50%), so the two Lorenz curves cross. Across four equal strips of width 0.25, each interior height enters two adjacent strips, so B = 0.25 × (h₁ + h₂ + h₃) + 0.125. In U, 0.10 + 0.25 + 0.50 = 0.85; in V, 0.06 + 0.28 + 0.51 = 0.85. Both give B = 0.3375 and G = 1 − 2B = 0.325.",
+        "id": "p41-q7",
+        "level": 3,
+        "options": [
+          {
+            "text": "Their Lorenz curves do not cross, and Region U has the lower Gini coefficient.",
+            "why": "At 25% of households U is higher (10% > 6%), whereas at 50% V is higher (28% > 25%), so the curves cross."
+          },
+          {
+            "text": "Their Lorenz curves cross, and Region V has the lower Gini coefficient.",
+            "why": "Both curves have the same sum of cumulative heights at 25%, 50% and 75% (85%), giving the exact same area B and Gini (0.325)."
+          },
+          {
+            "correct": true,
+            "text": "Their Lorenz curves cross, and the two regions have the exact same Gini coefficient.",
+            "why": "Cumulative shares are (10%, 25%, 50%, 100%) in U and (6%, 28%, 51%, 100%) in V: U starts higher, V overtakes it, and both give B = 0.3375 and G = 0.325."
+          },
+          {
+            "text": "Their Lorenz curves coincide everywhere, so the two regions have the exact same Gini coefficient.",
+            "why": "At 25% of households U is at 10% while V is at 6%, so the curves are different even though their areas match."
+          }
+        ],
+        "stem": "Households in Region U and Region V are each split from lowest to highest income into four equal quarters of 25% each, with straight Lorenz segments between quarter boundaries. In Region U the four quarters receive 10%, 15%, 25%, 50% of total income; in Region V they receive 6%, 22%, 23%, 49%. Comparing the two regions, what is true of their Lorenz curves and Gini coefficients?",
+        "type": "C"
+      }
+    ],
+    "title": "The Lorenz Curve and the Gini Coefficient"
+  },
+  {
+    "area": "computational sciences",
+    "blocks": [
+      {
+        "text": "Computers store and transmit text by encoding each character as a binary codeword, a sequence of bits written 0 and 1. In a fixed-length code every character uses the same number of bits, k. Because k bits can form 2^k different patterns, an alphabet of m characters needs the smallest integer k with 2^k ≥ m: two bits distinguish at most four characters, while five to eight characters need three bits each.",
+        "type": "p"
+      },
+      {
+        "text": "Text can often be stored in fewer bits with a variable-length code, which gives short codewords to common characters and longer codewords to rare ones. Variable lengths create a risk when codewords are joined end to end without spaces. Suppose X were encoded as 0, Y as 1 and Z as 01: the bit string 01 could then mean either \"X followed by Y\" or \"Z alone\". A code avoids this ambiguity if it is prefix-free (also called a prefix code): no codeword in the code is an initial segment, or prefix, of any other codeword. When a code is prefix-free, a receiver reading from left to right recognises the end of each codeword the instant a valid codeword is completed, with no separator needed.",
+        "type": "p"
+      },
+      {
+        "text": "Every binary prefix-free code can be drawn as a binary code tree starting from a root on the left (Figure 1). Each branching point, or internal node, splits into an upper branch labelled 0 and a lower branch labelled 1. Characters are placed only at the leaves, the endpoints with no branches leaving them; that rule ensures no character's path is the start of another's. A character's codeword is the sequence of branch bits from the root to its leaf, so its length in bits equals the number of steps from the root.",
+        "type": "p"
+      },
+      {
+        "alt": "A binary tree branching from a root on the left, with upper branches labelled 0 and lower branches labelled 1. Path 0 ends at leaf E. Path 10 ends at leaf T. Path 110 ends at leaf A. Path 1110 ends at leaf N. Path 1111 ends at leaf R.",
+        "caption": "Figure 1. A binary code tree for the five characters E, T, A, N and R.",
+        "id": "p42-fig1",
+        "svg": "<svg viewBox=\"0 0 460 284\" role=\"img\" aria-labelledby=\"p42-fig1-alt\">\n  <g class=\"branches\">\n    <line x1=\"38\" y1=\"108\" x2=\"128\" y2=\"46\"/><text class=\"prob\" x=\"83\" y=\"69\" text-anchor=\"middle\">0</text>\n    <line x1=\"38\" y1=\"108\" x2=\"128\" y2=\"158\"/><text class=\"prob\" x=\"83\" y=\"153\" text-anchor=\"middle\">1</text>\n    <line x1=\"128\" y1=\"158\" x2=\"224\" y2=\"96\"/><text class=\"prob\" x=\"176\" y=\"119\" text-anchor=\"middle\">0</text>\n    <line x1=\"128\" y1=\"158\" x2=\"224\" y2=\"198\"/><text class=\"prob\" x=\"176\" y=\"198\" text-anchor=\"middle\">1</text>\n    <line x1=\"224\" y1=\"198\" x2=\"320\" y2=\"140\"/><text class=\"prob\" x=\"272\" y=\"161\" text-anchor=\"middle\">0</text>\n    <line x1=\"224\" y1=\"198\" x2=\"320\" y2=\"232\"/><text class=\"prob\" x=\"272\" y=\"235\" text-anchor=\"middle\">1</text>\n    <line x1=\"320\" y1=\"232\" x2=\"414\" y2=\"194\"/><text class=\"prob\" x=\"367\" y=\"205\" text-anchor=\"middle\">0</text>\n    <line x1=\"320\" y1=\"232\" x2=\"414\" y2=\"260\"/><text class=\"prob\" x=\"367\" y=\"266\" text-anchor=\"middle\">1</text>\n  </g>\n  <g class=\"dots\">\n    <circle class=\"dot\" cx=\"38\" cy=\"108\" r=\"4\"/>\n    <circle class=\"dot\" cx=\"128\" cy=\"158\" r=\"4\"/>\n    <circle class=\"dot\" cx=\"224\" cy=\"198\" r=\"4\"/>\n    <circle class=\"dot\" cx=\"320\" cy=\"232\" r=\"4\"/>\n  </g>\n  <g class=\"nodes\">\n    <text class=\"prob\" x=\"138\" y=\"52\">E</text>\n    <text class=\"prob\" x=\"234\" y=\"102\">T</text>\n    <text class=\"prob\" x=\"330\" y=\"146\">A</text>\n    <text class=\"prob\" x=\"424\" y=\"200\">N</text>\n    <text class=\"prob\" x=\"424\" y=\"266\">R</text>\n  </g>\n</svg>",
+        "type": "figure"
+      },
+      {
+        "text": "For a message in which character i appears cᵢ times and has a codeword of length lᵢ bits, the total bit length is",
+        "type": "p"
+      },
+      {
+        "text": "total bits = Σ (cᵢ × lᵢ)",
+        "type": "formula"
+      },
+      {
+        "text": "Table 1 lists the character counts in a 200-character message written with the five letters of Figure 1.",
+        "type": "p"
+      },
+      {
+        "caption": "Table 1. Character counts in one 200-character message.",
+        "head": [
+          "Character",
+          "Occurrences in message"
+        ],
+        "rows": [
+          [
+            "E",
+            "95"
+          ],
+          [
+            "T",
+            "50"
+          ],
+          [
+            "A",
+            "25"
+          ],
+          [
+            "N",
+            "20"
+          ],
+          [
+            "R",
+            "10"
+          ]
+        ],
+        "type": "table"
+      }
+    ],
+    "id": "p42",
+    "questions": [
+      {
+        "explanation": "The second and third paragraphs state that in a prefix-free code no codeword is an initial segment (prefix) of another codeword — achieved in a code tree by placing characters only at leaves — so a bit stream decodes uniquely from left to right without separators.",
+        "id": "p42-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Every codeword starts with the bit 0, allowing the receiver to count how many characters are in a message before decoding.",
+            "why": "If every codeword started with 0, the tree could never use its 1 branch from the root; prefix-free forbids one whole codeword starting another."
+          },
+          {
+            "correct": true,
+            "text": "No codeword is the initial segment of another codeword, allowing a joined bit string to be decoded uniquely from left to right without separators.",
+            "why": "This states the definition and the left-to-right decoding property in the second paragraph."
+          },
+          {
+            "text": "Every codeword has the exact same number of bits, allowing any two characters to swap codewords without changing message length.",
+            "why": "Equal bit lengths describe a fixed-length code, whereas prefix-free codes can assign different lengths to different characters."
+          },
+          {
+            "text": "Characters are placed on both internal nodes and leaves of the tree, allowing more characters to share a shallow tree.",
+            "why": "Placing a character on an internal node would make its path a prefix of every leaf beyond it, breaking unique decoding."
+          }
+        ],
+        "stem": "According to the text, what makes a binary code prefix-free, and what does this property allow?",
+        "type": "R"
+      },
+      {
+        "explanation": "Follow the tree from the root each time a leaf is reached: 1110 reaches leaf N; restarting at the root, 0 reaches leaf E; 110 reaches leaf A; and 1111 reaches leaf R. Together 111001101111 decodes to NEAR.",
+        "id": "p42-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "NEAT",
+            "why": "NEAT encodes as 1110 0 110 10 (1110011010), which differs from 111001101111."
+          },
+          {
+            "text": "TEAR",
+            "why": "TEAR encodes as 10 0 110 1111 (1001101111), which differs from 111001101111."
+          },
+          {
+            "text": "RATE",
+            "why": "RATE encodes as 1111 110 10 0 (1111110100), which differs from 111001101111."
+          },
+          {
+            "correct": true,
+            "text": "NEAR",
+            "why": "Reading from the root: 1110 = N, 0 = E, 110 = A, 1111 = R, which joins to 111001101111."
+          }
+        ],
+        "stem": "Using the code tree in Figure 1, which word does the bit string 111001101111 represent?",
+        "type": "F"
+      },
+      {
+        "explanation": "Check whether any codeword starts another. In \"0, 10, 110, 111\", only 0 starts with 0, and among the three starting with 1, only 10 starts with 10 while 110 and 111 differ in their third bit, so none is a prefix of another. In each of the other three lists, a shorter codeword is the start of a longer one.",
+        "id": "p42-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "0, 10, 110, 111",
+            "why": "No codeword in this list forms the start of any other codeword in the list."
+          },
+          {
+            "text": "0, 01, 10, 11",
+            "why": "Not prefix-free: \"0\" is an initial segment of \"01\"."
+          },
+          {
+            "text": "00, 01, 10, 010",
+            "why": "Not prefix-free: \"01\" is an initial segment of \"010\"."
+          },
+          {
+            "text": "1, 01, 001, 011",
+            "why": "Not prefix-free: \"01\" is an initial segment of \"011\"."
+          }
+        ],
+        "stem": "Four binary codes for a four-symbol alphabet are listed below. Which one is prefix-free?",
+        "type": "C"
+      },
+      {
+        "explanation": "Read each character's bit length from Figure 1: E has 1 bit (0), T has 2 (10), A has 3 (110), N has 4 (1110) and R has 4 (1111). Multiply by the counts in Table 1 and add: 95 × 1 + 50 × 2 + 25 × 3 + 20 × 4 + 10 × 4 = 95 + 100 + 75 + 80 + 40 = 390 bits.",
+        "id": "p42-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "200 bits",
+            "why": "This is the number of characters (200), which would equal the bit count only if every character took 1 bit."
+          },
+          {
+            "correct": true,
+            "text": "390 bits",
+            "why": "95 × 1 + 50 × 2 + 25 × 3 + 20 × 4 + 10 × 4 = 390 bits."
+          },
+          {
+            "text": "560 bits",
+            "why": "This multiplies 200 characters by the unweighted mean codeword length (2.8 bits), ignoring that short codewords occur far more often."
+          },
+          {
+            "text": "600 bits",
+            "why": "This gives every character 3 bits, as in a fixed-length code for five characters, rather than the lengths in Figure 1."
+          }
+        ],
+        "stem": "How many bits in total are required to encode the 200-character message in Table 1 using the code tree in Figure 1?",
+        "type": "A"
+      },
+      {
+        "explanation": "Relabelling two leaves of a binary code tree leaves all symbols at leaves, so the code stays prefix-free. However, E appears 95 times and R only 10 times in Table 1: lengthening E by 3 bits adds 95 × 3 = 285 bits while shortening R by 3 bits saves only 10 × 3 = 30 bits, increasing the message by 255 bits.",
+        "id": "p42-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "The altered code is no longer prefix-free, and the total bit length of the message increases.",
+            "why": "Characters still sit only at the leaves of the same binary tree, so no codeword becomes a prefix of another."
+          },
+          {
+            "text": "The altered code remains prefix-free, and the total bit length of the message stays the same.",
+            "why": "Swapping a 1-bit codeword and a 4-bit codeword leaves total bits unchanged only if E and R appear equally often; in Table 1 E appears 95 times and R 10 times."
+          },
+          {
+            "correct": true,
+            "text": "The altered code remains prefix-free, and the total bit length of the message increases.",
+            "why": "All five characters remain at leaves, while giving 4 bits instead of 1 to the commonest letter (95 occurrences) outweighs saving 3 bits on the rarest (10 occurrences)."
+          },
+          {
+            "text": "The altered code remains prefix-free, and the total bit length of the message decreases.",
+            "why": "Giving a longer codeword to a frequent letter and a shorter one to a rare letter raises total bits rather than lowering them."
+          }
+        ],
+        "stem": "Suppose the leaves for E and R in Figure 1 are swapped — so E receives 1111 and R receives 0, while T, A and N keep their positions — and this altered tree is used to encode the message in Table 1. What happens?",
+        "type": "D"
+      },
+      {
+        "explanation": "First find the shortest fixed-length binary code for six symbols: 2² = 4 is too small, while 2³ = 8 ≥ 6, so fixed-length coding needs 3 bits per symbol, or 500 × 3 = 1,500 bits. Under the prefix-free code, S1 uses 240 × 1 = 240 bits, S2 uses 120 × 2 = 240 bits, and S3 to S6 (60 + 40 + 25 + 15 = 140 symbols) each use 4 bits, or 140 × 4 = 560 bits, giving 240 + 240 + 560 = 1,040 bits. The saving is 1,500 − 1,040 = 460 bits.",
+        "id": "p42-q6",
+        "level": 3,
+        "options": [
+          {
+            "correct": true,
+            "text": "460 bits",
+            "why": "Six symbols need 3 bits each in a fixed-length code (500 × 3 = 1,500 bits); the prefix-free code uses 240 × 1 + 120 × 2 + 140 × 4 = 1,040 bits, saving 460 bits."
+          },
+          {
+            "text": "960 bits",
+            "why": "This compares against 4 bits per symbol (2,000 bits), overlooking that 3 bits already give 2³ = 8 ≥ 6 patterns."
+          },
+          {
+            "text": "1,040 bits",
+            "why": "This is the total number of bits used by the prefix-free code (1,040), before subtracting from 1,500."
+          },
+          {
+            "text": "1,500 bits",
+            "why": "This is the total number of bits used by the 3-bit fixed-length code (1,500), before subtracting 1,040."
+          }
+        ],
+        "stem": "A weather station transmits 500-symbol reports built from six symbols, S1 to S6. In one report the counts are S1: 240, S2: 120, S3: 60, S4: 40, S5: 25, S6: 15. The station encodes the report with the prefix-free code S1 = 0, S2 = 10, S3 = 1100, S4 = 1101, S5 = 1110, S6 = 1111. How many fewer bits does this report use than it would under the shortest fixed-length binary code that can represent all six symbols?",
+        "type": "T"
+      }
+    ],
+    "title": "Prefix-Free Binary Codes"
+  },
+  {
+    "area": "social sciences",
+    "blocks": [
+      {
+        "text": "Whether researchers weigh a chemical sample or test verbal reasoning, every measurement tries to capture an underlying value or attribute. In practice, single readings depart from the true value because of two distinct kinds of measurement error. Random error consists of unpredictable chance fluctuations from one occasion, item or observer to the next — a momentary lapse of attention, a lucky guess on one multiple-choice item, or slight timing noise. Because random errors push readings up and down without a fixed direction, they tend to cancel out when many items or repeated readings are averaged. Systematic error, or bias, pushes measurements consistently in the same direction every time, like a weighing scale whose zero mark is offset by fifty grams, or an arithmetic test written in needlessly dense prose that penalises second-language readers every time they sit it.",
+        "type": "p"
+      },
+      {
+        "text": "Reliability is the consistency of a measurement when the attribute being measured has not changed. Researchers check it in several ways. Test–retest reliability asks whether giving the same instrument to the same people on two occasions yields close scores. Parallel-forms reliability asks whether two equivalent versions of a test produce matching results. Inter-rater reliability asks whether independent observers scoring the same performance agree with one another. Random error is the main enemy of reliability: the larger the random noise, the more scores jump around from trial to trial.",
+        "type": "p"
+      },
+      {
+        "text": "Validity, by contrast, asks whether an instrument actually measures what it claims to measure rather than something else. In the social sciences many targets — such as working memory, job satisfaction or civic trust — are constructs, abstract theoretical concepts that cannot be seen directly. Construct validity concerns how faithfully the chosen tasks or questions reflect that target construct rather than an irrelevant skill such as reading speed. Criterion validity checks how closely scores match an external benchmark, called the criterion: it is concurrent validity when the measure and the criterion are recorded at the same time, and predictive validity when today's score is checked against an outcome measured later.",
+        "type": "p"
+      },
+      {
+        "text": "Reliability and validity are linked in one direction only. A measure can be highly reliable without being valid: systematic error leaves repeated readings tightly clustered around the wrong value or the wrong trait. Yet a measure that has no reliability cannot be valid: if scores are swamped by random error and agree neither across occasions nor across raters, they cannot accurately track the intended attribute either.",
+        "type": "p"
+      }
+    ],
+    "id": "p43",
+    "questions": [
+      {
+        "explanation": "The fourth paragraph explains the asymmetry: systematic error can leave a measure highly reliable yet invalid, whereas a completely unreliable measure dominated by random noise cannot validly track its target.",
+        "id": "p43-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Any measurement that yields consistent scores across repeated trials is automatically valid for the trait its authors named.",
+            "why": "The fourth paragraph notes that systematic error produces consistent readings around the wrong value or trait, giving reliability without validity."
+          },
+          {
+            "text": "A measurement can be valid for its target attribute even when random error prevents it from showing any consistency across trials.",
+            "why": "The fourth paragraph states the opposite: a measure swamped by random error with no reliability cannot be valid."
+          },
+          {
+            "correct": true,
+            "text": "A measurement can be reliable without being valid, whereas a measurement with no reliability cannot be valid.",
+            "why": "This states the one-way relationship explained in the fourth paragraph."
+          },
+          {
+            "text": "Reliability and validity are two names for the same property, both reduced equally by random error and unaffected by bias.",
+            "why": "Reliability concerns consistency (hurt by random error), whereas validity concerns measuring the intended target (hurt by systematic bias too)."
+          }
+        ],
+        "stem": "According to the text, how are the reliability and the validity of a measurement related?",
+        "type": "R"
+      },
+      {
+        "explanation": "The four readings (41.8 °C, 41.8 °C, 41.7 °C, 41.8 °C) barely vary from check to check, which shows high reliability and little random error. However, every reading is roughly 1.8 °C above the true 40.0 °C, a systematic calibration error that lowers validity.",
+        "id": "p43-q2",
+        "level": 1,
+        "options": [
+          {
+            "correct": true,
+            "text": "High reliability and low validity, caused mainly by systematic error.",
+            "why": "The four readings cluster within 0.1 °C of one another, yet sit consistently about 1.8 °C above the true 40.0 °C."
+          },
+          {
+            "text": "Low reliability and high validity, caused mainly by random error.",
+            "why": "Readings varying by at most 0.1 °C are very consistent, while missing 40.0 °C in the same direction every time compromises validity."
+          },
+          {
+            "text": "Low reliability and low validity, caused mainly by random error.",
+            "why": "Random error scatters readings above and below the target; here all four readings sit tightly together nearly two degrees too high."
+          },
+          {
+            "text": "High reliability and high validity, with neither random nor systematic error.",
+            "why": "Consistently reading around 41.8 °C when the bath is 40.0 °C is a clear systematic offset."
+          }
+        ],
+        "stem": "A laboratory water bath is held at an exact true temperature of 40.0 °C. Checked four times in succession, a digital probe displays 41.8 °C, 41.8 °C, 41.7 °C, 41.8 °C. In the terms of the text, what does this probe show?",
+        "type": "C"
+      },
+      {
+        "explanation": "The third paragraph defines criterion validity as comparing a measure against an external benchmark, and calls it predictive validity when today's score is checked against an outcome measured later — here, orchestral ensemble marks 12 months after the audition.",
+        "id": "p43-q3",
+        "level": 2,
+        "options": [
+          {
+            "text": "Test–retest reliability across two administrations of the same sight-reading sheet.",
+            "why": "Applicants do not repeat the sight-reading audition; their entry score is compared against a different external outcome a year later."
+          },
+          {
+            "text": "Parallel-forms reliability between two equivalent sight-reading sheets.",
+            "why": "Ensemble marks over a year of rehearsals are an external performance criterion, not an equivalent form of the brief entry audition."
+          },
+          {
+            "text": "Concurrent criterion validity against an external benchmark recorded at the same time.",
+            "why": "Concurrent validity compares measures taken at the same time, whereas the ensemble marks are collected 12 months after the audition."
+          },
+          {
+            "correct": true,
+            "text": "Predictive criterion validity against an external outcome recorded later.",
+            "why": "End-of-year ensemble performance acts as the external criterion, measured 12 months after the entry audition."
+          }
+        ],
+        "stem": "A music conservatory gives every applicant a short sight-reading audition at entry and then checks, 12 months later, how closely those entry scores correspond to students' end-of-year orchestral ensemble marks. Which property of the sight-reading audition is being evaluated?",
+        "type": "C"
+      },
+      {
+        "explanation": "Across 35 items rather than 5, lucky guesses and momentary slips average out more, lowering random error and raising reliability. Because every item retains the convoluted prose, the systematic language bias persists: scores consistently reflect second-language reading comprehension alongside arithmetic, impairing construct validity.",
+        "id": "p43-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "Both random error and the systematic bias from wording shrink, giving the test high reliability and high construct validity for arithmetic.",
+            "why": "Repeating the same convoluted wording across more items does not cancel out the systematic disadvantage to second-language readers."
+          },
+          {
+            "correct": true,
+            "text": "Random error shrinks so reliability improves, while the systematic bias from wording remains so construct validity for pure arithmetic stays impaired.",
+            "why": "Averaging across 35 items smooths out lucky guesses and slips, whereas every item still blends reading fluency into the arithmetic score."
+          },
+          {
+            "text": "Random error grows with the number of items so reliability falls, while construct validity for pure arithmetic improves.",
+            "why": "Adding equivalent items reduces the effect of isolated chance slips on the total percentage score rather than magnifying it."
+          },
+          {
+            "text": "Reliability stays unchanged because only systematic error affects consistency, while predictive validity disappears.",
+            "why": "Random error is what governs consistency across items, so expanding from 5 to 35 items directly raises reliability."
+          }
+        ],
+        "stem": "To measure pure arithmetic skill among pupils studying in a second language, a school lengthens a 5-item test to 35 items, keeping the same convoluted legalistic wording on every item. Following the text, what is the expected effect of lengthening the test in this way?",
+        "type": "D"
+      },
+      {
+        "explanation": "The first paragraph contrasts the two error types: random fluctuations have no fixed direction and cancel out when averaged across trials or items, whereas systematic error pushes every reading in the same direction, so mere repetition reproduces the offset.",
+        "id": "p43-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Averaging many repeated readings eliminates systematic calibration bias just as effectively as it reduces random fluctuations.",
+            "why": "Because systematic error pushes every reading in the same direction, averaging repeated readings preserves that directional offset."
+          },
+          {
+            "text": "High inter-rater reliability between two independent judges shows that their checklist has strong construct validity for the intended trait.",
+            "why": "Two judges can agree closely on an irrelevant indicator (reliability without construct validity), as the fourth paragraph explains."
+          },
+          {
+            "text": "Systematic error causes scores on the same unchanged attribute to scatter widely in opposite directions from one trial to the next.",
+            "why": "Scattering in opposite directions from trial to trial is the mark of random error, not systematic error."
+          },
+          {
+            "correct": true,
+            "text": "Averaging across repeated readings reduces the impact of random error, whereas repeating a systematically biased procedure reproduces the same directional offset.",
+            "why": "Random fluctuations vary in sign and cancel out when averaged; systematic bias pushes every trial the same way."
+          }
+        ],
+        "stem": "Which statement about measurement error is supported by the text?",
+        "type": "S"
+      },
+      {
+        "explanation": "The current assessment has two separate defects: asking for historical dates measures memory of history rather than the construct of practical fault-finding (poor construct validity), and unscripted marking without shared criteria produces wide disagreement between the 2 tutors (low inter-rater reliability). Only standardised live fault-finding tasks scored with an explicit shared rubric address both defects together.",
+        "id": "p43-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "Keep the unstructured chats about nineteenth-century publication dates, and have each apprentice return a week later for a second unstructured chat on the same topic.",
+            "why": "A second unscripted chat on historical dates neither standardises marking between tutors nor measures practical fault-finding."
+          },
+          {
+            "correct": true,
+            "text": "Give every apprentice the same set of live boiler faults to diagnose and repair, and have both tutors score performance independently against an explicit step-by-step rubric.",
+            "why": "Hands-on fault diagnosis aligns the task with the target construct, while identical tasks and an explicit rubric raise inter-rater reliability."
+          },
+          {
+            "text": "Replace the unstructured chats with a written multiple-choice paper on nineteenth-century publication dates, marked by a computer key so both tutors award identical scores.",
+            "why": "Computer marking fixes inter-rater reliability, but memorising historical dates still lacks construct validity for practical fault-finding."
+          },
+          {
+            "text": "Have every apprentice diagnose a live boiler fault, while allowing each tutor to judge overall impression without shared criteria or agreed checklists.",
+            "why": "Live fault diagnosis improves task relevance, but unguided holistic impressions leave severe inter-rater inconsistency, limiting validity."
+          }
+        ],
+        "stem": "A technical college wants to assess practical fault-finding skill in 60 heating apprentices. At present, 2 tutors hold unstructured chats with each apprentice, using no shared mark scheme, and ask mainly for the years in which nineteenth-century thermodynamics laws were published; the 2 tutors often award very different marks to the same apprentice. Which redesign addresses both the reliability flaw and the construct-validity flaw in this assessment?",
+        "type": "T"
+      }
+    ],
+    "title": "Measurement Reliability and Validity"
+  },
+  {
+    "area": "humanities",
+    "blocks": [
+      {
+        "text": "When people disagree about what someone ought to do, they often appeal to two different moral standards: the outcomes an action brings about, or the duties and rights the action respects. In moral philosophy these two standards are developed systematically as act-consequentialism and deontological ethics.",
+        "type": "p"
+      },
+      {
+        "text": "Consequentialism holds that whether an action is morally right or wrong depends solely on its consequences — the states of affairs that follow from it — rather than on the intrinsic kind of act it is or on commitments made beforehand. Under act-consequentialism, an agent facing a choice ought to perform whichever available action produces the greatest net balance of good over bad outcomes overall. In its best-known version, classic utilitarianism, good is understood as well-being, and every affected person's gain or loss counts impartially, meaning equally regardless of who performs the act or how they are connected to the agent. Because only the net sum of consequences matters, no type of action — such as breaking a promise or withholding the truth — is ruled out in advance if, in that particular case, doing so produces a better total outcome than every alternative.",
+        "type": "p"
+      },
+      {
+        "text": "Deontological ethics, named from the Greek word deon (\"duty\"), denies that outcomes are the whole story. It holds that certain kinds of choice are intrinsically required, permitted or forbidden by moral duties and individual rights, even when breaking a duty would yield a somewhat larger total of good results. Philosophers in this tradition, notably Immanuel Kant, emphasise moral constraints against using people merely as a means — as tools for advancing a broader goal without regard for their own consent or rights. Many deontological theories also recognise agent-centred duties: special obligations an agent owes to particular people because of a prior promise, contract or role, which cannot simply be set aside whenever strangers would gain slightly more.",
+        "type": "p"
+      },
+      {
+        "text": "In everyday life the two frameworks often recommend the very same outward action, for instance honouring an agreement when doing so both keeps a promise and preserves useful cooperation. Even then, their underlying reasons differ: the consequentialist points to the future benefits of mutual trust, whereas the deontologist points to the obligation created by the agreement itself. Their verdicts pull apart in conflict cases where keeping a moral constraint, such as truthfulness or promise-keeping, produces a smaller net total of good outcomes than breaking it, or where achieving a wider benefit requires imposing an unconsented burden on one person.",
+        "type": "p"
+      }
+    ],
+    "id": "p44",
+    "questions": [
+      {
+        "explanation": "The second paragraph defines act-consequentialism as the view that an action is morally right when it brings about a greater net balance of good over bad outcomes across everyone affected than any alternative available on that occasion.",
+        "id": "p44-q1",
+        "level": 1,
+        "options": [
+          {
+            "text": "Whether the action honours prior promises and role obligations owed specifically by the agent.",
+            "why": "Prior promises and agent-centred role obligations are features of deontological ethics rather than act-consequentialism."
+          },
+          {
+            "text": "Whether the action belongs to a category of conduct that is permitted regardless of its results.",
+            "why": "Judging categories of conduct apart from their results is the mark of deontological constraints, not act-consequentialism."
+          },
+          {
+            "correct": true,
+            "text": "Whether the action produces a greater net balance of good over bad outcomes overall than any available alternative.",
+            "why": "This states the definition of act-consequentialism in the second paragraph."
+          },
+          {
+            "text": "Whether the action benefits the agent's close associates more than it benefits strangers.",
+            "why": "Act-consequentialism in its classic utilitarian form counts everyone's good impartially rather than favouring close associates."
+          }
+        ],
+        "stem": "According to the text, what determines whether an action is morally right under act-consequentialism?",
+        "type": "R"
+      },
+      {
+        "explanation": "Opening the folder 2 years early would raise total net benefit slightly without harming the donor, so act-consequentialism would favour opening it. Refusing solely because a binding promise was made illustrates deontological (duty-based) reasoning.",
+        "id": "p44-q2",
+        "level": 1,
+        "options": [
+          {
+            "text": "Impartial utilitarianism, because the archivist weighs the botanist's comfort more heavily than the researchers' time.",
+            "why": "The scenario states the botanist would suffer no distress, and the archivist appeals to the promise itself rather than weighing comfort."
+          },
+          {
+            "text": "Act-consequentialism, because keeping the folder sealed produces the largest total time saving across everyone involved.",
+            "why": "Keeping the folder sealed forfeits the time saving for the 15 researchers without creating a larger gain elsewhere."
+          },
+          {
+            "text": "Outcome maximisation, because the archivist judges the choice exclusively by the states of affairs that follow from it.",
+            "why": "Looking back to a prior promise rather than forward to net outcomes is the opposite of outcome maximisation."
+          },
+          {
+            "correct": true,
+            "text": "Deontological ethics, because a duty arising from a prior promise constrains the choice even when breaking it would raise net benefit.",
+            "why": "Refusing to break a promise despite a modest net gain in outcomes exemplifies a deontological constraint."
+          }
+        ],
+        "stem": "A university archivist promised a retiring botanist to keep a folder of harmless personal field diaries sealed for 10 years. Opening the folder 2 years early would modestly save time for 15 visiting researchers and cause the botanist no distress, yet the archivist refuses solely on the ground that a promise was given. Which ethical approach does the archivist's reasoning illustrate?",
+        "type": "C"
+      },
+      {
+        "explanation": "The board aggregates lost water hours impartially across all 4,000 homes and chooses the option with the best net outcome even though it breaks a prior written assurance to 30 homes. That directly reflects impartial act-consequentialism.",
+        "id": "p44-q3",
+        "level": 2,
+        "options": [
+          {
+            "correct": true,
+            "text": "Act-consequentialism, counting every household's disruption impartially and letting the best net outcome override the prior assurance.",
+            "why": "Minimising total disruption across all households equally, even at the cost of breaking a prior promise, applies impartial act-consequentialism."
+          },
+          {
+            "text": "Deontological ethics, upholding an agent-centred duty owed specifically to the thirty households that received the written assurance.",
+            "why": "An agent-centred duty to those thirty households would speak against breaking the written assurance given to them."
+          },
+          {
+            "text": "Kant's constraint against using a smaller group's inconvenience as a means to reduce inconvenience for a larger group.",
+            "why": "That constraint would forbid overriding the assurance to the thirty households merely to lower the city-wide total."
+          },
+          {
+            "text": "A rule that treats every category of promise-breaking as unconditionally forbidden whatever the size of the disruption saved.",
+            "why": "The board explicitly breaks its written assurance to secure fewer lost hours overall, rejecting an unconditional prohibition."
+          }
+        ],
+        "stem": "A municipal water board must choose between two pipe-repair schedules across 4,000 homes. It calculates total hours without tap water across all 4,000 homes, counting every household's hour equally, and picks the schedule with the fewest total hours lost even though doing so breaks an earlier written assurance given to 30 homes on one street. Which framework from the text guides this decision?",
+        "type": "C"
+      },
+      {
+        "explanation": "The fourth paragraph explains that both frameworks frequently recommend the same outward act (such as keeping an agreement that also sustains cooperation) for different underlying reasons, while pulling apart when keeping a moral constraint yields less overall good than breaking it.",
+        "id": "p44-q4",
+        "level": 2,
+        "options": [
+          {
+            "text": "The two frameworks must recommend opposite outward actions in every situation, because one looks to outcomes and the other to duties.",
+            "why": "The fourth paragraph explicitly notes that in everyday life both frameworks often recommend the same outward action for different reasons."
+          },
+          {
+            "text": "Deontological ethics ignores individual rights altogether, whereas act-consequentialism treats individual rights as unbreakable limits on action.",
+            "why": "This swaps the two views: deontological ethics treats duties and rights as constraints, while act-consequentialism allows any act that maximises net good."
+          },
+          {
+            "correct": true,
+            "text": "Both frameworks can endorse the same outward action for different reasons, and diverge when respecting a moral constraint lowers total net good.",
+            "why": "This summarises the fourth paragraph on everyday convergence of actions alongside divergence in reasons and conflict cases."
+          },
+          {
+            "text": "Act-consequentialism gives extra weight to promises made by the agent, whereas deontological ethics counts only impartial well-being.",
+            "why": "Special obligations from an agent's own promises belong to agent-centred deontology, whereas impartial well-being belongs to utilitarianism."
+          }
+        ],
+        "stem": "Which statement accurately describes how act-consequentialism and deontological ethics compare according to the text?",
+        "type": "S"
+      },
+      {
+        "explanation": "Under act-consequentialism, promise-breaking was opposed at first only because of its bad ripple effects on trust; once those negative consequences vanish and the pantry donation produces greater net good, act-consequentialism favours donating. Under deontological ethics, the duty created by the promise to repay binds even when breaking it yields more net good.",
+        "id": "p44-q5",
+        "level": 2,
+        "options": [
+          {
+            "text": "Both frameworks shift to recommending the donation, because neither counts a promise once wider trust is unaffected.",
+            "why": "Deontological promise-keeping rests on the duty owed to the promisee, not solely on indirect effects on public trust."
+          },
+          {
+            "correct": true,
+            "text": "Act-consequentialism shifts to recommending the donation, whereas deontological ethics continues to require repaying the neighbour.",
+            "why": "With indirect trust losses removed, donating maximises net good, whereas the duty to keep a promise still binds deontologically."
+          },
+          {
+            "text": "Deontological ethics shifts to recommending the donation, whereas act-consequentialism continues to require repaying the neighbour.",
+            "why": "This reverses the two theories: removing negative consequences shifts the outcome-based verdict, not the duty-based constraint."
+          },
+          {
+            "text": "Neither framework changes its verdict, because act-consequentialism forbids breaking a debt agreement regardless of the outcomes.",
+            "why": "The second paragraph notes that act-consequentialism never rules out breaking a promise in advance when doing so yields a better total outcome."
+          }
+        ],
+        "stem": "Suppose a borrower owes €200 today to a prosperous neighbour who would not miss the money, while donating that €200 to a local food pantry today would create a larger direct gain in well-being. At first, both an act-consequentialist and a deontologist advise repaying the neighbour: the act-consequentialist because public default would damage wider neighbourhood trust, and the deontologist because the borrower promised to repay. Suppose the situation changes so that donating instead of repaying would remain completely unknown to others and cause no wider loss of trust. How do the verdicts of the two frameworks change?",
+        "type": "D"
+      },
+      {
+        "explanation": "Both editors vote the same way, illustrating the fourth paragraph's point that outward verdicts can agree while reasons differ. Editor P weighs future harms (wasted purchases, lost subscriptions) against immediate sales gains — act-consequentialist reasoning. Editor Q appeals to a duty not to deceive and not to treat readers merely as a means, explicitly independent of consequences — deontological reasoning.",
+        "id": "p44-q6",
+        "level": 3,
+        "options": [
+          {
+            "text": "Both P and Q rely on act-consequentialist reasoning, because both editors reach the exact same vote against publishing the table.",
+            "why": "The fourth paragraph stresses that reaching the same outward decision does not mean sharing the same ethical reasoning."
+          },
+          {
+            "text": "Both P and Q rely on deontological reasoning, because both editors oppose boosting the magazine's own sales.",
+            "why": "Editor P opposes publication by weighing long-run net outcomes across buyers and subscriptions, which is consequentialist reasoning."
+          },
+          {
+            "text": "P relies on deontological reasoning about reader trust, whereas Q relies on act-consequentialist reasoning about circulation.",
+            "why": "P weighs total future harms against short-term sales (consequentialism), whereas Q invokes an unconditional duty not to deceive or use readers merely as means (deontology)."
+          },
+          {
+            "correct": true,
+            "text": "They reach the same outward decision from opposite frameworks: P argues on act-consequentialist grounds and Q on deontological grounds.",
+            "why": "P compares net long-run consequences, while Q appeals to a constraint against deception and using readers merely as a means regardless of detection."
+          }
+        ],
+        "stem": "Two editors at a consumer magazine both vote against publishing unverified battery-life figures that would boost this month's sales. Editor P argues: \"Once buyers find that real battery life falls short of our table, cancelled subscriptions and wasted purchases will outweigh this month's extra sales.\" Editor Q argues: \"Printing figures we know are unverified deceives readers and uses them merely as instruments to lift circulation, which is wrong even if nobody ever checks our table.\" How does the text classify P's and Q's arguments?",
+        "type": "T"
+      }
+    ],
+    "title": "Consequentialist and Deontological Ethics"
+  }
+]

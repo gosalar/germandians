@@ -103,3 +103,30 @@ test('an entry older than seven days is removed before the start page offers it'
   await expect(page.getByRole('region', { name: 'Unfinished practice', exact: true })).toHaveCount(0);
   await expect.poll(() => page.evaluate(key => localStorage.getItem(key), STORAGE_KEY)).toBeNull();
 });
+
+test('a session saved before mock numbers existed loads as Mock 1', async ({ page }) => {
+  const base = createSession('full', {}, now.getTime() - 3 * minute, false);
+  const legacyFull = {
+    ...base,
+    sections: base.sections.map(({ id, setId, startedAt, endedAt, endedBy }) => ({
+      id, setId, startedAt, endedAt, endedBy,
+    })),
+  };
+  delete legacyFull.mock;
+
+  await page.evaluate(({ key, value }) => localStorage.setItem(key, JSON.stringify(value)), {
+    key: STORAGE_KEY,
+    value: legacyFull,
+  });
+  await page.reload();
+  await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+
+  await expect(page.getByRole('timer')).toHaveText('22:00');
+  await expect(page.getByText('Mock 1 · Core Module · part 1 of 3', { exact: true })).toBeVisible();
+
+  await page.getByRole('radiogroup', { name: 'Fifth matrix', exact: true })
+    .getByRole('radio', { name: 'Option 1', exact: true })
+    .check();
+  const persisted = await page.evaluate((key) => JSON.parse(localStorage.getItem(key)!), STORAGE_KEY);
+  expect(persisted.mock).toBe(1);
+});
