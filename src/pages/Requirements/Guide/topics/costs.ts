@@ -1,4 +1,5 @@
 import { EXTERNAL_COSTS, SOURCES } from '@/utils/applicationFacts';
+import { ROUTES } from '@/utils/constants';
 import { REQUIREMENT_TOPIC_TITLES } from '@/utils/requirements/topics';
 
 import type { CostsTopic } from '../types';
@@ -18,7 +19,9 @@ export const costs = {
     'Take tuition and the semester contribution from your university’s own fees page, with any exemptions.',
     'For costs without an amount, such as IELTS, health insurance and flights, check the current prices with your chosen providers.',
     'Plan the living money you show for the visa separately from these fees.',
+    'Add up your own monthly living costs and one-off study expenses in euros and rupees in the budget planner.',
   ],
+  link: { label: 'Open the budget planner', to: ROUTES.budget },
   sources: [SOURCES.daad],
   detail: [],
   costs: EXTERNAL_COSTS,

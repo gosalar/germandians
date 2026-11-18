@@ -52,6 +52,11 @@ export const visaEnrolment = {
       source: SOURCES.tumInformatics,
     },
     {
+      heading: 'Budget planner',
+      body: 'Compare your own monthly spending with the official blocked-account reference rate in the budget planner.',
+      link: { label: 'Open the budget planner', to: ROUTES.budget },
+    },
+    {
       heading: 'Housing help',
       body: ARRIVAL_SUPPORT.availability,
       link: { label: 'Read about housing help', to: `${ROUTES.home}#${SECTIONS.housing}` },

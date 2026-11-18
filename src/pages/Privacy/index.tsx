@@ -92,6 +92,12 @@ export default function Privacy() {
               days, the page removes the saved test.
             </p>
             <p className={styles.text}>
+              Your budget planner entries stay in your browser on your device. This includes the number of months, your
+              monthly and one-off cost figures, any official fees you select, and the exchange rate you enter, so you can
+              reload without losing your plan. The site never sends this data. Choosing “Clear my entries” removes the
+              saved figures immediately.
+            </p>
+            <p className={styles.text}>
               If you ask about German lessons, through their form or the “Teach me German” box on the profile-review
               form, we also receive that interest and any answers you give: the language you’d like explanations in,
               what you need German for and any German you already have.

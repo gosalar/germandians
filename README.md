@@ -1,6 +1,6 @@
 # Germandians website
 
-Landing page, German grade conversion, a beginner's guide to master's requirements, a dMAT guide and practice tests, About us, Community and Learn German pages, and privacy note for Germandians. The grade check and the requirements questions start empty and do not predict admission or recommend universities.
+Landing page, German grade conversion, a beginner's guide to master's requirements, a dMAT guide and practice tests, a study budget planner, About us, Community and Learn German pages, and privacy note for Germandians. The grade check and the requirements questions start empty and do not predict admission or recommend universities.
 
 ## Stack
 
@@ -39,7 +39,7 @@ node tests/ux/build.mjs && npx playwright test --config playwright.ux.config.ts 
 
 A focused spec is enough while a change stays inside one flow. Run the full `npm run test:ux` when a change spans shared behaviour, or when one spec cannot cover the risk. Playwright serves the two variants on ports 5603 and 5604 by default, or on `UX_PORT_BASE` and `UX_PORT_BASE + 1` when `UX_PORT_BASE` is set.
 
-The suite has 241 cases across its two variants. The dMAT specs cover guide navigation, all three practice modes, keyboard answers, the clock, local storage, the practice record and a test screen that fails to load.
+The suite has 258 cases across its two variants. The dMAT specs cover guide navigation, all three practice modes, keyboard answers, the clock, local storage, the practice record and a test screen that fails to load.
 
 `npm run test:recheck` runs the same viewport sweep against a build you serve yourself, by default at `http://localhost:5611/germandians` (set `RECHECK_BASE_URL` for another address). Use it for the Pages subpath: build with `SITE_BASE_PATH=/germandians/`, copy `build/client/` into a `germandians` folder, copy its `404.html` into the parent as well (GitHub Pages answers a project site's missing paths with that site's `404.html`), and serve the parent with `node scripts/serve.mjs <parent> 5611`.
 
@@ -124,6 +124,7 @@ src/
 │   │                               # Guide holds TopicCard, CostsTable, Stamp and one file per topic in topics/
 │   ├── Dmat/                       # official format, registration and test-day guide
 │   ├── DmatPractice/               # start and breaks; the runner, record and question files load on demand (screens.ts, bank/)
+│   ├── Budget/                     # study budget planner in euros and rupees; copy in data.ts
 │   ├── About/                      # data.ts holds the copy and TEAM; TeamGallery (portraits and profile dialog), Portraits (stand-in animals), ExperienceRecord
 │   ├── Community/                  # community page; channels and copy in data.ts
 │   ├── LearnGerman/                # German lessons page; GermanLessonsForm is its enquiry form, WordDeck the flip cards
@@ -145,7 +146,8 @@ src/
                                     # publicPages (titles and descriptions); siteConfig (env); applicationFacts
                                     # (dated sources and costs); gradeConversion (marks to German grade, shared by
                                     # /check and /requirements); requirements/ (topics, questions, logic);
-                                    # dmat/ (session timing, marking and storage); metadata, publicSite, contactSettings, styles
+                                    # dmat/ (session timing, marking and storage); budget/ (budget totals and storage);
+                                    # metadata, publicSite, contactSettings, styles
 ```
 
 ## Notes
