@@ -1,0 +1,689 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.page {
+  background: t.$paper;
+  padding-bottom: clamp(48px, 7vw, 96px);
+}
+
+.opening {
+  @include m.section-padding;
+  background: t.$sand;
+  border-bottom: 1px solid t.$hairline;
+}
+
+.openingGrid {
+  display: grid;
+  align-items: start;
+  gap: clamp(24px, 5vw, 64px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.75fr);
+  }
+}
+
+.openingMeta {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+
+  p {
+    @include m.body-copy;
+    font-size: 16px;
+    color: t.$ink-soft;
+  }
+}
+
+.guideNav {
+  @include m.pop-shadow(4px);
+  min-width: 0;
+  padding: clamp(16px, 3vw, 26px);
+  border: 2px solid t.$navy;
+  border-radius: 12px;
+  background: t.$receipt;
+
+  p {
+    @include m.sticker(t.$yellow, t.$navy, -1.5deg);
+    @include m.label-font(800, 16px);
+    margin: 0 0 12px;
+  }
+
+  ol {
+    display: grid;
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: parent-nav;
+  }
+
+  li {
+    border-top: 1px solid t.$line;
+    counter-increment: parent-nav;
+  }
+
+  a {
+    @include m.navigation-font;
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding-block: 6px;
+    font-size: 16px;
+    line-height: 1.35;
+    color: t.$navy;
+    text-decoration: none;
+
+    &::before {
+      content: '0' counter(parent-nav);
+      @include m.label-font(700, 14px);
+      color: t.$slate;
+    }
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: t.$yellow;
+      text-decoration-thickness: 2.5px;
+    }
+  }
+}
+
+.content {
+  padding-inline: clamp(16px, 5vw, 72px);
+}
+
+.sections {
+  display: grid;
+  gap: clamp(24px, 4vw, 40px);
+  padding-top: clamp(28px, 5vw, 64px);
+  counter-reset: parent-section;
+}
+
+.section {
+  min-width: 0;
+  padding: clamp(20px, 3.2vw, 38px);
+  border: 1.5px solid t.$navy;
+  border-radius: 18px;
+  background: t.$white;
+  counter-increment: parent-section;
+
+  @include m.below(t.$bp-mobile) {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+}
+
+.sectionHead {
+  display: grid;
+  gap: 10px;
+  padding-bottom: clamp(14px, 2vw, 20px);
+  border-bottom: 1px solid t.$line;
+}
+
+.sectionTitleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.sectionNumber {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: t.$navy;
+  color: t.$yellow;
+  @include m.label-font(700, 18px);
+  line-height: 1;
+
+  &::before {
+    content: '0' counter(parent-section);
+  }
+}
+
+.sectionTitle {
+  @include m.sub-heading;
+  min-width: 0;
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.05;
+  color: t.$navy;
+  text-wrap: balance;
+}
+
+.sectionLead {
+  @include m.page-lead(clamp(18px, 1.45vw, 20px));
+  max-width: 68ch;
+  color: t.$ink-strong;
+}
+
+.sectionBody {
+  @include m.body-copy;
+  display: grid;
+  gap: clamp(16px, 2.4vw, 24px);
+  min-width: 0;
+  padding-top: clamp(16px, 2.4vw, 24px);
+  font-size: 17px;
+  color: t.$ink;
+}
+
+.notesGrid {
+  display: grid;
+  gap: 12px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.noteCard {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid t.$hairline;
+  border-radius: 12px;
+  background: t.$paper;
+
+  @include m.from(t.$bp-mobile) {
+    &:first-child:nth-last-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.noteHeading {
+  margin: 0;
+  font-family: t.$font-body;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: t.$ink-strong;
+}
+
+.noteText {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: t.$ink;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.noteSource {
+  margin: 2px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+// Official costs table: desktop rows, compact stacked blocks below 760px.
+.costs {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink;
+
+  th,
+  td {
+    padding: 12px 16px 12px 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid t.$line;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 0;
+  }
+}
+
+.costsHead th {
+  @include m.label-font(700, 15px);
+  line-height: 1.2;
+  color: t.$slate;
+  border-bottom: 1.5px solid t.$navy;
+}
+
+.costGroupName {
+  @include m.label-font(700, 16px);
+  line-height: 1.3;
+  color: t.$navy;
+  background: t.$sand;
+
+  .costs & {
+    padding: 10px 12px;
+  }
+}
+
+.costName {
+  width: 25%;
+  font-family: t.$font-body;
+  font-weight: 700;
+  color: t.$ink-strong;
+}
+
+.costAmount {
+  @include m.label-font(700, 17px);
+  line-height: 1.35;
+  color: t.$navy;
+  white-space: nowrap;
+
+  &[data-empty] {
+    @include m.label-font(600, 15px);
+    color: t.$slate;
+  }
+}
+
+.costDetail {
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+@include m.below(t.$bp-mobile) {
+  .costs,
+  .costGroup,
+  .costRow {
+    display: block;
+  }
+
+  .costsHead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .costGroupRow {
+    display: block;
+    margin-top: 14px;
+  }
+
+  .costGroupName {
+    display: block;
+    border-radius: 8px;
+
+    .costs & {
+      border-bottom: 0;
+    }
+  }
+
+  .costRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid t.$line;
+
+    .costs & > * {
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  .costName {
+    width: auto;
+  }
+
+  .costAmount {
+    text-align: right;
+    white-space: normal;
+  }
+
+  .costDetail {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+}
+
+.figureCallout {
+  @include m.pop-shadow(4px);
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: clamp(16px, 2.5vw, 24px);
+  border: 2px solid t.$navy;
+  border-radius: 14px;
+  background: t.$cream;
+}
+
+.figureHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 16px;
+}
+
+.figureLabel {
+  @include m.label-font(700, 16px);
+  margin: 0;
+  color: t.$slate;
+}
+
+.figureAmount {
+  @include m.display-heading(clamp(28px, 3.2vw, 40px));
+  line-height: 1;
+  color: t.$navy;
+}
+
+.figureDetail {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: t.$ink;
+}
+
+.proseStack {
+  display: grid;
+  gap: 12px;
+  max-width: 72ch;
+
+  p {
+    margin: 0;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+  }
+}
+
+.capacityRow {
+  display: grid;
+  gap: 12px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.capacityCard {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1.5px solid t.$navy;
+  border-radius: 12px;
+  background: t.$receipt;
+}
+
+.capacityLabel {
+  @include m.label-font(700, 15px);
+  margin: 0;
+  color: t.$slate;
+}
+
+.capacityFigure {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-stretch: 84%;
+  font-size: clamp(21px, 2.2vw, 26px);
+  line-height: 1.1;
+  color: t.$navy;
+}
+
+.capacityDetail {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: t.$ink;
+}
+
+.splitColumns {
+  display: grid;
+  gap: 16px;
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.columnCard {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+  padding: clamp(16px, 2.4vw, 24px);
+  border-radius: 14px;
+  border: 1px solid t.$hairline;
+  background: t.$paper;
+
+  &[data-kind='limits'] {
+    border-color: t.$navy;
+    background: t.$note;
+  }
+}
+
+.columnTitle {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 800;
+  font-stretch: 84%;
+  font-size: clamp(21px, 2.2vw, 26px);
+  line-height: 1.1;
+  color: t.$navy;
+}
+
+.itemList {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.itemEntry {
+  display: grid;
+  gap: 4px;
+  padding-top: 12px;
+  border-top: 1px solid t.$line;
+
+  &:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+.quoteCallout {
+  margin: 6px 0 0;
+  padding: 10px 14px;
+  border-left: 3px solid t.$yellow;
+  background: t.$white;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.55;
+  color: t.$navy;
+}
+
+.lessonsBox {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid t.$hairline;
+  border-left: 4px solid t.$navy;
+  border-radius: 10px;
+  background: t.$receipt;
+}
+
+.feeBanner {
+  @include m.pop-shadow(4px);
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding: clamp(16px, 2.5vw, 26px);
+  border: 2px solid t.$navy;
+  border-radius: 14px;
+  background: t.$receipt;
+}
+
+.feePromise {
+  @include m.display-heading(clamp(26px, 3vw, 36px));
+  line-height: 1.06;
+  color: t.$navy;
+}
+
+.feeSummary {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.feeCell {
+  padding: 12px 14px;
+  border: 1px solid t.$line;
+  border-radius: 10px;
+  background: t.$paper;
+
+  dt {
+    @include m.label-font(700, 14px);
+    color: t.$slate;
+  }
+
+  dd {
+    @include m.label-font(800, 20px);
+    margin: 4px 0 0;
+    line-height: 1.2;
+    color: t.$navy;
+    overflow-wrap: break-word;
+  }
+}
+
+.linkRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  list-style: none;
+  margin: 0;
+  padding: 12px 0 0;
+  border-top: 1px solid t.$line;
+
+  a {
+    @include m.touch-area;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: t.$font-body;
+    font-weight: 700;
+    font-size: 16px;
+  }
+}
+
+.emailLink {
+  @include m.touch-area;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.nextSteps {
+  @include m.pop-shadow(5px);
+  display: grid;
+  gap: 18px;
+  margin-top: clamp(28px, 5vw, 56px);
+  padding: clamp(20px, 3.2vw, 36px);
+  border: 2px solid t.$navy;
+  border-radius: 16px;
+  background: t.$highlight;
+
+  h2 {
+    @include m.display-heading(clamp(28px, 3.6vw, 44px));
+    line-height: 1.02;
+  }
+
+  p {
+    @include m.body-copy;
+    max-width: 62ch;
+    margin-top: 8px;
+    color: t.$ink-strong;
+  }
+}
+
+.nextActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media print {
+  .page {
+    background: t.$white;
+    padding-bottom: 0;
+  }
+
+  .opening {
+    padding: 0 0 16px;
+    background: t.$white;
+    border-bottom: 1.5px solid t.$navy;
+  }
+
+  .openingGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .printHide {
+    display: none;
+  }
+
+  .content {
+    padding-inline: 0;
+  }
+
+  .sections {
+    gap: 18px;
+    padding-top: 18px;
+  }
+
+  .section,
+  .figureCallout,
+  .feeBanner,
+  .capacityCard,
+  .columnCard,
+  .noteCard,
+  .lessonsBox {
+    box-shadow: none;
+    background: t.$white;
+    border-color: t.$navy;
+  }
+
+  .section {
+    padding: 16px;
+    border-radius: 8px;
+  }
+
+  .sectionHead,
+  .sectionTitle,
+  .columnTitle,
+  .noteHeading {
+    break-after: avoid;
+  }
+
+  // Yellow on white is close to invisible, and a background does not print by default.
+  .sectionNumber {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid t.$navy;
+    background: transparent;
+    color: t.$navy;
+  }
+
+  .noteCard,
+  .costRow,
+  .figureCallout,
+  .capacityCard,
+  .feeCell,
+  .itemEntry,
+  .lessonsBox {
+    break-inside: avoid;
+  }
+}
