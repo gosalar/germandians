@@ -46,18 +46,24 @@ export const AREA_LABELS: {
 export const FILTER_COPY = {
   heading: 'Find a word',
   searchLabel: 'Filter by German or English word',
-  searchPlaceholder: 'e.g. Anmeldung, Sperrkonto, rent, transcript',
+  searchPlaceholder: 'e.g. Anmeldung or rent',
   areasLabel: 'Filter by area',
   allAreas: 'All areas',
   clear: 'Clear filter',
   areaChip: (label: string, count: number) => `${label} (${count})`,
-  showingAll: (total: number) => `Showing all ${total} words`,
-  showingFiltered: (shown: number, total: number) => `Showing ${shown} of ${total} words`,
+  showingAll: (total: number) => `All ${total} words`,
+  showingFiltered: (matches: number, total: number) => `${matches} of ${total} words match`,
   showingNone: (query: string) => (query ? `No words match “${query}”.` : 'No words match this filter.'),
 } as const;
 
+/** Cards shown first, and added by each press of the show-more button. */
+export const WORDS_PAGE_SIZE = 24;
+
 export const LIST_COPY = {
   heading: 'Glossary entries',
+  showMore: 'Show more words',
+  count: (shown: number, total: number) =>
+    shown >= total ? `Showing all ${total} words` : `Showing ${shown} of ${total} words`,
 } as const;
 
 export const CARD_COPY = {

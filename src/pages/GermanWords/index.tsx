@@ -1,5 +1,5 @@
 import { Button, TextInput } from '@mantine/core';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 
 import HomeSectionLink from '@/components/HomeSectionLink';
@@ -17,6 +17,7 @@ import {
   LIST_COPY,
   NEXT_COPY,
   PAGE_COPY,
+  WORDS_PAGE_SIZE,
   WORD_AREAS,
   entryHeadword,
   topicLinkLabel,
@@ -57,7 +58,7 @@ function EntryCard({ entry }: { entry: GlossaryEntry }) {
       </div>
 
       <div className={styles.entryWordBlock}>
-        <h3 lang="de" className={styles.entryHeading}>
+        <h3 lang="de" tabIndex={-1} className={styles.entryHeading}>
           {fullHeadword}
         </h3>
         <p className={styles.entryForms}>{entry.forms}</p>
@@ -90,15 +91,43 @@ function EntryCard({ entry }: { entry: GlossaryEntry }) {
 export default function GermanWords() {
   const [query, setQuery] = useState('');
   const [area, setArea] = useState<AreaFilter>('all');
+  const [limit, setLimit] = useState(WORDS_PAGE_SIZE);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const focusFromIndex = useRef<number | null>(null);
 
   const filtered = filterEntries(GERMAN_WORDS_ENTRIES, query, area);
+  const visible = filtered.slice(0, limit);
   const isFiltered = query.trim().length > 0 || area !== 'all';
+
+  // After "Show more words", focus lands on the first card that was added.
+  useEffect(() => {
+    const from = focusFromIndex.current;
+    if (from === null) return;
+    focusFromIndex.current = null;
+    listRef.current?.querySelectorAll<HTMLElement>(':scope > li h3')[from]?.focus();
+  }, [limit]);
+
+  const changeQuery = (value: string) => {
+    setQuery(value);
+    setLimit(WORDS_PAGE_SIZE);
+  };
+
+  const changeArea = (next: AreaFilter) => {
+    setArea(next);
+    setLimit(WORDS_PAGE_SIZE);
+  };
 
   const clearFilters = () => {
     setQuery('');
     setArea('all');
+    setLimit(WORDS_PAGE_SIZE);
     searchInputRef.current?.focus();
+  };
+
+  const showMore = () => {
+    focusFromIndex.current = visible.length;
+    setLimit(visible.length + WORDS_PAGE_SIZE);
   };
 
   const statusText =
@@ -160,7 +189,7 @@ export default function GermanWords() {
                 inputMode="search"
                 autoComplete="off"
                 value={query}
-                onChange={(event) => setQuery(event.currentTarget.value)}
+                onChange={(event) => changeQuery(event.currentTarget.value)}
                 label={FILTER_COPY.searchLabel}
                 placeholder={FILTER_COPY.searchPlaceholder}
                 className={styles.searchInput}
@@ -182,7 +211,7 @@ export default function GermanWords() {
               <button
                 type="button"
                 aria-pressed={area === 'all'}
-                onClick={() => setArea('all')}
+                onClick={() => changeArea('all')}
                 className={styles.areaChip}
               >
                 {FILTER_COPY.areaChip(FILTER_COPY.allAreas, TOTAL_COUNT)}
@@ -192,7 +221,7 @@ export default function GermanWords() {
                   key={areaId}
                   type="button"
                   aria-pressed={area === areaId}
-                  onClick={() => setArea(areaId)}
+                  onClick={() => changeArea(areaId)}
                   className={styles.areaChip}
                 >
                   {FILTER_COPY.areaChip(AREA_LABELS[areaId].en, AREA_COUNTS[areaId])}
@@ -210,11 +239,25 @@ export default function GermanWords() {
           </h2>
 
           {filtered.length > 0 ? (
-            <ul className={styles.grid} data-testid="german-words-list">
-              {filtered.map((entry) => (
-                <EntryCard key={entry.id} entry={entry} />
-              ))}
-            </ul>
+            <>
+              <ul ref={listRef} className={styles.grid} data-testid="german-words-list">
+                {visible.map((entry) => (
+                  <EntryCard key={entry.id} entry={entry} />
+                ))}
+              </ul>
+              {filtered.length > WORDS_PAGE_SIZE ? (
+                <div className={styles.moreRow}>
+                  <p className={styles.moreCount} data-testid="german-words-count">
+                    {LIST_COPY.count(visible.length, filtered.length)}
+                  </p>
+                  {visible.length < filtered.length ? (
+                    <Button type="button" variant="navy" size="md" onClick={showMore} className={styles.moreButton}>
+                      {LIST_COPY.showMore}
+                    </Button>
+                  ) : null}
+                </div>
+              ) : null}
+            </>
           ) : (
             <div className={styles.emptyState} data-testid="german-words-empty">
               <h3 className={styles.emptyTitle}>{EMPTY_COPY.title}</h3>

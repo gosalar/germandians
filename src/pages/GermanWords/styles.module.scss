@@ -294,6 +294,26 @@
   }
 }
 
+// Count line and button under the cards.
+.moreRow {
+  margin-top: clamp(24px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.moreCount {
+  margin: 0;
+  @include m.label-font(700, 16px);
+  color: t.$navy;
+}
+
+.moreButton {
+  min-width: 220px;
+}
+
 .entryCard {
   min-width: 0;
   background: t.$white;
@@ -566,8 +586,13 @@
   }
 
   .controlsBand,
-  .nextBand {
+  .nextBand,
+  .moreButton {
     display: none;
+  }
+
+  .moreRow {
+    margin-top: 12px;
   }
 
   .glossaryBand {

@@ -21,6 +21,16 @@ const SITE_CORE_WORDS = [
 
 const LEARN_GERMAN_DECK_WORDS = ['Mensa', 'Vorlesung', 'Kommilitone', 'Termin', 'Feierabend', 'doch'];
 
+const PAGE_SIZE = 24;
+
+/** Press "Show more words" until every entry is on the page. */
+async function showAll(page: Page) {
+  const more = page.getByRole('button', { name: 'Show more words', exact: true });
+  while (await more.isVisible()) {
+    await more.click();
+  }
+}
+
 async function ready(page: Page) {
   await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
   await page.evaluate(() => document.fonts.ready);
@@ -39,16 +49,17 @@ function trackRuntimeErrors(page: Page) {
   return errors;
 }
 
-test('prerenders 100 to 150 German words, including every core site word and Learn German deck word', async ({
+test('prerenders the first 24 words and shows 100 to 150 once every word is revealed, including every core site word and Learn German deck word', async ({
   page,
   request,
 }) => {
   const errors = trackRuntimeErrors(page);
 
+  // The first 24 cards are in the HTML before any script runs.
   const rawHtml = await (await request.get('/german-words')).text();
-  for (const word of [...SITE_CORE_WORDS, ...LEARN_GERMAN_DECK_WORDS]) {
-    expect(rawHtml).toContain(word);
-  }
+  expect(rawHtml.match(/data-entry="/g)).toHaveLength(PAGE_SIZE);
+  expect(rawHtml).toMatch(/Showing 24 of \d+ words/);
+  expect(rawHtml).toContain('Show more words');
 
   await page.goto('/german-words');
   await ready(page);
@@ -56,9 +67,12 @@ test('prerenders 100 to 150 German words, including every core site word and Lea
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('German words');
 
   const cards = page.locator('[data-testid="german-words-list"] > li[data-entry]');
+  await expect(cards).toHaveCount(PAGE_SIZE);
+  await showAll(page);
   const total = await cards.count();
   expect(total).toBeGreaterThanOrEqual(100);
   expect(total).toBeLessThanOrEqual(150);
+  await expect(page.getByTestId('german-words-count')).toHaveText(`Showing all ${total} words`);
 
   const main = page.getByRole('main');
   for (const word of [...SITE_CORE_WORDS, ...LEARN_GERMAN_DECK_WORDS]) {
@@ -91,12 +105,17 @@ test('filters by German word, ASCII umlaut spelling, English meaning and area, a
 
   const search = page.getByLabel('Filter by German or English word');
   const cards = page.locator('[data-testid="german-words-list"] > li[data-entry]');
+  await expect(cards).toHaveCount(PAGE_SIZE);
+  await showAll(page);
   const total = await cards.count();
+  await page.reload();
+  await ready(page);
+  await expect(cards).toHaveCount(PAGE_SIZE);
 
   await search.fill('Sperrkonto');
   await expect(cards).toHaveCount(1);
   await expect(cards.first().locator('h3')).toHaveText('das Sperrkonto');
-  await expect(page.getByRole('status')).toHaveText(`Showing 1 of ${total} words`);
+  await expect(page.getByRole('status')).toHaveText(`1 of ${total} words match`);
 
   // ASCII umlaut spelling ("ue") matches German umlauts ("Ü").
   await search.fill('Uebungsschein');
@@ -116,20 +135,66 @@ test('filters by German word, ASCII umlaut spelling, English meaning and area, a
   await empty.getByRole('button', { name: 'Show all words', exact: true }).click();
   await expect(search).toHaveValue('');
   await expect(search).toBeFocused();
-  await expect(cards).toHaveCount(total);
+  await expect(cards).toHaveCount(PAGE_SIZE);
 
-  // Area filter chips narrow by area and Clear filter restores all entries.
+  // Area filter chips narrow by area and Clear filter restores the first 24 entries.
   const areaGroup = page.getByRole('group', { name: 'Filter by area' });
   const housingChip = areaGroup.getByRole('button', { name: /^Housing \(\d+\)$/ });
   await housingChip.click();
   await expect(housingChip).toHaveAttribute('aria-pressed', 'true');
+  await showAll(page);
   const housingCount = await cards.count();
   expect(housingCount).toBeGreaterThan(15);
   expect(housingCount).toBeLessThan(total);
+  await expect(cards.locator('xpath=self::*[@data-area!="housing"]')).toHaveCount(0);
 
   await page.getByRole('button', { name: 'Clear filter', exact: true }).click();
-  await expect(cards).toHaveCount(total);
+  await expect(cards).toHaveCount(PAGE_SIZE);
   await expect(search).toBeFocused();
+
+  expect(errors).toEqual([]);
+});
+
+test('shows more words 24 at a time, moves focus to the first new card and resets when filtering', async ({
+  page,
+}) => {
+  const errors = trackRuntimeErrors(page);
+  await page.goto('/german-words');
+  await ready(page);
+
+  const cards = page.locator('[data-testid="german-words-list"] > li[data-entry]');
+  const count = page.getByTestId('german-words-count');
+  const more = page.getByRole('button', { name: 'Show more words', exact: true });
+
+  await expect(cards).toHaveCount(PAGE_SIZE);
+  await expect(count).toHaveText(/^Showing 24 of \d+ words$/);
+
+  // Keyboard: Enter on the button reveals the next 24 and focus lands on the first of them.
+  await more.focus();
+  await page.keyboard.press('Enter');
+  await expect(cards).toHaveCount(PAGE_SIZE * 2);
+  await expect(count).toHaveText(/^Showing 48 of \d+ words$/);
+  await expect(cards.nth(PAGE_SIZE).locator('h3')).toBeFocused();
+
+  // Searching starts again from the first 24 of the results.
+  await page.getByLabel('Filter by German or English word').fill('a');
+  await expect(cards).toHaveCount(PAGE_SIZE);
+  await expect(count).toHaveText(/^Showing 24 of \d+ words$/);
+
+  await page.getByRole('button', { name: 'Clear filter', exact: true }).click();
+  await expect(cards).toHaveCount(PAGE_SIZE);
+
+  // Revealing everything removes the button.
+  await showAll(page);
+  await expect(more).toHaveCount(0);
+
+  // Print shows only the cards that are on screen.
+  await page.reload();
+  await ready(page);
+  await page.emulateMedia({ media: 'print' });
+  await expect(cards).toHaveCount(PAGE_SIZE);
+  await expect(more).toBeHidden();
+  await page.emulateMedia({ media: 'screen' });
 
   expect(errors).toEqual([]);
 });
@@ -137,6 +202,7 @@ test('filters by German word, ASCII umlaut spelling, English meaning and area, a
 test('links entries to their matching topics on the requirements page', async ({ page }) => {
   await page.goto('/german-words');
   await ready(page);
+  await showAll(page);
 
   const expectedLinks: Array<[string, string]> = [
     ['abschluss', '/requirements#degree'],
@@ -192,7 +258,7 @@ test('supports keyboard navigation, passes axe and hides filter chrome in print'
   // Print stylesheet hides filter controls while keeping glossary cards visible.
   await page.emulateMedia({ media: 'print' });
   await expect(page.locator('#german-words-search')).toBeHidden();
-  await expect(page.locator('li[data-entry="fragebogen"]')).toBeVisible();
+  await expect(page.locator('li[data-entry="abschluss"]')).toBeVisible();
   await page.emulateMedia({ media: 'screen' });
 
   expect(errors).toEqual([]);
