@@ -1,0 +1,347 @@
+@use '@/utils/styles/tokens' as t;
+@use '@/utils/styles/mixins' as m;
+
+.page {
+  background: t.$paper;
+}
+
+.opening {
+  @include m.section-padding;
+  background: t.$sand;
+  border-bottom: 1px solid t.$hairline;
+}
+
+.openingGrid {
+  display: grid;
+  align-items: start;
+  gap: clamp(28px, 5vw, 72px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.85fr);
+    align-items: center;
+  }
+}
+
+.openingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.indexCard {
+  @include m.pop-shadow(4px);
+  min-width: 0;
+  padding: clamp(16px, 3vw, 28px);
+  border: 2px solid t.$navy;
+  background: t.$receipt;
+}
+
+.indexTitle {
+  @include m.sticker;
+  @include m.label-font(800, 16px);
+  margin: 0 0 12px;
+}
+
+.indexList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+
+  li {
+    border-top: 1px solid t.$line;
+  }
+
+  a {
+    @include m.navigation-font;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding-block: 6px;
+    font-size: 16px;
+    line-height: 1.35;
+  }
+}
+
+.indexNumber {
+  @include m.label-font(800, 14px);
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  min-width: 28px;
+  height: 24px;
+  padding-inline: 6px;
+  border-radius: 4px;
+  background: t.$navy;
+  color: t.$yellow;
+}
+
+.content {
+  padding-inline: clamp(20px, 5vw, 72px);
+}
+
+.questions {
+  display: grid;
+  gap: clamp(18px, 2.5vw, 28px);
+  padding-top: clamp(32px, 5vw, 64px);
+}
+
+.card {
+  display: grid;
+  gap: clamp(18px, 2.6vw, 28px);
+  padding: clamp(18px, 3.2vw, 36px);
+  border: 1px solid t.$hairline;
+  border-radius: 10px;
+  background: t.$receipt;
+  scroll-margin-top: 96px;
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 14px;
+  padding-bottom: clamp(12px, 2vw, 18px);
+  border-bottom: 1px solid t.$line;
+}
+
+.questionNumber {
+  @include m.label-font(800, 15px);
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  min-width: 34px;
+  height: 28px;
+  padding-inline: 8px;
+  border-radius: 5px;
+  background: t.$navy;
+  color: t.$yellow;
+  letter-spacing: 0.04em;
+}
+
+.questionTitle {
+  @include m.display-heading(clamp(26px, 3vw, 40px));
+  line-height: 1.04;
+  min-width: 0;
+  flex: 1 1 220px;
+}
+
+.columns {
+  display: grid;
+  gap: clamp(18px, 2.8vw, 32px);
+
+  @include m.from(t.$bp-content-columns) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: start;
+  }
+}
+
+.checkPanel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.panelHeading {
+  @include m.label-font(800, 16px);
+  margin: 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: t.$navy;
+}
+
+.checkList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.checkItem {
+  @include m.body-copy;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 17px;
+  color: t.$ink;
+}
+
+.checkBox {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin-top: 5px;
+  border: 2px solid t.$navy;
+  border-radius: 3px;
+  background: t.$white;
+}
+
+.answerPanel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: clamp(16px, 2.4vw, 24px);
+  border-inline-start: 4px solid t.$yellow;
+  border-radius: 0 8px 8px 0;
+  background: t.$paper;
+}
+
+.answerBody {
+  @include m.body-copy;
+  display: grid;
+  gap: 12px;
+  font-size: 17px;
+  color: t.$ink-strong;
+
+  > p {
+    margin: 0;
+  }
+}
+
+.topicList {
+  margin: 0;
+  padding-inline-start: 20px;
+  display: grid;
+  gap: 6px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: t.$ink;
+}
+
+.inlineLink {
+  @include m.touch-area;
+  font-weight: 700;
+}
+
+.closing {
+  @include m.pop-shadow(5px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 36px;
+  margin-block: clamp(32px, 5vw, 64px);
+  padding: clamp(20px, 3.4vw, 36px);
+  border: 2px solid t.$navy;
+  border-radius: 12px;
+  background: t.$sand;
+}
+
+.closingText {
+  display: grid;
+  gap: 8px;
+  max-width: 62ch;
+  min-width: 0;
+}
+
+.closingTitle {
+  @include m.display-heading(clamp(28px, 3.6vw, 46px));
+  line-height: 1.02;
+}
+
+.closingBody {
+  @include m.body-copy;
+  color: t.$ink;
+}
+
+.closingActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media print {
+  .page {
+    background: t.$white;
+    color: t.$black;
+  }
+
+  .opening {
+    padding: 0 0 16px;
+    background: t.$white;
+    border-bottom: 2px solid t.$black;
+  }
+
+  .openingActions,
+  .printButton,
+  .indexCard,
+  .closing {
+    display: none;
+  }
+
+  .content {
+    padding-inline: 0;
+  }
+
+  .questions {
+    gap: 14px;
+    padding-top: 16px;
+  }
+
+  // A question card can run to most of a page, and keeping it whole left the first sheet holding only
+  // the title. The card splits between its parts; each part stays whole.
+  .card {
+    break-inside: auto;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1px solid t.$black;
+    border-radius: 4px;
+    background: t.$white;
+  }
+
+  // Stacked rather than side by side: a grid row cannot split across pages, so two columns kept the
+  // whole question off the first sheet.
+  .columns {
+    display: block;
+  }
+
+  .checkPanel,
+  .checkList {
+    display: block;
+  }
+
+  .checkItem + .checkItem {
+    margin-top: 10px;
+  }
+
+  .answerPanel {
+    margin-top: 14px;
+  }
+
+  .questionNumber {
+    border: 1px solid t.$black;
+    background: t.$white;
+    color: t.$black;
+  }
+
+  .checkBox {
+    border-color: t.$black;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .cardHeader,
+  .checkItem,
+  .panelHeading {
+    break-inside: avoid;
+  }
+
+  .panelHeading {
+    break-after: avoid;
+    margin-bottom: 8px;
+  }
+
+  .cardHeader {
+    break-after: avoid;
+  }
+
+  .answerPanel {
+    padding: 10px 12px;
+    border: 1px solid t.$line;
+    border-inline-start: 3px solid t.$black;
+    background: t.$white;
+  }
+}
