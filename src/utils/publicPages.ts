@@ -83,6 +83,14 @@ const METADATA = {
     imageSubtitle: 'Your details and how we use them',
     imageAlt: 'Germandians: privacy note about your details and how we use them',
   },
+  germanWords: {
+    title: 'German words | Germandians',
+    description: 'Everyday study, paperwork, housing, money and daily-life German words for students in Germany, with articles, plurals, examples and links to the requirements guide.',
+    image: 'social/german-words.png',
+    imageTitle: 'German words',
+    imageSubtitle: 'Study, paperwork and daily-life German',
+    imageAlt: 'Germandians: glossary of everyday study, paperwork and daily-life German',
+  },
 } as const satisfies Record<PageKey, Sharing>;
 
 /** Prerendering, metadata, the sitemap and social labels read this registry. */

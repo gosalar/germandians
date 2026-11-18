@@ -88,6 +88,15 @@ export const PAGE_REGISTRY = [
     sitemap: true,
     sections: [],
   },
+  {
+    key: 'germanWords',
+    path: '/german-words',
+    file: 'routes/german-words.tsx',
+    shell: 'site',
+    prerender: true,
+    sitemap: true,
+    sections: [SECTIONS.top],
+  },
 ] as const;
 
 type RegistryPage = (typeof PAGE_REGISTRY)[number];
