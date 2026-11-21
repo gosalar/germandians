@@ -55,7 +55,7 @@ export const deadlines = {
     },
     {
       heading: 'Example: what waits for what',
-      body: 'Some steps need an earlier one. At TUM, for example, applicants whose bachelor’s is from India upload their APS certificate to uni-assist with their other documents after applying online for the VPD, and the VPD then goes with their application to TUM. The visa application needs your admission letter, and enrolling at the university needs your passport with the visa or residence permit.',
+      body: 'Some steps need an earlier one. At TUM, for example, applicants whose bachelor’s is from India upload their APS certificate to uni-assist with their other documents after applying online for the VPD. The visa application needs your admission letter, and enrolling at the university needs your passport with the visa or residence permit.',
       source: SOURCES.tumAps,
     },
   ],

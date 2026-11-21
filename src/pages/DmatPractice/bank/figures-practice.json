@@ -30,12 +30,12 @@
             "colour": "white",
             "orient": 0,
             "pos": [
-              3,
-              2
+              1,
+              3
             ]
           }
         ],
-        "mistake": "the trapezium moves one field too many along the edge"
+        "mistake": "the trapezium goes round the edge the wrong way"
       },
       {
         "frame": [
@@ -43,12 +43,12 @@
             "colour": "white",
             "orient": 0,
             "pos": [
-              1,
-              3
+              3,
+              2
             ]
           }
         ],
-        "mistake": "the trapezium goes round the edge the wrong way"
+        "mistake": "the trapezium moves one field too many along the edge"
       }
     ],
     "options6": [
@@ -58,12 +58,12 @@
             "colour": "white",
             "orient": 0,
             "pos": [
-              3,
-              0
+              0,
+              3
             ]
           }
         ],
-        "mistake": "the trapezium moves one field too many along the edge"
+        "mistake": "the trapezium goes round the edge the wrong way"
       },
       {
         "frame": [
@@ -300,15 +300,15 @@
       {
         "frame": [
           {
-            "colour": "orange",
+            "colour": "green",
             "orient": 2,
             "pos": [
-              0,
+              1,
               0
             ]
           }
         ],
-        "mistake": "the arrow keeps its colour instead of changing"
+        "mistake": "the arrow moves one field too many along the edge"
       },
       {
         "frame": [
@@ -445,6 +445,19 @@
         "frame": [
           {
             "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              2,
+              0
+            ]
+          }
+        ],
+        "mistake": "the triangle turns one quarter turn too far"
+      },
+      {
+        "frame": [
+          {
+            "colour": "yellow",
             "orient": 0,
             "pos": [
               2,
@@ -453,19 +466,6 @@
           }
         ],
         "mistake": "the triangle turns the wrong way"
-      },
-      {
-        "frame": [
-          {
-            "colour": "yellow",
-            "orient": 2,
-            "pos": [
-              2,
-              2
-            ]
-          }
-        ],
-        "mistake": "the triangle turns back before it reaches the edge"
       },
       {
         "frame": [
@@ -486,27 +486,27 @@
         "frame": [
           {
             "colour": "yellow",
-            "orient": 3,
+            "orient": 1,
             "pos": [
               1,
               0
             ]
           }
         ],
-        "mistake": "the triangle slides along the edge instead of bouncing back"
+        "mistake": "the triangle slides up along the edge instead of bouncing back and stops turning"
       },
       {
         "frame": [
           {
             "colour": "yellow",
-            "orient": 1,
+            "orient": 2,
             "pos": [
-              2,
-              1
+              3,
+              0
             ]
           }
         ],
-        "mistake": "the triangle stops turning"
+        "mistake": "the triangle slides down along the edge instead of bouncing back and stops turning after the fifth matrix"
       },
       {
         "frame": [
@@ -614,15 +614,15 @@
       {
         "frame": [
           {
-            "colour": "yellow",
+            "colour": "green",
             "orient": 3,
             "pos": [
-              1,
+              0,
               0
             ]
           }
         ],
-        "mistake": "the half-circle keeps its colour instead of changing"
+        "mistake": "the half-circle moves one field too many along the edge"
       }
     ],
     "options6": [
@@ -746,6 +746,19 @@
         "frame": [
           {
             "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              3,
+              3
+            ]
+          }
+        ],
+        "mistake": "the flag turns one quarter turn too far"
+      },
+      {
+        "frame": [
+          {
+            "colour": "yellow",
             "orient": 0,
             "pos": [
               3,
@@ -754,6 +767,21 @@
           }
         ],
         "mistake": "the flag turns the wrong way"
+      }
+    ],
+    "options6": [
+      {
+        "frame": [
+          {
+            "colour": "yellow",
+            "orient": 1,
+            "pos": [
+              2,
+              3
+            ]
+          }
+        ],
+        "mistake": "the flag slides up along the edge instead of bouncing back and stops turning"
       },
       {
         "frame": [
@@ -766,35 +794,7 @@
             ]
           }
         ],
-        "mistake": "the flag turns back before it reaches the edge"
-      }
-    ],
-    "options6": [
-      {
-        "frame": [
-          {
-            "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              2,
-              3
-            ]
-          }
-        ],
-        "mistake": "the flag slides along the edge instead of bouncing back"
-      },
-      {
-        "frame": [
-          {
-            "colour": "yellow",
-            "orient": 1,
-            "pos": [
-              3,
-              2
-            ]
-          }
-        ],
-        "mistake": "the flag stops turning"
+        "mistake": "the flag moves one field too far after the fifth matrix and stops turning after the fifth matrix"
       },
       {
         "frame": [
@@ -878,7 +878,7 @@
         "frame": [
           {
             "colour": "green",
-            "orient": 3,
+            "orient": 1,
             "pos": [
               3,
               2
@@ -893,7 +893,7 @@
             ]
           }
         ],
-        "mistake": "the corner moves one field too far"
+        "mistake": "the trapezium turns the wrong way, and the corner moves one field too far"
       },
       {
         "frame": [
@@ -920,7 +920,7 @@
         "frame": [
           {
             "colour": "green",
-            "orient": 1,
+            "orient": 0,
             "pos": [
               3,
               2
@@ -930,12 +930,12 @@
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              1,
+              3,
               1
             ]
           }
         ],
-        "mistake": "the trapezium turns the wrong way"
+        "mistake": "the trapezium stops turning, and the corner turns back before it reaches the edge"
       }
     ],
     "options6": [
@@ -985,22 +985,22 @@
         "frame": [
           {
             "colour": "green",
-            "orient": 2,
+            "orient": 3,
             "pos": [
-              0,
-              1
+              3,
+              2
             ]
           },
           {
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              3,
-              2
+              0,
+              1
             ]
           }
         ],
-        "mistake": "the trapezium and the corner have swapped places"
+        "mistake": "the trapezium stops turning after the fifth matrix"
       }
     ],
     "shapes": [
@@ -1104,14 +1104,14 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 2,
+            "orient": 1,
             "pos": [
-              1,
-              3
+              3,
+              0
             ]
           }
         ],
-        "mistake": "the flag moves one field too far"
+        "mistake": "the flag switches to moving left at the edge instead of going back the way it came and turns one quarter turn too far"
       },
       {
         "frame": [
@@ -1130,14 +1130,14 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 2,
+            "orient": 0,
             "pos": [
-              3,
-              0
+              2,
+              1
             ]
           }
         ],
-        "mistake": "the flag switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the flag switches to moving up at the edge instead of going back the way it came and turns the wrong way"
       }
     ],
     "options6": [
@@ -1158,14 +1158,14 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 1,
+            "orient": 2,
             "pos": [
-              3,
+              1,
               1
             ]
           }
         ],
-        "mistake": "the flag switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the flag switches to moving up at the edge instead of going back the way it came and stops turning after the fifth matrix"
       },
       {
         "frame": [
@@ -1173,12 +1173,12 @@
             "colour": "black",
             "orient": 3,
             "pos": [
-              1,
-              3
+              3,
+              1
             ]
           }
         ],
-        "mistake": "the flag stops turning"
+        "mistake": "the flag turns back after the fifth matrix before reaching the edge and stops turning"
       }
     ],
     "shapes": [
@@ -1261,14 +1261,14 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 1,
+            "orient": 2,
             "pos": [
-              3,
-              1
+              1,
+              0
             ]
           }
         ],
-        "mistake": "the arrow moves one field too many along the edge"
+        "mistake": "the arrow goes round the edge the wrong way and turns one quarter turn too far"
       },
       {
         "frame": [
@@ -1277,11 +1277,11 @@
             "orient": 3,
             "pos": [
               3,
-              0
+              1
             ]
           }
         ],
-        "mistake": "the arrow turns the wrong way"
+        "mistake": "the arrow moves one field too many along the edge and turns the wrong way"
       }
     ],
     "options6": [
@@ -1289,27 +1289,27 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 2,
+            "orient": 1,
             "pos": [
-              3,
-              3
+              0,
+              0
             ]
           }
         ],
-        "mistake": "the arrow moves one field too many along the edge"
+        "mistake": "the arrow goes round the edge the wrong way and stops turning after the fifth matrix"
       },
       {
         "frame": [
           {
             "colour": "black",
-            "orient": 2,
+            "orient": 0,
             "pos": [
               2,
               0
             ]
           }
         ],
-        "mistake": "the arrow bounces back at the corner instead of going round it"
+        "mistake": "the arrow bounces back at the corner instead of going round it and stops turning"
       },
       {
         "frame": [
@@ -1408,24 +1408,24 @@
             "orient": 1,
             "pos": [
               3,
-              3
+              2
             ]
           }
         ],
-        "mistake": "the arrow turns the wrong way"
+        "mistake": "the arrow moves one field too many along the edge and turns the wrong way"
       },
       {
         "frame": [
           {
             "colour": "blue",
-            "orient": 0,
+            "orient": 2,
             "pos": [
-              3,
+              1,
               3
             ]
           }
         ],
-        "mistake": "the arrow stops turning"
+        "mistake": "the arrow goes round the edge the wrong way and turns one quarter turn too far"
       }
     ],
     "options6": [
@@ -1433,14 +1433,14 @@
         "frame": [
           {
             "colour": "blue",
-            "orient": 2,
+            "orient": 0,
             "pos": [
-              2,
+              0,
               3
             ]
           }
         ],
-        "mistake": "the arrow bounces back at the corner instead of going round it"
+        "mistake": "the arrow goes round the edge the wrong way and stops turning"
       },
       {
         "frame": [
@@ -1459,14 +1459,14 @@
         "frame": [
           {
             "colour": "blue",
-            "orient": 0,
+            "orient": 3,
             "pos": [
-              3,
-              2
+              2,
+              3
             ]
           }
         ],
-        "mistake": "the arrow stops turning"
+        "mistake": "the arrow bounces back at the corner instead of going round it and stops turning after the fifth matrix"
       }
     ],
     "shapes": [
@@ -1560,20 +1560,20 @@
             "colour": "pink",
             "orient": 0,
             "pos": [
-              3,
-              0
+              0,
+              3
             ]
           },
           {
             "colour": "orange",
             "orient": 0,
             "pos": [
-              2,
-              3
+              3,
+              0
             ]
           }
         ],
-        "mistake": "the corner and the half-circle have swapped places"
+        "mistake": "the corner goes round the edge the wrong way"
       },
       {
         "frame": [
@@ -1581,7 +1581,7 @@
             "colour": "pink",
             "orient": 0,
             "pos": [
-              2,
+              3,
               3
             ]
           },
@@ -1589,12 +1589,12 @@
             "colour": "orange",
             "orient": 0,
             "pos": [
-              1,
+              3,
               0
             ]
           }
         ],
-        "mistake": "the half-circle turns back before it reaches the edge"
+        "mistake": "the corner moves one field too many along the edge"
       }
     ],
     "options6": [
@@ -1604,8 +1604,8 @@
             "colour": "pink",
             "orient": 0,
             "pos": [
-              3,
-              3
+              0,
+              2
             ]
           },
           {
@@ -1617,7 +1617,7 @@
             ]
           }
         ],
-        "mistake": "the half-circle slides along the edge instead of bouncing back"
+        "mistake": "the corner goes round the edge the wrong way, and the half-circle slides right along the edge instead of bouncing back"
       },
       {
         "frame": [
@@ -1625,20 +1625,20 @@
             "colour": "pink",
             "orient": 0,
             "pos": [
-              2,
-              0
+              3,
+              1
             ]
           },
           {
             "colour": "orange",
             "orient": 0,
             "pos": [
-              3,
-              3
+              1,
+              0
             ]
           }
         ],
-        "mistake": "the corner and the half-circle have swapped places"
+        "mistake": "the corner moves one field too many along the edge, and the half-circle moves one field too far after the fifth matrix"
       },
       {
         "frame": [
@@ -1765,6 +1765,48 @@
             "colour": "black",
             "orient": 0,
             "pos": [
+              2,
+              0
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              3,
+              0
+            ]
+          }
+        ],
+        "mistake": "the triangle slides down along the edge instead of bouncing back"
+      },
+      {
+        "frame": [
+          {
+            "colour": "black",
+            "orient": 0,
+            "pos": [
+              1,
+              1
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              3,
+              0
+            ]
+          }
+        ],
+        "mistake": null
+      },
+      {
+        "frame": [
+          {
+            "colour": "black",
+            "orient": 0,
+            "pos": [
               1,
               2
             ]
@@ -1779,48 +1821,6 @@
           }
         ],
         "mistake": "the triangle moves one field too far"
-      },
-      {
-        "frame": [
-          {
-            "colour": "black",
-            "orient": 0,
-            "pos": [
-              1,
-              1
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              3,
-              0
-            ]
-          }
-        ],
-        "mistake": null
-      },
-      {
-        "frame": [
-          {
-            "colour": "black",
-            "orient": 0,
-            "pos": [
-              1,
-              1
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              1,
-              2
-            ]
-          }
-        ],
-        "mistake": "the square turns back before it reaches the edge"
       }
     ],
     "options6": [
@@ -1830,8 +1830,8 @@
             "colour": "black",
             "orient": 0,
             "pos": [
-              0,
-              1
+              1,
+              3
             ]
           },
           {
@@ -1843,7 +1843,7 @@
             ]
           }
         ],
-        "mistake": "the triangle slides along the edge instead of bouncing back"
+        "mistake": "the triangle moves one field too far after the fifth matrix"
       },
       {
         "frame": [
@@ -1872,20 +1872,20 @@
             "colour": "black",
             "orient": 0,
             "pos": [
-              2,
-              1
+              1,
+              0
             ]
           },
           {
             "colour": "yellow",
             "orient": 3,
             "pos": [
-              1,
-              2
+              2,
+              1
             ]
           }
         ],
-        "mistake": "the triangle and the square have swapped places"
+        "mistake": "the triangle turns back after the fifth matrix before reaching the edge"
       }
     ],
     "shapes": [
@@ -2033,20 +2033,20 @@
             "colour": "black",
             "orient": 3,
             "pos": [
-              3,
-              2
+              0,
+              1
             ]
           },
           {
             "colour": "green",
-            "orient": 1,
+            "orient": 2,
             "pos": [
-              0,
-              1
+              3,
+              2
             ]
           }
         ],
-        "mistake": "the flag and the triangle have swapped places"
+        "mistake": "the triangle turns one quarter turn too far"
       }
     ],
     "options6": [
@@ -2077,20 +2077,20 @@
             "colour": "black",
             "orient": 3,
             "pos": [
-              1,
-              2
+              0,
+              0
             ]
           },
           {
             "colour": "green",
-            "orient": 0,
+            "orient": 1,
             "pos": [
               3,
               2
             ]
           }
         ],
-        "mistake": "the triangle stops turning"
+        "mistake": "the flag switches to moving left at the edge instead of going back the way it came, and the triangle stops turning after the fifth matrix"
       },
       {
         "frame": [
@@ -2098,20 +2098,20 @@
             "colour": "black",
             "orient": 3,
             "pos": [
-              0,
-              0
+              1,
+              1
             ]
           },
           {
             "colour": "green",
-            "orient": 2,
+            "orient": 3,
             "pos": [
               3,
               2
             ]
           }
         ],
-        "mistake": "the flag switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the flag switches to moving down at the edge instead of going back the way it came, and the triangle turns one quarter turn too far"
       }
     ],
     "shapes": [
@@ -2226,12 +2226,12 @@
             "colour": "black",
             "orient": 2,
             "pos": [
-              2,
+              0,
               0
             ]
           }
         ],
-        "mistake": "the triangle moves one field too far"
+        "mistake": "the triangle moves one field too far, and the square goes round the edge the wrong way"
       },
       {
         "frame": [
@@ -2239,20 +2239,20 @@
             "colour": "orange",
             "orient": 0,
             "pos": [
-              1,
-              2
+              0,
+              3
             ]
           },
           {
             "colour": "black",
             "orient": 2,
             "pos": [
-              0,
+              3,
               0
             ]
           }
         ],
-        "mistake": "the square goes round the edge the wrong way"
+        "mistake": "the triangle slides up along the edge instead of bouncing back, and the square moves one field too many along the edge"
       },
       {
         "frame": [
@@ -2292,11 +2292,11 @@
             "orient": 2,
             "pos": [
               3,
-              0
+              2
             ]
           }
         ],
-        "mistake": "the triangle slides along the edge instead of bouncing back"
+        "mistake": "the triangle slides down along the edge instead of bouncing back, and the square moves one field too many along the edge"
       },
       {
         "frame": [
@@ -2305,19 +2305,19 @@
             "orient": 0,
             "pos": [
               1,
-              1
+              3
             ]
           },
           {
             "colour": "black",
             "orient": 2,
             "pos": [
-              3,
-              2
+              0,
+              1
             ]
           }
         ],
-        "mistake": "the square moves one field too many along the edge"
+        "mistake": "the triangle turns back after the fifth matrix before reaching the edge, and the square goes round the edge the wrong way"
       },
       {
         "frame": [
@@ -2441,14 +2441,14 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 2,
+            "orient": 3,
             "pos": [
-              1,
+              3,
               2
             ]
           }
         ],
-        "mistake": "the half-circle repeats its last move instead of continuing the pattern"
+        "mistake": "the half-circle goes back the way it came instead of continuing the pattern and turns one quarter turn too far"
       },
       {
         "frame": [
@@ -2456,12 +2456,12 @@
             "colour": "black",
             "orient": 1,
             "pos": [
-              2,
+              3,
               1
             ]
           }
         ],
-        "mistake": "the half-circle stops turning"
+        "mistake": "the half-circle skips a step in its repeating pattern and stops turning"
       },
       {
         "frame": [
@@ -2495,27 +2495,27 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 3,
+            "orient": 1,
+            "pos": [
+              2,
+              2
+            ]
+          }
+        ],
+        "mistake": "the half-circle goes back to its fourth-matrix field instead of continuing the pattern and stops turning"
+      },
+      {
+        "frame": [
+          {
+            "colour": "black",
+            "orient": 2,
             "pos": [
               0,
               2
             ]
           }
         ],
-        "mistake": "the half-circle repeats its last move instead of continuing the pattern"
-      },
-      {
-        "frame": [
-          {
-            "colour": "black",
-            "orient": 1,
-            "pos": [
-              3,
-              1
-            ]
-          }
-        ],
-        "mistake": "the half-circle stops turning"
+        "mistake": "the half-circle repeats its last move instead of continuing the pattern and stops turning after the fifth matrix"
       }
     ],
     "shapes": [
@@ -2589,19 +2589,19 @@
             "orient": 1,
             "pos": [
               3,
-              0
+              1
             ]
           },
           {
             "colour": "orange",
             "orient": 0,
             "pos": [
-              2,
+              3,
               2
             ]
           }
         ],
-        "mistake": "the arrow and the diamond have swapped places"
+        "mistake": "the arrow slides left along the edge instead of bouncing back, and the diamond goes round the edge the wrong way"
       },
       {
         "frame": [
@@ -2630,20 +2630,20 @@
             "colour": "blue",
             "orient": 1,
             "pos": [
-              2,
-              2
+              3,
+              3
             ]
           },
           {
             "colour": "orange",
             "orient": 0,
             "pos": [
-              3,
-              2
+              2,
+              0
             ]
           }
         ],
-        "mistake": "the diamond goes round the edge the wrong way"
+        "mistake": "the arrow slides right along the edge instead of bouncing back, and the diamond moves one field too many along the edge"
       }
     ],
     "options6": [
@@ -2654,19 +2654,19 @@
             "orient": 1,
             "pos": [
               3,
-              0
+              2
             ]
           },
           {
             "colour": "orange",
             "orient": 0,
             "pos": [
-              2,
+              0,
               0
             ]
           }
         ],
-        "mistake": "the arrow slides along the edge instead of bouncing back"
+        "mistake": "the arrow turns back after the fifth matrix before reaching the edge, and the diamond moves one field too many along the edge"
       },
       {
         "frame": [
@@ -2674,7 +2674,7 @@
             "colour": "white",
             "orient": 1,
             "pos": [
-              1,
+              0,
               2
             ]
           },
@@ -2687,7 +2687,7 @@
             ]
           }
         ],
-        "mistake": "the diamond bounces back at the corner instead of going round it"
+        "mistake": "the arrow moves one field too far after the fifth matrix, and the diamond bounces back at the corner instead of going round it"
       },
       {
         "frame": [
@@ -2817,19 +2817,19 @@
             "orient": 1,
             "pos": [
               2,
-              0
+              1
             ]
           },
           {
             "colour": "pink",
             "orient": 2,
             "pos": [
-              1,
-              1
+              3,
+              0
             ]
           }
         ],
-        "mistake": "the triangle switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the triangle bounces at a right angle off the edge instead of going back the way it came, and the diamond switches to moving down at the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -2837,20 +2837,20 @@
             "colour": "blue",
             "orient": 1,
             "pos": [
-              0,
-              1
+              2,
+              0
             ]
           },
           {
             "colour": "pink",
             "orient": 2,
             "pos": [
-              0,
-              2
+              3,
+              1
             ]
           }
         ],
-        "mistake": "the diamond moves one field too far"
+        "mistake": "the triangle switches to moving down at the edge instead of going back the way it came, and the diamond bounces at a right angle off the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -2881,20 +2881,20 @@
             "colour": "blue",
             "orient": 1,
             "pos": [
-              0,
-              2
+              1,
+              0
             ]
           },
           {
             "colour": "pink",
             "orient": 2,
             "pos": [
-              1,
+              2,
               0
             ]
           }
         ],
-        "mistake": "the triangle and the diamond have swapped places"
+        "mistake": "the diamond turns back after the fifth matrix before reaching the edge"
       },
       {
         "frame": [
@@ -2931,12 +2931,12 @@
             "colour": "pink",
             "orient": 2,
             "pos": [
-              2,
+              0,
               0
             ]
           }
         ],
-        "mistake": "the diamond switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the diamond switches to moving up at the edge instead of going back the way it came"
       }
     ],
     "shapes": [
@@ -3054,7 +3054,7 @@
             ]
           }
         ],
-        "mistake": "the hexagon switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the hexagon switches to moving up at the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -3062,7 +3062,7 @@
             "colour": "white",
             "orient": 2,
             "pos": [
-              3,
+              1,
               2
             ]
           },
@@ -3070,12 +3070,12 @@
             "colour": "orange",
             "orient": 3,
             "pos": [
-              2,
-              3
+              0,
+              1
             ]
           }
         ],
-        "mistake": "the square turns back before it reaches the edge"
+        "mistake": "the hexagon bounces at a right angle off the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -3106,20 +3106,20 @@
             "colour": "green",
             "orient": 2,
             "pos": [
-              1,
-              2
+              2,
+              3
             ]
           },
           {
             "colour": "orange",
             "orient": 3,
             "pos": [
-              2,
-              3
+              1,
+              0
             ]
           }
         ],
-        "mistake": "the hexagon and the square have swapped places"
+        "mistake": "the square bounces at a right angle off the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -3156,12 +3156,12 @@
             "colour": "orange",
             "orient": 3,
             "pos": [
-              0,
-              0
+              1,
+              1
             ]
           }
         ],
-        "mistake": "the square switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the square switches to moving down at the edge instead of going back the way it came"
       }
     ],
     "shapes": [
@@ -3273,15 +3273,15 @@
             ]
           },
           {
-            "colour": "yellow",
-            "orient": 3,
+            "colour": "green",
+            "orient": 0,
             "pos": [
-              3,
+              2,
               3
             ]
           }
         ],
-        "mistake": "the flag moves one field too far"
+        "mistake": "the flag turns 90° anticlockwise instead of 180° and keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -3304,6 +3304,29 @@
         ],
         "mistake": null
       },
+      {
+        "frame": [
+          {
+            "colour": "white",
+            "orient": 2,
+            "pos": [
+              3,
+              0
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 0,
+            "pos": [
+              0,
+              3
+            ]
+          }
+        ],
+        "mistake": "the flag turns back before it reaches the edge and turns 90° anticlockwise instead of 180°"
+      }
+    ],
+    "options6": [
       {
         "frame": [
           {
@@ -3315,38 +3338,15 @@
             ]
           },
           {
-            "colour": "yellow",
+            "colour": "green",
             "orient": 3,
             "pos": [
-              2,
+              3,
               3
             ]
           }
         ],
-        "mistake": "the circle turns back before it reaches the edge"
-      }
-    ],
-    "options6": [
-      {
-        "frame": [
-          {
-            "colour": "white",
-            "orient": 2,
-            "pos": [
-              3,
-              3
-            ]
-          },
-          {
-            "colour": "green",
-            "orient": 1,
-            "pos": [
-              3,
-              1
-            ]
-          }
-        ],
-        "mistake": "the circle and the flag have swapped places"
+        "mistake": "the circle moves one field too far after the fifth matrix, and the flag turns 90° clockwise instead of 180°"
       },
       {
         "frame": [
@@ -3381,14 +3381,14 @@
           },
           {
             "colour": "green",
-            "orient": 1,
+            "orient": 2,
             "pos": [
               3,
               3
             ]
           }
         ],
-        "mistake": "the circle slides along the edge instead of bouncing back"
+        "mistake": "the circle slides up along the edge instead of bouncing back, and the flag turns one quarter turn too far"
       }
     ],
     "shapes": [
@@ -3518,27 +3518,6 @@
             "orient": 1,
             "pos": [
               2,
-              2
-            ]
-          },
-          {
-            "colour": "green",
-            "orient": 3,
-            "pos": [
-              3,
-              1
-            ]
-          }
-        ],
-        "mistake": "the hexagon goes back the way it came instead of continuing the pattern"
-      },
-      {
-        "frame": [
-          {
-            "colour": "white",
-            "orient": 1,
-            "pos": [
-              1,
               1
             ]
           },
@@ -3551,7 +3530,28 @@
             ]
           }
         ],
-        "mistake": "the trapezium moves one field too far"
+        "mistake": "the hexagon skips a step in its repeating pattern, and the trapezium moves one field too far"
+      },
+      {
+        "frame": [
+          {
+            "colour": "white",
+            "orient": 1,
+            "pos": [
+              2,
+              2
+            ]
+          },
+          {
+            "colour": "green",
+            "orient": 3,
+            "pos": [
+              1,
+              3
+            ]
+          }
+        ],
+        "mistake": "the hexagon goes back the way it came instead of continuing the pattern, and the trapezium slides up along the edge instead of bouncing back"
       }
     ],
     "options6": [
@@ -3561,20 +3561,20 @@
             "colour": "white",
             "orient": 1,
             "pos": [
-              3,
-              1
+              1,
+              0
             ]
           },
           {
             "colour": "green",
             "orient": 3,
             "pos": [
-              2,
-              1
+              3,
+              2
             ]
           }
         ],
-        "mistake": "the hexagon and the trapezium have swapped places"
+        "mistake": "the hexagon repeats its fifth-matrix move instead of continuing the pattern, and the trapezium moves one field too far after the fifth matrix"
       },
       {
         "frame": [
@@ -3582,8 +3582,8 @@
             "colour": "white",
             "orient": 1,
             "pos": [
-              2,
-              1
+              1,
+              2
             ]
           },
           {
@@ -3595,7 +3595,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium moves one field too far"
+        "mistake": "the hexagon goes back to its fourth-matrix field instead of continuing the pattern, and the trapezium moves one field too far"
       },
       {
         "frame": [
@@ -3723,7 +3723,7 @@
             "colour": "orange",
             "orient": 3,
             "pos": [
-              2,
+              3,
               1
             ]
           },
@@ -3731,12 +3731,12 @@
             "colour": "yellow",
             "orient": 3,
             "pos": [
-              0,
+              2,
               3
             ]
           }
         ],
-        "mistake": "the hexagon goes back the way it came instead of continuing the pattern"
+        "mistake": "the diamond moves one field too far, and the hexagon repeats its last move instead of continuing the pattern"
       },
       {
         "frame": [
@@ -3773,12 +3773,12 @@
             "colour": "yellow",
             "orient": 3,
             "pos": [
-              1,
+              0,
               2
             ]
           }
         ],
-        "mistake": "the diamond turns back before it reaches the edge"
+        "mistake": "the diamond turns back before it reaches the edge, and the hexagon skips a step in its repeating pattern"
       }
     ],
     "options6": [
@@ -3817,12 +3817,12 @@
             "colour": "green",
             "orient": 3,
             "pos": [
-              3,
+              1,
               3
             ]
           }
         ],
-        "mistake": "the hexagon repeats its last move instead of continuing the pattern"
+        "mistake": "the hexagon goes back to its fourth-matrix field instead of continuing the pattern"
       },
       {
         "frame": [
@@ -3830,20 +3830,20 @@
             "colour": "orange",
             "orient": 3,
             "pos": [
-              0,
-              2
+              3,
+              1
             ]
           },
           {
             "colour": "green",
             "orient": 3,
             "pos": [
-              3,
+              1,
               1
             ]
           }
         ],
-        "mistake": "the diamond and the hexagon have swapped places"
+        "mistake": "the hexagon repeats its fifth-matrix move instead of continuing the pattern"
       }
     ],
     "shapes": [
@@ -3981,11 +3981,11 @@
             "orient": 3,
             "pos": [
               2,
-              3
+              1
             ]
           }
         ],
-        "mistake": "the circle bounces back at the corner instead of going round it"
+        "mistake": "the circle bounces back at the corner instead of going round it, and the half-circle bounces at a right angle off the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -3994,7 +3994,7 @@
             "orient": 3,
             "pos": [
               0,
-              3
+              2
             ]
           },
           {
@@ -4006,7 +4006,7 @@
             ]
           }
         ],
-        "mistake": "the half-circle switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the circle moves one field too few along the edge, and the half-circle switches to moving left at the edge instead of going back the way it came"
       }
     ],
     "options6": [
@@ -4017,7 +4017,7 @@
             "orient": 3,
             "pos": [
               3,
-              2
+              1
             ]
           },
           {
@@ -4025,11 +4025,11 @@
             "orient": 3,
             "pos": [
               3,
-              3
+              2
             ]
           }
         ],
-        "mistake": "the circle and the half-circle have swapped places"
+        "mistake": "the circle moves one field too many along the edge"
       },
       {
         "frame": [
@@ -4037,7 +4037,7 @@
             "colour": "pink",
             "orient": 3,
             "pos": [
-              3,
+              1,
               3
             ]
           },
@@ -4046,11 +4046,11 @@
             "orient": 3,
             "pos": [
               3,
-              0
+              2
             ]
           }
         ],
-        "mistake": "the half-circle switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the circle moves one field too few along the edge"
       },
       {
         "frame": [
@@ -4177,27 +4177,6 @@
             "colour": "white",
             "orient": 2,
             "pos": [
-              2,
-              3
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 2,
-            "pos": [
-              1,
-              3
-            ]
-          }
-        ],
-        "mistake": "the diamond keeps its colour instead of changing"
-      },
-      {
-        "frame": [
-          {
-            "colour": "white",
-            "orient": 2,
-            "pos": [
               3,
               2
             ]
@@ -4206,12 +4185,33 @@
             "colour": "blue",
             "orient": 2,
             "pos": [
-              1,
+              3,
               3
             ]
           }
         ],
-        "mistake": "the square goes back the way it came instead of continuing the pattern"
+        "mistake": "the square goes back the way it came instead of continuing the pattern, and the diamond goes round the edge the wrong way"
+      },
+      {
+        "frame": [
+          {
+            "colour": "white",
+            "orient": 2,
+            "pos": [
+              1,
+              2
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 2,
+            "pos": [
+              0,
+              3
+            ]
+          }
+        ],
+        "mistake": "the square repeats its last move instead of continuing the pattern, and the diamond moves one field too many along the edge"
       },
       {
         "frame": [
@@ -4242,7 +4242,7 @@
             "colour": "white",
             "orient": 2,
             "pos": [
-              0,
+              2,
               2
             ]
           },
@@ -4250,12 +4250,12 @@
             "colour": "black",
             "orient": 2,
             "pos": [
-              0,
-              3
+              3,
+              2
             ]
           }
         ],
-        "mistake": "the square repeats its last move instead of continuing the pattern"
+        "mistake": "the square goes back to its fourth-matrix field instead of continuing the pattern, and the diamond goes round the edge the wrong way"
       },
       {
         "frame": [
@@ -4264,19 +4264,19 @@
             "orient": 2,
             "pos": [
               3,
-              3
+              2
             ]
           },
           {
             "colour": "black",
             "orient": 2,
             "pos": [
-              3,
-              2
+              0,
+              1
             ]
           }
         ],
-        "mistake": "the diamond goes round the edge the wrong way"
+        "mistake": "the square skips a step in its repeating pattern, and the diamond moves one field too many along the edge"
       },
       {
         "frame": [
@@ -4404,8 +4404,8 @@
             "colour": "yellow",
             "orient": 0,
             "pos": [
-              1,
-              0
+              0,
+              1
             ]
           },
           {
@@ -4413,11 +4413,11 @@
             "orient": 0,
             "pos": [
               1,
-              2
+              3
             ]
           }
         ],
-        "mistake": "the hexagon goes back the way it came instead of continuing the pattern"
+        "mistake": "the triangle bounces back at the corner instead of going round it, and the hexagon skips a step in its repeating pattern"
       },
       {
         "frame": [
@@ -4447,19 +4447,19 @@
             "orient": 0,
             "pos": [
               0,
-              1
+              0
             ]
           },
           {
             "colour": "green",
             "orient": 0,
             "pos": [
-              2,
-              3
+              1,
+              2
             ]
           }
         ],
-        "mistake": "the triangle bounces back at the corner instead of going round it"
+        "mistake": "the triangle moves one field too few along the edge, and the hexagon goes back the way it came instead of continuing the pattern"
       }
     ],
     "options6": [
@@ -4469,8 +4469,8 @@
             "colour": "yellow",
             "orient": 0,
             "pos": [
-              0,
-              2
+              2,
+              0
             ]
           },
           {
@@ -4478,11 +4478,11 @@
             "orient": 0,
             "pos": [
               1,
-              3
+              2
             ]
           }
         ],
-        "mistake": "the triangle bounces back at the corner instead of going round it"
+        "mistake": "the triangle moves one field too few along the edge, and the hexagon skips a step in its repeating pattern"
       },
       {
         "frame": [
@@ -4511,20 +4511,20 @@
             "colour": "yellow",
             "orient": 0,
             "pos": [
-              3,
-              3
+              0,
+              2
             ]
           },
           {
             "colour": "green",
             "orient": 0,
             "pos": [
-              1,
-              3
+              2,
+              2
             ]
           }
         ],
-        "mistake": "the triangle moves one field too many along the edge"
+        "mistake": "the triangle bounces back at the corner instead of going round it, and the hexagon goes back to its fourth-matrix field instead of continuing the pattern"
       }
     ],
     "shapes": [
@@ -4630,27 +4630,6 @@
             "colour": "orange",
             "orient": 3,
             "pos": [
-              0,
-              1
-            ]
-          },
-          {
-            "colour": "green",
-            "orient": 2,
-            "pos": [
-              2,
-              3
-            ]
-          }
-        ],
-        "mistake": "the arrow keeps its colour instead of changing"
-      },
-      {
-        "frame": [
-          {
-            "colour": "orange",
-            "orient": 3,
-            "pos": [
               1,
               0
             ]
@@ -4660,11 +4639,32 @@
             "orient": 2,
             "pos": [
               2,
-              3
+              2
             ]
           }
         ],
-        "mistake": "the circle goes back the way it came instead of continuing the pattern"
+        "mistake": "the circle goes back the way it came instead of continuing the pattern, and the arrow switches to moving up at the edge instead of going back the way it came"
+      },
+      {
+        "frame": [
+          {
+            "colour": "orange",
+            "orient": 3,
+            "pos": [
+              1,
+              1
+            ]
+          },
+          {
+            "colour": "pink",
+            "orient": 2,
+            "pos": [
+              3,
+              1
+            ]
+          }
+        ],
+        "mistake": "the circle skips a step in its repeating pattern, and the arrow switches to moving left at the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -4716,7 +4716,7 @@
             "colour": "orange",
             "orient": 3,
             "pos": [
-              3,
+              0,
               2
             ]
           },
@@ -4724,12 +4724,12 @@
             "colour": "green",
             "orient": 2,
             "pos": [
-              1,
-              1
+              3,
+              2
             ]
           }
         ],
-        "mistake": "the circle and the arrow have swapped places"
+        "mistake": "the circle repeats its fifth-matrix move instead of continuing the pattern"
       },
       {
         "frame": [
@@ -4737,8 +4737,8 @@
             "colour": "orange",
             "orient": 3,
             "pos": [
-              1,
-              1
+              0,
+              0
             ]
           },
           {
@@ -4746,11 +4746,11 @@
             "orient": 2,
             "pos": [
               3,
-              0
+              2
             ]
           }
         ],
-        "mistake": "the arrow switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the circle goes back to its fourth-matrix field instead of continuing the pattern"
       }
     ],
     "shapes": [
@@ -4857,7 +4857,7 @@
             "colour": "blue",
             "orient": 2,
             "pos": [
-              1,
+              2,
               3
             ]
           },
@@ -4870,16 +4870,16 @@
             ]
           }
         ],
-        "mistake": "the corner skips a colour in its cycle"
+        "mistake": "the corner skips a step in its repeating pattern and runs through its colours in the wrong order"
       },
       {
         "frame": [
           {
-            "colour": "orange",
+            "colour": "white",
             "orient": 2,
             "pos": [
-              1,
-              3
+              2,
+              2
             ]
           },
           {
@@ -4887,11 +4887,11 @@
             "orient": 1,
             "pos": [
               3,
-              0
+              2
             ]
           }
         ],
-        "mistake": "the diamond goes round the edge the wrong way"
+        "mistake": "the corner goes back the way it came instead of continuing the pattern and keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -4919,11 +4919,11 @@
       {
         "frame": [
           {
-            "colour": "orange",
+            "colour": "white",
             "orient": 2,
             "pos": [
               2,
-              3
+              2
             ]
           },
           {
@@ -4935,7 +4935,7 @@
             ]
           }
         ],
-        "mistake": "the corner runs through its colours in the wrong order"
+        "mistake": "the corner skips a step in its repeating pattern and keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -4961,23 +4961,23 @@
       {
         "frame": [
           {
-            "colour": "blue",
+            "colour": "orange",
             "orient": 2,
             "pos": [
-              2,
-              3
+              1,
+              2
             ]
           },
           {
             "colour": "pink",
             "orient": 1,
             "pos": [
-              2,
-              0
+              3,
+              3
             ]
           }
         ],
-        "mistake": "the diamond goes round the edge the wrong way"
+        "mistake": "the corner goes back to its fourth-matrix field instead of continuing the pattern and skips a colour in its cycle"
       }
     ],
     "shapes": [
@@ -5122,7 +5122,7 @@
             "colour": "pink",
             "orient": 1,
             "pos": [
-              2,
+              1,
               1
             ]
           },
@@ -5135,7 +5135,7 @@
             ]
           }
         ],
-        "mistake": "the hexagon skips a colour in its cycle"
+        "mistake": "the flag moves one field too far, and the hexagon skips a colour in its cycle"
       },
       {
         "frame": [
@@ -5156,7 +5156,7 @@
             ]
           },
           {
-            "colour": "blue",
+            "colour": "white",
             "orient": 1,
             "pos": [
               2,
@@ -5164,7 +5164,7 @@
             ]
           }
         ],
-        "mistake": "the half-circle repeats its last move instead of continuing the pattern"
+        "mistake": "the half-circle repeats its last move instead of continuing the pattern, and the hexagon skips a colour in its cycle"
       }
     ],
     "options6": [
@@ -5187,7 +5187,7 @@
             ]
           },
           {
-            "colour": "white",
+            "colour": "blue",
             "orient": 1,
             "pos": [
               2,
@@ -5195,7 +5195,7 @@
             ]
           }
         ],
-        "mistake": "the half-circle repeats its last move instead of continuing the pattern"
+        "mistake": "the half-circle repeats its last move instead of continuing the pattern, and the hexagon runs through its colours in the wrong order"
       },
       {
         "frame": [
@@ -5240,7 +5240,7 @@
             "colour": "pink",
             "orient": 1,
             "pos": [
-              1,
+              0,
               1
             ]
           },
@@ -5253,7 +5253,7 @@
             ]
           }
         ],
-        "mistake": "the hexagon runs through its colours in the wrong order"
+        "mistake": "the flag moves one field too far after the fifth matrix, and the hexagon runs through its colours in the wrong order"
       }
     ],
     "shapes": [
@@ -5398,7 +5398,7 @@
             ]
           },
           {
-            "colour": "black",
+            "colour": "orange",
             "orient": 1,
             "pos": [
               1,
@@ -5406,7 +5406,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium turns the wrong way"
+        "mistake": "the trapezium turns the wrong way, and the diamond runs through its colours in the wrong order"
       },
       {
         "frame": [
@@ -5433,14 +5433,14 @@
         "frame": [
           {
             "colour": "blue",
-            "orient": 0,
+            "orient": 3,
             "pos": [
               0,
               2
             ]
           },
           {
-            "colour": "orange",
+            "colour": "blue",
             "orient": 1,
             "pos": [
               1,
@@ -5448,7 +5448,7 @@
             ]
           }
         ],
-        "mistake": "the diamond skips a colour in its cycle"
+        "mistake": "the trapezium stops turning, and the diamond keeps its colour instead of changing"
       }
     ],
     "options6": [
@@ -5487,33 +5487,33 @@
             "colour": "black",
             "orient": 1,
             "pos": [
-              1,
-              2
+              0,
+              1
             ]
           }
         ],
-        "mistake": "the diamond runs through its colours in the wrong order"
+        "mistake": "the diamond goes back to its fourth-matrix field instead of continuing the pattern and skips a colour in its cycle"
       },
       {
         "frame": [
           {
             "colour": "blue",
-            "orient": 3,
+            "orient": 1,
             "pos": [
               0,
               0
             ]
           },
           {
-            "colour": "orange",
+            "colour": "blue",
             "orient": 1,
             "pos": [
-              1,
-              2
+              2,
+              1
             ]
           }
         ],
-        "mistake": "the trapezium stops turning"
+        "mistake": "the diamond repeats its fifth-matrix move instead of continuing the pattern and keeps its colour instead of changing"
       }
     ],
     "shapes": [
@@ -5651,13 +5651,13 @@
             "colour": "orange",
             "orient": 0,
             "pos": [
-              3,
-              2
+              2,
+              0
             ]
           },
           {
             "colour": "blue",
-            "orient": 2,
+            "orient": 3,
             "pos": [
               2,
               1
@@ -5668,11 +5668,11 @@
             "orient": 2,
             "pos": [
               2,
-              2
+              3
             ]
           }
         ],
-        "mistake": "the hexagon switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the flag turns 90° anticlockwise instead of 180°, and the square switches to moving up at the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -5680,13 +5680,13 @@
             "colour": "orange",
             "orient": 0,
             "pos": [
-              2,
-              0
+              3,
+              2
             ]
           },
           {
-            "colour": "yellow",
-            "orient": 2,
+            "colour": "blue",
+            "orient": 3,
             "pos": [
               2,
               1
@@ -5701,7 +5701,7 @@
             ]
           }
         ],
-        "mistake": "the flag keeps its colour instead of changing"
+        "mistake": "the hexagon switches to moving right at the edge instead of going back the way it came, and the flag turns 90° anticlockwise instead of 180°"
       }
     ],
     "options6": [
@@ -5719,7 +5719,7 @@
             "colour": "yellow",
             "orient": 0,
             "pos": [
-              0,
+              2,
               0
             ]
           },
@@ -5727,12 +5727,12 @@
             "colour": "pink",
             "orient": 2,
             "pos": [
-              1,
-              1
+              3,
+              3
             ]
           }
         ],
-        "mistake": "the flag slides along the edge instead of bouncing back"
+        "mistake": "the flag turns back after the fifth matrix before reaching the edge, and the square turns back after the fifth matrix before reaching the edge"
       },
       {
         "frame": [
@@ -5741,7 +5741,7 @@
             "orient": 0,
             "pos": [
               3,
-              3
+              1
             ]
           },
           {
@@ -5749,7 +5749,7 @@
             "orient": 0,
             "pos": [
               2,
-              2
+              3
             ]
           },
           {
@@ -5757,11 +5757,11 @@
             "orient": 2,
             "pos": [
               1,
-              1
+              3
             ]
           }
         ],
-        "mistake": "the hexagon switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the flag moves one field too far after the fifth matrix, and the square switches to moving up at the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -5930,7 +5930,7 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 1,
+            "orient": 2,
             "pos": [
               3,
               0
@@ -5941,7 +5941,7 @@
             "orient": 3,
             "pos": [
               1,
-              0
+              2
             ]
           },
           {
@@ -5953,7 +5953,7 @@
             ]
           }
         ],
-        "mistake": "the flag goes back the way it came instead of continuing the pattern"
+        "mistake": "the trapezium turns 90° anticlockwise instead of 180°, and the flag repeats its last move instead of continuing the pattern"
       },
       {
         "frame": [
@@ -5998,8 +5998,8 @@
             "colour": "yellow",
             "orient": 3,
             "pos": [
-              0,
-              1
+              1,
+              2
             ]
           },
           {
@@ -6007,14 +6007,72 @@
             "orient": 0,
             "pos": [
               3,
-              1
+              3
             ]
           }
         ],
-        "mistake": "the corner slides along the edge instead of bouncing back"
+        "mistake": "the flag repeats its last move instead of continuing the pattern, and the corner slides right along the edge instead of bouncing back"
       }
     ],
     "options6": [
+      {
+        "frame": [
+          {
+            "colour": "black",
+            "orient": 1,
+            "pos": [
+              2,
+              0
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              0,
+              0
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 0,
+            "pos": [
+              3,
+              2
+            ]
+          }
+        ],
+        "mistake": "the trapezium turns 90° clockwise instead of 180°, and the corner turns back after the fifth matrix before reaching the edge"
+      },
+      {
+        "frame": [
+          {
+            "colour": "black",
+            "orient": 3,
+            "pos": [
+              2,
+              0
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              0,
+              0
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 0,
+            "pos": [
+              1,
+              2
+            ]
+          }
+        ],
+        "mistake": null
+      },
       {
         "frame": [
           {
@@ -6037,70 +6095,12 @@
             "colour": "blue",
             "orient": 0,
             "pos": [
-              1,
-              2
-            ]
-          }
-        ],
-        "mistake": "the flag repeats its last move instead of continuing the pattern"
-      },
-      {
-        "frame": [
-          {
-            "colour": "black",
-            "orient": 3,
-            "pos": [
-              2,
-              0
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              0,
-              0
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 0,
-            "pos": [
-              1,
-              2
-            ]
-          }
-        ],
-        "mistake": null
-      },
-      {
-        "frame": [
-          {
-            "colour": "black",
-            "orient": 3,
-            "pos": [
               3,
-              1
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              0,
-              0
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 0,
-            "pos": [
-              1,
               2
             ]
           }
         ],
-        "mistake": "the trapezium bounces back at the corner instead of going round it"
+        "mistake": "the flag repeats its last move instead of continuing the pattern, and the corner turns back after the fifth matrix before reaching the edge"
       }
     ],
     "shapes": [
@@ -6271,12 +6271,12 @@
             "colour": "blue",
             "orient": 3,
             "pos": [
-              1,
+              3,
               0
             ]
           },
           {
-            "colour": "orange",
+            "colour": "blue",
             "orient": 2,
             "pos": [
               1,
@@ -6287,12 +6287,12 @@
             "colour": "pink",
             "orient": 3,
             "pos": [
-              2,
-              1
+              3,
+              2
             ]
           }
         ],
-        "mistake": "the corner keeps its colour instead of changing"
+        "mistake": "the hexagon turns back before it reaches the edge, and the half-circle slides right along the edge instead of bouncing back"
       },
       {
         "frame": [
@@ -6300,7 +6300,7 @@
             "colour": "blue",
             "orient": 3,
             "pos": [
-              1,
+              3,
               0
             ]
           },
@@ -6309,19 +6309,19 @@
             "orient": 2,
             "pos": [
               1,
-              1
+              3
             ]
           },
           {
             "colour": "pink",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               2,
               1
             ]
           }
         ],
-        "mistake": "the half-circle turns the wrong way"
+        "mistake": "the hexagon turns back before it reaches the edge, and the corner turns back before it reaches the edge"
       }
     ],
     "options6": [
@@ -6331,7 +6331,7 @@
             "colour": "blue",
             "orient": 3,
             "pos": [
-              0,
+              2,
               0
             ]
           },
@@ -6347,12 +6347,12 @@
             "colour": "pink",
             "orient": 0,
             "pos": [
-              2,
-              0
+              3,
+              3
             ]
           }
         ],
-        "mistake": "the half-circle slides along the edge instead of bouncing back"
+        "mistake": "the hexagon turns back after the fifth matrix before reaching the edge, and the half-circle slides right along the edge instead of bouncing back"
       },
       {
         "frame": [
@@ -6366,7 +6366,7 @@
           },
           {
             "colour": "orange",
-            "orient": 3,
+            "orient": 2,
             "pos": [
               1,
               0
@@ -6376,12 +6376,12 @@
             "colour": "pink",
             "orient": 0,
             "pos": [
-              1,
-              1
+              3,
+              3
             ]
           }
         ],
-        "mistake": "the corner stops turning"
+        "mistake": "the corner stops turning after the fifth matrix, and the half-circle slides right along the edge instead of bouncing back"
       },
       {
         "frame": [
@@ -6551,8 +6551,8 @@
             "colour": "pink",
             "orient": 3,
             "pos": [
-              2,
-              2
+              1,
+              3
             ]
           },
           {
@@ -6572,7 +6572,7 @@
             ]
           }
         ],
-        "mistake": "the corner turns the wrong way"
+        "mistake": "the flag goes back the way it came instead of continuing the pattern, and the corner turns the wrong way"
       },
       {
         "frame": [
@@ -6588,7 +6588,7 @@
             "colour": "yellow",
             "orient": 3,
             "pos": [
-              3,
+              1,
               1
             ]
           },
@@ -6601,7 +6601,7 @@
             ]
           }
         ],
-        "mistake": "the flag goes back the way it came instead of continuing the pattern"
+        "mistake": "the flag goes back the way it came instead of continuing the pattern, and the hexagon bounces at a right angle off the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -6669,8 +6669,8 @@
             "colour": "pink",
             "orient": 0,
             "pos": [
-              1,
-              2
+              2,
+              3
             ]
           },
           {
@@ -6683,14 +6683,14 @@
           },
           {
             "colour": "white",
-            "orient": 3,
+            "orient": 2,
             "pos": [
               1,
               0
             ]
           }
         ],
-        "mistake": "the corner stops turning"
+        "mistake": "the flag goes back to its fourth-matrix field instead of continuing the pattern, and the corner stops turning after the fifth matrix"
       },
       {
         "frame": [
@@ -6698,28 +6698,28 @@
             "colour": "pink",
             "orient": 0,
             "pos": [
-              1,
-              2
+              2,
+              1
             ]
           },
           {
             "colour": "yellow",
             "orient": 3,
             "pos": [
-              0,
+              2,
               0
             ]
           },
           {
             "colour": "white",
-            "orient": 1,
+            "orient": 0,
             "pos": [
               1,
               0
             ]
           }
         ],
-        "mistake": "the hexagon switches to a straight line at the edge instead of going back the way it came"
+        "mistake": "the flag repeats its fifth-matrix move instead of continuing the pattern, and the corner turns one quarter turn too far"
       }
     ],
     "shapes": [
@@ -6890,7 +6890,7 @@
             "colour": "blue",
             "orient": 1,
             "pos": [
-              0,
+              2,
               1
             ]
           },
@@ -6903,15 +6903,15 @@
             ]
           },
           {
-            "colour": "pink",
+            "colour": "green",
             "orient": 1,
             "pos": [
               2,
-              2
+              0
             ]
           }
         ],
-        "mistake": "the hexagon keeps its colour instead of changing"
+        "mistake": "the flag bounces at a right angle off the edge instead of going back the way it came, and the hexagon turns back before it reaches the edge"
       },
       {
         "frame": [
@@ -6924,11 +6924,11 @@
             ]
           },
           {
-            "colour": "blue",
+            "colour": "white",
             "orient": 0,
             "pos": [
-              3,
-              1
+              1,
+              0
             ]
           },
           {
@@ -6936,11 +6936,11 @@
             "orient": 1,
             "pos": [
               2,
-              2
+              0
             ]
           }
         ],
-        "mistake": "the trapezium skips a colour in its cycle"
+        "mistake": "the trapezium switches to moving up at the edge instead of going back the way it came, and the hexagon turns back before it reaches the edge"
       }
     ],
     "options6": [
@@ -6985,7 +6985,7 @@
           },
           {
             "colour": "white",
-            "orient": 1,
+            "orient": 0,
             "pos": [
               2,
               0
@@ -7000,7 +7000,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium runs through its colours in the wrong order"
+        "mistake": "the trapezium stops turning after the fifth matrix and skips a colour in its cycle"
       },
       {
         "frame": [
@@ -7008,13 +7008,13 @@
             "colour": "blue",
             "orient": 1,
             "pos": [
-              2,
-              3
+              1,
+              0
             ]
           },
           {
-            "colour": "blue",
-            "orient": 1,
+            "colour": "orange",
+            "orient": 2,
             "pos": [
               2,
               0
@@ -7024,12 +7024,12 @@
             "colour": "pink",
             "orient": 1,
             "pos": [
-              1,
-              0
+              2,
+              3
             ]
           }
         ],
-        "mistake": "the flag and the hexagon have swapped places"
+        "mistake": "the trapezium turns one quarter turn too far and keeps its colour instead of changing"
       }
     ],
     "shapes": [
@@ -7179,20 +7179,20 @@
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              1,
+              0,
               3
             ]
           },
           {
-            "colour": "orange",
+            "colour": "pink",
             "orient": 3,
             "pos": [
-              2,
-              1
+              1,
+              0
             ]
           }
         ],
-        "mistake": "the half-circle goes back the way it came instead of continuing the pattern"
+        "mistake": "the circle moves one field too far, and the half-circle keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -7242,7 +7242,7 @@
             ]
           },
           {
-            "colour": "orange",
+            "colour": "pink",
             "orient": 3,
             "pos": [
               1,
@@ -7250,7 +7250,7 @@
             ]
           }
         ],
-        "mistake": "the flag repeats its last move instead of continuing the pattern"
+        "mistake": "the flag repeats its last move instead of continuing the pattern, and the half-circle keeps its colour instead of changing"
       }
     ],
     "options6": [
@@ -7260,8 +7260,8 @@
             "colour": "yellow",
             "orient": 0,
             "pos": [
-              2,
-              3
+              0,
+              1
             ]
           },
           {
@@ -7277,11 +7277,11 @@
             "orient": 3,
             "pos": [
               2,
-              0
+              1
             ]
           }
         ],
-        "mistake": "the flag repeats its last move instead of continuing the pattern"
+        "mistake": "the flag repeats its fifth-matrix move instead of continuing the pattern, and the half-circle skips a step in its repeating pattern"
       },
       {
         "frame": [
@@ -7289,15 +7289,15 @@
             "colour": "yellow",
             "orient": 0,
             "pos": [
-              1,
-              0
+              0,
+              1
             ]
           },
           {
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              3,
+              2,
               3
             ]
           },
@@ -7310,7 +7310,7 @@
             ]
           }
         ],
-        "mistake": "the circle moves one field too far"
+        "mistake": "the flag repeats its fifth-matrix move instead of continuing the pattern, and the circle moves one field too far after the fifth matrix"
       },
       {
         "frame": [
@@ -7510,36 +7510,7 @@
             "colour": "white",
             "orient": 3,
             "pos": [
-              3,
-              0
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              2,
-              2
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 0,
-            "pos": [
-              0,
-              0
-            ]
-          }
-        ],
-        "mistake": "the arrow goes back the way it came instead of continuing the pattern"
-      },
-      {
-        "frame": [
-          {
-            "colour": "white",
-            "orient": 3,
-            "pos": [
-              3,
+              1,
               0
             ]
           },
@@ -7560,7 +7531,36 @@
             ]
           }
         ],
-        "mistake": "the trapezium runs through its colours in the wrong order"
+        "mistake": "the hexagon goes round the edge the wrong way, and the trapezium runs through its colours in the wrong order"
+      },
+      {
+        "frame": [
+          {
+            "colour": "white",
+            "orient": 3,
+            "pos": [
+              3,
+              0
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              2,
+              2
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 0,
+            "pos": [
+              0,
+              0
+            ]
+          }
+        ],
+        "mistake": "the arrow goes back the way it came instead of continuing the pattern, and the trapezium runs through its colours in the wrong order"
       }
     ],
     "options6": [
@@ -7570,8 +7570,8 @@
             "colour": "white",
             "orient": 3,
             "pos": [
-              3,
-              1
+              2,
+              0
             ]
           },
           {
@@ -7591,7 +7591,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium skips a colour in its cycle"
+        "mistake": "the hexagon bounces back at the corner instead of going round it, and the trapezium skips a colour in its cycle"
       },
       {
         "frame": [
@@ -7636,8 +7636,8 @@
             "colour": "yellow",
             "orient": 0,
             "pos": [
-              2,
-              1
+              1,
+              2
             ]
           },
           {
@@ -7649,7 +7649,7 @@
             ]
           }
         ],
-        "mistake": "the hexagon bounces back at the corner instead of going round it"
+        "mistake": "the hexagon bounces back at the corner instead of going round it, and the arrow goes back to its fourth-matrix field instead of continuing the pattern"
       }
     ],
     "shapes": [
@@ -7818,6 +7818,35 @@
         "frame": [
           {
             "colour": "black",
+            "orient": 1,
+            "pos": [
+              3,
+              2
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              1,
+              2
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 0,
+            "pos": [
+              3,
+              3
+            ]
+          }
+        ],
+        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many, and the arrow stops turning"
+      },
+      {
+        "frame": [
+          {
+            "colour": "black",
             "orient": 0,
             "pos": [
               3,
@@ -7828,49 +7857,20 @@
             "colour": "yellow",
             "orient": 3,
             "pos": [
-              1,
-              2
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 1,
-            "pos": [
-              1,
+              0,
               1
             ]
-          }
-        ],
-        "mistake": "the arrow turns back before it reaches the edge"
-      },
-      {
-        "frame": [
-          {
-            "colour": "black",
-            "orient": 3,
-            "pos": [
-              3,
-              2
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              1,
-              2
-            ]
           },
           {
             "colour": "blue",
-            "orient": 1,
+            "orient": 0,
             "pos": [
               3,
               3
             ]
           }
         ],
-        "mistake": "the flag turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the corner goes back the way it came instead of continuing the pattern, and the arrow stops turning"
       }
     ],
     "options6": [
@@ -7878,7 +7878,7 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               3,
               2
@@ -7886,10 +7886,10 @@
           },
           {
             "colour": "yellow",
-            "orient": 2,
+            "orient": 0,
             "pos": [
-              1,
-              1
+              0,
+              2
             ]
           },
           {
@@ -7901,7 +7901,7 @@
             ]
           }
         ],
-        "mistake": "the corner stops turning"
+        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many, and the corner goes back to its fourth-matrix field instead of continuing the pattern"
       },
       {
         "frame": [
@@ -7926,11 +7926,11 @@
             "orient": 2,
             "pos": [
               2,
-              2
+              3
             ]
           }
         ],
-        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many, and the arrow switches to moving up at the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -8118,12 +8118,12 @@
             "colour": "white",
             "orient": 0,
             "pos": [
-              2,
+              3,
               0
             ]
           }
         ],
-        "mistake": "the circle keeps its colour instead of changing"
+        "mistake": "the circle keeps its colour instead of changing, and the triangle keeps the same step instead of moving one field more each time"
       },
       {
         "frame": [
@@ -8157,7 +8157,7 @@
       {
         "frame": [
           {
-            "colour": "orange",
+            "colour": "white",
             "orient": 1,
             "pos": [
               2,
@@ -8168,20 +8168,20 @@
             "colour": "black",
             "orient": 2,
             "pos": [
-              0,
-              1
+              1,
+              0
             ]
           },
           {
             "colour": "white",
             "orient": 0,
             "pos": [
-              3,
+              2,
               0
             ]
           }
         ],
-        "mistake": "the triangle keeps the same step instead of moving one field more each time"
+        "mistake": "the circle keeps its colour instead of changing, and the diamond goes back the way it came instead of continuing the pattern"
       }
     ],
     "options6": [
@@ -8217,6 +8217,35 @@
       {
         "frame": [
           {
+            "colour": "pink",
+            "orient": 1,
+            "pos": [
+              3,
+              2
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 2,
+            "pos": [
+              1,
+              3
+            ]
+          },
+          {
+            "colour": "white",
+            "orient": 3,
+            "pos": [
+              0,
+              1
+            ]
+          }
+        ],
+        "mistake": "the diamond repeats its last move instead of continuing the pattern, and the triangle moves one field too few along the edge"
+      },
+      {
+        "frame": [
+          {
             "colour": "orange",
             "orient": 1,
             "pos": [
@@ -8237,40 +8266,11 @@
             "orient": 3,
             "pos": [
               0,
-              3
+              1
             ]
           }
         ],
-        "mistake": "the circle skips a colour in its cycle"
-      },
-      {
-        "frame": [
-          {
-            "colour": "pink",
-            "orient": 1,
-            "pos": [
-              3,
-              2
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 2,
-            "pos": [
-              0,
-              0
-            ]
-          },
-          {
-            "colour": "white",
-            "orient": 3,
-            "pos": [
-              3,
-              0
-            ]
-          }
-        ],
-        "mistake": "the triangle goes round the edge the wrong way"
+        "mistake": "the circle skips a colour in its cycle, and the triangle moves one field too few along the edge"
       }
     ],
     "shapes": [
@@ -8440,35 +8440,6 @@
       {
         "frame": [
           {
-            "colour": "green",
-            "orient": 3,
-            "pos": [
-              1,
-              1
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 3,
-            "pos": [
-              2,
-              3
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 2,
-            "pos": [
-              2,
-              2
-            ]
-          }
-        ],
-        "mistake": "the corner keeps its colour instead of changing"
-      },
-      {
-        "frame": [
-          {
             "colour": "yellow",
             "orient": 3,
             "pos": [
@@ -8488,12 +8459,41 @@
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              2,
+              0,
               2
             ]
           }
         ],
-        "mistake": "the hexagon runs through its colours in the wrong order"
+        "mistake": "the hexagon skips a colour in its cycle, and the diamond bounces at a right angle off the edge instead of going back the way it came"
+      },
+      {
+        "frame": [
+          {
+            "colour": "yellow",
+            "orient": 2,
+            "pos": [
+              1,
+              1
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 3,
+            "pos": [
+              2,
+              3
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 2,
+            "pos": [
+              0,
+              2
+            ]
+          }
+        ],
+        "mistake": "the corner turns 90° clockwise instead of 180°, and the diamond bounces at a right angle off the edge instead of going back the way it came"
       }
     ],
     "options6": [
@@ -8530,7 +8530,36 @@
         "frame": [
           {
             "colour": "green",
-            "orient": 1,
+            "orient": 3,
+            "pos": [
+              1,
+              0
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 3,
+            "pos": [
+              1,
+              3
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 2,
+            "pos": [
+              3,
+              3
+            ]
+          }
+        ],
+        "mistake": "the corner turns 90° clockwise instead of 180°, and the diamond switches to moving down at the edge instead of going back the way it came"
+      },
+      {
+        "frame": [
+          {
+            "colour": "green",
+            "orient": 3,
             "pos": [
               1,
               0
@@ -8553,36 +8582,7 @@
             ]
           }
         ],
-        "mistake": "the hexagon skips a colour in its cycle"
-      },
-      {
-        "frame": [
-          {
-            "colour": "green",
-            "orient": 1,
-            "pos": [
-              0,
-              3
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 3,
-            "pos": [
-              1,
-              3
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 2,
-            "pos": [
-              3,
-              1
-            ]
-          }
-        ],
-        "mistake": "the corner repeats its last move instead of continuing the pattern"
+        "mistake": "the corner turns 90° clockwise instead of 180°, and the hexagon runs through its colours in the wrong order"
       }
     ],
     "shapes": [
@@ -8727,15 +8727,15 @@
             "orient": 3,
             "pos": [
               3,
-              1
+              3
             ]
           },
           {
             "colour": "yellow",
             "orient": 3,
             "pos": [
-              0,
-              1
+              2,
+              3
             ]
           },
           {
@@ -8750,12 +8750,12 @@
             "colour": "white",
             "orient": 0,
             "pos": [
-              2,
-              3
+              0,
+              1
             ]
           }
         ],
-        "mistake": "the diamond moves one field too many along the edge"
+        "mistake": "the diamond moves one field too few along the edge, and the triangle and the hexagon have swapped places"
       },
       {
         "frame": [
@@ -8764,7 +8764,7 @@
             "orient": 3,
             "pos": [
               3,
-              2
+              3
             ]
           },
           {
@@ -8779,20 +8779,20 @@
             "colour": "orange",
             "orient": 1,
             "pos": [
-              1,
-              0
+              2,
+              3
             ]
           },
           {
             "colour": "white",
             "orient": 0,
             "pos": [
-              2,
-              3
+              1,
+              1
             ]
           }
         ],
-        "mistake": "the flag moves one field too far"
+        "mistake": "the diamond moves one field too few along the edge, and the flag and the hexagon have swapped places"
       },
       {
         "frame": [
@@ -8839,16 +8839,16 @@
             "colour": "blue",
             "orient": 3,
             "pos": [
-              0,
-              1
+              3,
+              2
             ]
           },
           {
             "colour": "blue",
             "orient": 3,
             "pos": [
-              1,
-              3
+              0,
+              2
             ]
           },
           {
@@ -8864,11 +8864,11 @@
             "orient": 0,
             "pos": [
               3,
-              2
+              0
             ]
           }
         ],
-        "mistake": "the diamond goes round the edge the wrong way"
+        "mistake": "the diamond and the hexagon have swapped places, and the triangle moves one field too few along the edge"
       },
       {
         "frame": [
@@ -8913,23 +8913,23 @@
             "colour": "blue",
             "orient": 3,
             "pos": [
-              3,
+              1,
               0
             ]
           },
           {
-            "colour": "yellow",
+            "colour": "blue",
             "orient": 3,
             "pos": [
-              1,
-              3
+              0,
+              2
             ]
           },
           {
             "colour": "orange",
             "orient": 1,
             "pos": [
-              1,
+              3,
               0
             ]
           },
@@ -8942,7 +8942,7 @@
             ]
           }
         ],
-        "mistake": "the triangle keeps its colour instead of changing"
+        "mistake": "the diamond and the flag have swapped places, and the triangle moves one field too few along the edge"
       }
     ],
     "shapes": [
@@ -9172,8 +9172,8 @@
             "colour": "white",
             "orient": 1,
             "pos": [
-              3,
-              2
+              2,
+              3
             ]
           },
           {
@@ -9185,7 +9185,7 @@
             ]
           }
         ],
-        "mistake": "the half-circle turns the wrong way"
+        "mistake": "the corner slides up along the edge instead of bouncing back, and the half-circle turns the wrong way"
       },
       {
         "frame": [
@@ -9199,14 +9199,14 @@
           },
           {
             "colour": "pink",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               3,
               3
             ]
           },
           {
-            "colour": "pink",
+            "colour": "white",
             "orient": 1,
             "pos": [
               3,
@@ -9215,14 +9215,14 @@
           },
           {
             "colour": "black",
-            "orient": 0,
+            "orient": 2,
             "pos": [
               1,
               0
             ]
           }
         ],
-        "mistake": "the corner skips a colour in its cycle"
+        "mistake": "the flag turns the wrong way, and the half-circle turns the wrong way"
       }
     ],
     "options6": [
@@ -9275,7 +9275,7 @@
           },
           {
             "colour": "yellow",
-            "orient": 0,
+            "orient": 3,
             "pos": [
               3,
               3
@@ -9298,7 +9298,7 @@
             ]
           }
         ],
-        "mistake": "the corner slides along the edge instead of bouncing back"
+        "mistake": "the flag turns one quarter turn too far, and the corner slides up along the edge instead of bouncing back"
       },
       {
         "frame": [
@@ -9306,8 +9306,8 @@
             "colour": "pink",
             "orient": 3,
             "pos": [
-              0,
-              1
+              1,
+              0
             ]
           },
           {
@@ -9322,20 +9322,20 @@
             "colour": "pink",
             "orient": 1,
             "pos": [
-              3,
-              0
+              0,
+              3
             ]
           },
           {
             "colour": "black",
             "orient": 1,
             "pos": [
-              2,
-              1
+              0,
+              0
             ]
           }
         ],
-        "mistake": "the diamond bounces back at the corner instead of going round it"
+        "mistake": "the corner slides up along the edge instead of bouncing back, and the half-circle switches to moving up at the edge instead of going back the way it came"
       }
     ],
     "shapes": [
@@ -9514,7 +9514,7 @@
             "orient": 3,
             "pos": [
               3,
-              1
+              0
             ]
           },
           {
@@ -9522,7 +9522,7 @@
             "orient": 3,
             "pos": [
               3,
-              0
+              3
             ]
           },
           {
@@ -9535,14 +9535,14 @@
           },
           {
             "colour": "blue",
-            "orient": 1,
+            "orient": 0,
             "pos": [
               0,
               1
             ]
           }
         ],
-        "mistake": "the diamond turns back before it reaches the edge"
+        "mistake": "the diamond and the square have swapped places, and the triangle turns 90° clockwise instead of 180°"
       },
       {
         "frame": [
@@ -9596,27 +9596,27 @@
             "orient": 3,
             "pos": [
               3,
-              0
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 3,
-            "pos": [
-              3,
               2
             ]
           },
           {
-            "colour": "blue",
+            "colour": "black",
             "orient": 1,
+            "pos": [
+              3,
+              0
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 0,
             "pos": [
               0,
               1
             ]
           }
         ],
-        "mistake": "the corner turns the wrong way"
+        "mistake": "the square and the corner have swapped places, and the triangle turns 90° clockwise instead of 180°"
       }
     ],
     "options6": [
@@ -9663,43 +9663,6 @@
             "colour": "white",
             "orient": 3,
             "pos": [
-              3,
-              2
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 3,
-            "pos": [
-              3,
-              1
-            ]
-          },
-          {
-            "colour": "pink",
-            "orient": 2,
-            "pos": [
-              3,
-              3
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 3,
-            "pos": [
-              2,
-              0
-            ]
-          }
-        ],
-        "mistake": "the triangle moves one field too many along the edge"
-      },
-      {
-        "frame": [
-          {
-            "colour": "white",
-            "orient": 3,
-            "pos": [
               2,
               3
             ]
@@ -9714,7 +9677,7 @@
           },
           {
             "colour": "pink",
-            "orient": 2,
+            "orient": 1,
             "pos": [
               3,
               3
@@ -9729,7 +9692,44 @@
             ]
           }
         ],
-        "mistake": "the diamond slides along the edge instead of bouncing back"
+        "mistake": "the diamond slides up along the edge instead of bouncing back, and the corner stops turning after the fifth matrix"
+      },
+      {
+        "frame": [
+          {
+            "colour": "white",
+            "orient": 3,
+            "pos": [
+              3,
+              2
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 3,
+            "pos": [
+              3,
+              1
+            ]
+          },
+          {
+            "colour": "pink",
+            "orient": 1,
+            "pos": [
+              3,
+              3
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 1,
+            "pos": [
+              0,
+              0
+            ]
+          }
+        ],
+        "mistake": "the corner stops turning after the fifth matrix, and the triangle turns 90° anticlockwise instead of 180°"
       }
     ],
     "shapes": [
@@ -9912,20 +9912,20 @@
             "colour": "white",
             "orient": 2,
             "pos": [
-              1,
-              2
+              0,
+              3
             ]
           },
           {
-            "colour": "black",
+            "colour": "yellow",
             "orient": 1,
             "pos": [
-              2,
+              1,
               3
             ]
           }
         ],
-        "mistake": "the triangle keeps the same step instead of moving one field more each time"
+        "mistake": "the half-circle slides up along the edge instead of bouncing back, and the triangle keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -9946,7 +9946,7 @@
             ]
           },
           {
-            "colour": "black",
+            "colour": "yellow",
             "orient": 1,
             "pos": [
               1,
@@ -9954,7 +9954,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium skips a colour in its cycle"
+        "mistake": "the trapezium skips a colour in its cycle, and the triangle keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -10002,7 +10002,7 @@
             "orient": 2,
             "pos": [
               1,
-              1
+              3
             ]
           },
           {
@@ -10014,7 +10014,7 @@
             ]
           }
         ],
-        "mistake": "the triangle keeps the same step instead of moving one field more each time"
+        "mistake": "the half-circle turns back after the fifth matrix before reaching the edge, and the triangle keeps the same step instead of moving one field more each time"
       },
       {
         "frame": [
@@ -10060,7 +10060,7 @@
             "orient": 2,
             "pos": [
               1,
-              1
+              3
             ]
           },
           {
@@ -10072,7 +10072,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium runs through its colours in the wrong order"
+        "mistake": "the trapezium runs through its colours in the wrong order, and the half-circle turns back after the fifth matrix before reaching the edge"
       }
     ],
     "shapes": [
@@ -10244,7 +10244,7 @@
         "frame": [
           {
             "colour": "orange",
-            "orient": 2,
+            "orient": 0,
             "pos": [
               0,
               1
@@ -10254,8 +10254,8 @@
             "colour": "blue",
             "orient": 0,
             "pos": [
-              2,
-              1
+              1,
+              0
             ]
           },
           {
@@ -10267,13 +10267,13 @@
             ]
           }
         ],
-        "mistake": "the flag turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many, and the hexagon slides up along the edge instead of bouncing back"
       },
       {
         "frame": [
           {
             "colour": "orange",
-            "orient": 1,
+            "orient": 0,
             "pos": [
               0,
               1
@@ -10296,7 +10296,7 @@
             ]
           }
         ],
-        "mistake": "the circle keeps the same step instead of moving one field more each time"
+        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many, and the circle keeps the same step instead of moving one field more each time"
       }
     ],
     "options6": [
@@ -10323,11 +10323,11 @@
             "orient": 0,
             "pos": [
               0,
-              2
+              0
             ]
           }
         ],
-        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many, and the circle moves one field too few along the edge"
       },
       {
         "frame": [
@@ -10362,7 +10362,7 @@
         "frame": [
           {
             "colour": "orange",
-            "orient": 0,
+            "orient": 2,
             "pos": [
               1,
               0
@@ -10372,8 +10372,8 @@
             "colour": "blue",
             "orient": 0,
             "pos": [
-              0,
-              0
+              2,
+              3
             ]
           },
           {
@@ -10385,7 +10385,7 @@
             ]
           }
         ],
-        "mistake": "the hexagon slides along the edge instead of bouncing back"
+        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many, and the hexagon moves one field too far after the fifth matrix"
       }
     ],
     "shapes": [
@@ -10538,20 +10538,20 @@
             "colour": "pink",
             "orient": 3,
             "pos": [
-              0,
-              1
+              2,
+              3
             ]
           },
           {
-            "colour": "green",
-            "orient": 1,
+            "colour": "blue",
+            "orient": 0,
             "pos": [
               1,
               3
             ]
           }
         ],
-        "mistake": "the flag turns back before it reaches the edge"
+        "mistake": "the triangle turns by the same amount instead of one quarter turn more each time and skips a colour in its cycle"
       },
       {
         "frame": [
@@ -10572,15 +10572,15 @@
             ]
           },
           {
-            "colour": "green",
-            "orient": 2,
+            "colour": "blue",
+            "orient": 1,
             "pos": [
-              1,
-              3
+              3,
+              1
             ]
           }
         ],
-        "mistake": "the triangle counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the triangle turns back before it reaches the edge and skips a colour in its cycle"
       },
       {
         "frame": [
@@ -10619,8 +10619,8 @@
             "colour": "green",
             "orient": 0,
             "pos": [
-              3,
-              2
+              0,
+              1
             ]
           },
           {
@@ -10632,15 +10632,15 @@
             ]
           },
           {
-            "colour": "blue",
-            "orient": 2,
+            "colour": "green",
+            "orient": 3,
             "pos": [
               2,
               2
             ]
           }
         ],
-        "mistake": "the hexagon bounces back at the corner instead of going round it"
+        "mistake": "the triangle turns by the same amount instead of one quarter turn more each time and runs through its colours in the wrong order"
       },
       {
         "frame": [
@@ -10690,15 +10690,15 @@
             ]
           },
           {
-            "colour": "blue",
-            "orient": 3,
+            "colour": "green",
+            "orient": 2,
             "pos": [
-              2,
+              0,
               2
             ]
           }
         ],
-        "mistake": "the triangle turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the triangle bounces at a right angle off the edge instead of going back the way it came and runs through its colours in the wrong order"
       }
     ],
     "shapes": [
@@ -10871,28 +10871,28 @@
             "colour": "pink",
             "orient": 3,
             "pos": [
-              1,
-              2
+              2,
+              1
             ]
           },
           {
             "colour": "blue",
             "orient": 1,
             "pos": [
-              1,
+              2,
               3
             ]
           },
           {
             "colour": "blue",
-            "orient": 2,
+            "orient": 0,
             "pos": [
               3,
               3
             ]
           }
         ],
-        "mistake": "the corner keeps the same step instead of moving one field more each time"
+        "mistake": "the square moves one field too far, and the triangle turns the wrong way"
       },
       {
         "frame": [
@@ -10908,20 +10908,20 @@
             "colour": "blue",
             "orient": 1,
             "pos": [
-              2,
+              1,
               3
             ]
           },
           {
-            "colour": "orange",
-            "orient": 2,
+            "colour": "blue",
+            "orient": 0,
             "pos": [
               3,
               3
             ]
           }
         ],
-        "mistake": "the triangle skips a colour in its cycle"
+        "mistake": "the corner keeps the same step instead of moving one field more each time, and the triangle turns the wrong way"
       }
     ],
     "options6": [
@@ -10939,20 +10939,20 @@
             "colour": "blue",
             "orient": 1,
             "pos": [
-              2,
-              0
+              3,
+              1
             ]
           },
           {
-            "colour": "blue",
-            "orient": 3,
+            "colour": "orange",
+            "orient": 2,
             "pos": [
               3,
               2
             ]
           }
         ],
-        "mistake": "the triangle runs through its colours in the wrong order"
+        "mistake": "the corner moves one field too few along the edge, and the triangle stops turning after the fifth matrix"
       },
       {
         "frame": [
@@ -10961,27 +10961,27 @@
             "orient": 3,
             "pos": [
               2,
-              1
+              3
             ]
           },
           {
             "colour": "blue",
             "orient": 1,
             "pos": [
-              0,
+              2,
               0
             ]
           },
           {
             "colour": "orange",
-            "orient": 3,
+            "orient": 2,
             "pos": [
               3,
               2
             ]
           }
         ],
-        "mistake": "the corner moves one field too many along the edge"
+        "mistake": "the square switches to moving down at the edge instead of going back the way it came, and the triangle stops turning after the fifth matrix"
       },
       {
         "frame": [
@@ -11162,6 +11162,35 @@
             "colour": "pink",
             "orient": 1,
             "pos": [
+              1,
+              2
+            ]
+          },
+          {
+            "colour": "white",
+            "orient": 0,
+            "pos": [
+              2,
+              2
+            ]
+          }
+        ],
+        "mistake": "the diamond repeats its last move instead of continuing the pattern, and the arrow turns by the same amount instead of one quarter turn more each time"
+      },
+      {
+        "frame": [
+          {
+            "colour": "yellow",
+            "orient": 2,
+            "pos": [
+              3,
+              3
+            ]
+          },
+          {
+            "colour": "pink",
+            "orient": 1,
+            "pos": [
               2,
               1
             ]
@@ -11175,36 +11204,7 @@
             ]
           }
         ],
-        "mistake": "the arrow turns by the same amount instead of one quarter turn more each time"
-      },
-      {
-        "frame": [
-          {
-            "colour": "yellow",
-            "orient": 2,
-            "pos": [
-              3,
-              2
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 1,
-            "pos": [
-              2,
-              1
-            ]
-          },
-          {
-            "colour": "white",
-            "orient": 3,
-            "pos": [
-              2,
-              2
-            ]
-          }
-        ],
-        "mistake": "the diamond keeps its colour instead of changing"
+        "mistake": "the hexagon moves one field too few along the edge, and the arrow turns by the same amount instead of one quarter turn more each time"
       },
       {
         "frame": [
@@ -11243,8 +11243,8 @@
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              2,
-              0
+              1,
+              3
             ]
           },
           {
@@ -11264,7 +11264,7 @@
             ]
           }
         ],
-        "mistake": "the arrow counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the hexagon bounces back at the corner instead of going round it, and the arrow counts its turns from the wrong start: one quarter turn too many"
       },
       {
         "frame": [
@@ -11272,8 +11272,8 @@
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              2,
-              0
+              1,
+              3
             ]
           },
           {
@@ -11293,7 +11293,7 @@
             ]
           }
         ],
-        "mistake": "the diamond repeats its last move instead of continuing the pattern"
+        "mistake": "the hexagon bounces back at the corner instead of going round it, and the diamond repeats its last move instead of continuing the pattern"
       },
       {
         "frame": [
@@ -11463,8 +11463,8 @@
       {
         "frame": [
           {
-            "colour": "black",
-            "orient": 0,
+            "colour": "blue",
+            "orient": 2,
             "pos": [
               3,
               1
@@ -11483,11 +11483,11 @@
             "orient": 3,
             "pos": [
               0,
-              2
+              3
             ]
           }
         ],
-        "mistake": "the corner turns the wrong way"
+        "mistake": "the corner skips a colour in its cycle, and the flag keeps the same step instead of moving one field more each time"
       },
       {
         "frame": [
@@ -11521,7 +11521,7 @@
       {
         "frame": [
           {
-            "colour": "black",
+            "colour": "blue",
             "orient": 2,
             "pos": [
               3,
@@ -11532,8 +11532,8 @@
             "colour": "pink",
             "orient": 2,
             "pos": [
-              0,
-              1
+              2,
+              3
             ]
           },
           {
@@ -11541,11 +11541,11 @@
             "orient": 3,
             "pos": [
               0,
-              3
+              2
             ]
           }
         ],
-        "mistake": "the flag keeps the same step instead of moving one field more each time"
+        "mistake": "the corner skips a colour in its cycle, and the arrow slides down along the edge instead of bouncing back"
       }
     ],
     "options6": [
@@ -11581,7 +11581,7 @@
       {
         "frame": [
           {
-            "colour": "blue",
+            "colour": "black",
             "orient": 1,
             "pos": [
               2,
@@ -11605,7 +11605,7 @@
             ]
           }
         ],
-        "mistake": "the flag keeps the same step instead of moving one field more each time"
+        "mistake": "the corner runs through its colours in the wrong order, and the flag keeps the same step instead of moving one field more each time"
       },
       {
         "frame": [
@@ -11622,19 +11622,19 @@
             "orient": 2,
             "pos": [
               0,
-              3
+              2
             ]
           },
           {
             "colour": "black",
             "orient": 3,
             "pos": [
-              3,
+              0,
               0
             ]
           }
         ],
-        "mistake": "the arrow moves one field too far"
+        "mistake": "the arrow moves one field too far after the fifth matrix, and the flag keeps the same step instead of moving one field more each time"
       }
     ],
     "shapes": [
@@ -11778,7 +11778,36 @@
             "orient": 2,
             "pos": [
               0,
-              1
+              0
+            ]
+          },
+          {
+            "colour": "orange",
+            "orient": 2,
+            "pos": [
+              2,
+              0
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 0,
+            "pos": [
+              1,
+              3
+            ]
+          }
+        ],
+        "mistake": "the half-circle keeps the same step instead of moving one field more each time, and the circle moves one field too many along the edge"
+      },
+      {
+        "frame": [
+          {
+            "colour": "white",
+            "orient": 2,
+            "pos": [
+              0,
+              0
             ]
           },
           {
@@ -11798,36 +11827,7 @@
             ]
           }
         ],
-        "mistake": "the arrow bounces back at the corner instead of going round it"
-      },
-      {
-        "frame": [
-          {
-            "colour": "white",
-            "orient": 2,
-            "pos": [
-              0,
-              0
-            ]
-          },
-          {
-            "colour": "orange",
-            "orient": 2,
-            "pos": [
-              2,
-              0
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 0,
-            "pos": [
-              0,
-              3
-            ]
-          }
-        ],
-        "mistake": "the half-circle keeps the same step instead of moving one field more each time"
+        "mistake": "the half-circle keeps the same step instead of moving one field more each time, and the arrow bounces back at the corner instead of going round it"
       },
       {
         "frame": [
@@ -11864,7 +11864,7 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               3,
               3
@@ -11887,7 +11887,7 @@
             ]
           }
         ],
-        "mistake": "the arrow keeps the same step instead of moving one field more each time"
+        "mistake": "the half-circle stops turning, and the arrow keeps the same step instead of moving one field more each time"
       },
       {
         "frame": [
@@ -11933,7 +11933,7 @@
             "orient": 2,
             "pos": [
               0,
-              3
+              0
             ]
           },
           {
@@ -11941,11 +11941,11 @@
             "orient": 0,
             "pos": [
               0,
-              0
+              2
             ]
           }
         ],
-        "mistake": "the circle goes round the edge the wrong way"
+        "mistake": "the arrow keeps the same step instead of moving one field more each time, and the circle bounces back at the corner instead of going round it"
       }
     ],
     "shapes": [
@@ -12114,7 +12114,36 @@
         "frame": [
           {
             "colour": "yellow",
+            "orient": 2,
+            "pos": [
+              1,
+              0
+            ]
+          },
+          {
+            "colour": "pink",
             "orient": 1,
+            "pos": [
+              1,
+              1
+            ]
+          },
+          {
+            "colour": "green",
+            "orient": 1,
+            "pos": [
+              2,
+              3
+            ]
+          }
+        ],
+        "mistake": "the corner turns by the same amount instead of one quarter turn more each time, and the diamond keeps its colour instead of changing"
+      },
+      {
+        "frame": [
+          {
+            "colour": "yellow",
+            "orient": 2,
             "pos": [
               1,
               0
@@ -12137,36 +12166,7 @@
             ]
           }
         ],
-        "mistake": "the triangle moves one field too far"
-      },
-      {
-        "frame": [
-          {
-            "colour": "yellow",
-            "orient": 2,
-            "pos": [
-              1,
-              0
-            ]
-          },
-          {
-            "colour": "pink",
-            "orient": 1,
-            "pos": [
-              1,
-              1
-            ]
-          },
-          {
-            "colour": "white",
-            "orient": 1,
-            "pos": [
-              2,
-              3
-            ]
-          }
-        ],
-        "mistake": "the corner turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the corner turns by the same amount instead of one quarter turn more each time, and the triangle moves one field too far"
       }
     ],
     "options6": [
@@ -12203,10 +12203,10 @@
         "frame": [
           {
             "colour": "yellow",
-            "orient": 2,
+            "orient": 0,
             "pos": [
-              2,
-              1
+              0,
+              0
             ]
           },
           {
@@ -12221,12 +12221,12 @@
             "colour": "green",
             "orient": 1,
             "pos": [
-              1,
+              3,
               2
             ]
           }
         ],
-        "mistake": "the corner counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the corner switches to moving up at the edge instead of going back the way it came, and the diamond bounces at a right angle off the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -12234,16 +12234,16 @@
             "colour": "yellow",
             "orient": 0,
             "pos": [
-              2,
-              1
+              0,
+              0
             ]
           },
           {
-            "colour": "pink",
+            "colour": "white",
             "orient": 1,
             "pos": [
               2,
-              2
+              0
             ]
           },
           {
@@ -12255,7 +12255,7 @@
             ]
           }
         ],
-        "mistake": "the triangle keeps its colour instead of changing"
+        "mistake": "the corner switches to moving up at the edge instead of going back the way it came, and the triangle switches to moving down at the edge instead of going back the way it came"
       }
     ],
     "shapes": [
@@ -12398,6 +12398,43 @@
             "colour": "blue",
             "orient": 2,
             "pos": [
+              0,
+              0
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 3,
+            "pos": [
+              2,
+              3
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 3,
+            "pos": [
+              0,
+              2
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 0,
+            "pos": [
+              0,
+              3
+            ]
+          }
+        ],
+        "mistake": "the hexagon skips a step in its repeating pattern, and the trapezium turns back before it reaches the edge"
+      },
+      {
+        "frame": [
+          {
+            "colour": "blue",
+            "orient": 2,
+            "pos": [
               1,
               0
             ]
@@ -12407,7 +12444,7 @@
             "orient": 3,
             "pos": [
               2,
-              0
+              3
             ]
           },
           {
@@ -12419,7 +12456,7 @@
             ]
           },
           {
-            "colour": "yellow",
+            "colour": "orange",
             "orient": 0,
             "pos": [
               0,
@@ -12427,44 +12464,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium moves one field too far"
-      },
-      {
-        "frame": [
-          {
-            "colour": "blue",
-            "orient": 2,
-            "pos": [
-              0,
-              1
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 3,
-            "pos": [
-              2,
-              1
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 3,
-            "pos": [
-              0,
-              2
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 0,
-            "pos": [
-              0,
-              3
-            ]
-          }
-        ],
-        "mistake": "the hexagon goes back the way it came instead of continuing the pattern"
+        "mistake": "the trapezium turns back before it reaches the edge, and the circle runs through its colours in the wrong order"
       },
       {
         "frame": [
@@ -12548,8 +12548,8 @@
             "colour": "white",
             "orient": 2,
             "pos": [
-              0,
-              0
+              3,
+              1
             ]
           },
           {
@@ -12557,7 +12557,7 @@
             "orient": 3,
             "pos": [
               2,
-              0
+              2
             ]
           },
           {
@@ -12569,7 +12569,7 @@
             ]
           },
           {
-            "colour": "yellow",
+            "colour": "orange",
             "orient": 0,
             "pos": [
               3,
@@ -12577,7 +12577,7 @@
             ]
           }
         ],
-        "mistake": "the circle runs through its colours in the wrong order"
+        "mistake": "the hexagon repeats its last move instead of continuing the pattern, and the trapezium turns back after the fifth matrix before reaching the edge"
       },
       {
         "frame": [
@@ -12606,7 +12606,7 @@
             ]
           },
           {
-            "colour": "orange",
+            "colour": "yellow",
             "orient": 0,
             "pos": [
               3,
@@ -12614,7 +12614,7 @@
             ]
           }
         ],
-        "mistake": "the hexagon repeats its last move instead of continuing the pattern"
+        "mistake": "the hexagon repeats its last move instead of continuing the pattern, and the circle runs through its colours in the wrong order"
       }
     ],
     "shapes": [
@@ -12789,28 +12789,28 @@
             "colour": "orange",
             "orient": 2,
             "pos": [
-              3,
-              2
+              1,
+              0
             ]
           },
           {
             "colour": "black",
             "orient": 2,
             "pos": [
-              1,
-              1
+              0,
+              0
             ]
           },
           {
             "colour": "orange",
-            "orient": 3,
+            "orient": 0,
             "pos": [
               2,
               1
             ]
           }
         ],
-        "mistake": "the half-circle counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the corner turns back before it reaches the edge, and the trapezium moves one field too far"
       },
       {
         "frame": [
@@ -12847,28 +12847,28 @@
             "colour": "orange",
             "orient": 2,
             "pos": [
-              1,
-              0
+              3,
+              2
             ]
           },
           {
             "colour": "black",
             "orient": 2,
             "pos": [
-              1,
-              1
+              0,
+              0
             ]
           },
           {
             "colour": "orange",
-            "orient": 0,
+            "orient": 1,
             "pos": [
               2,
               1
             ]
           }
         ],
-        "mistake": "the corner turns back before it reaches the edge"
+        "mistake": "the trapezium moves one field too far, and the half-circle turns by the same amount instead of one quarter turn more each time"
       }
     ],
     "options6": [
@@ -12876,7 +12876,7 @@
         "frame": [
           {
             "colour": "yellow",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               2,
               1
@@ -12891,15 +12891,15 @@
             ]
           },
           {
-            "colour": "green",
+            "colour": "orange",
             "orient": 3,
             "pos": [
-              2,
-              0
+              1,
+              1
             ]
           }
         ],
-        "mistake": "the corner stops turning"
+        "mistake": "the half-circle repeats its fifth-matrix move instead of continuing the pattern and keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -12920,15 +12920,15 @@
             ]
           },
           {
-            "colour": "green",
-            "orient": 2,
+            "colour": "orange",
+            "orient": 1,
             "pos": [
               2,
               0
             ]
           }
         ],
-        "mistake": "the half-circle turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the half-circle counts its turns from the wrong start: one quarter turn too many and keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -13098,7 +13098,7 @@
         "frame": [
           {
             "colour": "pink",
-            "orient": 3,
+            "orient": 1,
             "pos": [
               2,
               3
@@ -13108,8 +13108,8 @@
             "colour": "blue",
             "orient": 2,
             "pos": [
-              0,
-              2
+              1,
+              3
             ]
           },
           {
@@ -13121,13 +13121,13 @@
             ]
           }
         ],
-        "mistake": "the triangle counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the triangle turns by the same amount instead of one quarter turn more each time, and the circle bounces back at the corner instead of going round it"
       },
       {
         "frame": [
           {
             "colour": "pink",
-            "orient": 2,
+            "orient": 1,
             "pos": [
               2,
               3
@@ -13150,7 +13150,7 @@
             ]
           }
         ],
-        "mistake": "the corner skips a colour in its cycle"
+        "mistake": "the triangle turns by the same amount instead of one quarter turn more each time, and the corner skips a colour in its cycle"
       },
       {
         "frame": [
@@ -13216,36 +13216,7 @@
         "frame": [
           {
             "colour": "pink",
-            "orient": 0,
-            "pos": [
-              2,
-              0
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 2,
-            "pos": [
-              1,
-              0
-            ]
-          },
-          {
-            "colour": "white",
             "orient": 1,
-            "pos": [
-              0,
-              1
-            ]
-          }
-        ],
-        "mistake": "the triangle turns by the same amount instead of one quarter turn more each time"
-      },
-      {
-        "frame": [
-          {
-            "colour": "pink",
-            "orient": 3,
             "pos": [
               2,
               0
@@ -13268,7 +13239,36 @@
             ]
           }
         ],
-        "mistake": "the corner skips a colour in its cycle"
+        "mistake": "the triangle counts its turns from the wrong start: one quarter turn too many, and the corner skips a colour in its cycle"
+      },
+      {
+        "frame": [
+          {
+            "colour": "pink",
+            "orient": 3,
+            "pos": [
+              2,
+              0
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 2,
+            "pos": [
+              2,
+              3
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 1,
+            "pos": [
+              0,
+              1
+            ]
+          }
+        ],
+        "mistake": "the circle bounces back at the corner instead of going round it, and the corner skips a colour in its cycle"
       }
     ],
     "shapes": [
@@ -13448,16 +13448,16 @@
             "colour": "black",
             "orient": 3,
             "pos": [
-              0,
-              3
+              1,
+              2
             ]
           },
           {
             "colour": "orange",
             "orient": 1,
             "pos": [
-              3,
-              0
+              0,
+              3
             ]
           },
           {
@@ -13472,12 +13472,12 @@
             "colour": "orange",
             "orient": 2,
             "pos": [
-              0,
+              2,
               2
             ]
           }
         ],
-        "mistake": "the square turns back before it reaches the edge"
+        "mistake": "the flag and the square have swapped places, and the triangle turns back before it reaches the edge"
       },
       {
         "frame": [
@@ -13485,7 +13485,7 @@
             "colour": "black",
             "orient": 3,
             "pos": [
-              0,
+              3,
               3
             ]
           },
@@ -13501,20 +13501,20 @@
             "colour": "green",
             "orient": 1,
             "pos": [
-              3,
+              0,
               3
             ]
           },
           {
             "colour": "orange",
-            "orient": 1,
+            "orient": 2,
             "pos": [
-              0,
+              2,
               2
             ]
           }
         ],
-        "mistake": "the triangle turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the flag and the hexagon have swapped places, and the triangle turns back before it reaches the edge"
       }
     ],
     "options6": [
@@ -13582,15 +13582,15 @@
             ]
           },
           {
-            "colour": "blue",
-            "orient": 1,
+            "colour": "orange",
+            "orient": 2,
             "pos": [
               1,
               2
             ]
           }
         ],
-        "mistake": "the triangle counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the triangle stops turning after the fifth matrix and runs through its colours in the wrong order"
       },
       {
         "frame": [
@@ -13603,7 +13603,7 @@
             ]
           },
           {
-            "colour": "orange",
+            "colour": "yellow",
             "orient": 1,
             "pos": [
               0,
@@ -13620,14 +13620,14 @@
           },
           {
             "colour": "blue",
-            "orient": 3,
+            "orient": 2,
             "pos": [
-              1,
-              2
+              0,
+              1
             ]
           }
         ],
-        "mistake": "the square runs through its colours in the wrong order"
+        "mistake": "the triangle slides left along the edge instead of bouncing back and stops turning after the fifth matrix"
       }
     ],
     "shapes": [
@@ -13820,18 +13820,18 @@
             "colour": "yellow",
             "orient": 1,
             "pos": [
-              3,
+              2,
               0
             ]
           }
         ],
-        "mistake": "the trapezium turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the trapezium turns by the same amount instead of one quarter turn more each time, and the square keeps the same step instead of moving one field more each time"
       },
       {
         "frame": [
           {
             "colour": "green",
-            "orient": 0,
+            "orient": 2,
             "pos": [
               0,
               1
@@ -13849,12 +13849,12 @@
             "colour": "yellow",
             "orient": 1,
             "pos": [
-              3,
+              2,
               0
             ]
           }
         ],
-        "mistake": "the arrow counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the arrow turns by the same amount instead of one quarter turn more each time, and the square keeps the same step instead of moving one field more each time"
       },
       {
         "frame": [
@@ -13894,7 +13894,7 @@
             "orient": 0,
             "pos": [
               1,
-              1
+              0
             ]
           },
           {
@@ -13914,16 +13914,16 @@
             ]
           }
         ],
-        "mistake": "the trapezium counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the arrow skips a step in its repeating pattern, and the trapezium counts its turns from the wrong start: one quarter turn too many"
       },
       {
         "frame": [
           {
             "colour": "green",
-            "orient": 3,
+            "orient": 0,
             "pos": [
               1,
-              1
+              0
             ]
           },
           {
@@ -13938,12 +13938,12 @@
             "colour": "black",
             "orient": 1,
             "pos": [
-              1,
-              3
+              3,
+              2
             ]
           }
         ],
-        "mistake": "the arrow turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the arrow skips a step in its repeating pattern, and the square keeps the same step instead of moving one field more each time"
       },
       {
         "frame": [
@@ -14115,6 +14115,43 @@
         "frame": [
           {
             "colour": "white",
+            "orient": 0,
+            "pos": [
+              0,
+              1
+            ]
+          },
+          {
+            "colour": "white",
+            "orient": 1,
+            "pos": [
+              2,
+              1
+            ]
+          },
+          {
+            "colour": "pink",
+            "orient": 2,
+            "pos": [
+              3,
+              3
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 3,
+            "pos": [
+              0,
+              2
+            ]
+          }
+        ],
+        "mistake": "the flag turns by the same amount instead of one quarter turn more each time, and the arrow turns back before it reaches the edge"
+      },
+      {
+        "frame": [
+          {
+            "colour": "white",
             "orient": 1,
             "pos": [
               0,
@@ -14141,49 +14178,12 @@
             "colour": "black",
             "orient": 3,
             "pos": [
-              2,
-              0
-            ]
-          }
-        ],
-        "mistake": "the trapezium turns by the same amount instead of one quarter turn more each time"
-      },
-      {
-        "frame": [
-          {
-            "colour": "white",
-            "orient": 0,
-            "pos": [
               0,
-              1
-            ]
-          },
-          {
-            "colour": "white",
-            "orient": 3,
-            "pos": [
-              2,
-              1
-            ]
-          },
-          {
-            "colour": "pink",
-            "orient": 2,
-            "pos": [
-              3,
-              3
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 3,
-            "pos": [
-              2,
-              0
+              2
             ]
           }
         ],
-        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the trapezium turns by the same amount instead of one quarter turn more each time, and the arrow turns back before it reaches the edge"
       },
       {
         "frame": [
@@ -14265,7 +14265,7 @@
         "frame": [
           {
             "colour": "white",
-            "orient": 3,
+            "orient": 1,
             "pos": [
               0,
               0
@@ -14273,7 +14273,7 @@
           },
           {
             "colour": "green",
-            "orient": 0,
+            "orient": 3,
             "pos": [
               2,
               2
@@ -14291,12 +14291,12 @@
             "colour": "white",
             "orient": 1,
             "pos": [
-              1,
-              1
+              3,
+              0
             ]
           }
         ],
-        "mistake": "the flag turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the trapezium turns the wrong way, and the arrow switches to moving down at the edge instead of going back the way it came"
       },
       {
         "frame": [
@@ -14310,7 +14310,7 @@
           },
           {
             "colour": "green",
-            "orient": 3,
+            "orient": 1,
             "pos": [
               2,
               2
@@ -14333,7 +14333,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the trapezium turns the wrong way, and the flag counts its turns from the wrong start: one quarter turn too many"
       }
     ],
     "shapes": [
@@ -14545,44 +14545,7 @@
         "frame": [
           {
             "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              0,
-              2
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 1,
-            "pos": [
-              3,
-              3
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 1,
-            "pos": [
-              2,
-              3
-            ]
-          },
-          {
-            "colour": "black",
-            "orient": 1,
-            "pos": [
-              3,
-              0
-            ]
-          }
-        ],
-        "mistake": "the flag goes back the way it came instead of continuing the pattern"
-      },
-      {
-        "frame": [
-          {
-            "colour": "yellow",
-            "orient": 3,
+            "orient": 2,
             "pos": [
               1,
               1
@@ -14597,8 +14560,45 @@
             ]
           },
           {
-            "colour": "green",
+            "colour": "yellow",
             "orient": 1,
+            "pos": [
+              2,
+              3
+            ]
+          },
+          {
+            "colour": "black",
+            "orient": 1,
+            "pos": [
+              0,
+              3
+            ]
+          }
+        ],
+        "mistake": "the flag turns one quarter turn too far, and the diamond bounces back at the corner instead of going round it"
+      },
+      {
+        "frame": [
+          {
+            "colour": "yellow",
+            "orient": 2,
+            "pos": [
+              1,
+              1
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 1,
+            "pos": [
+              3,
+              3
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 0,
             "pos": [
               2,
               3
@@ -14613,7 +14613,7 @@
             ]
           }
         ],
-        "mistake": "the arrow keeps its colour instead of changing"
+        "mistake": "the flag turns one quarter turn too far, and the arrow turns 90° clockwise instead of 180°"
       }
     ],
     "options6": [
@@ -14658,7 +14658,7 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 2,
+            "orient": 0,
             "pos": [
               1,
               2
@@ -14673,8 +14673,8 @@
             ]
           },
           {
-            "colour": "yellow",
-            "orient": 3,
+            "colour": "pink",
+            "orient": 1,
             "pos": [
               3,
               2
@@ -14689,24 +14689,24 @@
             ]
           }
         ],
-        "mistake": "the arrow runs through its colours in the wrong order"
+        "mistake": "the flag stops turning, and the arrow turns 90° clockwise instead of 180°"
       },
       {
         "frame": [
           {
             "colour": "black",
-            "orient": 2,
+            "orient": 0,
             "pos": [
               1,
               2
             ]
           },
           {
-            "colour": "black",
+            "colour": "blue",
             "orient": 1,
             "pos": [
               0,
-              1
+              3
             ]
           },
           {
@@ -14726,7 +14726,7 @@
             ]
           }
         ],
-        "mistake": "the trapezium moves one field too many along the edge"
+        "mistake": "the flag stops turning, and the trapezium skips a colour in its cycle"
       }
     ],
     "shapes": [
@@ -14902,18 +14902,18 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 3,
+            "orient": 0,
             "pos": [
-              2,
-              2
+              1,
+              1
             ]
           },
           {
             "colour": "blue",
             "orient": 0,
             "pos": [
-              3,
-              0
+              2,
+              1
             ]
           },
           {
@@ -14933,7 +14933,7 @@
             ]
           }
         ],
-        "mistake": "the arrow goes back the way it came instead of continuing the pattern"
+        "mistake": "the arrow turns one quarter turn too far, and the flag goes back the way it came instead of continuing the pattern"
       },
       {
         "frame": [
@@ -14976,7 +14976,7 @@
         "frame": [
           {
             "colour": "black",
-            "orient": 3,
+            "orient": 0,
             "pos": [
               1,
               1
@@ -14994,7 +14994,7 @@
             "colour": "blue",
             "orient": 2,
             "pos": [
-              1,
+              2,
               0
             ]
           },
@@ -15002,20 +15002,20 @@
             "colour": "green",
             "orient": 2,
             "pos": [
-              0,
-              1
+              1,
+              0
             ]
           }
         ],
-        "mistake": "the triangle keeps the same step instead of moving one field more each time"
+        "mistake": "the arrow turns one quarter turn too far, and the diamond goes back the way it came instead of continuing the pattern"
       }
     ],
     "options6": [
       {
         "frame": [
           {
-            "colour": "blue",
-            "orient": 1,
+            "colour": "pink",
+            "orient": 3,
             "pos": [
               2,
               1
@@ -15025,8 +15025,8 @@
             "colour": "green",
             "orient": 0,
             "pos": [
-              2,
-              0
+              3,
+              1
             ]
           },
           {
@@ -15046,7 +15046,7 @@
             ]
           }
         ],
-        "mistake": "the arrow keeps its colour instead of changing"
+        "mistake": "the arrow stops turning after the fifth matrix, and the flag goes back to its fourth-matrix field instead of continuing the pattern"
       },
       {
         "frame": [
@@ -15089,7 +15089,7 @@
         "frame": [
           {
             "colour": "pink",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               2,
               1
@@ -15107,20 +15107,20 @@
             "colour": "blue",
             "orient": 3,
             "pos": [
-              3,
-              1
+              2,
+              3
             ]
           },
           {
             "colour": "green",
             "orient": 2,
             "pos": [
-              1,
-              1
+              0,
+              2
             ]
           }
         ],
-        "mistake": "the triangle keeps the same step instead of moving one field more each time"
+        "mistake": "the arrow stops turning after the fifth matrix, and the diamond repeats its fifth-matrix move instead of continuing the pattern"
       }
     ],
     "shapes": [
@@ -15298,7 +15298,7 @@
             "colour": "orange",
             "orient": 1,
             "pos": [
-              1,
+              0,
               3
             ]
           },
@@ -15306,16 +15306,16 @@
             "colour": "pink",
             "orient": 3,
             "pos": [
-              3,
-              1
+              2,
+              2
             ]
           },
           {
-            "colour": "green",
+            "colour": "blue",
             "orient": 1,
             "pos": [
-              2,
-              2
+              3,
+              1
             ]
           },
           {
@@ -15327,7 +15327,7 @@
             ]
           }
         ],
-        "mistake": "the triangle runs through its colours in the wrong order"
+        "mistake": "the flag keeps the same step instead of moving one field more each time, and the hexagon and the triangle have swapped places"
       },
       {
         "frame": [
@@ -15343,7 +15343,7 @@
             "colour": "pink",
             "orient": 3,
             "pos": [
-              3,
+              1,
               1
             ]
           },
@@ -15359,12 +15359,12 @@
             "colour": "white",
             "orient": 1,
             "pos": [
-              1,
+              3,
               1
             ]
           }
         ],
-        "mistake": "the flag keeps the same step instead of moving one field more each time"
+        "mistake": "the flag keeps the same step instead of moving one field more each time, and the hexagon and the diamond have swapped places"
       },
       {
         "frame": [
@@ -15412,44 +15412,7 @@
             "orient": 0,
             "pos": [
               3,
-              0
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 3,
-            "pos": [
-              0,
-              1
-            ]
-          },
-          {
-            "colour": "blue",
-            "orient": 1,
-            "pos": [
-              1,
-              1
-            ]
-          },
-          {
-            "colour": "white",
-            "orient": 1,
-            "pos": [
-              0,
-              0
-            ]
-          }
-        ],
-        "mistake": "the triangle skips a colour in its cycle"
-      },
-      {
-        "frame": [
-          {
-            "colour": "blue",
-            "orient": 0,
-            "pos": [
-              3,
-              0
+              2
             ]
           },
           {
@@ -15477,7 +15440,44 @@
             ]
           }
         ],
-        "mistake": "the hexagon keeps the same step instead of moving one field more each time"
+        "mistake": "the flag moves one field too few along the edge, and the hexagon keeps the same step instead of moving one field more each time"
+      },
+      {
+        "frame": [
+          {
+            "colour": "blue",
+            "orient": 0,
+            "pos": [
+              3,
+              2
+            ]
+          },
+          {
+            "colour": "yellow",
+            "orient": 3,
+            "pos": [
+              0,
+              1
+            ]
+          },
+          {
+            "colour": "blue",
+            "orient": 1,
+            "pos": [
+              1,
+              1
+            ]
+          },
+          {
+            "colour": "white",
+            "orient": 1,
+            "pos": [
+              0,
+              0
+            ]
+          }
+        ],
+        "mistake": "the flag moves one field too few along the edge, and the triangle runs through its colours in the wrong order"
       },
       {
         "frame": [
@@ -15697,15 +15697,7 @@
             ]
           },
           {
-            "colour": "orange",
-            "orient": 1,
-            "pos": [
-              3,
-              0
-            ]
-          },
-          {
-            "colour": "white",
+            "colour": "blue",
             "orient": 1,
             "pos": [
               1,
@@ -15713,15 +15705,23 @@
             ]
           },
           {
+            "colour": "white",
+            "orient": 1,
+            "pos": [
+              3,
+              0
+            ]
+          },
+          {
             "colour": "blue",
-            "orient": 0,
+            "orient": 3,
             "pos": [
               1,
               1
             ]
           }
         ],
-        "mistake": "the hexagon runs through its colours in the wrong order"
+        "mistake": "the hexagon and the corner have swapped places, and the flag turns by the same amount instead of one quarter turn more each time"
       },
       {
         "frame": [
@@ -15766,16 +15766,16 @@
             "colour": "blue",
             "orient": 3,
             "pos": [
-              2,
-              3
+              3,
+              0
             ]
           },
           {
             "colour": "blue",
             "orient": 1,
             "pos": [
-              3,
-              0
+              2,
+              3
             ]
           },
           {
@@ -15788,14 +15788,14 @@
           },
           {
             "colour": "blue",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               1,
               1
             ]
           }
         ],
-        "mistake": "the flag counts its turns from the wrong start: one quarter turn too many"
+        "mistake": "the trapezium and the hexagon have swapped places, and the flag turns by the same amount instead of one quarter turn more each time"
       }
     ],
     "options6": [
@@ -15803,7 +15803,7 @@
         "frame": [
           {
             "colour": "blue",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               3,
               2
@@ -15813,8 +15813,8 @@
             "colour": "orange",
             "orient": 1,
             "pos": [
-              3,
-              1
+              2,
+              2
             ]
           },
           {
@@ -15827,14 +15827,14 @@
           },
           {
             "colour": "white",
-            "orient": 2,
+            "orient": 1,
             "pos": [
-              2,
-              2
+              3,
+              1
             ]
           }
         ],
-        "mistake": "the flag turns by the same amount instead of one quarter turn more each time"
+        "mistake": "the trapezium turns 90° anticlockwise instead of 180°, and the hexagon and the flag have swapped places"
       },
       {
         "frame": [
@@ -15877,26 +15877,26 @@
         "frame": [
           {
             "colour": "blue",
-            "orient": 1,
+            "orient": 3,
             "pos": [
               3,
               2
             ]
           },
           {
-            "colour": "blue",
+            "colour": "orange",
             "orient": 1,
             "pos": [
-              3,
-              1
+              2,
+              3
             ]
           },
           {
             "colour": "green",
             "orient": 0,
             "pos": [
-              2,
-              3
+              3,
+              1
             ]
           },
           {
@@ -15908,7 +15908,7 @@
             ]
           }
         ],
-        "mistake": "the hexagon skips a colour in its cycle"
+        "mistake": "the trapezium turns 90° anticlockwise instead of 180°, and the hexagon and the corner have swapped places"
       }
     ],
     "shapes": [
@@ -16088,11 +16088,11 @@
             "orient": 2,
             "pos": [
               3,
-              2
+              3
             ]
           },
           {
-            "colour": "white",
+            "colour": "orange",
             "orient": 2,
             "pos": [
               1,
@@ -16100,7 +16100,7 @@
             ]
           },
           {
-            "colour": "pink",
+            "colour": "yellow",
             "orient": 1,
             "pos": [
               2,
@@ -16116,7 +16116,7 @@
             ]
           }
         ],
-        "mistake": "the corner keeps the same step instead of moving one field more each time"
+        "mistake": "the hexagon keeps its colour instead of changing, and the half-circle keeps its colour instead of changing"
       },
       {
         "frame": [
@@ -16174,7 +16174,7 @@
             ]
           },
           {
-            "colour": "pink",
+            "colour": "yellow",
             "orient": 1,
             "pos": [
               2,
@@ -16183,14 +16183,14 @@
           },
           {
             "colour": "white",
-            "orient": 3,
+            "orient": 1,
             "pos": [
-              0,
+              2,
               2
             ]
           }
         ],
-        "mistake": "the flag turns the wrong way"
+        "mistake": "the half-circle keeps its colour instead of changing, and the flag bounces at a right angle off the edge instead of going back the way it came"
       }
     ],
     "options6": [
@@ -16200,22 +16200,6 @@
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              1,
-              0
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 2,
-            "pos": [
-              3,
-              3
-            ]
-          },
-          {
-            "colour": "yellow",
-            "orient": 2,
-            "pos": [
               2,
               3
             ]
@@ -16224,15 +16208,10 @@
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              1,
-              3
+              3,
+              1
             ]
-          }
-        ],
-        "mistake": "the corner moves one field too many along the edge"
-      },
-      {
-        "frame": [
+          },
           {
             "colour": "yellow",
             "orient": 2,
@@ -16242,11 +16221,32 @@
             ]
           },
           {
-            "colour": "white",
+            "colour": "yellow",
+            "orient": 2,
+            "pos": [
+              1,
+              3
+            ]
+          }
+        ],
+        "mistake": "the corner and the half-circle have swapped places, and the hexagon moves one field too few along the edge"
+      },
+      {
+        "frame": [
+          {
+            "colour": "yellow",
+            "orient": 2,
+            "pos": [
+              1,
+              3
+            ]
+          },
+          {
+            "colour": "yellow",
             "orient": 2,
             "pos": [
               3,
-              3
+              1
             ]
           },
           {
@@ -16261,12 +16261,12 @@
             "colour": "yellow",
             "orient": 2,
             "pos": [
-              1,
-              3
+              0,
+              1
             ]
           }
         ],
-        "mistake": "the hexagon runs through its colours in the wrong order"
+        "mistake": "the corner and the flag have swapped places, and the hexagon moves one field too few along the edge"
       },
       {
         "frame": [

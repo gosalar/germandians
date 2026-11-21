@@ -1,6 +1,13 @@
 import { siteConfig } from '@/utils/siteConfig';
 
-import { emailDraftUrl, openEmailDraft, postEnquiry, type SubmitResult } from './enquiry';
+import {
+  createSubmissionAttempt,
+  emailDraftUrl,
+  openEmailDraft,
+  postEnquiry,
+  type SubmissionAttempt,
+  type SubmitResult,
+} from './enquiry';
 
 /** The pages that can offer a summary of the visitor's answers with a profile review. */
 export const SUMMARY_SOURCES = ['grade-check', 'requirements'] as const;
@@ -34,9 +41,18 @@ export function summaryText(summary: EnquirySummary): string {
   return summary.lines.join(SUMMARY_SEPARATOR);
 }
 
-/** What the endpoint receives. An attached summary travels as `snapshot`, its lines joined, so the endpoint contract is unchanged. */
-export function profileReviewPayload({ summary, ...fields }: ProfileReviewRequest) {
-  return { ...fields, ...(summary ? { snapshot: summaryText(summary) } : {}) };
+/**
+ * What the endpoint receives, in a fixed field order with optional blanks omitted. An attached
+ * summary travels as `snapshot`, its lines joined, so the endpoint contract is unchanged.
+ */
+export function profileReviewPayload(request: ProfileReviewRequest) {
+  return {
+    name: request.name,
+    ...(request.email ? { email: request.email } : {}),
+    whatsapp: request.whatsapp,
+    ...(request.summary ? { snapshot: summaryText(request.summary) } : {}),
+    ...(request.germanLessons ? { germanLessons: true as const } : {}),
+  };
 }
 
 export function buildEmailDraft(request: ProfileReviewRequest): string {
@@ -57,7 +73,14 @@ export function buildEmailDraftUrl(request: ProfileReviewRequest): string {
 }
 
 /** Sends the request to the admissions sheet, or opens it as an email draft when that sheet isn't configured. */
-export async function submitProfileReview(request: ProfileReviewRequest): Promise<SubmitResult> {
+export async function submitProfileReview(
+  request: ProfileReviewRequest,
+  attempt?: SubmissionAttempt,
+): Promise<SubmitResult> {
   if (!siteConfig.profileReviewEndpoint) return openEmailDraft(buildEmailDraftUrl(request));
-  return postEnquiry(siteConfig.profileReviewEndpoint, profileReviewPayload(request));
+  return postEnquiry(
+    siteConfig.profileReviewEndpoint,
+    profileReviewPayload(request),
+    attempt ?? createSubmissionAttempt(),
+  );
 }

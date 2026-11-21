@@ -54,7 +54,7 @@ export default function Privacy() {
             variant="regular"
             title="Privacy note"
             introduction="This page explains what stays in your browser and what happens to the details you send us."
-            meta={<p className={styles.updated}>Last updated 18 November 2026</p>}
+            meta={<p className={styles.updated}>Last updated 21 November 2026</p>}
           />
 
           <section className={styles.section}>
@@ -77,6 +77,9 @@ export default function Privacy() {
             <p className={styles.text}>
               When you send an enquiry, we receive your name, WhatsApp number, any email address you choose to provide,
               the time of your message or submission, and your consent to be contacted.
+              {reviewBySheet || lessonsBySheet
+                ? ' When a form sends to our Google Sheets, it also sends a random technical submission ID stored alongside your enquiry so a retry does not create a duplicate row.'
+                : null}
             </p>
             <p className={styles.text}>
               If you use the grade check and get a result, the contact form shows a summary of the marks you entered and
@@ -105,8 +108,10 @@ export default function Privacy() {
             </p>
             <p className={styles.text}>
               Your SOP planner notes stay in your browser on your device, so you can reload the page or print your
-              outline without losing what you typed. The site never sends these notes. Choosing “Clear my entries”
-              removes them from your browser.
+              outline without losing what you typed. To coordinate open tabs, the page stores a small browser-local sync
+              record with no note text, and keeps a temporary recovery copy in your browser while a multi-tab edit
+              conflict is unresolved. The site never sends these notes or records. Choosing “Clear my entries” removes
+              your outline and any recovery copy from your browser.
             </p>
             <p className={styles.text}>
               The application plan saves the programmes, dates and document lists you enter in this browser. The

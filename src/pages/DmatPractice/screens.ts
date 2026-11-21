@@ -1,7 +1,12 @@
 import type { Dispatch, SetStateAction } from 'react';
 
 import type { SectionRun } from '@/utils/dmat/session';
-import type { SectionContent, SectionId } from '@/utils/dmat/types';
+import {
+  CURRENT_FIGURE_BANK_REVISION,
+  type FigureBankRevision,
+  type SectionContent,
+  type SectionId,
+} from '@/utils/dmat/types';
 
 import { loadSection } from './bank';
 
@@ -27,9 +32,13 @@ export const NOTHING_LOADED: Loaded = { screens: {}, sections: {} };
 
 type Keep = Dispatch<SetStateAction<Loaded>>;
 
-export const runKey = (run: Pick<SectionRun, 'id' | 'setId' | 'mock'>) => {
+export const runKey = (
+  run: Pick<SectionRun, 'id' | 'setId' | 'mock'>,
+  figureRevision: FigureBankRevision = CURRENT_FIGURE_BANK_REVISION,
+) => {
   const mock = run.mock ?? (run.setId === 'mock' ? 1 : undefined);
-  return mock !== undefined ? `${run.id}:${run.setId}:${mock}` : `${run.id}:${run.setId}`;
+  const base = mock !== undefined ? `${run.id}:${run.setId}:${mock}` : `${run.id}:${run.setId}`;
+  return run.id === 'figures' ? `${base}:r${figureRevision}` : base;
 };
 
 export async function fetchScreen(keep: Keep, name: LazyScreen): Promise<void> {
@@ -39,9 +48,14 @@ export async function fetchScreen(keep: Keep, name: LazyScreen): Promise<void> {
 
 /** `key` is a `runKey`. */
 export async function fetchRun(keep: Keep, key: string): Promise<void> {
-  const [section, setId, mockPart] = key.split(':') as [SectionId, string, string | undefined];
-  const mock = mockPart !== undefined ? Number(mockPart) : undefined;
-  const content = await loadSection(section, setId, mock);
+  const [section, setId, ...rest] = key.split(':') as [SectionId, string, ...string[]];
+  let mock: number | undefined;
+  let figureRevision: FigureBankRevision | undefined;
+  for (const part of rest) {
+    if (part.startsWith('r')) figureRevision = Number(part.slice(1)) as FigureBankRevision;
+    else mock = Number(part);
+  }
+  const content = await loadSection(section, setId, mock, figureRevision);
   keep((current) => current.sections[key] === content ? current : { ...current, sections: { ...current.sections, [key]: content } });
 }
 

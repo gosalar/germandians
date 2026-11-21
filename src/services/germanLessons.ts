@@ -1,7 +1,14 @@
 import { GERMAN_LESSONS } from '@/utils/constants';
 import { siteConfig } from '@/utils/siteConfig';
 
-import { emailDraftUrl, openEmailDraft, postEnquiry, type SubmitResult } from './enquiry';
+import {
+  createSubmissionAttempt,
+  emailDraftUrl,
+  openEmailDraft,
+  postEnquiry,
+  type SubmissionAttempt,
+  type SubmitResult,
+} from './enquiry';
 
 /** A German lessons enquiry. Separate from the profile review: its own form, subject and endpoint type. */
 export interface GermanLessonsRequest {
@@ -14,6 +21,19 @@ export interface GermanLessonsRequest {
   purpose?: string;
   /** Any German they already have. Omitted when blank. */
   experience?: string;
+}
+
+/** What the endpoint receives, in a fixed field order with optional blanks omitted. */
+export function germanLessonsPayload(request: GermanLessonsRequest) {
+  return {
+    enquiry: 'german-lessons' as const,
+    name: request.name,
+    ...(request.email ? { email: request.email } : {}),
+    whatsapp: request.whatsapp,
+    language: request.language,
+    ...(request.purpose ? { purpose: request.purpose } : {}),
+    ...(request.experience ? { experience: request.experience } : {}),
+  };
 }
 
 export function buildGermanLessonsDraft(request: GermanLessonsRequest): string {
@@ -39,7 +59,14 @@ export function buildGermanLessonsDraftUrl(request: GermanLessonsRequest): strin
  * draft when that sheet isn't configured. The mark lets the sheet's script turn away a profile review
  * sent to the wrong address.
  */
-export async function submitGermanLessons(request: GermanLessonsRequest): Promise<SubmitResult> {
+export async function submitGermanLessons(
+  request: GermanLessonsRequest,
+  attempt?: SubmissionAttempt,
+): Promise<SubmitResult> {
   if (!siteConfig.germanLessonsEndpoint) return openEmailDraft(buildGermanLessonsDraftUrl(request));
-  return postEnquiry(siteConfig.germanLessonsEndpoint, { enquiry: 'german-lessons', ...request });
+  return postEnquiry(
+    siteConfig.germanLessonsEndpoint,
+    germanLessonsPayload(request),
+    attempt ?? createSubmissionAttempt(),
+  );
 }

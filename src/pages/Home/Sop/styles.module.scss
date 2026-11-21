@@ -151,6 +151,13 @@
   font-size: 15px;
 }
 
+.plannerAction {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 // Two applicants
 .compare {
   margin-top: clamp(72px, 9vw, 120px);

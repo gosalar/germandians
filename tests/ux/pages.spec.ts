@@ -27,6 +27,75 @@ test('home sections lead to the about, community, German and dMAT pages', async 
   }
 });
 
+test('Home fees and SOP sections link to the budget and SOP planners by pointer and keyboard', async ({ page }) => {
+  await page.goto('/');
+  await ready(page);
+
+  const fees = page.locator('#fees');
+  const sopSection = page.locator('#sop');
+  const budget = fees.getByRole('link', { name: 'Open the budget planner', exact: true });
+  const sop = sopSection.getByRole('link', { name: 'Plan your own SOP', exact: true });
+
+  // Both links live inside their sections with exact same-tab routes, preserving neighbouring controls.
+  await expect(fees.getByRole('link', { name: 'How the quote works', exact: true })).toHaveAttribute('href', '#faq-fees');
+  await expect(fees.getByRole('link', { name: 'Other costs to plan for', exact: true })).toHaveAttribute('href', '/requirements#costs');
+  await expect(budget).toHaveAttribute('href', '/budget');
+  await expect(budget).not.toHaveAttribute('target', /.+/);
+  await expect(fees.getByRole('link', { name: 'Get my profile reviewed', exact: true })).toHaveAttribute('href', '#contact-form');
+  await expect(fees.getByRole('link', { name: 'Free German grade check', exact: true })).toHaveAttribute('href', '/check');
+
+  await expect(sop).toHaveAttribute('href', '/sop-planner');
+  await expect(sop).not.toHaveAttribute('target', /.+/);
+  await expect(sopSection.getByRole('link', { name: 'Get my profile reviewed', exact: true })).toHaveAttribute('href', '#contact-form');
+
+  // The SOP planner link sits directly after the revision notes and before the real-case comparison.
+  const sopOrderOk = await sopSection.evaluate((section) => {
+    const notes = section.querySelector('ol');
+    const link = Array.from(section.querySelectorAll('a')).find((a) => a.textContent?.trim() === 'Plan your own SOP');
+    const caseHeading = Array.from(section.querySelectorAll('h3')).find((h) =>
+      h.textContent?.includes('Two applicants, one university'),
+    );
+    if (!notes || !link || !caseHeading) return false;
+    return (
+      Boolean(notes.compareDocumentPosition(link) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+      Boolean(link.compareDocumentPosition(caseHeading) & Node.DOCUMENT_POSITION_FOLLOWING)
+    );
+  });
+  expect(sopOrderOk).toBe(true);
+
+  const toolVisits = [
+    { section: '#fees', link: 'Open the budget planner', path: '/budget', heading: 'Study budget planner' },
+    { section: '#sop', link: 'Plan your own SOP', path: '/sop-planner', heading: 'SOP planner' },
+  ];
+
+  // Pointer activation, destination heading check, and browser Back.
+  for (const visit of toolVisits) {
+    const target = page.locator(visit.section).getByRole('link', { name: visit.link, exact: true });
+    await target.click();
+    await expect(page).toHaveURL(new RegExp(`${visit.path}/?$`));
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(visit.heading);
+    await expect(page.getByRole('main')).toHaveCount(1);
+    await page.goBack();
+    await ready(page);
+    await expect(page).toHaveURL(/\/$/);
+    await expect(page.locator(visit.section).getByRole('link', { name: visit.link, exact: true })).toBeVisible();
+  }
+
+  // Keyboard activation, destination heading check, and browser Back.
+  for (const visit of toolVisits) {
+    const target = page.locator(visit.section).getByRole('link', { name: visit.link, exact: true });
+    await target.focus();
+    await expect(target).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(page).toHaveURL(new RegExp(`${visit.path}/?$`));
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(visit.heading);
+    await expect(page.getByRole('main')).toHaveCount(1);
+    await page.goBack();
+    await ready(page);
+    await expect(page).toHaveURL(/\/$/);
+  }
+});
+
 for (const path of ['/about', '/community', '/learn-german']) for (const suffix of ['', '/']) {
   test(`${path}${suffix} loads directly, and its contact actions open the form on Home`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });

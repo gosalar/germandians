@@ -1,4 +1,13 @@
-import type { CoreSubtest, CoreTask, Passage, SectionContent, SectionId } from '@/utils/dmat/types';
+import {
+  CURRENT_FIGURE_BANK_REVISION,
+  LEGACY_FIGURE_BANK_REVISION,
+  type CoreSubtest,
+  type CoreTask,
+  type FigureBankRevision,
+  type Passage,
+  type SectionContent,
+  type SectionId,
+} from '@/utils/dmat/types';
 
 import practiceIndex from './practice-index.json';
 
@@ -74,9 +83,15 @@ function resolveMockNumber(setId: string, mock?: number): number | null {
   return setId === 'mock' ? mock ?? 1 : null;
 }
 
-function sectionKey(section: SectionId, setId: string, mock?: number): string {
+function sectionKey(
+  section: SectionId,
+  setId: string,
+  mock?: number,
+  figureRevision: FigureBankRevision = CURRENT_FIGURE_BANK_REVISION,
+): string {
   const mockNumber = resolveMockNumber(setId, mock);
-  return mockNumber !== null ? `${section}:mock:${mockNumber}` : `${section}:${setId}`;
+  const base = mockNumber !== null ? `${section}:mock:${mockNumber}` : `${section}:${setId}`;
+  return section === 'figures' ? `${base}:r${figureRevision}` : base;
 }
 
 const loaderFor = (group: Record<string, Loader>, setId: string, what: string): Loader => {
@@ -90,8 +105,17 @@ function mockLoaderFor(mockNumber: number, section: SectionId): Loader {
   return entry[section];
 }
 
-async function fetchSection(section: SectionId, setId: string, mock?: number): Promise<SectionContent> {
+async function fetchSection(
+  section: SectionId,
+  setId: string,
+  mock?: number,
+  figureRevision: FigureBankRevision = CURRENT_FIGURE_BANK_REVISION,
+): Promise<SectionContent> {
   const mockNumber = resolveMockNumber(setId, mock);
+  if (section === 'figures' && figureRevision === LEGACY_FIGURE_BANK_REVISION) {
+    const { loadLegacyFigureSet } = await import('./legacy-v1');
+    return { section, tasks: await loadLegacyFigureSet(setId, mockNumber) };
+  }
   if (mockNumber !== null) {
     const loader = mockLoaderFor(mockNumber, section);
     if (section === 'academic') {
@@ -107,14 +131,19 @@ async function fetchSection(section: SectionId, setId: string, mock?: number): P
 }
 
 /** Loads what a section shows, reusing any cached or in-flight request. */
-export function loadSection(section: SectionId, setId: string, mock?: number): Promise<SectionContent> {
-  const key = sectionKey(section, setId, mock);
+export function loadSection(
+  section: SectionId,
+  setId: string,
+  mock?: number,
+  figureRevision: FigureBankRevision = CURRENT_FIGURE_BANK_REVISION,
+): Promise<SectionContent> {
+  const key = sectionKey(section, setId, mock, figureRevision);
   const cached = loadedSections.get(key);
   if (cached) return Promise.resolve(cached);
   const inFlight = inFlightSections.get(key);
   if (inFlight) return inFlight;
 
-  const request = fetchSection(section, setId, mock).then(
+  const request = fetchSection(section, setId, mock, figureRevision).then(
     (content) => {
       loadedSections.set(key, content);
       inFlightSections.delete(key);

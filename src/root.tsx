@@ -10,12 +10,15 @@ import '@/utils/styles/global.scss';
 import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 import hankenLatin from '@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url';
 import { ColorSchemeScript, MantineProvider, mantineHtmlProps } from '@mantine/core';
-import { StrictMode, useEffect, type ReactNode } from 'react';
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import { StrictMode, useEffect, useRef, type ReactNode } from 'react';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation, useNavigationType } from 'react-router';
 
 import ErrorPage from '@/pages/ErrorPage';
 import SkipLink from '@/components/SkipLink';
 import { germandiansTheme } from '@/themes';
+
+/** Match prerendered trailing slashes ("/budget/") with in-app paths ("/budget"). */
+const normalizePathname = (path: string) => (path.length > 1 ? path.replace(/\/+$/, '') : path);
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -49,12 +52,32 @@ export function Layout({ children }: { children: ReactNode }) {
 export function HydrateFallback() { return null; }
 export { ErrorPage as ErrorBoundary };
 export default function App() {
+  const { pathname, hash } = useLocation();
+  const navigationType = useNavigationType();
+  const normalizedPathname = normalizePathname(pathname);
+  const previousPathname = useRef(normalizedPathname);
+
   // Parent effects run after their children's, so this marks the moment the
   // prerendered page is hydrated and every page effect has run. The UX tests
   // wait for `html[data-hydrated]` before they measure or interact.
   useEffect(() => {
     document.documentElement.dataset.hydrated = '';
   }, []);
+
+  // On PUSH/REPLACE to a different page without a hash fragment, move keyboard focus into the
+  // new page's main landmark without scrolling over ScrollRestoration. Skip initial hydration,
+  // same-page updates, Back/Forward (POP) and explicit fragment destinations.
+  useEffect(() => {
+    const previous = previousPathname.current;
+    previousPathname.current = normalizedPathname;
+    if (previous === normalizedPathname) return;
+    if (navigationType !== 'PUSH' && navigationType !== 'REPLACE') return;
+    if (hash) return;
+    const main = document.getElementById('main-content');
+    if (main instanceof HTMLElement) {
+      main.focus({ preventScroll: true });
+    }
+  }, [normalizedPathname, hash, navigationType]);
 
   return <Outlet />;
 }

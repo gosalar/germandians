@@ -39,7 +39,7 @@ export const documents = {
     },
     {
       heading: 'Translations and official documents',
-      body: 'uni-assist asks for certificates in their original language with a translation into German or English, unless your institution also issued them in German or English. A translation must come from a sworn or court-admissible translator, or from a department of the issuing institution that is authorised to issue translations. It counts a certificate as official when it carries the institution’s signature and stamp, a note that it was issued automatically, or a verification code. A university may set further rules, so check its own page too.',
+      body: 'uni-assist asks for certificates in their original language with a translation into German or English, unless they are also issued in German or English. A translation must come from a sworn or court-admissible translator, or from a department of the issuing institution that is authorised to issue translations. It counts a certificate as official when it carries the institution’s signature and stamp, a note that it was issued automatically, or a verification code. A university may set further rules, so check its own page too.',
       source: SOURCES.uniAssistCertificates,
     },
     {

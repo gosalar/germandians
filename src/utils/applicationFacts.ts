@@ -12,11 +12,11 @@ const reviewed = '12 November 2026';
 
 export const SOURCES = {
   dmat: { label: 'APS India: dMAT rules', url: 'https://aps-india.de/dmat/', reviewed: '18 November 2026' },
-  test: { label: 'g.a.s.t.: dMAT schedule', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed },
+  test: { label: 'g.a.s.t.: dMAT schedule', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed: '21 November 2026' },
   // Read for the dMAT guide and the practice page; each keeps the date it was read.
   dmatFaq: { label: 'g.a.s.t.: dMAT questions and answers for graduates in India', url: 'https://www.d-mat.de/en/faq-graduate-students-india/', reviewed: '17 November 2026' },
   // The preparation material is a PDF linked from this page; the PDF's own URL changes with each edition.
-  dmatPreparation: { label: 'g.a.s.t.: dMAT preparation material (PDF linked from this page)', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed: '17 November 2026' },
+  dmatPreparation: { label: 'g.a.s.t.: dMAT preparation material (PDF linked from this page)', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed: '21 November 2026' },
   // The videos on how the exam works on screen, linked from this page. Watched, not re-read: the date is the day they were watched.
   dmatVideos: { label: 'g.a.s.t.: videos on how the dMAT works on screen (linked from this page)', url: 'https://www.d-mat.de/en/dmat-in-india/', reviewed: '16 November 2026' },
   dmatTerms: { label: 'g.a.s.t.: dMAT terms and exam-day rules', url: 'https://www.d-mat.de/en/terms-conditions/', reviewed: '17 November 2026' },
@@ -29,7 +29,7 @@ export const SOURCES = {
   visa: { label: 'German Missions: visa FAQs', url: 'https://india.diplo.de/in-en/service/2546328-2546328', reviewed: '18 November 2026' },
   visaFee: { label: 'German Missions: national visa', url: 'https://india.diplo.de/in-en/service/2755482-2755482', reviewed: '18 November 2026' },
   daad: { label: 'DAAD: costs', url: 'https://www.daad.de/en/studying-in-germany/living-in-germany/finances/', reviewed: '18 November 2026' },
-  tum: { label: 'TUM: tuition fees', url: 'https://www.tum.de/en/studies/fees/tuition', reviewed: '18 November 2026' },
+  tum: { label: 'TUM: tuition fees', url: 'https://www.tum.de/en/studies/fees/tuition', reviewed: '21 November 2026' },
   housing: {
     label: 'Studierendenwerk München Oberbayern: housing FAQs',
     url: 'https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/',
@@ -51,7 +51,7 @@ export const SOURCES = {
   gradeConversion: {
     label: 'TUM: grade conversion for grades earned outside Germany',
     url: 'https://www.tum.de/en/studies/application/application-info-portal/grade-conversion-formula-for-grades-earned-outside-germany',
-    reviewed: '18 November 2026',
+    reviewed: '21 November 2026',
   },
   ects: {
     label: 'European Commission: ECTS',
@@ -82,7 +82,7 @@ export const SOURCES = {
   uniAssistCertificates: {
     label: 'uni-assist: educational certificates and translations',
     url: 'https://www.uni-assist.de/en/how-to-apply/plan-your-application/educational-certificates-translations/',
-    reviewed: '14 November 2026',
+    reviewed: '21 November 2026',
   },
   uniAssistOtherDocuments: {
     label: 'uni-assist: other documents',
@@ -107,17 +107,17 @@ export const SOURCES = {
   tumManagement: {
     label: 'TUM: Master in Management, Munich (example)',
     url: 'https://www.mgt.tum.de/programs/master-in-management/munich/how-to-apply',
-    reviewed: '15 November 2026',
+    reviewed: '21 November 2026',
   },
   tumAdmissionProcedures: {
     label: 'TUM: admission procedures',
     url: 'https://www.tum.de/en/studies/application/application-info-portal/admission-procedures',
-    reviewed: '15 November 2026',
+    reviewed: '21 November 2026',
   },
   tumAps: {
     label: 'TUM: APS certificate (example)',
     url: 'https://www.tum.de/en/studies/application/application-info-portal/aps',
-    reviewed: '16 November 2026',
+    reviewed: '21 November 2026',
   },
   semesters: {
     label: 'uni-assist: glossary, semester',
@@ -173,7 +173,7 @@ export const SOURCES = {
   tumEnrolment: {
     label: 'TUM: enrolment through TUMonline (example)',
     url: 'https://www.tum.de/en/studies/application/enrollment-info-portal/enrollment',
-    reviewed: '18 November 2026',
+    reviewed: '21 November 2026',
   },
   foreignOfficeBlockedAccount: {
     label: 'Federal Foreign Office: opening and closing a blocked account',
@@ -188,12 +188,12 @@ export const SOURCES = {
   tumStudentCard: {
     label: 'TUM: StudentCard (example)',
     url: 'https://www.tum.de/en/studies/application/enrollment-info-portal/studentcard',
-    reviewed: '18 November 2026',
+    reviewed: '21 November 2026',
   },
   tumFirstSteps: {
     label: 'TUM: First Steps for international students (example)',
     url: 'https://www.tum.de/en/studies/during-your-studies/starting-your-studies/tum-first-steps',
-    reviewed: '18 November 2026',
+    reviewed: '21 November 2026',
   },
   rundfunkbeitragWelcome: {
     label: 'Rundfunkbeitrag: general information in English',
@@ -235,7 +235,7 @@ export const UNI_ASSIST = {
 export const APS = {
   about: 'APS is the German Embassy’s check of your Indian academic documents.',
   need: 'If your academic documents were issued by an Indian institution, you generally need an APS certificate for the German student visa: what counts is where your documents were issued, not your nationality.',
-  programmes: 'Programmes can ask for it too, so check where and by when each programme wants it.',
+  programmes: 'Universities can ask for it too, so check where and by when each one wants it.',
 } as const;
 
 /**

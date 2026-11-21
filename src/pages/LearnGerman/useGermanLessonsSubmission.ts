@@ -1,7 +1,16 @@
 import { useRef, useState } from 'react';
 
-import type { SubmitResult } from '@/services/enquiry';
-import { submitGermanLessons, type GermanLessonsRequest } from '@/services/germanLessons';
+import {
+  resolveSubmissionAttempt,
+  type PendingSubmission,
+  type SubmissionAttempt,
+  type SubmitResult,
+} from '@/services/enquiry';
+import {
+  germanLessonsPayload,
+  submitGermanLessons,
+  type GermanLessonsRequest,
+} from '@/services/germanLessons';
 import { siteConfig } from '@/utils/siteConfig';
 
 type SubmissionStatus = 'idle' | 'sending' | SubmitResult;
@@ -20,6 +29,7 @@ export interface GermanLessonsValues {
 export function useGermanLessonsSubmission() {
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const inFlight = useRef(false);
+  const pendingAttempt = useRef<PendingSubmission | null>(null);
   const [submittedRequest, setSubmittedRequest] = useState<GermanLessonsRequest | null>(null);
 
   // Editing after a failed or mailto submit puts the form back to its ready state.
@@ -40,15 +50,26 @@ export function useGermanLessonsSubmission() {
       ...optional('experience'),
     };
     setSubmittedRequest(request);
-    if (siteConfig.germanLessonsEndpoint) setStatus('sending');
+    let attempt: SubmissionAttempt | undefined;
+    if (siteConfig.germanLessonsEndpoint) {
+      const pending = resolveSubmissionAttempt(pendingAttempt.current, germanLessonsPayload(request));
+      pendingAttempt.current = pending;
+      attempt = pending.attempt;
+      setStatus('sending');
+    } else {
+      pendingAttempt.current = null;
+    }
     try {
-      setStatus(await submitGermanLessons(request));
+      const result = await submitGermanLessons(request, attempt);
+      if (result === 'sent') pendingAttempt.current = null;
+      setStatus(result);
     } finally {
       inFlight.current = false;
     }
   };
 
   const clearSubmission = () => {
+    pendingAttempt.current = null;
     setSubmittedRequest(null);
     setStatus('idle');
   };

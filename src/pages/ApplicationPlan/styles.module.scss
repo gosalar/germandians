@@ -790,6 +790,35 @@
   border-top: 1px solid t.$hairline;
 }
 
+.confirmRemove {
+  flex: 1 1 100%;
+  min-width: 0;
+  max-width: 100%;
+  background: t.$cream;
+  border: 1.5px solid t.$navy;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.confirmRemovePrompt {
+  margin: 0;
+  @include m.label-font(700, 16px);
+  line-height: 1.4;
+  color: t.$navy;
+  overflow-wrap: anywhere;
+}
+
+.confirmRemoveActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
 .editBox {
   background: t.$form;
   border: 1.5px solid t.$navy;

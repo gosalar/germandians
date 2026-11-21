@@ -346,3 +346,55 @@ test('corrupted history is discarded, mock controls fit across widths, and histo
   expect(capped).toHaveLength(50);
   expect(capped[0]).toMatchObject({ mode: 'section', mock: 2, section: 'figures', right: 1, done: 1 });
 });
+
+test('new figure attempts load revised choices without fetching legacy chunks and render low, medium and high tasks cleanly', async ({ page }) => {
+  const assetUrls: string[] = [];
+  page.on('request', (request) => assetUrls.push(request.url()));
+
+  await page.getByRole('radio', { name: 'One section', exact: true }).check();
+  await page.getByRole('radio', { name: 'Figure Sequences', exact: true }).check();
+  await button(page, 'Start the section').click();
+  await expect(page.getByRole('heading', { level: 1, name: 'Figure Sequences' })).toBeVisible();
+  expect(assetUrls.filter((url) => url.includes('legacy-v1'))).toEqual([]);
+
+  // Answer one low (Task 2), one medium (Task 7), and one high (Task 15) item by keyboard across widths.
+  const samples = [
+    { taskNumber: 2, index: 1, wrongFifth: 0 },
+    { taskNumber: 7, index: 6, wrongFifth: 1 },
+    { taskNumber: 15, index: 14, wrongFifth: 2 },
+  ] as const;
+
+  for (const sample of samples) {
+    await page.getByRole('group', { name: 'Tasks in this section', exact: true })
+      .getByRole('button', { name: new RegExp(`^Task ${sample.taskNumber}(?:,|$)`) })
+      .click();
+    const fifthRadio = page.getByRole('radiogroup', { name: 'Fifth matrix', exact: true })
+      .getByRole('radio', { name: `Option ${sample.wrongFifth + 1}`, exact: true });
+    const sixthRadio = page.getByRole('radiogroup', { name: 'Sixth matrix', exact: true })
+      .getByRole('radio', { name: `Option ${figures[sample.index].answer[1] + 1}`, exact: true });
+    await selectByKeyboard(fifthRadio);
+    await selectByKeyboard(sixthRadio);
+    await expect(fifthRadio).toHaveAccessibleDescription(/.+/);
+  }
+
+  for (const width of [320, 390, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 840 });
+    await expectNoSidewaysScroll(page);
+  }
+
+  await endSection(page);
+  await expect(page.getByRole('heading', { level: 1, name: 'Practice record' })).toBeVisible();
+  await page.locator('main details > summary').filter({ hasText: /^Figure Sequences$/ }).click();
+  for (const sample of samples) {
+    const taskArticle = page.locator('article').filter({
+      has: page.getByRole('heading', { level: 3, name: `Task ${sample.taskNumber}`, exact: true }),
+    });
+    const expectedMistake = figures[sample.index].options5[sample.wrongFifth].mistake!;
+    await expect(taskArticle).toContainText(`Fifth matrix: ${expectedMistake}`);
+  }
+  for (const width of [320, 390, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 840 });
+    await expectNoSidewaysScroll(page);
+  }
+  expect(assetUrls.filter((url) => url.includes('legacy-v1'))).toEqual([]);
+});

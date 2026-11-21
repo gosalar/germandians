@@ -8,9 +8,16 @@ import { usePageChromeActions } from '@/contexts/PageChrome/usePageChrome';
 import { SECTIONS } from '@/utils/constants';
 import { buildHistoryAttempt } from '@/utils/dmat/history';
 import { markSection } from '@/utils/dmat/marking';
-import { mockFor, sectionIdsFor, setIdFor, type SectionRun } from '@/utils/dmat/session';
+import { figureRevisionOf, mockFor, sectionIdsFor, setIdFor, type SectionRun } from '@/utils/dmat/session';
 import { earnedStamps } from '@/utils/dmat/stamps';
-import type { MistakeSection, Mode, SectionContent, SectionId, StartChoice } from '@/utils/dmat/types';
+import {
+  CURRENT_FIGURE_BANK_REVISION,
+  type MistakeSection,
+  type Mode,
+  type SectionContent,
+  type SectionId,
+  type StartChoice,
+} from '@/utils/dmat/types';
 
 import Between from './Between';
 import { PAGE_COPY } from './data';
@@ -100,17 +107,18 @@ export default function DmatPractice() {
 
   // The test screen needs the section on screen; the record needs every section of the test.
   const onScreen = ready && session && phase?.kind === 'section' ? phase.section : null;
+  const sessionRevision = session ? figureRevisionOf(session) : CURRENT_FIGURE_BANK_REVISION;
   const wanted: SectionRun[] = !ready || !session || !phaseKind
     ? []
     : screen === 'record'
       ? session.sections
       : session.sections.filter((run) => run.id === onScreen);
-  const wantedKey = wanted.map(runKey).join('|');
+  const wantedKey = wanted.map((run) => runKey(run, sessionRevision)).join('|');
   const attemptKey = `${lazyScreen}:${wantedKey}#${attempt}`;
   const practiceTag = session?.practiceTag ?? null;
   const practiceIds = session?.practiceIds ?? null;
-  const contents = wanted.every((run) => loaded.sections[runKey(run)])
-    ? wanted.map((run) => filterContent(loaded.sections[runKey(run)], practiceTag, practiceIds))
+  const contents = wanted.every((run) => loaded.sections[runKey(run, sessionRevision)])
+    ? wanted.map((run) => filterContent(loaded.sections[runKey(run, sessionRevision)], practiceTag, practiceIds))
     : null;
   const results = screen === 'record' && session && contents
     ? contents.map((content, index) => markSection(session.sections[index], content, session.answers))
@@ -149,7 +157,8 @@ export default function DmatPractice() {
   const aheadScreen: LazyScreen | null = resumable
     ? resumable.finishedAt !== null ? 'record' : aheadRuns.length > 0 ? 'runner' : null
     : screen === 'runner' ? 'record' : upcoming ? 'runner' : null;
-  const aheadKey = [aheadScreen ?? '', ...aheadRuns.map(runKey)].join('|');
+  const aheadRevision = resumable ? figureRevisionOf(resumable) : sessionRevision;
+  const aheadKey = [aheadScreen ?? '', ...aheadRuns.map((run) => runKey(run, aheadRevision))].join('|');
   useEffect(() => {
     const [name, ...runs] = aheadKey.split('|');
     if (name) quietly(fetchScreen(setLoaded, name as LazyScreen));
@@ -175,7 +184,13 @@ export default function DmatPractice() {
   const prepare = (mode: Mode, choice: StartChoice) => {
     const [section] = sectionIdsFor(mode, choice);
     quietly(fetchScreen(setLoaded, 'runner'));
-    quietly(fetchRun(setLoaded, runKey({ id: section, setId: setIdFor(mode, section, choice), mock: mockFor(mode, choice) })));
+    quietly(fetchRun(
+      setLoaded,
+      runKey(
+        { id: section, setId: setIdFor(mode, section, choice), mock: mockFor(mode, choice) },
+        CURRENT_FIGURE_BANK_REVISION,
+      ),
+    ));
   };
 
   const start = (mode: Mode, choice: StartChoice) => {
@@ -208,7 +223,7 @@ export default function DmatPractice() {
     if (taskIds.length === 0) return;
     start('practice', {
       mock: session.mock,
-      mistakes: { sections: mistakeSections, taskIds },
+      mistakes: { sections: mistakeSections, taskIds, figureRevision: figureRevisionOf(session) },
     });
   };
 

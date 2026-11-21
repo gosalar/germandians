@@ -54,10 +54,11 @@ export interface Figure {
 export interface FState { pos: Cell; orient: number; colour: string }
 
 export type Misconception =
-  | 'lineReverse' | 'lineSkip' | 'lineSlide' | 'diagonalStraight'
-  | 'borderReverse' | 'borderStepOff' | 'borderNoGrowth' | 'borderBounce'
-  | 'loopRepeat' | 'loopReverse'
-  | 'rotNone' | 'rotOpposite' | 'rotNoGrowth' | 'rotGrowthOff'
+  | 'lineReverse' | 'lineReverseLate' | 'lineSkip' | 'lineSkipLate' | 'lineSlide' | 'lineSlideAlt'
+  | 'diagonalStraight' | 'diagonalStraightAlt' | 'diagonalReflect'
+  | 'borderReverse' | 'borderStepOff' | 'borderShort' | 'borderNoGrowth' | 'borderBounce'
+  | 'loopRepeat' | 'loopRepeatLate' | 'loopReverse' | 'loopReverseLate' | 'loopSkip'
+  | 'rotNone' | 'rotLateStop' | 'rotOpposite' | 'rotExtra' | 'rotHalf' | 'rotHalfCcw' | 'rotNoGrowth' | 'rotGrowthOff'
   | 'colourSame' | 'colourSkip' | 'colourBack';
 
 /** A wrong option is the right answer with one of these mistakes, or two figures swapped. */
@@ -65,17 +66,30 @@ export type MistakeKind = Misconception | 'swap';
 
 export const MISCONCEPTION_TEXT: Record<Misconception, string> = {
   lineReverse: 'turns back before it reaches the edge',
+  lineReverseLate: 'turns back after the fifth matrix before reaching the edge',
   lineSkip: 'moves one field too far',
+  lineSkipLate: 'moves one field too far after the fifth matrix',
   lineSlide: 'slides along the edge instead of bouncing back',
+  lineSlideAlt: 'slides along the edge instead of bouncing back',
   diagonalStraight: 'switches to a straight line at the edge instead of going back the way it came',
+  diagonalStraightAlt: 'switches to a straight line at the edge instead of going back the way it came',
+  diagonalReflect: 'bounces at a right angle off the edge instead of going back the way it came',
   borderReverse: 'goes round the edge the wrong way',
   borderStepOff: 'moves one field too many along the edge',
+  borderShort: 'moves one field too few along the edge',
   borderNoGrowth: 'keeps the same step instead of moving one field more each time',
   borderBounce: 'bounces back at the corner instead of going round it',
   loopRepeat: 'repeats its last move instead of continuing the pattern',
+  loopRepeatLate: 'repeats its fifth-matrix move instead of continuing the pattern',
   loopReverse: 'goes back the way it came instead of continuing the pattern',
+  loopReverseLate: 'goes back to its fourth-matrix field instead of continuing the pattern',
+  loopSkip: 'skips a step in its repeating pattern',
   rotNone: 'stops turning',
+  rotLateStop: 'stops turning after the fifth matrix',
   rotOpposite: 'turns the wrong way',
+  rotExtra: 'turns one quarter turn too far',
+  rotHalf: 'turns 90° clockwise instead of 180°',
+  rotHalfCcw: 'turns 90° anticlockwise instead of 180°',
   rotNoGrowth: 'turns by the same amount instead of one quarter turn more each time',
   rotGrowthOff: 'counts its turns from the wrong start: one quarter turn too many',
   colourSame: 'keeps its colour instead of changing',
@@ -107,8 +121,14 @@ export const LOOPS: Dir[][] = [
 /**
  * Run a figure for six matrices. A misconception changes its behaviour from matrix 5 on.
  * `bounces`, when given, collects the steps (1–5) at which the figure turned back at an edge.
+ * `edgeTurns`, when given, collects the turned direction at each edge misconception from step 4 on.
  */
-export function simulate(f: Figure, mis: Misconception | null = null, bounces?: number[]): FState[] | null {
+export function simulate(
+  f: Figure,
+  mis: Misconception | null = null,
+  bounces?: number[],
+  edgeTurns?: { step: number; dir: Dir }[],
+): FState[] | null {
   const out: FState[] = [];
   let pos: Cell = f.start;
   let dir: Dir | null = f.movement.kind === 'line' ? f.movement.dir : null;
@@ -116,13 +136,14 @@ export function simulate(f: Figure, mis: Misconception | null = null, bounces?: 
   if (f.movement.kind === 'border' && ring < 0) return null;
   let orient = f.orient;
   let ci = 0;
+  let loopStep = 0;
   out.push({ pos, orient: mod(orient, 4), colour: f.colour.cycle[0] });
   for (let t = 1; t < FRAMES; t++) {
     const m = t >= 4 ? mis : null;
     const mv = f.movement;
     if (mv.kind === 'line' && dir) {
-      if (m === 'lineReverse' && t === 4) dir = [-dir[0], -dir[1]];
-      const steps = mv.step + (m === 'lineSkip' ? 1 : 0);
+      if ((m === 'lineReverse' && t === 4) || (m === 'lineReverseLate' && t === 5)) dir = [-dir[0], -dir[1]];
+      const steps = mv.step + (m === 'lineSkip' || (m === 'lineSkipLate' && t === 5) ? 1 : 0);
       for (let s = 0; s < steps; s++) {
         let next: Cell = [pos[0] + dir[0], pos[1] + dir[1]];
         if (!inGrid(next)) {
@@ -131,7 +152,21 @@ export function simulate(f: Figure, mis: Misconception | null = null, bounces?: 
           const diagonal = d[0] !== 0 && d[1] !== 0;
           let turned: Dir | undefined;
           if (m === 'diagonalStraight' && diagonal) turned = ([[d[0], 0], [0, d[1]]] as Dir[]).find(fits);
+          if (m === 'diagonalStraightAlt' && diagonal) {
+            const primary = ([[d[0], 0], [0, d[1]]] as Dir[]).find(fits);
+            turned = ([[d[0], 0], [0, d[1]], [-d[0], 0], [0, -d[1]]] as Dir[]).find(
+              (cand) => fits(cand) && (!primary || cand[0] !== primary[0] || cand[1] !== primary[1]),
+            );
+          }
+          if (m === 'diagonalReflect' && diagonal) {
+            const outRow = !inGrid([pos[0] + d[0], pos[1]]);
+            const outCol = !inGrid([pos[0], pos[1] + d[1]]);
+            if (outRow && !outCol) turned = [-d[0], d[1]];
+            else if (outCol && !outRow) turned = [d[0], -d[1]];
+          }
           if (m === 'lineSlide' && !diagonal) turned = ([[d[1], -d[0]], [-d[1], d[0]]] as Dir[]).find(fits);
+          if (m === 'lineSlideAlt' && !diagonal) turned = ([[-d[1], d[0]], [d[1], -d[0]]] as Dir[]).find(fits);
+          if (turned && edgeTurns) edgeTurns.push({ step: t, dir: turned });
           dir = turned ?? [-d[0], -d[1]];
           next = [pos[0] + dir[0], pos[1] + dir[1]];
           bounces?.push(t);
@@ -142,6 +177,10 @@ export function simulate(f: Figure, mis: Misconception | null = null, bounces?: 
       let amount = mv.growth ? t : mv.step;
       if (m === 'borderNoGrowth') amount = 3;
       if (m === 'borderStepOff') amount += 1;
+      if (m === 'borderShort') {
+        if (amount <= 1) return null;
+        amount -= 1;
+      }
       let d = (m === 'borderReverse' ? !mv.cw : mv.cw) ? 1 : -1;
       for (let u = 0; u < amount; u++) {
         if (m === 'borderBounce' && CORNERS.has(ring)) d = -d;
@@ -150,15 +189,32 @@ export function simulate(f: Figure, mis: Misconception | null = null, bounces?: 
       pos = RING[ring];
     } else if (mv.kind === 'loop') {
       const len = mv.dirs.length;
-      let d = mv.dirs[(t - 1) % len];
-      if (m === 'loopRepeat') d = mv.dirs[2 % len];
-      if (m === 'loopReverse') { const back = mv.dirs[mod(6 - t, len)]; d = [-back[0], -back[1]]; }
-      pos = [pos[0] + d[0], pos[1] + d[1]];
-      if (!inGrid(pos)) return null;
+      if (m === 'loopSkip') {
+        const count = t === 4 ? 2 : 1;
+        for (let u = 0; u < count; u++) {
+          const d = mv.dirs[loopStep % len];
+          loopStep++;
+          pos = [pos[0] + d[0], pos[1] + d[1]];
+          if (!inGrid(pos)) return null;
+        }
+      } else {
+        let d = mv.dirs[loopStep % len];
+        if (m === 'loopRepeat') d = mv.dirs[2 % len];
+        else if (m === 'loopRepeatLate' && t === 5) d = mv.dirs[3 % len];
+        else if (m === 'loopReverse') { const back = mv.dirs[mod(6 - t, len)]; d = [-back[0], -back[1]]; }
+        else if (m === 'loopReverseLate' && t === 5) { const back = mv.dirs[3 % len]; d = [-back[0], -back[1]]; }
+        loopStep++;
+        pos = [pos[0] + d[0], pos[1] + d[1]];
+        if (!inGrid(pos)) return null;
+      }
     }
     let turn = f.rotation.growth ? f.rotation.q * t : f.rotation.q;
     if (m === 'rotNone') turn = 0;
+    if (m === 'rotLateStop' && t === 5) turn = 0;
     if (m === 'rotOpposite') turn = -turn;
+    if (m === 'rotExtra' && t === 4) turn += f.rotation.q > 0 ? 1 : -1;
+    if (m === 'rotHalf') turn = 1;
+    if (m === 'rotHalfCcw') turn = -1;
     if (m === 'rotNoGrowth') turn = f.rotation.q * 3;
     if (m === 'rotGrowthOff') turn = f.rotation.q * (t + 1);
     orient += turn;
@@ -309,7 +365,14 @@ export function describe(f: Figure): string {
 
 // ---------- generation ----------
 
-export interface Option { frame: FState[]; correct: boolean; misconception?: { figure: number; kind: MistakeKind; text: string } }
+/** One labelled mistake that a wrong option shows. */
+export interface MistakePart { figure: number; kind: MistakeKind; text: string }
+
+/**
+ * `misconception` names the option's first mistake and carries the note shown to students; a wrong
+ * option that combines two mistakes lists both in `parts`, and `text` describes both.
+ */
+export interface Option { frame: FState[]; correct: boolean; misconception?: MistakePart & { parts?: MistakePart[] } }
 
 export interface FigureItem {
   id: string;
@@ -489,4 +552,439 @@ export function generateFigures(rng: Rng, band: Band, id: string, stretch = fals
     };
   }
   return null;
+}
+
+// ---------- second-pass distractor selection ----------
+
+const ROTATION_MISTAKE = /^rot/;
+const COLOUR_MISTAKE = /^colour/;
+const LINE_BOUNCE_GUARD = new Set<Misconception>([
+  'lineSkip', 'lineReverse', 'lineSkipLate', 'lineReverseLate',
+  'lineSlide', 'lineSlideAlt', 'diagonalStraight', 'diagonalStraightAlt', 'diagonalReflect',
+]);
+
+type RevisedCand = { fig: number; kind: MistakeKind; frame: FState[]; text: string };
+
+const cardinalName = (d: Dir) => (d[0] < 0 ? 'up' : d[0] > 0 ? 'down' : d[1] < 0 ? 'left' : 'right');
+
+function extendedMisconceptionsFor(f: Figure, k: 4 | 5): Misconception[] {
+  const out: Misconception[] = [];
+  const m = f.movement;
+  if (m.kind === 'line') {
+    const diag = m.dir[0] !== 0 && m.dir[1] !== 0;
+    out.push('lineReverse', 'lineSkip');
+    if (k === 5) out.push('lineReverseLate', 'lineSkipLate');
+    if (diag) out.push('diagonalStraight', 'diagonalStraightAlt', 'diagonalReflect');
+    else out.push('lineSlide', 'lineSlideAlt');
+  }
+  if (m.kind === 'border') {
+    out.push('borderReverse', 'borderStepOff', 'borderBounce');
+    if (m.step > 1 || m.growth) out.push('borderShort');
+    if (m.growth) out.push('borderNoGrowth');
+  }
+  if (m.kind === 'loop') {
+    out.push('loopRepeat', 'loopReverse', 'loopSkip');
+    if (k === 5) out.push('loopRepeatLate', 'loopReverseLate');
+  }
+  if (f.rotation.q !== 0) {
+    out.push('rotNone', 'rotOpposite', 'rotExtra');
+    if (k === 5) out.push('rotLateStop');
+    if (Math.abs(f.rotation.q) === 2) out.push('rotHalf', 'rotHalfCcw');
+    if (f.rotation.growth) out.push('rotNoGrowth', 'rotGrowthOff');
+  }
+  if (f.colour.cycle.length > 1) {
+    out.push('colourSame', ...(f.colour.cycle.length === 3 ? ['colourSkip' as const, 'colourBack' as const] : []));
+  }
+  return out;
+}
+
+const canonicalFamily = (kind: MistakeKind): string => {
+  if (kind === 'lineSlideAlt') return 'lineSlide';
+  if (kind === 'diagonalStraightAlt') return 'diagonalStraight';
+  return kind;
+};
+
+function candidateText(shape: ShapeName, kind: Misconception, edgeTurns: { step: number; dir: Dir }[], k: 4 | 5): string | null {
+  const name = SHAPE_LABEL[shape];
+  if (kind === 'lineSlide' || kind === 'lineSlideAlt') {
+    const turns = edgeTurns.filter((entry) => entry.step >= 4 && entry.step <= k);
+    if (turns.length !== 1) return null;
+    return `the ${name} slides ${cardinalName(turns[0].dir)} along the edge instead of bouncing back`;
+  }
+  if (kind === 'diagonalStraight' || kind === 'diagonalStraightAlt') {
+    const turns = edgeTurns.filter((entry) => entry.step >= 4 && entry.step <= k);
+    if (turns.length !== 1) return null;
+    return `the ${name} switches to moving ${cardinalName(turns[0].dir)} at the edge instead of going back the way it came`;
+  }
+  return `the ${name} ${MISCONCEPTION_TEXT[kind]}`;
+}
+
+function samePos(a: Cell, b: Cell): boolean {
+  return a[0] === b[0] && a[1] === b[1];
+}
+
+function drawMatchesKind(f: Figure, truth: FState, prev: FState, alt: FState, kind: Misconception, k: 4 | 5, m4: FState): boolean {
+  const period = SHAPE_PERIOD[f.shape];
+  if (MOVEMENT_MISTAKE.test(kind)) {
+    if (samePos(alt.pos, truth.pos) || samePos(alt.pos, prev.pos)) return false;
+    if (k === 4 && samePos(alt.pos, m4.pos)) return false;
+    return alt.orient % period === truth.orient % period && alt.colour === truth.colour;
+  }
+  if (ROTATION_MISTAKE.test(kind)) {
+    return samePos(alt.pos, truth.pos) && alt.colour === truth.colour && alt.orient % period !== truth.orient % period;
+  }
+  if (COLOUR_MISTAKE.test(kind)) {
+    return samePos(alt.pos, truth.pos) && alt.orient % period === truth.orient % period &&
+      alt.colour !== truth.colour && f.colour.cycle.includes(alt.colour);
+  }
+  return false;
+}
+
+function extendedCandidates(figs: Figure[], frames: FState[][], k: 4 | 5): RevisedCand[] {
+  const correctKey = frameKey(figs, frames[k]);
+  const seenFamilyFrame = new Set<string>();
+  const out: RevisedCand[] = [];
+  const push = (c: RevisedCand) => {
+    if (c.frame.some((s) => !inGrid(s.pos)) || overlaps(c.frame)) return;
+    const fk = frameKey(figs, c.frame);
+    if (fk === correctKey) return;
+    const famKey = `${c.fig}:${canonicalFamily(c.kind)}:${fk}`;
+    if (seenFamilyFrame.has(famKey)) return;
+    seenFamilyFrame.add(famKey);
+    out.push(c);
+  };
+  figs.forEach((f, i) => {
+    const usual: number[] = [];
+    simulate(f, null, usual);
+    const lately = (ts: number[]) => ts.filter((t) => t >= 4 && t <= k).join();
+    for (const kind of extendedMisconceptionsFor(f, k)) {
+      const bounces: number[] = [];
+      const edgeTurns: { step: number; dir: Dir }[] = [];
+      const alt = simulate(f, kind, bounces, edgeTurns);
+      if (!alt) continue;
+      if (LINE_BOUNCE_GUARD.has(kind) && lately(bounces) !== lately(usual)) continue;
+      if (!drawMatchesKind(f, frames[k][i], alt[k - 1], alt[k], kind, k, frames[3][i])) continue;
+      const text = candidateText(f.shape, kind, edgeTurns, k);
+      if (!text) continue;
+      push({ fig: i, kind, frame: frames[k].map((s, j) => (j === i ? alt[k] : s)), text });
+    }
+    for (let j = i + 1; j < figs.length; j++) {
+      const frame = frames[k].map((s, x) => (x === i ? { ...s, pos: frames[k][j].pos } : x === j ? { ...s, pos: frames[k][i].pos } : s));
+      push({ fig: i, kind: 'swap', frame, text: `the ${SHAPE_LABEL[f.shape]} and the ${SHAPE_LABEL[figs[j].shape]} have swapped places` });
+    }
+  });
+  return out;
+}
+
+function figureAttrValues(shape: ShapeName, s: FState): [string, string, string] {
+  return [`${s.pos[0]},${s.pos[1]}`, `${s.orient % SHAPE_PERIOD[shape]}`, s.colour];
+}
+
+/** Whether comparing the three frames alone yields a single unique consensus option. */
+function hasUniqueConsensus(figs: Figure[], trio: readonly FState[][], perAttribute: boolean): boolean {
+  const columns: string[][] = [];
+  figs.forEach((f, i) => {
+    if (perAttribute) {
+      for (let a = 0; a < 3; a++) columns.push(trio.map((fr) => figureAttrValues(f.shape, fr[i])[a]));
+    } else {
+      columns.push(trio.map((fr) => visible(f.shape, fr[i])));
+    }
+  });
+  const matching = trio.map(() => true);
+  for (const column of columns) {
+    const counts = new Map<string, number>();
+    for (const value of column) counts.set(value, (counts.get(value) ?? 0) + 1);
+    if (counts.size === 1) continue;
+    let bestValue = '';
+    let bestCount = 0;
+    for (const [value, count] of counts) {
+      if (count > bestCount) { bestCount = count; bestValue = value; }
+    }
+    if (bestCount === 1) return false;
+    column.forEach((value, idx) => { if (value !== bestValue) matching[idx] = false; });
+  }
+  return matching.filter(Boolean).length === 1;
+}
+
+// A wrong option is the right frame with one or two labelled mistakes applied. Each mistake changes
+// some "cells": one attribute (position, turn or colour) of one figure, or the positions of two
+// figures that swap. A two-mistake option combines mistakes that touch different cells.
+type Atom = { part: MistakePart; frame: FState[]; cells: Map<string, string> };
+type Distractor = { parts: MistakePart[]; frame: FState[]; key: string };
+
+/** Search limits per option set, so `check:bank` stays quick; the RNG decides which combinations come first. */
+const MAX_STRUCTURE_TRIES = 600;
+const ATTRIBUTE_ORDER: Record<string, number> = { swap: 0, movement: 0, rotation: 1, colour: 2 };
+
+const familyOf = (kind: MistakeKind): 'swap' | 'movement' | 'rotation' | 'colour' =>
+  kind === 'swap' ? 'swap' : MOVEMENT_MISTAKE.test(kind) ? 'movement' : ROTATION_MISTAKE.test(kind) ? 'rotation' : 'colour';
+
+function atomFrom(figs: Figure[], truth: FState[], cand: RevisedCand): Atom | null {
+  const cells = new Map<string, string>();
+  figs.forEach((f, i) => {
+    const right = figureAttrValues(f.shape, truth[i]);
+    const shown = figureAttrValues(f.shape, cand.frame[i]);
+    for (let a = 0; a < 3; a++) if (right[a] !== shown[a]) cells.set(`${i}:${a}`, shown[a]);
+  });
+  if (cells.size === 0) return null;
+  return { part: { figure: cand.fig, kind: cand.kind, text: cand.text }, frame: cand.frame, cells };
+}
+
+function combine(figs: Figure[], truth: FState[], atoms: readonly Atom[]): Distractor | null {
+  const taken = new Set<string>();
+  for (const atom of atoms) {
+    for (const cell of atom.cells.keys()) {
+      if (taken.has(cell)) return null;
+      taken.add(cell);
+    }
+  }
+  const frame = truth.map((s, i): FState => {
+    let { pos, orient, colour } = s;
+    for (const atom of atoms) {
+      if (atom.cells.has(`${i}:0`)) pos = atom.frame[i].pos;
+      if (atom.cells.has(`${i}:1`)) orient = atom.frame[i].orient;
+      if (atom.cells.has(`${i}:2`)) colour = atom.frame[i].colour;
+    }
+    return { pos, orient, colour };
+  });
+  if (frame.some((s) => !inGrid(s.pos)) || overlaps(frame)) return null;
+  const parts = atoms
+    .map((atom) => atom.part)
+    .sort((x, y) => x.figure - y.figure || ATTRIBUTE_ORDER[familyOf(x.kind)] - ATTRIBUTE_ORDER[familyOf(y.kind)]);
+  return { parts, frame, key: frameKey(figs, frame) };
+}
+
+/** The note for an option: one mistake as written, two joined ("the circle moves … and stops turning"). */
+function joinParts(figs: Figure[], parts: readonly MistakePart[]): string {
+  if (parts.length === 1) return parts[0].text;
+  const [first, second] = parts;
+  const prefix = `the ${SHAPE_LABEL[figs[second.figure].shape]} `;
+  if (first.kind !== 'swap' && second.kind !== 'swap' && first.figure === second.figure && second.text.startsWith(prefix)) {
+    return `${first.text} and ${second.text.slice(prefix.length)}`;
+  }
+  return `${first.text}, and ${second.text}`;
+}
+
+function columnsOf(figs: Figure[], trio: readonly FState[][], perAttribute: boolean): string[][] {
+  const columns: string[][] = [];
+  figs.forEach((f, i) => {
+    if (perAttribute) {
+      for (let a = 0; a < 3; a++) columns.push(trio.map((fr) => figureAttrValues(f.shape, fr[i])[a]));
+    } else {
+      columns.push(trio.map((fr) => visible(f.shape, fr[i])));
+    }
+  });
+  return columns;
+}
+
+/**
+ * How often each option is the odd one out in a column where the other two agree. When the counts
+ * differ, "pick the option that is never the odd one out" or "rule out the odd one out" says
+ * something about the answer without solving the task, so the counts should be equal.
+ */
+function oddOneOutSpread(figs: Figure[], trio: readonly FState[][], perAttribute: boolean): number {
+  const odd = trio.map(() => 0);
+  for (const column of columnsOf(figs, trio, perAttribute)) {
+    if (new Set(column).size !== 2) continue;
+    column.forEach((value, idx) => { if (column.filter((other) => other === value).length === 1) odd[idx]++; });
+  }
+  return Math.max(...odd) - Math.min(...odd);
+}
+
+function varyingAttributes(figs: Figure[], trio: readonly FState[][]): number {
+  return columnsOf(figs, trio, true).filter((column) => new Set(column).size > 1).length;
+}
+
+function chooseDistractors(
+  figs: Figure[],
+  correctFrame: FState[],
+  cands: RevisedCand[],
+  rng: Rng,
+  usage: Map<MistakeKind, number>,
+  seed: number,
+  itemId: string,
+  matrix: 5 | 6,
+): [Distractor, Distractor] {
+  const correctKey = frameKey(figs, correctFrame);
+  const atoms = shuffle(rng, cands.map((c) => atomFrom(figs, correctFrame, c)).filter((a): a is Atom => a !== null));
+  type Scored = {
+    pair: [Distractor, Distractor];
+    tier: number;
+    attrSpread: number;
+    figSpread: number;
+    varying: number;
+    sameText: number;
+    useScore: number;
+    tie: number;
+  };
+  const scored: Scored[] = [];
+  const consider = (a: Distractor | null, b: Distractor | null) => {
+    if (!a || !b || a.key === b.key || a.key === correctKey || b.key === correctKey) return;
+    const trio = [correctFrame, a.frame, b.frame];
+    const leaks = hasUniqueConsensus(figs, trio, false) || hasUniqueConsensus(figs, trio, true);
+    const kinds = [...a.parts, ...b.parts].map((p) => p.kind);
+    scored.push({
+      pair: [a, b],
+      tier: leaks ? 1 : 0,
+      attrSpread: oddOneOutSpread(figs, trio, true),
+      figSpread: oddOneOutSpread(figs, trio, false),
+      varying: Math.min(varyingAttributes(figs, trio), 3),
+      sameText: joinParts(figs, a.parts) === joinParts(figs, b.parts) ? 1 : 0,
+      useScore: kinds.reduce((sum, kind) => sum + (usage.get(kind) ?? 0), 0) / kinds.length,
+      tie: rng(),
+    });
+  };
+
+  // One mistake shared by both wrong options and one of each option's own, on separate cells: every
+  // option is then the odd one out exactly once.
+  let tries = 0;
+  outerShared: for (const shared of atoms) {
+    for (let y = 0; y < atoms.length; y++) {
+      for (let z = y + 1; z < atoms.length; z++) {
+        if (atoms[y] === shared || atoms[z] === shared) continue;
+        if (++tries > MAX_STRUCTURE_TRIES) break outerShared;
+        consider(combine(figs, correctFrame, [shared, atoms[y]]), combine(figs, correctFrame, [shared, atoms[z]]));
+      }
+    }
+  }
+  // Two mistakes per wrong option, each pair on the same cells with different results: no option is
+  // ever the odd one out, and two attributes differ.
+  const sameCells = (x: Atom, y: Atom) => x.cells.size === y.cells.size && [...x.cells.keys()].every((cell) => y.cells.has(cell));
+  tries = 0;
+  outerPaired: for (let x1 = 0; x1 < atoms.length; x1++) {
+    for (let x2 = x1 + 1; x2 < atoms.length; x2++) {
+      if (!sameCells(atoms[x1], atoms[x2])) continue;
+      for (let y1 = 0; y1 < atoms.length; y1++) {
+        for (let y2 = y1 + 1; y2 < atoms.length; y2++) {
+          if (!sameCells(atoms[y1], atoms[y2]) || sameCells(atoms[x1], atoms[y1])) continue;
+          if (++tries > MAX_STRUCTURE_TRIES) break outerPaired;
+          consider(combine(figs, correctFrame, [atoms[x1], atoms[y1]]), combine(figs, correctFrame, [atoms[x2], atoms[y2]]));
+          consider(combine(figs, correctFrame, [atoms[x1], atoms[y2]]), combine(figs, correctFrame, [atoms[x2], atoms[y1]]));
+        }
+      }
+    }
+  }
+  // One mistake per wrong option: the fallback when the rule leaves too few separate cells.
+  for (let a = 0; a < atoms.length; a++) {
+    for (let b = a + 1; b < atoms.length; b++) {
+      consider(combine(figs, correctFrame, [atoms[a]]), combine(figs, correctFrame, [atoms[b]]));
+    }
+  }
+
+  if (scored.length === 0) {
+    throw new Error(`Figure distractor search exhausted for seed ${seed}, task ${itemId}, matrix ${matrix} (${cands.length} candidates)`);
+  }
+  scored.sort((x, y) =>
+    x.tier - y.tier ||
+    x.attrSpread - y.attrSpread ||
+    x.figSpread - y.figSpread ||
+    y.varying - x.varying ||
+    x.sameText - y.sameText ||
+    x.useScore - y.useScore ||
+    x.tie - y.tie,
+  );
+  return scored[0].pair;
+}
+
+function placeOptions(figs: Figure[], correctFrame: FState[], distractors: [Distractor, Distractor], answerSlot: number, rng: Rng): Option[] {
+  const ordered = shuffle(rng, distractors).map((d): Option => ({
+    frame: d.frame,
+    correct: false,
+    misconception: {
+      ...d.parts[0],
+      text: joinParts(figs, d.parts),
+      ...(d.parts.length > 1 ? { parts: d.parts } : {}),
+    },
+  }));
+  const options: Option[] = [];
+  let wrongIndex = 0;
+  for (let slot = 0; slot < 3; slot++) {
+    options.push(slot === answerSlot ? { frame: correctFrame, correct: true } : ordered[wrongIndex++]);
+  }
+  return options;
+}
+
+/**
+ * Deterministic second pass over already selected figure items using a figure-only RNG:
+ * replaces distractors so comparing the options alone does not give the answer away, and so the
+ * options differ in more than one feature wherever the rule allows, while preserving prompt IDs,
+ * ordering, correct frames and balanced answer indices.
+ */
+export function reviseFigureDistractors(items: FigureItem[], rng: Rng, seed: number): void {
+  const usage = new Map<MistakeKind, number>();
+  const count = (pair: [Distractor, Distractor]) => {
+    for (const d of pair) for (const p of d.parts) usage.set(p.kind, (usage.get(p.kind) ?? 0) + 1);
+  };
+  for (const item of items) {
+    const runs = item.figures.map((f) => simulate(f));
+    if (runs.some((r) => !r)) throw new Error(`Failed to re-simulate seed ${seed}, task ${item.id}`);
+    const frames = Array.from({ length: FRAMES }, (_, k) => runs.map((r) => r![k]));
+    const picks5 = chooseDistractors(item.figures, frames[4], extendedCandidates(item.figures, frames, 4), rng, usage, seed, item.id, 5);
+    count(picks5);
+    const picks6 = chooseDistractors(item.figures, frames[5], extendedCandidates(item.figures, frames, 5), rng, usage, seed, item.id, 6);
+    count(picks6);
+    item.options5 = placeOptions(item.figures, frames[4], picks5, item.answer[0], rng);
+    item.options6 = placeOptions(item.figures, frames[5], picks6, item.answer[1], rng);
+  }
+}
+
+/** Verify every wrong option's rendered frame is the right frame with exactly its labelled mistakes applied. */
+export function verifyFigureOptionDraw(item: FigureItem): boolean {
+  const runs = item.figures.map((f) => simulate(f));
+  if (runs.some((r) => !r)) return false;
+  const frames = Array.from({ length: FRAMES }, (_, k) => runs.map((r) => r![k]));
+  const checks: [Option[], 4 | 5][] = [[item.options5, 4], [item.options6, 5]];
+  for (const [opts, k] of checks) {
+    const answerIdx = item.answer[k === 4 ? 0 : 1];
+    for (let idx = 0; idx < opts.length; idx++) {
+      const opt = opts[idx];
+      if (idx === answerIdx) {
+        if (!opt.correct || opt.misconception) return false;
+        continue;
+      }
+      const mis = opt.misconception;
+      if (opt.correct || !mis || !mis.text.trim()) return false;
+      if (opt.frame.some((s) => !inGrid(s.pos)) || overlaps(opt.frame)) return false;
+      const parts = mis.parts ?? [{ figure: mis.figure, kind: mis.kind, text: mis.text }];
+      if (parts.length < 1 || parts.length > 2) return false;
+      if (mis.figure !== parts[0].figure || mis.kind !== parts[0].kind) return false;
+      if (mis.text !== joinParts(item.figures, parts)) return false;
+
+      const expected = frames[k].map((s) => ({ ...s }));
+      const touched = new Set<string>();
+      const touch = (cell: string) => {
+        if (touched.has(cell)) return false;
+        touched.add(cell);
+        return true;
+      };
+      for (const part of parts) {
+        if (part.figure < 0 || part.figure >= item.figures.length) return false;
+        const f = item.figures[part.figure];
+        if (!part.text.includes(SHAPE_LABEL[f.shape])) return false;
+        if (part.kind === 'swap') {
+          const i = part.figure;
+          const j = item.figures.findIndex((_, x) => x !== i &&
+            samePos(opt.frame[i].pos, frames[k][x].pos) && samePos(opt.frame[x].pos, frames[k][i].pos));
+          if (j < 0 || !part.text.includes(SHAPE_LABEL[item.figures[j].shape])) return false;
+          if (!touch(`${i}:0`) || !touch(`${j}:0`)) return false;
+          expected[i].pos = frames[k][j].pos;
+          expected[j].pos = frames[k][i].pos;
+          continue;
+        }
+        const alt = simulate(f, part.kind);
+        if (!alt) return false;
+        if (!drawMatchesKind(f, frames[k][part.figure], alt[k - 1], alt[k], part.kind, k, frames[3][part.figure])) return false;
+        const family = familyOf(part.kind);
+        if (!touch(`${part.figure}:${ATTRIBUTE_ORDER[family]}`)) return false;
+        if (family === 'movement') expected[part.figure].pos = alt[k].pos;
+        else if (family === 'rotation') expected[part.figure].orient = alt[k].orient;
+        else expected[part.figure].colour = alt[k].colour;
+      }
+      for (let j = 0; j < item.figures.length; j++) {
+        if (visible(item.figures[j].shape, opt.frame[j]) !== visible(item.figures[j].shape, expected[j])) return false;
+      }
+      if (frameKey(item.figures, opt.frame) === frameKey(item.figures, frames[k])) return false;
+    }
+  }
+  return true;
 }

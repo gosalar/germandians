@@ -156,8 +156,27 @@ export const SOP_PLANNER_COPY = {
   partBreakdownTitle: 'Words by part',
   browserNote:
     'Saved automatically in this browser on this device. Nothing you write here is sent to Germandians or anywhere else.',
+  lockingUnavailableBrowserNote:
+    'Nothing you write here is sent to Germandians or anywhere else.',
   storageWarning:
     'Browser storage is unavailable right now. Your latest changes may not be saved.',
+  lockingUnavailableWarning:
+    'Automatic saving is unavailable in this browser session. You can still write and print your outline, but changes here are not saved automatically.',
+  conflictIntro:
+    'Choose which version to keep in this browser. Both versions are shown below so you can copy anything you need first.',
+  conflictClearedIntro:
+    'Another tab cleared the saved outline. Choose whether to keep your text here or clear this section to match.',
+  conflictRecoveredIntro:
+    'Another tab had unsaved text for this section that differed from the saved outline. Choose which version to keep.',
+  conflictUpdatedNotice:
+    'Another tab saved a newer version while you were reviewing this section. Check the updated text below before choosing again.',
+  conflictLocalLabel: 'Your text (this tab)',
+  conflictRemoteLabel: 'Text from the other tab',
+  conflictEmptyLocalText: 'Empty (no text in this tab)',
+  conflictEmptyRemoteText: 'Empty (cleared in the other tab)',
+  conflictUseLocalButton: 'Use my text',
+  conflictUseRemoteButton: 'Use text from the other tab',
+  conflictSummaryTitle: 'Sections needing a choice',
   printButton: 'Print outline',
   clearButton: 'Clear my entries',
   clearConfirmPrompt: 'Clear all entries?',
@@ -204,4 +223,45 @@ export function getStockSummaryText(hasAnyText: boolean, totalFlaggedPhrases: nu
   if (!hasAnyText) return SOP_PLANNER_COPY.stockCheckIdle;
   if (totalFlaggedPhrases === 0) return SOP_PLANNER_COPY.stockCheckClean;
   return formatFlaggedCount(totalFlaggedPhrases);
+}
+
+export function formatConflictHeading(
+  partTitle: string,
+  kind: 'changed' | 'cleared' | 'recovered',
+): string {
+  if (kind === 'cleared') return `“${partTitle}” was cleared in another tab`;
+  if (kind === 'recovered') return `Unsaved text recovered for “${partTitle}”`;
+  return `“${partTitle}” changed in another tab`;
+}
+
+export function formatConflictDetectedAnnouncement(
+  partTitle: string,
+  remoteCleared: boolean,
+): string {
+  return remoteCleared
+    ? `“${partTitle}” was cleared in another tab. Review both versions below that section.`
+    : `“${partTitle}” changed in another tab. Review both versions below that section.`;
+}
+
+export function formatConflictUpdatedAnnouncement(partTitle: string): string {
+  return `Another tab saved a newer version of “${partTitle}”. Review the updated text before choosing again.`;
+}
+
+export function formatConflictResolvedAnnouncement(
+  partTitle: string,
+  choice: 'local' | 'remote',
+  cleared: boolean,
+): string {
+  if (choice === 'local') {
+    return `Kept your text for “${partTitle}” and saved it in this browser.`;
+  }
+  return cleared
+    ? `Cleared “${partTitle}” to match the other tab.`
+    : `Updated “${partTitle}” with the text from the other tab.`;
+}
+
+export function formatConflictSummaryCount(count: number): string {
+  return count === 1
+    ? '1 section has two versions to review:'
+    : `${count} sections have two versions to review:`;
 }

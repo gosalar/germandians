@@ -24,12 +24,13 @@ export default function PageChromeProvider({ children }: { children: ReactNode }
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const [immersive, setImmersive] = useState(false);
-  // A page that asked for the bare screen and was then left must not leave the next page without its header.
+  // A page change (including Back and Forward) leaves any immersive screen and closes the mobile menu.
   const page = withoutTrailingSlash(pathname);
-  const [immersivePage, setImmersivePage] = useState(page);
-  if (immersivePage !== page) {
-    setImmersivePage(page);
+  const [currentPage, setCurrentPage] = useState(page);
+  if (currentPage !== page) {
+    setCurrentPage(page);
     setImmersive(false);
+    setMenuOpen(false);
   }
   const heroCta = useIntersection<HTMLElement>(VISIBILITY);
   const form = useIntersection<HTMLElement>(VISIBILITY);

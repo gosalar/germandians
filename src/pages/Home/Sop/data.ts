@@ -10,6 +10,7 @@ export const SOP_COPY = {
   exampleLabel: 'Illustrative example. The student and details are invented.',
   genericLabel: 'Generic draft',
   revisedLabel: 'Revised with a mentor',
+  plannerLink: 'Plan your own SOP',
   caseLabel: `Real case from the ${CASE_CYCLE}.`,
   caseTitle: 'Two applicants, one university',
   caseBody: [

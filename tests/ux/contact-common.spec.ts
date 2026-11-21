@@ -107,18 +107,82 @@ test('the footer and privacy note name the business only when it is configured',
   }
 });
 
-test('production privacy text follows the transport and has no placeholders', async ({ page }, testInfo) => {
+test('production privacy text follows configuration and transport without placeholders or broken punctuation', async ({ page }, testInfo) => {
+  const configured = testInfo.project.name === 'endpoint';
   await page.goto('/privacy');
-  await expect(page.locator('main')).not.toContainText(/\[|\]/);
-  await expect(page.locator('main')).toContainText('any email address you choose to provide');
-  await expect(page.locator('main')).toContainText('Unanswered questions are omitted');
-  await expect(page.locator('main')).toContainText('Last updated 18 November 2026');
-  if (testInfo.project.name === 'endpoint') {
-    await expect(page.locator('main')).toContainText('Google receives the forms you send on this site and keeps them in our Google Sheets.');
-    await expect(page.locator('main')).not.toContainText('opens an email draft');
+  await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+  const main = page.getByRole('main');
+  const section = (name: string) =>
+    main.locator('section').filter({ has: page.getByRole('heading', { level: 2, name, exact: true }) });
+
+  await expect(main).not.toContainText(/\[|\]|,\s*\.|\s+\.|\bwithin\s+of\b|\bfor example\s*\./);
+  await expect(main).toContainText('any email address you choose to provide');
+  await expect(main).toContainText('Unanswered questions are omitted');
+  await expect(main).toContainText(/Last updated \d{1,2} \w+ \d{4}/);
+
+  const responsible = section('Who is responsible');
+  await expect(responsible.getByRole('link', { name: 'thegermandians@gmail.com' })).toHaveAttribute(
+    'href',
+    'mailto:thegermandians@gmail.com',
+  );
+  if (configured) {
+    await expect(responsible.locator('p').first()).toHaveText(
+      'Germandians is operated by Test Operator Example, Test Street 1, 00000 Testville.',
+    );
   } else {
-    await expect(page.locator('main')).toContainText('The form opens an email draft addressed to us. Nothing is sent until you press send in your email app');
-    await expect(page.locator('main')).not.toContainText('Google Sheets');
+    await expect(responsible.locator('p')).toHaveCount(1);
+    await expect(responsible).not.toContainText(/operated by|Postal address|Test Operator Example|Test Street 1/i);
+  }
+
+  const collect = section('What we collect');
+  await expect(collect).toContainText(
+    'To coordinate open tabs, the page stores a small browser-local sync record with no note text, and keeps a temporary recovery copy in your browser while a multi-tab edit conflict is unresolved.',
+  );
+  await expect(collect).toContainText(
+    'Choosing “Clear my entries” removes your outline and any recovery copy from your browser.',
+  );
+  if (configured) {
+    await expect(collect).toContainText(
+      'When a form sends to our Google Sheets, it also sends a random technical submission ID stored alongside your enquiry so a retry does not create a duplicate row.',
+    );
+  } else {
+    await expect(collect).not.toContainText(/submission ID|Google Sheets/i);
+  }
+
+  const handlers = section('Who else handles it');
+  if (configured) {
+    await expect(handlers).toContainText('Google receives the forms you send on this site and keeps them in our Google Sheets.');
+    await expect(handlers).not.toContainText('opens an email draft');
+    await expect(handlers).toContainText(
+      'Test Hosting Provider Example hosts this site and keeps short technical logs, such as IP addresses and access times, to keep it running.',
+    );
+  } else {
+    await expect(handlers).toContainText('The form opens an email draft addressed to us. Nothing is sent until you press send in your email app');
+    await expect(handlers).not.toContainText(/Google Sheets|hosts this site|Test Hosting Provider Example/i);
+  }
+
+  const retention = section('How long we keep it');
+  if (configured) {
+    await expect(retention.locator('p')).toHaveText(
+      "If we don't end up working together, we delete your details within 30 test days of your last message. If we do, we keep them for as long as we're helping you, plus any period the law requires.",
+    );
+  } else {
+    await expect(retention.locator('p')).toHaveText(
+      "We keep the details you send us for as long as we're helping you, plus any period the law requires.",
+    );
+    await expect(retention).not.toContainText('30 test days');
+  }
+
+  const rights = section('Your rights');
+  if (configured) {
+    await expect(rights.locator('p').last()).toHaveText(
+      'You can also complain to a data protection authority, for example Test Data Protection Authority.',
+    );
+  } else {
+    await expect(rights.locator('p').last()).toHaveText(
+      'You can also complain to a data protection authority.',
+    );
+    await expect(rights).not.toContainText(/for example|Test Data Protection Authority/i);
   }
 });
 

@@ -266,6 +266,131 @@
   }
 }
 
+.conflictPanel {
+  background: t.$cream;
+  border: 2px solid t.$navy;
+  border-left: 5px solid t.$red;
+  border-radius: 12px;
+  padding: 14px clamp(12px, 1.8vw, 18px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  scroll-margin-top: 92px;
+}
+
+.conflictHead {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.conflictHeading {
+  margin: 0;
+  font-family: t.$font-display;
+  font-weight: 900;
+  font-stretch: 84%;
+  font-size: clamp(18px, 1.8vw, 21px);
+  line-height: 1.15;
+  color: t.$navy;
+}
+
+.conflictIntro {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 15px;
+  line-height: 1.5;
+  color: t.$ink-strong;
+}
+
+.conflictUpdated {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: t.$highlight;
+  border: 1.5px solid t.$navy;
+  font-family: t.$font-body;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.45;
+  color: t.$navy;
+}
+
+.conflictVersions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+
+  @include m.from(t.$bp-mobile) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.conflictVersionCard {
+  background: t.$white;
+  border: 1.5px solid t.$hairline;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.conflictVersionLabel {
+  @include m.label-font(800, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$navy;
+}
+
+.conflictTextarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 96px;
+  padding: 10px 12px;
+  border: 1.5px solid t.$line;
+  border-radius: 8px;
+  background: t.$form;
+  font-family: t.$font-body;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.55;
+  color: t.$navy;
+  resize: vertical;
+  scroll-margin-top: 92px;
+  scroll-margin-bottom: 108px;
+
+  &:focus {
+    outline: none;
+    border-color: t.$navy;
+    box-shadow: 0 0 0 3px t.$yellow;
+  }
+}
+
+.conflictEmpty {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: t.$sand;
+  font-family: t.$font-body;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.5;
+  color: t.$ink-muted;
+}
+
+.conflictActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  button {
+    scroll-margin-top: 92px;
+    scroll-margin-bottom: 108px;
+  }
+}
+
 .flagsPanel {
   background: t.$cream;
   border: 1.5px solid t.$navy;
@@ -470,6 +595,40 @@
   font-size: 15px;
   line-height: 1.45;
   color: t.$mist-light;
+}
+
+.conflictSummaryBox {
+  background: t.$navy-raised;
+  border: 1.5px solid t.$yellow;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.conflictSummaryLabel {
+  @include m.label-font(700, 14px);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: t.$yellow;
+}
+
+.conflictSummaryText {
+  margin: 0;
+  font-family: t.$font-body;
+  font-size: 14px;
+  line-height: 1.45;
+  color: t.$mist-light;
+}
+
+.conflictSummaryList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .breakdown {
@@ -688,6 +847,8 @@
   .summaryCard,
   .mentoringSection,
   .fieldRoot,
+  .conflictPanel,
+  .conflictSummaryBox,
   .flagsPanel,
   .flagBadge {
     display: none;

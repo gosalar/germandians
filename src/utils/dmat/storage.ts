@@ -1,6 +1,6 @@
 import { ENDED_BY } from './session.ts';
 import type { Session } from './session';
-import { LETTERS, MODES, SECTION_IDS, TEXT_SIZES } from './types.ts';
+import { FIGURE_BANK_REVISIONS, LEGACY_FIGURE_BANK_REVISION, LETTERS, MODES, SECTION_IDS, TEXT_SIZES } from './types.ts';
 
 /**
  * The browser-storage entry the practice page keeps for a running or waiting test, so a reload does not
@@ -34,7 +34,9 @@ function validAnswer(value: unknown): boolean {
 
 /** Validate the whole persisted shape before any consumer can use it as a Session. */
 function validSession(value: unknown, maxMock?: number): value is Session {
-  if (!object(value) || value.version !== 1 || !oneOf(value.mode, MODES) || !oneOf(value.textSize, TEXT_SIZES) ||
+  if (!object(value) || value.version !== 1 ||
+    !(value.figureRevision === undefined || oneOf(value.figureRevision, FIGURE_BANK_REVISIONS)) ||
+    !oneOf(value.mode, MODES) || !oneOf(value.textSize, TEXT_SIZES) ||
     !number(value.createdAt) || !nullableNumber(value.finishedAt) || !nullableNumber(value.breakStartedAt) ||
     !(value.historyCleared === undefined || typeof value.historyCleared === 'boolean') ||
     !nullableNumber(value.shownAt) || typeof value.returning !== 'boolean' ||
@@ -106,12 +108,19 @@ export function readSession(now: number, maxMock?: number): { session: Session |
       return { session: null, failed: false };
     }
     const mock = parsed.mode === 'practice' ? parsed.mock : parsed.mock ?? 1;
-    const session: Session = parsed.mode !== 'practice' && mock !== undefined &&
-      (parsed.mock === undefined || parsed.sections.some((run) => run.mock === undefined))
+    const needsMock = parsed.mode !== 'practice' && mock !== undefined &&
+      (parsed.mock === undefined || parsed.sections.some((run) => run.mock === undefined));
+    const needsFigureRevision = parsed.figureRevision === undefined;
+    const session: Session = needsMock || needsFigureRevision
       ? {
           ...parsed,
-          mock,
-          sections: parsed.sections.map((run) => (run.mock === undefined ? { ...run, mock } : run)),
+          ...(needsMock
+            ? {
+                mock,
+                sections: parsed.sections.map((run) => (run.mock === undefined ? { ...run, mock } : run)),
+              }
+            : {}),
+          ...(needsFigureRevision ? { figureRevision: LEGACY_FIGURE_BANK_REVISION } : {}),
         }
       : parsed;
     return { session, failed: false };

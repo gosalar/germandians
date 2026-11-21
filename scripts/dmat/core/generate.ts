@@ -1,7 +1,7 @@
 import { type Band, type BandRanges, BANDS, makeRng, shuffle, within } from './rng.ts';
 import { type LatinItem, type Letter, LETTERS, generateLatin, latinSignature, analyseLatin, LATIN_RANGES } from './latin.ts';
 import { type EquationItem, generateEquation, analyseEquations } from './equations.ts';
-import { type FigureItem, type FState, type Figure, type MistakeKind, generateFigures, simulate, isUnambiguous, coloursAllShown, SHAPE_PERIOD } from './figures.ts';
+import { type FigureItem, type FState, type Figure, type MistakeKind, generateFigures, reviseFigureDistractors, verifyFigureOptionDraw, simulate, isUnambiguous, coloursAllShown, SHAPE_PERIOD } from './figures.ts';
 
 export function generateCore(seed: number, perBand: number) {
   const rng = makeRng(seed);
@@ -67,6 +67,9 @@ export function generateCore(seed: number, perBand: number) {
     }
   });
 
+  // Second pass with a figure-only RNG: keep prompts, order and answer slots, replace distractors cleanly.
+  reviseFigureDistractors(figures, makeRng((seed ^ 0x517cc1b7) >>> 0), seed);
+
   return { seed, perBand, latin, equations, figures };
 }
 
@@ -122,6 +125,7 @@ export function checkCore({ seed, perBand, latin, equations, figures }: Generate
     const overlap = opts.some((o) => new Set(o.frame.map((s) => `${s.pos}`)).size !== o.frame.length);
     return new Set(keys).size !== 3 || overlap;
   })).map((x) => x.id), figures.length);
+  add('Figures: every wrong option matches its stated misconception', figures.filter((x) => !verifyFigureOptionDraw(x)).map((x) => x.id), figures.length);
 
   const failed = checks.filter((check) => !check.ok);
   if (failed.length) {

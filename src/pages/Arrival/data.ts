@@ -174,7 +174,7 @@ export const ARRIVAL_ITEMS: readonly ArrivalItem[] = [
       'The other documents in your university portal. At TUM these include a signed application for enrolment and, if you applied for a preliminary documentation (VPD) through uni-assist, the documents you submitted to it.',
     ],
     whereDone: [
-      'Through your university’s portal or International Office. TUM does enrolment and document uploads only in TUMonline, and its enrolment page gives the recipient number the insurer needs. Check your own university’s procedure and deadline as soon as you have an offer.',
+      'Through your university’s portal or International Office. TUM does enrolment and document uploads only in TUMonline, and its enrolment page gives TUM’s number for the insurer’s notification. Check your own university’s procedure and deadline as soon as you have an offer.',
     ],
     guideLink: {
       label: `${REQUIREMENT_TOPIC_TITLES['visa-enrolment']} in the requirements guide`,
@@ -218,7 +218,7 @@ export const ARRIVAL_ITEMS: readonly ArrivalItem[] = [
     },
     whatItIs: [
       'The DAAD says every student pays a Semesterbeitrag (semester contribution), at enrolment and again before each new semester. It is separate from tuition fees and covers contributions to student services and the student government. Many universities include a local public transport ticket (Semesterticket) in it or offer a discounted one.',
-      'Check how your university issues the student card. At TUM, students in Munich, Garching and Weihenstephan get a physical StudentCard by post, and a digital StudentCard is available in the TUM Campus App. TUM says you can still take exams without a current card if you bring a printed proof of enrolment and an official ID card or passport.',
+      'Check how your university issues the student card. At TUM, students in Munich, Garching and Weihenstephan are sent a physical StudentCard automatically after enrolment, and a digital StudentCard is available in the TUM Campus App. TUM says you can still take exams without a current card if you bring a printed proof of enrolment and an official ID card or passport.',
     ],
     whatToBring: [
       'The payment details for the Semesterbeitrag from your university portal. At TUM, the amount and deadline are in your TUMonline account, and you are enrolled only once the fee is paid.',

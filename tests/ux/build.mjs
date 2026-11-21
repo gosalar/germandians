@@ -24,12 +24,12 @@ for (const variant of ['endpoint', 'email']) {
         VITE_WHATSAPP_NUMBER: variant === 'endpoint' ? '4915123456789' : '',
         // Fictitious invitation; tests read the link and never open it.
         VITE_WHATSAPP_COMMUNITY_URL: variant === 'endpoint' ? 'https://chat.whatsapp.com/GermandiansTestInvite' : '',
-        // Fictitious identity: the endpoint variant shows the footer and privacy note with it set.
+        // Fictitious privacy details: the endpoint variant exercises all configured clauses; email stays empty for fallback.
         VITE_PRIVACY_NAMES: variant === 'endpoint' ? 'Test Operator Example' : '',
         VITE_PRIVACY_ADDRESS: variant === 'endpoint' ? 'Test Street 1, 00000 Testville' : '',
-        VITE_PRIVACY_HOSTING_PROVIDER: '',
-        VITE_PRIVACY_RETENTION: '',
-        VITE_PRIVACY_AUTHORITY: '',
+        VITE_PRIVACY_HOSTING_PROVIDER: variant === 'endpoint' ? 'Test Hosting Provider Example' : '',
+        VITE_PRIVACY_RETENTION: variant === 'endpoint' ? '30 test days' : '',
+        VITE_PRIVACY_AUTHORITY: variant === 'endpoint' ? 'Test Data Protection Authority' : '',
       },
     });
     child.on('error', reject);

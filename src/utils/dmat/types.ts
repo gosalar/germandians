@@ -11,6 +11,7 @@ export const LETTERS = ['A', 'B', 'C', 'D', 'E'] as const;
 export const COLOURS = ['yellow', 'pink', 'green', 'orange', 'black', 'white', 'blue'] as const;
 export const SHAPES = ['square', 'circle', 'diamond', 'hexagon', 'triangle', 'arrow', 'angle', 'halfCircle', 'trapezoid', 'flag'] as const;
 export const TEXT_SIZES = [0, 1, 2] as const;
+export const FIGURE_BANK_REVISIONS = [1, 2] as const;
 
 export type CoreSubtest = (typeof CORE_SUBTESTS)[number];
 export type SectionId = (typeof SECTION_IDS)[number];
@@ -20,6 +21,10 @@ export type Letter = (typeof LETTERS)[number];
 export type Colour = (typeof COLOURS)[number];
 export type Shape = (typeof SHAPES)[number];
 export type TextSize = (typeof TEXT_SIZES)[number];
+export type FigureBankRevision = (typeof FIGURE_BANK_REVISIONS)[number];
+
+export const LEGACY_FIGURE_BANK_REVISION: FigureBankRevision = 1;
+export const CURRENT_FIGURE_BANK_REVISION: FigureBankRevision = 2;
 
 /** `pos` is zero-based in a 4×4 matrix. `orient` is 0 up, 1 right, 2 down, 3 left. */
 export interface FigureState {
@@ -117,5 +122,6 @@ export interface StartChoice {
   mistakes?: {
     sections: MistakeSection[];
     taskIds: string[];
+    figureRevision?: FigureBankRevision;
   };
 }

@@ -1,6 +1,12 @@
 import { useRef, useState } from 'react';
 
-import { submitProfileReview, type EnquirySummary, type ProfileReviewRequest } from '@/services/profileReview';
+import { resolveSubmissionAttempt, type PendingSubmission, type SubmissionAttempt } from '@/services/enquiry';
+import {
+  profileReviewPayload,
+  submitProfileReview,
+  type EnquirySummary,
+  type ProfileReviewRequest,
+} from '@/services/profileReview';
 import { siteConfig } from '@/utils/siteConfig';
 
 type SubmissionStatus = 'idle' | 'sending' | 'sent' | 'error' | 'timeout' | 'mailto';
@@ -23,6 +29,7 @@ export function useProfileReviewSubmission(summary?: EnquirySummary) {
   const [status, setStatus] = useState<SubmissionStatus>('idle');
   const [receivedDate, setReceivedDate] = useState('');
   const inFlight = useRef(false);
+  const pendingAttempt = useRef<PendingSubmission | null>(null);
   const [submittedRequest, setSubmittedRequest] = useState<ProfileReviewRequest | null>(null);
 
   const currentSummary = summary && summary.lines.length > 0 ? summary : undefined;
@@ -54,10 +61,22 @@ export function useProfileReviewSubmission(summary?: EnquirySummary) {
       ...(values.german ? { germanLessons: true as const } : {}),
     };
     setSubmittedRequest(request);
-    if (siteConfig.profileReviewEndpoint) setStatus('sending');
+    let attempt: SubmissionAttempt | undefined;
+    if (siteConfig.profileReviewEndpoint) {
+      // Recompute from the normalised outbound fields at send time so summary or checkbox changes get a new ID.
+      const pending = resolveSubmissionAttempt(pendingAttempt.current, profileReviewPayload(request));
+      pendingAttempt.current = pending;
+      attempt = pending.attempt;
+      setStatus('sending');
+    } else {
+      pendingAttempt.current = null;
+    }
     try {
-      const result = await submitProfileReview(request);
-      if (result === 'sent') setReceivedDate(new Date().toLocaleDateString('de-DE', { timeZone: 'Asia/Kolkata' }));
+      const result = await submitProfileReview(request, attempt);
+      if (result === 'sent') {
+        pendingAttempt.current = null;
+        setReceivedDate(new Date().toLocaleDateString('de-DE', { timeZone: 'Asia/Kolkata' }));
+      }
       setStatus(result);
     } finally {
       inFlight.current = false;
@@ -65,6 +84,7 @@ export function useProfileReviewSubmission(summary?: EnquirySummary) {
   };
 
   const clearSubmission = () => {
+    pendingAttempt.current = null;
     setReceivedDate('');
     setSubmittedRequest(null);
     setSummaryTicked(false);

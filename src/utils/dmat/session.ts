@@ -1,6 +1,6 @@
 import { DMAT_FORMAT } from '../applicationFacts.ts';
-import { SECTION_IDS } from './types.ts';
-import type { Answer, CoreSubtest, Mode, SectionId, StartChoice, TextSize } from './types';
+import { CURRENT_FIGURE_BANK_REVISION, LEGACY_FIGURE_BANK_REVISION, SECTION_IDS } from './types.ts';
+import type { Answer, CoreSubtest, FigureBankRevision, Mode, SectionId, StartChoice, TextSize } from './types';
 
 /**
  * A practice test as plain data, and the pure functions that move it on. `now` is milliseconds since the
@@ -23,6 +23,8 @@ export interface SectionRun {
 
 export interface Session {
   version: 1;
+  /** Revision of the figure option bank this session uses; absent on sessions saved before revision 2 (= 1). */
+  figureRevision?: FigureBankRevision;
   mode: Mode;
   /** 1..n for a full mock or timed section; omitted in untimed practice. */
   mock?: number;
@@ -105,6 +107,10 @@ export const setIdFor = (mode: Mode, section: SectionId, choice: StartChoice): s
     ? section === 'academic' ? choice.passage ?? 'p10' : 'practice'
     : 'mock';
 
+/** The figure option bank revision a session uses; sessions saved without one read revision 1. */
+export const figureRevisionOf = (session: Pick<Session, 'figureRevision'>): FigureBankRevision =>
+  session.figureRevision ?? LEGACY_FIGURE_BANK_REVISION;
+
 /** The mock number a timed run draws from (1 by default), or `choice.mock` in a mistakes run. */
 export const mockFor = (mode: Mode, choice: StartChoice): number | undefined =>
   mode === 'practice' ? choice.mistakes ? choice.mock : undefined : choice.mock ?? 1;
@@ -132,6 +138,7 @@ export function createSession(mode: Mode, choice: StartChoice, now: number, retu
       }));
   return {
     version: 1,
+    figureRevision: mistakes?.figureRevision ?? CURRENT_FIGURE_BANK_REVISION,
     mode,
     ...(mock !== undefined ? { mock } : {}),
     sections,

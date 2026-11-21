@@ -45,6 +45,10 @@ export const DOCUMENT_STATUS_LABELS: { readonly [Status in DocumentStatus]: stri
   ready: 'Ready',
 };
 
+function formatCount(count: number, singular: string, plural: string): string {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
 export const APPLICATION_PLAN_COPY = {
   title: 'Application plan',
   germanTerm: 'Bewerbungsplan',
@@ -119,6 +123,10 @@ export const APPLICATION_PLAN_COPY = {
     editProgramme: 'Edit details',
     removeProgramme: 'Remove programme',
     removeProgrammeAria: (name: string, university: string) => `Remove ${name} at ${university}`,
+    removeConfirmPrompt: (name: string, university: string, dateCount: number, documentCount: number) =>
+      `Remove ${name} at ${university}? This will also remove ${formatCount(dateCount, 'date', 'dates')} and ${formatCount(documentCount, 'document', 'documents')}.`,
+    removeConfirmYes: 'Yes, remove',
+    removeConfirmCancel: 'Cancel',
     editProgrammeAria: (name: string, university: string) => `Edit details for ${name} at ${university}`,
     nextDateBadge: (date: string, label: string) => `Next date: ${date} · ${label}`,
     pastDatesBadge: 'Entered dates have passed',

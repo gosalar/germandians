@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { postEnquiry } from '../../src/services/enquiry';
+import { postEnquiry, resolveSubmissionAttempt, submissionPayloadKey } from '../../src/services/enquiry';
 import { toFormEndpoint, toWhatsAppCommunityUrl, toWhatsAppNumber } from '../../src/utils/contactSettings';
 import { UX_ENDPOINTS } from './endpoints';
 
@@ -40,12 +40,16 @@ test('enquiry endpoints must be deployed Apps Script web apps', () => {
 test('enquiries go to Apps Script as plain text and follow its redirect to the acknowledgement', async () => {
   const original = globalThis.fetch;
   const requests: { url: string; init: RequestInit }[] = [];
+  const attempt = {
+    submissionId: '123e4567-e89b-42d3-a456-426614174000',
+    consentAt: '2026-11-20T12:00:00.000Z',
+  };
   globalThis.fetch = (async (url: string | URL | Request, init?: RequestInit) => {
     requests.push({ url: String(url), init: init ?? {} });
     return Response.json({ received: true });
   }) as typeof fetch;
   try {
-    expect(await postEnquiry(UX_ENDPOINTS.profileReview, { name: 'Test visitor' })).toBe('sent');
+    expect(await postEnquiry(UX_ENDPOINTS.profileReview, { name: 'Test visitor' }, attempt)).toBe('sent');
   } finally {
     globalThis.fetch = original;
   }
@@ -53,5 +57,31 @@ test('enquiries go to Apps Script as plain text and follow its redirect to the a
   const [{ url, init }] = requests;
   expect(url).toBe(UX_ENDPOINTS.profileReview);
   expect(init).toMatchObject({ method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, credentials: 'omit', redirect: 'follow' });
-  expect(JSON.parse(String(init.body))).toMatchObject({ name: 'Test visitor', consent: true, source: 'germandians-website' });
+  expect(JSON.parse(String(init.body))).toEqual({
+    name: 'Test visitor',
+    submissionId: attempt.submissionId,
+    consent: true,
+    consentAt: attempt.consentAt,
+    source: 'germandians-website',
+  });
+});
+
+test('submission identity reuses one UUID and timestamp for matching normalised payloads and rotates on change', () => {
+  const firstKey = submissionPayloadKey({ whatsapp: '+91 9876543210', name: 'Test visitor', email: undefined });
+  const sameKey = submissionPayloadKey({
+    name: 'Test visitor',
+    whatsapp: '+91 9876543210',
+    consent: true,
+    consentAt: '2026-11-20T12:00:00.000Z',
+    source: 'germandians-website',
+    submissionId: '123e4567-e89b-42d3-a456-426614174000',
+  });
+  expect(sameKey).toBe(firstKey);
+
+  const first = resolveSubmissionAttempt(null, { name: 'Test visitor', whatsapp: '+91 9876543210' });
+  const retry = resolveSubmissionAttempt(first, { whatsapp: '+91 9876543210', name: 'Test visitor' });
+  expect(retry).toBe(first);
+
+  const changed = resolveSubmissionAttempt(first, { name: 'Test visitor', whatsapp: '+91 9876543210', germanLessons: true });
+  expect(changed.attempt.submissionId).not.toBe(first.attempt.submissionId);
 });

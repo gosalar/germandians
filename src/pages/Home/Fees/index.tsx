@@ -22,8 +22,9 @@ export default function Fees() {
           </h2>
           <p className={styles.introBody}>{FEES_COPY.intro}</p>
 
-          {/* The quote terms and outside costs are answered where they belong: the FAQ on this page, and the
-              costs topic on /requirements. The FAQ group is on this page, so its link scrolls locally. */}
+          {/* The quote terms, outside costs and budget planner live where they belong: the FAQ on this page,
+              the costs topic on /requirements, and the planner at /budget. The FAQ group is on this page, so
+              its link scrolls locally. */}
           <ul className={styles.links}>
             <li>
               <a href={hashLink(SECTIONS.faqFees)} className={styles.link}>
@@ -34,6 +35,12 @@ export default function Fees() {
             <li>
               <Link to={requirementsHref('costs')} className={styles.link}>
                 <span>{FEES_COPY.costsLink}</span>
+                <span aria-hidden="true" className={styles.linkArrow}>→</span>
+              </Link>
+            </li>
+            <li>
+              <Link to={ROUTES.budget} className={styles.link}>
+                <span>{FEES_COPY.budgetLink}</span>
                 <span aria-hidden="true" className={styles.linkArrow}>→</span>
               </Link>
             </li>

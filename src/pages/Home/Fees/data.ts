@@ -21,6 +21,8 @@ export const FEES_COPY = {
   quoteLink: 'How the quote works',
   /** Link to the costs topic on /requirements: what students pay to other organisations. */
   costsLink: 'Other costs to plan for',
+  /** Link to the study budget planner so visitors can map out their own monthly and one-off costs. */
+  budgetLink: 'Open the budget planner',
   /** Read by the FAQ's "When is payment due?". */
   payment: `${FEE_POLICY.due} Your written quote states what triggers payment.`,
   /** Read by the FAQ's "Do you help with funding?", after its link to the costs topic. Never on /requirements: it names the service fee. */

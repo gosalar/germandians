@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 
+import flagPainting from '@/assets/images/flag-painting.jpg';
 import { usePageChrome } from '@/contexts/PageChrome/usePageChrome';
 import { INTAKE_SEATS, ROUTES, destinationHref } from '@/utils/constants';
 import { buildYear, businessOperator, siteConfig } from '@/utils/siteConfig';
@@ -43,7 +44,9 @@ export default function SiteFooter() {
 
   return (
     <>
-      <div aria-hidden="true" className={styles.flagBand} />
+      <div aria-hidden="true" className={styles.flagBand}>
+        <img src={flagPainting} alt="" loading="lazy" decoding="async" draggable={false} className={styles.flagBandImage} />
+      </div>
       <footer className={styles.footer}>
         <div className={styles.inner}>
           <div className={styles.top}>

@@ -34,11 +34,11 @@ let sameAsFour = 0, total = 0;
 const kinds = {};
 for (const it of bank.figures) {
   const m4 = it.shown[3];
-  for (const [opts] of [[it.options5], [it.options6]]) for (const o of opts) if (o.misconception && o.misconception.kind !== 'swap') {
+  for (const [opts] of [[it.options5], [it.options6]]) for (const o of opts) for (const part of o.misconception ? o.misconception.parts ?? [o.misconception] : []) if (part.kind !== 'swap') {
     total++;
-    const i = o.misconception.figure;
+    const i = part.figure;
     const s = o.frame[i];
-    const k = o.misconception.kind;
+    const k = part.kind;
     // a "moved too far / wrong way" note where the figure is drawn in the same field as in matrix 4
     if (/^(line|border|loop|diagonal)/.test(k) && opts === it.options5 && `${s.pos}` === `${m4[i].pos}`) { sameAsFour++; kinds[k] = (kinds[k] ?? 0) + 1; }
   }

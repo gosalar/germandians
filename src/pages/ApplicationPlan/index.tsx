@@ -172,6 +172,27 @@ function ProgrammeCard({
 }: ProgrammeCardProps) {
   const baseId = useId();
   const [editing, setEditing] = useState(false);
+  const [confirmingRemoveId, setConfirmingRemoveId] = useState<string | null>(null);
+  const removeButtonRef = useRef<HTMLButtonElement>(null);
+  const cancelRemoveRef = useRef<HTMLButtonElement>(null);
+  const restoreRemoveFocus = useRef(false);
+  const removeCommittedId = useRef<string | null>(null);
+  const confirmingRemove = confirmingRemoveId === programme.id;
+
+  // Focus moves to "Cancel" when the removal prompt opens so a second Enter cannot delete
+  // accidentally, and returns to this card's Remove button when closed without removing.
+  useEffect(() => {
+    if (confirmingRemove) {
+      const button = cancelRemoveRef.current;
+      button?.focus({ preventScroll: true });
+      button?.scrollIntoView({ block: 'nearest' });
+    } else if (restoreRemoveFocus.current) {
+      restoreRemoveFocus.current = false;
+      const button = removeButtonRef.current;
+      button?.focus({ preventScroll: true });
+      button?.scrollIntoView({ block: 'nearest' });
+    }
+  }, [confirmingRemove]);
 
   const editForm = useForm<ProgrammeDraftValues>({
     mode: 'controlled',
@@ -222,10 +243,30 @@ function ProgrammeCard({
   const docLabelId = `${baseId}-doc-label`;
   const headingId = `${baseId}-programme-heading`;
   const editButtonId = `${baseId}-edit-button`;
+  const removeButtonId = `${baseId}-remove-button`;
+  const removePromptId = `${baseId}-remove-prompt`;
+  const cancelRemoveButtonId = `${baseId}-remove-cancel`;
 
   const closeEditor = () => {
     setEditing(false);
     focusFieldById(editButtonId);
+  };
+
+  const openRemoveConfirm = () => {
+    removeCommittedId.current = null;
+    setConfirmingRemoveId(programme.id);
+  };
+
+  const closeRemoveConfirm = () => {
+    restoreRemoveFocus.current = true;
+    setConfirmingRemoveId(null);
+  };
+
+  const confirmRemoveProgramme = () => {
+    if (removeCommittedId.current === programme.id) return;
+    removeCommittedId.current = programme.id;
+    restoreRemoveFocus.current = false;
+    onRemoveProgramme(programme.id);
   };
 
   return (
@@ -553,16 +594,64 @@ function ProgrammeCard({
               {APPLICATION_PLAN_COPY.plan.editProgramme}
             </Button>
           ) : null}
-          <Button
-            type="button"
-            variant="ring"
-            size="nav"
-            className={styles.compactButton}
-            aria-label={APPLICATION_PLAN_COPY.plan.removeProgrammeAria(programme.name, programme.university)}
-            onClick={() => onRemoveProgramme(programme.id)}
-          >
-            {APPLICATION_PLAN_COPY.plan.removeProgramme}
-          </Button>
+          {confirmingRemove ? (
+            <div
+              role="group"
+              aria-labelledby={removePromptId}
+              className={styles.confirmRemove}
+              onKeyDown={(event) => {
+                if (event.key === 'Escape') {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  closeRemoveConfirm();
+                }
+              }}
+            >
+              <p id={removePromptId} className={styles.confirmRemovePrompt}>
+                {APPLICATION_PLAN_COPY.plan.removeConfirmPrompt(
+                  programme.name,
+                  programme.university,
+                  programme.dates.length,
+                  programme.documents.length,
+                )}
+              </p>
+              <div className={styles.confirmRemoveActions}>
+                <Button
+                  id={cancelRemoveButtonId}
+                  ref={cancelRemoveRef}
+                  type="button"
+                  variant="outline"
+                  size="nav"
+                  className={styles.compactButton}
+                  onClick={closeRemoveConfirm}
+                >
+                  {APPLICATION_PLAN_COPY.plan.removeConfirmCancel}
+                </Button>
+                <Button
+                  type="button"
+                  variant="navy"
+                  size="nav"
+                  className={styles.compactButton}
+                  onClick={confirmRemoveProgramme}
+                >
+                  {APPLICATION_PLAN_COPY.plan.removeConfirmYes}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <Button
+              id={removeButtonId}
+              ref={removeButtonRef}
+              type="button"
+              variant="ring"
+              size="nav"
+              className={styles.compactButton}
+              aria-label={APPLICATION_PLAN_COPY.plan.removeProgrammeAria(programme.name, programme.university)}
+              onClick={openRemoveConfirm}
+            >
+              {APPLICATION_PLAN_COPY.plan.removeProgramme}
+            </Button>
+          )}
         </div>
       </article>
     </li>

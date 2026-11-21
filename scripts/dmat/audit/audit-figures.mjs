@@ -30,22 +30,109 @@ function majorityPick(item, opts, perAttribute) {
   }
   return fits.map((ok, k) => (ok ? k : -1)).filter((k) => k >= 0);
 }
-const leak = { fig: { right: 0, wrong: 0, none: 0 }, attr: { right: 0, wrong: 0, none: 0 } };
+const blankCounts = () => ({ right: 0, wrong: 0, none: 0 });
+const setNameOf = (id) => id.match(/^(.*)-F-[lmh]\d+$/)?.[1] ?? 'all';
+const leak = { fig: blankCounts(), attr: blankCounts() };
 const leakByN = {};
+const leakBySet = { fig: {}, attr: {} };
+const leakByBand = { fig: {}, attr: {} };
 for (const it of bank.figures) {
+  const setName = setNameOf(it.id);
+  const band = it.band ?? 'unknown';
   [[it.options5, it.answer[0]], [it.options6, it.answer[1]]].forEach(([opts, ans]) => {
     for (const [name, per] of [['fig', false], ['attr', true]]) {
       const pick = majorityPick(it, opts, per);
       const res = !pick || pick.length !== 1 ? 'none' : pick[0] === ans ? 'right' : 'wrong';
       leak[name][res]++;
-      if (name === 'attr') { const n = it.figures.length; leakByN[n] ??= { right: 0, wrong: 0, none: 0 }; leakByN[n][res]++; }
+      leakBySet[name][setName] ??= blankCounts();
+      leakBySet[name][setName][res]++;
+      leakByBand[name][band] ??= blankCounts();
+      leakByBand[name][band][res]++;
+      if (name === 'attr') { const n = it.figures.length; leakByN[n] ??= blankCounts(); leakByN[n][res]++; }
     }
   });
 }
-console.log(`Figures: ${bank.figures.length} items, ${bank.figures.length * 2} option sets`);
+const sets = bank.figures.length * 2;
+console.log(`Figures: ${bank.figures.length} items, ${sets} option sets`);
 console.log(`  "pick what most options agree on", per figure: ${JSON.stringify(leak.fig)}`);
 console.log(`  same, per attribute (position, turn, colour): ${JSON.stringify(leak.attr)}`);
 console.log(`  per attribute by number of figures: ${JSON.stringify(leakByN)}`);
+console.log(`  per figure by set: ${JSON.stringify(leakBySet.fig)}`);
+console.log(`  per attribute by set: ${JSON.stringify(leakBySet.attr)}`);
+console.log(`  per figure by band: ${JSON.stringify(leakByBand.fig)}`);
+console.log(`  per attribute by band: ${JSON.stringify(leakByBand.attr)}`);
+for (const [method, result] of Object.entries(leak)) {
+  if ((result.right + result.wrong) * 10 > sets) {
+    console.error(method, 'unique choices', result.right + result.wrong, 'of', sets);
+    process.exitCode = 1;
+  }
+}
+
+// Odd one out: in a figure (or attribute) where two options agree, the third is the odd one out.
+// If one option is the odd one out more often, or less often, than both others, "pick the option
+// that never stands out" or "rule out the one that stands out most" says something without solving.
+function oddCounts(item, opts, perAttribute) {
+  const odd = opts.map(() => 0);
+  item.figures.forEach((f, i) => {
+    const cols = perAttribute
+      ? [0, 1, 2].map((a) => opts.map((o) => attrs(f.shape, o.frame[i])[a]))
+      : [opts.map((o) => vis(f.shape, o.frame[i]))];
+    for (const col of cols) {
+      if (new Set(col).size !== 2) continue;
+      col.forEach((v, k) => { if (col.filter((w) => w === v).length === 1) odd[k]++; });
+    }
+  });
+  return odd;
+}
+const uniqueIndex = (values, target) => (values.filter((v) => v === target).length === 1 ? values.indexOf(target) : -1);
+const oddLeak = {};
+for (const it of bank.figures) {
+  [[it.options5, it.answer[0]], [it.options6, it.answer[1]]].forEach(([opts, ans]) => {
+    for (const [level, per] of [['fig', false], ['attr', true]]) {
+      const odd = oddCounts(it, opts, per);
+      for (const [method, k] of [['never odd', uniqueIndex(odd, Math.min(...odd))], ['most odd', uniqueIndex(odd, Math.max(...odd))]]) {
+        const name = `${method}, per ${level === 'fig' ? 'figure' : 'attribute'}`;
+        oddLeak[name] ??= { points: 0, toAnswer: 0 };
+        if (k >= 0 && Math.min(...odd) !== Math.max(...odd)) {
+          oddLeak[name].points++;
+          if (k === ans) oddLeak[name].toAnswer++;
+        }
+      }
+    }
+  });
+}
+console.log(`  odd one out (option sets where one option stands apart, and how many of those are the answer): ${JSON.stringify(oddLeak)}`);
+for (const [method, result] of Object.entries(oddLeak)) {
+  if (result.points * 10 > sets) {
+    console.error(method, 'singles out an option in', result.points, 'of', sets);
+    process.exitCode = 1;
+  }
+}
+
+// How many features (an attribute of a figure) differ between the three options, against what the
+// four matrices shown allow. Options that differ in only one feature tell the student which single
+// feature to work out. Without an odd one out, two features can differ only when each can take two
+// different wrong values (it shows three or more values), or three features can each take one.
+const varying = {};
+let narrow = 0, narrowable = 0;
+for (const it of bank.figures) {
+  const shownValues = it.figures.flatMap((f, i) => [0, 1, 2].map((a) => new Set(it.shown.map((fr) => attrs(f.shape, fr[i])[a])).size));
+  const roomy = shownValues.filter((n) => n > 1).length >= 3 || shownValues.filter((n) => n > 2).length >= 2;
+  for (const opts of [it.options5, it.options6]) {
+    const differ = it.figures.reduce((sum, f, i) =>
+      sum + [0, 1, 2].filter((a) => new Set(opts.map((o) => attrs(f.shape, o.frame[i])[a])).size > 1).length, 0);
+    varying[differ] = (varying[differ] ?? 0) + 1;
+    if (roomy) {
+      narrowable++;
+      if (differ < 2) narrow++;
+    }
+  }
+}
+console.log(`  features that differ between the options: ${JSON.stringify(varying)}; only one where the matrices allow more: ${narrow} of ${narrowable}`);
+if (narrow * 10 > narrowable) {
+  console.error('options differ in only one feature in', narrow, 'of', narrowable, 'option sets whose matrices allow more');
+  process.exitCode = 1;
+}
 
 // ---------- 2. A wider family of readings than the generator checks ----------
 function* movements(start) {

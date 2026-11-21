@@ -2,9 +2,11 @@
  * Germandians: the German lessons sheet's web app.
  *
  * It writes each German lessons enquiry sent from the form on the Learn German page into this
- * spreadsheet, one row per enquiry, and answers { "received": true } only once the row is saved. The
- * website shows "Received" only after that answer. A "Teach me German" tick on the profile-review form
- * goes to the admissions sheet, not here.
+ * spreadsheet, one row per logical enquiry, and answers { "received": true } only once the row is
+ * saved. Retries carrying the same submissionId and matching enquiry details acknowledge the
+ * existing row instead of appending a duplicate. The website shows "Received" only after that
+ * answer. A "Teach me German" tick on the profile-review form goes to the admissions sheet, not
+ * here.
  *
  * Setup, once, in the German lessons spreadsheet (README, "Google Sheets"):
  *  1. Extensions → Apps Script. Replace the code in the editor with this file and save.
@@ -31,6 +33,7 @@ const COLUMNS = [
   ['What they need German for', (enquiry) => enquiry.purpose],
   ['German they already have', (enquiry) => enquiry.experience],
   ['Consent given', (enquiry) => enquiry.consentAt],
+  ['Submission ID', (enquiry) => submissionIdOf(enquiry)],
 ];
 
 /** The text fields a German lessons enquiry may carry, and the longest each may be. */
@@ -46,6 +49,10 @@ function problemWith(enquiry) {
 // Everything below is the same in both sheets' scripts.
 
 const SPREADSHEET_ID = 'SPREADSHEET_ID';
+const RECEIVED_HEADING = 'Received';
+const SUBMISSION_ID_HEADING = 'Submission ID';
+const SUBMISSION_ID_LENGTH = 36;
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /** Run once from the editor: remembers this spreadsheet and adds the tab with its headings. */
 function setUp() {
@@ -73,17 +80,31 @@ function doPost(event) {
   if (!id) return reply({ received: false, error: 'Run setUp in the Apps Script editor first.' });
 
   const lock = LockService.getScriptLock();
+  let locked = false;
   try {
     lock.waitLock(10000);
+    locked = true;
     const sheet = tab(SpreadsheetApp.openById(id));
-    const values = Object.fromEntries(COLUMNS.map(([heading, read]) => [heading, cell(read(enquiry))]));
-    const headings = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0].map(String);
+    const width = sheet.getLastColumn();
+    const headings = width ? sheet.getRange(1, 1, 1, width).getValues()[0].map(String) : [];
+    const expected = Object.fromEntries(COLUMNS.map(([heading, read]) => [heading, read(enquiry)]));
+    const submissionId = submissionIdOf(enquiry);
+
+    if (submissionId) {
+      const match = findSubmission(sheet, headings, submissionId);
+      if (match) {
+        if (sameEnquiry(headings, match, expected)) return reply({ received: true });
+        return reply({ received: false, error: 'This submission ID was already used with different details.' });
+      }
+    }
+
+    const values = Object.fromEntries(COLUMNS.map(([heading]) => [heading, cell(expected[heading])]));
     sheet.appendRow(headings.map((heading) => (heading in values ? values[heading] : '')));
     SpreadsheetApp.flush();
   } catch (error) {
     return reply({ received: false, error: 'The row could not be saved.' });
   } finally {
-    lock.releaseLock();
+    if (locked) lock.releaseLock();
   }
   return reply({ received: true });
 }
@@ -95,6 +116,16 @@ function checkEnquiry(enquiry) {
   if (enquiry.consent !== true) return 'The request has no consent.';
   const formProblem = problemWith(enquiry);
   if (formProblem) return formProblem;
+  if ('submissionId' in enquiry && enquiry.submissionId !== undefined) {
+    const submissionId = enquiry.submissionId;
+    if (
+      typeof submissionId !== 'string' ||
+      submissionId.length !== SUBMISSION_ID_LENGTH ||
+      !UUID_PATTERN.test(submissionId)
+    ) {
+      return 'submissionId must be a valid UUID.';
+    }
+  }
   for (const [field, limit] of Object.entries(TEXT_LIMITS)) {
     const value = enquiry[field];
     if (value === undefined) continue;
@@ -104,6 +135,43 @@ function checkEnquiry(enquiry) {
     if (typeof enquiry[field] !== 'string' || !enquiry[field].trim()) return `${field} is missing.`;
   }
   return '';
+}
+
+function submissionIdOf(enquiry) {
+  return typeof enquiry.submissionId === 'string' ? enquiry.submissionId.toLowerCase() : '';
+}
+
+/** Looks up an existing row by exact Submission ID under the script lock, guarding empty sheets. */
+function findSubmission(sheet, headings, submissionId) {
+  const idColumn = headings.indexOf(SUBMISSION_ID_HEADING) + 1;
+  const lastRow = sheet.getLastRow();
+  const width = headings.length;
+  if (idColumn < 1 || lastRow < 2 || width < 1) return null;
+
+  const ids = sheet.getRange(2, idColumn, lastRow - 1, 1).getValues();
+  for (let index = 0; index < ids.length; index++) {
+    if (text(ids[index][0]).toLowerCase() === submissionId) {
+      return sheet.getRange(index + 2, 1, 1, width).getValues()[0];
+    }
+  }
+  return null;
+}
+
+/** Compares every recognised enquiry column except the server-generated Received timestamp. */
+function sameEnquiry(headings, row, expected) {
+  for (const [heading] of COLUMNS) {
+    if (heading === RECEIVED_HEADING) continue;
+    const column = headings.indexOf(heading);
+    if (column === -1) return false;
+    const stored = text(row[column]);
+    const incoming = text(expected[heading]);
+    if (heading === SUBMISSION_ID_HEADING) {
+      if (stored.toLowerCase() !== incoming.toLowerCase()) return false;
+    } else if (stored !== incoming) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -122,11 +190,17 @@ function tab(spreadsheet) {
   return sheet;
 }
 
+/** Normalises a text cell value so omitted/blank fields compare consistently with sheet reads. */
+function text(value) {
+  if (value === undefined || value === null) return '';
+  return String(value);
+}
+
 /** Text is stored exactly as typed: the leading apostrophe stops Sheets reading it as a formula, number or date. */
 function cell(value) {
   if (value instanceof Date) return value;
-  if (value === undefined || value === null || value === '') return '';
-  return `'${String(value)}`;
+  const plain = text(value);
+  return plain === '' ? '' : `'${plain}`;
 }
 
 function reply(body) {

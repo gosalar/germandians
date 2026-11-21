@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T12:32:45.829Z",
+  "generatedAt": "2026-11-21T06:03:00.787Z",
   "sources": {
     "dmat": {
       "url": "https://aps-india.de/dmat/",
@@ -9,7 +9,7 @@
     "test": {
       "url": "https://www.d-mat.de/en/dmat-in-india/",
       "status": 200,
-      "sha256": "332521aaab930efe123d6818d9f7654f4a275f665dde1ae2827722f50c34638a"
+      "sha256": "b75678f197cacbc7ea2ecb30ad20ea9554743da71356494b1359f8a106e048e2"
     },
     "dmatFaq": {
       "url": "https://www.d-mat.de/en/faq-graduate-students-india/",
@@ -19,12 +19,12 @@
     "dmatPreparation": {
       "url": "https://www.d-mat.de/en/dmat-in-india/",
       "status": 200,
-      "sha256": "332521aaab930efe123d6818d9f7654f4a275f665dde1ae2827722f50c34638a"
+      "sha256": "b75678f197cacbc7ea2ecb30ad20ea9554743da71356494b1359f8a106e048e2"
     },
     "dmatVideos": {
       "url": "https://www.d-mat.de/en/dmat-in-india/",
       "status": 200,
-      "sha256": "332521aaab930efe123d6818d9f7654f4a275f665dde1ae2827722f50c34638a"
+      "sha256": "b75678f197cacbc7ea2ecb30ad20ea9554743da71356494b1359f8a106e048e2"
     },
     "dmatTerms": {
       "url": "https://www.d-mat.de/en/terms-conditions/",
@@ -69,7 +69,7 @@
     "tum": {
       "url": "https://www.tum.de/en/studies/fees/tuition",
       "status": 200,
-      "sha256": "7c4656cb28c9013e3f497d4e5afbb3a249fac4bfadb1c2425daf5276759a4aad"
+      "sha256": "3ed7ec709048a6dc8bf508aea0d6cf6cf245645d0db2c6c5ba02ccfd653416be"
     },
     "housing": {
       "url": "https://www.studierendenwerk-muenchen-oberbayern.de/en/accommodation/faq/",
@@ -119,7 +119,7 @@
     "gradeConversion": {
       "url": "https://www.tum.de/en/studies/application/application-info-portal/grade-conversion-formula-for-grades-earned-outside-germany",
       "status": 200,
-      "sha256": "373c4646fea5e55fd71bd5cf91c466cdeda201d70d32add9ccc15805c8a78cef"
+      "sha256": "b5fb52ec13356209248e0182460d8c24547faed46717e0cf5c25dc225136866d"
     },
     "ects": {
       "url": "https://education.ec.europa.eu/education-levels/higher-education/inclusive-and-connected-higher-education/european-credit-transfer-and-accumulation-system",
@@ -154,7 +154,7 @@
     "uniAssistCertificates": {
       "url": "https://www.uni-assist.de/en/how-to-apply/plan-your-application/educational-certificates-translations/",
       "status": 200,
-      "sha256": "c453c5ecc574526413ed955752e70b6ccfb3bd6aa7ca1c434636740b5fe7f854"
+      "sha256": "68ff2ec7543f56a7914a3579120c9df4b00b943685e7430e98f3282bf7bdee2f"
     },
     "uniAssistOtherDocuments": {
       "url": "https://www.uni-assist.de/en/how-to-apply/plan-your-application/other-documents/",
@@ -179,17 +179,17 @@
     "tumManagement": {
       "url": "https://www.mgt.tum.de/programs/master-in-management/munich/how-to-apply",
       "status": 200,
-      "sha256": "fdec2f333256ea667f8343ed09e246d4705405cd19b12e706ba52624c4b55c45"
+      "sha256": "9c50d03fb5493df98ba77a5b16080dfe61b0dc87da569b6a052c34fa51dd9ee9"
     },
     "tumAdmissionProcedures": {
       "url": "https://www.tum.de/en/studies/application/application-info-portal/admission-procedures",
       "status": 200,
-      "sha256": "a64546da330ea4268b80a5716f00fae5f955da080dd4973002d9177e6cfc0806"
+      "sha256": "b04a8b2b5a4bf68510163111f0a3f3a914791fdadd1a875ae0740a7b72e25996"
     },
     "tumAps": {
       "url": "https://www.tum.de/en/studies/application/application-info-portal/aps",
       "status": 200,
-      "sha256": "0b36783b03b859eaece77b7b8a406fee7aab5defc819be682b3c5a79841ecfe8"
+      "sha256": "d5249a50067af301ff46292149ef03d1078787462e1fd5bb46c9958d3c1ab9b3"
     },
     "semesters": {
       "url": "https://www.uni-assist.de/en/tools/glossary-of-terms/description/term/semester/",
@@ -244,7 +244,7 @@
     "tumEnrolment": {
       "url": "https://www.tum.de/en/studies/application/enrollment-info-portal/enrollment",
       "status": 200,
-      "sha256": "8ddb6b948f5646b9f9863f3cffeb5bb700e30aaf09e46a585555ee3b0aee0931"
+      "sha256": "815667ba1b48577f5e94043f9bbebc77fa3edf3f5f5aca3db4f87a5582c9025e"
     },
     "foreignOfficeBlockedAccount": {
       "url": "https://www.auswaertiges-amt.de/en/sperrkonto/388600",
@@ -259,12 +259,12 @@
     "tumStudentCard": {
       "url": "https://www.tum.de/en/studies/application/enrollment-info-portal/studentcard",
       "status": 200,
-      "sha256": "6b354b3826a9580522e6441763336d10427b3cd8bee99690c6d3c7f0ad737b7e"
+      "sha256": "66164f316481197b967ef820e4c60bdb3d6e42811b288ac9fff9a150a8921251"
     },
     "tumFirstSteps": {
       "url": "https://www.tum.de/en/studies/during-your-studies/starting-your-studies/tum-first-steps",
       "status": 200,
-      "sha256": "34e6236c716ec0b462fbb242621c062f2fd860560b01ad72e613e0f93263228e"
+      "sha256": "13023fdd365ddffb1b9aae666c4b5ca4b89a63e89315c0aade9b1c1128cff44a"
     },
     "rundfunkbeitragWelcome": {
       "url": "https://www.rundfunkbeitrag.de/welcome/english",

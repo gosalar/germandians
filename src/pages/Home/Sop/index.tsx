@@ -1,5 +1,6 @@
 import { Button } from '@mantine/core';
-import { NAV_CTA, SECTIONS, hashLink } from '@/utils/constants';
+import { Link } from 'react-router';
+import { NAV_CTA, ROUTES, SECTIONS, hashLink } from '@/utils/constants';
 
 import { REVISION_NOTES, SOP_COPY } from './data';
 import StampedCards from './StampedCards';
@@ -57,6 +58,12 @@ export default function Sop() {
             </li>
           ))}
         </ol>
+
+        <div className={styles.plannerAction}>
+          <Button component={Link} to={ROUTES.sopPlanner} variant="ring-dark" size="lg">
+            {SOP_COPY.plannerLink}
+          </Button>
+        </div>
 
         <div className={styles.compare}>
           <div className={styles.compareCopy}>
