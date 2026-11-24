@@ -8,6 +8,9 @@ type Sharing = {
   imageTitle: string;
   imageSubtitle: string;
   imageAlt: string;
+  imageKicker: string;
+  imageTone: 'yellow' | 'cream' | 'mint' | 'red';
+  imageHighlights: readonly [string, string];
 };
 
 const METADATA = {
@@ -16,8 +19,11 @@ const METADATA = {
     description: `Students living in Germany guide Indian students from profile evaluation to the housing search and settling in. ${FEE_PROMISE}`,
     image: 'social/home.png',
     imageTitle: 'Study in Germany',
-    imageSubtitle: 'Student-led guidance',
+    imageSubtitle: 'Guidance from Indian students in Germany',
     imageAlt: 'Germandians: student-led guidance for studying in Germany',
+    imageKicker: 'India to Germany',
+    imageTone: 'yellow',
+    imageHighlights: ['Mentors living in Germany', 'Profile to arrival'],
   },
   check: {
     title: 'German grade check | Germandians',
@@ -26,6 +32,9 @@ const METADATA = {
     imageTitle: 'German grade check',
     imageSubtitle: 'Convert CGPA or percentage marks',
     imageAlt: 'Germandians: convert your CGPA or percentage to a German grade',
+    imageKicker: 'Grade converter',
+    imageTone: 'yellow',
+    imageHighlights: ['Modified Bavarian formula', 'No login needed'],
   },
   requirements: {
     title: 'Requirements for a master’s in Germany | Germandians',
@@ -34,6 +43,9 @@ const METADATA = {
     imageTitle: 'Master’s requirements',
     imageSubtitle: 'What you need to apply in Germany',
     imageAlt: 'Germandians: what you need for a master’s in Germany',
+    imageKicker: 'Master’s guide',
+    imageTone: 'cream',
+    imageHighlights: ['Official sources linked', 'Interactive next steps'],
   },
   dmat: {
     title: 'dMAT guide | Germandians',
@@ -42,6 +54,9 @@ const METADATA = {
     imageTitle: 'dMAT guide',
     imageSubtitle: 'The test, registering and the test day',
     imageAlt: 'Germandians: a guide to the dMAT for master’s applicants',
+    imageKicker: 'Test format',
+    imageTone: 'cream',
+    imageHighlights: ['Core and academic modules', 'Official sources linked'],
   },
   dmatPractice: {
     title: 'dMAT practice | Germandians',
@@ -50,6 +65,9 @@ const METADATA = {
     imageTitle: 'dMAT practice',
     imageSubtitle: 'A full mock, one section or untimed practice',
     imageAlt: 'Germandians: dMAT practice with a full mock, one section or untimed practice',
+    imageKicker: 'Practice tests',
+    imageTone: 'yellow',
+    imageHighlights: ['Timed or untimed modes', 'Worked explanations'],
   },
   about: {
     title: 'About us | Germandians',
@@ -58,6 +76,9 @@ const METADATA = {
     imageTitle: 'About us',
     imageSubtitle: 'The people behind Germandians',
     imageAlt: 'Germandians: about the people behind Germandians',
+    imageKicker: 'Our story & team',
+    imageTone: 'yellow',
+    imageHighlights: ['Students in Germany', 'Lived experience'],
   },
   community: {
     title: 'Community | Germandians',
@@ -66,6 +87,9 @@ const METADATA = {
     imageTitle: 'Community',
     imageSubtitle: 'Where Germandians began',
     imageAlt: 'Germandians: the community where Germandians began',
+    imageKicker: 'Open community',
+    imageTone: 'mint',
+    imageHighlights: ['Instagram and WhatsApp', 'Open questions'],
   },
   learnGerman: {
     title: 'Learn German | Germandians',
@@ -74,6 +98,9 @@ const METADATA = {
     imageTitle: 'Learn German',
     imageSubtitle: 'Explanations in your own language',
     imageAlt: 'Germandians: learn German with explanations in your own language',
+    imageKicker: 'German lessons',
+    imageTone: 'yellow',
+    imageHighlights: ['Native-language help', 'Separate from mentoring'],
   },
   privacy: {
     title: 'Privacy note | Germandians',
@@ -82,6 +109,9 @@ const METADATA = {
     imageTitle: 'Privacy note',
     imageSubtitle: 'Your details and how we use them',
     imageAlt: 'Germandians: privacy note about your details and how we use them',
+    imageKicker: 'No tracking',
+    imageTone: 'cream',
+    imageHighlights: ['No analytics scripts', 'Clear data controls'],
   },
   budget: {
     title: 'Study budget planner | Germandians',
@@ -90,6 +120,9 @@ const METADATA = {
     imageTitle: 'Budget planner',
     imageSubtitle: 'Your own living and one-off study costs',
     imageAlt: 'Germandians: plan your monthly living and one-off study costs in Germany',
+    imageKicker: 'EUR & INR tool',
+    imageTone: 'yellow',
+    imageHighlights: ['Euros and rupees', 'Saved in your browser'],
   },
   sopPlanner: {
     title: 'SOP planner | Germandians',
@@ -98,6 +131,9 @@ const METADATA = {
     imageTitle: 'SOP planner',
     imageSubtitle: 'Five parts in your own words',
     imageAlt: 'Germandians: plan your Statement of Purpose in five parts in your own words',
+    imageKicker: 'SOP worksheet',
+    imageTone: 'yellow',
+    imageHighlights: ['Stock-phrase check', 'Saved in your browser'],
   },
   germanWords: {
     title: 'German words | Germandians',
@@ -106,6 +142,9 @@ const METADATA = {
     imageTitle: 'German words',
     imageSubtitle: 'Study, paperwork and daily-life German',
     imageAlt: 'Germandians: glossary of everyday study, paperwork and daily-life German',
+    imageKicker: 'Student glossary',
+    imageTone: 'cream',
+    imageHighlights: ['Articles and plurals', 'Everyday study terms'],
   },
   applicationPlan: {
     title: 'Application plan | Germandians',
@@ -114,6 +153,9 @@ const METADATA = {
     imageTitle: 'Application plan',
     imageSubtitle: 'Your programmes, routes, dates and documents',
     imageAlt: 'Germandians: application plan for tracking your programmes, routes, dates and documents',
+    imageKicker: 'Application tracker',
+    imageTone: 'yellow',
+    imageHighlights: ['Routes and dates', 'Saved in your browser'],
   },
   creditMatch: {
     title: 'Credit matching (Modulabgleich) | Germandians',
@@ -122,6 +164,9 @@ const METADATA = {
     imageTitle: 'Credit matching',
     imageSubtitle: 'Map your courses to required subject areas',
     imageAlt: 'Germandians: map your completed courses to a programme’s required subject areas',
+    imageKicker: 'Modulabgleich',
+    imageTone: 'yellow',
+    imageHighlights: ['Course-to-area mapping', 'Export or print'],
   },
   arrival: {
     title: 'Arrival checklist | Germandians',
@@ -130,6 +175,9 @@ const METADATA = {
     imageTitle: 'Arrival checklist',
     imageSubtitle: 'Steps after you land in Germany',
     imageAlt: 'Germandians: arrival checklist for steps after you land in Germany',
+    imageKicker: 'After you land',
+    imageTone: 'mint',
+    imageHighlights: ['Official sources linked', 'Saved in your browser'],
   },
   parents: {
     title: 'For parents | Germandians',
@@ -138,6 +186,9 @@ const METADATA = {
     imageTitle: 'For parents',
     imageSubtitle: 'Costs, the blocked account and how our mentoring works',
     imageAlt: 'Germandians: plain guide for parents on study costs, the blocked account and mentoring',
+    imageKicker: 'Family guide',
+    imageTone: 'cream',
+    imageHighlights: ['Public study costs', 'Blocked account explained'],
   },
   choosingHelp: {
     title: 'Before you pay anyone | Germandians',
@@ -146,6 +197,9 @@ const METADATA = {
     imageTitle: 'Before you pay anyone',
     imageSubtitle: 'Six questions to ask an admissions adviser',
     imageAlt: 'Germandians: six questions to ask any admissions adviser before paying',
+    imageKicker: 'Ask before paying',
+    imageTone: 'red',
+    imageHighlights: ['Questions for any adviser', 'Written quote first'],
   },
 } as const satisfies Record<PageKey, Sharing>;
 

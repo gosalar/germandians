@@ -20,6 +20,7 @@ export function pageMetadata(path: (typeof PUBLIC_PAGES)[number]['path']): MetaD
     { property: 'og:description', content: page.description },
     { property: 'og:url', content: url },
     { property: 'og:image', content: image },
+    { property: 'og:image:secure_url', content: image },
     { property: 'og:image:type', content: 'image/png' },
     { property: 'og:image:width', content: '1200' },
     { property: 'og:image:height', content: '630' },
